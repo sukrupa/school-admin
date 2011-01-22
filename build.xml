@@ -1,0 +1,72 @@
+<project name="sukrupa" default="test">
+
+    <property name="src.dir" value="src"/>
+    <property name="src.main.dir" value="${src.dir}/main/java"/>
+    <property name="src.test.dir" value="${src.dir}/test/java"/>
+
+    <property name="web.dir" value="web"/>
+    <property name="war.name" value="${ant.project.name}.war"/>
+
+    <property name="build.dir" value="build"/>
+    <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="build.test.dir" value="${build.dir}/test"/>
+
+    <property name="lib.dir" value="lib"/>
+    <property name="lib.test.dir" value="${lib.dir}/test"/>
+
+    <path id="classpath.compilation">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+        <fileset dir="${lib.dir}/jetty" includes="*.jar"/>
+        <fileset dir="${lib.dir}/jsp" includes="*.jar"/>
+        <fileset dir="${lib.dir}/spring" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.run">
+        <path refid="classpath.compilation"/>
+        <pathelement location="${build.main.dir}"/>
+    </path>
+
+    <path id="classpath.compilation.test">
+        <path refid="classpath.run"/>
+        <fileset dir="${lib.test.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.run.test">
+        <path refid="classpath.compilation.test"/>
+        <pathelement location="${build.test.dir}"/>
+    </path>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build.main.dir}"/>
+        <mkdir dir="${build.test.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}" classpathref="classpath.compilation"/>
+        <javac includeantruntime="false" srcdir="${src.test.dir}" destdir="${build.test.dir}" classpathref="classpath.compilation.test"/>
+    </target>
+
+    <target name="test" depends="clean, compile">
+        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+            <classpath refid="classpath.run.test"/>
+            <batchtest>
+                <formatter type="plain" usefile="false"/>
+                <fileset dir="${build.test.dir}" includes="**/*Test*.class"/>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="package" depends="test">
+        <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" excludes="**/WebServer*"/>
+            <lib dir="${lib.dir}/spring"/>
+        </war>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${build.main.dir}"/>
+    </target>
+
+</project>
