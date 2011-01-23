@@ -1,4 +1,6 @@
 # IntelliJ
-##########
 *.iws
 
+# Build Artifacts
+build
+web/WEB-INF/classes
