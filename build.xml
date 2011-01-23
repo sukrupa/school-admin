@@ -10,6 +10,7 @@
     <property name="build.dir" value="build"/>
     <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
     <property name="build.test.dir" value="${build.dir}/test"/>
+    <property name="build.reports.dir" value="${build.dir}/reports"/>
 
     <property name="lib.dir" value="lib"/>
     <property name="lib.test.dir" value="${lib.dir}/test"/>
@@ -40,21 +41,27 @@
         <tstamp/>
         <mkdir dir="${build.main.dir}"/>
         <mkdir dir="${build.test.dir}"/>
+        <mkdir dir="${build.reports.dir}" />
     </target>
 
     <target name="compile" depends="init">
-        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}" classpathref="classpath.compilation"/>
-        <javac includeantruntime="false" srcdir="${src.test.dir}" destdir="${build.test.dir}" classpathref="classpath.compilation.test"/>
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}"
+               classpathref="classpath.compilation"/>
+        <javac includeantruntime="false" srcdir="${src.test.dir}" destdir="${build.test.dir}"
+               classpathref="classpath.compilation.test"/>
     </target>
 
     <target name="test" depends="clean, compile">
-        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+        <junit printsummary="false" fork="true" haltonfailure="false" haltonerror="false" outputtoformatters="false">
             <classpath refid="classpath.run.test"/>
-            <batchtest>
+            <formatter type="xml" usefile="true"/>
+            <batchtest todir="${build.reports.dir}" failureproperty="test.failed">
                 <formatter type="plain" usefile="false"/>
                 <fileset dir="${build.test.dir}" includes="**/*Test*.class"/>
             </batchtest>
         </junit>
+
+        <fail if="test.failed" message="Some tests failed"/>
     </target>
 
     <target name="package" depends="test">
