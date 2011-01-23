@@ -7,7 +7,7 @@
     <property name="web.dir" value="web"/>
     <property name="war.name" value="${ant.project.name}.war"/>
 
-    <property name="build.dir" value="build"/>
+    <property name="build.dir" value="target"/>
     <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
     <property name="build.test.dir" value="${build.dir}/test"/>
     <property name="build.reports.dir" value="${build.dir}/reports"/>
