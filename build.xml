@@ -48,7 +48,7 @@
     </path>
 
     <path id="classpath.run.test.integration">
-        <path refid="classpath.compilation.test.unit"/>
+        <path refid="classpath.compilation.test.integration"/>
         <pathelement location="${build.test.integration.dir}"/>
     </path>
 
