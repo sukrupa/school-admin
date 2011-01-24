@@ -71,6 +71,10 @@
         </war>
     </target>
 
+    <target name="self.deploy">
+        <java  classname="org.sukrupa.web.WebServer" classpathref="classpath.run" fork="true" spawn="true"/>
+    </target>
+
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${build.main.dir}"/>
