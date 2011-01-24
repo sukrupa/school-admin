@@ -204,6 +204,15 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="db">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/db" />
+        <root url="file://$PROJECT_DIR$/lib/db" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/db" recursive="false" />
+    </library>
     <library name="jetty">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/lib/jetty" />

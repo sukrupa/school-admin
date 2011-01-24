@@ -4,7 +4,7 @@
 <body>
 <ul>
     <c:forEach items="${students}" var="student">
-        <li>${student}</li>
+        <li>${student.name}</li>
     </c:forEach>
 </ul>
 </body>

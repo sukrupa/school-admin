@@ -1,25 +1,32 @@
-<project name="sukrupa" default="test">
+<project name="sukrupa" default="all">
 
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
-    <property name="src.test.dir" value="${src.dir}/test/java"/>
+    <!-- TODO: move to test/unit/java-->
+    <property name="src.test.unit.dir" value="${src.dir}/test/java"/>
+    <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
+
+    <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
     <property name="web.dir" value="web"/>
-    <property name="war.name" value="${ant.project.name}.war"/>
-
-    <property name="build.dir" value="target"/>
-    <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
-    <property name="build.test.dir" value="${build.dir}/test"/>
-    <property name="build.reports.dir" value="${build.dir}/reports"/>
 
     <property name="lib.dir" value="lib"/>
     <property name="lib.test.dir" value="${lib.dir}/test"/>
+
+    <property name="build.dir" value="target"/>
+    <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="build.test.unit.dir" value="${build.dir}/test/unit"/>
+    <property name="build.test.integration.dir" value="${build.dir}/test/integration"/>
+    <property name="build.reports.dir" value="${build.dir}/reports"/>
+
+    <property name="war.name" value="${ant.project.name}.war"/>
 
     <path id="classpath.compilation">
         <fileset dir="${lib.dir}" includes="*.jar"/>
         <fileset dir="${lib.dir}/jetty" includes="*.jar"/>
         <fileset dir="${lib.dir}/jsp" includes="*.jar"/>
         <fileset dir="${lib.dir}/spring" includes="*.jar"/>
+        <fileset dir="${lib.dir}/db" includes="*.jar"/>
     </path>
 
     <path id="classpath.run">
@@ -27,53 +34,96 @@
         <pathelement location="${build.main.dir}"/>
     </path>
 
-    <path id="classpath.compilation.test">
+    <path id="classpath.compilation.test.unit">
         <path refid="classpath.run"/>
         <fileset dir="${lib.test.dir}" includes="*.jar"/>
     </path>
 
-    <path id="classpath.run.test">
-        <path refid="classpath.compilation.test"/>
-        <pathelement location="${build.test.dir}"/>
+    <path id="classpath.run.test.unit">
+        <path refid="classpath.compilation.test.unit"/>
+        <pathelement location="${build.test.unit.dir}"/>
     </path>
 
-    <target name="init">
-        <tstamp/>
-        <mkdir dir="${build.main.dir}"/>
-        <mkdir dir="${build.test.dir}"/>
-        <mkdir dir="${build.reports.dir}" />
-    </target>
+    <path id="classpath.compilation.test.integration">
+        <path refid="classpath.run.test.unit"/>
+    </path>
 
-    <target name="compile" depends="init">
-        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}"
-               classpathref="classpath.compilation"/>
-        <javac includeantruntime="false" srcdir="${src.test.dir}" destdir="${build.test.dir}"
-               classpathref="classpath.compilation.test"/>
-    </target>
-
-    <target name="test" depends="clean, compile">
-        <junit printsummary="false" fork="true" haltonfailure="false" haltonerror="false" outputtoformatters="false">
-            <classpath refid="classpath.run.test"/>
-            <formatter type="xml" usefile="true"/>
-            <batchtest todir="${build.reports.dir}" failureproperty="test.failed">
-                <formatter type="plain" usefile="false"/>
-                <fileset dir="${build.test.dir}" includes="**/*Test*.class"/>
-            </batchtest>
-        </junit>
-
-        <fail if="test.failed" message="Some tests failed"/>
-    </target>
-
-    <target name="package" depends="test">
-        <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
-            <fileset dir="${web.dir}" excludes="**/WebServer*"/>
-            <lib dir="${lib.dir}/spring"/>
-        </war>
-    </target>
+    <path id="classpath.run.test.integration">
+        <path refid="classpath.compilation.test.unit"/>
+        <pathelement location="${build.test.integration.dir}"/>
+    </path>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${build.main.dir}"/>
+    </target>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build.main.dir}"/>
+        <mkdir dir="${build.test.unit.dir}"/>
+        <mkdir dir="${build.test.integration.dir}"/>
+        <mkdir dir="${build.reports.dir}"/>
+    </target>
+
+    <target name="all" depends="clean, init, compile-all, copy-resources, test-all, package"/>
+
+    <target name="compile-all" depends="compile-main, compile-test-unit, compile-test-integration"/>
+
+    <target name="compile-main">
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}"
+               classpathref="classpath.compilation"/>
+    </target>
+
+    <target name="compile-test-unit">
+        <javac includeantruntime="false" srcdir="${src.test.unit.dir}" destdir="${build.test.unit.dir}"
+               classpathref="classpath.compilation.test.unit"/>
+    </target>
+
+    <target name="compile-test-integration">
+        <javac includeantruntime="false" srcdir="${src.test.integration.dir}" destdir="${build.test.integration.dir}"
+               classpathref="classpath.compilation.test.integration"/>
+    </target>
+
+    <target name="copy-resources">
+        <copy todir="${build.main.dir}">
+            <fileset dir="${resources.main.dir}"/>
+        </copy>
+    </target>
+
+    <target name="test-all" depends="test-unit, test-integration"/>
+
+    <target name="test-unit">
+        <test type="unit"/>
+    </target>
+
+    <target name="test-integration">
+        <test type="integration"/>
+    </target>
+
+    <macrodef name="test">
+        <attribute name="type"/>
+        <sequential>
+            <junit printsummary="false" fork="true" haltonfailure="false" haltonerror="false"
+                   outputtoformatters="false">
+                <classpath refid="classpath.run.test.@{type}"/>
+                <formatter type="xml" usefile="true"/>
+                <batchtest todir="${build.reports.dir}" failureproperty="test.@{type}.failed">
+                    <formatter type="plain" usefile="false"/>
+                    <fileset dir="${build.test.@{type}.dir}" includes="**/*Test*.class"/>
+                </batchtest>
+            </junit>
+
+            <fail if="test.@{type}.failed" message="Some @{type} tests failed"/>
+        </sequential>
+    </macrodef>
+
+    <target name="package"
+            depends="clean, init, compile-all, copy-resources, test-all"> <!-- TODO: change target on CI -->
+        <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" excludes="**/WebServer*"/>
+            <lib dir="${lib.dir}/spring"/>
+        </war>
     </target>
 
 </project>
