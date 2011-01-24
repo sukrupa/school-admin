@@ -2,8 +2,7 @@
 
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
-    <!-- TODO: move to test/unit/java-->
-    <property name="src.test.unit.dir" value="${src.dir}/test/java"/>
+    <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
     <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
