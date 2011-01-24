@@ -11,4 +11,6 @@ define 'sukrupa' do
 	test.compile.into "target/test"
 
 	package :war, :file=>_('target/sukrupa.war')
+
+	run.using :main => "org.sukrupa.web.WebServer"
 end
