@@ -1,7 +1,6 @@
-repositories.remote << 'http://www.ibiblio.org/maven2/'
-
 define 'sukrupa' do
 	compile.with Dir[_("lib/*.jar")],
+                 Dir[_("lib/db/*.jar")],
 	             Dir[_("lib/jetty/*.jar")],
 	             Dir[_("lib/jsp/*.jar")],
 	             Dir[_("lib/spring/*.jar")]
