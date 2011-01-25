@@ -3,6 +3,7 @@ define 'sukrupa' do
                  Dir[_("lib/db/*.jar")],
 	             Dir[_("lib/jetty/*.jar")],
 	             Dir[_("lib/jsp/*.jar")],
+	             Dir[_("lib/production/*.jar")],
 	             Dir[_("lib/spring/*.jar")]
 	compile.into "web/WEB-INF/classes"
 
