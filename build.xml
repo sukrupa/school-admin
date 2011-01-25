@@ -15,13 +15,13 @@
     <property name="lib.main.dir" value="lib/main"/>
     <property name="lib.test.dir" value="lib/test"/>
 
-    <property name="build.dir" value="target"/>
-    <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
-    <property name="build.test.unit.dir" value="${build.dir}/test/unit"/>
-    <property name="build.test.integration.dir" value="${build.dir}/test/integration"/>
-    <property name="build.reports.dir" value="${build.dir}/reports"/>
+    <property name="target.dir" value="target"/>
+    <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
+    <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
+    <property name="target.reports.dir" value="${target.dir}/reports"/>
 
-    <property name="db.dir" value="${build.dir}/db"/>
+    <property name="db.dir" value="${target.dir}/db"/>
 
     <property name="war.name" value="${ant.project.name}.war"/>
 
@@ -36,7 +36,7 @@
 
     <path id="classpath.run">
         <path refid="classpath.compilation"/>
-        <pathelement location="${build.main.dir}"/>
+        <pathelement location="${target.main.dir}"/>
     </path>
 
     <path id="classpath.compilation.test.unit">
@@ -46,7 +46,7 @@
 
     <path id="classpath.run.test.unit">
         <path refid="classpath.compilation.test.unit"/>
-        <pathelement location="${build.test.unit.dir}"/>
+        <pathelement location="${target.test.unit.dir}"/>
     </path>
 
     <path id="classpath.compilation.test.integration">
@@ -55,43 +55,43 @@
 
     <path id="classpath.run.test.integration">
         <path refid="classpath.compilation.test.integration"/>
-        <pathelement location="${build.test.integration.dir}"/>
+        <pathelement location="${target.test.integration.dir}"/>
     </path>
 
     <target name="clean">
-        <delete dir="${build.dir}"/>
-        <delete dir="${build.main.dir}"/>
+        <delete dir="${target.dir}"/>
+        <delete dir="${target.main.dir}"/>
     </target>
 
     <target name="init">
         <tstamp/>
-        <mkdir dir="${build.main.dir}"/>
-        <mkdir dir="${build.test.unit.dir}"/>
-        <mkdir dir="${build.test.integration.dir}"/>
-        <mkdir dir="${build.reports.dir}"/>
+        <mkdir dir="${target.main.dir}"/>
+        <mkdir dir="${target.test.unit.dir}"/>
+        <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.reports.dir}"/>
     </target>
 
-    <target name="all" depends="clean, init, compile-all, copy-resources, test:all, package"/>
+    <target name="all" depends="clean, init, compile:all, copy-resources, test:all, package"/>
 
-    <target name="compile-all" depends="compile-main, compile-test-unit, compile-test-integration"/>
+    <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
 
-    <target name="compile-main">
-        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${build.main.dir}"
+    <target name="compile:main">
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
                classpathref="classpath.compilation"/>
     </target>
 
-    <target name="compile-test-unit">
-        <javac includeantruntime="false" srcdir="${src.test.unit.dir}" destdir="${build.test.unit.dir}"
+    <target name="compile:test:unit">
+        <javac includeantruntime="false" srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile-test-integration">
-        <javac includeantruntime="false" srcdir="${src.test.integration.dir}" destdir="${build.test.integration.dir}"
+    <target name="compile:test:integration">
+        <javac includeantruntime="false" srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                classpathref="classpath.compilation.test.integration"/>
     </target>
 
     <target name="copy-resources">
-        <copy todir="${build.main.dir}">
+        <copy todir="${target.main.dir}">
             <fileset dir="${resources.main.dir}"/>
         </copy>
     </target>
@@ -113,9 +113,9 @@
                    outputtoformatters="false">
                 <classpath refid="classpath.run.test.@{type}"/>
                 <formatter type="xml" usefile="true"/>
-                <batchtest todir="${build.reports.dir}" failureproperty="test.@{type}.failed">
+                <batchtest todir="${target.reports.dir}" failureproperty="test.@{type}.failed">
                     <formatter type="plain" usefile="false"/>
-                    <fileset dir="${build.test.@{type}.dir}" includes="**/*Test.class"/>
+                    <fileset dir="${target.test.@{type}.dir}" includes="**/*Test.class"/>
                 </batchtest>
             </junit>
 
@@ -124,24 +124,24 @@
     </macrodef>
 
     <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${build.dir}/deploy.zip">
+        <zip destfile="${target.dir}/deploy.zip">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
-            <fileset file="${build.dir}/${war.name}"/>
-            <fileset file="${build.dir}/${web.server.jar}"/>
+            <fileset file="${target.dir}/${war.name}"/>
+            <fileset file="${target.dir}/${web.server.jar}"/>
             <fileset file="${deploy.dir}/deploy.sh"/>
             <fileset file="${deploy.dir}/stop-server.sh"/>
         </zip>
     </target>
 
     <target name="create.war">
-        <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
+        <war destfile="${target.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}" excludes="**/WebServer*"/>
             <lib dir="${lib.main.dir}"/>
         </war>
     </target>
 
     <target name="create.web.server.jar">
-        <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}" jarfile="${build.dir}/${web.server.jar}">
+        <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class" basedir="${target.main.dir}" jarfile="${target.dir}/${web.server.jar}">
             <manifest>
                 <attribute name="Main-Class" value="org.sukrupa.platform.server.WebServer"/>
             </manifest>
