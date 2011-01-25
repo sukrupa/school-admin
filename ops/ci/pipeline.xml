@@ -1,0 +1,27 @@
+<pipeline name="all">
+  <materials>
+    <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa.git" />
+  </materials>
+  <stage name="build">
+    <jobs>
+      <job name="build">
+        <tasks>
+          <exec command="./build" />
+        </tasks>
+        <artifacts>
+          <test src="target/reports" />
+          <artifact src="target/sukrupa.war" />
+        </artifacts>
+      </job>
+    </jobs>
+  </stage>
+  <stage name="auto-deploy">
+    <jobs>
+      <job name="auto-deploy">
+        <tasks>
+          <exec command="./build" args="self.deploy" />
+        </tasks>
+      </job>
+    </jobs>
+  </stage>
+</pipeline>

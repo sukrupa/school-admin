@@ -15,15 +15,15 @@ public class WebServer {
 
     public static void main(String[] args) throws Exception {
         configureLogging();
-        new WebServer();
+        new WebServer(args.length > 0 ? args[0] : WAR_DIRECTORY);
     }
 
-    public WebServer() throws Exception {
+    public WebServer(String war) throws Exception {
         Server server = new Server(HTTP_PORT);
 
         WebAppContext webApp = new WebAppContext();
         webApp.setContextPath(WEB_APP_CONTEXT);
-        webApp.setWar(WAR_DIRECTORY);
+        webApp.setWar(war);
         server.setHandler(webApp);
 
         server.start();

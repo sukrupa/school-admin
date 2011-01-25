@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import static org.hamcrest.Matchers.hasItems;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigContextLoader.class)
 @Transactional
-@Ignore("pat, sahil - 24/01/11 @ 17:18 - Work in Progress")
+@Ignore("pat, juan: 25/01/2010 10:55 - work in progress")
 public class StudentRepositoryTest {
 
     @Autowired
@@ -34,14 +35,25 @@ public class StudentRepositoryTest {
     public void shouldRetrieveAllStudentsFromDatabase() {
         Student sahil = new Student("Sahil");
         Student pat = new Student("Pat");
-        save(sahil);
-        save(pat);
+
+        save(sahil, pat);
+        flushHibernateSessionToForceReload();
 
         assertThat(repository.findAll(), hasItems(sahil, pat));
     }
 
-    private void save(Student sahil) {
-        sessionFactory.getCurrentSession().save(sahil);
+    private void save(Student... students) {
+        for (Object student : students) {
+            session().save(student);
+        }
     }
 
+    private void flushHibernateSessionToForceReload() {
+        session().flush();
+        session().clear();
+    }
+
+    private Session session() {
+        return sessionFactory.getCurrentSession();
+    }
 }

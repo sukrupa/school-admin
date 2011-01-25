@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>sukrupa-code</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>sukrupa-main-java</name>
+			<type>2</type>
+			<location>D:/TWU/TheSukrupaProject/sukrupa/src/main/java</location>
+		</link>
+		<link>
+			<name>sukrupa-test-shared-java</name>
+			<type>2</type>
+			<location>D:/TWU/TheSukrupaProject/sukrupa/src/test/shared/java</location>
+		</link>
+	</linkedResources>
+</projectDescription>
