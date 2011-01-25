@@ -53,7 +53,7 @@
     </path>
 
     <target name="clean">
-        <delete dir="${build.dir}"/>
+        <delete dir="${build.  dir}"/>
         <delete dir="${build.main.dir}"/>
     </target>
 

@@ -1,6 +1,12 @@
 # IntelliJ
 *.iws
+out
 
 # Build Artifacts
 target
 web/WEB-INF/classes
+
+# Twist / Eclipse
+.metadata
+bin
+logs
