@@ -4,6 +4,9 @@
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
     <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
+    <property name="src.sql.dir" value="${src.dir}/main/sql"/>
+    <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
+    <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
@@ -17,6 +20,8 @@
     <property name="build.test.unit.dir" value="${build.dir}/test/unit"/>
     <property name="build.test.integration.dir" value="${build.dir}/test/integration"/>
     <property name="build.reports.dir" value="${build.dir}/reports"/>
+
+    <property name="db.dir" value="${build.dir}/db"/>
 
     <property name="war.name" value="${ant.project.name}.war"/>
 
@@ -66,7 +71,7 @@
         <mkdir dir="${build.reports.dir}"/>
     </target>
 
-    <target name="all" depends="clean, init, compile-all, copy-resources, test-all, package"/>
+    <target name="all" depends="clean, init, compile-all, copy-resources, test:all, package"/>
 
     <target name="compile-all" depends="compile-main, compile-test-unit, compile-test-integration"/>
 
@@ -91,13 +96,13 @@
         </copy>
     </target>
 
-    <target name="test-all" depends="test-unit, test-integration"/>
+    <target name="test:all" depends="test:unit, test:integration"/>
 
-    <target name="test-unit">
+    <target name="test:unit">
         <test type="unit"/>
     </target>
 
-    <target name="test-integration">
+    <target name="test:integration">
         <test type="integration"/>
     </target>
 
@@ -143,5 +148,36 @@
         </jar>
     </target>
 
+
+    <property name="db.driver" value="org.hsqldb.jdbcDriver"/>
+    <property name="db.url" value="jdbc:hsqldb:hsql://localhost/sukrupa;shutdown=true"/>
+
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget"/>
+
+    <target name="db:setup">
+        <sql driver="${db.driver}" url="${db.url}" userid="sa" password="">
+            <fileset file="src/main/sql/script/create-changelog-table.sql"/>
+        </sql>
+    </target>
+
+    <target name="db:update" description="Updates the database schema">
+        <dbdeploy driver="${db.driver}" url="${db.url}" userid="sa" password="" dir="${src.sql.delta.dir}"/>
+    </target>
+
+    <target name="db:recreate" depends="db:stop,db:delete,db:start,db:setup,db:update"/>
+
+    <target name="db:start">
+        <java classname="org.hsqldb.server.Server" args="-database.0 file:${db.dir}/sukrupa -dbname.0 sukrupa" fork="true" spawn="true" classpathref="classpath.compilation"/>
+    </target>
+
+    <target name="db:delete">
+        <delete dir="${db.dir}"/>
+    </target>
+
+    <target name="db:stop">
+        <sql driver="${db.driver}" url="${db.url}" userid="sa" password="" failonconnectionerror="false">
+            SHUTDOWN;
+        </sql>
+    </target>
 
 </project>
