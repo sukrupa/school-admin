@@ -124,6 +124,7 @@
             <fileset file="${build.dir}/${war.name}"/>
             <fileset file="${build.dir}/${web.server.jar}"/>
             <fileset file="${deploy.dir}/deploy.sh"/>
+            <fileset file="${deploy.dir}/stop-server.sh"/>
         </zip>
     </target>
 
