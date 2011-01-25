@@ -1,10 +1,10 @@
 repositories.remote << 'http://www.ibiblio.org/maven2/'
 
 define 'sukrupa' do
-	compile.with Dir[_("lib/*.jar")]
-	compile.with Dir[_("lib/jetty/*.jar")]
-	compile.with Dir[_("lib/jsp/*.jar")]
-	compile.with Dir[_("lib/spring/*.jar")]
+	compile.with Dir[_("lib/*.jar")],
+	             Dir[_("lib/jetty/*.jar")],
+	             Dir[_("lib/jsp/*.jar")],
+	             Dir[_("lib/spring/*.jar")]
 	compile.into "web/WEB-INF/classes"
 
 	test.with Dir[_("lib/test/*.jar")]
@@ -12,5 +12,6 @@ define 'sukrupa' do
 
 	package :war, :file=>_('target/sukrupa.war')
 
+    #TODO: fork off webserver
 	run.using :main => "org.sukrupa.web.WebServer"
 end
