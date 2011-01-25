@@ -207,49 +207,13 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="db">
+    <library name="main">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/db" />
-        <root url="file://$PROJECT_DIR$/lib/db" />
+        <root url="file://$PROJECT_DIR$/lib/main" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/db" recursive="false" />
-    </library>
-    <library name="jetty">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/jetty" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/jetty" recursive="false" />
-    </library>
-    <library name="jsp">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/jsp" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/jsp" recursive="false" />
-    </library>
-    <library name="production">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/production" />
-        <root url="file://$PROJECT_DIR$/lib/production" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/source/production/commons-lang-2.6-sources.jar!/" />
-      </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/lib/production" recursive="false" />
-    </library>
-    <library name="spring">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/spring" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/spring" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/main" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
