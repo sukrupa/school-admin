@@ -1,4 +1,5 @@
 define 'sukrupa' do
+
 	compile.with Dir[_("lib/*.jar")],
                  Dir[_("lib/db/*.jar")],
 	             Dir[_("lib/jetty/*.jar")],
@@ -8,7 +9,15 @@ define 'sukrupa' do
 	compile.into "web/WEB-INF/classes"
 
 	test.with Dir[_("lib/test/*.jar")]
+	test.compile.from "src/test/unit"
 	test.compile.into "target/test"
+    test.teardown do
+        # FIXME hack to get reports into target/reports
+        # because we can't find the buildr config option
+        rm_rf "target/reports"
+        mv "reports/junit", "target/reports", :force => true
+        rmdir "reports"
+    end
 
 	package :war, :file=>_('target/sukrupa.war')
 
