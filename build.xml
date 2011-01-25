@@ -71,21 +71,21 @@
         <mkdir dir="${target.reports.dir}"/>
     </target>
 
-    <target name="all" depends="clean, init, compile-all, copy-resources, test:all, package"/>
+    <target name="all" depends="clean, init, compile:all, copy-resources, test:all, package"/>
 
-    <target name="compile-all" depends="compile-main, compile-test-unit, compile-test-integration"/>
+    <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
 
-    <target name="compile-main">
+    <target name="compile:main">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
                classpathref="classpath.compilation"/>
     </target>
 
-    <target name="compile-test-unit">
+    <target name="compile:test:unit">
         <javac includeantruntime="false" srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile-test-integration">
+    <target name="compile:test:integration">
         <javac includeantruntime="false" srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                classpathref="classpath.compilation.test.integration"/>
     </target>
