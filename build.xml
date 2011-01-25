@@ -26,6 +26,7 @@
         <fileset dir="${lib.dir}/jsp" includes="*.jar"/>
         <fileset dir="${lib.dir}/spring" includes="*.jar"/>
         <fileset dir="${lib.dir}/db" includes="*.jar"/>
+        <fileset dir="${lib.dir}/production" includes="*.jar"/>
     </path>
 
     <path id="classpath.run">

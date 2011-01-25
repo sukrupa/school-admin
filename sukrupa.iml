@@ -17,6 +17,7 @@
     <orderEntry type="library" name="jetty" level="project" />
     <orderEntry type="library" name="spring" level="project" />
     <orderEntry type="library" name="db" level="project" />
+    <orderEntry type="library" name="production" level="project" />
   </component>
 </module>
 
