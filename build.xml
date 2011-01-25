@@ -20,7 +20,7 @@
 
     <property name="war.name" value="${ant.project.name}.war"/>
 
-    <property name="deploy.dir" value="deploy"/>
+    <property name="deploy.dir" value="ops/deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="web.server.jar" value="web-server.jar"/>
     <property name="web.server.class.name" value="org.sukrupa.platform.WebServer"/>
@@ -54,13 +54,8 @@
     </path>
 
     <target name="clean">
-        <delete dir="${build.  dir}"/>
+        <delete dir="${build.dir}"/>
         <delete dir="${build.main.dir}"/>
-        <delete>
-            <fileset dir="${deploy.dir}">
-                <exclude name="deploy.sh"/>
-            </fileset>
-        </delete>
     </target>
 
     <target name="init">
@@ -124,10 +119,10 @@
     </macrodef>
 
     <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${deploy.dir}/deploy.zip">
+        <zip destfile="${build.dir}/deploy.zip">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${build.dir}/${war.name}"/>
-            <fileset file="${deploy.dir}/${web.server.jar}"/>
+            <fileset file="${build.dir}/${web.server.jar}"/>
             <fileset file="${deploy.dir}/deploy.sh"/>
         </zip>
     </target>
@@ -140,8 +135,7 @@
     </target>
 
     <target name="create.web.server.jar">
-        <jar includes="org/sukrupa/web/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}"
-             jarfile="${deploy.dir}/${web.server.jar}">
+        <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}" jarfile="${build.dir}/${web.server.jar}">
             <manifest>
                 <attribute name="Main-Class" value="org.sukrupa.platform.WebServer"/>
             </manifest>
