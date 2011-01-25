@@ -20,6 +20,11 @@
 
     <property name="war.name" value="${ant.project.name}.war"/>
 
+    <property name="deploy.dir" value="deploy"/>
+    <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
+    <property name="web.server.jar" value="web-server.jar"/>
+    <property name="web.server.class.name" value="org.sukrupa.web.WebServer"/>
+
     <path id="classpath.compilation">
         <fileset dir="${lib.dir}" includes="*.jar"/>
         <fileset dir="${lib.dir}/jetty" includes="*.jar"/>
@@ -56,6 +61,11 @@
     <target name="clean">
         <delete dir="${build.  dir}"/>
         <delete dir="${build.main.dir}"/>
+        <delete>
+            <fileset dir="${deploy.dir}">
+              <exclude name="deploy.sh"/>
+            </fileset>
+        </delete>
     </target>
 
     <target name="init">
@@ -118,15 +128,31 @@
         </sequential>
     </macrodef>
 
-    <target name="package">
+    <target name="package" depends="create.war ,create.web.server.jar">
+        <zip destfile="${deploy.dir}/deploy.zip">
+            <zipfileset dir="${lib.dir}/jetty" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/spring" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/jsp" prefix="lib"/>
+            <fileset file="${build.dir}/${war.name}"/>
+            <fileset file="${deploy.dir}/${web.server.jar}"/>
+            <fileset file="${deploy.dir}/deploy.sh"/>
+        </zip>
+    </target>
+
+    <target name="create.war">
         <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}" excludes="**/WebServer*"/>
             <lib dir="${lib.dir}/spring"/>
         </war>
     </target>
 
-    <target name="self.deploy">
-        <java classname="org.sukrupa.web.WebServer" classpathref="classpath.run" fork="true" spawn="true"/>
+    <target name="create.web.server.jar">
+        <jar includes="org/sukrupa/web/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}" jarfile="${deploy.dir}/${web.server.jar}">
+            <manifest>
+            <attribute name="Main-Class" value="org.sukrupa.web.WebServer"/>
+        </manifest>
+        </jar>
     </target>
+
 
 </project>
