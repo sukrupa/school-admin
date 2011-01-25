@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.sukrupa.platform.DbServer;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -15,17 +16,17 @@ import java.util.Properties;
 public class DBConfig {
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new HibernateTransactionManager(sessionFactory());
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+        return new HibernateTransactionManager(sessionFactory);
     }
 
     @Bean
-    public SessionFactory sessionFactory() {
-        return sessionFactoryFrom(dataSource(), hibernateProperties());
+    public SessionFactory sessionFactory(DataSource dataSource) {
+        return sessionFactoryFrom(dataSource, hibernateProperties());
     }
 
     @Bean(destroyMethod = "close")
-    public DataSource dataSource() {
+    public DataSource dataSource(DbServer dbServer) {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(true);
         dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
@@ -33,6 +34,11 @@ public class DBConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("");
         return dataSource;
+    }
+
+    @Bean(destroyMethod = "shutDown")
+    public DbServer dbServer() {
+        return new DbServer();
     }
 
     private Properties hibernateProperties() {
@@ -56,4 +62,5 @@ public class DBConfig {
             throw new RuntimeException(e);
         }
     }
+
 }

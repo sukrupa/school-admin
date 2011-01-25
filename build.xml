@@ -9,8 +9,8 @@
 
     <property name="web.dir" value="web"/>
 
-    <property name="lib.dir" value="lib"/>
-    <property name="lib.test.dir" value="${lib.dir}/test"/>
+    <property name="lib.main.dir" value="lib/main"/>
+    <property name="lib.test.dir" value="lib/test"/>
 
     <property name="build.dir" value="target"/>
     <property name="build.main.dir" value="${web.dir}/WEB-INF/classes"/>
@@ -23,15 +23,10 @@
     <property name="deploy.dir" value="deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="web.server.jar" value="web-server.jar"/>
-    <property name="web.server.class.name" value="org.sukrupa.web.WebServer"/>
+    <property name="web.server.class.name" value="org.sukrupa.platform.WebServer"/>
 
     <path id="classpath.compilation">
-        <fileset dir="${lib.dir}" includes="*.jar"/>
-        <fileset dir="${lib.dir}/jetty" includes="*.jar"/>
-        <fileset dir="${lib.dir}/jsp" includes="*.jar"/>
-        <fileset dir="${lib.dir}/spring" includes="*.jar"/>
-        <fileset dir="${lib.dir}/db" includes="*.jar"/>
-        <fileset dir="${lib.dir}/production" includes="*.jar"/>
+        <fileset dir="${lib.main.dir}" includes="*.jar"/>
     </path>
 
     <path id="classpath.run">
@@ -63,7 +58,7 @@
         <delete dir="${build.main.dir}"/>
         <delete>
             <fileset dir="${deploy.dir}">
-              <exclude name="deploy.sh"/>
+                <exclude name="deploy.sh"/>
             </fileset>
         </delete>
     </target>
@@ -128,11 +123,9 @@
         </sequential>
     </macrodef>
 
-    <target name="package" depends="create.war ,create.web.server.jar">
+    <target name="package" depends="create.war, create.web.server.jar">
         <zip destfile="${deploy.dir}/deploy.zip">
-            <zipfileset dir="${lib.dir}/jetty" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/spring" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/jsp" prefix="lib"/>
+            <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${build.dir}/${war.name}"/>
             <fileset file="${deploy.dir}/${web.server.jar}"/>
             <fileset file="${deploy.dir}/deploy.sh"/>
@@ -142,15 +135,16 @@
     <target name="create.war">
         <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}" excludes="**/WebServer*"/>
-            <lib dir="${lib.dir}/spring"/>
+            <lib dir="${lib.main.dir}"/>
         </war>
     </target>
 
     <target name="create.web.server.jar">
-        <jar includes="org/sukrupa/web/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}" jarfile="${deploy.dir}/${web.server.jar}">
+        <jar includes="org/sukrupa/web/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}"
+             jarfile="${deploy.dir}/${web.server.jar}">
             <manifest>
-            <attribute name="Main-Class" value="org.sukrupa.web.WebServer"/>
-        </manifest>
+                <attribute name="Main-Class" value="org.sukrupa.platform.WebServer"/>
+            </manifest>
         </jar>
     </target>
 
