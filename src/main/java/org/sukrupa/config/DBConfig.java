@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.sukrupa.web.DbServer;
+import org.sukrupa.platform.DbServer;
 
 import javax.sql.DataSource;
 import java.util.Properties;
