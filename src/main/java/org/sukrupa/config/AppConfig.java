@@ -41,8 +41,7 @@ public class AppConfig {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(true);
         dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-//        dataSource.setUrl("jdbc:hsqldb:mem:sukrupa");
-        dataSource.setUrl("jdbc:hsqldb:file:./target/db/sukrupa");
+        dataSource.setUrl("jdbc:hsqldb:hsql://localhost/sukrupa");
         dataSource.setUsername("sa");
         dataSource.setPassword("");
         return dataSource;
@@ -51,6 +50,8 @@ public class AppConfig {
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        properties.put("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
+        properties.put("hibernate.show_sql", true);
         properties.put("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
         return properties;
     }
@@ -66,5 +67,18 @@ public class AppConfig {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void generateSchema() {
+//        org.hibernate.cfg.Configuration config = new org.hibernate.cfg.Configuration();
+//        config.addAnnotatedClass(Student.class);
+//        Properties properties = hibernateProperties();
+//        properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
+//        properties.put("hibernate.connection.url", "jdbc:hsqldb:hsql://localhost/xdb");
+//        properties.put("hibernate.connection.username", "sa");
+//        properties.put("hibernate.connection.password", "");
+//        SchemaExport schemaExport = new SchemaExport(config, properties);
+//        schemaExport.setOutputFile("foo");
+//        schemaExport.create(true, true);
     }
 }

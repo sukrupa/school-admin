@@ -229,6 +229,17 @@
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/lib/jsp" recursive="false" />
     </library>
+    <library name="production">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/production" />
+        <root url="file://$PROJECT_DIR$/lib/production" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/source/production/commons-lang-2.6-sources.jar!/" />
+      </SOURCES>
+      <jarDirectory url="file://$PROJECT_DIR$/lib/production" recursive="false" />
+    </library>
     <library name="spring">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/lib/spring" />
