@@ -1,6 +1,7 @@
 # IntelliJ
 *.iws
 out
+.DS_Store
 
 # Build Artifacts
 target
