@@ -28,7 +28,7 @@
     <property name="deploy.dir" value="ops/deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="web.server.jar" value="web-server.jar"/>
-    <property name="web.server.class.name" value="org.sukrupa.platform.WebServer"/>
+    <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
 
     <path id="classpath.compilation">
         <fileset dir="${lib.main.dir}" includes="*.jar"/>
@@ -143,7 +143,7 @@
     <target name="create.web.server.jar">
         <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class" basedir="${build.main.dir}" jarfile="${build.dir}/${web.server.jar}">
             <manifest>
-                <attribute name="Main-Class" value="org.sukrupa.platform.WebServer"/>
+                <attribute name="Main-Class" value="org.sukrupa.platform.server.WebServer"/>
             </manifest>
         </jar>
     </target>
