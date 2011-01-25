@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.config.AppConfigContextLoader;
+import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AppConfigContextLoader.class)
+@ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
 @Ignore("pat, juan: 25/01/2010 10:55 - work in progress")
 public class StudentRepositoryTest {

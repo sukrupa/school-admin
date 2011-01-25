@@ -1,4 +1,4 @@
-package org.sukrupa.platform;
+package org.sukrupa.app;
 
 import org.apache.log4j.Logger;
 import org.hsqldb.DatabaseManager;

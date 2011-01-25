@@ -1,11 +1,11 @@
-package org.sukrupa.platform;
+package org.sukrupa.app;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import static org.sukrupa.config.Logging.configureLogging;
+import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 
-public class WebServer {
+public class SchoolAdminApp {
 
     private static final int HTTP_PORT = 8080;
 
@@ -15,10 +15,10 @@ public class WebServer {
 
     public static void main(String[] args) throws Exception {
         configureLogging();
-        new WebServer(args.length > 0 ? args[0] : WAR_DIRECTORY);
+        new SchoolAdminApp(args.length > 0 ? args[0] : WAR_DIRECTORY);
     }
 
-    public WebServer(String war) throws Exception {
+    public SchoolAdminApp(String war) throws Exception {
         Server server = new Server(HTTP_PORT);
 
         WebAppContext webApp = new WebAppContext();

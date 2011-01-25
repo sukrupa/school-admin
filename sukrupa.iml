@@ -2,7 +2,12 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset1" name="My Fileset" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/transaction-config.xml</file>
+          <file>jar://$MODULE_DIR$/lib/main/org.springframework.jdbc-3.0.0.RELEASE.jar!/org/springframework/jdbc/support/sql-error-codes.xml</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>

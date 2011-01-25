@@ -1,4 +1,4 @@
-package org.sukrupa.config;
+package org.sukrupa.app.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.sukrupa.platform.DbServer;
+import org.sukrupa.app.DbServer;
 
 import javax.sql.DataSource;
 import java.util.Properties;

@@ -1,12 +1,12 @@
-package org.sukrupa.config;
+package org.sukrupa.app.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextLoader;
 
-import static org.sukrupa.config.Logging.configureLogging;
+import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 
-public class AppConfigContextLoader implements ContextLoader {
+public class AppConfigForTestsContextLoader implements ContextLoader {
 
     private static final String BASE_PACKAGE = "org.sukrupa";
 
