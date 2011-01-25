@@ -117,8 +117,7 @@
         </sequential>
     </macrodef>
 
-    <target name="package"
-            depends="clean, init, compile-all, copy-resources, test-all"> <!-- TODO: change target on CI -->
+    <target name="package">
         <war destfile="${build.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}" excludes="**/WebServer*"/>
             <lib dir="${lib.dir}/spring"/>
