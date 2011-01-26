@@ -46,6 +46,7 @@
           <option name="processComments" value="true" />
         </inspection_tool>
         <inspection_tool class="SpringContextConfigurationInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="SpringJavaAutowiringInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       </profile>
     </profiles>
     <option name="PROJECT_PROFILE" value="Project Default" />
@@ -215,7 +216,10 @@
         <root url="file://$PROJECT_DIR$/lib/main" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/lib/source/main" />
+        <root url="jar://$PROJECT_DIR$/lib/source/main/commons-lang-2.6-sources.jar!/" />
+      </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/lib/main" recursive="false" />
     </library>
     <library name="test">
