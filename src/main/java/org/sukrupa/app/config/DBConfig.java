@@ -2,21 +2,25 @@ package org.sukrupa.app.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 @ImportResource("classpath:transaction-config.xml")
 public class DBConfig {
 
     private static final String BASE_PACKAGE = "org.sukrupa";
-    
+
     @Value("${jdbc.url}")
     private String jdbcUrl;
 
@@ -36,7 +40,7 @@ public class DBConfig {
 
     @Bean
     public SessionFactory sessionFactory(DataSource dataSource) {
-        return sessionFactoryFrom(dataSource, hibernateProperties());
+        return sessionFactoryFrom(dataSource, databaseProperties());
     }
 
     @Bean(destroyMethod = "close")
@@ -48,15 +52,6 @@ public class DBConfig {
         dataSource.setUsername(jdbcUser);
         dataSource.setPassword(jdbcPassword);
         return dataSource;
-    }
-
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        properties.put("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
-        properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
-        return properties;
     }
 
     private SessionFactory sessionFactoryFrom(DataSource dataSource, Properties hibernateProperties) {
@@ -72,4 +67,13 @@ public class DBConfig {
         }
     }
 
+    private Properties databaseProperties() {
+        try {
+            Properties properties = new Properties();
+            properties.load(new ClassPathResource("database.properties").getInputStream());
+            return properties;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
