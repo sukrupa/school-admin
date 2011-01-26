@@ -156,7 +156,7 @@
     </target>
 
     <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
-            depends="db:stop, db:clean, db:start, db:setup, db:update"/>
+            depends="db:stop, db:clean, db:start, db:update"/>
     
     <target name="db:start" description="Starts the database and makes sure it's set up."
             depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
