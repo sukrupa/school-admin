@@ -22,7 +22,7 @@ public class StudentControllerTest {
 
     private StudentController controller;
 
-    private Map<String, List<Student>> model = new HashMap();
+    private Map<String, List<Student>> model = new HashMap<String, List<Student>>();
     private Student sahil = new Student("Sahil");
     private Student pat = new Student("Pat");
 
