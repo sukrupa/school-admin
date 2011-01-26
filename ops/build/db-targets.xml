@@ -2,15 +2,19 @@
 
     <import file="properties.xml"/>
 
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget"/>
+
     <property name="src.sql.dir" value="${src.dir}/main/sql"/>
     <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
     <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
+    <!-- FIXME: These properties are duplicated between here and our Java code -->
     <property name="db.dir" value="${user.home}/.sukrupa/db"/>
     <property name="db.name" value="sukrupa"/>
     <property name="db.driver" value="org.hsqldb.jdbcDriver"/>
-    <property name="db.url" value="jdbc:hsqldb:hsql://localhost/sukrupa;shutdown=true"/>
-    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget"/>
+    <property name="db.url" value="jdbc:hsqldb:hsql://localhost/${db.name}"/>
+    <property name="db.user" value="sa"/>
+    <property name="db.password" value=""/>
 
     <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
             depends="db:stop, db:clean, db:start, db:update"/>
@@ -47,20 +51,21 @@
     </target>
 
     <target name="db:stop" description="Stops the database server (no data will be deleted).">
-        <sql driver="${db.driver}" url="${db.url}" userid="sa" password=""
+        <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
              failonconnectionerror="false" onerror="continue">
             SHUTDOWN;
         </sql>
     </target>
 
     <target name="db:setup">
-        <sql driver="${db.driver}" url="${db.url}" userid="sa" password="">
+        <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}">
             <fileset file="${src.sql.script.dir}/create-changelog-table.sql"/>
         </sql>
     </target>
 
     <target name="db:update" description="Updates the database schema to the latest version.">
-        <dbdeploy driver="${db.driver}" url="${db.url}" userid="sa" password="" dir="${src.sql.delta.dir}"/>
+        <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
+                  dir="${src.sql.delta.dir}"/>
     </target>
 
     <target name="db:clean" depends="db:stop">
