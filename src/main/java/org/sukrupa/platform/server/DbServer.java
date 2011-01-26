@@ -1,6 +1,5 @@
 package org.sukrupa.platform.server;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hsqldb.DatabaseManager;
 import org.hsqldb.Server;
@@ -9,7 +8,7 @@ import org.hsqldb.persist.HsqlProperties;
 import java.io.File;
 import java.util.Properties;
 
-import static java.util.Arrays.asList;
+import static org.sukrupa.platform.text.StringManipulation.join;
 
 public class DbServer {
 
@@ -75,9 +74,5 @@ public class DbServer {
 
     private File lockFile() {
         return new File(join(rootDir, dbName + ".lck"));
-    }
-
-    private String join(String... parts) {
-        return StringUtils.join(asList(parts), File.separator);
     }
 }

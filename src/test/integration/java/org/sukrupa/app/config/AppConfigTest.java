@@ -20,6 +20,9 @@ public class AppConfigTest {
     @Value("${jdbc.url}")
     private String jdbcUrl;
 
+    @Value("${db.root.dir}")
+    private String hsqlDbRoot;
+
     @Autowired
     private Properties properties;
 
@@ -37,5 +40,4 @@ public class AppConfigTest {
     public void shouldResolvePropertyValues() {
         assertThat(jdbcUrl, containsString("jdbc:"));
     }
-
 }
