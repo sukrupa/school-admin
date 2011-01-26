@@ -4,9 +4,6 @@
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
     <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
-    <property name="src.sql.dir" value="${src.dir}/main/sql"/>
-    <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
-    <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
@@ -20,6 +17,10 @@
     <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
     <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
+
+    <property name="src.sql.dir" value="${src.dir}/main/sql"/>
+    <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
+    <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
     <property name="db.dir" value="${user.home}/.sukrupa/db"/>
     <property name="db.name" value="sukrupa"/>
@@ -75,7 +76,7 @@
         <mkdir dir="${target.reports.dir}"/>
     </target>
 
-    <target name="all" description="Build, update db, test and package."
+    <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
 
     <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
@@ -154,10 +155,11 @@
         </jar>
     </target>
 
-    <target name="db:recreate" description="Deletes and recreates database from scratch."
+    <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
             depends="db:stop, db:clean, db:start, db:setup, db:update"/>
-
-    <target name="db:start" depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
+    
+    <target name="db:start" description="Starts the database and makes sure it's set up."
+            depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
 
     <target name="db:start:check">
         <available file="${db.dir}/${db.name}.script" property="db.exists"/>
@@ -187,7 +189,7 @@
         <antcall target="db:setup"/>
     </target>
 
-    <target name="db:stop">
+    <target name="db:stop" description="Stops the database server (no data will be deleted).">
         <sql driver="${db.driver}" url="${db.url}" userid="sa" password=""
              failonconnectionerror="false" onerror="continue">
             SHUTDOWN;
@@ -196,7 +198,7 @@
 
     <target name="db:setup">
         <sql driver="${db.driver}" url="${db.url}" userid="sa" password="">
-            <fileset file="src/main/sql/script/create-changelog-table.sql"/>
+            <fileset file="${src.sql.script.dir}/create-changelog-table.sql"/>
         </sql>
     </target>
 
