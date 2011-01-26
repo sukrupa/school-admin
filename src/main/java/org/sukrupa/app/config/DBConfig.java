@@ -2,6 +2,7 @@ package org.sukrupa.app.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
@@ -13,6 +14,20 @@ import java.util.Properties;
 
 @ImportResource("classpath:transaction-config.xml")
 public class DBConfig {
+
+    private static final String BASE_PACKAGE = "org.sukrupa";
+    
+    @Value("${jdbc.url}")
+    private String jdbcUrl;
+
+    @Value("${jdbc.driver}")
+    private String jdbcDriver;
+
+    @Value("${jdbc.user}")
+    private String jdbcUser;
+
+    @Value("${jdbc.password}")
+    private String jdbcPassword;
 
     @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
@@ -28,10 +43,10 @@ public class DBConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(true);
-        dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-        dataSource.setUrl("jdbc:hsqldb:hsql://localhost/sukrupa");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+        dataSource.setDriverClassName(jdbcDriver);
+        dataSource.setUrl(jdbcUrl);
+        dataSource.setUsername(jdbcUser);
+        dataSource.setPassword(jdbcPassword);
         return dataSource;
     }
 
@@ -48,7 +63,7 @@ public class DBConfig {
         try {
             AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
-            sessionFactory.setPackagesToScan(new String[]{"org.sukrupa",});
+            sessionFactory.setPackagesToScan(new String[]{BASE_PACKAGE,});
             sessionFactory.setHibernateProperties(hibernateProperties);
             sessionFactory.afterPropertiesSet();
             return sessionFactory.getObject();
