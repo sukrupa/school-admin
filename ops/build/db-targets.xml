@@ -1,0 +1,70 @@
+<project name="db-targets">
+
+    <import file="properties.xml"/>
+
+    <property name="src.sql.dir" value="${src.dir}/main/sql"/>
+    <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
+    <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
+
+    <property name="db.dir" value="${user.home}/.sukrupa/db"/>
+    <property name="db.name" value="sukrupa"/>
+    <property name="db.driver" value="org.hsqldb.jdbcDriver"/>
+    <property name="db.url" value="jdbc:hsqldb:hsql://localhost/sukrupa;shutdown=true"/>
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget"/>
+
+    <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
+            depends="db:stop, db:clean, db:start, db:update"/>
+
+    <target name="db:start" description="Starts the database and makes sure it's set up."
+            depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
+
+    <target name="db:start:check">
+        <available file="${db.dir}/${db.name}.script" property="db.exists"/>
+        <available file="${db.dir}/${db.name}.lck" property="db.server.running"/>
+    </target>
+
+    <target name="db:start:status" if="db.server.running">
+        <echo>Database server seems to be up already *yai* - we'll skip starting.</echo>
+    </target>
+
+    <target name="db:start:server" unless="db.server.running">
+        <java classname="org.hsqldb.server.Server" fork="true" spawn="true" classpathref="classpath.compilation">
+            <arg value="--database.0"/>
+            <arg value="file:${db.dir}/${db.name}"/>
+            <arg value="--dbname.0"/>
+            <arg value="${db.name}"/>
+        </java>
+        <waitfor maxwait="20" maxwaitunit="second" timeoutproperty="db.start.time.out">
+            <available file="${db.dir}/${db.name}.lck"/>
+        </waitfor>
+        <fail if="db.start.time.out" message="Could not start database =("/>
+        <echo>Database server started.</echo>
+    </target>
+
+    <target name="db:start:first-time" unless="db.exists">
+        <echo>It looks like you don't have a database setup yet. No worries, though, we'll do it for you.</echo>
+        <antcall target="db:setup"/>
+    </target>
+
+    <target name="db:stop" description="Stops the database server (no data will be deleted).">
+        <sql driver="${db.driver}" url="${db.url}" userid="sa" password=""
+             failonconnectionerror="false" onerror="continue">
+            SHUTDOWN;
+        </sql>
+    </target>
+
+    <target name="db:setup">
+        <sql driver="${db.driver}" url="${db.url}" userid="sa" password="">
+            <fileset file="${src.sql.script.dir}/create-changelog-table.sql"/>
+        </sql>
+    </target>
+
+    <target name="db:update" description="Updates the database schema to the latest version.">
+        <dbdeploy driver="${db.driver}" url="${db.url}" userid="sa" password="" dir="${src.sql.delta.dir}"/>
+    </target>
+
+    <target name="db:clean" depends="db:stop">
+        <delete dir="${db.dir}"/>
+    </target>
+
+</project>

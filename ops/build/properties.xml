@@ -1,0 +1,26 @@
+<project name="properties">
+    <property name="src.dir" value="src"/>
+    <property name="src.main.dir" value="${src.dir}/main/java"/>
+    <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
+    <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
+
+    <property name="resources.main.dir" value="${src.dir}/main/resources"/>
+
+    <property name="web.dir" value="web"/>
+
+    <property name="lib.main.dir" value="lib/main"/>
+    <property name="lib.test.dir" value="lib/test"/>
+
+    <property name="target.dir" value="target"/>
+    <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
+    <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
+    <property name="target.reports.dir" value="${target.dir}/reports"/>
+
+    <property name="war.name" value="${ant.project.name}.war"/>
+
+    <property name="deploy.dir" value="ops/deploy"/>
+    <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
+    <property name="web.server.jar" value="web-server.jar"/>
+    <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
+</project>
