@@ -1,4 +1,4 @@
-<project name="sukrupa" default="all">
+<project name="sukrupa" default="all" basedir="../..">
 
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
