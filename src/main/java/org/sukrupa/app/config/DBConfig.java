@@ -4,18 +4,17 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.Properties;
 
+@Configuration
 @ImportResource("classpath:transaction-config.xml")
 public class DBConfig {
 
@@ -33,14 +32,17 @@ public class DBConfig {
     @Value("${jdbc.password}")
     private String jdbcPassword;
 
+    @Autowired
+    private Properties properties;
+
     @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-        return new HibernateTransactionManager(sessionFactory);
+    public PlatformTransactionManager transactionManager() {
+        return new HibernateTransactionManager(sessionFactory());
     }
 
     @Bean
-    public SessionFactory sessionFactory(DataSource dataSource) {
-        return sessionFactoryFrom(dataSource, databaseProperties());
+    public SessionFactory sessionFactory() {
+        return sessionFactoryFrom(dataSource());
     }
 
     @Bean(destroyMethod = "close")
@@ -54,25 +56,15 @@ public class DBConfig {
         return dataSource;
     }
 
-    private SessionFactory sessionFactoryFrom(DataSource dataSource, Properties hibernateProperties) {
+    private SessionFactory sessionFactoryFrom(DataSource dataSource) {
         try {
             AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
             sessionFactory.setPackagesToScan(new String[]{BASE_PACKAGE,});
-            sessionFactory.setHibernateProperties(hibernateProperties);
+            sessionFactory.setHibernateProperties(properties);
             sessionFactory.afterPropertiesSet();
             return sessionFactory.getObject();
         } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Properties databaseProperties() {
-        try {
-            Properties properties = new Properties();
-            properties.load(new ClassPathResource("database.properties").getInputStream());
-            return properties;
-        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

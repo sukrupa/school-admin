@@ -8,6 +8,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.io.IOException;
+import java.util.Properties;
+
 @Configuration
 @Import({DBConfig.class})
 public class AppConfig {
@@ -23,7 +26,18 @@ public class AppConfig {
     @Bean
     public PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-        configurer.setLocation(new ClassPathResource("database.properties"));
+        configurer.setProperties(properties());
         return configurer;
+    }
+
+    @Bean
+    public Properties properties() {
+        try {
+            Properties properties = new Properties();
+            properties.load(new ClassPathResource("database.properties").getInputStream());
+            return properties;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
