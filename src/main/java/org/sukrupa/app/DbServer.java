@@ -19,13 +19,15 @@ public class DbServer {
             server.setRestartOnShutdown(false);
             server.setNoSystemExit(true);
             server.setProperties(hsqlProperties());
-
-            LOG.info("Starting HSQL Server...");
-            server.start();
-            LOG.info("HSQL Server listening on port " + server.getPort());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void start() {
+        LOG.info("Starting HSQL Server...");
+        server.start();
+        LOG.info("HSQL Server listening on port " + server.getPort());
     }
 
     public void shutDown() {
@@ -39,13 +41,21 @@ public class DbServer {
     }
 
     private HsqlProperties hsqlProperties() {
-        return new HsqlProperties(serverProperties());
+        return new HsqlProperties(properties());
     }
 
-    private Properties serverProperties() {
+    private Properties properties() {
         Properties properties = new Properties();
-        properties.put("server.database.0", "target/db/sukrupa");
+        properties.put("server.database.0", dataDir());
         properties.put("server.dbname.0", "sukrupa");
         return properties;
+    }
+
+    private String dataDir() {
+        return userHome() + "/.sukrupa/db/sukrupa";
+    }
+
+    private String userHome() {
+        return System.getProperty("user.home");
     }
 }

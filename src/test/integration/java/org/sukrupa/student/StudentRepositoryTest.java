@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.hasItems;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
-@Ignore("pat, juan: 25/01/2010 10:55 - work in progress")
 public class StudentRepositoryTest {
 
     @Autowired

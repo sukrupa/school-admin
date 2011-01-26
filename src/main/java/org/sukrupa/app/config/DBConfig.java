@@ -36,7 +36,7 @@ public class DBConfig {
         return dataSource;
     }
 
-    @Bean(destroyMethod = "shutDown")
+    @Bean(initMethod = "start", destroyMethod = "shutDown")
     public DbServer dbServer() {
         return new DbServer();
     }
