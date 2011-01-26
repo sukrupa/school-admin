@@ -26,7 +26,7 @@ public class DBConfig {
     }
 
     @Bean(destroyMethod = "close")
-    public DataSource dataSource(DbServer dbServer) {
+    public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(true);
         dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
@@ -34,11 +34,6 @@ public class DBConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("");
         return dataSource;
-    }
-
-    @Bean(initMethod = "start", destroyMethod = "shutDown")
-    public DbServer dbServer() {
-        return new DbServer();
     }
 
     private Properties hibernateProperties() {
