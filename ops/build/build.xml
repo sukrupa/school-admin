@@ -11,6 +11,8 @@
         <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
+            <arg value="-f"/>
+            <arg value="ops/build/buildfile"/>
             <arg value="clean"/>
         </exec>
     </target>
@@ -29,6 +31,8 @@
         <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
+            <arg value="-f"/>
+            <arg value="ops/build/buildfile"/>
             <arg value="compile"/>
         </exec>
     </target>
@@ -50,6 +54,8 @@
         <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
+            <arg value="-f"/>
+            <arg value="ops/build/buildfile"/>
             <arg value="test"/>
         </exec>
     </target>
