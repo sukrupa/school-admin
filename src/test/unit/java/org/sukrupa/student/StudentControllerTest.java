@@ -10,8 +10,8 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -36,7 +36,7 @@ public class StudentControllerTest {
     public void shouldPopulateModelWithAllStudents() {
         when(repository.findAll()).thenReturn(asList(sahil, pat));
         controller.all(model);
-        assertThat(model.get("students"), hasItems(sahil, pat));
+        assertThat(model.get("students"), is(asList(sahil, pat)));
     }
 
     @Test
