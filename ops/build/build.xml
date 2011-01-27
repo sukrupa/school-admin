@@ -5,7 +5,12 @@
     <import file="db-targets.xml"/>
     <import file="macros.xml"/>
 
-    <property name="jruby" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
+    <property name="jruby.win" location="tools/jruby-1.6.0.RC1/bin/jruby.bat"/>
+    <property name="jruby.sh" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
+    <condition property="jruby" value="${jruby.win}">
+        <os family="windows"/>
+    </condition>
+    <property name="jruby" value="${jruby.sh}"/>
 
     <target name="clean">
         <exec executable="${jruby}" failonerror="true">

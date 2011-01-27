@@ -4,15 +4,13 @@
 <body>
 
 <table>
-    <thead>
-    <tr>
+    <tr style="text-align:left;">
         <th>Name</th>
         <th>Religion</th>
         <th>Caste</th>
         <th>Sub Caste</th>
         <th>Area</th>
     </tr>
-    </thead>
     <tbody>
     <c:forEach items="${students}" var="student">
         <tr>
@@ -26,10 +24,5 @@
     </tbody>
 </table>
 
-<%--<ul>--%>
-<%--<c:forEach items="${students}" var="student">--%>
-<%--<li>Name: ${student.name} - Religion: ${student.religion} - Caste: ${student.caste} - Sub Caste: ${student.subCaste} - Area: ${student.area}</li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
 </body>
 </html>
