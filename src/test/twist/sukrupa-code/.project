@@ -18,7 +18,7 @@
 		<link>
 			<name>lib</name>
 			<type>2</type>
-			<locationURI>PARENT-4-PROJECT_LOC/lib</locationURI>
+			<location>/home/ron/sukrupa/lib</location>
 		</link>
 		<link>
 			<name>main</name>
@@ -29,6 +29,16 @@
 			<name>shared</name>
 			<type>2</type>
 			<locationURI>PARENT-2-PROJECT_LOC/shared</locationURI>
+		</link>
+		<link>
+			<name>sukrupa-code-class-files</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/ide/twist/out/sukrupa-code-class-files</locationURI>
+		</link>
+		<link>
+			<name>twist</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

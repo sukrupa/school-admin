@@ -23,9 +23,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>out</name>
+			<name>target-twist</name>
 			<type>2</type>
-			<locationURI>PARENT-4-PROJECT_LOC/ide/twist/out</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

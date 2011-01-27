@@ -15,6 +15,7 @@
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
     <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
     <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
+    <property name="target.test.twist.dir" value="${target.dir}/test/twist"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
 
     <property name="war.name" value="${ant.project.name}.war"/>

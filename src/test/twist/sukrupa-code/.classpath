@@ -50,5 +50,5 @@
 	<classpathentry kind="lib" path="lib/test/junit-dep-4.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/test/mockito-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="lib/test/spring-test-3.0.5.RELEASE.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="sukrupa-code-class-files"/>
 </classpath>
