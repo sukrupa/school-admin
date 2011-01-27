@@ -9,7 +9,7 @@ define 'sukrupa' do
 
 	test.with Dir[_("lib/test/*.jar")]
 	test.compile.from "src/test/unit"
-	test.compile.into "target/test/unit"
+	test.compile.into "target/test"
     test.teardown do
         # FIXME hack to get reports into target/reports
         # because we can't find the buildr config option
