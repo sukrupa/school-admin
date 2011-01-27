@@ -8,7 +8,7 @@
     <property name="jruby" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
 
     <target name="clean">
-        <exec executable="${jruby}">
+        <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
             <arg value="clean"/>
@@ -26,7 +26,7 @@
     <target name="compile:all" depends="compile:main, compile:test:integration"/>
 
     <target name="compile:main">
-        <exec executable="${jruby}">
+        <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
             <arg value="compile"/>
@@ -47,7 +47,7 @@
     <target name="test:all" depends="test:unit, test:integration"/>
 
     <target name="test:unit">
-        <exec executable="${jruby}">
+        <exec executable="${jruby}" failonerror="true">
             <arg value="-S"/>
             <arg value="buildr"/>
             <arg value="test"/>
