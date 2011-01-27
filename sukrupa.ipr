@@ -221,6 +221,7 @@
       <SOURCES>
         <root url="file://$PROJECT_DIR$/lib/source/main" />
         <root url="jar://$PROJECT_DIR$/lib/source/main/commons-lang-2.6-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/source/stringtemplate-3.2.1-source.zip!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/lib/main" recursive="false" />
     </library>

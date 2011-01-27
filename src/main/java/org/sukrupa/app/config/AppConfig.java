@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.sukrupa.platform.web.StringTemplateView;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -18,8 +19,9 @@ public class AppConfig {
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/jsp/");
-        viewResolver.setSuffix(".jsp");
+        viewResolver.setPrefix("/WEB-INF/templates/");
+        viewResolver.setViewClass(StringTemplateView.class);
+        viewResolver.setSuffix(".st");
         return viewResolver;
     }
 
