@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="out" path="shared/java"/>
-	<classpathentry kind="src" output="out" path="main/java"/>
+	<classpathentry kind="src" path="shared/java"/>
+	<classpathentry kind="src" path="main/java"/>
 	<classpathentry kind="src" path="main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/main/antlr-2.7.6.jar"/>
@@ -50,5 +50,5 @@
 	<classpathentry kind="lib" path="lib/test/junit-dep-4.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/test/mockito-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="lib/test/spring-test-3.0.5.RELEASE.jar"/>
-	<classpathentry kind="output" path="out"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
