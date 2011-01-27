@@ -12,9 +12,14 @@
 
     </path>
 
-    <path id="classpath.compilation.test.unit">
+    <path id="classpath.compilation.test.shared">
         <path refid="classpath.run"/>
         <fileset dir="${lib.test.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.compilation.test.unit">
+        <path refid="classpath.compilation.test.shared"/>
+        <pathelement location="${target.test.shared.dir}"/>
     </path>
 
     <path id="classpath.run.test.unit">
@@ -23,11 +28,13 @@
     </path>
 
     <path id="classpath.compilation.test.integration">
-        <path refid="classpath.compilation.test.unit"/>
+        <path refid="classpath.compilation.test.shared"/>
+        <pathelement location="${target.test.shared.dir}"/>
     </path>
 
     <path id="classpath.run.test.integration">
         <path refid="classpath.compilation.test.integration"/>
         <pathelement location="${target.test.integration.dir}"/>
+        <pathelement location="${target.test.shared.dir}"/>
     </path>
 </project>

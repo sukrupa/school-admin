@@ -9,17 +9,20 @@ public class StudentTest {
 
     @Test
     public void shouldBeEqual() {
-        assertThat(new Student("Patric").equals(new Student("Patric")), is(true));
+        assertThat(student("pat").equals(student("pat")), is(true));
     }
 
     @Test
     public void shouldHaveSameHashCode() {
-        assertThat(new Student("Patric").hashCode(), is(new Student("Patric").hashCode()));
+        assertThat(student("pat").hashCode(), is(student("pat").hashCode()));
     }
 
     @Test
     public void shouldNotBeEqualIfDifferentName() {
-        assertThat(new Student("Patric").equals(new Student("Mr Jones")), is(false));
+        assertThat(student("pat").equals(student("mr. jones")), is(false));
     }
 
+    private Student student(String name) {
+        return new StudentBuilder().name(name).build();
+    }
 }

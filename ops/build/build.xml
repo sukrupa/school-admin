@@ -24,6 +24,7 @@
 
     <target name="init">
         <tstamp/>
+        <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
         <mkdir dir="${target.test.twist.dir}"/>
@@ -33,7 +34,7 @@
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
 
-    <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
+    <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration"/>
 
     <target name="compile:main">
         <exec executable="${jruby}" failonerror="true">
@@ -43,6 +44,11 @@
             <arg value="ops/build/buildfile"/>
             <arg value="compile"/>
         </exec>
+    </target>
+
+    <target name="compile:test:shared">
+        <compile srcdir="${src.test.shared.dir}" destdir="${target.test.shared.dir}"
+                 classpathref="classpath.compilation.test.shared"/>
     </target>
 
     <target name="compile:test:unit">
