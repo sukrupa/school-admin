@@ -15,5 +15,3 @@ logs
 # JRuby
 !tools/jruby-1.6.0.RC1/bin
 
-# Database
-.sukrupa
