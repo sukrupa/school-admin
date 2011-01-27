@@ -1,3 +1,7 @@
+# Uncomment this to download extra dependencies to the local repository. Never commit it uncommented.
+# repositories.remote << 'http://www.ibiblio.org/maven2'
+repositories.local = './tools/lib'
+
 define 'sukrupa' do
 
 	compile.with Dir[_("lib/main/*.jar")]
