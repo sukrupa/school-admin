@@ -10,7 +10,7 @@
     <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
     <!-- FIXME: These properties are duplicated between here and our Java code -->
-    <property name="db.root.dir" value="${user.home}/${db.root.dir}"/>
+    <property name="db.dir" value="${user.home}/${db.root.dir}"/>
     <property name="db.name" value="${db.name}"/>
     <property name="db.driver" value="${jdbc.driver}"/>
     <property name="db.url" value="${jdbc.url}"/>
@@ -24,8 +24,8 @@
             depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
 
     <target name="db:start:check">
-        <available file="${db.root.dir}/${db.name}.script" property="db.exists"/>
-        <available file="${db.root.dir}/${db.name}.lck" property="db.server.running"/>
+        <available file="${db.dir}/${db.name}.script" property="db.exists"/>
+        <available file="${db.dir}/${db.name}.lck" property="db.server.running"/>
     </target>
 
     <target name="db:start:status" if="db.server.running">
@@ -35,12 +35,12 @@
     <target name="db:start:server" unless="db.server.running">
         <java classname="org.hsqldb.server.Server" fork="true" spawn="true" classpathref="classpath.compilation">
             <arg value="--database.0"/>
-            <arg value="file:${db.root.dir}/${db.name}"/>
+            <arg value="file:${db.dir}/${db.name}"/>
             <arg value="--dbname.0"/>
             <arg value="${db.name}"/>
         </java>
         <waitfor maxwait="20" maxwaitunit="second" timeoutproperty="db.start.time.out">
-            <available file="${db.root.dir}/${db.name}.lck"/>
+            <available file="${db.dir}/${db.name}.lck"/>
         </waitfor>
         <fail if="db.start.time.out" message="Could not start database =("/>
         <echo>Database server started.</echo>
@@ -70,7 +70,7 @@
     </target>
 
     <target name="db:clean" depends="db:stop">
-        <delete dir="${db.root.dir}"/>
+        <delete dir="${db.dir}"/>
     </target>
 
 </project>
