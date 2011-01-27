@@ -5,9 +5,16 @@
     <import file="db-targets.xml"/>
     <import file="macros.xml"/>
 
+    <property name="jruby" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
+
     <target name="clean">
-        <delete dir="${target.dir}"/>
-        <delete dir="${target.main.dir}"/>
+        <exec executable="${jruby}" failonerror="true">
+            <arg value="-S"/>
+            <arg value="buildr"/>
+            <arg value="-f"/>
+            <arg value="ops/build/buildfile"/>
+            <arg value="clean"/>
+        </exec>
     </target>
 
     <target name="init">
@@ -24,7 +31,13 @@
     <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
 
     <target name="compile:main">
-        <compile srcdir="${src.main.dir}" destdir="${target.main.dir}" classpathref="classpath.compilation"/>
+        <exec executable="${jruby}" failonerror="true">
+            <arg value="-S"/>
+            <arg value="buildr"/>
+            <arg value="-f"/>
+            <arg value="ops/build/buildfile"/>
+            <arg value="compile"/>
+        </exec>
     </target>
 
     <target name="compile:test:unit">
