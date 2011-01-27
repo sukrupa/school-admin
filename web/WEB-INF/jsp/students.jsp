@@ -4,15 +4,13 @@
 <body>
 
 <table>
-    <thead>
-    <tr>
+    <tr style="text-align:left;">
         <th>Name</th>
         <th>Religion</th>
         <th>Caste</th>
         <th>Sub Caste</th>
         <th>Area</th>
     </tr>
-    </thead>
     <tbody>
     <c:forEach items="${students}" var="student">
         <tr>
