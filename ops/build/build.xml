@@ -5,31 +5,32 @@
     <import file="db-targets.xml"/>
     <import file="macros.xml"/>
 
+    <property name="jruby" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
+
     <target name="clean">
-        <delete dir="${target.dir}"/>
-        <delete dir="${target.main.dir}"/>
+        <exec executable="${jruby}">
+            <arg value="-S"/>
+            <arg value="buildr"/>
+            <arg value="clean"/>
+        </exec>
     </target>
 
     <target name="init">
         <tstamp/>
-        <mkdir dir="${target.main.dir}"/>
-        <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
-        <mkdir dir="${target.reports.dir}"/>
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
 
-    <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
+    <target name="compile:all" depends="compile:main, compile:test:integration"/>
 
     <target name="compile:main">
-        <compile srcdir="${src.main.dir}" destdir="${target.main.dir}" classpathref="classpath.compilation"/>
-    </target>
-
-    <target name="compile:test:unit">
-        <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
-                 classpathref="classpath.compilation.test.unit"/>
+        <exec executable="${jruby}">
+            <arg value="-S"/>
+            <arg value="buildr"/>
+            <arg value="compile"/>
+        </exec>
     </target>
 
     <target name="compile:test:integration">
@@ -46,7 +47,11 @@
     <target name="test:all" depends="test:unit, test:integration"/>
 
     <target name="test:unit">
-        <test type="unit"/>
+        <exec executable="${jruby}">
+            <arg value="-S"/>
+            <arg value="buildr"/>
+            <arg value="test"/>
+        </exec>
     </target>
 
     <target name="test:integration">
