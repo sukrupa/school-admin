@@ -1,6 +1,6 @@
 # IntelliJ
 *.iws
-out/*.class
+out
 .DS_Store
 
 # Build Artifacts
