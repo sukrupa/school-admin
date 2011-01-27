@@ -19,7 +19,8 @@ public class StudentController {
     private StudentRepository repository;
 
     @DoNotRemove
-    StudentController() {}
+    StudentController() {
+    }
 
     @Autowired
     public StudentController(StudentRepository repository) {
@@ -32,4 +33,6 @@ public class StudentController {
         model.put(STUDENTS_MODEL, repository.findAll());
         return STUDENTS_VIEW;
     }
+
+
 }
