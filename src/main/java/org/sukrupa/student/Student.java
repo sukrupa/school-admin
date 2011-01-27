@@ -4,11 +4,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Collection;
 
 @Entity
 public class Student {
@@ -19,7 +19,7 @@ public class Student {
 
     private String name;
 
-    @Deprecated // Only used by Hibernate
+    @DoNotRemove
     private Student() {
     }
 
@@ -31,7 +31,7 @@ public class Student {
         return name;
     }
 
-    private static String[] excludedFields = new String[] { "id" };
+    private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other, excludedFields);

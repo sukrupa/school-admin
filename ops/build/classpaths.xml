@@ -1,0 +1,33 @@
+<project name="classpaths">
+
+    <import file="properties.xml"/>
+
+    <path id="classpath.compilation">
+        <fileset dir="${lib.main.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.run">
+        <path refid="classpath.compilation"/>
+        <pathelement location="${target.main.dir}"/>
+
+    </path>
+
+    <path id="classpath.compilation.test.unit">
+        <path refid="classpath.run"/>
+        <fileset dir="${lib.test.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.run.test.unit">
+        <path refid="classpath.compilation.test.unit"/>
+        <pathelement location="${target.test.unit.dir}"/>
+    </path>
+
+    <path id="classpath.compilation.test.integration">
+        <path refid="classpath.compilation.test.unit"/>
+    </path>
+
+    <path id="classpath.run.test.integration">
+        <path refid="classpath.compilation.test.integration"/>
+        <pathelement location="${target.test.integration.dir}"/>
+    </path>
+</project>

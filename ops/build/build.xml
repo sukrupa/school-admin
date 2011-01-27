@@ -1,0 +1,82 @@
+<project name="sukrupa" default="all" basedir="../..">
+
+    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
+    <import file="db-targets.xml"/>
+    <import file="macros.xml"/>
+
+    <target name="clean">
+        <delete dir="${target.dir}"/>
+        <delete dir="${target.main.dir}"/>
+    </target>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${target.main.dir}"/>
+        <mkdir dir="${target.test.unit.dir}"/>
+        <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.reports.dir}"/>
+    </target>
+
+    <target name="all" description="Builds, updates the database, runs tests and packages the app."
+            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
+
+    <target name="compile:all" depends="compile:main, compile:test:unit, compile:test:integration"/>
+
+    <target name="compile:main">
+        <compile srcdir="${src.main.dir}" destdir="${target.main.dir}" classpathref="classpath.compilation"/>
+    </target>
+
+    <target name="compile:test:unit">
+        <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
+                 classpathref="classpath.compilation.test.unit"/>
+    </target>
+
+    <target name="compile:test:integration">
+        <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
+                 classpathref="classpath.compilation.test.integration"/>
+    </target>
+
+    <target name="copy-resources">
+        <copy todir="${target.main.dir}">
+            <fileset dir="${resources.main.dir}"/>
+        </copy>
+    </target>
+
+    <target name="test:all" depends="test:unit, test:integration"/>
+
+    <target name="test:unit">
+        <test type="unit"/>
+    </target>
+
+    <target name="test:integration">
+        <test type="integration"/>
+    </target>
+
+    <target name="package" depends="create.war, create.web.server.jar">
+        <zip destfile="${target.dir}/deploy.zip">
+            <zipfileset dir="${lib.main.dir}" prefix="lib"/>
+            <fileset file="${target.dir}/${war.name}"/>
+            <fileset file="${target.dir}/${web.server.jar}"/>
+            <fileset file="${deploy.dir}/deploy.sh"/>
+            <fileset file="${deploy.dir}/stop-server.sh"/>
+        </zip>
+    </target>
+
+    <target name="create.war">
+        <war destfile="${target.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" excludes="**/WebServer*"/>
+            <lib dir="${lib.main.dir}"/>
+        </war>
+    </target>
+
+    <target name="create.web.server.jar">
+        <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class"
+             basedir="${target.main.dir}" jarfile="${target.dir}/${web.server.jar}">
+            <manifest>
+                <attribute name="Main-Class" value="org.sukrupa.platform.server.WebServer"/>
+            </manifest>
+        </jar>
+    </target>
+
+</project>

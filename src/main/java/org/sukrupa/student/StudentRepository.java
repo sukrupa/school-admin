@@ -15,6 +15,7 @@ public class StudentRepository {
         this.sessionFactory = sessionFactory;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Student> findAll() {
         return sessionFactory.getCurrentSession().createCriteria(Student.class).list();
     }

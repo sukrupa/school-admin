@@ -1,0 +1,27 @@
+<project name="macros">
+    <macrodef name="compile">
+        <attribute name="srcdir"/>
+        <attribute name="destdir"/>
+        <attribute name="classpathref"/>
+        <sequential>
+            <javac includeantruntime="false" srcdir="@{srcdir}" destdir="@{destdir}" classpathref="@{classpathref}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test">
+        <attribute name="type"/>
+        <sequential>
+            <junit printsummary="false" fork="true" haltonfailure="false" haltonerror="false"
+                   outputtoformatters="false">
+                <classpath refid="classpath.run.test.@{type}"/>
+                <formatter type="xml" usefile="true"/>
+                <batchtest todir="${target.reports.dir}" failureproperty="test.@{type}.failed">
+                    <formatter type="plain" usefile="false"/>
+                    <fileset dir="${target.test.@{type}.dir}" includes="**/*Test.class"/>
+                </batchtest>
+            </junit>
+
+            <fail if="test.@{type}.failed" message="Some @{type} tests failed"/>
+        </sequential>
+    </macrodef>
+</project>

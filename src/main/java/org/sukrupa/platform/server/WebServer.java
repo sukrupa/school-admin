@@ -7,12 +7,12 @@ public class WebServer {
 
     private Server server;
 
-    public WebServer(String warFilename, int httpPort, String contextPath)  {
+    public WebServer(String war, int httpPort, String contextPath)  {
         server = new Server(httpPort);
 
         WebAppContext webApp = new WebAppContext();
         webApp.setContextPath(contextPath);
-        webApp.setWar(warFilename);
+        webApp.setWar(war);
         server.setHandler(webApp);
 
     }
