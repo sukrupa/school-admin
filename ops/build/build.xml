@@ -84,8 +84,10 @@
     </target>
 
     <target name="create.web.server.jar">
-        <jar includes="org/sukrupa/platform/WebServer.class, org/sukrupa/config/Logging.class"
-             basedir="${target.main.dir}" jarfile="${target.dir}/${web.server.jar}">
+        <jar basedir="${target.main.dir}" jarfile="${target.dir}/${web.server.jar}">
+            <include name="org/sukrupa/platform/"/>
+            <include name="org/sukrupa/app/"/>
+            <include name="database.properties"/>
             <manifest>
                 <attribute name="Main-Class" value="org.sukrupa.platform.server.WebServer"/>
             </manifest>
