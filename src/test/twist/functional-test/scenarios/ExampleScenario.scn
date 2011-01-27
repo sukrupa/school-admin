@@ -2,6 +2,7 @@ Tags:
 Preconditions:
 Metadata:ScenarioType=Auto
 Make an assertion:
-#Assert that "true" is true
-#Greeting a student called "PavRon" should say "Hello PavRon"
-#Assert that "false" is true
+#Assert that <firstBoolean> is true
+#Greeting a student called <studentName> should say <expectedGreeting>
+#Assert that <secondBoolean> is true
+$Check logic and greet student

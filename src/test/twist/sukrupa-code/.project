@@ -18,7 +18,7 @@
 		<link>
 			<name>lib</name>
 			<type>2</type>
-			<location>/home/ron/sukrupa/lib</location>
+			<locationURI>PARENT-4-PROJECT_LOC/lib</locationURI>
 		</link>
 		<link>
 			<name>main</name>
