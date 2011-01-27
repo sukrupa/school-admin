@@ -3,6 +3,7 @@
 	<name>functional-test</name>
 	<comment></comment>
 	<projects>
+		<project>sukrupa-code</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -20,4 +21,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.thoughtworks.twist.eclipse.core.twistNatureID</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>out</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/ide/twist/out</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
