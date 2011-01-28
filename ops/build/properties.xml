@@ -1,12 +1,9 @@
 <project name="properties">
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
-    <property name="src.test.dir" value="${src.dir}/test"/>
-    <property name="src.test.shared.dir" value="${src.test.dir}/shared/java"/>
-    <property name="src.test.unit.dir" value="${src.test.dir}/unit/java"/>
-    <property name="src.test.integration.dir" value="${src.test.dir}/integration/java"/>
-    <property name="src.test.functional.dir" value="${src.test.dir}/twist/functional-test"/>
-    <property name="src.test.functional.src.dir" value="${src.test.functional.dir}/src"/>
+    <property name="src.test.shared.dir" value="${src.dir}/test/shared/java"/>
+    <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
+    <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
@@ -14,17 +11,14 @@
 
     <property name="lib.main.dir" value="lib/main"/>
     <property name="lib.test.dir" value="lib/test"/>
-    <property name="lib.twist.dir" value="lib/twist"/>
 
     <property name="target.dir" value="target"/>
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
-    <property name="target.test.dir" value="${target.dir}"/>
-    <property name="target.test.shared.dir" value="${target.test.dir}/shared"/>
-    <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>
-    <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
-    <property name="target.test.twist.functional-test.dir" value="${target.test.dir}/twist/functional-test"/>
-    <property name="target.test.functional.dir" value="${target.test.twist.functional-test.dir}"/>
-    <property name="target.test.twist.sukrupa-code.dir" value="${target.test.dir}/twist/sukrupa-code"/>
+    <property name="target.test.shared.dir" value="${target.dir}/test/shared"/>
+    <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
+    <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
+    <property name="target.test.twist.functional-test.dir" value="${target.dir}/test/twist/functional-test"/>
+    <property name="target.test.twist.sukrupa-code.dir" value="${target.dir}/test/twist/sukrupa-code"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
 
     <property environment="env"/>
@@ -48,6 +42,4 @@
 
     <property name="ops.dir" value="ops" />
     <property name="ops.build.dir" value="${ops.dir}/build" />
-
-    <property name="twist-config" value="${src.test.functional.dir}/twist-conf"/>
 </project>

@@ -7,7 +7,6 @@
 
     <property name="jruby.win" location="tools/jruby-1.6.0.RC1/bin/jruby.bat"/>
     <property name="jruby.sh" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
-
     <condition property="jruby" value="${jruby.win}">
         <os family="windows"/>
     </condition>
@@ -31,11 +30,10 @@
         <mkdir dir="${target.test.twist.functional-test.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
-        <mkdir dir="${arget.reports.dir}/html"/>
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, test:functional, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
 
     <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration"/>
 
@@ -49,27 +47,20 @@
         </exec>
     </target>
 
-    <target name="compile:test:shared" depends="init, compile:main">
+    <target name="compile:test:shared">
         <compile srcdir="${src.test.shared.dir}" destdir="${target.test.shared.dir}"
                  classpathref="classpath.compilation.test.shared"/>
     </target>
 
-    <target name="compile:test:unit" depends="compile:test:shared">
+    <target name="compile:test:unit">
         <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                  classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile:test:integration" depends="compile:test:shared">
+    <target name="compile:test:integration">
         <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                  classpathref="classpath.compilation.test.integration"/>
     </target>
-
-<!-- -->
-    <target name="compile:test:functional" depends="compile:test:shared">
- 	<compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
-                 classpathref="classpath.compilation.test.functional"/>
-    </target>
-<!-- -->
 
     <target name="copy-resources">
         <copy todir="${target.main.dir}">
@@ -86,32 +77,6 @@
     <target name="test:integration">
         <test type="integration"/>
     </target>
-
-<!-- -->
-     <target name="test:functional"  depends="compile:test:functional" >
-              <path id="scenarios.classpath">
-                 <!--<path refid="${ant.project.name}.classpath" />-->
-                 <!--<fileset dir="${ant.library.dir}" includes="*.jar" />-->
-                 <path refid="classpath.run.test.functional" />
-                 <fileset dir="${ant.library.dir}" includes="*.jar" />
-             </path>
-
-             <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
-                classpathref="scenarios.classpath"
-                name="twist.runner"/>
-             <twist.runner
-                 scenarioDir="${src.test.functional.dir}/scenarios"
-                 reportsDir="${target.reports.dir}"
-                 confDir="${twist-config}"
-                 failureproperty="twist.scenarios.failed"
-                 classpathref="scenarios.classpath"
-                 tags="!in-progress">
-                    <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
-             </twist.runner>
-
-             <fail if="twist.scenarios.failed" message="[ERROR!] Twist is shouting check for Dani!"/>
-     </target>
-<!-- -->
 
     <target name="package" depends="create.war, create.web.server.jar">
         <zip destfile="${target.dir}/${app.zip.name}">
