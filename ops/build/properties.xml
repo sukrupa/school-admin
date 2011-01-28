@@ -26,6 +26,8 @@
     <property name="deploy.dir" value="ops/deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
+    <property name="deploy.staging.user" value="go"/>
+    <property name="deploy.staging.path" value="/var/opt/sukrupa/school-admin/"/>
     <property name="web.server.jar" value="web-server.jar"/>
     <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
 </project>

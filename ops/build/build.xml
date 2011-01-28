@@ -86,6 +86,7 @@
             <fileset file="${deploy.dir}/deploy.sh"/>
             <fileset file="${deploy.dir}/stop-server.sh"/>
         </zip>
+        <copy verbose="true" file="${deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
     </target>
 
     <target name="create.war">
@@ -107,10 +108,14 @@
     </target>
 
     <target name="deploy:staging">
+        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
         <exec executable="scp">
             <arg value="${target.dir}/school-admin.zip"/>
-            <arg value="go@twu-staging:/var/opt/sukrupa/school-admin/"/>
+            <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
-        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
+        <exec executable="scp">
+            <arg value="${target.dir}/auto-deploy.sh"/>
+            <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
+        </exec>
     </target>
 </project>
