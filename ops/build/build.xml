@@ -119,7 +119,10 @@
         </exec>
         <exec executable="ssh">
             <arg value="${deploy.staging.user}@${deploy.staging.server}"/>
-            <arg value="'cd ${deploy.staging.path}; sh auto-deploy.sh'"/>
+            <arg value="'cd"/>
+            <arg value="${deploy.staging.path};"/>
+            <arg value="sh"/>
+            <arg value="auto-deploy.sh'"/>
             <arg value="&amp;"/>
         </exec>
     </target>
