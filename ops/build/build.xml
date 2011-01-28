@@ -134,6 +134,11 @@
             <arg value="${target.dir}/bootstrap.sh"/>
             <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
-        <exec command="sh ${target.dir}/auto-deploy.sh ${deploy.staging.user} ${deploy.staging.server} ${deploy.staging.path}" failonerror="true"/>
+        <exec executable="sh" failonerror="true">
+            <arg value="${target.dir}/auto-deploy.sh"/>
+            <arg value="${deploy.staging.user}"/>
+            <arg value="${deploy.staging.server}"/>
+            <arg value="${deploy.staging.path}"/>
+        </exec>
     </target>
 </project>
