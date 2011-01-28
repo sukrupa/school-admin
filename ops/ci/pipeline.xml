@@ -20,6 +20,8 @@
       <job name="sonar">
         <tasks>
           <exec command="mvn">
+            <arg value="--file" />
+            <arg value="ops/sonar/pom.xml" />
             <arg value="sonar:sonar" />
           </exec>
         </tasks>
