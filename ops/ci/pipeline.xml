@@ -10,8 +10,19 @@
         </tasks>
         <artifacts>
           <test src="target/reports" />
-          <artifact src="target/sukrupa.war" />
+          <artifact src="target/school-admin.zip" />
         </artifacts>
+      </job>
+    </jobs>
+  </stage>
+  <stage name="sonar">
+    <jobs>
+      <job name="sonar">
+        <tasks>
+          <exec command="mvn">
+            <arg value="sonar:sonar" />
+          </exec>
+        </tasks>
       </job>
     </jobs>
   </stage>
@@ -19,7 +30,7 @@
     <jobs>
       <job name="auto-deploy">
         <tasks>
-          <exec command="./build" args="self.deploy" />
+          <exec command="./build" args="deploy:staging" />
         </tasks>
       </job>
     </jobs>

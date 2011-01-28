@@ -79,7 +79,7 @@
     </target>
 
     <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${target.dir}/deploy.zip">
+        <zip destfile="${target.dir}/school-admin.zip">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${target.dir}/${war.name}"/>
             <fileset file="${target.dir}/${web.server.jar}"/>
@@ -106,4 +106,7 @@
         </jar>
     </target>
 
+    <target name="deploy:staging">
+        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
+    </target>
 </project>
