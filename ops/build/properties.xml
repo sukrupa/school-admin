@@ -42,4 +42,7 @@
 
     <property name="ops.dir" value="ops" />
     <property name="ops.build.dir" value="${ops.dir}/build" />
+    <property name="ops.deploy.dir" value="${ops.dir}/deploy" />
+    <property name="ops.deploy.insert.fake.data.sql" value="${ops.deploy.dir}/insert-fake-data.sql"/>
+    <property name="ops.deploy.delete.fake.data.sql" value="${ops.deploy.dir}/delete-fake-data.sql"/>
 </project>
