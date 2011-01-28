@@ -13,9 +13,10 @@
       <version>4.0</version>
       <type>jar</type>
       <scope>test</scope>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
   </dependencies>
+  
   <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <outputDirectory>web/WEB-INF/classes</outputDirectory>
