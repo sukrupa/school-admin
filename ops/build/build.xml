@@ -103,6 +103,7 @@
             </zipfileset>
         </zip>
         <copy verbose="true" file="${deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
+        <copy verbose="true" file="${deploy.dir}/bootstrap.sh" todir="${target.dir}"/>
     </target>
 
     <target name="create.war">
@@ -125,21 +126,14 @@
 
     <target name="deploy:staging">
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
-        <exec executable="scp">
+        <exec executable="scp" failonerror="true">
             <arg value="${target.dir}/school-admin.zip"/>
             <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
-        <exec executable="scp">
-            <arg value="${target.dir}/auto-deploy.sh"/>
+        <exec executable="scp" failonerror="true">
+            <arg value="${target.dir}/bootstrap.sh"/>
             <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
-        <exec executable="ssh">
-            <arg value="${deploy.staging.user}@${deploy.staging.server}"/>
-            <arg value="'cd"/>
-            <arg value="${deploy.staging.path};"/>
-            <arg value="sh"/>
-            <arg value="auto-deploy.sh'"/>
-            <arg value="&amp;"/>
-        </exec>
+        <exec command="sh ${target.dir}/auto-deploy.sh ${deploy.staging.user} @${deploy.staging.server} ${deploy.staging.path}" failonerror="true"/>
     </target>
 </project>

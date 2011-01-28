@@ -1,4 +1,3 @@
 #!/bin/bash
 
-unzip -o school-admin.zip
-sh deploy.sh
+ssh $1@$2 'cd $3; sh bootstrap.sh' &
