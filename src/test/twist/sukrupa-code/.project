@@ -30,5 +30,15 @@
 			<type>2</type>
 			<locationURI>PARENT-2-PROJECT_LOC/shared</locationURI>
 		</link>
+		<link>
+			<name>sukrupa-code</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist/sukrupa-code</locationURI>
+		</link>
+		<link>
+			<name>twist</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

@@ -1,0 +1,4 @@
+Metadata:Concept=$Check logic and greet student
+Make an assertion:
+#Assert that "true" is true
+#Greeting a student called "PavRon" should say "Hello PavRon"

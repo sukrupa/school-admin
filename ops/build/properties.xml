@@ -17,7 +17,8 @@
     <property name="target.test.shared.dir" value="${target.dir}/test/shared"/>
     <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
     <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
-    <property name="target.test.twist.dir" value="${target.dir}/test/twist"/>
+    <property name="target.test.twist.functional-test.dir" value="${target.dir}/test/twist/functional-test"/>
+    <property name="target.test.twist.sukrupa-code.dir" value="${target.dir}/test/twist/sukrupa-code"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
 
     <property name="war.name" value="${ant.project.name}.war"/>

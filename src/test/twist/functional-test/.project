@@ -23,6 +23,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>functional-test</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist/functional-test</locationURI>
+		</link>
+		<link>
 			<name>target-twist</name>
 			<type>2</type>
 			<locationURI>PARENT-4-PROJECT_LOC/target/test/twist</locationURI>
