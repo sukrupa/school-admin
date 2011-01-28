@@ -21,7 +21,13 @@
     <property name="target.test.twist.sukrupa-code.dir" value="${target.dir}/test/twist/sukrupa-code"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
 
+    <property environment="env"/>
+    <condition property="pipeline.counter" value="${env.GO_PIPELINE_COUNTER}" else="local">
+        <isset property="env.GO_PIPELINE_COUNTER" />
+    </condition>
+
     <property name="war.name" value="${ant.project.name}.war"/>
+    <property name="app.zip.name" value="school-admin-${pipeline.counter}.zip"/>
 
     <property name="deploy.dir" value="ops/deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>

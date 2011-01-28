@@ -10,7 +10,7 @@
         </tasks>
         <artifacts>
           <test src="target/reports" />
-          <artifact src="target/school-admin.zip" />
+          <artifact src="target/school-admin-*.zip" />
         </artifacts>
       </job>
     </jobs>
