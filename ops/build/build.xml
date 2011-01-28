@@ -107,6 +107,10 @@
     </target>
 
     <target name="deploy:staging">
+        <exec executable="scp">
+            <arg value="${target.dir}/school-admin.zip"/>
+            <arg value="go@twu-staging:/var/opt/sukrupa/school-admin/"/>
+        </exec>
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
     </target>
 </project>
