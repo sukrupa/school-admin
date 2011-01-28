@@ -23,8 +23,8 @@ public class StudentControllerTest {
     private StudentController controller;
 
     private Map<String, List<Student>> model = new HashMap<String, List<Student>>();
-    private Student sahil = new Student("Sahil");
-    private Student pat = new Student("Pat");
+    private Student sahil = new StudentBuilder().name("pat").build();
+    private Student pat = new StudentBuilder().name("sahil").build();
 
     @Before
     public void setUp() throws Exception {

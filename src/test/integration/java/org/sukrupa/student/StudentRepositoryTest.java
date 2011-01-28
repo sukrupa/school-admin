@@ -31,19 +31,27 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
-        Student sahil = new Student("Sahil");
-        Student pat = new Student("Pat");
+        Student sahil = new StudentBuilder().name("Sahil").build();
+        Student pat = new StudentBuilder().name("Pat").build();
 
         save(sahil, pat);
-        flushHibernateSessionToForceReload();
 
         assertThat(repository.findAll(), hasItems(sahil, pat));
+    }
+
+    @Test
+    public void shouldPersistAndReloadAllFields() {
+        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").build();
+        save(pat);
+
+        assertThat(repository.findAll(), hasItems(pat));
     }
 
     private void save(Student... students) {
         for (Object student : students) {
             session().save(student);
         }
+        flushHibernateSessionToForceReload();
     }
 
     private void flushHibernateSessionToForceReload() {

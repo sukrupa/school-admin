@@ -19,19 +19,26 @@ public class Student {
     private long id;
 
     private String name;
+
     private String religion;
 
     private String caste;
+
     @Column(name = "SUB_CASTE")
     private String subCaste;
+
     private String area;
 
     @DoNotRemove
     private Student() {
     }
 
-    public Student(String name) {
+    public Student(String name, String religion, String caste, String subCaste, String area) {
         this.name = name;
+        this.religion = religion;
+        this.caste = caste;
+        this.subCaste = subCaste;
+        this.area = area;
     }
 
     public String getName() {

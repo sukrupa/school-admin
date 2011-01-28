@@ -204,34 +204,32 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/target" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
     <library name="main">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/main" />
+        <root url="file://$PROJECT_DIR$/../../lib/main" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://$PROJECT_DIR$/lib/source/main" />
-        <root url="jar://$PROJECT_DIR$/lib/source/main/commons-lang-2.6-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/source/stringtemplate-3.2.1-source.zip!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/main/commons-lang-2.6-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/main/stringtemplate-3.2.1-source.zip!/" />
       </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/lib/main" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/test" />
+        <root url="file://$PROJECT_DIR$/../../lib/test" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/test" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
     </library>
   </component>
 </project>

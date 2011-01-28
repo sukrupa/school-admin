@@ -1,6 +1,7 @@
 <project name="properties">
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
+    <property name="src.test.shared.dir" value="${src.dir}/test/shared/java"/>
     <property name="src.test.unit.dir" value="${src.dir}/test/unit/java"/>
     <property name="src.test.integration.dir" value="${src.dir}/test/integration/java"/>
 
@@ -13,6 +14,7 @@
 
     <property name="target.dir" value="target"/>
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="target.test.shared.dir" value="${target.dir}/test/shared"/>
     <property name="target.test.unit.dir" value="${target.dir}/test/unit"/>
     <property name="target.test.integration.dir" value="${target.dir}/test/integration"/>
     <property name="target.test.twist.dir" value="${target.dir}/test/twist"/>
