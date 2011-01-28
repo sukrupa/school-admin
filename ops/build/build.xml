@@ -139,6 +139,7 @@
             <arg value="${deploy.staging.user}"/>
             <arg value="${deploy.staging.server}"/>
             <arg value="${deploy.staging.path}"/>
+            <arg value="${app.zip.name}"/>
         </exec>
     </target>
 </project>

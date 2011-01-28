@@ -1,4 +1,4 @@
 #!/bin/bash
 
-unzip -o school-admin-$1.zip
+unzip -o $1
 sh deploy.sh
