@@ -117,5 +117,10 @@
             <arg value="${target.dir}/auto-deploy.sh"/>
             <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
+        <exec executable="ssh">
+            <arg value="${deploy.staging.user}@${deploy.staging.server}"/>
+            <arg value="'cd ${deploy.staging.path}; sh auto-deploy.sh'"/>
+            <arg value="&amp;"/>
+        </exec>
     </target>
 </project>
