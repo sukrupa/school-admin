@@ -26,9 +26,9 @@
       </job>
     </jobs>
   </stage>
-  <stage name="auto-deploy">
+  <stage name="deploy-staging">
     <jobs>
-      <job name="auto-deploy">
+      <job name="deploy-staging">
         <tasks>
           <exec command="./build" args="deploy:staging" />
         </tasks>
