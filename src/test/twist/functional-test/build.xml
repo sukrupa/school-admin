@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="functional-test">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../../opt/twist"/>
+    <property name="sukrupa-code.location" value="../sukrupa-code"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Twist Core Libraries.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.lang_2.3.0.v201005080501.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.log4j_1.2.13.v200903072027.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.codec_1.3.0.v20100518-1140.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.ognl_2.7.3.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.org.jboss.javassist_3.7.0.GA.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.springframework_2.5.4.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.mina.core_2.0.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.slf4j_1.5.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.org.apache.ecs_1.4.2.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.org.apache.commons.jexl_1.1.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.velocity_1.5.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.twist.core_2.1.0.9411.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.ant_1.7.1.v20100518-1145/lib/ant.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.ant_1.7.1.v20100518-1145/lib/ant-junit.jar"/>
+    </path>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+    <path id="Java Language Support.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.ognl_2.7.3.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.slf4j_1.5.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.lang_2.3.0.v201005080501.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.twist.language.java_2.1.0.9411.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.thoughtworks.twist.language.common_2.1.0.9411.jar"/>
+    </path>
+    <path id="sukrupa-code.classpath">
+        <pathelement location="${sukrupa-code.location}/sukrupa-code"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/aopalliance-1.0.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/asm-3.3.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/cglib-2.2.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/commons-collections-3.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/commons-dbcp-1.4.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/commons-lang-2.6.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/commons-logging-1.1.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/commons-pool-1.5.5.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/core-3.1.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/dom4j-1.6.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/hibernate3.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/hsqldb.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/javassist-3.12.0.GA.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-continuation-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-http-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-io-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-security-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-server-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-servlet-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-util-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-webapp-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jetty-xml-7.2.2.v20101205.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jsp-2.1-glassfish-9.1.1.B60.25.p2.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jsp-api-2.1-glassfish-9.1.1.B60.25.p2.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/jta-1.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/log4j-1.2.16.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/org.springframework.aop-3.0.0.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/org.springframework.jdbc-3.0.0.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/org.springframework.orm-3.0.0.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/org.springframework.transaction-3.0.0.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/servlet-api-2.5.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/slf4j-api-1.6.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/slf4j-log4j12-1.6.1.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-asm-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-beans-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-context-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-core-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-expression-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-web-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/spring-webmvc-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/test/hamcrest-all-1.2.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/test/junit-dep-4.8.2.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/test/mockito-all-1.8.5.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/test/spring-test-3.0.5.RELEASE.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/antlr-2.7.7.jar"/>
+        <pathelement location="${sukrupa-code.location}/lib/main/stringtemplate-3.2.1.jar"/>
+    </path>
+    <path id="functional-test.classpath">
+        <pathelement location="functional-test"/>
+        <path refid="Twist Core Libraries.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <path refid="Java Language Support.libraryclasspath"/>
+        <path refid="sukrupa-code.classpath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="functional-test"/>
+        <copy includeemptydirs="false" todir="functional-test">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	
+        
+    <target name="execute-scenarios" description="Executes scenarios">
+    	<path id="scenarios.classpath">
+			<path refid="${ant.project.name}.classpath" />
+			<fileset dir="${ant.library.dir}" includes="*.jar" />
+		</path>
+
+        <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask" classpathref="scenarios.classpath" name="twist.runner" />
+        <property name="test-reports" value="${basedir}/reports/ant-reports" />
+        <property name="twist-config" value="${basedir}/twist-conf"/>
+        <delete dir="${test-reports}" />
+        <mkdir dir="${test-reports}" />
+        <mkdir dir="${test-reports}/html" />
+
+		<twist.runner
+			scenarioDir="${basedir}/scenarios" reportsDir="${test-reports}" confDir="${twist-config}"
+			failureproperty="twist.scenarios.failed"
+			classpathref="scenarios.classpath" tags="!in-progress" threads="1" >
+			<fileset dir="${basedir}/scenarios" includes="*"/>
+		</twist.runner>
+
+        <fail if="twist.scenarios.failed" message="One or more scenarios failed during execution" />
+    </target>
+        
+	
+    <target name="clean">
+        <delete dir="functional-test"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="build.xml" dir="${sukrupa-code.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="build.xml" dir="${sukrupa-code.location}" inheritAll="false" target="build-project">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="functional-test" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="functional-test.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+</project>
