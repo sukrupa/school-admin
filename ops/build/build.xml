@@ -79,7 +79,7 @@
     </target>
 
     <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${target.dir}/${app.zip.name}">
+        <zip destfile="${target.dir}/school-admin.zip">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${target.dir}/${war.name}"/>
             <fileset file="${target.dir}/${web.server.jar}"/>
@@ -127,7 +127,7 @@
     <target name="deploy:staging">
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
         <exec executable="scp" failonerror="true">
-            <arg value="${target.dir}/${app.zip.name}"/>
+            <arg value="${target.dir}/school-admin.zip"/>
             <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
         </exec>
         <exec executable="scp" failonerror="true">
