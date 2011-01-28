@@ -30,4 +30,10 @@
     <property name="deploy.staging.path" value="/var/opt/sukrupa/school-admin/"/>
     <property name="web.server.jar" value="web-server.jar"/>
     <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
+
+    <property name="tools.dir" value="tools" />
+    <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2" />
+
+    <property name="ops.dir" value="ops" />
+    <property name="ops.build.dir" value="${ops.dir}/build" />
 </project>

@@ -85,6 +85,22 @@
             <fileset file="${target.dir}/${web.server.jar}"/>
             <fileset file="${deploy.dir}/deploy.sh"/>
             <fileset file="${deploy.dir}/stop-server.sh"/>
+            <zipfileset file="${deploy.dir}/update-database.sh" prefix="install"/>
+            <zipfileset file="${deploy.dir}/install-database.sh" prefix="install"/>
+            <zipfileset file="${resources.main.dir}/database.properties" prefix="install/dbdeploy"/>
+            <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
+            <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
+                <include name="*.xml"/>
+            </zipfileset>
+            <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
+                <include name="ant" />
+            </zipfileset>
+            <zipfileset dir="${tools.ant.dir}/lib" prefix="install/ant/lib">
+                <include name="**/ant.jar" />
+                <include name="**/ant-launcher.jar" />
+                <include name="**/dbdeploy*.jar" />
+                <include name="**/hsql*.jar" />
+            </zipfileset>
         </zip>
         <copy verbose="true" file="${deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
     </target>
