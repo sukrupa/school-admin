@@ -5,7 +5,8 @@
   <groupId>org.sukrupa</groupId>
   <artifactId>sukrupa</artifactId>
   <name>sukrupa</name>
-  <version>1.0</version>
+  <version>1.0.${env.GO_PIPELINE_COUNTER}</version>
+
   <dependencies>
 	<dependency>
       <groupId>junit</groupId>
