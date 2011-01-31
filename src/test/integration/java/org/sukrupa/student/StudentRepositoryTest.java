@@ -25,7 +25,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").studentId("abcdef").build();
 
 	@Before
     public void setUp() throws Exception {
