@@ -1,27 +1,26 @@
 <project name="cobertura">
+    <import file="properties.xml"/>
     <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <!-- used to test cobertura instruements -->
     <target name="cobertura-instrument">
         <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}">
-            <!-- <ignore regex="org.apache.log4j.*" />-->
-            <fileset dir="${classes.dir}">
+            <ignore regex="org.apache.log4j.*"/>
+            <fileset dir="${target.main.dir}/org/sukrupa">
                 <include name="**/*.class" />
-                <exclude name="**/*Test.class" />
             </fileset>
         </cobertura-instrument>
     </target>
 
     <!-- used to test cobertura report generation-->
     <target name="cobertura-report">
-        <cobertura-report-execute format="xml" destdir="${target.reports.cobertura.dir}" >
-            <!-- <ignore regex="org.apache.log4j.*" />-->
+        <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" >
+            <ignore regex="org.apache.log4j.*"/>
             <fileset dir="${src.dir}">
-            <include name="main/**/*.java" />
-            <include name="test/**/*.java" />
+                <include name="**/*.java" />
             </fileset>
-        </cobertura-report-execute>
+        </cobertura-report>
         <cobertura-report-gen />
     </target>
 

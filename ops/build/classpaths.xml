@@ -51,9 +51,9 @@
     </path>
 
    <path id="classpath.cobertura">
-        <fileset dir="lib/test/">
-            <include name="cobertura.jar"/>
+        <fileset dir="lib/">
+            <include name="**/*.jar" />
         </fileset>
-    </path>
+   </path>
 
 </project>
