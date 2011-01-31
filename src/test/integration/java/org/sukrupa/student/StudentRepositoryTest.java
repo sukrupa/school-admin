@@ -23,28 +23,33 @@ public class StudentRepositoryTest {
     private SessionFactory sessionFactory;
 
     private StudentRepository repository;
+	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").build();
+	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").build();
 
-    @Before
+	@Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
     }
 
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
-        Student sahil = new StudentBuilder().name("Sahil").build();
-        Student pat = new StudentBuilder().name("Pat").build();
-
-        save(sahil, pat);
+        save(sahil, pat, renaud);
 
         assertThat(repository.findAll(), hasItems(sahil, pat));
     }
 
     @Test
     public void shouldPersistAndReloadAllFields() {
-        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").build();
         save(pat);
 
         assertThat(repository.findAll(), hasItems(pat));
+    }
+
+    @Test
+    public void shouldReturnNurseryStudents() {
+        save(sahil, pat, renaud);
+        assertThat(repository.singleParametricSearch("Nursery"), hasItems(renaud, sahil));
     }
 
     private void save(Student... students) {

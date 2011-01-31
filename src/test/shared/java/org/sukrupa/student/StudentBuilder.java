@@ -6,8 +6,12 @@ public class StudentBuilder {
     private String caste;
     private String subCaste;
     private String area;
+	private String studentId;
+	private String sex;
+	private String studentClass;
+	private String dateOfBirth;
 
-    public StudentBuilder name(String name) {
+	public StudentBuilder name(String name) {
         this.name = name;
         return this;
     }
@@ -32,7 +36,27 @@ public class StudentBuilder {
         return this;
     }
 
+    public StudentBuilder studentId(String studentId) {
+	    this.studentId = studentId;
+        return this;
+    }
+
+    public StudentBuilder sex(String sex) {
+	    this.sex = sex;
+        return this;
+    }
+
+    public StudentBuilder studentClass(String studentClass) {
+	    this.studentClass = studentClass;
+	    return this;
+    }
+
+    public StudentBuilder dateOfBirth(String dateOfBirth) {
+	    this.dateOfBirth = dateOfBirth;
+	    return this;
+    }
+
     public Student build() {
-        return new Student(name, religion, caste, subCaste, area);
+	    return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
     }
 }

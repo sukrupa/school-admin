@@ -1,23 +1,30 @@
 <html>
+<head>
+	<title>Student List</title>
+
+	<style type="text/css">
+		table,th, td {
+			border: 1px solid black;
+		}
+	</style>
+</head>
 <body>
 
 <table>
     <tr style="text-align:left;">
         <th>Name</th>
-        <th>Religion</th>
-        <th>Caste</th>
-        <th>Sub Caste</th>
-        <th>Area</th>
+        <th>Student ID</th>
+        <th>Sex</th>
+        <th>Age</th>
     </tr>
     <tbody>
 
     $students:{
     <tr>
         <td>$it.name$</td>
-        <td>$it.religion$</td>
-        <td>$it.caste$</td>
-        <td>$it.subCaste$</td>
-        <td>$it.area$</td>
+        <td>$it.studentId$</td>
+        <td>$it.sex$</td>
+        <td>$it.age$</td>
     </tr>
     }$
 
