@@ -10,7 +10,7 @@
         </tasks>
         <artifacts>
           <test src="target/reports" />
-          <artifact src="target/school-admin-*.zip" />
+          <artifact src="target/school-admin.zip" dest="deploy" />
         </artifacts>
       </job>
     </jobs>
@@ -33,7 +33,7 @@
     <jobs>
       <job name="deploy-staging">
         <tasks>
-          <fetchartifact stage="build" job="build" srcfile="target/school-admin-*.zip"/>
+          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip"/>
           <exec command="./build" args="deploy:staging" />
         </tasks>
       </job>

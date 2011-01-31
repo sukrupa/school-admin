@@ -30,13 +30,8 @@
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
 
-    <property environment="env"/>
-    <condition property="pipeline.counter" value="${env.GO_PIPELINE_COUNTER}" else="local">
-        <isset property="env.GO_PIPELINE_COUNTER" />
-    </condition>
-
     <property name="war.name" value="${ant.project.name}.war"/>
-    <property name="app.zip.name" value="school-admin-${pipeline.counter}.zip"/>
+    <property name="app.zip.name" value="school-admin.zip"/>
 
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
