@@ -1,3 +1,4 @@
 #!/bin/bash
 
-ssh $1@$2 "cd $3; sh bootstrap.sh $4"
+ssh $1@$2 "cd $3; unzip -o $4; sh bootstrap.sh"
+

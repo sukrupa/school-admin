@@ -1,6 +1,5 @@
 #!/bin/bash
 
-unzip -o $1
 sh stop-server.sh
 sh start-server.sh
 
