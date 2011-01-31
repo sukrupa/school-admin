@@ -3,6 +3,7 @@
     <import file="properties.xml"/>
     <import file="classpaths.xml"/>
     <import file="db-targets.xml"/>
+    <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
 
     <target name="clean">
@@ -23,7 +24,7 @@
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:copy-resources, package"/>
     <!-- test:functional works on computers, but not on headless environments -->
 
     <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
@@ -121,8 +122,6 @@
                 <include name="**/hsql*.jar" />
             </zipfileset>
         </zip>
-        <copy verbose="true" file="${deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
-        <copy verbose="true" file="${deploy.dir}/bootstrap.sh" todir="${target.dir}"/>
     </target>
 
     <target name="create.war">
@@ -143,22 +142,4 @@
         </jar>
     </target>
 
-    <target name="deploy:staging">
-        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
-        <exec executable="scp" failonerror="true">
-            <arg value="${target.dir}/${app.zip.name}"/>
-            <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
-        </exec>
-        <exec executable="scp" failonerror="true">
-            <arg value="${target.dir}/bootstrap.sh"/>
-            <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
-        </exec>
-        <exec executable="sh" failonerror="true">
-            <arg value="${target.dir}/auto-deploy.sh"/>
-            <arg value="${deploy.staging.user}"/>
-            <arg value="${deploy.staging.server}"/>
-            <arg value="${deploy.staging.path}"/>
-            <arg value="${app.zip.name}"/>
-        </exec>
-    </target>
 </project>
