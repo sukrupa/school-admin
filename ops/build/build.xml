@@ -103,7 +103,6 @@
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${target.dir}/${war.name}"/>
             <fileset file="${target.dir}/${web.server.jar}"/>
-            <fileset file="${ops.deploy.dir}/deploy.sh"/>
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
