@@ -33,7 +33,7 @@
     <jobs>
       <job name="deploy-staging">
         <tasks>
-          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip"/>
+          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target"/>
           <exec command="./build" args="deploy:staging" />
         </tasks>
       </job>
