@@ -1,5 +1,4 @@
 <project name="properties">
-
     <property name="src.dir" value="src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.dir" value="${src.dir}/test"/>
@@ -55,5 +54,5 @@
     <property name="ops.scripts.dir" value="${ops.dir}/scripts" />
 
     <property name="twist-config" value="${src.test.functional.dir}/twist-conf"/>
-    <property name="cobertura.dir" value="tools/cobertura-1.9.4.1" />
+
 </project>
