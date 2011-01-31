@@ -29,9 +29,11 @@
     </jobs>
   </stage>
   <stage name="deploy-staging">
+    <approval type="manual" />
     <jobs>
       <job name="deploy-staging">
         <tasks>
+          <fetchartifact stage="build" job="build" srcfile="target/school-admin-*.zip"/>
           <exec command="./build" args="deploy:staging" />
         </tasks>
       </job>
