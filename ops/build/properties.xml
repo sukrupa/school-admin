@@ -35,7 +35,6 @@
     <property name="war.name" value="${ant.project.name}.war"/>
     <property name="app.zip.name" value="school-admin-${pipeline.counter}.zip"/>
 
-    <property name="deploy.dir" value="ops/deploy"/>
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
     <property name="deploy.staging.user" value="go"/>
@@ -50,8 +49,9 @@
     <property name="ops.build.dir" value="${ops.dir}/build" />
 
     <property name="ops.deploy.dir" value="${ops.dir}/deploy" />
-    <property name="ops.deploy.insert.fake.data.sql" value="${ops.deploy.dir}/insert-fake-data.sql"/>
-    <property name="ops.deploy.delete.fake.data.sql" value="${ops.deploy.dir}/delete-fake-data.sql"/>
+    <property name="ops.deploy.sql.dir" value="${ops.deploy.dir}/sql" />
+    <property name="ops.deploy.insert.fake.data.sql" value="${ops.deploy.sql.dir}/insert-fake-data.sql"/>
+    <property name="ops.deploy.delete.fake.data.sql" value="${ops.deploy.sql.dir}/delete-fake-data.sql"/>
 
     <property name="twist-config" value="${src.test.functional.dir}/twist-conf"/>
 

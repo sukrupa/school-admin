@@ -103,12 +103,13 @@
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${target.dir}/${war.name}"/>
             <fileset file="${target.dir}/${web.server.jar}"/>
-            <fileset file="${deploy.dir}/deploy.sh"/>
-            <fileset file="${deploy.dir}/stop-server.sh"/>
-            <zipfileset file="${deploy.dir}/update-database.sh" prefix="install"/>
-            <zipfileset file="${deploy.dir}/install-database.sh" prefix="install"/>
+            <fileset file="${ops.deploy.dir}/deploy.sh"/>
+            <fileset file="${ops.deploy.dir}/stop-server.sh"/>
+            <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
+            <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
             <zipfileset file="${resources.main.dir}/database.properties" prefix="install/dbdeploy"/>
             <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
+            <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
                 <include name="*.xml"/>
             </zipfileset>

@@ -20,8 +20,8 @@
     </target>
 
     <target name="deploy:copy-resources">
-        <copy verbose="true" file="${deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
-        <copy verbose="true" file="${deploy.dir}/bootstrap.sh" todir="${target.dir}"/>
+        <copy verbose="true" file="${ops.deploy.dir}/auto-deploy.sh" todir="${target.dir}"/>
+        <copy verbose="true" file="${ops.deploy.dir}/bootstrap.sh" todir="${target.dir}"/>
     </target>
 
 </project>
