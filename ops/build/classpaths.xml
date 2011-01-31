@@ -50,10 +50,16 @@
         <fileset dir="${lib.twist.dir}" includes="**/*.jar"/>
     </path>
 
-   <path id="classpath.cobertura">
-        <fileset dir="lib/">
-            <include name="**/*.jar" />
+    <path id="classpath.cobertura">
+        <fileset dir="lib/main">
+            <include name="*.jar"/>
         </fileset>
-   </path>
-
+        <fileset dir="lib/test">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="lib/source/main/">
+            <include name="*.jar"/>
+            <include name="*.zip"/>
+        </fileset>
+    </path>
 </project>

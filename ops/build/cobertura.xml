@@ -6,8 +6,13 @@
     <!-- used to test cobertura instruements -->
     <target name="cobertura-instrument">
         <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}">
-            <ignore regex="org.apache.log4j.*"/>
             <fileset dir="${target.main.dir}/org/sukrupa">
+                <include name="**/*.class" />
+            </fileset>
+            <fileset dir="${target.test.dir}">
+                <include name="**/*.class" />
+            </fileset>
+            <fileset dir="${target.test.dir}">
                 <include name="**/*.class" />
             </fileset>
         </cobertura-instrument>
@@ -16,7 +21,6 @@
     <!-- used to test cobertura report generation-->
     <target name="cobertura-report">
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" >
-            <ignore regex="org.apache.log4j.*"/>
             <fileset dir="${src.dir}">
                 <include name="**/*.java" />
             </fileset>
