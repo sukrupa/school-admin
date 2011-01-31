@@ -1,0 +1,51 @@
+<project name="cobertura">
+
+    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
+
+    <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
+
+    <delete file="cobertura.ser" />
+
+    <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}">
+        <ignore regex="org.apache.log4j.*" />
+        <fileset dir="${classes.dir}">
+            <include name="**/*.class" />
+            <exclude name="**/*Test.class" />
+        </fileset>
+    </cobertura-instrument>
+
+    <cobertura-report format="html" destdir="${target.reports.cobertura.dir}" >
+        <fileset dir="${src.dir}">
+        <include name="main/**/*.java" />
+        <include name="test/**/*.java" />
+        </fileset>
+    </cobertura-report>
+
+    <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+
+        <sysproperty key="net.sourceforge.cobertura.datafile"	file="${basedir}/cobertura.ser" />
+
+        <!--
+            Note the classpath order: instrumented classes are before the
+            original (uninstrumented) classes.  This is important.
+        -->
+        <classpath location="${instrumented.dir}" />
+        <classpath location="${classes.dir}" />
+
+        <!--
+            The instrumented classes reference classes used by the
+            Cobertura runtime, so Cobertura and its dependencies
+            must be on your classpath.
+        -->
+        <classpath refid="cobertura_classpath" />
+
+        <formatter type="xml" />
+        <test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
+        <batchtest todir="${reports.xml.dir}" unless="testcase">
+            <fileset dir="${src.dir}">
+                <include name="**/*Test.java" />
+            </fileset>
+        </batchtest>
+    </junit>
+</project>
