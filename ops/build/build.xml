@@ -109,6 +109,7 @@
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
             <fileset file="${ops.deploy.dir}/bootstrap.sh"/>
+            <zipfileset file="${cobertura.dir}" prefix="tools"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
             <zipfileset file="${resources.main.dir}/database.properties" prefix="install/dbdeploy"/>
