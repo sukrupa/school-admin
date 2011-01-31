@@ -14,13 +14,8 @@
     <property name="jruby" value="${jruby.sh}"/>
 
     <target name="clean">
-        <exec executable="${jruby}" failonerror="true">
-            <arg value="-S"/>
-            <arg value="buildr"/>
-            <arg value="-f"/>
-            <arg value="ops/build/buildfile"/>
-            <arg value="clean"/>
-        </exec>
+        <delete dir="${target.dir}"/>
+        <delete dir="${target.main.dir}"/>
     </target>
 
     <target name="init">
