@@ -3,23 +3,13 @@
     <import file="properties.xml"/>
     <import file="classpaths.xml"/>
     <import file="db-targets.xml"/>
+    <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
-
-    <property name="jruby.win" location="tools/jruby-1.6.0.RC1/bin/jruby.bat"/>
-    <property name="jruby.sh" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
-    <condition property="jruby" value="${jruby.win}">
-        <os family="windows"/>
-    </condition>
-    <property name="jruby" value="${jruby.sh}"/>
+    <import file="cobertura.xml" />
 
     <target name="clean">
-        <exec executable="${jruby}" failonerror="true">
-            <arg value="-S"/>
-            <arg value="buildr"/>
-            <arg value="-f"/>
-            <arg value="ops/build/buildfile"/>
-            <arg value="clean"/>
-        </exec>
+        <delete dir="${target.dir}"/>
+        <delete dir="${target.main.dir}"/>
     </target>
 
     <target name="init">
@@ -27,40 +17,47 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.test.cobertura_instrumented.dir}" />
         <mkdir dir="${target.test.twist.functional-test.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
+        <mkdir dir="${target.reports.twist.dir}"/>
+        <mkdir dir="${target.reports.cobertura.dir}"/>
+        <mkdir dir="${target.main.dir}"/>
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
+    <!-- test:functional works on computers, but not on headless environments -->
 
-    <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration"/>
+    <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
 
-    <target name="compile:main">
-        <exec executable="${jruby}" failonerror="true">
-            <arg value="-S"/>
-            <arg value="buildr"/>
-            <arg value="-f"/>
-            <arg value="ops/build/buildfile"/>
-            <arg value="compile"/>
-        </exec>
+    <target name="compile:main" depends="init">
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
+                       classpathref="classpath.compilation"/>
     </target>
 
-    <target name="compile:test:shared">
+    <target name="compile:test:shared" depends="init, compile:main">
         <compile srcdir="${src.test.shared.dir}" destdir="${target.test.shared.dir}"
                  classpathref="classpath.compilation.test.shared"/>
     </target>
 
-    <target name="compile:test:unit">
+    <target name="compile:test:unit" depends="compile:test:shared">
         <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                  classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile:test:integration">
+    <target name="compile:test:integration" depends="compile:test:shared">
         <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                  classpathref="classpath.compilation.test.integration"/>
     </target>
+
+<!-- -->
+    <target name="compile:test:functional" depends="compile:test:shared">
+ 	<compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
+                 classpathref="classpath.compilation.test.functional"/>
+    </target>
+<!-- -->
 
     <target name="copy-resources">
         <copy todir="${target.main.dir}">
@@ -78,13 +75,58 @@
         <test type="integration"/>
     </target>
 
+<!-- -->
+     <target name="test:functional"  depends="compile:test:functional" >
+              <path id="scenarios.classpath">
+                 <!--<path refid="${ant.project.name}.classpath" />-->
+                 <!--<fileset dir="${ant.library.dir}" includes="*.jar" />-->
+                 <path refid="classpath.run.test.functional" />
+                 <fileset dir="${ant.library.dir}" includes="*.jar" />
+             </path>
+
+             <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
+                classpathref="scenarios.classpath"
+                name="twist.runner"/>
+             <twist.runner
+                 scenarioDir="${src.test.functional.dir}/scenarios"
+                 reportsDir="${target.reports.dir}"
+                 confDir="${twist-config}"
+                 failureproperty="twist.scenarios.failed"
+                 classpathref="scenarios.classpath"
+                 tags="!in-progress">
+                    <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
+             </twist.runner>
+
+             <fail if="twist.scenarios.failed" message="[ERROR!] Twist is shouting check for Dani!"/>
+     </target>
+<!-- -->
+
     <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${target.dir}/school-admin.zip">
+        <zip destfile="${target.dir}/${app.zip.name}">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
             <fileset file="${target.dir}/${war.name}"/>
             <fileset file="${target.dir}/${web.server.jar}"/>
-            <fileset file="${deploy.dir}/deploy.sh"/>
-            <fileset file="${deploy.dir}/stop-server.sh"/>
+            <fileset file="${ops.deploy.dir}/stop-server.sh"/>
+            <fileset file="${ops.deploy.dir}/start-server.sh"/>
+            <fileset file="${ops.deploy.dir}/bootstrap.sh"/>
+            <zipfileset file="${cobertura.dir}" prefix="tools"/>
+            <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
+            <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
+            <zipfileset file="${resources.main.dir}/database.properties" prefix="install/dbdeploy"/>
+            <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
+            <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
+            <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
+                <include name="*.xml"/>
+            </zipfileset>
+            <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
+                <include name="ant" />
+            </zipfileset>
+            <zipfileset dir="${tools.ant.dir}/lib" prefix="install/ant/lib">
+                <include name="**/ant.jar" />
+                <include name="**/ant-launcher.jar" />
+                <include name="**/dbdeploy*.jar" />
+                <include name="**/hsql*.jar" />
+            </zipfileset>
         </zip>
     </target>
 
@@ -106,7 +148,5 @@
         </jar>
     </target>
 
-    <target name="deploy:staging">
-        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
-    </target>
+
 </project>

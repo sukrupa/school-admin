@@ -1,0 +1,18 @@
+<project name="deploy-targets">
+
+    <target name="deploy:staging">
+        <echo message="Deploying to staging server (${deploy.staging.server})..."/>
+        <exec executable="scp" failonerror="true">
+            <arg value="${target.dir}/${app.zip.name}"/>
+            <arg value="${deploy.staging.user}@${deploy.staging.server}:${deploy.staging.path}"/>
+        </exec>
+        <exec executable="sh" failonerror="true">
+            <arg value="${ops.scripts.dir}/deploy-staging.sh"/>
+            <arg value="${deploy.staging.user}"/>
+            <arg value="${deploy.staging.server}"/>
+            <arg value="${deploy.staging.path}"/>
+            <arg value="${app.zip.name}"/>
+        </exec>
+    </target>
+
+</project>

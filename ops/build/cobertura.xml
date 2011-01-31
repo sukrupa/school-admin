@@ -1,0 +1,32 @@
+<project name="cobertura">
+    <import file="properties.xml"/>
+    <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
+    <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
+
+    <!-- used to test cobertura instruements -->
+    <target name="cobertura-instrument">
+        <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}">
+            <fileset dir="${target.main.dir}/org/sukrupa">
+                <include name="**/*.class" />
+            </fileset>
+            <fileset dir="${target.test.dir}">
+                <include name="**/*.class" />
+            </fileset>
+            <fileset dir="${target.test.dir}">
+                <include name="**/*.class" />
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <!-- used to test cobertura report generation-->
+    <target name="cobertura-report">
+        <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" >
+            <fileset dir="${src.dir}">
+                <include name="**/*.java" />
+            </fileset>
+        </cobertura-report>
+        <cobertura-report-gen />
+    </target>
+
+
+</project>
