@@ -15,7 +15,7 @@
             <type>jar</type>
             <scope>test</scope>
             <optional>false</optional>
-        </dependency>
+    </dependency>
         <!--
     <dependency>
       <groupId>org.apache</groupId>
