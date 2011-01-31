@@ -5,9 +5,6 @@ findSukrupaServerProcess() {
       Darwin | Linux)
         PID=$(ps aux | grep $SUKRUPA_WEB_SERVER | grep java | grep -v grep | awk '{ print $2 }')
         ;;
-      SunOS)
-        PID=$(/usr/ucb/ps -axwww | grep $SUKRUPA_WEB_SERVER | grep java | grep -v grep | awk '{ print \$1 }')        
-        ;;
       *)
        echo "Unrecognised OS, supported OS's are MacOSX, Linux & SunOS (Solaris)"
        exit 1
