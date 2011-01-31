@@ -19,7 +19,8 @@
         <mkdir dir="${target.test.twist.functional-test.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
-        <mkdir dir="${target.reports.dir}/html"/>
+        <mkdir dir="${target.reports.twist.dir}"/>
+        <mkdir dir="${target.reports.cobertura.dir}"/>
         <mkdir dir="${target.main.dir}"/>
     </target>
 

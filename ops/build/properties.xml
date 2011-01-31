@@ -26,6 +26,8 @@
     <property name="target.test.functional.dir" value="${target.test.twist.functional-test.dir}"/>
     <property name="target.test.twist.sukrupa-code.dir" value="${target.test.dir}/twist/sukrupa-code"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
+    <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
+    <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
 
     <property environment="env"/>
     <condition property="pipeline.counter" value="${env.GO_PIPELINE_COUNTER}" else="local">
