@@ -5,14 +5,6 @@
     <import file="db-targets.xml"/>
     <import file="macros.xml"/>
 
-    <property name="jruby.win" location="tools/jruby-1.6.0.RC1/bin/jruby.bat"/>
-    <property name="jruby.sh" location="tools/jruby-1.6.0.RC1/bin/jruby"/>
-
-    <condition property="jruby" value="${jruby.win}">
-        <os family="windows"/>
-    </condition>
-    <property name="jruby" value="${jruby.sh}"/>
-
     <target name="clean">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
@@ -27,6 +19,7 @@
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${arget.reports.dir}/html"/>
+        <mkdir dir="${target.main.dir}"/>
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
@@ -35,14 +28,9 @@
 
     <target name="compile:all" depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
 
-    <target name="compile:main">
-        <exec executable="${jruby}" failonerror="true">
-            <arg value="-S"/>
-            <arg value="buildr"/>
-            <arg value="-f"/>
-            <arg value="ops/build/buildfile"/>
-            <arg value="compile"/>
-        </exec>
+    <target name="compile:main" depends="init">
+        <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
+                       classpathref="classpath.compilation"/>
     </target>
 
     <target name="compile:test:shared" depends="init, compile:main">
