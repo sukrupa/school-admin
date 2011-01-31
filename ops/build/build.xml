@@ -5,6 +5,7 @@
     <import file="db-targets.xml"/>
     <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
+    <import file="cobertura.xml" />
 
     <target name="clean">
         <delete dir="${target.dir}"/>
@@ -16,6 +17,7 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.test.cobertura_instrumented.dir}" />
         <mkdir dir="${target.test.twist.functional-test.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
@@ -142,5 +144,6 @@
             </manifest>
         </jar>
     </target>
+
 
 </project>

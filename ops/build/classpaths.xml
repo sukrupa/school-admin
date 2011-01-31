@@ -49,4 +49,11 @@
         <pathelement location="${src.test.functional.src.dir}"/>
         <fileset dir="${lib.twist.dir}" includes="**/*.jar"/>
     </path>
+
+   <path id="classpath.cobertura">
+        <fileset dir="lib/test/">
+            <include name="cobertura.jar"/>
+        </fileset>
+    </path>
+
 </project>

@@ -24,4 +24,25 @@
             <fail if="test.@{type}.failed" message="Some @{type} tests failed"/>
         </sequential>
     </macrodef>
+
+    <macrodef name="cobertura-report-gen">
+        <sequential>
+         <junit fork="yes" dir="${target.test.cobertura_instrumented.dir}" failureProperty="cobertura-report-gen.failed">
+            <sysproperty key="net.sourceforge.cobertura.datafile"	file="${target.reports.cobertura.dir}/cobertura.ser" />
+            <classpath location="${target.test.cobertura_instrumented.dir}" />
+            <classpath location="${target.main.dir}" />
+
+            <classpath refid="classpath.cobertura" />
+            <formatter type="xml" />
+            <test name="${testcase}" todir="${target.reports.cobertura.dir}" if="testcase" />
+            <batchtest todir="${target.reports.cobertura.dir}" unless="testcase">
+                <fileset dir="${src.dir}">
+                    <include name="**/*Test.java" />
+                </fileset>
+            </batchtest>
+            </junit>
+            <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
+        </sequential>
+    </macrodef>
+
 </project>
