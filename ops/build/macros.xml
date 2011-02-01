@@ -27,11 +27,12 @@
 
     <macrodef name="cobertura-report-gen">
         <sequential>
-            <junit printsummary="false" fork="true" dir="${target.test.cobertura_instrumented.dir}"
+            <junit printsummary="false" fork="true" forkmode="once" dir="${target.test.cobertura_instrumented.dir}"
                    failureProperty="cobertura-report-gen.failed">
                 <sysproperty key="net.sourceforge.cobertura.datafile"
                              file="${target.reports.cobertura.dir}/cobertura.ser"/>
                 <classpath location="${target.test.cobertura_instrumented.dir}"/>
+                <classpath location="${target.main.dir}"/>
                 <classpath refid="classpath.cobertura"/>
 
                 <formatter type="xml"/>
