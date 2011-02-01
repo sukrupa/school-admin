@@ -8,7 +8,7 @@ while [ $ntimes -lt 6 ]; do
     echo "Trying to connect to staging server..."
     ! ( wget --spider http://$2:8080/sukrupa/app/students ) || exit 0
     echo "sleeping 10 sec"
-    sleep 1
+    sleep 10
     ntimes=`expr $ntimes + 1`
 done
 exit 1
