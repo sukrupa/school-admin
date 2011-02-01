@@ -55,7 +55,7 @@
         <!--
         <sonar.surefire.reportsPath>yourSurfireDir</sonar.surefire.reportsPath>
                 -->
-        <sonar.cobertura.reportPath>${module.dir}/target/reports/cobertura/</sonar.cobertura.reportPath>
+        <sonar.cobertura.reportPath>${module.dir}/target/reports/cobertura/coverage.xml</sonar.cobertura.reportPath>
     </properties>
 
 
