@@ -1,0 +1,6 @@
+Sahi:
+	class: net.sf.sahi.client.Browser
+	fieldName: browser
+	project_path: /Users/jim/work/code/clients/sukrupa/school-admin/src/test/twist/functional-test
+language:
+	class: com.thoughtworks.twist.language.java.Java
