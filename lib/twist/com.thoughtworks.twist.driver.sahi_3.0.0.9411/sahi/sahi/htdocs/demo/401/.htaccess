@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "401"
+AuthUserFile "/home/tytosoft/.htpasswds/public_html/demo/401/passwd"
+require valid-user
