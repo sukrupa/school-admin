@@ -4,7 +4,7 @@
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <!-- used to test cobertura instruements -->
-    <target name="cobertura-instrument">
+    <target name="cobertura:instrument">
         <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
         <copy todir="${target.test.cobertura_instrumented.dir}">
             <fileset dir="${resources.main.dir}"/>
@@ -17,7 +17,7 @@
     </target>
 
     <!-- used to test cobertura report generation-->
-    <target name="cobertura-report" depends="db:start, db:update">
+    <target name="cobertura:report" depends="db:start, db:update">
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
             <fileset dir="${src.main.dir}">
                 <include name="**/*.java" />
@@ -26,5 +26,6 @@
         <cobertura-report-gen />
     </target>
 
+    <target name="cobertura:all" depends="cobertura:instrument cobertura:report" />
 
 </project>
