@@ -1,8 +1,8 @@
 <html>
 <head>
-    <title>Parking Lot App</title>
+    <title>Sukrupa App</title>
 </head>
 <body>
-<p>Hey, this is the index page.</p>
+<p>Index Page</p>
 </body>
 </html>

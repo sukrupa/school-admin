@@ -6,6 +6,7 @@ out
 # Build Artifacts
 target
 web/WEB-INF/classes
+web/build-number.txt
 
 # Twist / Eclipse
 .metadata
