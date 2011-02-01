@@ -52,9 +52,7 @@
     <properties>
         <module.dir>../../</module.dir>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <!--
-        <sonar.surefire.reportsPath>yourSurfireDir</sonar.surefire.reportsPath>
-                -->
+        <sonar.surefire.reportsPath>${module.dir}/target/reports/cobertura/</sonar.surefire.reportsPath>
         <sonar.cobertura.reportPath>${module.dir}/target/reports/cobertura/coverage.xml</sonar.cobertura.reportPath>
     </properties>
 

@@ -33,6 +33,7 @@
     <property name="target.reports.dir" value="${target.dir}/reports"/>
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
+    <property name="target.sahi.browser.profiles" value="${src.test.functional.dir}/sahi/userdata/browser/ff/profiles/" />
 
     <property name="war.name" value="${ant.project.name}.war"/>
     <property name="app.zip.name" value="school-admin.zip"/>
@@ -49,6 +50,7 @@
 
     <property name="ops.dir" value="${module.dir}/ops" />
     <property name="ops.build.dir" value="${ops.dir}/build" />
+    <property name="ops.local.dir" value="${ops.dir}/local" />
 
     <property name="ops.deploy.dir" value="${ops.dir}/deploy" />
     <property name="ops.deploy.sql.dir" value="${ops.deploy.dir}/sql" />

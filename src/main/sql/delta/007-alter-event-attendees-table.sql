@@ -1,0 +1,1 @@
+ALTER TABLE EventAttendees ADD PRIMARY KEY (event_id,student_id)
