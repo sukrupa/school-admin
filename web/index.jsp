@@ -1,8 +1,21 @@
+<%@ page import="java.io.*"  %>
 <html>
 <head>
-    <title>Parking Lot App</title>
+    <title>Sukrupa App</title>
 </head>
 <body>
-<p>Hey, this is the index page.</p>
+<%
+String fileName=getServletContext().getRealPath("version.txt");
+
+File f=new File(fileName);
+
+InputStream in = new FileInputStream(f);
+
+BufferedInputStream bin = new BufferedInputStream(in);
+
+DataInputStream din = new DataInputStream(bin);
+
+out.println(din.readLine());
+%> 
 </body>
 </html>
