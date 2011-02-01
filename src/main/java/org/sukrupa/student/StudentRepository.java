@@ -40,13 +40,15 @@ public class StudentRepository {
 		return criteria.addOrder(Order.asc(SEX).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
 	}
 
-	public List<Student> singleParametricSearch(String studentClass, String sex,
-	                                            String caste, String area, String ageFrom, String ageTo, String talent) {
+	public List<Student> parametricSearch(String studentClass, String sex,
+	                                      String caste, String area, String ageFrom, String ageTo, String talent) {
 		Conjunction conjunction = createConjunction(studentClass, sex, caste, area, talent);
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
 		List<Student> students = addOrderCriteria(criteria).add(conjunction).list();
 
-		return getStudentsWithinAgeRange(Integer.parseInt(ageFrom), Integer.parseInt(ageTo), students);
+		return getStudentsWithinAgeRange(
+				(ageFrom.isEmpty()) ? 0 : Integer.parseInt(ageFrom),
+				(ageFrom.isEmpty()) ? Integer.MAX_VALUE : Integer.parseInt(ageTo), students);
 	}
 
 	private List<Student> getStudentsWithinAgeRange(int ageFrom, int ageTo, List<Student> students) {

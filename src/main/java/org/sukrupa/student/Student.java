@@ -92,6 +92,9 @@ public class Student {
 	public int getAge() {
 		DateFormat format = getDateFormat();
 		try {
+			if (dateOfBirth == null) {
+				return 0;
+			}
 			GregorianCalendar birthDate = new GregorianCalendar();
 			birthDate.setTimeInMillis(format.parse(dateOfBirth).getTime());
 

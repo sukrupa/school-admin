@@ -49,7 +49,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnNurseryStudents() {
         save(sahil, pat, renaud);
-        assertThat(repository.singleParametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
+        assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
     }
 
     private void save(Student... students) {

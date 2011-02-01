@@ -48,9 +48,8 @@ public class StudentController {
 			@RequestParam(value = "ageFrom") String ageFrom,
 			@RequestParam(value = "talent") String talent,
 			Map<String, List<Student>> model) {
-		model.put(STUDENTS_MODEL,
-				repository.singleParametricSearch(studentClass, sex, caste, area, ageFrom, ageTo, talent)
-		);
+
+		model.put(STUDENTS_MODEL, repository.parametricSearch(studentClass, sex, caste, area, ageFrom, ageTo, talent));
         return STUDENTS_VIEW;
     }
 
