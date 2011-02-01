@@ -18,12 +18,12 @@
 
     <!-- used to test cobertura report generation-->
     <target name="cobertura:report" depends="db:start, db:update">
+        <cobertura-report-gen />
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
             <fileset dir="${src.main.dir}">
                 <include name="**/*.java" />
             </fileset>
         </cobertura-report>
-        <cobertura-report-gen />
     </target>
 
     <target name="cobertura:all" depends="cobertura:instrument, cobertura:report" />
