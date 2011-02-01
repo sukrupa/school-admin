@@ -26,6 +26,6 @@
         <cobertura-report-gen />
     </target>
 
-    <target name="cobertura:all" depends="cobertura:instrument cobertura:report" />
+    <target name="cobertura:all" depends="cobertura:instrument, cobertura:report" />
 
 </project>
