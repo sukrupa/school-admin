@@ -1,7 +1,7 @@
 <project name="twist">
 
     <target name="execute-twist">
-        <exec command="${ops.local.dir}/kill-firefox.sh" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh" />
         <echo message="Executing Twist tests from ${src.test.functional.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
@@ -18,7 +18,7 @@
             <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
         </twist.runner>
 
-        <exec command="${ops.local.dir}/kill-firefox.sh" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh" />
 
         <fail if="twist.scenarios.failed" message="Twist tests have failed."/>
     </target>
