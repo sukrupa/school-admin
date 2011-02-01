@@ -2,7 +2,7 @@
 
     <property environment="env"/>
 
-    <target name="deploy:staging">
+    <target name="deploy:staging" depends="deploy:save-build-number">
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
         <exec executable="scp" failonerror="true">
             <arg value="${target.dir}/${app.zip.name}"/>
