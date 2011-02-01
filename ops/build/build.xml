@@ -10,7 +10,6 @@
     <target name="clean">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
-        <delete dir="${target.sahi.browser.profiles}"/>
     </target>
 
     <target name="init">
