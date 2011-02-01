@@ -61,5 +61,7 @@
         </fileset>
         <fileset dir="${lib.test.dir}" includes="*.jar"/>
         <fileset dir="${lib.main.dir}" includes="*.jar"/>
+        <pathelement location="${target.test.unit.dir}"/>
+        <pathelement location="${target.test.shared.dir}"/>
     </path>
 </project>

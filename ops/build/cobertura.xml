@@ -16,7 +16,7 @@
     <!-- used to test cobertura report generation-->
     <target name="cobertura-report">
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
-            <fileset dir="${src.test.unit.dir}">
+            <fileset dir="${src.main.dir}">
                 <include name="**/*.java" />
             </fileset>
         </cobertura-report>
