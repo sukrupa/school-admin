@@ -1,6 +1,7 @@
 <project name="deploy-targets">
 
     <property environment="env"/>
+    <property name="env.GO_PIPELINE_COUNTER" value="local build"/>
 
     <target name="deploy:staging">
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
