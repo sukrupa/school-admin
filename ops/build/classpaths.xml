@@ -59,5 +59,7 @@
             <include name="cobertura.jar" />
             <include name="lib/**/*.jar" />
         </fileset>
+        <fileset dir="${lib.test.dir}" includes="*.jar"/>
+        <fileset dir="${lib.main.dir}" includes="*.jar"/>
     </path>
 </project>

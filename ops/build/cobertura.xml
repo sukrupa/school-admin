@@ -1,18 +1,13 @@
 <project name="cobertura">
+
     <import file="properties.xml"/>
-    <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <!-- used to test cobertura instruements -->
     <target name="cobertura-instrument">
-        <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}">
-            <fileset dir="${target.main.dir}/org/sukrupa">
-                <include name="**/*.class" />
-            </fileset>
-            <fileset dir="${target.test.dir}">
-                <include name="**/*.class" />
-            </fileset>
-            <fileset dir="${target.test.dir}">
+        <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
+        <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
+            <fileset dir="${target.main.dir}">
                 <include name="**/*.class" />
             </fileset>
         </cobertura-instrument>
@@ -20,8 +15,8 @@
 
     <!-- used to test cobertura report generation-->
     <target name="cobertura-report">
-        <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" >
-            <fileset dir="${src.dir}">
+        <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
+            <fileset dir="${src.test.unit.dir}">
                 <include name="**/*.java" />
             </fileset>
         </cobertura-report>
