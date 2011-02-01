@@ -8,6 +8,7 @@
     <property name="src.test.integration.dir" value="${src.test.dir}/integration/java"/>
     <property name="src.test.functional.dir" value="${src.test.dir}/twist/functional-test"/>
     <property name="src.test.functional.src.dir" value="${src.test.functional.dir}/src"/>
+    <property name="src.test.functional.twist-conf.dir" value="${src.test.functional.dir}/twist-conf"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 

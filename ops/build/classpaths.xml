@@ -47,7 +47,11 @@
         <path refid="classpath.compilation.test.functional"/>
         <pathelement location="${target.test.twist.functional-test.dir}"/>
         <pathelement location="${src.test.functional.src.dir}"/>
-        <fileset dir="${lib.twist.dir}" includes="**/*.jar"/>
+        <pathelement location="${src.test.functional.twist-conf.dir}" />
+        <fileset dir="${lib.twist.dir}">
+            <exclude name="*slf4*.jar" />
+            <include name="*.jar" />
+        </fileset>
     </path>
 
     <path id="classpath.cobertura">
