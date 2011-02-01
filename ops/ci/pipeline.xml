@@ -21,8 +21,7 @@
       <job name="sonar">
         <tasks>
           <exec command="./build">
-            <arg value="cobertura-instrument"/>
-            <arg value="cobertura-report"/>
+            <arg value="cobertura:all" />
           </exec>
           <exec command="mvn">
             <arg value="--file" />

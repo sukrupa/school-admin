@@ -37,6 +37,7 @@
                 <formatter type="xml"/>
                 <batchtest todir="${target.reports.cobertura.dir}">
                     <fileset dir="${target.test.unit.dir}" includes="**/*Test.class"/>
+                    <fileset dir="${target.test.integration.dir}" includes="**/*Test.class"/>
                 </batchtest>
             </junit>
             <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
