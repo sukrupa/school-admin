@@ -1,4 +1,5 @@
 <pipeline name="all">
+  <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
   <materials>
     <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa.git" />
   </materials>
@@ -29,14 +30,14 @@
     </jobs>
   </stage>
   <stage name="deploy-staging">
-    <approval type="manual" />
     <jobs>
       <job name="deploy-staging">
         <tasks>
-          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target"/>
+          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
           <exec command="./build" args="deploy:staging" />
         </tasks>
       </job>
     </jobs>
   </stage>
 </pipeline>
+
