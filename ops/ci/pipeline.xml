@@ -20,6 +20,10 @@
     <jobs>
       <job name="sonar">
         <tasks>
+          <exec command="./build">
+            <arg value="cobertura-instrument"/>
+            <arg value="cobertura-report"/>
+          </exec>
           <exec command="mvn">
             <arg value="--file" />
             <arg value="ops/sonar/pom.xml" />
@@ -40,4 +44,3 @@
     </jobs>
   </stage>
 </pipeline>
-
