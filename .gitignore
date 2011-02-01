@@ -12,6 +12,7 @@ web/build-number.txt
 .metadata
 bin
 logs
+Cache/
 
 # JRuby
 !tools/jruby-1.6.0.RC1/bin
