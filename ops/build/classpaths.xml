@@ -48,11 +48,11 @@
     </path>
 
     <path id="classpath.run.test.functional">
+        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411" />
         <path refid="classpath.compilation.test.functional"/>
         <pathelement location="${target.test.twist.functional-test.dir}"/>
         <pathelement location="${src.test.functional.src.dir}"/>
         <pathelement location="${src.test.functional.twist-conf.dir}" />
-        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411" />
     </path>
 
 
