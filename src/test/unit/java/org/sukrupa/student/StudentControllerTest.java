@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,18 +49,16 @@ public class StudentControllerTest {
 
 	@Test
 	public void shouldListStudentsFromClassNursery() {
-		when(repository.singleParametricSearch("Nursery")).thenReturn(asList(sahil, renaud));
-        controller.parametricSearchResult("Nursery", model);
+		when(repository.singleParametricSearch("Nursery", "", "", "", "", "", "")).thenReturn(asList(sahil, renaud));
+        controller.parametricSearchResult("Nursery", "", "", "", "", "", "", model);
 		assertThat(model.get("students"), is(asList(sahil, renaud)));
 	}
 
 	@Test
 	public void shouldReturnEmptyList() {
-		when(repository.singleParametricSearch("UKG")).thenReturn(anyList());
-        controller.parametricSearchResult("UKG", model);
+		when(repository.singleParametricSearch("UKG", "", "", "", "", "", "")).thenReturn(anyList());
+        controller.parametricSearchResult("UKG", "", "", "", "", "", "", model);
 		assertThat(model.get("students"), is(Matchers.<Student>empty()));
 	}
-
-
 
 }

@@ -89,13 +89,13 @@ public class Student {
 		return dateOfBirth;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		DateFormat format = getDateFormat();
 		try {
 			GregorianCalendar birthDate = new GregorianCalendar();
 			birthDate.setTimeInMillis(format.parse(dateOfBirth).getTime());
 
-			return String.valueOf(getDateDifferenceInYears(getCurrentDate(), birthDate));
+			return getDateDifferenceInYears(getCurrentDate(), birthDate);
 		} catch (ParseException e) {
 			throw new InternalError("Invalid date saved as date of birth");
 		}

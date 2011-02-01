@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.platform.DoNotRemove;
 
@@ -16,11 +15,13 @@ public class StudentController {
 
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
-    private static final String SEARCH_VIEW = "studentSearchSingleParameter";
+    private static final String SEARCH_VIEW = "studentSearch";
+	private static final int AGES_TO = 18;
+	private static final int AGES_FROM = 2;
 
-    private StudentRepository repository;
+	private StudentRepository repository;
 
-    @DoNotRemove
+	@DoNotRemove
     StudentController() {
     }
 
@@ -36,18 +37,47 @@ public class StudentController {
         return STUDENTS_VIEW;
     }
 
-	@RequestMapping(value = "parametricSearchResult")
+	@RequestMapping(value = "searchResult")
     @Transactional
-	public String parametricSearchResult(@RequestParam(value = "class") String studentClass, Map<String, List<Student>> model) {
-		model.put(STUDENTS_MODEL, repository.singleParametricSearch(studentClass));
+	public String parametricSearchResult(
+			@RequestParam(value = "class") String studentClass,
+			@RequestParam(value = "sex") String sex,
+			@RequestParam(value = "caste") String caste,
+			@RequestParam(value = "area") String area,
+			@RequestParam(value = "ageTo") String ageTo,
+			@RequestParam(value = "ageFrom") String ageFrom,
+			@RequestParam(value = "talent") String talent,
+			Map<String, List<Student>> model) {
+		model.put(STUDENTS_MODEL,
+				repository.singleParametricSearch(studentClass, sex, caste, area, ageFrom, ageTo, talent)
+		);
         return STUDENTS_VIEW;
     }
 
 	@RequestMapping(value = "search")
 	public String parametricSearch(Map<String, List<String>> model) {
-		model.put("classes", Arrays.asList("Nursery", "LKG","UKG","1 Std","2 Std","3 Std","4 Std","5 Std","6 Std","7 Std","8 Std","9 Std","10 Std"));
+		model.put("classes", Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
+	    model.put("sexes", Arrays.asList("", "Male", "Female"));
+		model.put("castes", Arrays.asList("", "Some caste"));
+		model.put("areas", Arrays.asList(""));
+		model.put("agesFrom", getAges());
+		model.put("agesTo", getAges());
+		model.put("talents", Arrays.asList("", "Sports","Science Club", "Humanities", "Creative Writing",
+				"Dancing","Debate","Singing","Drama","Musical Instrument","Quiz","Story Writing","Choir","Art","Drawing","Craft"));
 		return SEARCH_VIEW;
-    }
+	}
+
+
+	private List<String> getAges(){
+		List<String> ages = new ArrayList<String>();
+
+		ages.add("");
+		for(int age = AGES_FROM; age <= AGES_TO; age++) {
+			ages.add(age+"");
+		}
+
+		return ages;
+	}
 
 
 }
