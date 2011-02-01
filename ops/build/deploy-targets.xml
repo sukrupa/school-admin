@@ -2,7 +2,7 @@
 
     <property environment="env"/>
 
-    <target name="deploy:staging" depends="deploy:save-build-number">
+    <target name="deploy:staging">
         <echo message="Deploying to staging server (${deploy.staging.server})..."/>
         <exec executable="scp" failonerror="true">
             <arg value="${target.dir}/${app.zip.name}"/>
@@ -18,6 +18,7 @@
     </target>
 
     <target name="deploy:save-build-number">
+        <echo message="Saving build number: ${env.GO_PIPELINE_COUNTER}"/>
         <echo file="${web.dir}/build-number.txt">${env.GO_PIPELINE_COUNTER}</echo>
     </target>
 

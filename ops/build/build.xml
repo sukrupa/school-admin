@@ -27,7 +27,7 @@
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:save-build-number, package"/>
     <!-- test:functional works on computers, but not on headless environments -->
 
     <target name="compile:all"
