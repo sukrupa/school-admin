@@ -77,30 +77,19 @@
     </target>
 
 
-    <path id="scenarios.classpath">
-        <path refid="classpath.run.test.functional"/>
-        <fileset dir="${ant.library.dir}" includes="*.jar"/>
-    </path>
-
-    <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
-             classpathref="scenarios.classpath"
-             name="twist.runner"/>
     <!-- -->
     <target name="test:functional"
             depends="compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
-        <twist.runner
-                scenarioDir="${src.test.functional.dir}/scenarios"
-                reportsDir="${target.reports.dir}"
-                confDir="${twist-config}"
-                failureproperty="twist.scenarios.failed"
-                classpathref="scenarios.classpath"
-                tags="!in-progress">
-            <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
-        </twist.runner>
+        <ant antfile="${ops.build.dir}/twist.xml"
+             dir="${src.test.functional.dir}"
+             target="execute-twist"
+             inheritall="true"
+             inheritrefs="true">
+        </ant>
 
-        <fail if="twist.scenarios.failed" message="[ERROR!] Twist is shouting check for Dani!"/>
+
     </target>
     <!-- -->
 

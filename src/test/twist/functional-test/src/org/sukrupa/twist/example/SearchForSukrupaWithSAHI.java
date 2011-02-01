@@ -1,6 +1,5 @@
 package org.sukrupa.twist.example;
 
-// JUnit Assert framework can be used for verification
 
 import net.sf.sahi.client.Browser;
 import static junit.framework.Assert.*;
@@ -19,7 +18,7 @@ public class SearchForSukrupaWithSAHI {
 		browser.submit("Google Search").click();
 		browser.link("Sukrupa Home Page").click();
 	
-		assertTrue(browser.link("Click here to donate online safely and securely").exists());	
+		assertTrue(browser.link("Click here to donate online safely and securely").exists());			
 	}
 
 }

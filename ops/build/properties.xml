@@ -1,6 +1,7 @@
 <project name="properties">
 
-    <property name="src.dir" value="src"/>
+    <property name="module.dir" value="${basedir}" />
+    <property name="src.dir" value="${module.dir}/src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.dir" value="${src.dir}/test"/>
     <property name="src.test.shared.dir" value="${src.test.dir}/shared/java"/>
@@ -12,13 +13,14 @@
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
-    <property name="web.dir" value="web"/>
+    <property name="web.dir" value="${module.dir}/web"/>
 
-    <property name="lib.main.dir" value="lib/main"/>
-    <property name="lib.test.dir" value="lib/test"/>
-    <property name="lib.twist.dir" value="lib/twist"/>
+    <property name="lib.dir" value="${module.dir}/lib" />
+    <property name="lib.main.dir" value="${lib.dir}/main"/>
+    <property name="lib.test.dir" value="${lib.dir}/test"/>
+    <property name="lib.twist.dir" value="${lib.dir}/twist"/>
 
-    <property name="target.dir" value="target"/>
+    <property name="target.dir" value="${module.dir}/target"/>
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
     <property name="target.test.dir" value="${target.dir}"/>
     <property name="target.test.cobertura_instrumented.dir" value="${target.test.dir}/cobertura_instrumented"/>
@@ -42,10 +44,10 @@
     <property name="web.server.jar" value="web-server.jar"/>
     <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
 
-    <property name="tools.dir" value="tools" />
+    <property name="tools.dir" value="${module.dir}/tools" />
     <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2" />
 
-    <property name="ops.dir" value="ops" />
+    <property name="ops.dir" value="${module.dir}/ops" />
     <property name="ops.build.dir" value="${ops.dir}/build" />
 
     <property name="ops.deploy.dir" value="${ops.dir}/deploy" />
@@ -56,5 +58,5 @@
     <property name="ops.scripts.dir" value="${ops.dir}/scripts" />
 
     <property name="twist-config" value="${src.test.functional.dir}/twist-conf"/>
-    <property name="cobertura.dir" value="tools/cobertura-1.9.4.1" />
+    <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1" />
 </project>

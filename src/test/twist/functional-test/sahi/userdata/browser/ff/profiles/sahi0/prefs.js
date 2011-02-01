@@ -76,5 +76,5 @@ user_pref("security.warn_viewing_mixed", false);
 user_pref("security.warn_viewing_mixed.show_once", false);
 user_pref("signon.autofillForms", false);
 user_pref("signon.rememberSignons", false);
-user_pref("urlclassifier.keyupdatetime.https://sb-ssl.google.com/safebrowsing/newkey", 1299134666);
+user_pref("urlclassifier.keyupdatetime.https://sb-ssl.google.com/safebrowsing/newkey", 1299145117);
 user_pref("xpinstall.whitelist.required", false);

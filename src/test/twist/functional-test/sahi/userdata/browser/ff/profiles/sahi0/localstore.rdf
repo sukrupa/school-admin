@@ -4,13 +4,9 @@
   <RDF:Description RDF:about="chrome://browser/content/browser.xul#main-window"
                    width="940"
                    height="1044"
-                   screenX="2034"
-                   screenY="347"
-                   sizemode="maximized" />
-  <RDF:Description RDF:about="chrome://browser/content/browser.xul#sidebar-box"
-                   sidebarcommand=""
-                   width=""
-                   src="" />
+                   sizemode="normal"
+                   screenX="147"
+                   screenY="32" />
   <RDF:Description RDF:about="chrome://browser/content/browser.xul">
     <NC:persist RDF:resource="chrome://browser/content/browser.xul#main-window"/>
     <NC:persist RDF:resource="chrome://browser/content/browser.xul#sidebar-box"/>
