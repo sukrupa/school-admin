@@ -1,8 +1,0 @@
-Tags:
-Preconditions:
-Metadata:ScenarioType=Auto
-Make an assertion:
-#Assert that <Param3> is true
-#Greeting a student called <Param4> should say <Param5>
-#Assert that <Param2> is true
-$Check logic and greet student
