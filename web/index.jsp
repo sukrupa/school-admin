@@ -5,7 +5,7 @@
 </head>
 <body>
 <%
-String fileName=getServletContext().getRealPath("version.txt");
+String fileName=getServletContext().getRealPath("build-number.txt");
 
 File f=new File(fileName);
 
