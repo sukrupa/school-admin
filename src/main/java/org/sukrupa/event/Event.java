@@ -41,6 +41,7 @@ public class Event {
     @Column ( name = "event_notes" )
     private String notes;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "EventAttendees",
             joinColumns = { @JoinColumn(name = "event_id") },
@@ -56,6 +57,7 @@ public class Event {
     /*public void  setAttendees(Set <Student> attendees){
         this.attendees = attendees;
     }                       */
+
 
     @DoNotRemove
     public Event() {
@@ -80,4 +82,5 @@ public class Event {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
+
 }

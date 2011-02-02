@@ -28,46 +28,45 @@ public class StudentTest {
 
 	@Test
 	public void shouldBe5YearsOld() {
-		assertThat(createFakeStudent("2005/01/22", "2010/03/01").getAge(), is("5"));
+		assertThat(createFakeStudent("2005/01/22", "2010/03/01").getAge(), is(5));
 	}
 
 	@Test
 	public void shouldBeOfSameAge() {
 		String currentDate = "2010/03/01";
-		assertThat(createFakeStudent("2005/04/12", currentDate).getAge().
-				equals(createFakeStudent("2005/06/10", currentDate).getAge()), is(true));
+		assertThat(createFakeStudent("2005/04/12", currentDate).getAge() == createFakeStudent("2005/06/10", currentDate).getAge(), is(true));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateMonthBeforeDOBMonth() {
-		assertThat(createFakeStudent("2005/05/22", "2010/04/01").getAge(), is("4"));
+		assertThat(createFakeStudent("2005/05/22", "2010/04/01").getAge(), is(4));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateDayBeforeDOBDay() {
-		assertThat(createFakeStudent("2005/05/02", "2010/05/01").getAge(), is("4"));
+		assertThat(createFakeStudent("2005/05/02", "2010/05/01").getAge(), is(4));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateMonthAfterDOBMonth() {
-		assertThat(createFakeStudent("2005/05/03", "2010/06/03").getAge(), is("5"));
+		assertThat(createFakeStudent("2005/05/03", "2010/06/03").getAge(), is(5));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
-		assertThat(createFakeStudent("2005/05/02", "2010/05/03").getAge(), is("5"));
+		assertThat(createFakeStudent("2005/05/02", "2010/05/03").getAge(), is(5));
 	}
 
 	@Test
 	public void shouldBeCurrentDate() {
 		GregorianCalendar currentDate = new GregorianCalendar();
-		resetSecondsAnMilliseconds(currentDate);
+		resetSecondsAndMilliseconds(currentDate);
 		Calendar studentCurrentDate = new Student() {
 			public Calendar getCurrentDateTest() {
 				return super.getCurrentDate();
 			}
 		}.getCurrentDateTest();
-		resetSecondsAnMilliseconds(studentCurrentDate);
+		resetSecondsAndMilliseconds(studentCurrentDate);
 
 		assertThat(currentDate, is(studentCurrentDate));
 	}
@@ -78,7 +77,7 @@ public class StudentTest {
 		return student;
 	}
 
-	private void resetSecondsAnMilliseconds(Calendar calendar) {
+	private void resetSecondsAndMilliseconds(Calendar calendar) {
 		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.SECOND, 0);
 	}
