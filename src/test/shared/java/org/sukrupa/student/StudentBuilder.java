@@ -1,5 +1,8 @@
 package org.sukrupa.student;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
 public class StudentBuilder {
     private String name;
     private String religion;
@@ -9,7 +12,7 @@ public class StudentBuilder {
 	private String studentId;
 	private String sex;
 	private String studentClass;
-	private String dateOfBirth;
+	private DateTime dateOfBirth;
 
 	public StudentBuilder name(String name) {
         this.name = name;
@@ -51,7 +54,7 @@ public class StudentBuilder {
 	    return this;
     }
 
-    public StudentBuilder dateOfBirth(String dateOfBirth) {
+    public StudentBuilder dateOfBirth(DateTime dateOfBirth) {
 	    this.dateOfBirth = dateOfBirth;
 	    return this;
     }
