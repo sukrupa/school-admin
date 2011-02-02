@@ -17,7 +17,7 @@
 
 	<span>Gender</span>
 	<select name="gender" >
-		$sexes:{
+		$genders:{
 		<option>$it$</option>
 		}$
 	</select>
