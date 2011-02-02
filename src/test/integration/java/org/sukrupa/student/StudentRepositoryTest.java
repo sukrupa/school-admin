@@ -52,7 +52,7 @@ public class StudentRepositoryTest {
         assertThat(repository.singleParametricSearch("Nursery"), hasItems(renaud, sahil));
     }
 
-    private void save(Student... students) {
+    public void save(Student... students) {
         for (Object student : students) {
             session().save(student);
         }
