@@ -1,6 +1,7 @@
 package org.sukrupa.platform;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,14 @@ public class DatabaseHelper {
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    public Transaction beginTransaction() {
+        return session().beginTransaction();
+    }
+
+    public void commit(Transaction transaction) {
+        transaction.commit();
+    }
 
     public void save(Object... objects) {
         for (Object object : objects) {
@@ -23,7 +32,7 @@ public class DatabaseHelper {
         session().clear();
     }
 
-    private Session session() {
+    public Session session() {
         return sessionFactory.getCurrentSession();
     }
 }
