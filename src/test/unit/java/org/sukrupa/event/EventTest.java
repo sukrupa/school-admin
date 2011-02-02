@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
@@ -28,7 +29,7 @@ public class EventTest {
     public void shouldReturnTheCorrectStudentList(){
         Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
         Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").build();
-        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth(new DateTime(1985, 5, 24, 0, 0, 0, 0)).studentClass("4th grade").studentId("abcdef").build();
+        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
         Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);

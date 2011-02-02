@@ -14,7 +14,7 @@
     <tr style="text-align:left;">
         <th>Name</th>
         <th>Student ID</th>
-        <th>Sex</th>
+        <th>Gender</th>
         <th>Age</th>
     </tr>
     <tbody>
@@ -23,7 +23,7 @@
     <tr class="student">
         <td class="name">$it.name$</td>
         <td class="studentId">$it.studentId$</td>
-        <td class="sex">$it.sex$</td>
+        <td class="gender">$it.gender$</td>
         <td class="age">$it.age$</td>
     </tr>
     }$

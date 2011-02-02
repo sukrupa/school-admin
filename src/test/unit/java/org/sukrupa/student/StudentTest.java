@@ -3,6 +3,7 @@ package org.sukrupa.student;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
+import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,39 +40,39 @@ public class StudentTest {
 
 	@Test
 	public void shouldBe5YearsOld() {
-		assertThat(student("pat", new DateTime(2005, 01, 22, 0, 0, 0, 0)).getAge(), is(5));
+		assertThat(student("pat", new LocalDate(2005, 01, 22)).getAge(), is(5));
 	}
 
 	@Test
 	public void shouldBeOfSameAge() {
-		assertThat(student("pat", new DateTime(2005, 4, 12, 0, 0, 0, 0)).getAge(), is(student("pat", new DateTime(2005, 6, 10, 0, 0, 0, 0)).getAge()));
+		assertThat(student("pat", new LocalDate(2005, 4, 12)).getAge(), is(student("pat", new LocalDate(2005, 6, 10)).getAge()));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateMonthBeforeDOBMonth() {
-		assertThat(student("pat", new DateTime(2005, 4, 22, 0, 0, 0, 0)).getAge(), is(4));
+		assertThat(student("pat", new LocalDate(2005, 4, 22)).getAge(), is(4));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateDayBeforeDOBDay() {
-		assertThat(student("pat", new DateTime(2005, 3, 3, 0, 0, 0, 0)).getAge(), is(4));
+		assertThat(student("pat", new LocalDate(2005, 3, 3)).getAge(), is(4));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateMonthAfterDOBMonth() {
-		assertThat(student("pat", new DateTime(2005, 2, 01, 0, 0, 0, 0)).getAge(), is(5));
+		assertThat(student("pat", new LocalDate(2005, 2, 01)).getAge(), is(5));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
-		assertThat(student("pat", new DateTime(2005, 3, 01, 0, 0, 0, 0)).getAge(), is(5));
+		assertThat(student("pat", new LocalDate(2005, 3, 01)).getAge(), is(5));
 	}
 
 	private Student student(String name) {
         return student(name, null);
     }
 
-	private Student student(String name, DateTime dateOfBirth) {
+	private Student student(String name, LocalDate dateOfBirth) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).build();
     }
 

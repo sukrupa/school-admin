@@ -45,7 +45,7 @@ public class StudentController {
 	public String parametricSearchResult(
 			@RequestParam(value = "searchParam") SearchParameter searchParam,
 //			@RequestParam(value = "class") String studentClass,
-//			@RequestParam(value = "sex") String sex,
+//			@RequestParam(value = "gender") String gender,
 //			@RequestParam(value = "caste") String caste,
 //			@RequestParam(value = "area") String area,
 //			@RequestParam(value = "ageFrom") String ageFrom,
@@ -62,7 +62,7 @@ public class StudentController {
 	@RequestMapping(value = "search")
 	public String parametricSearch(Map<String, List<String>> model) {
 		model.put("classes", Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
-	    model.put("sexes", Arrays.asList("", "Male", "Female"));
+	    model.put("genders", Arrays.asList("", "Male", "Female"));
 		model.put("castes", Arrays.asList("", "Some caste"));
 		model.put("areas", Arrays.asList(""));
 		model.put("agesFrom", getAges());

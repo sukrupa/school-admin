@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male")./*dateOfBirth(new LocalDate(1985, 5, 24)).*/studentClass("4th grade").studentId("abcdef").build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
 
     @Before
     public void setUp() throws Exception {

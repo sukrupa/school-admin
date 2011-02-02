@@ -15,7 +15,7 @@ public class StudentBuilder {
 	private String studentId;
 	private String sex;
 	private String studentClass;
-	private DateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -57,7 +57,7 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder dateOfBirth(DateTime dateOfBirth) {
+    public StudentBuilder dateOfBirth(LocalDate dateOfBirth) {
 	    this.dateOfBirth = dateOfBirth;
 	    return this;
     }

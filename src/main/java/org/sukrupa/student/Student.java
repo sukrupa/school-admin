@@ -5,7 +5,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.sukrupa.platform.DoNotRemove;
 
@@ -28,25 +30,25 @@ public class Student {
     @Column(name = "SUB_CASTE")
     private String subCaste;
     private String area;
-    private String sex;
+    private String gender;
 	@Column(name = "STUDENT_CLASS")
 	private String studentClass;
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@Column(name = "DATE_OF_BIRTH")
-	private DateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 
     @DoNotRemove
     public Student() {
     }
 
-	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String sex, String studentClass, DateTime dateOfBirth) {
+	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String gender, String studentClass, LocalDate dateOfBirth) {
 		this.studentId = studentId;
 		this.name = name;
 		this.religion = religion;
 		this.caste = caste;
 		this.subCaste = subCaste;
 		this.area = area;
-		this.sex = sex;
+		this.gender = gender;
 		this.studentClass = studentClass;
 		this.dateOfBirth = dateOfBirth;
 	}
@@ -75,15 +77,15 @@ public class Student {
 		return studentId;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
 	public String getStudentClass() {
 		return studentClass;
 	}
 
-	public DateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -108,7 +110,7 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-	protected DateTime getCurrentDate() {
-		return new DateTime();
+	protected LocalDate getCurrentDate() {
+		return new LocalDate();
 	}
 }
