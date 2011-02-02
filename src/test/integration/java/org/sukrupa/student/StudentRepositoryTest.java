@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,7 @@ import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -29,9 +30,9 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").studentId("abcdef").build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male")./*dateOfBirth(new LocalDate(1985, 5, 24)).*/studentClass("4th grade").studentId("abcdef").build();
 
-	@Before
+    @Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
     }

@@ -4,22 +4,19 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 @Entity
 public class Student {
 
-	private static final String DATE_FORMAT = "yyyy/MM/dd";
 	@Id
     @GeneratedValue
     private long id;
@@ -34,14 +31,15 @@ public class Student {
     private String sex;
 	@Column(name = "STUDENT_CLASS")
 	private String studentClass;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "DATE_OF_BIRTH")
-	private String dateOfBirth;
+	private DateTime dateOfBirth;
 
     @DoNotRemove
     public Student() {
     }
 
-	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String sex, String studentClass, String dateOfBirth) {
+	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String sex, String studentClass, DateTime dateOfBirth) {
 		this.studentId = studentId;
 		this.name = name;
 		this.religion = religion;
@@ -85,43 +83,15 @@ public class Student {
 		return studentClass;
 	}
 
-	public String getDateOfBirth() {
+	public DateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 
 	public int getAge() {
-		DateFormat format = getDateFormat();
-		try {
-			if (dateOfBirth == null) {
-				return 0;
-			}
-			GregorianCalendar birthDate = new GregorianCalendar();
-			birthDate.setTimeInMillis(format.parse(dateOfBirth).getTime());
-
-			return getDateDifferenceInYears(getCurrentDate(), birthDate);
-		} catch (ParseException e) {
-			throw new InternalError("Invalid date saved as date of birth");
+		if (dateOfBirth == null) {
+			return 0;
 		}
-	}
-
-	private int getDateDifferenceInYears(Calendar currentDate, Calendar dateOfBirth) {
-		int years = currentDate.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
-		int months = currentDate.get(Calendar.MONTH) - dateOfBirth.get(Calendar.MONTH);
-
-		if (isMonthOfCurrentDateBeforeMonthOfDateOfBirth(months)) {
-			years--;
-		} else if (isSameMonthAndCurrentDayBeforeBirthdayDay(currentDate, dateOfBirth, months)) {
-			years--;
-		}
-		return years;
-	}
-
-	private boolean isSameMonthAndCurrentDayBeforeBirthdayDay(Calendar currentDate, Calendar dateOfBirth, int months) {
-		return months == 0 && currentDate.get(Calendar.DAY_OF_MONTH) < dateOfBirth.get(Calendar.DAY_OF_MONTH);
-	}
-
-	private boolean isMonthOfCurrentDateBeforeMonthOfDateOfBirth(int months) {
-		return months < 0;
+		return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
 	}
 
 	private static String[] excludedFields = new String[]{"id"};
@@ -138,11 +108,7 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-	public DateFormat getDateFormat() {
-		return new SimpleDateFormat(DATE_FORMAT);
-	}
-
-	protected Calendar getCurrentDate() {
-		return new GregorianCalendar();
+	protected DateTime getCurrentDate() {
+		return new DateTime();
 	}
 }

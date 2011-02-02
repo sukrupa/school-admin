@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.platform.DoNotRemove;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/students")
@@ -40,16 +43,19 @@ public class StudentController {
 	@RequestMapping(value = "searchResult")
     @Transactional
 	public String parametricSearchResult(
-			@RequestParam(value = "class") String studentClass,
-			@RequestParam(value = "sex") String sex,
-			@RequestParam(value = "caste") String caste,
-			@RequestParam(value = "area") String area,
-			@RequestParam(value = "ageTo") String ageTo,
-			@RequestParam(value = "ageFrom") String ageFrom,
-			@RequestParam(value = "talent") String talent,
+			@RequestParam(value = "searchParam") SearchParameter searchParam,
+//			@RequestParam(value = "class") String studentClass,
+//			@RequestParam(value = "sex") String sex,
+//			@RequestParam(value = "caste") String caste,
+//			@RequestParam(value = "area") String area,
+//			@RequestParam(value = "ageFrom") String ageFrom,
+//			@RequestParam(value = "ageTo") String ageTo,
+//			@RequestParam(value = "talent") String talent,
 			Map<String, List<Student>> model) {
 
-		model.put(STUDENTS_MODEL, repository.parametricSearch(studentClass, sex, caste, area, ageFrom, ageTo, talent));
+		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
+				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
+
         return STUDENTS_VIEW;
     }
 
