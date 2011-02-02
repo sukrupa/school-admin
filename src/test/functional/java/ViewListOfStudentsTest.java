@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
 public class ViewListOfStudentsTest {
 
     private WebDriver driver = new HtmlUnitDriver();
 
+    @Ignore
     @Test
     public void shouldDisplayListOfAllStudents() {
         // given we have three students in the DB

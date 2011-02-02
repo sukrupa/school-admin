@@ -18,7 +18,7 @@ public class DatabaseHelper {
         flushHibernateSessionToForceReload();
     }
 
-    private void flushHibernateSessionToForceReload() {
+    public void flushHibernateSessionToForceReload() {
         session().flush();
         session().clear();
     }
