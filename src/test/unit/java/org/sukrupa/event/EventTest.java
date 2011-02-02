@@ -16,9 +16,10 @@ public class EventTest {
 
     @Test
     public void identicalEventsAreEqual(){
-
-        Event event1 = new Event("Dummy event", new Date(2010,8,29),new Time(10,10,10),"DD","coord","event desc","event notes",null);
-        Event event2 = new Event("Dummy event", new Date(2010,8,29),new Time(10,10,10),"DD","coord","event desc","event notes",null);
+        Event event1 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+                .venue("DD").coordinator("coord").description("desc").notes("notes").build();
+        Event event2 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+                .venue("DD").coordinator("coord").description("desc").notes("notes").build();
         assertThat(event1.equals(event2),is(true));
     }
 
@@ -31,7 +32,8 @@ public class EventTest {
         attendees.add(sahil);
         attendees.add(renaud);
         attendees.add(pat);
-        Event event1 = new Event("Dummy event", new Date(2010,8,29),new Time(10,10,10),"DD","coord","event desc","event notes",attendees);
+        Event event1 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+                .venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
         assertThat(attendees.equals(event1.getAttendees()),is(true));
     }
 
