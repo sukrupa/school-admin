@@ -1,0 +1,62 @@
+set :user, "go"
+
+set :local_path, "target"
+set :deploy_artifact, "school-admin.zip"
+
+set :staging_server, "twu-staging"
+set :staging_deploy_path, "/var/opt/sukrupa/school-admin"
+
+role :staging_server, "#{staging_server}"
+
+namespace :staging do
+
+    task :default, :roles => :staging_server do
+        copy_deploy_artifact
+        unzip_deploy_artifact
+        stop_remote_server
+        start_remote_server
+        delete_fake_data
+        insert_fake_data
+        safety_check
+    end
+
+    task :copy_deploy_artifact, :roles => :staging_server do
+        run "mkdir -p #{staging_deploy_path}"
+        upload "#{local_path}/#{deploy_artifact}", "#{staging_deploy_path}", :via => :scp
+    end
+
+    task :stop_remote_server, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && sh stop-server.sh"
+    end
+
+    task :unzip_deploy_artifact, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && unzip -o #{deploy_artifact}"
+    end
+
+    task :start_remote_server, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && sh start-server.sh"
+    end
+
+    task :delete_fake_data, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:delete-fake-data"
+    end
+
+    task :insert_fake_data, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:insert-fake-data"
+    end
+
+    task :safety_check, :roles => :staging_server do
+        times = 0;
+        while times < 6
+            begin
+                run "wget --spider http://#{staging_server}:8080/sukrupa/app/students"
+            rescue
+                times = times + 1
+                sleep 10
+            else
+                break
+            end
+        end
+    end
+
+end
