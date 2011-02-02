@@ -1,5 +1,6 @@
 package org.sukrupa.event;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
@@ -16,9 +17,9 @@ public class EventTest {
 
     @Test
     public void identicalEventsAreEqual(){
-        Event event1 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+        Event event1 = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29,10,10,10,0))
                 .venue("DD").coordinator("coord").description("desc").notes("notes").build();
-        Event event2 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+        Event event2 = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29,10,10,10,0))
                 .venue("DD").coordinator("coord").description("desc").notes("notes").build();
         assertThat(event1.equals(event2),is(true));
     }
@@ -32,7 +33,7 @@ public class EventTest {
         attendees.add(sahil);
         attendees.add(renaud);
         attendees.add(pat);
-        Event event1 = new EventBuilder().title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10))
+        Event event1 = new EventBuilder().title("Dummy event").date(new Date(2010, 8, 29)).time(new Time(10, 10, 10))
                 .venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
         assertThat(attendees.equals(event1.getAttendees()),is(true));
     }

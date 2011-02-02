@@ -2,7 +2,7 @@ package org.sukrupa.event;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.springframework.transaction.annotation.Transactional;
+import org.joda.time.DateTime;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 
@@ -48,8 +48,11 @@ public class Event {
             inverseJoinColumns = { @JoinColumn(name = "id") })
     private Set<Student> attendees;
 
-   /* @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")*/
+    @Transient // until we change the schema from Date,Time to DateTime
+    private DateTime datetime;
+
+    /* @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "id")*/
     public Set <Student> getAttendees(){
         return this.attendees;
     }
@@ -63,11 +66,12 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, Date date, Time time, String venue, String coordinator, String description, String notes, Set<Student> attendees)
+    public Event(String title, Date date, Time time, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees)
      {
         this.title=title;
         this.date=date;
         this.time=time;
+        this.datetime=datetime;
         this.venue=venue;
         this.coordinator=coordinator;
         this.description=description;
