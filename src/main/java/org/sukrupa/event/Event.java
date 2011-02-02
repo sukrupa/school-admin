@@ -2,16 +2,17 @@ package org.sukrupa.event;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 
 import javax.persistence.*;
-
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Set;
 
 @Entity
+
 public class Event {
 
     @Id
@@ -40,8 +41,23 @@ public class Event {
     @Column ( name = "event_notes" )
     private String notes;
 
-    @Transient
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "EventAttendees",
+            joinColumns = { @JoinColumn(name = "event_id") },
+            inverseJoinColumns = { @JoinColumn(name = "id") })
     private Set<Student> attendees;
+
+   /* @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")*/
+    public Set <Student> getAttendees(){
+        return this.attendees;
+    }
+
+    /*public void  setAttendees(Set <Student> attendees){
+        this.attendees = attendees;
+    }                       */
+
 
     @DoNotRemove
     public Event() {
@@ -67,7 +83,4 @@ public class Event {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-    public Set<Student> getAttendees() {
-        return attendees;
-    }
 }

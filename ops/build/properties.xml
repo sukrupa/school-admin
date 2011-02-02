@@ -22,7 +22,8 @@
 
     <property name="target.dir" value="${module.dir}/target"/>
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
-    <property name="target.test.dir" value="${target.dir}"/>
+    <property name="target.test.dir" value="${target.dir}/test"/>
+
     <property name="target.test.cobertura_instrumented.dir" value="${target.test.dir}/cobertura_instrumented"/>
     <property name="target.test.shared.dir" value="${target.test.dir}/shared"/>
     <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>

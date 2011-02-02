@@ -69,12 +69,42 @@ public class StudentTest {
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
+<<<<<<< HEAD
 		assertThat(student("pat", new DateTime(2005, 3, 01, 0, 0, 0, 0)).getAge(), is(5));
 	}
 
 	private Student student(String name) {
         return student(name, null);
     }
+=======
+		assertThat(createFakeStudent("2005/05/02", "2010/05/03").getAge(), is(5));
+	}
+
+	@Test
+	public void shouldBeCurrentDate() {
+		GregorianCalendar currentDate = new GregorianCalendar();
+		resetSecondsAndMilliseconds(currentDate);
+		Calendar studentCurrentDate = new Student() {
+			public Calendar getCurrentDateTest() {
+				return super.getCurrentDate();
+			}
+		}.getCurrentDateTest();
+		resetSecondsAndMilliseconds(studentCurrentDate);
+
+		assertThat(currentDate, is(studentCurrentDate));
+	}
+
+	private FakeStudent createFakeStudent(String dateOfBirth, String currentDate) {
+		FakeStudent student = new FakeStudent(null, null, null, null, null, null, null, null, dateOfBirth);
+		student.setCurrentDate(currentDate);
+		return student;
+	}
+
+	private void resetSecondsAndMilliseconds(Calendar calendar) {
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+	}
+>>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
 
 	private Student student(String name, DateTime dateOfBirth) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).build();

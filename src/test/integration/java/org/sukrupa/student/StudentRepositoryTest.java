@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
@@ -22,6 +23,9 @@ public class StudentRepositoryTest {
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    private DatabaseHelper databaseHelper;
 
     private StudentRepository repository;
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
@@ -35,38 +39,21 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
-        save(sahil, pat, renaud);
+        databaseHelper.save(sahil, pat, renaud);
 
-        assertThat(repository.findAll(), hasItems(sahil, pat));
+        assertThat(repository.findAll(), hasItems(sahil, pat, renaud));
     }
 
     @Test
     public void shouldPersistAndReloadAllFields() {
-        save(pat);
+        databaseHelper.save(pat);
 
         assertThat(repository.findAll(), hasItems(pat));
     }
 
     @Test
     public void shouldReturnNurseryStudents() {
-        save(sahil, pat, renaud);
+        databaseHelper.save(sahil, pat, renaud);
         assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
     }
-
-    private void save(Student... students) {
-        for (Object student : students) {
-            session().save(student);
-        }
-        flushHibernateSessionToForceReload();
-    }
-
-    private void flushHibernateSessionToForceReload() {
-        session().flush();
-        session().clear();
-    }
-
-    private Session session() {
-        return sessionFactory.getCurrentSession();
-    }
-
 }

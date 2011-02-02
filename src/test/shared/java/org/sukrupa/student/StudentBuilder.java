@@ -4,17 +4,27 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 public class StudentBuilder {
+    private static final String FEMALE = "female";
+    private static final String MALE = "male";
+    
     private String name;
     private String religion;
     private String caste;
     private String subCaste;
     private String area;
+<<<<<<< HEAD
 	private String studentId;
 	private String sex;
 	private String studentClass;
 	private DateTime dateOfBirth;
+=======
+    private String studentId;
+    private String sex;
+    private String studentClass;
+    private String dateOfBirth;
+>>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
 
-	public StudentBuilder name(String name) {
+    public StudentBuilder name(String name) {
         this.name = name;
         return this;
     }
@@ -40,26 +50,44 @@ public class StudentBuilder {
     }
 
     public StudentBuilder studentId(String studentId) {
-	    this.studentId = studentId;
+        this.studentId = studentId;
         return this;
     }
 
     public StudentBuilder sex(String sex) {
-	    this.sex = sex;
+        this.sex = sex;
         return this;
     }
 
     public StudentBuilder studentClass(String studentClass) {
-	    this.studentClass = studentClass;
-	    return this;
+        this.studentClass = studentClass;
+        return this;
     }
 
+<<<<<<< HEAD
     public StudentBuilder dateOfBirth(DateTime dateOfBirth) {
 	    this.dateOfBirth = dateOfBirth;
 	    return this;
+=======
+    public StudentBuilder dateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+>>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
     }
 
     public Student build() {
-	    return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
     }
+
+    public StudentBuilder female() {
+        sex = FEMALE;
+        return this;
+    }
+
+    public StudentBuilder male() {
+        sex = MALE;
+        return this;
+    }
+
+
 }
