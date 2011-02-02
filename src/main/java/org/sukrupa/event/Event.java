@@ -3,12 +3,13 @@ package org.sukrupa.event;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.student.Student;
 
 import javax.persistence.*;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Event {
@@ -40,13 +41,13 @@ public class Event {
     private String notes;
 
     @Transient
-    private List attendees;
+    private Set<Student> attendees;
 
     @DoNotRemove
     public Event() {
     }
 
-    public Event(String title, Date date, Time time, String venue, String coordinator, String description, String notes, List attendees)
+    public Event(String title, Date date, Time time, String venue, String coordinator, String description, String notes, Set<Student> attendees)
      {
         this.title=title;
         this.date=date;
@@ -64,5 +65,9 @@ public class Event {
 
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    public Set<Student> getAttendees() {
+        return attendees;
     }
 }
