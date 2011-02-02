@@ -33,7 +33,7 @@ public class DatabaseHelper {
         });
     }
 
-    private void flushHibernateSessionToForceReload() {
+    public void flushHibernateSessionToForceReload() {
         session().flush();
         session().clear();
     }
