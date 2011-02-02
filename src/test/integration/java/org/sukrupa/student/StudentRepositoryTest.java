@@ -55,7 +55,4 @@ public class StudentRepositoryTest {
         databaseHelper.save(sahil, pat, renaud);
         assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
     }
-
-
-
 }
