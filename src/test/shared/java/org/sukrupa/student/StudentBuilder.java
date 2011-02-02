@@ -1,17 +1,20 @@
 package org.sukrupa.student;
 
 public class StudentBuilder {
+    private static final String FEMALE = "female";
+    private static final String MALE = "male";
+    
     private String name;
     private String religion;
     private String caste;
     private String subCaste;
     private String area;
-	private String studentId;
-	private String sex;
-	private String studentClass;
-	private String dateOfBirth;
+    private String studentId;
+    private String sex;
+    private String studentClass;
+    private String dateOfBirth;
 
-	public StudentBuilder name(String name) {
+    public StudentBuilder name(String name) {
         this.name = name;
         return this;
     }
@@ -37,26 +40,38 @@ public class StudentBuilder {
     }
 
     public StudentBuilder studentId(String studentId) {
-	    this.studentId = studentId;
+        this.studentId = studentId;
         return this;
     }
 
     public StudentBuilder sex(String sex) {
-	    this.sex = sex;
+        this.sex = sex;
         return this;
     }
 
     public StudentBuilder studentClass(String studentClass) {
-	    this.studentClass = studentClass;
-	    return this;
+        this.studentClass = studentClass;
+        return this;
     }
 
     public StudentBuilder dateOfBirth(String dateOfBirth) {
-	    this.dateOfBirth = dateOfBirth;
-	    return this;
+        this.dateOfBirth = dateOfBirth;
+        return this;
     }
 
     public Student build() {
-	    return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
     }
+
+    public StudentBuilder female() {
+        sex = FEMALE;
+        return this;
+    }
+
+    public StudentBuilder male() {
+        sex = MALE;
+        return this;
+    }
+
+
 }
