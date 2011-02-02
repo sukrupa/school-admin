@@ -8,15 +8,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.page.ListOfStudentsPage;
 import org.sukrupa.platform.DatabaseHelper;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -30,9 +24,6 @@ public class ViewListOfStudentsTest {
 
     @Autowired
     private DatabaseHelper databaseHelper;
-
-    @Autowired
-    private PlatformTransactionManager transactionManager;
 
     @Test
     public void shouldDisplayListOfAllStudents() {
@@ -49,12 +40,7 @@ public class ViewListOfStudentsTest {
         assertThat(page.getStudents().get(2).getName(), is("renaud"));
     }
 
-    public void save(final Object... students) {
-        new TransactionTemplate(transactionManager).execute(new TransactionCallbackWithoutResult() {
-            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-                databaseHelper.save(students);
-            }
-        });
+    public void save(Object... students) {
+        databaseHelper.saveAndCommit(students);
     }
-
 }

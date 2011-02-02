@@ -1,10 +1,13 @@
 package org.sukrupa.platform;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Component
 public class DatabaseHelper {
@@ -12,13 +15,8 @@ public class DatabaseHelper {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Transaction beginTransaction() {
-        return session().beginTransaction();
-    }
-
-    public void commit(Transaction transaction) {
-        transaction.commit();
-    }
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     public void save(Object... objects) {
         for (Object object : objects) {
@@ -27,12 +25,20 @@ public class DatabaseHelper {
         flushHibernateSessionToForceReload();
     }
 
+    public void saveAndCommit(final Object... objects) {
+        new TransactionTemplate(transactionManager).execute(new TransactionCallbackWithoutResult() {
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                save(objects);
+            }
+        });
+    }
+
     private void flushHibernateSessionToForceReload() {
         session().flush();
         session().clear();
     }
 
-    public Session session() {
+    private Session session() {
         return sessionFactory.getCurrentSession();
     }
 }
