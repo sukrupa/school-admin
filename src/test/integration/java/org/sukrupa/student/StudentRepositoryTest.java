@@ -26,35 +26,42 @@ public class StudentRepositoryTest {
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").build();
     private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").studentId("abcdef").build();
-    private final StudentCreatorHelper studentCreatorHelper = new StudentCreatorHelper();
 
-    @Before
+	@Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
     }
 
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
-        studentCreatorHelper.save(session(), sahil, pat, renaud);
+        save(sahil, pat, renaud);
 
         assertThat(repository.findAll(), hasItems(sahil, pat));
     }
 
     @Test
     public void shouldPersistAndReloadAllFields() {
-        studentCreatorHelper.save(session(), pat);
+        save(pat);
 
         assertThat(repository.findAll(), hasItems(pat));
     }
 
     @Test
     public void shouldReturnNurseryStudents() {
-        studentCreatorHelper.save(session(), sahil, pat, renaud);
+        save(sahil, pat, renaud);
         assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
     }
 
     public void save(Student... students) {
-        studentCreatorHelper.save(session(), students);
+        for (Object student : students) {
+            session().save(student);
+        }
+        flushHibernateSessionToForceReload();
+    }
+
+    private void flushHibernateSessionToForceReload() {
+        session().flush();
+        session().clear();
     }
 
     private Session session() {
