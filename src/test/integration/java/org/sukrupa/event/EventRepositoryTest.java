@@ -33,45 +33,38 @@ public class EventRepositoryTest {
     SessionFactory sessionFactory;
     private EventRepository eventRepository;
     private final HibernateHelper hibernateHelper = new HibernateHelper();
+    private final StudentCreatorHelper creator = new StudentCreatorHelper();
+    private final Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
+    private final Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
+    private final Set<Student> attendees = new HashSet<Student>();
+    private Event event;
 
     @Before
     public void setUp() {
         eventRepository = new EventRepository(sessionFactory);
+         attendees.add(sahil);
+        attendees.add(renaud);
+        creator.save(sessionFactory.getCurrentSession(), sahil,renaud);
+        EventBuilder builder = new EventBuilder();
+        event = builder.title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
+         saveEvent(event);
     }
 
     @Test
     public void saveShouldCreateRecordInDatabase(){
-        Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
-	    Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
-        Set<Student> att = new HashSet<Student>();
-        att.add(sahil);
-        att.add(renaud);
-        EventRepository eventRepository = new EventRepository(sessionFactory);
-        Event event = new Event("Dummy event", new Date(2010,8,29),new Time(10,10,10),"DD","coord","event desc","event notes",att);
-        eventRepository.save(event);
+
+
         List<Event> eventsList = eventRepository.getAll();
         Event eventRet = eventsList.get(0);
-        assertThat(att.equals(eventRet.getAttendees()),is(true));
+        assertThat(event.equals(eventRet),is(true));
     }
 
     @Test
     public void saveWithAttendeesShouldStoreSetOfAttendees() {
-        Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").studentId("234567").build();
-        //Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").studentId("13579").build();
-        //Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth("1985/05/24").studentClass("4th grade").studentId("23456").build();
-        StudentCreatorHelper creator = new StudentCreatorHelper();
 
-        creator.save(sessionFactory.getCurrentSession(), sahil);
 
-        Set<Student> attendees = new HashSet<Student>();
-        attendees.add(sahil);
-        //attendees.add(renaud);
-//        attendees.add(pat);
-
-        Event event = new Event("Dummy event", new Date(2010,8,29),new Time(10,10,10),"DD","coord","event desc","event notes",attendees);
-        saveEvent(event);
         Event retrievedEvent = eventRepository.getAll().get(0);
-//        assertThat(attendees.equals(retrievedEvent.getAttendees()),is(true));
+        assertThat(attendees.equals(retrievedEvent.getAttendees()),is(true));
     }
 
     private void saveEvent(Event event) {
