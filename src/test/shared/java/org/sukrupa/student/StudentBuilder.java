@@ -12,17 +12,10 @@ public class StudentBuilder {
     private String caste;
     private String subCaste;
     private String area;
-<<<<<<< HEAD
 	private String studentId;
 	private String sex;
 	private String studentClass;
 	private DateTime dateOfBirth;
-=======
-    private String studentId;
-    private String sex;
-    private String studentClass;
-    private String dateOfBirth;
->>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -64,15 +57,9 @@ public class StudentBuilder {
         return this;
     }
 
-<<<<<<< HEAD
     public StudentBuilder dateOfBirth(DateTime dateOfBirth) {
 	    this.dateOfBirth = dateOfBirth;
 	    return this;
-=======
-    public StudentBuilder dateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-        return this;
->>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
     }
 
     public Student build() {
