@@ -66,7 +66,8 @@ public class Event {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "EventAttendees", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "student_id") })
     public Set<Student> getAttendees() {
         return attendees;
     }
