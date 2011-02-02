@@ -1,15 +1,26 @@
 package org.sukrupa.student;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 public class StudentTest {
+
+	@BeforeClass
+	public static void classSetUp() {
+        DateTimeUtils.setCurrentMillisFixed(new DateMidnight(2010, 3, 02).getMillis());
+	}
+
+	@AfterClass
+	public static void classTearDown() {
+		DateTimeUtils.setCurrentMillisSystem();
+	}
 
     @Test
     public void shouldBeEqual() {
@@ -28,85 +39,40 @@ public class StudentTest {
 
 	@Test
 	public void shouldBe5YearsOld() {
-		assertThat(createFakeStudent("2005/01/22", "2010/03/01").getAge(), is(5));
+		assertThat(student("pat", new DateTime(2005, 01, 22, 0, 0, 0, 0)).getAge(), is(5));
 	}
 
 	@Test
 	public void shouldBeOfSameAge() {
-		String currentDate = "2010/03/01";
-		assertThat(createFakeStudent("2005/04/12", currentDate).getAge() == createFakeStudent("2005/06/10", currentDate).getAge(), is(true));
+		assertThat(student("pat", new DateTime(2005, 4, 12, 0, 0, 0, 0)).getAge(), is(student("pat", new DateTime(2005, 6, 10, 0, 0, 0, 0)).getAge()));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateMonthBeforeDOBMonth() {
-		assertThat(createFakeStudent("2005/05/22", "2010/04/01").getAge(), is(4));
+		assertThat(student("pat", new DateTime(2005, 4, 22, 0, 0, 0, 0)).getAge(), is(4));
 	}
 
 	@Test
 	public void shouldBe5YearOldCurrentDateDayBeforeDOBDay() {
-		assertThat(createFakeStudent("2005/05/02", "2010/05/01").getAge(), is(4));
+		assertThat(student("pat", new DateTime(2005, 3, 3, 0, 0, 0, 0)).getAge(), is(4));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateMonthAfterDOBMonth() {
-		assertThat(createFakeStudent("2005/05/03", "2010/06/03").getAge(), is(5));
+		assertThat(student("pat", new DateTime(2005, 2, 01, 0, 0, 0, 0)).getAge(), is(5));
 	}
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
-		assertThat(createFakeStudent("2005/05/02", "2010/05/03").getAge(), is(5));
+		assertThat(student("pat", new DateTime(2005, 3, 01, 0, 0, 0, 0)).getAge(), is(5));
 	}
 
-	@Test
-	public void shouldBeCurrentDate() {
-		GregorianCalendar currentDate = new GregorianCalendar();
-		resetSecondsAndMilliseconds(currentDate);
-		Calendar studentCurrentDate = new Student() {
-			public Calendar getCurrentDateTest() {
-				return super.getCurrentDate();
-			}
-		}.getCurrentDateTest();
-		resetSecondsAndMilliseconds(studentCurrentDate);
+	private Student student(String name) {
+        return student(name, null);
+    }
 
-		assertThat(currentDate, is(studentCurrentDate));
-	}
-
-	private FakeStudent createFakeStudent(String dateOfBirth, String currentDate) {
-		FakeStudent student = new FakeStudent(null, null, null, null, null, null, null, null, dateOfBirth);
-		student.setCurrentDate(currentDate);
-		return student;
-	}
-
-	private void resetSecondsAndMilliseconds(Calendar calendar) {
-		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.set(Calendar.SECOND, 0);
-	}
-
-	private Student student(String name, String dateOfBirth) {
+	private Student student(String name, DateTime dateOfBirth) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).build();
     }
 
-	private class FakeStudent extends Student {
-
-		private String currentDate;
-
-		public FakeStudent(String studentId, String name, String religion, String caste, String subCaste, String area, String sex, String studentClass, String dateOfBirth) {
-			super(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
-		}
-
-		public void setCurrentDate(String currentDate) {
-			this.currentDate = currentDate;
-		}
-
-		@Override
-		protected Calendar getCurrentDate() {
-			try {
-				GregorianCalendar cal = new GregorianCalendar();
-				cal.setTime(super.getDateFormat().parse(currentDate));
-				return cal;
-			} catch (ParseException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
 }
