@@ -27,7 +27,6 @@ import static org.hamcrest.Matchers.is;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
 public class EventRepositoryTest {
 
     @Autowired
