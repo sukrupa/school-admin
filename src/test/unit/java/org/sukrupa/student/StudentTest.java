@@ -60,13 +60,13 @@ public class StudentTest {
 	@Test
 	public void shouldBeCurrentDate() {
 		GregorianCalendar currentDate = new GregorianCalendar();
-		resetSecondsAnMilliseconds(currentDate);
+		resetSecondsAndMilliseconds(currentDate);
 		Calendar studentCurrentDate = new Student() {
 			public Calendar getCurrentDateTest() {
 				return super.getCurrentDate();
 			}
 		}.getCurrentDateTest();
-		resetSecondsAnMilliseconds(studentCurrentDate);
+		resetSecondsAndMilliseconds(studentCurrentDate);
 
 		assertThat(currentDate, is(studentCurrentDate));
 	}
@@ -77,7 +77,7 @@ public class StudentTest {
 		return student;
 	}
 
-	private void resetSecondsAnMilliseconds(Calendar calendar) {
+	private void resetSecondsAndMilliseconds(Calendar calendar) {
 		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.SECOND, 0);
 	}
