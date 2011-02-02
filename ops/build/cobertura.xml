@@ -1,10 +1,10 @@
 <project name="cobertura">
 
     <import file="properties.xml"/>
-    <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <!-- used to test cobertura instruements -->
     <target name="cobertura:instrument">
+        <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
         <delete file="${target.reports.cobertura.dir}/cobertura.ser" />
         <copy todir="${target.test.cobertura_instrumented.dir}">
             <fileset dir="${resources.main.dir}"/>
@@ -18,6 +18,7 @@
 
     <!-- used to test cobertura report generation-->
     <target name="cobertura:report" depends="db:start, db:update">
+        <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
         <cobertura-report-gen />
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}" datafile="${target.reports.cobertura.dir}/cobertura.ser">
             <fileset dir="${src.main.dir}">
