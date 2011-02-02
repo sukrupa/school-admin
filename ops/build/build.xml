@@ -57,6 +57,12 @@
     <target name="compile:test:functional" depends="compile:test:shared">
         <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
                  classpathref="classpath.compilation.test.functional"/>
+        <copy todir="${target.test.twist.functional-test.dir}">
+            <fileset dir="${src.test.functional.src.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+            <fileset dir="${src.test.functional.twist-conf.dir}" />
+        </copy>
     </target>
     <!-- -->
 

@@ -20,11 +20,11 @@
     <tbody>
 
     $students:{
-    <tr>
-        <td>$it.name$</td>
-        <td>$it.studentId$</td>
-        <td>$it.sex$</td>
-        <td>$it.age$</td>
+    <tr class="student">
+        <td class="name">$it.name$</td>
+        <td class="studentId">$it.studentId$</td>
+        <td class="sex">$it.sex$</td>
+        <td class="age">$it.age$</td>
     </tr>
     }$
 

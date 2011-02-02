@@ -9,10 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
-import org.sukrupa.student.HibernateHelper;
+import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
-import org.sukrupa.student.StudentCreatorHelper;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -31,9 +30,9 @@ public class EventRepositoryTest {
 
     @Autowired
     SessionFactory sessionFactory;
+    @Autowired
+    private DatabaseHelper databaseHelper;
     private EventRepository eventRepository;
-    private final HibernateHelper hibernateHelper = new HibernateHelper();
-    private final StudentCreatorHelper creator = new StudentCreatorHelper();
     private final Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
     private final Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
     private final Set<Student> attendees = new HashSet<Student>();
@@ -44,7 +43,7 @@ public class EventRepositoryTest {
         eventRepository = new EventRepository(sessionFactory);
          attendees.add(sahil);
         attendees.add(renaud);
-        creator.save(sessionFactory.getCurrentSession(), sahil,renaud);
+        databaseHelper.save(sahil,renaud);
         EventBuilder builder = new EventBuilder();
         event = builder.title("Dummy event").date(new Date(2010,8,29)).time(new Time(10,10,10)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
          saveEvent(event);
@@ -69,6 +68,6 @@ public class EventRepositoryTest {
 
     private void saveEvent(Event event) {
         eventRepository.save(event);
-        hibernateHelper.flushHibernateSessionToForceReload(sessionFactory.getCurrentSession());
+        databaseHelper.flushHibernateSessionToForceReload();
     }
 }
