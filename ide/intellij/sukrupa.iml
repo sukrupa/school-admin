@@ -51,6 +51,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/unit/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/integration/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/shared/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/functional/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools" />
     </content>
