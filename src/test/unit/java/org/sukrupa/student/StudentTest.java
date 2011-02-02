@@ -3,14 +3,9 @@ package org.sukrupa.student;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
-import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -29,17 +24,17 @@ public class StudentTest {
 
     @Test
     public void shouldBeEqual() {
-        assertThat(student("pat").equals(student("pat")), is(true));
+        assertThat(student("pat", null).equals(student("pat", null)), is(true));
     }
 
     @Test
     public void shouldHaveSameHashCode() {
-        assertThat(student("pat").hashCode(), is(student("pat").hashCode()));
+        assertThat(student("pat", null).hashCode(), is(student("pat", null).hashCode()));
     }
 
     @Test
     public void shouldNotBeEqualIfDifferentName() {
-        assertThat(student("pat").equals(student("mr. jones")), is(false));
+        assertThat(student("pat", null).equals(student("mr. jones", null)), is(false));
     }
 
 	@Test
@@ -69,42 +64,12 @@ public class StudentTest {
 
 	@Test
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
-<<<<<<< HEAD
 		assertThat(student("pat", new DateTime(2005, 3, 01, 0, 0, 0, 0)).getAge(), is(5));
 	}
 
 	private Student student(String name) {
         return student(name, null);
     }
-=======
-		assertThat(createFakeStudent("2005/05/02", "2010/05/03").getAge(), is(5));
-	}
-
-	@Test
-	public void shouldBeCurrentDate() {
-		GregorianCalendar currentDate = new GregorianCalendar();
-		resetSecondsAndMilliseconds(currentDate);
-		Calendar studentCurrentDate = new Student() {
-			public Calendar getCurrentDateTest() {
-				return super.getCurrentDate();
-			}
-		}.getCurrentDateTest();
-		resetSecondsAndMilliseconds(studentCurrentDate);
-
-		assertThat(currentDate, is(studentCurrentDate));
-	}
-
-	private FakeStudent createFakeStudent(String dateOfBirth, String currentDate) {
-		FakeStudent student = new FakeStudent(null, null, null, null, null, null, null, null, dateOfBirth);
-		student.setCurrentDate(currentDate);
-		return student;
-	}
-
-	private void resetSecondsAndMilliseconds(Calendar calendar) {
-		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.set(Calendar.SECOND, 0);
-	}
->>>>>>> 5b2997f8660f990736b7260540292611d9cfdef6
 
 	private Student student(String name, DateTime dateOfBirth) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).build();
