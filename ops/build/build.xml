@@ -61,6 +61,7 @@
             <fileset dir="${src.test.functional.src.dir}">
                 <exclude name="**/*.java"/>
             </fileset>
+            <fileset dir="${src.test.functional.twist-conf.dir}" />
         </copy>
     </target>
     <!-- -->
