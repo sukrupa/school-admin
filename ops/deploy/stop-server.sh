@@ -1,6 +1,6 @@
 #!/bin/bash
 findSukrupaServerProcess() {
-	SUKRUPA_WEB_SERVER=web-server.jar
+	SUKRUPA_WEB_SERVER=SchoolAdminApp
     case $(uname) in
       Darwin | Linux)
         PID=$(ps aux | grep $SUKRUPA_WEB_SERVER | grep java | grep -v grep | awk '{ print $2 }')

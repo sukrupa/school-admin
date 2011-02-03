@@ -40,7 +40,7 @@
             <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
                 <jvmarg value="-Xms128m"/>
                 <jvmarg value="-Xmx768m"/>
-                <arg value="${sukrupa.webserver.jar.name}" />
+                <arg value="${target.war}" />
                 <classpath>
                     <path refid="classpath.sukrupa.server.run"/>
                 </classpath>
