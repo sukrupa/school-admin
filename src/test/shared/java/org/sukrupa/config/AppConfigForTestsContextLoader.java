@@ -1,4 +1,4 @@
-package org.sukrupa.app.config;
+package org.sukrupa.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

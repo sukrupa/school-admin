@@ -12,7 +12,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.page.ListOfStudentsPage;
 import org.sukrupa.page.StudentRow;
 import org.sukrupa.platform.DatabaseHelper;
@@ -23,7 +23,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
-@Ignore("pat, shefali - work in progress")
 public class ViewListOfStudentsTest {
 
     private WebDriver driver = new HtmlUnitDriver();

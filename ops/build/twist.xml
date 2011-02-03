@@ -2,20 +2,20 @@
 
     <target name="execute-twist">
         <exec executable="${ops.local.dir}/kill-firefox.sh" />
-        <echo message="Executing Twist tests from ${src.test.functional.dir}."/>
+        <echo message="Executing Twist tests from ${src.test.twist.fixtures.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
                  classpathref="classpath.run.twist.scenarios"
                  name="twist.runner"/>
 
         <twist.runner
-                scenarioDir="${src.test.functional.dir}/scenarios"
+                scenarioDir="${src.test.twist.fixtures.dir}/scenarios"
                 reportsDir="${target.reports.dir}"
                 confDir="${twist-config}"
                 failureproperty="twist.scenarios.failed"
                 classpathref="classpath.run.twist.scenarios"
                 tags="!in-progress">
-            <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
+            <fileset dir="${src.test.twist.fixtures.dir}/scenarios" includes="*"/>
         </twist.runner>
 
         <exec executable="${ops.local.dir}/kill-firefox.sh" />

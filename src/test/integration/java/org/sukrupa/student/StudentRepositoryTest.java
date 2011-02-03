@@ -1,9 +1,7 @@
 package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.Before;
@@ -13,9 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 
 import java.util.Arrays;
@@ -40,7 +37,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private final Talent music = new Talent("Music");
 	private final Talent sport = new Talent("Sport");
-	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995,10,1)).gender("Male").talents(new HashSet(Arrays.asList(music, sport))).build();
+	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(new HashSet(Arrays.asList(music, sport))).build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).build();
     private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").build();
 
