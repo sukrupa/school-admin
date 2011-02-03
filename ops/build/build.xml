@@ -15,6 +15,7 @@
     </target>
 
     <target name="init">
+        <fail message="TESTING THE BUILD!" />
         <tstamp/>
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
