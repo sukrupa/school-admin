@@ -14,10 +14,7 @@ import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,41 +30,30 @@ public class EventRepositoryTest {
     SessionFactory sessionFactory;
     @Autowired
     private DatabaseHelper databaseHelper;
+
     private EventRepository eventRepository;
-    private final Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
-    private final Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
-    private final Set<Student> attendees = new HashSet<Student>();
-    private Event event;
 
     @Before
     public void setUp() {
         eventRepository = new EventRepository(sessionFactory);
+    }
+
+    @Test
+    public void saveShouldLoadEventsFromDatabase() {
+        Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
+        Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
+        Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);
         databaseHelper.save(sahil, renaud);
-        EventBuilder builder = new EventBuilder();
-        event = builder.title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
-        saveEvent(event);
+
+        Event event = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
+        save(event);
+
+        assertThat(eventRepository.getAll().get(0), is(event));
     }
 
-    @Test
-    public void saveShouldCreateRecordInDatabase() {
-
-
-        List<Event> eventsList = eventRepository.getAll();
-        Event eventRet = eventsList.get(0);
-        assertThat(event.equals(eventRet), is(true));
-    }
-
-    @Test
-    public void saveWithAttendeesShouldStoreSetOfAttendees() {
-
-
-        Event retrievedEvent = eventRepository.getAll().get(0);
-        assertThat(attendees.equals(retrievedEvent.getAttendees()), is(true));
-    }
-
-    private void saveEvent(Event event) {
+    private void save(Event event) {
         eventRepository.save(event);
         databaseHelper.flushHibernateSessionToForceReload();
     }

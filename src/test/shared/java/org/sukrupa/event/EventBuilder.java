@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.sukrupa.student.Student;
 
 import java.sql.Date;
@@ -54,7 +55,7 @@ public class EventBuilder {
     }
 
     public EventBuilder datetime(DateTime dateTime) {
-        this.datetime = dateTime;
+        this.datetime = dateTime.toDateTime(DateTimeZone.UTC);
         return this;
     }
 
