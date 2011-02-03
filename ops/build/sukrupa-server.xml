@@ -1,0 +1,71 @@
+<project name="sukrupa-server" basedir="../..">
+
+    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
+
+
+    <macrodef name="run-against-server">
+        <attribute name="targetToExecute"/>
+        <attribute name="startServerTarget"/>
+        <attribute name="stopServerTarget"/>
+        <attribute name="serverPort" default="8080"/>
+
+        <sequential>
+
+            <local name="targetToExecute"/>
+            <local name="startServerTarget"/>
+            <local name="stopServerTarget"/>
+            <local name="serverPort"/>
+
+            <sequential>
+                <antcall target="@{stopServerTarget}"/>
+            </sequential>
+            <parallel>
+                <sequential>
+                    <echo message="Starting Server using target [@{startServerTarget}] on port [@{serverPort}]..."/>
+                    <antcall target="@{startServerTarget}"/>
+                </sequential>
+                <sequential>
+                    <wait.for.sukrupa-app host="localhost" port="@{serverPort}"/>
+                    <antcall target="@{targetToExecute}"/>
+                    <antcall target="@{stopServerTarget}"/>
+                </sequential>
+            </parallel>
+        </sequential>
+    </macrodef>
+
+    <target name="sukrupa-server:start">
+        <sequential>
+            <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..." />
+            <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
+                <jvmarg value="-Xms128m"/>
+                <jvmarg value="-Xmx768m"/>
+                <arg value="${target.war}" />
+                <classpath>
+                    <path refid="classpath.sukrupa.server.run"/>
+                </classpath>
+            </java>
+        </sequential>
+    </target>
+
+    <target name="sukrupa-server:stop">
+        <exec executable="${ops.deploy.dir}/stop-server.sh"/>
+    </target>
+
+    <macrodef name="wait.for.sukrupa-app">
+        <attribute name="maxwait" default="30"/>
+        <attribute name="host"/>
+        <attribute name="port"/>
+        <sequential>
+            <echo message="Waiting for Sukrupa Server Application: @{host}"/>
+            <waitfor maxwait="@{maxwait}" maxwaitunit="second" timeoutproperty="app.did.not.start">
+                <socket server="@{host}" port="@{port}"/>
+            </waitfor>
+            <fail if="app.did.not.start"
+                  message="Application did not start up at @{host}:@{port} within @{maxwait} seconds."/>
+            <echo message="Connection establised to @{host} on port @{port} - application must be up"/>
+        </sequential>
+    </macrodef>
+
+
+</project>
