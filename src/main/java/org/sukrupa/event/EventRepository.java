@@ -12,7 +12,7 @@ public class EventRepository {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public EventRepository(SessionFactory sessionFactory){
+    public EventRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

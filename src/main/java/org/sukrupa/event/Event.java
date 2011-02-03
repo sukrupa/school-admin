@@ -2,13 +2,12 @@ package org.sukrupa.event;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Set;
 
 @Entity
@@ -17,66 +16,50 @@ public class Event {
 
     @Id
     @GeneratedValue
-    @Column ( name = "event_id" )
+    @Column(name = "event_id")
     private int eventId;
 
-    @Column ( name = "event_title" )
+    @Column(name = "event_title")
     private String title;
 
-    @Column ( name = "event_date" )
-    private Date date;
-
-    @Column ( name = "event_time" )
-    private Time time;
-
-    @Column ( name = "event_venue" )
+    @Column(name = "event_venue")
     private String venue;
 
-    @Column ( name = "event_coordinator" )
+    @Column(name = "event_coordinator")
     private String coordinator;
 
-    @Column ( name = "event_description" )
+    @Column(name = "event_description")
     private String description;
 
-    @Column ( name = "event_notes" )
+    @Column(name = "event_notes")
     private String notes;
 
 
     @ManyToMany
     @JoinTable(name = "EventAttendees",
-            joinColumns = { @JoinColumn(name = "event_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") })
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "id")})
     private Set<Student> attendees;
 
-    @Transient // until we change the schema from Date,Time to DateTime
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime datetime;
 
-    /* @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "id")*/
-    public Set <Student> getAttendees(){
+    public Set<Student> getAttendees() {
         return this.attendees;
     }
-
-    /*public void  setAttendees(Set <Student> attendees){
-        this.attendees = attendees;
-    }                       */
-
 
     @DoNotRemove
     public Event() {
     }
 
-    public Event(String title, Date date, Time time, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees)
-     {
-        this.title=title;
-        this.date=date;
-        this.time=time;
-        this.datetime=datetime;
-        this.venue=venue;
-        this.coordinator=coordinator;
-        this.description=description;
-        this.notes=notes;
-        this.attendees=attendees;
+    public Event(String title, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+        this.title = title;
+        this.datetime = datetime;
+        this.venue = venue;
+        this.coordinator = coordinator;
+        this.description = description;
+        this.notes = notes;
+        this.attendees = attendees;
     }
 
     public boolean equals(Object other) {
