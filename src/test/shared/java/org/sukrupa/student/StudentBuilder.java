@@ -79,4 +79,9 @@ public class StudentBuilder {
         dateOfBirth = new LocalDate().minusYears(age);
         return this;
     }
+
+    public StudentBuilder id(String id) {
+        studentId = id;
+        return this;
+    }
 }

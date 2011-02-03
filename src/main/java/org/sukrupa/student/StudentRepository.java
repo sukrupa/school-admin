@@ -14,13 +14,14 @@ import java.util.List;
 @Repository
 public class StudentRepository {
 
-	private static final String STUDENT_CLASS = "studentClass";
-	private static final String GENDER = "gender";
-	private static final String CASTE = "caste";
-	private static final String AREA = "area";
-	private static final String TALENT = "talent";
-	private static final String NAME = "name";
-	private final SessionFactory sessionFactory;
+    private static final String STUDENT_CLASS = "studentClass";
+    private static final String GENDER = "gender";
+    private static final String CASTE = "caste";
+    private static final String AREA = "area";
+    private static final String TALENT = "talent";
+    private static final String NAME = "name";
+    private static final String STUDENT_ID = "studentId";
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
@@ -29,14 +30,17 @@ public class StudentRepository {
 
     @SuppressWarnings("unchecked")
     public List<Student> findAll() {
-	    Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
 
-	    return addOrderCriteria(criteria).list();
+        return addOrderCriteria(criteria).list();
     }
 
-	private Criteria addOrderCriteria(Criteria criteria) {
-		return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
-	}
+    public Student find(String studentId) {
+        Criteria criteria = sessionFactory.getCurrentSession()
+                .createCriteria(Student.class)
+                .add(Restrictions.eq(STUDENT_ID, studentId));
+        return (Student) criteria.uniqueResult();
+    }
 
 	public List<Student> parametricSearch(String studentClass, String gender,
 	                                      String caste, String area, String ageFrom, String ageTo, String talent) {
@@ -50,30 +54,35 @@ public class StudentRepository {
 				(ageTo.isEmpty()) ? Integer.MAX_VALUE : Integer.parseInt(ageTo), students);
 	}
 
-	private List<Student> getStudentsWithinAgeRange(int ageFrom, int ageTo, List<Student> students) {
-		List<Student> toRemove = new ArrayList<Student>();
-		for (Student s : students) {
-			if (s.getAge() < ageFrom || s.getAge() > ageTo) {
-				toRemove.add(s);
-			}
-		}
-		students.removeAll(toRemove);
-		return students;
-	}
+    private Criteria addOrderCriteria(Criteria criteria) {
+        return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
+    }
 
-	private Conjunction createConjunction(String studentClass, String gender, String caste, String area, String talent) {
-		Conjunction conjunction = Restrictions.conjunction();
-		addRestrictionIfNotEmpty(STUDENT_CLASS, studentClass, conjunction);
-		addRestrictionIfNotEmpty(GENDER, gender, conjunction);
-		addRestrictionIfNotEmpty(CASTE, caste, conjunction);
-		addRestrictionIfNotEmpty(AREA, area, conjunction);
-		addRestrictionIfNotEmpty(TALENT, talent, conjunction);
-		return conjunction;
-	}
 
-	private void addRestrictionIfNotEmpty(String field, String parameter, Conjunction conjunction) {
-		if (!parameter.isEmpty()) {
-			conjunction.add(Restrictions.eq(field, parameter));
-		}
-	}
+    private List<Student> getStudentsWithinAgeRange(int ageFrom, int ageTo, List<Student> students) {
+        List<Student> toRemove = new ArrayList<Student>();
+        for (Student s : students) {
+            if (s.getAge() < ageFrom || s.getAge() > ageTo) {
+                toRemove.add(s);
+            }
+        }
+        students.removeAll(toRemove);
+        return students;
+    }
+
+    private Conjunction createConjunction(String studentClass, String gender, String caste, String area, String talent) {
+        Conjunction conjunction = Restrictions.conjunction();
+        addRestrictionIfNotEmpty(STUDENT_CLASS, studentClass, conjunction);
+        addRestrictionIfNotEmpty(GENDER, gender, conjunction);
+        addRestrictionIfNotEmpty(CASTE, caste, conjunction);
+        addRestrictionIfNotEmpty(AREA, area, conjunction);
+        addRestrictionIfNotEmpty(TALENT, talent, conjunction);
+        return conjunction;
+    }
+
+    private void addRestrictionIfNotEmpty(String field, String parameter, Conjunction conjunction) {
+        if (!parameter.isEmpty()) {
+            conjunction.add(Restrictions.eq(field, parameter));
+        }
+    }
 }

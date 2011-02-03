@@ -33,7 +33,7 @@
 
     <target name="ci"
             description="Runs the build as run on ci, including functional tests"
-            depends="all, test:functional">
+            depends="all, test:twist">
 
     </target>
 
@@ -45,22 +45,22 @@
                classpathref="classpath.compilation" debug="true"/>
     </target>
 
-    <target name="compile:test:shared" depends="init, compile:main">
+    <target name="compile:test:shared">
         <compile srcdir="${src.test.shared.dir}" destdir="${target.test.shared.dir}"
                  classpathref="classpath.compilation.test.shared"/>
     </target>
 
-    <target name="compile:test:unit" depends="compile:test:shared">
+    <target name="compile:test:unit">
         <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                  classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile:test:integration" depends="compile:test:shared">
+    <target name="compile:test:integration">
         <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-    <target name="compile:test:functional" depends="compile:test:shared">
+    <target name="compile:test:functional">
         <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
                  classpathref="classpath.compilation.test.functional"/>
         <copy todir="${target.test.twist.functional-test.dir}">
@@ -89,7 +89,7 @@
 
 
     <!-- -->
-    <target name="test:functional"
+    <target name="test:twist"
             depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 

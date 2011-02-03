@@ -39,13 +39,12 @@
     <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>
     <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
     <property name="target.test.twist.functional-test.dir" value="${target.test.dir}/twist/functional-test"/>
-    <property name="target.test.functional.dir" value="${target.test.twist.functional-test.dir}"/>
     <property name="target.test.twist.sukrupa-code.dir" value="${target.test.dir}/twist/sukrupa-code"/>
     <property name="target.reports.dir" value="${target.dir}/reports"/>
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
     <property name="target.sahi.browser.profiles"
-              value="${src.test.functional.dir}/sahi/userdata/browser/ff/profiles/"/>
+              value="${target.test.twist.functional-test.dir}/sahi/userdata/browser/ff/profiles/"/>
 
 
     <property name="app.zip.name" value="school-admin.zip"/>

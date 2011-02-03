@@ -16,6 +16,7 @@ import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -31,7 +32,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").gender("Male").build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").id("123").build();
 
     @Before
     public void setUp() throws Exception {
@@ -56,5 +57,11 @@ public class StudentRepositoryTest {
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
         assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
+    }
+
+    @Test
+    public void shouldReturnStudentBasedOnStudentId(){
+        databaseHelper.save(pat);
+        assertThat(repository.find("123"),is(pat));
     }
 }
