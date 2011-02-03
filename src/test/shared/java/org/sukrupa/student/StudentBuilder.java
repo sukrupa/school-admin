@@ -1,21 +1,20 @@
 package org.sukrupa.student;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 public class StudentBuilder {
     private static final String FEMALE = "female";
     private static final String MALE = "male";
-    
+
     private String name;
     private String religion;
     private String caste;
     private String subCaste;
     private String area;
-	private String studentId;
-	private String sex;
-	private String studentClass;
-	private LocalDate dateOfBirth;
+    private String studentId;
+    private String sex;
+    private String studentClass;
+    private LocalDate dateOfBirth = new LocalDate();
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -58,12 +57,8 @@ public class StudentBuilder {
     }
 
     public StudentBuilder dateOfBirth(LocalDate dateOfBirth) {
-	    this.dateOfBirth = dateOfBirth;
-	    return this;
-    }
-
-    public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
+        return this;
     }
 
     public StudentBuilder female() {
@@ -76,5 +71,12 @@ public class StudentBuilder {
         return this;
     }
 
+    public Student build() {
+        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+    }
 
+    public StudentBuilder age(int age) {
+        dateOfBirth = new LocalDate().minusYears(age);
+        return this;
+    }
 }
