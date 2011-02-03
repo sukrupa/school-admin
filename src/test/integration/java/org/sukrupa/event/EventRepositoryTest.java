@@ -2,6 +2,7 @@ package org.sukrupa.event;
 
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,28 +35,37 @@ public class EventRepositoryTest {
 
     private EventRepository eventRepository;
 
+    private Student sahil;
+    private Student renaud;
+
     @Before
     public void setUp() {
+        sahil = new StudentBuilder().name("Bob1").studentId("123459").build();
+        renaud = new StudentBuilder().name("Bob2").studentId("345458").build();
+        databaseHelper.save(sahil, renaud);
         eventRepository = new EventRepository(sessionFactory);
     }
 
     @Test
     public void saveShouldLoadEventsFromDatabase() {
-        Student sahil = new StudentBuilder().name("Bob1").studentId("12345").build();
-        Student renaud = new StudentBuilder().name("Bob2").studentId("34545").build();
+
         Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);
-        databaseHelper.save(sahil, renaud);
-
-        Event event = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
+        //Event event = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0, DateTimeZone.UTC)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
+        Event event = new EventBuilder().title("Dummy event").coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
         save(event);
-
         assertThat(eventRepository.getAll().get(0), is(event));
     }
 
+    @Test
+    public void shouldRetrieveStudentsAttendingUsingID(){
+        assertThat(eventRepository.retrieveStudent("123459","345458").get(0).getName(),is("Bob1"));
+    }
     private void save(Event event) {
         eventRepository.save(event);
         databaseHelper.flushHibernateSessionToForceReload();
     }
+
+
 }

@@ -37,7 +37,7 @@ public class EventController {
 @RequestMapping(value = "save")
        public String save(){
 
-        return EVENTS_SAVE_VIEW;
+       return EVENTS_SAVE_VIEW;
     }
 
 }
