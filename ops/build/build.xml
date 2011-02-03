@@ -33,7 +33,7 @@
 
     <target name="ci"
             description="Runs the build as run on ci, including functional tests"
-            depends="all, test:functional">
+            depends="all, test:twist">
 
     </target>
 
@@ -89,7 +89,7 @@
 
 
     <!-- -->
-    <target name="test:functional"
+    <target name="test:twist"
             depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 

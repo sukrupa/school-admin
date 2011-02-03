@@ -52,7 +52,6 @@ public class EventRepositoryTest {
         Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);
-        //Event event = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0, DateTimeZone.UTC)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
         Event event = new EventBuilder().title("Dummy event").coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
         save(event);
         assertThat(eventRepository.getAll().get(0), is(event));
