@@ -10,17 +10,17 @@ import java.util.Set;
 public class StudentBuilder {
     private static final String FEMALE = "female";
     private static final String MALE = "male";
-    
+
     private String name;
     private String religion;
     private String caste;
     private String subCaste;
     private String area;
-	private String studentId;
-	private String sex;
-	private String studentClass;
-	private LocalDate dateOfBirth;
 	private Set<Talent> talents = new HashSet<Talent>();
+    private String studentId;
+    private String gender;
+    private String studentClass;
+    private LocalDate dateOfBirth = new LocalDate();
 
 	public StudentBuilder name(String name) {
         this.name = name;
@@ -52,8 +52,8 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder sex(String sex) {
-        this.sex = sex;
+    public StudentBuilder gender(String gender) {
+        this.gender = gender;
         return this;
     }
 
@@ -67,23 +67,32 @@ public class StudentBuilder {
 	    return this;
     }
 
-    public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, talents, dateOfBirth);
-    }
-
     public StudentBuilder female() {
-        sex = FEMALE;
+        gender = FEMALE;
         return this;
     }
 
     public StudentBuilder male() {
-        sex = MALE;
+        gender = MALE;
         return this;
     }
 
+    public StudentBuilder age(int age) {
+        dateOfBirth = new LocalDate().minusYears(age);
+        return this;
+    }
 
 	public StudentBuilder talents(Set<Talent> talents) {
 		this.talents = talents;
 		return this;
+	}
+
+    public StudentBuilder id(String id) {
+	    studentId = id;
+	    return this;
+    }
+
+	public Student build() {
+		return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, dateOfBirth);
 	}
 }

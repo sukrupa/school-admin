@@ -13,67 +13,69 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-
 public class Event {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "event_id")
-    private int eventId;
+	@Id
+	@GeneratedValue
+	@Column(name = "event_id")
+	private int eventId;
 
-    @Column(name = "event_title")
-    private String title;
+	@Column(name = "event_title")
+	private String title;
 
-    @Column(name = "event_venue")
-    private String venue;
+	@Column(name = "event_venue")
+	private String venue;
 
-    @Column(name = "event_coordinator")
-    private String coordinator;
+	@Column(name = "event_coordinator")
+	private String coordinator;
 
-    @Column(name = "event_description")
-    private String description;
+	@Column(name = "event_description")
+	private String description;
 
-    @Column(name = "event_notes")
-    private String notes;
+	@Column(name = "event_notes")
+	private String notes;
 
 
-    @ManyToMany
-    @JoinTable(name = "EventAttendees",
-            joinColumns = {@JoinColumn(name = "event_id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
-    private Set<Student> attendees;
+	@ManyToMany
+	@JoinTable(name = "EventAttendees",
+			joinColumns = {@JoinColumn(name = "event_id")},
+			inverseJoinColumns = {@JoinColumn(name = "id")})
+	private Set<Student> attendees;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime datetime;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime datetime;
 
-    public Set<Student> getAttendees() {
-        return this.attendees;
-    }
+	public Set<Student> getAttendees() {
+		return this.attendees;
+	}
 
-    @DoNotRemove
-    public Event() {
-    }
+	@DoNotRemove
+	public Event() {
+	}
 
-    public Event(String title, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
-        this.title = title;
-        this.datetime = datetime;
-        this.venue = venue;
-        this.coordinator = coordinator;
-        this.description = description;
-        this.notes = notes;
-        this.attendees = attendees;
-    }
+	public Event(String title, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+		this.title = title;
+		this.datetime = datetime;
+		this.venue = venue;
+		this.coordinator = coordinator;
+		this.description = description;
+		this.notes = notes;
+		this.attendees = attendees;
+	}
 
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
-    }
+	@Transient
+	private String[] excludedFields = new String[] {"eventId", "datetime"};
 
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	public boolean equals(Object other) {
+		return EqualsBuilder.reflectionEquals(this, other, excludedFields);
+	}
 
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-    }
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this, excludedFields);
+	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+	}
 
 }

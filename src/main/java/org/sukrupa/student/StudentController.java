@@ -3,6 +3,7 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.platform.DoNotRemove;
@@ -22,10 +23,11 @@ public class StudentController {
     private static final String UPDATE_VIEW = "update";
 	private static final int AGES_TO = 18;
 	private static final int AGES_FROM = 2;
+    private static final String STUDENT_VIEW = "student";
 
-	private StudentRepository repository;
+    private StudentRepository repository;
 
-	@DoNotRemove
+    @DoNotRemove
     StudentController() {
     }
 
@@ -98,6 +100,15 @@ public class StudentController {
         return UPDATE_VIEW;
     }
 
+    @RequestMapping(value = "{id}")
+    @Transactional
+    public String find(@PathVariable String id, Map<String, Student> model) {
+        Student student = repository.find(id);
+        model.put("student", student);
+        return STUDENT_VIEW;
+
+    }
+
 
 	private List<String> getAges(){
 		List<String> ages = new ArrayList<String>();
@@ -109,6 +120,4 @@ public class StudentController {
 
 		return ages;
 	}
-
-
 }

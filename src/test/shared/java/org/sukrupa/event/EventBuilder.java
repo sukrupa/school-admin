@@ -1,19 +1,13 @@
 package org.sukrupa.event;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.sukrupa.student.Student;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * User: ppotter
- * Date: 02/02/2011
- * Time: 16:11
- * To change this template use File | Settings | File Templates.
- */
 public class EventBuilder {
     private String title;
     private String venue;
@@ -54,7 +48,7 @@ public class EventBuilder {
     }
 
     public EventBuilder datetime(DateTime dateTime) {
-        this.datetime = dateTime;
+        this.datetime = dateTime.toDateTime(DateTimeZone.UTC);
         return this;
     }
 

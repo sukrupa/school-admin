@@ -1,9 +1,9 @@
 package org.sukrupa.page;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentBuilder;
 
 public class StudentRow {
     private final WebElement row;
@@ -13,22 +13,22 @@ public class StudentRow {
     }
 
     public String getName() {
-        return row.findElement(By.xpath("//td[@class='name']")).getText();
+        return row.findElement(By.xpath("td[@class='name']")).getText();
     }
 
     public String getStudentId() {
-        return row.findElement(By.xpath("//td[@class='studentId']")).getText();
+        return row.findElement(By.xpath("td[@class='studentId']")).getText();
     }
 
-    public String getSex() {
-        return row.findElement(By.xpath("//td[@class='sex']")).getText();
+    public String getGender() {
+        return row.findElement(By.xpath("td[@class='sex']")).getText();
     }
 
-    public String getAge() {
-        return row.findElement(By.xpath("//td[@class='age']")).getText();
+    public int getAge() {
+        return Integer.parseInt(row.findElement(By.xpath("td[@class='age']")).getText());
     }
 
-    public Student getStudent() {
-        return new StudentBuilder().name(getName()).studentId(getStudentId()).sex(getSex()).build();
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append("name", getName()).append("studentId", getStudentId()).append("gender", getGender()).append("age", getAge()).toString();
     }
 }
