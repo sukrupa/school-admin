@@ -32,7 +32,7 @@
         <pathelement location="${target.test.shared.dir}"/>
     </path>
 
-    <path id="classpath.compilation.test.functional">
+    <path id="classpath.compilation.test.twist">
         <path refid="classpath.compilation.test.shared"/>
         <pathelement location="${target.test.shared.dir}"/>
         <fileset dir="${lib.twist.dir}">
@@ -47,16 +47,16 @@
         <pathelement location="${target.test.shared.dir}"/>
     </path>
 
-    <path id="classpath.run.test.functional">
+    <path id="classpath.run.test.twist">
         <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411/sahi" />
         <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411" />
-        <path refid="classpath.compilation.test.functional"/>
+        <path refid="classpath.compilation.test.twist"/>
         <pathelement location="${target.test.twist.functional-test.dir}"/>
     </path>
 
 
     <path id="classpath.run.twist.scenarios">
-        <path refid="classpath.run.test.functional"/>
+        <path refid="classpath.run.test.twist"/>
         <fileset dir="${ant.library.dir}" includes="*.jar"/>
     </path>
 
