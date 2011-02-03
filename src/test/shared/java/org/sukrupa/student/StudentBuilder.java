@@ -1,7 +1,11 @@
 package org.sukrupa.student;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class StudentBuilder {
     private static final String FEMALE = "female";
@@ -16,8 +20,9 @@ public class StudentBuilder {
 	private String sex;
 	private String studentClass;
 	private LocalDate dateOfBirth;
+	private Set<Talent> talents = new HashSet<Talent>();
 
-    public StudentBuilder name(String name) {
+	public StudentBuilder name(String name) {
         this.name = name;
         return this;
     }
@@ -63,7 +68,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, talents, dateOfBirth);
     }
 
     public StudentBuilder female() {
@@ -77,4 +82,8 @@ public class StudentBuilder {
     }
 
 
+	public StudentBuilder talents(Set<Talent> talents) {
+		this.talents = talents;
+		return this;
+	}
 }

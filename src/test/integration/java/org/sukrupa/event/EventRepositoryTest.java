@@ -2,6 +2,7 @@ package org.sukrupa.event;
 
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class EventRepositoryTest {
         attendees.add(renaud);
         databaseHelper.save(sahil, renaud);
         EventBuilder builder = new EventBuilder();
-        event = builder.title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
+        event = builder.title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0, DateTimeZone.UTC)).coordinator("cord").venue("dd").notes("notes").attendees(attendees).description("desc").build();
         saveEvent(event);
     }
 
@@ -56,12 +57,11 @@ public class EventRepositoryTest {
 
         List<Event> eventsList = eventRepository.getAll();
         Event eventRet = eventsList.get(0);
-        assertThat(event.equals(eventRet), is(true));
+        assertThat(event, is(eventRet));
     }
 
     @Test
     public void saveWithAttendeesShouldStoreSetOfAttendees() {
-
 
         Event retrievedEvent = eventRepository.getAll().get(0);
         assertThat(attendees.equals(retrievedEvent.getAttendees()), is(true));
