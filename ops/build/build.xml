@@ -86,7 +86,7 @@
 
     <!-- -->
     <target name="test:functional"
-            depends="compile:test:functional"
+            depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
        <run-against-server targetToExecute="twist:execute"
