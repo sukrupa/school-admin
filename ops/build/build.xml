@@ -9,7 +9,7 @@
     <import file="functional-test.xml"/>
     <import file="sukrupa-server.xml"/>
 
-    <target name="clean">
+    <target name="clean" depends="db:delete-fake-data">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
     </target>
@@ -60,7 +60,6 @@
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-    <!-- -->
     <target name="compile:test:functional" depends="compile:test:shared">
         <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
                  classpathref="classpath.compilation.test.functional"/>
@@ -71,7 +70,6 @@
             <fileset dir="${src.test.functional.twist-conf.dir}" />
         </copy>
     </target>
-    <!-- -->
 
     <target name="copy-resources">
         <copy todir="${target.main.dir}">
