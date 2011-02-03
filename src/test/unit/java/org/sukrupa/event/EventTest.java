@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.sukrupa.student.Student;
@@ -35,6 +36,4 @@ public class EventTest {
         Event event1 = new EventBuilder().title("Dummy event").datetime(new DateTime(2010, 8, 29, 10, 10, 10, 0)).venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
         assertThat(attendees.equals(event1.getAttendees()), is(true));
     }
-
-
 }
