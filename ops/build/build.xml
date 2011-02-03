@@ -31,6 +31,12 @@
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:save-build-number, package"/>
 
+    <target name="ci"
+            description="Runs the build as run on ci, including functional tests"
+            depends="all, test:functional">
+
+    </target>
+
     <target name="compile:all"
             depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
 
@@ -86,7 +92,7 @@
 
     <!-- -->
     <target name="test:functional"
-            depends="compile:test:functional"
+            depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
        <run-against-server targetToExecute="twist:execute"
