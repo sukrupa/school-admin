@@ -13,7 +13,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-
 public class Event {
 
     @Id
@@ -64,12 +63,15 @@ public class Event {
         this.attendees = attendees;
     }
 
+    @Transient
+    private String[] excludedFields = new String[] {"eventId", "datetime"};
+
     public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
+        return EqualsBuilder.reflectionEquals(this, other, excludedFields);
     }
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return HashCodeBuilder.reflectionHashCode(this, excludedFields);
     }
 
     public String toString() {
