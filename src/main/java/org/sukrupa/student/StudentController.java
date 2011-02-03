@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class StudentController {
 	@RequestMapping(value = "searchResult")
     @Transactional
 	public String parametricSearchResult(
-			@ModelAttribute("searchParam") SearchParameter searchParam,
+			@ModelAttribute("searchParam") StudentSearchParameter searchParam,
 			Map<String, List<Student>> model) {
 
 		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),

@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-public class SearchParameter {
+public class StudentSearchParameter {
 
 	private String studentClass;
     private String gender;

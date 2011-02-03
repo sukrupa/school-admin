@@ -9,7 +9,6 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,7 +21,9 @@ public class StudentRepository {
     private static final String NAME = "name";
 	private static final String DATE_OF_BIRTH = "dateOfBirth";
     private static final String STUDENT_ID = "studentId";
-    private final SessionFactory sessionFactory;
+	private static final String TALENTS = "talents";
+	private static final String DESCRIPTION = "description";
+	private final SessionFactory sessionFactory;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
@@ -53,7 +54,17 @@ public class StudentRepository {
 			conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
 		}
 
-		return addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class)).add(conjunction).list();
+		Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
+		criteria.add(conjunction);
+		addTalentsSearchCriteria(criteria, talent);
+
+		return criteria.list();
+	}
+
+	private void addTalentsSearchCriteria(Criteria criteria, String talent) {
+		if (!talent.isEmpty()) {
+			criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, talent));
+		}
 	}
 
 	private LocalDate computeBirthDateFromAge(int age) {
