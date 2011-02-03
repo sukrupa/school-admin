@@ -2,31 +2,15 @@
 <head>
 	<title>Search</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" ></script>
-	<script type="text/javascript" >
-		function changeAgeRange() {
-		    var minVal = \$('#ageFrom').val();
-			\$('#ageTo').val(minVal);
-			\$('#ageTo > option').each(function() {
-				if (minVal !== "" && \$(this).val() === "") {
-					\$(this).hide();
-				} else if (parseInt(\$(this).val()) < parseInt(minVal)) {
-		    		\$(this).hide();
-				}
-				else {
-					\$(this).show();
-				}
-			});
-		}
-	</script>
+	<script type="text/javascript" src="../../scripts/studentSearch.js"></script>
 </head>
 <body>
 
-<form name="searchParam" action="searchResult" method="post">
-
+<form name="searchParam" action="searchResult" method="post" >
 	<h1>Student Search</h1>
 
 	<span>Class</span>
-	<select name="class" >
+	<select name="studentClass" >
 		$classes:{
 		<option>$it$</option>
 		}$

@@ -60,11 +60,4 @@ public class StudentControllerTest {
         assertThat(controller.find("123",studentModel),is("student"));
     }
 
-	@Test
-	public void shouldListStudentsFromClassNursery() {
-		when(repository.parametricSearch("Nursery", "", "", "", "", "", "")).thenReturn(asList(sahil, renaud));
-        controller.parametricSearchResult("Nursery", "", "", "", "", "", "", studentsListModel);
-		assertThat(studentsListModel.get("students"), is(asList(sahil, renaud)));
-	}
-
 }

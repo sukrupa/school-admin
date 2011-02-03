@@ -2,16 +2,12 @@
 <head>
 	<title>Student List</title>
 
-	<style type="text/css">
-		table,th, td {
-			border: 1px solid black;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="../../styles/studentList.css" />
 </head>
 <body>
 
 <table>
-    <tr style="text-align:left;">
+    <tr class="header">
         <th>Name</th>
         <th>Student ID</th>
         <th>Gender</th>
