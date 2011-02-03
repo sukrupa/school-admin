@@ -19,7 +19,7 @@ public class StudentController {
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
-    private static final String EDIT_VIEW = "edit";
+    private static final String UPDATE_VIEW = "update";
 	private static final int AGES_TO = 18;
 	private static final int AGES_FROM = 2;
 
@@ -73,8 +73,8 @@ public class StudentController {
 		return SEARCH_VIEW;
 	}
 
-    @RequestMapping(value = "edit")
-    public String editStudent(Map<String, List<String>> model){
+    @RequestMapping(value = "update")
+    public String updateStudent(Map<String, List<String>> model){
         model.put("studentId",Arrays.asList("yo"));
         model.put("name",Arrays.asList(""));
         model.put("dateOfBirth",Arrays.asList(""));
@@ -86,7 +86,7 @@ public class StudentController {
         model.put("father",Arrays.asList(""));
         model.put("mother",Arrays.asList(""));
         model.put("talents",Arrays.asList("Sports","Science Club","Quiz"));
-        return EDIT_VIEW;
+        return UPDATE_VIEW;
     }
 
 

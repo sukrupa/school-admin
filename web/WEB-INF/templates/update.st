@@ -1,6 +1,7 @@
 <html>
 <body>
-<form name="editStudent" action="edit" method="post">
+<form name="updateStudent" action="update" method="post">
+<form name="updateStudent" action="update" method="post">
 
 <h1>Update Student Record</h1>
 
@@ -103,12 +104,7 @@
 
 	<br/>
 
-
-
-
-
-
-
+<input type="submit" value="Update"/>
 
 </form>
 </body>
