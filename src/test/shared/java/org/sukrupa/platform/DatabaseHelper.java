@@ -1,5 +1,6 @@
 package org.sukrupa.platform;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class DatabaseHelper {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
+    private Object[] trackedObjects = new Object[]{};
+
     public void save(Object... objects) {
         for (Object object : objects) {
             session().save(object);
@@ -26,11 +29,26 @@ public class DatabaseHelper {
     }
 
     public void saveAndCommit(final Object... objects) {
-        new TransactionTemplate(transactionManager).execute(new TransactionCallbackWithoutResult() {
+        transactionTemplate().execute(new TransactionCallbackWithoutResult() {
             protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
                 save(objects);
             }
         });
+        track(objects);
+    }
+
+    public void deleteAndCommit(final Object... savedObjects) {
+        transactionTemplate().execute(new TransactionCallbackWithoutResult() {
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                delete(savedObjects);
+            }
+        });
+    }
+
+    public void delete(Object... savedObjects) {
+        for (Object savedObject : savedObjects) {
+            session().delete(savedObject);
+        }
     }
 
     public void flushHibernateSessionToForceReload() {
@@ -38,7 +56,20 @@ public class DatabaseHelper {
         session().clear();
     }
 
+    public void deleteAllCreatedObjects() {
+        deleteAndCommit(trackedObjects);
+    }
+
+
     private Session session() {
         return sessionFactory.getCurrentSession();
+    }
+
+    private TransactionTemplate transactionTemplate() {
+        return new TransactionTemplate(transactionManager);
+    }
+
+    private void track(Object[] objects) {
+        trackedObjects = ArrayUtils.addAll(trackedObjects, objects);
     }
 }
