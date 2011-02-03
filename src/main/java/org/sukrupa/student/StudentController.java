@@ -75,7 +75,7 @@ public class StudentController {
 
     @RequestMapping(value = "edit")
     public String editStudent(Map<String, List<String>> model){
-        model.put("studentId",Arrays.asList(""));
+        model.put("studentId",Arrays.asList("yo"));
         model.put("name",Arrays.asList(""));
         model.put("dateOfBirth",Arrays.asList(""));
         model.put("gender",Arrays.asList(""));
@@ -85,7 +85,7 @@ public class StudentController {
         model.put("area",Arrays.asList(""));
         model.put("father",Arrays.asList(""));
         model.put("mother",Arrays.asList(""));
-        model.put("talents",Arrays.asList(""));
+        model.put("talents",Arrays.asList("Sports","Science Club","Quiz"));
         return EDIT_VIEW;
     }
 
