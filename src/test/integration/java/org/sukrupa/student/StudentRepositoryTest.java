@@ -2,17 +2,25 @@ package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
@@ -30,13 +38,22 @@ public class StudentRepositoryTest {
     private DatabaseHelper databaseHelper;
 
     private StudentRepository repository;
-	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").gender("Male").build();
-	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").id("123").build();
+	private final Talent music = new Talent("Music");
+	private final Talent sport = new Talent("Sport");
+	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995,10,1)).gender("Male").talents(new HashSet(Arrays.asList(music, sport))).build();
+	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").build();
 
-    @Before
+	@BeforeClass
+	public static void classSetUp() {
+        DateTimeUtils.setCurrentMillisFixed(new DateMidnight(2010, 12, 31).getMillis());
+	}
+
+	@Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
+
+	    databaseHelper.save(music, sport);
     }
 
     @Test
@@ -50,7 +67,7 @@ public class StudentRepositoryTest {
     public void shouldPersistAndReloadAllFields() {
         databaseHelper.save(pat);
 
-        assertThat(repository.findAll(), hasItems(pat));
+        assertThat(repository.findAll().get(0), is(pat));
     }
 
     @Test
@@ -59,9 +76,25 @@ public class StudentRepositoryTest {
         assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
     }
 
-    @Test
+	@Test
+	public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
+		databaseHelper.save(sahil,pat,renaud);
+
+		List<Student> students = repository.parametricSearch("", "", "", "", "18", "22", "");
+		assertThat(students.size(), is(1));
+		assertThat(students, hasItems(renaud));
+	}
+
+	@Test
+	public void shouldReturnListOfTalents() {
+		databaseHelper.save(sahil);
+		assertThat(repository.findAll().get(0).getTalents(),hasItems(music,sport));
+	}
+
+	@Test
     public void shouldReturnStudentBasedOnStudentId(){
         databaseHelper.save(pat);
         assertThat(repository.find("123"),is(pat));
     }
+
 }

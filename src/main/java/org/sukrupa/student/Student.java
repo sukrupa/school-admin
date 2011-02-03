@@ -5,16 +5,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.sukrupa.platform.DoNotRemove;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Student {
@@ -37,11 +34,17 @@ public class Student {
 	@Column(name = "DATE_OF_BIRTH")
 	private LocalDate dateOfBirth;
 
+	@ManyToMany
+    @JoinTable(name = "STUDENT_TALENT",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "talent_id")})
+	private Set<Talent> talents;
+
     @DoNotRemove
     public Student() {
     }
 
-	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String gender, String studentClass, LocalDate dateOfBirth) {
+	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
 		this.studentId = studentId;
 		this.name = name;
 		this.religion = religion;
@@ -51,6 +54,7 @@ public class Student {
 		this.gender = gender;
 		this.studentClass = studentClass;
 		this.dateOfBirth = dateOfBirth;
+		this.talents = talents;
 	}
 
     public String getName() {
@@ -87,6 +91,10 @@ public class Student {
 
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
+	}
+
+	public Set<Talent> getTalents() {
+		return talents;
 	}
 
 	public int getAge() {

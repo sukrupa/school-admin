@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import com.google.common.collect.Sets;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
@@ -7,6 +8,9 @@ import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -64,8 +68,9 @@ public class StudentTest {
 	}
 
 	@Test
-	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
-		assertThat(student("pat", new LocalDate(2005, 3, 01)).getAge(), is(5));
+	public void shouldBeEquals() {
+		assertThat(student("pat", new LocalDate(2005, 3, 01), new Talent("music"), new Talent("sport")),
+				is(student("pat", new LocalDate(2005, 3, 01), new Talent("sport"), new Talent("music"))));
 	}
 
 	private Student student(String name) {
@@ -74,6 +79,10 @@ public class StudentTest {
 
 	private Student student(String name, LocalDate dateOfBirth) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).build();
+    }
+
+	private Student student(String name, LocalDate dateOfBirth, Talent... talents) {
+        return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).talents(new HashSet(Arrays.asList(talents))).build();
     }
 
 }
