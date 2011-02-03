@@ -8,6 +8,7 @@
 
     <path id="classpath.run">
         <path refid="classpath.compilation"/>
+        <pathelement location="${resources.main.dir}" />
         <pathelement location="${target.main.dir}"/>
     </path>
 
