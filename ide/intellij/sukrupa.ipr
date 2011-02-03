@@ -54,13 +54,23 @@
       <item index="1" class="java.lang.String" itemvalue="org.springframework.context.annotation.Configuration" />
     </list>
   </component>
+  <component name="FacetAutodetectingManager">
+    <autodetection-disabled>
+      <facet-type id="Osmorc">
+        <modules>
+          <module name="sukrupa" />
+        </modules>
+      </facet-type>
+    </autodetection-disabled>
+  </component>
   <component name="IdProvider" IDEtalkID="1AF829361B38FBD5F48B3CBF989C257A" />
   <component name="InspectionProjectProfileManager">
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
-        <inspection_tool class="AntResolveInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="AntResolveInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
         <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
           <option name="processCode" value="true" />
           <option name="processLiterals" value="true" />
