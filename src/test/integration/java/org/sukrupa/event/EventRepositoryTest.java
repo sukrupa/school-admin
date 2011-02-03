@@ -1,8 +1,6 @@
 package org.sukrupa.event;
 
 import org.hibernate.SessionFactory;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -59,7 +56,7 @@ public class EventRepositoryTest {
 
     @Test
     public void shouldRetrieveStudentsAttendingUsingID(){
-        assertThat(eventRepository.retrieveStudent("123459","345458").get(0).getName(),is("Bob1"));
+        assertThat(eventRepository.retrieveStudent("123459", "345458").get(0).getName(), is("Bob1"));
     }
     private void save(Event event) {
         eventRepository.save(event);
