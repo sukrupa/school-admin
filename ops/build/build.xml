@@ -9,7 +9,7 @@
     <import file="functional-test.xml"/>
     <import file="sukrupa-server.xml"/>
 
-    <target name="clean" depends="db:delete-fake-data">
+    <target name="clean">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
     </target>
@@ -95,7 +95,8 @@
 
        <run-against-server targetToExecute="twist:execute"
                            startServerTarget="sukrupa-server:start"
-                           stopServerTarget="sukrupa-server:stop" />
+                           stopServerTarget="sukrupa-server:stop"
+                           cleanupTarget="db:delete-fake-data"/>
 
     </target>
     <!-- -->
