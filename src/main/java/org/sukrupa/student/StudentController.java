@@ -19,6 +19,7 @@ public class StudentController {
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
+    private static final String EDIT_VIEW = "edit";
 	private static final int AGES_TO = 18;
 	private static final int AGES_FROM = 2;
 
@@ -71,6 +72,22 @@ public class StudentController {
 				"Dancing","Debate","Singing","Drama","Musical Instrument","Quiz","Story Writing","Choir","Art","Drawing","Craft"));
 		return SEARCH_VIEW;
 	}
+
+    @RequestMapping(value = "edit")
+    public String editStudent(Map<String, List<String>> model){
+        model.put("studentId",Arrays.asList(""));
+        model.put("name",Arrays.asList(""));
+        model.put("dateOfBirth",Arrays.asList(""));
+        model.put("gender",Arrays.asList(""));
+        model.put("religion",Arrays.asList(""));
+        model.put("caste",Arrays.asList(""));
+        model.put("subCaste",Arrays.asList(""));
+        model.put("area",Arrays.asList(""));
+        model.put("father",Arrays.asList(""));
+        model.put("mother",Arrays.asList(""));
+        model.put("talents",Arrays.asList(""));
+        return EDIT_VIEW;
+    }
 
 
 	private List<String> getAges(){
