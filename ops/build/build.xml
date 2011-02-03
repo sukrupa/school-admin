@@ -29,7 +29,7 @@
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, deploy:save-build-number, package"/>
 
     <target name="ci"
             description="Runs the build as run on ci, including functional tests"
