@@ -136,7 +136,7 @@
     </target>
 
     <target name="create.web.server.jar">
-        <jar basedir="${target.main.dir}" jarfile="${sukrupa.webserver.jar.name}">
+        <jar basedir="${target.main.dir}" jarfile="${target.sukrupa.webserver.jar}">
             <include name="org/sukrupa/platform/"/>
             <include name="org/sukrupa/app/"/>
             <include name="database.properties"/>

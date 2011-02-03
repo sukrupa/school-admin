@@ -28,7 +28,7 @@
 
     <property name="target.dir" value="${module.dir}/target"/>
 
-    <property name="target.sukrupa.server.jar" value="${target.dir}/${sukrupa.webserver.jar.name}"/>
+    <property name="target.sukrupa.webserver.jar" value="${target.dir}/${sukrupa.webserver.jar.name}"/>
     <property name="target.war" value="${target.dir}/${module.war.name}"/>
 
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
