@@ -20,7 +20,7 @@
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
         <mkdir dir="${target.test.cobertura_instrumented.dir}"/>
-        <mkdir dir="${target.test.twist.functional-test.dir}"/>
+        <mkdir dir="${target.test.twist.fixtures.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.twist.dir}"/>
@@ -61,13 +61,13 @@
     </target>
 
     <target name="compile:test:functional">
-        <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
+        <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
                  classpathref="classpath.compilation.test.twist"/>
-        <copy todir="${target.test.twist.functional-test.dir}">
-            <fileset dir="${src.test.functional.src.dir}">
+        <copy todir="${target.test.twist.fixtures.dir}">
+            <fileset dir="${src.test.twist.src.dir}">
                 <exclude name="**/*.java"/>
             </fileset>
-            <fileset dir="${src.test.functional.twist-conf.dir}" />
+            <fileset dir="${src.test.twist.conf.dir}" />
         </copy>
     </target>
 

@@ -2,7 +2,7 @@
 
     <target name="twist:execute">
         <ant antfile="${ops.build.dir}/twist.xml"
-             dir="${src.test.functional.dir}"
+             dir="${src.test.twist.fixtures.dir}"
              target="execute-twist"
              inheritall="true"
              inheritrefs="true">

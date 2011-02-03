@@ -51,7 +51,7 @@
         <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411/sahi" />
         <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411" />
         <path refid="classpath.compilation.test.twist"/>
-        <pathelement location="${target.test.twist.functional-test.dir}"/>
+        <pathelement location="${target.test.twist.fixtures.dir}"/>
     </path>
 
 
