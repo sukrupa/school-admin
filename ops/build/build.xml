@@ -38,7 +38,7 @@
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:twist"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -60,7 +60,7 @@
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-    <target name="compile:test:functional">
+    <target name="compile:test:twist">
         <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
                  classpathref="classpath.compilation.test.twist"/>
         <copy todir="${target.test.twist.fixtures.dir}">
@@ -90,7 +90,7 @@
 
     <!-- -->
     <target name="test:twist"
-            depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
+            depends="db:delete-fake-data, db:insert-fake-data, compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
        <run-against-server targetToExecute="twist:execute"
