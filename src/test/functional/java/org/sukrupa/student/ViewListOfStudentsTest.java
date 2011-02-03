@@ -73,7 +73,7 @@ public class ViewListOfStudentsTest {
             }
 
             private boolean sameGender() {
-                return student.getSex().equals(studentRow.getSex());
+                return student.getGender().equals(studentRow.getSex());
             }
 
             private boolean sameAge() {
