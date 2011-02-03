@@ -43,24 +43,27 @@ public class StudentController {
 	@RequestMapping(value = "searchResult")
     @Transactional
 	public String parametricSearchResult(
-			@RequestParam(value = "searchParam") SearchParameter searchParam,
-//			@RequestParam(value = "class") String studentClass,
-//			@RequestParam(value = "gender") String gender,
-//			@RequestParam(value = "caste") String caste,
-//			@RequestParam(value = "area") String area,
-//			@RequestParam(value = "ageFrom") String ageFrom,
-//			@RequestParam(value = "ageTo") String ageTo,
-//			@RequestParam(value = "talent") String talent,
+//			@RequestParam(value = "searchParam") SearchParameter searchParam,
+			@RequestParam(value = "class") String studentClass,
+			@RequestParam(value = "gender") String gender,
+			@RequestParam(value = "caste") String caste,
+			@RequestParam(value = "area") String area,
+			@RequestParam(value = "ageFrom") String ageFrom,
+			@RequestParam(value = "ageTo") String ageTo,
+			@RequestParam(value = "talent") String talent,
 			Map<String, List<Student>> model) {
 
-		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
-				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
+//		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
+//				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
+
+		model.put(STUDENTS_MODEL, repository.parametricSearch(studentClass, gender,
+				caste, area, ageFrom, ageTo, talent));
 
         return STUDENTS_VIEW;
     }
 
 	@RequestMapping(value = "search")
-	public String parametricSearch(Map<String, List<String>> model) {
+	public String parametricSearch(Map<String, Object> model) {
 		model.put("classes", Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
 	    model.put("genders", Arrays.asList("", "Male", "Female"));
 		model.put("castes", Arrays.asList("", "Some caste"));

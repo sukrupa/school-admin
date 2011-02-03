@@ -51,9 +51,9 @@ public class StudentControllerTest {
 
 	@Test
 	public void shouldListStudentsFromClassNursery() {
-//		when(repository.parametricSearch("Nursery", "", "", "", "", "", "")).thenReturn(asList(sahil, renaud));
-//        controller.parametricSearchResult("Nursery", "", "", "", "", "", "", model);
-//		assertThat(model.get("students"), is(asList(sahil, renaud)));
+		when(repository.parametricSearch("Nursery", "", "", "", "", "", "")).thenReturn(asList(sahil, renaud));
+        controller.parametricSearchResult("Nursery", "", "", "", "", "", "", model);
+		assertThat(model.get("students"), is(asList(sahil, renaud)));
 	}
 
 }
