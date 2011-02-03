@@ -20,7 +20,7 @@ public class StudentRow {
         return row.findElement(By.xpath("td[@class='studentId']")).getText();
     }
 
-    public String getSex() {
+    public String getGender() {
         return row.findElement(By.xpath("td[@class='sex']")).getText();
     }
 
@@ -29,6 +29,6 @@ public class StudentRow {
     }
 
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append("name", getName()).append("studentId", getStudentId()).append("gender", getSex()).append("age", getAge()).toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append("name", getName()).append("studentId", getStudentId()).append("gender", getGender()).append("age", getAge()).toString();
     }
 }

@@ -12,7 +12,7 @@ public class StudentBuilder {
     private String subCaste;
     private String area;
     private String studentId;
-    private String sex;
+    private String gender;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
 
@@ -46,8 +46,8 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder sex(String sex) {
-        this.sex = sex;
+    public StudentBuilder gender(String gender) {
+        this.gender = gender;
         return this;
     }
 
@@ -62,17 +62,17 @@ public class StudentBuilder {
     }
 
     public StudentBuilder female() {
-        sex = FEMALE;
+        gender = FEMALE;
         return this;
     }
 
     public StudentBuilder male() {
-        sex = MALE;
+        gender = MALE;
         return this;
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, sex, studentClass, dateOfBirth);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, dateOfBirth);
     }
 
     public StudentBuilder age(int age) {

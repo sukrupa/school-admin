@@ -26,9 +26,9 @@ public class EventTest {
 
     @Test
     public void shouldReturnTheCorrectStudentList() {
-        Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").sex("Male").build();
-        Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").sex("Female").build();
-        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").sex("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
+        Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").gender("Male").build();
+        Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").build();
+        Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
         Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);
