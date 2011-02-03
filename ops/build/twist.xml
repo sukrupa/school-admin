@@ -5,7 +5,7 @@
         <echo message="Executing Twist tests from ${src.test.functional.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
-                 classpathref="scenarios.classpath"
+                 classpathref="classpath.run.twist.scenarios"
                  name="twist.runner"/>
 
         <twist.runner
@@ -13,7 +13,7 @@
                 reportsDir="${target.reports.dir}"
                 confDir="${twist-config}"
                 failureproperty="twist.scenarios.failed"
-                classpathref="scenarios.classpath"
+                classpathref="classpath.run.twist.scenarios"
                 tags="!in-progress">
             <fileset dir="${src.test.functional.dir}/scenarios" includes="*"/>
         </twist.runner>
