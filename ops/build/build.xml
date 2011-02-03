@@ -9,7 +9,7 @@
     <import file="functional-test.xml"/>
     <import file="sukrupa-server.xml"/>
 
-    <target name="clean">
+    <target name="clean" depends="db:delete-fake-data">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
     </target>
