@@ -19,6 +19,7 @@ public class StudentController {
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
+    private static final String UPDATE_VIEW = "update";
 	private static final int AGES_TO = 18;
 	private static final int AGES_FROM = 2;
 
@@ -74,6 +75,28 @@ public class StudentController {
 				"Dancing","Debate","Singing","Drama","Musical Instrument","Quiz","Story Writing","Choir","Art","Drawing","Craft"));
 		return SEARCH_VIEW;
 	}
+
+    @RequestMapping(value = "update")
+    @Transactional
+    public String updateStudent(Map<String, List<String>> model){
+
+        //hard-coded student
+        //TODO: get actual student from search results
+        Student theStudent = repository.findAll().get(0);
+
+        model.put("studentId",Arrays.asList(theStudent.getStudentId()));
+        model.put("name",Arrays.asList(theStudent.getName()));
+        model.put("dateOfBirth",Arrays.asList(theStudent.getDateOfBirth().toString()));
+        model.put("gender",Arrays.asList(theStudent.getGender()));
+        model.put("religion",Arrays.asList(theStudent.getReligion()));
+        model.put("caste",Arrays.asList(theStudent.getCaste()));
+        model.put("subCaste",Arrays.asList(theStudent.getSubCaste()));
+        model.put("area",Arrays.asList(theStudent.getArea()));
+        model.put("father",Arrays.asList(""));
+        model.put("mother",Arrays.asList(""));
+        model.put("talents",Arrays.asList(""));
+        return UPDATE_VIEW;
+    }
 
 
 	private List<String> getAges(){

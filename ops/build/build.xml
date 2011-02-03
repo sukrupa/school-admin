@@ -6,6 +6,8 @@
     <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
     <import file="cobertura.xml"/>
+    <import file="functional-test.xml"/>
+    <import file="sukrupa-server.xml"/>
 
     <target name="clean">
         <delete dir="${target.dir}"/>
@@ -87,13 +89,9 @@
             depends="compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
-        <ant antfile="${ops.build.dir}/twist.xml"
-             dir="${src.test.functional.dir}"
-             target="execute-twist"
-             inheritall="true"
-             inheritrefs="true">
-        </ant>
-
+       <run-against-server targetToExecute="twist:execute"
+                           startServerTarget="sukrupa-server:start"
+                           stopServerTarget="sukrupa-server:stop" />
 
     </target>
     <!-- -->
@@ -101,11 +99,10 @@
     <target name="package" depends="create.war, create.web.server.jar">
         <zip destfile="${target.dir}/${app.zip.name}">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
-            <fileset file="${target.dir}/${war.name}"/>
-            <fileset file="${target.dir}/${web.server.jar}"/>
+            <fileset file="${target.dir}/${module.war.name}"/>
+            <fileset file="${target.dir}/${sukrupa.webserver.jar.name}"/>
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
-            <fileset file="${ops.deploy.dir}/bootstrap.sh"/>
             <zipfileset file="${cobertura.dir}" prefix="tools"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
@@ -128,14 +125,14 @@
     </target>
 
     <target name="create.war">
-        <war destfile="${target.dir}/${war.name}" webxml="${web.dir}/WEB-INF/web.xml">
+        <war destfile="${target.dir}/${module.war.name}" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}" excludes="**/WebServer*"/>
             <lib dir="${lib.main.dir}"/>
         </war>
     </target>
 
     <target name="create.web.server.jar">
-        <jar basedir="${target.main.dir}" jarfile="${target.dir}/${web.server.jar}">
+        <jar basedir="${target.main.dir}" jarfile="${target.sukrupa.webserver.jar}">
             <include name="org/sukrupa/platform/"/>
             <include name="org/sukrupa/app/"/>
             <include name="database.properties"/>

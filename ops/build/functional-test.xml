@@ -1,0 +1,13 @@
+<project name="functional-test" basedir="../..">
+
+    <target name="twist:execute">
+        <ant antfile="${ops.build.dir}/twist.xml"
+             dir="${src.test.functional.dir}"
+             target="execute-twist"
+             inheritall="true"
+             inheritrefs="true">
+        </ant>
+    </target>
+
+
+</project>

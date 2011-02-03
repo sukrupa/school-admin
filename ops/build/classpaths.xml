@@ -9,7 +9,6 @@
     <path id="classpath.run">
         <path refid="classpath.compilation"/>
         <pathelement location="${target.main.dir}"/>
-
     </path>
 
     <path id="classpath.compilation.test.shared">
@@ -55,7 +54,7 @@
     </path>
 
 
-    <path id="scenarios.classpath">
+    <path id="classpath.run.twist.scenarios">
         <path refid="classpath.run.test.functional"/>
         <fileset dir="${ant.library.dir}" includes="*.jar"/>
     </path>
@@ -70,5 +69,9 @@
         <pathelement location="${target.test.unit.dir}"/>
         <pathelement location="${target.test.shared.dir}"/>
         <pathelement location="${target.test.integration.dir}"/>
+    </path>
+
+    <path id="classpath.sukrupa.server.run">
+        <path refid="classpath.run" />
     </path>
 </project>

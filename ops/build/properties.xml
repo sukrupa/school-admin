@@ -1,6 +1,11 @@
 <project name="properties">
+    <property name="module.dir" value="${basedir}"/>
 
-    <property name="module.dir" value="${basedir}" />
+    <property name="module.war.name" value="sukrupa.war"/>
+
+    <property name="sukrupa.webserver.jar.name" value="web-server.jar"/>
+    <property name="sukrupa.app.class.name" value="org.sukrupa.app.SchoolAdminApp"/>
+
     <property name="src.dir" value="${module.dir}/src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.dir" value="${src.dir}/test"/>
@@ -15,12 +20,17 @@
 
     <property name="web.dir" value="${module.dir}/web"/>
 
-    <property name="lib.dir" value="${module.dir}/lib" />
+    <property name="lib.dir" value="${module.dir}/lib"/>
     <property name="lib.main.dir" value="${lib.dir}/main"/>
     <property name="lib.test.dir" value="${lib.dir}/test"/>
     <property name="lib.twist.dir" value="${lib.dir}/twist"/>
 
+
     <property name="target.dir" value="${module.dir}/target"/>
+
+    <property name="target.sukrupa.webserver.jar" value="${target.dir}/${sukrupa.webserver.jar.name}"/>
+    <property name="target.war" value="${target.dir}/${module.war.name}"/>
+
     <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
     <property name="target.test.dir" value="${target.dir}/test"/>
 
@@ -34,32 +44,32 @@
     <property name="target.reports.dir" value="${target.dir}/reports"/>
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
-    <property name="target.sahi.browser.profiles" value="${src.test.functional.dir}/sahi/userdata/browser/ff/profiles/" />
+    <property name="target.sahi.browser.profiles"
+              value="${src.test.functional.dir}/sahi/userdata/browser/ff/profiles/"/>
 
-    <property name="war.name" value="${ant.project.name}.war"/>
+
     <property name="app.zip.name" value="school-admin.zip"/>
 
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
     <property name="deploy.staging.user" value="go"/>
     <property name="deploy.staging.path" value="/var/opt/sukrupa/school-admin/"/>
-    <property name="web.server.jar" value="web-server.jar"/>
-    <property name="web.server.class.name" value="org.sukrupa.platform.server.WebServer"/>
 
-    <property name="tools.dir" value="${module.dir}/tools" />
-    <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2" />
 
-    <property name="ops.dir" value="${module.dir}/ops" />
-    <property name="ops.build.dir" value="${ops.dir}/build" />
-    <property name="ops.local.dir" value="${ops.dir}/local" />
+    <property name="tools.dir" value="${module.dir}/tools"/>
+    <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2"/>
 
-    <property name="ops.deploy.dir" value="${ops.dir}/deploy" />
-    <property name="ops.deploy.sql.dir" value="${ops.deploy.dir}/sql" />
+    <property name="ops.dir" value="${module.dir}/ops"/>
+    <property name="ops.build.dir" value="${ops.dir}/build"/>
+    <property name="ops.local.dir" value="${ops.dir}/local"/>
+
+    <property name="ops.deploy.dir" value="${ops.dir}/deploy"/>
+    <property name="ops.deploy.sql.dir" value="${ops.deploy.dir}/sql"/>
     <property name="ops.deploy.insert.fake.data.sql" value="${ops.deploy.sql.dir}/insert-fake-data.sql"/>
     <property name="ops.deploy.delete.fake.data.sql" value="${ops.deploy.sql.dir}/delete-fake-data.sql"/>
 
-    <property name="ops.scripts.dir" value="${ops.dir}/scripts" />
+    <property name="ops.scripts.dir" value="${ops.dir}/scripts"/>
 
     <property name="twist-config" value="${src.test.functional.dir}/twist-conf"/>
-    <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1" />
+    <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1"/>
 </project>
