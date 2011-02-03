@@ -1,27 +1,14 @@
 package org.sukrupa.student;
 
 import org.hibernate.SessionFactory;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTimeUtils;
-import org.joda.time.LocalDate;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
