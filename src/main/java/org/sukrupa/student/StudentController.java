@@ -22,10 +22,11 @@ public class StudentController {
     private static final String UPDATE_VIEW = "update";
 	private static final int AGES_TO = 18;
 	private static final int AGES_FROM = 2;
+    private static final String STUDENT_VIEW = "student";
 
-	private StudentRepository repository;
+    private StudentRepository repository;
 
-	@DoNotRemove
+    @DoNotRemove
     StudentController() {
     }
 
@@ -111,4 +112,9 @@ public class StudentController {
 	}
 
 
+    public String find(String studentId, Map<String, Student> model) {
+        Student student = repository.find(studentId);
+        model.put("student", student);
+        return STUDENT_VIEW;
+    }
 }

@@ -20,6 +20,7 @@ public class StudentRepository {
 	private static final String AREA = "area";
 	private static final String TALENT = "talent";
 	private static final String NAME = "name";
+	private static final String STUDENT_ID = "studentId";
 	private final SessionFactory sessionFactory;
 
     @Autowired
@@ -76,4 +77,9 @@ public class StudentRepository {
 			conjunction.add(Restrictions.eq(field, parameter));
 		}
 	}
+
+    public Student find(String studentId) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class).add(Restrictions.eq(STUDENT_ID, studentId));
+        return (Student)criteria.uniqueResult();
+    }
 }
