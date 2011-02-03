@@ -11,10 +11,9 @@ import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.sukrupa.platform.DoNotRemove;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -36,6 +35,8 @@ public class Student {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@Column(name = "DATE_OF_BIRTH")
 	private LocalDate dateOfBirth;
+    @Transient
+    private List<Note> notes = new ArrayList<Note>();
 
     @DoNotRemove
     public Student() {
@@ -110,4 +111,12 @@ public class Student {
 	protected LocalDate getCurrentDate() {
 		return new LocalDate();
 	}
+
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
 }

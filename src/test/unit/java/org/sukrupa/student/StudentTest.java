@@ -8,6 +8,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static java.util.Arrays.asList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -67,6 +70,17 @@ public class StudentTest {
 	public void shouldNBe5YearOldCurrentDateDayAfterDOBDay() {
 		assertThat(student("pat", new LocalDate(2005, 3, 01)).getAge(), is(5));
 	}
+
+    @Test
+    public void shouldCaptureNotesAboutAStudent() {
+        Student suhas = student("suhas");
+        Note firstNote = new Note("note1");
+        Note secondNote = new Note("note2");
+        suhas.addNote(firstNote);
+        suhas.addNote(secondNote);
+        List<Note> notes = suhas.getNotes();
+        assertThat(notes, hasItems(firstNote,secondNote));
+    }
 
 	private Student student(String name) {
         return student(name, null);
