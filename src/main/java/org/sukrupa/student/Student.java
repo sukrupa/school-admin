@@ -90,9 +90,6 @@ public class Student {
 	}
 
 	public int getAge() {
-		if (dateOfBirth == null) {
-			return 0;
-		}
 		return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
 	}
 

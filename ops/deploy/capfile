@@ -48,13 +48,12 @@ namespace :staging do
     task :safety_check, :roles => :staging_server do
         times = 0;
         while times < 6
-            begin
-                run "wget --spider http://#{staging_server}:8080/sukrupa/app/students"
-            rescue
+            wgetresult = system "wget --spider http://#{staging_server}:8080/sukrupa/app/students"
+            if wgetresult
+                break
+            else
                 times = times + 1
                 sleep 10
-            else
-                break
             end
         end
     end

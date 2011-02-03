@@ -9,7 +9,7 @@
     <import file="functional-test.xml"/>
     <import file="sukrupa-server.xml"/>
 
-    <target name="clean">
+    <target name="clean" depends="db:delete-fake-data">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
     </target>
@@ -30,6 +30,12 @@
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:save-build-number, package"/>
+
+    <target name="ci"
+            description="Runs the build as run on ci, including functional tests"
+            depends="all, test:functional">
+
+    </target>
 
     <target name="compile:all"
             depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
@@ -54,7 +60,6 @@
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-    <!-- -->
     <target name="compile:test:functional" depends="compile:test:shared">
         <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
                  classpathref="classpath.compilation.test.functional"/>
@@ -65,7 +70,6 @@
             <fileset dir="${src.test.functional.twist-conf.dir}" />
         </copy>
     </target>
-    <!-- -->
 
     <target name="copy-resources">
         <copy todir="${target.main.dir}">
@@ -86,7 +90,7 @@
 
     <!-- -->
     <target name="test:functional"
-            depends="compile:test:functional"
+            depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
        <run-against-server targetToExecute="twist:execute"
