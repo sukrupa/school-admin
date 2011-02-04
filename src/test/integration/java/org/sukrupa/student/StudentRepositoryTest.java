@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
@@ -20,9 +19,7 @@ import org.sukrupa.platform.DatabaseHelper;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -50,7 +47,6 @@ public class StudentRepositoryTest {
     @Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
-
         databaseHelper.save(music, sport);
     }
 
@@ -60,13 +56,6 @@ public class StudentRepositoryTest {
         List<Student> students = repository.findAll();
         assertThat(students, hasSize(3));
         assertThat(students, hasItems(sahil, pat, renaud));
-    }
-
-    @Test
-    public void shouldPersistAndReloadAllFields() {
-        databaseHelper.save(pat);
-
-        assertThat(repository.findAll().get(0), is(pat));
     }
 
     @Test
@@ -109,9 +98,9 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldUpdateStudentInDatabase(){
+    public void shouldUpdateStudentInDatabase() {
         final Student philOld = new StudentBuilder().studentId("12345")
-                .name("Phil")    .studentClass("1 Std").gender("Male")  .religion("Hindu")   .area("Bhuvaneshwari Slum")
+                .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
                 .caste("SC").subCaste("AD").build();
         final Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
