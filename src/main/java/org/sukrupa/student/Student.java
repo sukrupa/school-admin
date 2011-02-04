@@ -1,9 +1,11 @@
 package org.sukrupa.student;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -37,11 +39,11 @@ public class Student {
     @Transient
     private List<Note> notes = new ArrayList<Note>();
 
-	@ManyToMany
+    @ManyToMany
     @JoinTable(name = "STUDENT_TALENT",
             joinColumns = {@JoinColumn(name = "student_id")},
             inverseJoinColumns = {@JoinColumn(name = "talent_id")})
-	private Set<Talent> talents;
+    private Set<Talent> talents;
 
     @DoNotRemove
     public Student() {
@@ -100,7 +102,19 @@ public class Student {
 		return talents;
 	}
 
-	public int getAge() {
+    public String getTalentsForDisplay() {
+        return StringUtils.join(talentDescriptions(), ", ");
+    }
+
+    private List<String> talentDescriptions() {
+        List<String> talentDescriptions = new ArrayList<String>();
+        for (Talent talent : talents) {
+            talentDescriptions.add(talent.getDescription());
+        }
+        return talentDescriptions;
+    }
+
+    public int getAge() {
 		return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
 	}
 

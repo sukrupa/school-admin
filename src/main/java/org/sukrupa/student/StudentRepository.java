@@ -33,7 +33,6 @@ public class StudentRepository {
     @SuppressWarnings("unchecked")
     public List<Student> findAll() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
-
         return addOrderCriteria(criteria).list();
     }
 

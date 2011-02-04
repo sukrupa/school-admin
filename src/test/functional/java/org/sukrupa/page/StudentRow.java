@@ -5,6 +5,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.Set;
+
 public class StudentRow {
     private final WebElement row;
 
@@ -28,7 +30,11 @@ public class StudentRow {
         return Integer.parseInt(row.findElement(By.xpath("td[@class='age']")).getText());
     }
 
+    public String getTalents() {
+        return row.findElement(By.xpath("td[@class='talents']")).getText();
+    }
+
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append("name", getName()).append("studentId", getStudentId()).append("gender", getGender()).append("age", getAge()).toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append("name", getName()).append("studentId", getStudentId()).append("gender", getGender()).append("age", getAge()).append("talents", getTalents()).toString();
     }
 }

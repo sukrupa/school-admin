@@ -3,7 +3,6 @@ package org.sukrupa.student;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.matchers.TypeSafeMatcher;
 import org.junit.runner.RunWith;
@@ -20,6 +19,7 @@ import org.sukrupa.platform.DatabaseHelper;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -37,8 +37,13 @@ public class ViewListOfStudentsTest {
 
     @Test
     public void shouldDisplayListOfAllStudentsOrderedByGenderAndName() {
-        Student rebecca = new StudentBuilder().name("rebecca").studentId("1").female().age(25).build();
-        Student bob = new StudentBuilder().name("bob").studentId("2").male().age(22).build();
+        Talent running = new Talent("running");
+        Talent jumping = new Talent("jumping");
+        Talent flying = new Talent("flying");
+        save(running, jumping, flying);
+
+        Student rebecca = new StudentBuilder().name("rebecca").studentId("1").female().age(25).talents(running, jumping, flying).build();
+        Student bob = new StudentBuilder().name("bob").studentId("2").male().age(22).talents(flying).build();
         Student alex = new StudentBuilder().name("alex").studentId("3").male().age(42).build();
         save(rebecca, bob, alex);
 
@@ -60,7 +65,11 @@ public class ViewListOfStudentsTest {
 
             public boolean matchesSafely(StudentRow studentRow) {
                 this.studentRow = studentRow;
-                return sameName() && sameStudentId() && sameGender() && sameAge();
+                return sameName() && sameStudentId() && sameGender() && sameAge() && sameTalents();
+            }
+
+            private boolean sameTalents() {
+                return student.getTalentsForDisplay().equals(studentRow.getTalents());
             }
 
             private boolean sameName() {
@@ -83,5 +92,5 @@ public class ViewListOfStudentsTest {
                 description.appendValue(student);
             }
         };
-    }    
+    }
 }
