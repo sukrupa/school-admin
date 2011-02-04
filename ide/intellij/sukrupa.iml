@@ -52,11 +52,13 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/integration/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/shared/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/functional/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/ruby" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Hamcrest" level="project" />
     <orderEntry type="library" name="test" level="project" />
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" name="twist" level="project" />

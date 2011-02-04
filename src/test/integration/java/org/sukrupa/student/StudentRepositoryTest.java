@@ -5,6 +5,7 @@ import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -70,14 +70,14 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
-        assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
+
+	    assertThat(repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build()), hasItems(renaud, sahil));
     }
 
 	@Test
 	public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
 		databaseHelper.save(sahil,pat,renaud);
-
-		List<Student> students = repository.parametricSearch("", "", "", "", "18", "22", "");
+		List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").build());
 		assertThat(students.size(), is(1));
 		assertThat(students, hasItems(renaud));
 	}
@@ -92,6 +92,19 @@ public class StudentRepositoryTest {
     public void shouldReturnStudentBasedOnStudentId(){
         databaseHelper.save(pat);
         assertThat(repository.find("123"),is(pat));
+    }
+
+    @Test
+    @Ignore("[suhas, pradeep] WIP")
+    public void shouldPersistStudentWithNotes()
+    {
+        Note noteOne = new Note("note1");
+        Note noteTwo = new Note("note2");
+        pat.addNote(noteOne);
+        pat.addNote(noteTwo);
+        databaseHelper.save(pat);
+        Student loaded = repository.find("123");
+        assertThat(loaded.getNotes(),hasItems(noteOne, noteTwo));
     }
 
 }
