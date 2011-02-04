@@ -73,12 +73,6 @@ public class StudentRepositoryTest {
         databaseHelper.save(sahil, pat, renaud);
 
 	    List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build());
-	    for (Student s : students) {
-		    System.out.println("Talentss" + s.getTalents());
-		    for (Talent t : s.getTalents()) {
-			    System.err.println(s.getName() + "++++++++++++++++++++++++" + t + "+++++++++++++++++++++++++++++++++++++");
-		    }
-	    }
 	    assertThat(students, Matchers.<Object>hasSize(2));
 	    assertThat(students, hasItems(renaud, sahil));
     }

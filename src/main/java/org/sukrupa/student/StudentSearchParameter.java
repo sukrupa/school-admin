@@ -14,7 +14,7 @@ public class StudentSearchParameter {
 
 	private String religion;
 
-	public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent) {
+	public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
 		this.studentClass = studentClass;
 		this.gender = gender;
 		this.caste = caste;
@@ -22,6 +22,7 @@ public class StudentSearchParameter {
 		this.ageFrom = ageFrom;
 		this.ageTo = ageTo;
 		this.talent = talent;
+		this.religion = religion;
 	}
 
 	@DoNotRemove
