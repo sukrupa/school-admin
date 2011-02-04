@@ -21,10 +21,11 @@ public class StudentController {
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "update";
-	private static final int AGES_TO = 18;
-	private static final int AGES_FROM = 2;
+    private static final String CONFIRM_UPDATE_VIEW = "confirmUpdate";
     private static final String STUDENT_VIEW = "student";
 
+    private static final int AGES_TO = 18;
+    private static final int AGES_FROM = 2;
     private StudentRepository repository;
     private final List<String> STUDENT_CLASSES = Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private final List<String> GENDERS = Arrays.asList("", "Male", "Female");
@@ -90,6 +91,15 @@ public class StudentController {
         model.put("mother",Arrays.asList(""));
         model.put("talents",Arrays.asList(""));
         return UPDATE_VIEW;
+    }
+
+    @RequestMapping(value = "updateConfirm")
+    @Transactional
+    public String confirmUpdateStudent(
+            @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
+            Map<String, List<?>> model) {
+        repository.update(studentParam);
+        return CONFIRM_UPDATE_VIEW;
     }
 
     private List<DropDownElement> createDropDownList(String selected, List<String> options) {

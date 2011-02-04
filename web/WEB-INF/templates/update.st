@@ -1,6 +1,6 @@
 <html>
 <body>
-<form name="updateStudent" action="update" method="post">
+<form name="updateStudent" action="updateConfirm" method="post">
 
 <h1>Update Student Record</h1>
 

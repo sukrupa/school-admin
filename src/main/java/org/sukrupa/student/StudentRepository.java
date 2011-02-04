@@ -93,4 +93,11 @@ public class StudentRepository {
             conjunction.add(Restrictions.eq(field, parameter));
         }
     }
+
+    public void update(UpdateStudentParameter studentParam) {
+        Student student = find(studentParam.getStudentId());
+        student.setStudentClass(studentParam.getStudentClass());
+        sessionFactory.getCurrentSession().save(student);
+        sessionFactory.getCurrentSession().flush();
+    }
 }

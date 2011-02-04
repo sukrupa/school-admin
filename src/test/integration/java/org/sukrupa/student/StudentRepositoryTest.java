@@ -5,13 +5,14 @@ import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
@@ -21,7 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -105,6 +107,18 @@ public class StudentRepositoryTest {
         databaseHelper.save(pat);
         Student loaded = repository.find("123");
         assertThat(loaded.getNotes(),hasItems(noteOne, noteTwo));
+    }
+
+    @Test
+    public void shouldUpdateStudentInDatabase(){
+        final Student philOld = new StudentBuilder().studentId("12345").name("Phil").studentClass("1 Std").gender("Male").build();
+        final Student philNew = new StudentBuilder().studentId("12345").name("Phil").studentClass("2 Std").gender("Male").build();
+        databaseHelper.save(philOld);
+        Student s = repository.findAll().get(0);
+        UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId()).name(s.getName()).gender(s.getGender()).studentClass("2 Std").build();
+        repository.update(updateParameter);
+        Student retrievedPhil = repository.findAll().get(0);
+        assertThat(retrievedPhil, is(philNew));
     }
 
 }

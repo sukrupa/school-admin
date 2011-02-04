@@ -30,7 +30,7 @@ public class ViewStudentTest {
     @Test
     public void shouldDisplayAStudent() {
         String studentId = "123";
-        Student suhas = new StudentBuilder().name("suhas").male().id(studentId).build();
+        Student suhas = new StudentBuilder().name("suhas").male().studentId(studentId).build();
         save(suhas);
         ViewStudentPage page = new ViewStudentPage(driver, studentId);
         assertThat(page.getStudentName(), is("suhas"));
