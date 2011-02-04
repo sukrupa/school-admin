@@ -49,11 +49,11 @@
         <attribute name="targetToExecute"/>
         <attribute name="startServerTarget"/>
         <attribute name="stopServerTarget"/>
+        <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
         <attribute name="serverPort" default="8080"/>
 
         <sequential>
-
             <local name="targetToExecute"/>
             <local name="startServerTarget"/>
             <local name="stopServerTarget"/>
@@ -69,8 +69,10 @@
                     <antcall target="@{startServerTarget}"/>
                 </sequential>
                 <sequential>
-                    <wait.for.sukrupa-app host="localhost" port="@{serverPort}"/>
+                    <antcall target="@{checkServerUpTarget}"/>
+
                     <antcall target="@{targetToExecute}"/>
+
                     <antcall target="@{stopServerTarget}"/>
                     <antcall target="@{cleanupTarget}"/>
                 </sequential>
@@ -94,5 +96,6 @@
     </macrodef>
 
     <target name="nothing-to-cleanup"/>
+
 
 </project>

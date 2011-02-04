@@ -6,11 +6,11 @@
 
     <target name="sukrupa-server:start">
         <sequential>
-            <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..." />
+            <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
             <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
                 <jvmarg value="-Xms128m"/>
                 <jvmarg value="-Xmx768m"/>
-                <arg value="${target.war}" />
+                <arg value="${target.war}"/>
                 <classpath>
                     <path refid="classpath.sukrupa.server.run"/>
                 </classpath>
@@ -21,5 +21,55 @@
     <target name="sukrupa-server:stop">
         <exec executable="${ops.deploy.dir}/stop-server.sh"/>
     </target>
+
+    <target name="sukrupa-server:check-is-running">
+        <wait.for.sukrupa-app host="localhost" port="@{serverPort}"/>
+    </target>
+
+    <target name="demo:server-test">
+
+        <run-against-server targetToExecute="demo:failing-test"
+                            startServerTarget="demo:server-start"
+                            checkServerUpTarget="demo:check-server-is-running"
+                            stopServerTarget="demo:server-stop"
+                            cleanupTarget="demo:cleanup"/>
+
+        <fail if="demo.tests.failed" message="Tests failed!"/>
+
+    </target>
+
+    <target name="demo:server-start">
+        <echo message="demo:server start..."/>
+        <waitfor maxwait="5000">
+            <equals arg1="true" arg2="false"/>
+        </waitfor>
+        <echo message="Finished starting." />
+    </target>
+
+    <target name="demo:check-server-is-running">
+        <echo message="demo: "/>
+        <waitfor maxwait="1000">
+            <equals arg1="true" arg2="false"/>
+        </waitfor>
+    </target>
+
+
+    <target name="demo:server-stop">
+        <echo message="demo:server : shutting down"/>
+        <waitfor maxwait="1000">
+            <equals arg1="true" arg2="false"/>
+        </waitfor>
+    </target>
+
+    <target name="demo:failing-test">
+        <echo message="demo:failing-test execute failing test"/>
+        <property name="demo.tests.failed" value="true" />
+    </target>
+
+
+    <target name="demo:cleanup">
+        <echo message="Cleaning up now!"/>
+    </target>
+
 
 </project>
