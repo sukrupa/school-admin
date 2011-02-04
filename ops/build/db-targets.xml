@@ -16,6 +16,7 @@
     <property name="db.url" value="${jdbc.url}"/>
     <property name="db.user" value="${jdbc.user}"/>
     <property name="db.password" value="${jdbc.password}"/>
+    <property name="staging.sql.script.dir" value="install/sql/script/" />
 
     <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
             depends="db:stop, db:clean, db:start, db:update"/>
@@ -61,6 +62,12 @@
     <target name="db:setup">
         <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}">
             <fileset file="${src.sql.script.dir}/create-changelog-table.sql"/>
+        </sql>
+    </target>
+
+    <target name="db:setup:staging">
+        <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}">
+            <fileset file="${staging.sql.script.dir}/create-changelog-table.sql"/>
         </sql>
     </target>
 

@@ -8,6 +8,9 @@ target
 web/WEB-INF/classes
 web/build-number.txt
 
+# WebApp logs for functional tests
+ops/deploy/sukrupa.log
+
 # Twist / Eclipse
 .metadata
 bin
