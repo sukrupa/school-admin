@@ -7,19 +7,22 @@ public class StudentSearchParameter {
 	private String studentClass;
     private String gender;
     private String caste;
-    private String area;
+    private String communityLocation;
 	private String ageFrom;
 	private String ageTo;
 	private String talent;
 
-	public StudentSearchParameter(String studentClass, String gender, String caste, String area, String ageFrom, String ageTo, String talent) {
+	private String religion;
+
+	public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
 		this.studentClass = studentClass;
 		this.gender = gender;
 		this.caste = caste;
-		this.area = area;
+		this.communityLocation = communityLocation;
 		this.ageFrom = ageFrom;
 		this.ageTo = ageTo;
 		this.talent = talent;
+		this.religion = religion;
 	}
 
 	@DoNotRemove
@@ -50,12 +53,12 @@ public class StudentSearchParameter {
 		this.caste = caste;
 	}
 
-	public String getArea() {
-		return area;
+	public String getCommunityLocation() {
+		return communityLocation;
 	}
 
-	public void setArea(String area) {
-		this.area = area;
+	public void setCommunityLocation(String communityLocation) {
+		this.communityLocation = communityLocation;
 	}
 
 	public String getAgeFrom() {
@@ -82,4 +85,11 @@ public class StudentSearchParameter {
 		this.talent = talent;
 	}
 
+	public String getReligion() {
+		return religion;
+	}
+
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
 }

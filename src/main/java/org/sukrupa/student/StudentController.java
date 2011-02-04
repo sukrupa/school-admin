@@ -21,18 +21,23 @@ public class StudentController {
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "update";
-    private static final String UPDATE_RESULTS_VIEW = "updateResults";
+	private static final String UPDATE_RESULTS_VIEW = "updateResults";
     private static final String STUDENT_VIEW = "student";
+	private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+	private static final List<String> GENDERS = Arrays.asList("Male", "Female");
+	private static final List<String> CASTES = Arrays.asList("Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
+	private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
+	private static final List<String> RELIGIONS = Arrays.asList("Hindu", "Christian", "Muslim");
+	private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
+			"Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
 
-    private static final int AGES_TO = 18;
-    private static final int AGES_FROM = 2;
-    private StudentRepository repository;
-    private final List<String> STUDENT_CLASSES = Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
-    private final List<String> GENDERS = Arrays.asList("", "Male", "Female");
-    private final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST");
-    private final List<String> AREAS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
+	private StudentRepository repository;
+	private static final String ANY = "Any";
 
-    @DoNotRemove
+	private static final int AGES_TO = 20;
+	private static final int AGES_FROM = 2;
+
+	@DoNotRemove
     StudentController() {
     }
 
@@ -56,30 +61,28 @@ public class StudentController {
         return STUDENTS_VIEW;
     }
 
-    @RequestMapping(value = "search")
-    public String parametricSearch(Map<String, Object> model) {
-        model.put("classes", STUDENT_CLASSES);
-        model.put("genders", GENDERS);
-        model.put("castes", CASTES);
-        model.put("areas", AREAS);
-        model.put("agesFrom", getAges());
-        model.put("agesTo", getAges());
-        model.put("talents", Arrays.asList("", "Sports", "Science Club", "Humanities", "Creative Writing",
-                "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft"));
-        return SEARCH_VIEW;
-    }
+	@RequestMapping(value = "search")
+	public String parametricSearch(Map<String, Object> model) {
+		model.put("classes", STUDENT_CLASSES);
+	    model.put("genders", GENDERS);
+		model.put("castes", CASTES);
+		model.put("communityLocations", COMMUNITY_LOCATIONS);
+		model.put("religions", RELIGIONS);
+		model.put("agesFrom", getAges());
+		model.put("agesTo", getAges());
+		model.put("talents", TALENTS);
+		return SEARCH_VIEW;
+	}
 
     @RequestMapping(value = "update")
     @Transactional
     public String updateStudent(Map<String, Object> model) {
-
         Student theStudent = repository.findAll().get(0);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
         model.put("castes", createDropDownList(theStudent.getCaste(), CASTES));
-        model.put("areas", createDropDownList(theStudent.getArea(), AREAS));
-
+        model.put("areas", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
         model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
@@ -104,11 +107,11 @@ public class StudentController {
     }
 
     private List<DropDownElement> createDropDownList(String selected, List<String> options) {
-        List<DropDownElement> genders = new ArrayList<DropDownElement>();
+        List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
         for (String genderString : options) {
-            genders.add(new DropDownElement(genderString, genderString.equals(selected)));
+            dropDownElements.add(new DropDownElement(genderString, genderString.equals(selected)));
         }
-        return genders;
+        return dropDownElements;
     }
 
     @RequestMapping(value = "{id}")
@@ -124,7 +127,6 @@ public class StudentController {
     private List<String> getAges() {
         List<String> ages = new ArrayList<String>();
 
-        ages.add("");
         for (int age = AGES_FROM; age <= AGES_TO; age++) {
             ages.add(age + "");
         }
