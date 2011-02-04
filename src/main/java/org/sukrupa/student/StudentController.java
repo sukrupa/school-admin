@@ -49,9 +49,7 @@ public class StudentController {
 			@ModelAttribute("searchParam") StudentSearchParameter searchParam,
 			Map<String, List<Student>> model) {
 
-		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
-				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
-
+		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam));
         return STUDENTS_VIEW;
     }
 
