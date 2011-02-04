@@ -38,11 +38,11 @@ namespace :staging do
     end
 
     task :recreate_database, :roles => :staging_server do
-        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:recreate"
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -buildfile install/dbdeploy/build.xml db:recreate:staging"
     end
 
     task :insert_fake_data, :roles => :staging_server do
-        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:insert-fake-data"
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -buildfile install/dbdeploy/build.xml db:insert-fake-data:staging"
     end
 
     task :safety_check, :roles => :staging_server do
