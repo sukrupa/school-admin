@@ -1,24 +1,24 @@
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (1 , 'Bob1', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','12345', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (1 , 'Bob1', 'Hindu', 'SC', 'Brahmin', 'Cholanaykanahalli','12345', 'Male', '1995-05-24 00:00:00.0', 'LKG')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (2 , 'Bob2', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','34545', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (2 , 'Bob2', 'Hindu', 'SC', 'Brahmin', 'Cholanaykanahalli','34545', 'Female', '1995-01-03 00:00:00.0', 'LKG')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (3 , 'Bob3', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','64262',CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (3 , 'Bob3', 'Hindu', 'SC', 'Brahmin', 'Cholanaykanahalli','64262','Male', '2001-01-01 00:00:00.0', '6 Std')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (4 , 'Bob4', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','16346', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (4 , 'Bob4', 'Hindu', 'SC', 'Brahmin', 'Chamundi Nagar','16346', 'Female', '1994-08-11 00:00:00.0', 'Nursery')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (5 , 'Bob5', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','83415', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (5 , 'Bob5', 'Hindu', 'SC', 'Brahmin', 'Chamundi Nagar','83415', 'Male', '1999-05-05 00:00:00.0', 'Nursery')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (6 , 'Bob6', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','23462', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (6 , 'Bob6', 'Hindu', 'SC', 'Brahmin', 'Chamundi Nagar','23462', 'Male', '2005-05-24 00:00:00.0', 'Nursery')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "DATE_OF_BIRTH")
-VALUES (7 , 'Bob7', 'Hindu', 'Brahmin', 'Brahmin', 'Uttar Pradesh','35734', CURRENT_TIMESTAMP)
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "AREA" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (7 , 'Bob7', 'Hindu', 'SC', 'Brahmin', 'Chamundi Nagar','35734', 'Female', '2000-05-24 00:00:00.0', 'Nursery')
 
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 1, 'Sports' );
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 2, 'Humanities' );

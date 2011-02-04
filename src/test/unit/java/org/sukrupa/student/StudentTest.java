@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
 public class StudentTest {
@@ -70,6 +72,21 @@ public class StudentTest {
     public void shouldDisplayTalentsAsCommaSeperated() {
         Student ron = new StudentBuilder().talents("running", "flying").build();
         assertThat(ron.getTalentsForDisplay(), is("running, flying"));
+    }
+
+    @Test
+    public void shouldCaptureNotesAboutAStudent() {
+        Student suhas = student("suhas");
+        Note firstNote = new Note("note1");
+        Note secondNote = new Note("note2");
+        suhas.addNote(firstNote);
+        suhas.addNote(secondNote);
+        List<Note> notes = suhas.getNotes();
+        assertThat(notes, hasItems(firstNote, secondNote));
+    }
+
+    private Student student(String name) {
+        return student(name, null);
     }
 
     private Student student(String name, LocalDate dateOfBirth) {
