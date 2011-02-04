@@ -1,5 +1,7 @@
 package org.sukrupa.student;
 
+import org.sukrupa.platform.DoNotRemove;
+
 public class StudentSearchParameter {
 
 	private String studentClass;
@@ -18,6 +20,10 @@ public class StudentSearchParameter {
 		this.ageFrom = ageFrom;
 		this.ageTo = ageTo;
 		this.talent = talent;
+	}
+
+	@DoNotRemove
+	public StudentSearchParameter() {
 	}
 
 	public String getStudentClass() {
