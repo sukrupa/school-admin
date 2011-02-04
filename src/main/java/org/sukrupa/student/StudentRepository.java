@@ -96,7 +96,6 @@ public class StudentRepository {
     public boolean update(UpdateStudentParameter studentParam) {
         Student student = find(studentParam.getStudentId());
         if (student==null){
-            System.out.println("Student id " + studentParam.getStudentId() + " not found");
             return false;
         }
         student.setStudentClass(studentParam.getStudentClass());
