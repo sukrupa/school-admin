@@ -90,26 +90,37 @@
     </target>
 
     <target name="test:functional">
-        <run-against-server targetToExecute="test:functional:plain"
-                            startServerTarget="sukrupa-server:start"
+        <run-against-server startServerTarget="sukrupa-server:start"
                             checkServerUpTarget="sukrupa-server:check-is-running"
-                            stopServerTarget="sukrupa-server:stop"/>
-    </target>
+                            stopServerTarget="sukrupa-server:stop">
+            <execute>
+                <test-without-failing type="functional"/>
+            </execute>
+        </run-against-server>
 
-    <target name="test:functional:plain">
-        <test type="functional"/>
+        <fail if="test.functional.failed" message="Some functional tests failed"/>
     </target>
 
     <target name="test:twist"
             depends="db:delete-fake-data, db:insert-fake-data, compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
-        <run-against-server targetToExecute="twist:execute"
-                            startServerTarget="sukrupa-server:start"
+        <run-against-server startServerTarget="sukrupa-server:start"
                             stopServerTarget="sukrupa-server:stop"
-                            cleanupTarget="db:delete-fake-data"/>
-    </target>
+                            cleanupTarget="db:delete-fake-data"
+                            checkServerUpTarget="sukrupa-server:check-is-running">
+            <execute>
+                <ant antfile="${ops.build.dir}/twist.xml"
+                     dir="${src.test.twist.fixtures.dir}"
+                     target="execute-twist"
+                     inheritall="true"
+                     inheritrefs="true" />
+            </execute>
+        </run-against-server>
 
+        <available file="${target.test.twist.failed.file}" property="twist.scenarios.failed"/>
+        <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
+    </target>
 
 
     <target name="package" depends="create.war, create.web.server.jar">

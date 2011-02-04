@@ -36,6 +36,11 @@ public class ViewListOfStudentsTest {
     }
 
     @Test
+    public void fail() {
+        throw new RuntimeException("bang!");
+    }
+
+    @Test
     public void shouldDisplayListOfAllStudentsOrderedByGenderAndName() {
         Talent running = new Talent("running");
         Talent jumping = new Talent("jumping");

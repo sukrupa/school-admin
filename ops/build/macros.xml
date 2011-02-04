@@ -10,18 +10,32 @@
 
     <macrodef name="test">
         <attribute name="type"/>
+
         <sequential>
-            <junit printsummary="false" fork="true" haltonfailure="false" haltonerror="false"
-                   outputtoformatters="false">
+            <test-without-failing type="@{type}"/>
+            <fail if="test.@{type}.failed" message="Some @{type} tests failed"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test-without-failing">
+        <attribute name="type"/>
+
+        <sequential>
+            <junit printsummary="false"
+                   fork="true"
+                   haltonfailure="false" haltonerror="false" outputtoformatters="false">
+
                 <classpath refid="classpath.run.test.@{type}"/>
-                <formatter type="xml" usefile="true"/>
-                <batchtest todir="${target.reports.dir}" failureproperty="test.@{type}.failed">
+                <formatter type="xml"
+                           usefile="true"/>
+                <batchtest todir="${target.reports.dir}"
+                           failureproperty="test.@{type}.failed">
                     <formatter type="plain" usefile="false"/>
-                    <fileset dir="${target.test.@{type}.dir}" includes="**/*Test.class"/>
+                    <fileset dir="${target.test.@{type}.dir}">
+                        <include name="**/*Test.class"/>
+                    </fileset>
                 </batchtest>
             </junit>
-
-            <fail if="test.@{type}.failed" message="Some @{type} tests failed"/>
         </sequential>
     </macrodef>
 
@@ -46,11 +60,12 @@
     </macrodef>
 
     <macrodef name="run-against-server">
-        <attribute name="targetToExecute"/>
         <attribute name="startServerTarget"/>
         <attribute name="stopServerTarget"/>
         <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
+
+        <element name="execute" />
 
         <sequential>
             <local name="targetToExecute"/>
@@ -70,7 +85,7 @@
                 <sequential>
                     <antcall target="@{checkServerUpTarget}"/>
 
-                    <antcall target="@{targetToExecute}"/>
+                    <execute />
 
                     <antcall target="@{stopServerTarget}"/>
                     <antcall target="@{cleanupTarget}"/>
