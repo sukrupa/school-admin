@@ -37,7 +37,6 @@ public class StudentController {
     }
 
     @RequestMapping()
-    @Transactional
     public String all(Map<String, List<Student>> model) {
         model.put(STUDENTS_MODEL, repository.findAll());
         return STUDENTS_VIEW;
@@ -50,7 +49,7 @@ public class StudentController {
 			Map<String, List<Student>> model) {
 
 		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
-				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
+                searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
 
         return STUDENTS_VIEW;
     }

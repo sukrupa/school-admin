@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,7 +38,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 	private final Talent music = new Talent("Music");
 	private final Talent sport = new Talent("Sport");
-	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(new HashSet(Arrays.asList(music, sport))).build();
+	private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
 	private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).build();
     private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").build();
 
@@ -56,8 +57,9 @@ public class StudentRepositoryTest {
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
         databaseHelper.save(sahil, pat, renaud);
-
-        assertThat(repository.findAll(), hasItems(sahil, pat, renaud));
+        List<Student> students = repository.findAll();
+        assertThat(students, hasSize(3));
+        assertThat(students, hasItems(sahil, pat, renaud));
     }
 
     @Test
@@ -83,7 +85,7 @@ public class StudentRepositoryTest {
 	}
 
 	@Test
-	public void shouldReturnListOfTalents() {
+	public void shouldPopulateTalents() {
 		databaseHelper.save(sahil);
 		assertThat(repository.findAll().get(0).getTalents(),hasItems(music,sport));
 	}
