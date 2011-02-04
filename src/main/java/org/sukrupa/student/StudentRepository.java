@@ -44,19 +44,19 @@ public class StudentRepository {
         return (Student) criteria.uniqueResult();
     }
 
-	public List<Student> parametricSearch(String studentClass, String gender,
-	                                      String caste, String area, String ageFrom, String ageTo, String talent) {
+	public List<Student> parametricSearch(StudentSearchParameter searchParam) {
 
-		Conjunction conjunction = createConjunction(studentClass, gender, caste, area);
-		if (!ageFrom.isEmpty()) {
-			LocalDate birthDateFrom = computeBirthDateFromAge(Integer.parseInt(ageFrom));
-			LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(ageTo));
+		Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
+				searchParam.getCaste(), searchParam.getArea());
+		if (!searchParam.getAgeFrom().isEmpty()) {
+			LocalDate birthDateFrom = computeBirthDateFromAge(Integer.parseInt(searchParam.getAgeFrom()));
+			LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(searchParam.getAgeTo()));
 			conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
 		}
 
 		Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
 		criteria.add(conjunction);
-		addTalentsSearchCriteria(criteria, talent);
+		addTalentsSearchCriteria(criteria, searchParam.getTalent());
 
 		return criteria.list();
 	}

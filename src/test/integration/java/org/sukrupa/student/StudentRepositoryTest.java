@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
@@ -10,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -72,14 +70,14 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
-        assertThat(repository.parametricSearch("Nursery", "", "", "", "", "", ""), hasItems(renaud, sahil));
+
+	    assertThat(repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build()), hasItems(renaud, sahil));
     }
 
 	@Test
 	public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
 		databaseHelper.save(sahil,pat,renaud);
-
-		List<Student> students = repository.parametricSearch("", "", "", "", "18", "22", "");
+		List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").build());
 		assertThat(students.size(), is(1));
 		assertThat(students, hasItems(renaud));
 	}

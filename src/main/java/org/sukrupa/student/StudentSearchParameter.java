@@ -10,6 +10,16 @@ public class StudentSearchParameter {
 	private String ageTo;
 	private String talent;
 
+	public StudentSearchParameter(String studentClass, String gender, String caste, String area, String ageFrom, String ageTo, String talent) {
+		this.studentClass = studentClass;
+		this.gender = gender;
+		this.caste = caste;
+		this.area = area;
+		this.ageFrom = ageFrom;
+		this.ageTo = ageTo;
+		this.talent = talent;
+	}
+
 	public String getStudentClass() {
 		return studentClass;
 	}
