@@ -1,13 +1,16 @@
 package org.sukrupa.student;
 
+import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,8 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -92,6 +94,19 @@ public class StudentRepositoryTest {
     public void shouldReturnStudentBasedOnStudentId(){
         databaseHelper.save(pat);
         assertThat(repository.find("123"),is(pat));
+    }
+
+    @Test
+    @Ignore("[suhas, pradeep] WIP")
+    public void shouldPersistStudentWithNotes()
+    {
+        Note noteOne = new Note("note1");
+        Note noteTwo = new Note("note2");
+        pat.addNote(noteOne);
+        pat.addNote(noteTwo);
+        databaseHelper.save(pat);
+        Student loaded = repository.find("123");
+        assertThat(loaded.getNotes(),hasItems(noteOne, noteTwo));
     }
 
 }
