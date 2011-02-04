@@ -26,6 +26,10 @@ public class StudentController {
     private static final String STUDENT_VIEW = "student";
 
     private StudentRepository repository;
+    private final List<String> STUDENT_CLASSES = Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private final List<String> GENDERS = Arrays.asList("", "Male", "Female");
+    private final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST");
+    private final List<String> AREAS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama","Nagenahalli","Subramnya Nagar");
 
     @DoNotRemove
     StudentController() {
@@ -57,10 +61,10 @@ public class StudentController {
 
 	@RequestMapping(value = "search")
 	public String parametricSearch(Map<String, Object> model) {
-		model.put("classes", Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
-	    model.put("genders", Arrays.asList("", "Male", "Female"));
-		model.put("castes", Arrays.asList("", "Some caste"));
-		model.put("areas", Arrays.asList(""));
+		model.put("classes", STUDENT_CLASSES);
+	    model.put("genders", GENDERS);
+		model.put("castes", CASTES);
+		model.put("areas", AREAS);
 		model.put("agesFrom", getAges());
 		model.put("agesTo", getAges());
 		model.put("talents", Arrays.asList("", "Sports","Science Club", "Humanities", "Creative Writing",
@@ -70,24 +74,32 @@ public class StudentController {
 
     @RequestMapping(value = "update")
     @Transactional
-    public String updateStudent(Map<String, List<String>> model){
+    public String updateStudent(Map<String, List<?>> model){
 
-        //hard-coded student
-        //TODO: get actual student from search results
         Student theStudent = repository.findAll().get(0);
+
+        model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
+        model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
+        model.put("castes", createDropDownList(theStudent.getCaste(), CASTES));
+        model.put("areas", createDropDownList(theStudent.getArea(), AREAS));
 
         model.put("studentId",Arrays.asList(theStudent.getStudentId()));
         model.put("name",Arrays.asList(theStudent.getName()));
         model.put("dateOfBirth",Arrays.asList(theStudent.getDateOfBirth().toString()));
-        model.put("gender",Arrays.asList(theStudent.getGender()));
         model.put("religion",Arrays.asList(theStudent.getReligion()));
-        model.put("caste",Arrays.asList(theStudent.getCaste()));
         model.put("subCaste",Arrays.asList(theStudent.getSubCaste()));
-        model.put("area",Arrays.asList(theStudent.getArea()));
         model.put("father",Arrays.asList(""));
         model.put("mother",Arrays.asList(""));
         model.put("talents",Arrays.asList(""));
         return UPDATE_VIEW;
+    }
+
+    private List<DropDownElement> createDropDownList(String selected, List<String> options) {
+        List<DropDownElement> genders = new ArrayList<DropDownElement>();
+        for (String genderString : options) {
+            genders.add(new DropDownElement(genderString, genderString.equals(selected)));
+        }
+        return genders;
     }
 
     @RequestMapping(value = "{id}")
@@ -110,4 +122,22 @@ public class StudentController {
 
 		return ages;
 	}
+
+    private class DropDownElement {
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        private final String value;
+        private final boolean selected;
+
+        public DropDownElement(String value, boolean selected) {
+            this.value = value;
+            this.selected = selected;
+        }
+    }
 }
