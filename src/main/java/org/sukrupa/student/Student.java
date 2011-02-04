@@ -4,6 +4,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -27,7 +29,8 @@ public class Student {
     private String caste;
     @Column(name = "SUB_CASTE")
     private String subCaste;
-    private String area;
+	@Column(name = "COMMUNITY_LOCATION")
+    private String communityLocation;
     private String gender;
 	@Column(name = "STUDENT_CLASS")
 	private String studentClass;
@@ -37,7 +40,8 @@ public class Student {
     @Transient
     private List<Note> notes = new ArrayList<Note>();
 
-	@ManyToMany
+	//@Fetch(value = FetchMode.JOIN)
+	@ManyToMany//(fetch = FetchType.EAGER, targetEntity = Talent.class)
     @JoinTable(name = "STUDENT_TALENT",
             joinColumns = {@JoinColumn(name = "student_id")},
             inverseJoinColumns = {@JoinColumn(name = "talent_id")})
@@ -47,13 +51,13 @@ public class Student {
     public Student() {
     }
 
-	public Student(String studentId, String name, String religion, String caste, String subCaste, String area, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
+	public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
 		this.studentId = studentId;
 		this.name = name;
 		this.religion = religion;
 		this.caste = caste;
 		this.subCaste = subCaste;
-		this.area = area;
+		this.communityLocation = communityLocation;
 		this.gender = gender;
 		this.studentClass = studentClass;
 		this.dateOfBirth = dateOfBirth;
@@ -76,8 +80,8 @@ public class Student {
         return subCaste;
     }
 
-    public String getArea() {
-        return area;
+    public String getCommunityLocation() {
+        return communityLocation;
     }
 
 	public String getStudentId() {

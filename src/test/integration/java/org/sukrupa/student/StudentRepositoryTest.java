@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
@@ -71,7 +72,15 @@ public class StudentRepositoryTest {
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-	    assertThat(repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build()), hasItems(renaud, sahil));
+	    List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build());
+	    for (Student s : students) {
+		    System.out.println("Talentss" + s.getTalents());
+		    for (Talent t : s.getTalents()) {
+			    System.err.println(s.getName() + "++++++++++++++++++++++++" + t + "+++++++++++++++++++++++++++++++++++++");
+		    }
+	    }
+	    assertThat(students, Matchers.<Object>hasSize(2));
+	    assertThat(students, hasItems(renaud, sahil));
     }
 
 	@Test

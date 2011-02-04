@@ -17,15 +17,16 @@ public class StudentRepository {
     private static final String STUDENT_CLASS = "studentClass";
     private static final String GENDER = "gender";
     private static final String CASTE = "caste";
-    private static final String AREA = "area";
+    private static final String COMMUNITY_LOCATION = "communityLocation";
     private static final String NAME = "name";
 	private static final String DATE_OF_BIRTH = "dateOfBirth";
     private static final String STUDENT_ID = "studentId";
 	private static final String TALENTS = "talents";
 	private static final String DESCRIPTION = "description";
 	private final SessionFactory sessionFactory;
+	private static final String RELIGION = "religion";
 
-    @Autowired
+	@Autowired
     public StudentRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -47,11 +48,9 @@ public class StudentRepository {
 	public List<Student> parametricSearch(StudentSearchParameter searchParam) {
 
 		Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
-				searchParam.getCaste(), searchParam.getArea());
+				searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
 		if (!searchParam.getAgeFrom().isEmpty()) {
-			LocalDate birthDateFrom = computeBirthDateFromAge(Integer.parseInt(searchParam.getAgeFrom()));
-			LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(searchParam.getAgeTo()));
-			conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
+			addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
 		}
 
 		Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
@@ -61,8 +60,14 @@ public class StudentRepository {
 		return criteria.list();
 	}
 
-	private int getInclusiveUpperBoundAge(String ageTo) {
-		return Integer.parseInt(ageTo)+1;
+	private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {
+		LocalDate birthDateFrom = computeBirthDateFromAge(ageFrom);
+		LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(ageTo));
+		conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
+	}
+
+	private int getInclusiveUpperBoundAge(int ageTo) {
+		return ageTo + 1;
 	}
 
 	private void addTalentsSearchCriteria(Criteria criteria, String talent) {
@@ -79,12 +84,13 @@ public class StudentRepository {
         return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
     }
 
-    private Conjunction createConjunction(String studentClass, String gender, String caste, String area) {
+    private Conjunction createConjunction(String studentClass, String gender, String caste, String communityLocation, String religion) {
         Conjunction conjunction = Restrictions.conjunction();
         addRestrictionIfNotEmpty(STUDENT_CLASS, studentClass, conjunction);
         addRestrictionIfNotEmpty(GENDER, gender, conjunction);
         addRestrictionIfNotEmpty(CASTE, caste, conjunction);
-        addRestrictionIfNotEmpty(AREA, area, conjunction);
+        addRestrictionIfNotEmpty(COMMUNITY_LOCATION, communityLocation, conjunction);
+        addRestrictionIfNotEmpty(RELIGION, religion, conjunction);
         return conjunction;
     }
 

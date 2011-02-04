@@ -21,13 +21,14 @@ public class StudentController {
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "update";
-	private static final int AGES_TO = 18;
+	private static final int AGES_TO = 20;
 	private static final int AGES_FROM = 2;
     private static final String STUDENT_VIEW = "student";
 
     private StudentRepository repository;
+	private static final String ANY = "Any";
 
-    @DoNotRemove
+	@DoNotRemove
     StudentController() {
     }
 
@@ -55,20 +56,21 @@ public class StudentController {
 
 	@RequestMapping(value = "search")
 	public String parametricSearch(Map<String, Object> model) {
-		model.put("classes", Arrays.asList("", "Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
-	    model.put("genders", Arrays.asList("", "Male", "Female"));
-		model.put("castes", Arrays.asList("", "Some caste"));
-		model.put("areas", Arrays.asList(""));
+		model.put("classes", Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std"));
+	    model.put("genders", Arrays.asList("Male", "Female"));
+		model.put("castes", Arrays.asList("Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed"));
+		model.put("communityLocations", Arrays.asList("Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar"));
+		model.put("religions", Arrays.asList("Hindu", "Christian", "Muslim"));
 		model.put("agesFrom", getAges());
 		model.put("agesTo", getAges());
-		model.put("talents", Arrays.asList("", "Sports","Science Club", "Humanities", "Creative Writing",
+		model.put("talents", Arrays.asList("Sports","Science Club", "Humanities", "Creative Writing",
 				"Dancing","Debate","Singing","Drama","Musical Instrument","Quiz","Story Writing","Choir","Art","Drawing","Craft"));
 		return SEARCH_VIEW;
 	}
 
     @RequestMapping(value = "update")
     @Transactional
-    public String updateStudent(Map<String, List<String>> model){
+    public String updateStudent(Map<String, Object> model){
 
         //hard-coded student
         //TODO: get actual student from search results
@@ -81,7 +83,7 @@ public class StudentController {
         model.put("religion",Arrays.asList(theStudent.getReligion()));
         model.put("caste",Arrays.asList(theStudent.getCaste()));
         model.put("subCaste",Arrays.asList(theStudent.getSubCaste()));
-        model.put("area",Arrays.asList(theStudent.getArea()));
+        model.put("communityLocation",Arrays.asList(theStudent.getCommunityLocation()));
         model.put("father",Arrays.asList(""));
         model.put("mother",Arrays.asList(""));
         model.put("talents",Arrays.asList(""));
@@ -101,7 +103,6 @@ public class StudentController {
 	private List<String> getAges(){
 		List<String> ages = new ArrayList<String>();
 
-		ages.add("");
 		for(int age = AGES_FROM; age <= AGES_TO; age++) {
 			ages.add(age+"");
 		}
