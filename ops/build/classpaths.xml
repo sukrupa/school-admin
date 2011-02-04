@@ -6,12 +6,6 @@
         <fileset dir="${lib.main.dir}" includes="*.jar"/>
     </path>
 
-    <path id="classpath.run">
-        <path refid="classpath.compilation"/>
-        <pathelement location="${resources.main.dir}" />
-        <pathelement location="${target.main.dir}"/>
-    </path>
-
     <path id="classpath.compilation.test.shared">
         <path refid="classpath.run"/>
         <fileset dir="${lib.test.dir}" includes="*.jar"/>
@@ -22,11 +16,6 @@
         <pathelement location="${target.test.shared.dir}"/>
     </path>
 
-    <path id="classpath.run.test.unit">
-        <path refid="classpath.compilation.test.unit"/>
-        <pathelement location="${target.test.unit.dir}"/>
-    </path>
-
     <path id="classpath.compilation.test.integration">
         <path refid="classpath.compilation.test.shared"/>
         <pathelement location="${target.test.shared.dir}"/>
@@ -35,10 +24,26 @@
     <path id="classpath.compilation.test.functional">
         <path refid="classpath.compilation.test.shared"/>
         <pathelement location="${target.test.shared.dir}"/>
+    </path>
+
+    <path id="classpath.compilation.test.twist">
+        <path refid="classpath.compilation.test.shared"/>
+        <pathelement location="${target.test.shared.dir}"/>
         <fileset dir="${lib.twist.dir}">
-            <exclude name="*slf4*.jar" />
-            <include name="*.jar" />
+            <exclude name="*slf4*.jar"/>
+            <include name="*.jar"/>
         </fileset>
+    </path>
+
+    <path id="classpath.run">
+        <path refid="classpath.compilation"/>
+        <pathelement location="${resources.main.dir}"/>
+        <pathelement location="${target.main.dir}"/>
+    </path>
+
+    <path id="classpath.run.test.unit">
+        <path refid="classpath.compilation.test.unit"/>
+        <pathelement location="${target.test.unit.dir}"/>
     </path>
 
     <path id="classpath.run.test.integration">
@@ -48,31 +53,38 @@
     </path>
 
     <path id="classpath.run.test.functional">
-        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411/sahi" />
-        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411" />
         <path refid="classpath.compilation.test.functional"/>
-        <pathelement location="${target.test.twist.functional-test.dir}"/>
+        <pathelement location="${target.test.functional.dir}"/>
+        <pathelement location="${target.test.shared.dir}"/>
+    </path>
+
+    <path id="classpath.run.test.twist">
+        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411/sahi"/>
+        <pathelement location="${lib.twist.dir}/com.thoughtworks.twist.driver.sahi_3.0.0.9411"/>
+        <path refid="classpath.compilation.test.twist"/>
+        <pathelement location="${target.test.twist.fixtures.dir}"/>
     </path>
 
 
     <path id="classpath.run.twist.scenarios">
-        <path refid="classpath.run.test.functional"/>
+        <path refid="classpath.run.test.twist"/>
         <fileset dir="${ant.library.dir}" includes="*.jar"/>
     </path>
 
     <path id="classpath.cobertura">
         <fileset dir="${cobertura.dir}">
-            <include name="cobertura.jar" />
-            <include name="lib/**/*.jar" />
+            <include name="cobertura.jar"/>
+            <include name="lib/**/*.jar"/>
         </fileset>
         <fileset dir="${lib.test.dir}" includes="*.jar"/>
         <fileset dir="${lib.main.dir}" includes="*.jar"/>
         <pathelement location="${target.test.unit.dir}"/>
         <pathelement location="${target.test.shared.dir}"/>
         <pathelement location="${target.test.integration.dir}"/>
+        <pathelement location="${target.test.functional.dir}"/>
     </path>
 
     <path id="classpath.sukrupa.server.run">
-        <path refid="classpath.run" />
+        <path refid="classpath.run"/>
     </path>
 </project>

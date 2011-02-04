@@ -3,9 +3,9 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.ArrayList;
@@ -46,21 +46,11 @@ public class StudentController {
 	@RequestMapping(value = "searchResult")
     @Transactional
 	public String parametricSearchResult(
-//			@RequestParam(value = "searchParam") SearchParameter searchParam,
-			@RequestParam(value = "class") String studentClass,
-			@RequestParam(value = "gender") String gender,
-			@RequestParam(value = "caste") String caste,
-			@RequestParam(value = "area") String area,
-			@RequestParam(value = "ageFrom") String ageFrom,
-			@RequestParam(value = "ageTo") String ageTo,
-			@RequestParam(value = "talent") String talent,
+			@ModelAttribute("searchParam") StudentSearchParameter searchParam,
 			Map<String, List<Student>> model) {
 
-//		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
-//				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
-
-		model.put(STUDENTS_MODEL, repository.parametricSearch(studentClass, gender,
-				caste, area, ageFrom, ageTo, talent));
+		model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam.getStudentClass(), searchParam.getGender(),
+				searchParam.getCaste(), searchParam.getArea(), searchParam.getAgeFrom(), searchParam.getAgeTo(), searchParam.getTalent()));
 
         return STUDENTS_VIEW;
     }

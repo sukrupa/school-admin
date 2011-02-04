@@ -19,8 +19,9 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.test.functional.dir}"/>
         <mkdir dir="${target.test.cobertura_instrumented.dir}"/>
-        <mkdir dir="${target.test.twist.functional-test.dir}"/>
+        <mkdir dir="${target.test.twist.fixtures.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.twist.dir}"/>
@@ -29,16 +30,15 @@
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:start, db:update, test:integration, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, deploy:save-build-number, package, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci, including functional tests"
             depends="all, test:twist">
-
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional, compile:test:twist"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -61,13 +61,18 @@
     </target>
 
     <target name="compile:test:functional">
-        <compile srcdir="${src.test.functional.src.dir}" destdir="${target.test.twist.functional-test.dir}"
+        <compile srcdir="${src.test.functional.dir}" destdir="${target.test.functional.dir}"
                  classpathref="classpath.compilation.test.functional"/>
-        <copy todir="${target.test.twist.functional-test.dir}">
-            <fileset dir="${src.test.functional.src.dir}">
+    </target>
+
+    <target name="compile:test:twist">
+        <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
+                 classpathref="classpath.compilation.test.twist"/>
+        <copy todir="${target.test.twist.fixtures.dir}">
+            <fileset dir="${src.test.twist.src.dir}">
                 <exclude name="**/*.java"/>
             </fileset>
-            <fileset dir="${src.test.functional.twist-conf.dir}" />
+            <fileset dir="${src.test.twist.conf.dir}"/>
         </copy>
     </target>
 
@@ -77,8 +82,6 @@
         </copy>
     </target>
 
-    <target name="test:all" depends="test:unit, test:integration"/>
-
     <target name="test:unit">
         <test type="unit"/>
     </target>
@@ -87,19 +90,25 @@
         <test type="integration"/>
     </target>
 
+    <target name="test:functional">
+        <run-against-server targetToExecute="test:functional:plain"
+                            startServerTarget="sukrupa-server:start"
+                            stopServerTarget="sukrupa-server:stop"/>
+    </target>
 
-    <!-- -->
+    <target name="test:functional:plain">
+        <test type="functional"/>
+    </target>
+
     <target name="test:twist"
-            depends="db:delete-fake-data, db:insert-fake-data, compile:test:functional"
+            depends="db:delete-fake-data, db:insert-fake-data, compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
-       <run-against-server targetToExecute="twist:execute"
-                           startServerTarget="sukrupa-server:start"
-                           stopServerTarget="sukrupa-server:stop"
-                           cleanupTarget="db:delete-fake-data"/>
-
+        <run-against-server targetToExecute="twist:execute"
+                            startServerTarget="sukrupa-server:start"
+                            stopServerTarget="sukrupa-server:stop"
+                            cleanupTarget="db:delete-fake-data"/>
     </target>
-    <!-- -->
 
     <target name="package" depends="create.war, create.web.server.jar">
         <zip destfile="${target.dir}/${app.zip.name}">
@@ -146,6 +155,5 @@
             </manifest>
         </jar>
     </target>
-
 
 </project>

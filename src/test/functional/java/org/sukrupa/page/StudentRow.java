@@ -21,7 +21,7 @@ public class StudentRow {
     }
 
     public String getGender() {
-        return row.findElement(By.xpath("td[@class='sex']")).getText();
+        return row.findElement(By.xpath("td[@class='gender']")).getText();
     }
 
     public int getAge() {
