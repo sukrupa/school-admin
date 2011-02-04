@@ -6,7 +6,6 @@
     <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
     <import file="cobertura.xml"/>
-    <import file="functional-test.xml"/>
     <import file="sukrupa-server.xml"/>
 
     <target name="clean">
@@ -93,6 +92,7 @@
     <target name="test:functional">
         <run-against-server targetToExecute="test:functional:plain"
                             startServerTarget="sukrupa-server:start"
+                            checkServerUpTarget="sukrupa-server:check-is-running"
                             stopServerTarget="sukrupa-server:stop"/>
     </target>
 
@@ -109,6 +109,8 @@
                             stopServerTarget="sukrupa-server:stop"
                             cleanupTarget="db:delete-fake-data"/>
     </target>
+
+
 
     <target name="package" depends="create.war, create.web.server.jar">
         <zip destfile="${target.dir}/${app.zip.name}">

@@ -1,7 +1,16 @@
 <project name="twist">
 
+    <target name="twist:execute">
+        <ant antfile="${ops.build.dir}/twist.xml"
+             dir="${src.test.twist.fixtures.dir}"
+             target="execute-twist"
+             inheritall="true"
+             inheritrefs="true">
+        </ant>
+    </target>
+
     <target name="execute-twist">
-        <exec executable="${ops.local.dir}/kill-firefox.sh" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
         <echo message="Executing Twist tests from ${src.test.twist.fixtures.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
@@ -18,7 +27,7 @@
             <fileset dir="${src.test.twist.fixtures.dir}/scenarios" includes="*"/>
         </twist.runner>
 
-        <exec executable="${ops.local.dir}/kill-firefox.sh" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
 
         <fail if="twist.scenarios.failed" message="Twist tests have failed."/>
     </target>

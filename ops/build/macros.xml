@@ -49,11 +49,10 @@
         <attribute name="targetToExecute"/>
         <attribute name="startServerTarget"/>
         <attribute name="stopServerTarget"/>
+        <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
-        <attribute name="serverPort" default="8080"/>
 
         <sequential>
-
             <local name="targetToExecute"/>
             <local name="startServerTarget"/>
             <local name="stopServerTarget"/>
@@ -65,12 +64,14 @@
             </sequential>
             <parallel>
                 <sequential>
-                    <echo message="Starting Server using target [@{startServerTarget}] on port [@{serverPort}]..."/>
+                    <echo message="Starting Server using target [@{startServerTarget}] ..."/>
                     <antcall target="@{startServerTarget}"/>
                 </sequential>
                 <sequential>
-                    <wait.for.sukrupa-app host="localhost" port="@{serverPort}"/>
+                    <antcall target="@{checkServerUpTarget}"/>
+
                     <antcall target="@{targetToExecute}"/>
+
                     <antcall target="@{stopServerTarget}"/>
                     <antcall target="@{cleanupTarget}"/>
                 </sequential>
@@ -78,7 +79,7 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="wait.for.sukrupa-app">
+    <macrodef name="wait.for.server">
         <attribute name="maxwait" default="30"/>
         <attribute name="host"/>
         <attribute name="port"/>
@@ -94,5 +95,6 @@
     </macrodef>
 
     <target name="nothing-to-cleanup"/>
+
 
 </project>

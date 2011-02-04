@@ -1,4 +1,4 @@
 input,strudentName,expectedGreeting
-false,PavRon,Hello PavRon
+true,PavRon,Hello PavRon
 false,JonnyBoy,Hello JonnyBoy
 false,Teddy,Hello Teddy
