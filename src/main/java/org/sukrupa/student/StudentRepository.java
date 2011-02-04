@@ -34,7 +34,6 @@ public class StudentRepository {
     @SuppressWarnings("unchecked")
     public List<Student> findAll() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
-
         return addOrderCriteria(criteria).list();
     }
 
@@ -98,5 +97,23 @@ public class StudentRepository {
         if (!parameter.isEmpty()) {
             conjunction.add(Restrictions.eq(field, parameter));
         }
+    }
+
+    public boolean update(UpdateStudentParameter studentParam) {
+        Student student = find(studentParam.getStudentId());
+        if (student==null){
+            System.out.println("Student id " + studentParam.getStudentId() + " not found");
+            return false;
+        }
+        student.setStudentClass(studentParam.getStudentClass());
+        student.setGender(studentParam.getGender());
+        student.setName(studentParam.getName());
+        student.setReligion(studentParam.getReligion());
+        student.setCaste(studentParam.getCaste());
+        student.setSubCaste(studentParam.getSubCaste());
+        student.setCommunityLocation(studentParam.getArea());
+        sessionFactory.getCurrentSession().save(student);
+        sessionFactory.getCurrentSession().flush();
+        return true;
     }
 }

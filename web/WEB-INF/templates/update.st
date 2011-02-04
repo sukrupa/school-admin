@@ -1,106 +1,86 @@
 <html>
 <body>
-<form name="updateStudent" action="update" method="post">
-<form name="updateStudent" action="update" method="post">
+<form name="updateStudent" action="updateResults" method="post">
 
 <h1>Update Student Record</h1>
 
 	<span>Student ID</span>
-	<input type="text" name="studentId" value=
-		$studentId:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="studentId" value="$studentId$"></input>
 
 	<br/>
 
 	<span>Name</span>
-	<input type="text" name="name" value=
-		$name:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="name" value="$name$"></input>
 
 	<br/>
 
 	<span>Date of birth</span>
-	<input type="text" name="dateOfBirth" value=
-		$dateOfBirth:{
-		$it$
-		}$  >
-	</input>
+	<input type="text" name="dateOfBirth" value="$dateOfBirth$"></input>
 
 	<br/>
 
-	<span>Gender</span>
-	<input type="text" name="gender" value=
-		$gender:{
-		$it$
-		}$    >
-	</input>
+    <span>Gender</span>
+    <select name="gender">
+        $genders:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
+
+    <br/>
+
+    <span>Class</span>
+    <select name="studentClass" >
+        $classes:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
+
+    <br/>
+
+    <span>Religion</span>
+    <input type="text" name="religion" value="$religion$"></input>
+
+    <br/>
+
+    <span>Caste</span>
+    <select name="caste" >
+        $castes:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
 
 	<br/>
 
-	<span>Religion</span>
-	<input type="text" name="religion" value=
-		$religion:{
-	    $it$
-		}$    >
-	</input>
+    <span>Subcaste</span>
+    <input type="text" name="subCaste" value=
+    $subCaste:{
+    $it$
+    }$   >
+    </input>
 
-	<br/>
+    <br/>
 
-	<span>Caste</span>
-	<input type="text" name="caste" value=
-		$caste:{
-		$it$
-		}$   >
-	</input>
+    <span>Area</span>
+    <select name="area" >
+        $areas:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
 
-	<br/>
-
-	<span>Subcaste</span>
-	<input type="text" name="subCaste" value=
-		$subCaste:{
-		$it$
-		}$   >
-	</input>
-
-	<br/>
-
-	<span>Area</span>
-	<input type="text" name="area" value=
-		$area:{
-		$it$
-		}$ >
-	</input>
-
-	<br/>
+    <br/>
 
 	<span>Father</span>
-	<input type="text" name="father" value=
-		$father:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="father" value="$father$"></input>
 
 	<br/>
 
 	<span>Mother</span>
-	<input type="text" name="mother" value=
-		$mother:{
-		$it$
-		}$   >
-	</input>
+	<input type="text" name="mother" value="$mother$"></input>
 
 	<br/>
 
 	<span>Talents</span>
-	<input type="text" name="talents" value=
-		$talents:{
-		$it$
-		}$   >
-	</input>
+	<input type="text" name="talents" value="$talents$"></input>
 
 	<br/>
 

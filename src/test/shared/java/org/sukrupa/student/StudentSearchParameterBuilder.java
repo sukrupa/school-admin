@@ -28,6 +28,7 @@ public class StudentSearchParameterBuilder {
 		return this;
 	}
 
+
 	public StudentSearchParameterBuilder area(String area) {
 		this.area = area;
 		return this;

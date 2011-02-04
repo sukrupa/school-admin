@@ -5,6 +5,7 @@
 
     <property name="sukrupa.webserver.jar.name" value="web-server.jar"/>
     <property name="sukrupa.app.class.name" value="org.sukrupa.app.SchoolAdminApp"/>
+    <property name="sukrupa.app.port" value="8080"/>
 
     <property name="src.dir" value="${module.dir}/src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
@@ -40,13 +41,17 @@
     <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>
     <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
     <property name="target.test.functional.dir" value="${target.test.dir}/functional"/>
-    <property name="target.test.twist.fixtures.dir" value="${target.test.dir}/twist/functional-test"/>
-    <property name="target.test.twist.sukrupa-code.dir" value="${target.test.dir}/twist/sukrupa-code"/>
+
+    <property name="target.test.twist.dir" value="${target.test.dir}/twist/" />
+    <property name="target.test.twist.fixtures.dir" value="${target.test.twist.dir}/functional-test"/>
+    <property name="target.test.twist.sukrupa-code.dir" value="${target.test.twist.dir}/sukrupa-code"/>
+    <property name="target.test.twist.failed.file" value="${target.test.twist.dir}/twist.scenarios.failed" />
+    <property name="target.sahi.browser.profiles"
+              value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
+
     <property name="target.reports.dir" value="${target.dir}/reports"/>
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
-    <property name="target.sahi.browser.profiles"
-              value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
 
 
     <property name="app.zip.name" value="school-admin.zip"/>

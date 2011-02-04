@@ -1,7 +1,11 @@
 <project name="twist">
+    <import file="properties.xml" />
+    <import file="macros.xml" />
 
     <target name="execute-twist">
-        <exec executable="${ops.local.dir}/kill-firefox.sh" />
+        <delete file="${target.test.twist.failed.file}" />
+
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
         <echo message="Executing Twist tests from ${src.test.twist.fixtures.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
@@ -15,12 +19,18 @@
                 failureproperty="twist.scenarios.failed"
                 classpathref="classpath.run.twist.scenarios"
                 tags="!in-progress">
+
             <fileset dir="${src.test.twist.fixtures.dir}/scenarios" includes="*"/>
         </twist.runner>
 
-        <exec executable="${ops.local.dir}/kill-firefox.sh" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
 
-        <fail if="twist.scenarios.failed" message="Twist tests have failed."/>
+        <antcall target="report-status" />
     </target>
 
+    <target name="report-status" if="twist.scenarios.failed">
+        <propertyfile file="${target.test.twist.failed.file}">
+            <entry key="twist.scenarios.failed" value="${twist.scenarios.failed}" />
+        </propertyfile>
+    </target>
 </project>
