@@ -51,7 +51,6 @@
         <attribute name="stopServerTarget"/>
         <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
-        <attribute name="serverPort" default="8080"/>
 
         <sequential>
             <local name="targetToExecute"/>
@@ -65,7 +64,7 @@
             </sequential>
             <parallel>
                 <sequential>
-                    <echo message="Starting Server using target [@{startServerTarget}] on port [@{serverPort}]..."/>
+                    <echo message="Starting Server using target [@{startServerTarget}] ..."/>
                     <antcall target="@{startServerTarget}"/>
                 </sequential>
                 <sequential>
