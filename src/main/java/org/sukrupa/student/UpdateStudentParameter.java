@@ -82,4 +82,52 @@ public class UpdateStudentParameter {
     public String getTalents() {
         return talents;
     }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setStudentClass(String studentClass) {
+        this.studentClass = studentClass;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public void setCaste(String caste) {
+        this.caste = caste;
+    }
+
+    public void setSubCaste(String subCaste) {
+        this.subCaste = subCaste;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    public void setTalents(String talents) {
+        this.talents = talents;
+    }
 }

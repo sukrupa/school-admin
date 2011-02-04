@@ -126,9 +126,14 @@ public class StudentRepositoryTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std").build();
-        repository.update(updateParameter);
+        boolean status = repository.update(updateParameter);
         Student retrievedPhil = repository.findAll().get(0);
         assertThat(retrievedPhil, is(philNew));
+        assertThat(status, is(true));
     }
 
+    @Test
+    public void shouldFailToUpdateNonexistantStudent() {
+        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), is(false));
+    }
 }

@@ -93,8 +93,12 @@ public class StudentRepository {
         }
     }
 
-    public void update(UpdateStudentParameter studentParam) {
+    public boolean update(UpdateStudentParameter studentParam) {
         Student student = find(studentParam.getStudentId());
+        if (student==null){
+            System.out.println("Student id " + studentParam.getStudentId() + " not found");
+            return false;
+        }
         student.setStudentClass(studentParam.getStudentClass());
         student.setGender(studentParam.getGender());
         student.setName(studentParam.getName());
@@ -104,5 +108,6 @@ public class StudentRepository {
         student.setArea(studentParam.getArea());
         sessionFactory.getCurrentSession().save(student);
         sessionFactory.getCurrentSession().flush();
+        return true;
     }
 }
