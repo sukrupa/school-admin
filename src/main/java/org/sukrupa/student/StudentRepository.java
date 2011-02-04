@@ -50,7 +50,7 @@ public class StudentRepository {
 		Conjunction conjunction = createConjunction(studentClass, gender, caste, area);
 		if (!ageFrom.isEmpty()) {
 			LocalDate birthDateFrom = computeBirthDateFromAge(Integer.parseInt(ageFrom));
-			LocalDate birthDateTo = computeBirthDateFromAge(Integer.parseInt(ageTo));
+			LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(ageTo));
 			conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
 		}
 
@@ -59,6 +59,10 @@ public class StudentRepository {
 		addTalentsSearchCriteria(criteria, talent);
 
 		return criteria.list();
+	}
+
+	private int getInclusiveUpperBoundAge(String ageTo) {
+		return Integer.parseInt(ageTo)+1;
 	}
 
 	private void addTalentsSearchCriteria(Criteria criteria, String talent) {
