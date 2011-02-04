@@ -22,11 +22,6 @@ public class StudentBuilder {
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
 
-    public StudentBuilder id(String id) {
-        studentId = id;
-        return this;
-    }
-
     public StudentBuilder name(String name) {
         this.name = name;
         return this;

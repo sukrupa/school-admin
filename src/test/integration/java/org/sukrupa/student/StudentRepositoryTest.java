@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
@@ -19,7 +20,9 @@ import org.sukrupa.platform.DatabaseHelper;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -105,4 +108,32 @@ public class StudentRepositoryTest {
         assertThat(loaded.getNotes(), hasItems(noteOne, noteTwo));
     }
 
+    @Test
+    public void shouldUpdateStudentInDatabase(){
+        final Student philOld = new StudentBuilder().studentId("12345")
+                .name("Phil")    .studentClass("1 Std").gender("Male")  .religion("Hindu")   .area("Bhuvaneshwari Slum")
+                .caste("SC").subCaste("AD").build();
+        final Student philNew = new StudentBuilder().studentId("12345")
+                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
+                .caste("ST").subCaste("AK").build();
+        databaseHelper.save(philOld);
+        Student s = repository.findAll().get(0);
+        UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
+                .area("Chamundi Nagar")
+                .caste("ST")
+                .subCaste("AK")
+                .religion("Catholic")
+                .name("Philippa")
+                .gender("Female")
+                .studentClass("2 Std").build();
+        boolean status = repository.update(updateParameter);
+        Student retrievedPhil = repository.findAll().get(0);
+        assertThat(retrievedPhil, is(philNew));
+        assertThat(status, is(true));
+    }
+
+    @Test
+    public void shouldFailToUpdateNonexistantStudent() {
+        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), is(false));
+    }
 }

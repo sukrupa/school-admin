@@ -92,4 +92,22 @@ public class StudentRepository {
             conjunction.add(Restrictions.eq(field, parameter));
         }
     }
+
+    public boolean update(UpdateStudentParameter studentParam) {
+        Student student = find(studentParam.getStudentId());
+        if (student==null){
+            System.out.println("Student id " + studentParam.getStudentId() + " not found");
+            return false;
+        }
+        student.setStudentClass(studentParam.getStudentClass());
+        student.setGender(studentParam.getGender());
+        student.setName(studentParam.getName());
+        student.setReligion(studentParam.getReligion());
+        student.setCaste(studentParam.getCaste());
+        student.setSubCaste(studentParam.getSubCaste());
+        student.setArea(studentParam.getArea());
+        sessionFactory.getCurrentSession().save(student);
+        sessionFactory.getCurrentSession().flush();
+        return true;
+    }
 }

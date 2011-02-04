@@ -143,4 +143,32 @@ public class Student {
     public List<Note> getNotes() {
         return notes;
     }
+
+    public void setStudentClass(String studentClass) {
+        this.studentClass = studentClass;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public void setCaste(String caste) {
+        this.caste = caste;
+    }
+
+    public void setSubCaste(String subCaste) {
+        this.subCaste = subCaste;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }

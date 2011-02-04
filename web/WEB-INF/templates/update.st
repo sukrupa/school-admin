@@ -1,33 +1,21 @@
 <html>
 <body>
-<form name="updateStudent" action="update" method="post">
+<form name="updateStudent" action="updateResults" method="post">
 
 <h1>Update Student Record</h1>
 
 	<span>Student ID</span>
-	<input type="text" name="studentId" value=
-		$studentId:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="studentId" value="$studentId$"></input>
 
 	<br/>
 
 	<span>Name</span>
-	<input type="text" name="name" value=
-		$name:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="name" value="$name$"></input>
 
 	<br/>
 
 	<span>Date of birth</span>
-	<input type="text" name="dateOfBirth" value=
-		$dateOfBirth:{
-		$it$
-		}$  >
-	</input>
+	<input type="text" name="dateOfBirth" value="$dateOfBirth$"></input>
 
 	<br/>
 
@@ -50,11 +38,7 @@
     <br/>
 
     <span>Religion</span>
-    <input type="text" name="religion" value=
-            $religion:{
-    $it$
-    }$    >
-    </input>
+    <input type="text" name="religion" value="$religion$"></input>
 
     <br/>
 
@@ -86,29 +70,17 @@
     <br/>
 
 	<span>Father</span>
-	<input type="text" name="father" value=
-		$father:{
-		$it$
-		}$ >
-	</input>
+	<input type="text" name="father" value="$father$"></input>
 
 	<br/>
 
 	<span>Mother</span>
-	<input type="text" name="mother" value=
-		$mother:{
-		$it$
-		}$   >
-	</input>
+	<input type="text" name="mother" value="$mother$"></input>
 
 	<br/>
 
 	<span>Talents</span>
-	<input type="text" name="talents" value=
-		$talents:{
-		$it$
-		}$   >
-	</input>
+	<input type="text" name="talents" value="$talents$"></input>
 
 	<br/>
 
