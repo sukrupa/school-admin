@@ -159,7 +159,7 @@ This release has more bugfixes/enhancements with the ZK framework in focus.
 	Added support for running single script via HTTP request
 	Added batch files for running single script
 	_getText returns value for text and textarea elements
-	_area Accessor API added for area tags
+	_area Accessor API added for communityLocation tags
 	Sahi version check link added to Controller
 	addURLMock and removeURLMock added to Browser
 	Added gzip encoding when fetching remote URLs. Big performance boost.

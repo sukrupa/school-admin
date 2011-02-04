@@ -11,53 +11,16 @@
 
 	<table>
 
-		<tr>
-			<td>
-				<span>Class</span>
-			</td>
-			<td>
-				<select name="studentClass">
-					$classes:{
-					<option>$it$</option>
-					}$
-				</select>
-			</td>
-		</tr>
 
 		<tr>
 			<td>
-				<span>Gender</span>
+				<span>Talent</span>
 			</td>
 			<td>
-				<select name="gender">
-					$genders:{
-					<option>$it$</option>
-					}$
-				</select>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<span>Caste</span>
-			</td>
-			<td>
-				<select name="caste">
-					$castes:{
-					<option>$it$</option>
-					}$
-				</select>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<span>Area</span>
-			</td>
-			<td>
-				<select name="area">
-					$areas:{
-					<option>$it$</option>
+				<select name="talent">
+					<option value="">Any</option>
+					$talents:{
+						<option value="$it$">$it$</option>
 					}$
 				</select>
 			</td>
@@ -69,15 +32,17 @@
 			</td>
 			<td>
 				<select name="ageFrom" id="ageFrom" onClick="changeAgeRange()">
+					<option value="">Any</option>
 					$agesFrom:{
-					<option>$it$</option>
+					<option value="$it$">$it$</option>
 					}$
 				</select>
 
 				&nbsp;<span>to</span>&nbsp;
 				<select name="ageTo" id="ageTo">
+					<option value="">Any</option>
 					$agesTo:{
-					<option>$it$</option>
+						<option value="$it$">$it$</option>
 					}$
 				</select>
 			</td>
@@ -85,20 +50,75 @@
 
 		<tr>
 			<td>
-				<span>Talent</span>
+				<span>Class</span>
 			</td>
 			<td>
-				<select name="talent">
-					$talents:{
-					<option>$it$</option>
+				<select name="studentClass">
+					<option value="">Any</option>
+					$classes:{
+					<option value="$it$">$it$</option>
 					}$
 				</select>
 			</td>
 		</tr>
-	</table>
 
-	<br/>
-	<input type="submit" value="Search"/>
+		<tr>
+			<td>
+				<span>Gender</span>
+			</td>
+			<td>
+				<select name="gender">
+					<option value="">Any</option>
+					$genders:{
+					<option value="$it$">$it$</option>
+					}$
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<span>Religion</span>
+			</td>
+			<td>
+				<select name="religion">
+					<option value="">Any</option>
+					$religions:{
+					<option value="$it$">$it$</option>
+					}$
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<span>Caste</span>
+			</td>
+			<td>
+				<select name="caste">
+					<option value="">Any</option>
+					$castes:{
+					<option value="$it$">$it$</option>
+					}$
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<span>Community Location</span>
+			</td>
+			<td>
+				<select name="communityLocation">
+					<option value="">Any</option>
+					$communityLocations:{
+					<option value="$it$">$it$</option>
+					}$
+				</select>
+			</td>
+		</tr>
+		<tr><td></td><td><input style="float:right;" type="submit" value="Search"/></td></tr>
+	</table>
 </form>
 </body>
 </html>

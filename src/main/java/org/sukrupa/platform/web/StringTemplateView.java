@@ -14,17 +14,14 @@ public class StringTemplateView extends InternalResourceView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Resource templateFile = getApplicationContext().getResource(getUrl());
-
         StringTemplateGroup group = new StringTemplateGroup("view", templateFile.getFile().getParent());
-
         StringTemplate template = group.getInstanceOf(getBeanName());
+
         template.setAttributes(model);
 
         PrintWriter writer = response.getWriter();
         writer.print(template);
         writer.flush();
         writer.close();
-
-
     }
 }

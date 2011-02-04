@@ -15,7 +15,7 @@ namespace :staging do
         unzip_deploy_artifact
         stop_remote_server
         start_remote_server
-        delete_fake_data
+        recreate_database
         insert_fake_data
         safety_check
     end
@@ -37,8 +37,8 @@ namespace :staging do
         run "cd #{staging_deploy_path} && sh start-server.sh"
     end
 
-    task :delete_fake_data, :roles => :staging_server do
-        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:delete-fake-data"
+    task :recreate_database, :roles => :staging_server do
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dops.deploy.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:recreate"
     end
 
     task :insert_fake_data, :roles => :staging_server do
