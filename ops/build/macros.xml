@@ -79,7 +79,7 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="wait.for.sukrupa-app">
+    <macrodef name="wait.for.server">
         <attribute name="maxwait" default="30"/>
         <attribute name="host"/>
         <attribute name="port"/>

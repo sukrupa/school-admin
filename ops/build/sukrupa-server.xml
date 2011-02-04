@@ -23,7 +23,7 @@
     </target>
 
     <target name="sukrupa-server:check-is-running">
-        <wait.for.sukrupa-app host="localhost" port="${sukrupa.app.port}"/>
+        <wait.for.server host="localhost" port="${sukrupa.app.port}"/>
     </target>
 
     <target name="demo:server-test">
