@@ -110,11 +110,22 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldUpdateStudentInDatabase(){
-        final Student philOld = new StudentBuilder().studentId("12345").name("Phil").studentClass("1 Std").gender("Male").build();
-        final Student philNew = new StudentBuilder().studentId("12345").name("Phil").studentClass("2 Std").gender("Male").build();
+        final Student philOld = new StudentBuilder().studentId("12345")
+                .name("Phil")    .studentClass("1 Std").gender("Male")  .religion("Hindu")   .area("Bhuvaneshwari Slum")
+                .caste("SC").subCaste("AD").build();
+        final Student philNew = new StudentBuilder().studentId("12345")
+                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
+                .caste("ST").subCaste("AK").build();
         databaseHelper.save(philOld);
         Student s = repository.findAll().get(0);
-        UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId()).name(s.getName()).gender(s.getGender()).studentClass("2 Std").build();
+        UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
+                .area("Chamundi Nagar")
+                .caste("ST")
+                .subCaste("AK")
+                .religion("Catholic")
+                .name("Philippa")
+                .gender("Female")
+                .studentClass("2 Std").build();
         repository.update(updateParameter);
         Student retrievedPhil = repository.findAll().get(0);
         assertThat(retrievedPhil, is(philNew));
