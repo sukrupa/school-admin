@@ -11,6 +11,7 @@
     <target name="clean">
         <delete dir="${target.dir}"/>
         <delete dir="${target.main.dir}"/>
+        <delete dir="${module.dir}/src/test/twist/functional-test/sahi/userdata/browser/ff" />
     </target>
 
     <target name="init">
