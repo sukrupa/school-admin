@@ -28,22 +28,32 @@
 
     <target name="demo:server-test">
 
-        <run-against-server targetToExecute="demo:failing-test"
-                            startServerTarget="demo:server-start"
+        <run-against-server startServerTarget="demo:server-start"
                             checkServerUpTarget="demo:check-server-is-running"
                             stopServerTarget="demo:server-stop"
-                            cleanupTarget="demo:cleanup"/>
+                            cleanupTarget="demo:cleanup">
 
+            <execute>
+                <echo message="demo:failing-test execute failing test"/>
+
+                <property name="demo.tests.failed" value="true" />
+
+                <echo message="demo.tests.failed is ${demo.tests.failed}"/>
+            </execute>
+
+        </run-against-server>
+
+        <echo message="demo.tests.failed is ${demo.tests.failed}"/>
         <fail if="demo.tests.failed" message="Tests failed!"/>
 
     </target>
 
     <target name="demo:server-start">
         <echo message="demo:server start..."/>
-        <waitfor maxwait="5000">
+        <waitfor maxwait="1000">
             <equals arg1="true" arg2="false"/>
         </waitfor>
-        <echo message="Finished starting." />
+        <echo message="Finished starting."/>
     </target>
 
     <target name="demo:check-server-is-running">
@@ -59,11 +69,6 @@
         <waitfor maxwait="1000">
             <equals arg1="true" arg2="false"/>
         </waitfor>
-    </target>
-
-    <target name="demo:failing-test">
-        <echo message="demo:failing-test execute failing test"/>
-        <property name="demo.tests.failed" value="true" />
     </target>
 
 
