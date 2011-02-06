@@ -20,7 +20,7 @@
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
     <property name="web.root" value="web"/>
-    <property name="web.dir" value="${module.dir}/${web.root}"/>
+    <property name="web.dir" value="${src.dir}/${web.root}"/>
 
     <property name="lib.dir" value="${module.dir}/lib"/>
     <property name="lib.main.dir" value="${lib.dir}/main"/>

@@ -11,7 +11,7 @@ public class SchoolAdminApp {
 
     private static final int HTTP_PORT = 8080;
     private static final String WEB_APP_CONTEXT = "/sukrupa";
-    private static final String DEFAULT_WAR_DIRECTORY = "../../web";
+    private static final String DEFAULT_WAR_DIRECTORY = "";
 
     private DbServer dbServer;
     private WebServer webServer;
