@@ -38,7 +38,7 @@ namespace :staging do
     end
 
     task :recreate_database, :roles => :staging_server do
-        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -buildfile install/dbdeploy/build.xml db:recreate:staging"
+        run "cd #{staging_deploy_path} && sh install-database.sh"
     end
 
     task :insert_fake_data, :roles => :staging_server do
