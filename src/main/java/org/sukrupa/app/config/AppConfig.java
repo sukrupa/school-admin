@@ -16,6 +16,8 @@ import org.sukrupa.platform.web.StringTemplateView;
 import java.io.IOException;
 import java.util.Properties;
 
+import static org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE;
+
 @Configuration
 @Import({DBConfig.class})
 public class AppConfig {
@@ -46,6 +48,7 @@ public class AppConfig {
     @Bean
     public PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
+        configurer.setSystemPropertiesMode(SYSTEM_PROPERTIES_MODE_OVERRIDE);
         configurer.setProperties(properties());
         return configurer;
     }
@@ -54,11 +57,10 @@ public class AppConfig {
     public Properties properties() {
         try {
             Properties properties = new Properties();
-            properties.load(new ClassPathResource("database.properties").getInputStream());
+            properties.load(new ClassPathResource("app.properties").getInputStream());
             return properties;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

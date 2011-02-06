@@ -5,17 +5,15 @@
     <import file="macros.xml"/>
 
     <target name="sukrupa-server:start">
-        <sequential>
-            <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
-            <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
-                <jvmarg value="-Xms128m"/>
-                <jvmarg value="-Xmx768m"/>
-                <arg value="${web.dir}"/>
-                <classpath>
-                    <path refid="classpath.sukrupa.server.run"/>
-                </classpath>
-            </java>
-        </sequential>
+        <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
+        <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
+            <jvmarg value="-Xms128m"/>
+            <jvmarg value="-Xmx768m"/>
+            <sysproperty key="web.root.dir" value="${web.dir}"/>
+            <classpath>
+                <path refid="classpath.sukrupa.server.run"/>
+            </classpath>
+        </java>
     </target>
 
     <target name="sukrupa-server:stop">
@@ -23,7 +21,7 @@
     </target>
 
     <target name="sukrupa-server:check-is-running">
-        <wait.for.server host="localhost" port="${sukrupa.app.port}"/>
+        <wait.for.server host="localhost" port="${web.http.port}"/>
     </target>
 
     <target name="demo:server-test">
@@ -36,7 +34,7 @@
             <execute>
                 <echo message="demo:failing-test execute failing test"/>
 
-                <property name="demo.tests.failed" value="true" />
+                <property name="demo.tests.failed" value="true"/>
 
                 <echo message="demo.tests.failed is ${demo.tests.failed}"/>
             </execute>

@@ -132,7 +132,7 @@
             <zipfileset file="${cobertura.dir}" prefix="tools"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
-            <zipfileset file="${resources.main.dir}/database.properties" prefix="install/dbdeploy"/>
+            <zipfileset file="/app.properties" prefix="install/dbdeploy"/>
             <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">

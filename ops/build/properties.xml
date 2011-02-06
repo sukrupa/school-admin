@@ -4,7 +4,6 @@
     <property name="module.deployable.name" value="school-admin.zip"/>
     <property name="module.jar.name" value="school-admin.jar"/>
     <property name="sukrupa.app.class.name" value="org.sukrupa.app.SchoolAdminApp"/>
-    <property name="sukrupa.app.port" value="8080"/>
 
     <property name="src.dir" value="${module.dir}/src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
@@ -72,4 +71,6 @@
 
     <property name="twist-config" value="${src.test.twist.fixtures.dir}/twist-conf"/>
     <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1"/>
+
+    <loadproperties srcFile="${resources.main.dir}/app.properties"/>
 </project>

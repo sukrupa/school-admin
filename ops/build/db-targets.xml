@@ -1,7 +1,6 @@
 <project name="db-targets">
 
     <import file="properties.xml"/>
-    <loadproperties srcFile="${resources.main.dir}/database.properties"/>
 
     <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget"/>
 
@@ -10,7 +9,7 @@
     <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
     <!-- FIXME: These properties are duplicated between here and our Java code -->
-    <property name="db.dir" value="${user.home}/${db.root.dir}"/>
+    <property name="db.dir" value="${db.root.dir}"/>
     <property name="db.name" value="${db.name}"/>
     <property name="db.driver" value="${jdbc.driver}"/>
     <property name="db.url" value="${jdbc.url}"/>

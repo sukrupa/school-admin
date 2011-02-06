@@ -4,12 +4,18 @@ import org.apache.log4j.Logger;
 import org.hsqldb.DatabaseManager;
 import org.hsqldb.Server;
 import org.hsqldb.persist.HsqlProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.util.Properties;
 
 import static org.sukrupa.platform.text.StringManipulation.join;
 
+@Component("dbServer")
 public class DbServer {
 
     private Logger LOG = Logger.getLogger(DbServer.class);
@@ -18,7 +24,8 @@ public class DbServer {
     private final String dbName;
     private Server server;
 
-    public DbServer(String rootDir, String dbName) {
+    @Autowired
+    public DbServer(@Value("${db.root.dir}") String rootDir, @Value("${db.name}") String dbName) {
         try {
             this.rootDir = rootDir;
             this.dbName = dbName;
@@ -31,6 +38,7 @@ public class DbServer {
         }
     }
 
+    @PostConstruct
     public void start() {
         if (serverStartedAlready()) {
             LOG.info("Looks like some other process has already started the DB Server. Will skip starting a new one.");
@@ -43,6 +51,7 @@ public class DbServer {
         LOG.info("DB Server started on port " + server.getPort());
     }
 
+    @PreDestroy
     public void shutDown() {
         if (didNotStartServerOurselves()) {
             LOG.info("Won't stop DB Server because it had been started by some other process.");
