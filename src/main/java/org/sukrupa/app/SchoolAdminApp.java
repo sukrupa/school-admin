@@ -11,14 +11,14 @@ public class SchoolAdminApp {
 
     private static final int HTTP_PORT = 8080;
     private static final String WEB_APP_CONTEXT = "/sukrupa";
-    private static final String DEFAULT_WAR_DIRECTORY = "";
+    private static final String DEFAULT_WEB_ROOT = "../../src/web";
 
     private DbServer dbServer;
     private WebServer webServer;
 
-    public SchoolAdminApp(String war) {
+    public SchoolAdminApp(String webRoot) {
         dbServer = new DbServer(rootDir(), dbName());
-        webServer = new WebServer(war, HTTP_PORT, WEB_APP_CONTEXT);
+        webServer = new WebServer(webRoot, HTTP_PORT, WEB_APP_CONTEXT);
     }
 
     public void start() {
@@ -57,6 +57,6 @@ public class SchoolAdminApp {
     }
 
     private static String warDirectoryNameFrom(String[] args) {
-        return args.length > 0 ? args[0] : DEFAULT_WAR_DIRECTORY;
+        return args.length > 0 ? args[0] : DEFAULT_WEB_ROOT;
     }
 }
