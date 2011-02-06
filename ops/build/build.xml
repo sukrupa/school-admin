@@ -10,8 +10,7 @@
 
     <target name="clean">
         <delete dir="${target.dir}"/>
-        <delete dir="${target.main.dir}"/>
-        <delete dir="${module.dir}/src/test/twist/functional-test/sahi/userdata/browser/ff" />
+        <delete dir="${module.dir}/src/test/twist/functional-test/sahi/userdata/browser/ff"/>
     </target>
 
     <target name="init">
@@ -115,7 +114,7 @@
                      dir="${src.test.twist.fixtures.dir}"
                      target="execute-twist"
                      inheritall="true"
-                     inheritrefs="true" />
+                     inheritrefs="true"/>
             </execute>
         </run-against-server>
 
@@ -123,12 +122,11 @@
         <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
     </target>
 
-
-    <target name="package" depends="create.war, create.web.server.jar">
-        <zip destfile="${target.dir}/${app.zip.name}">
+    <target name="package" depends="create.module.jar">
+        <zip destfile="${target.dir}/${module.deployable.name}">
             <zipfileset dir="${lib.main.dir}" prefix="lib"/>
-            <fileset file="${target.dir}/${module.war.name}"/>
-            <fileset file="${target.dir}/${sukrupa.webserver.jar.name}"/>
+            <zipfileset file="${target.module.jar}" prefix="lib"/>
+            <zipfileset dir="${web.dir}" prefix="${web.root}"/>
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
             <zipfileset file="${cobertura.dir}" prefix="tools"/>
@@ -152,22 +150,8 @@
         </zip>
     </target>
 
-    <target name="create.war">
-        <war destfile="${target.dir}/${module.war.name}" webxml="${web.dir}/WEB-INF/web.xml">
-            <fileset dir="${web.dir}" excludes="**/WebServer*"/>
-            <lib dir="${lib.main.dir}"/>
-        </war>
-    </target>
-
-    <target name="create.web.server.jar">
-        <jar basedir="${target.main.dir}" jarfile="${target.sukrupa.webserver.jar}">
-            <include name="org/sukrupa/platform/"/>
-            <include name="org/sukrupa/app/"/>
-            <include name="database.properties"/>
-            <manifest>
-                <attribute name="Main-Class" value="org.sukrupa.platform.server.WebServer"/>
-            </manifest>
-        </jar>
+    <target name="create.module.jar">
+        <jar basedir="${target.main.dir}" jarfile="${target.module.jar}"/>
     </target>
 
 </project>

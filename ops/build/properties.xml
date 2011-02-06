@@ -1,9 +1,8 @@
 <project name="properties">
     <property name="module.dir" value="${basedir}"/>
 
-    <property name="module.war.name" value="sukrupa.war"/>
-
-    <property name="sukrupa.webserver.jar.name" value="web-server.jar"/>
+    <property name="module.deployable.name" value="school-admin.zip"/>
+    <property name="module.jar.name" value="school-admin.jar"/>
     <property name="sukrupa.app.class.name" value="org.sukrupa.app.SchoolAdminApp"/>
     <property name="sukrupa.app.port" value="8080"/>
 
@@ -20,20 +19,19 @@
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
 
-    <property name="web.dir" value="${module.dir}/web"/>
+    <property name="web.root" value="web"/>
+    <property name="web.dir" value="${module.dir}/${web.root}"/>
 
     <property name="lib.dir" value="${module.dir}/lib"/>
     <property name="lib.main.dir" value="${lib.dir}/main"/>
     <property name="lib.test.dir" value="${lib.dir}/test"/>
     <property name="lib.twist.dir" value="${lib.dir}/twist"/>
 
-
     <property name="target.dir" value="${module.dir}/target"/>
 
-    <property name="target.sukrupa.webserver.jar" value="${target.dir}/${sukrupa.webserver.jar.name}"/>
-    <property name="target.war" value="${target.dir}/${module.war.name}"/>
+    <property name="target.module.jar" value="${target.dir}/${module.jar.name}"/>
 
-    <property name="target.main.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="target.main.dir" value="${target.dir}/main"/>
     <property name="target.test.dir" value="${target.dir}/test"/>
 
     <property name="target.test.cobertura_instrumented.dir" value="${target.test.dir}/cobertura_instrumented"/>
@@ -42,10 +40,10 @@
     <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
     <property name="target.test.functional.dir" value="${target.test.dir}/functional"/>
 
-    <property name="target.test.twist.dir" value="${target.test.dir}/twist/" />
+    <property name="target.test.twist.dir" value="${target.test.dir}/twist/"/>
     <property name="target.test.twist.fixtures.dir" value="${target.test.twist.dir}/functional-test"/>
     <property name="target.test.twist.sukrupa-code.dir" value="${target.test.twist.dir}/sukrupa-code"/>
-    <property name="target.test.twist.failed.file" value="${target.test.twist.dir}/twist.scenarios.failed" />
+    <property name="target.test.twist.failed.file" value="${target.test.twist.dir}/twist.scenarios.failed"/>
     <property name="target.sahi.browser.profiles"
               value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
 
@@ -53,14 +51,10 @@
     <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
 
-
-    <property name="app.zip.name" value="school-admin.zip"/>
-
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
     <property name="deploy.staging.user" value="go"/>
     <property name="deploy.staging.path" value="/var/opt/sukrupa/school-admin/"/>
-
 
     <property name="tools.dir" value="${module.dir}/tools"/>
     <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2"/>

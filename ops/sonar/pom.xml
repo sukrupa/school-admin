@@ -15,23 +15,13 @@
             <type>jar</type>
             <scope>test</scope>
             <optional>false</optional>
-    </dependency>
-        <!--
-    <dependency>
-      <groupId>org.apache</groupId>
-      <artifactId>commons.collections</artifactId>
-      <version>3.1</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/main/commons-collections-3.1.jar</systemPath>
-      <optional>false</optional>
-    </dependency>
-        -->
+        </dependency>
     </dependencies>
 
     <!--suppress MavenModelInspection -->
     <build>
         <sourceDirectory>${module.dir}/src/main/java</sourceDirectory>
-        <outputDirectory>${module.dir}/web/WEB-INF/classes</outputDirectory>
+        <outputDirectory>${module.dir}/target/main</outputDirectory>
         <testSourceDirectory>${module.dir}/src/test/unit/java</testSourceDirectory>
         <testOutputDirectory>${module.dir}/target/test/unit</testOutputDirectory>
         <plugins>
@@ -47,15 +37,14 @@
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
+
     <properties>
         <module.dir>../../</module.dir>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.surefire.reportsPath>${module.dir}/target/reports/cobertura/</sonar.surefire.reportsPath>
         <sonar.cobertura.reportPath>${module.dir}/target/reports/cobertura/coverage.xml</sonar.cobertura.reportPath>
     </properties>
-
 
 </project>
 
