@@ -1,35 +1,34 @@
 package org.sukrupa.platform.hsqldb;
 
-import org.apache.log4j.*;
-
 import static java.lang.String.format;
 import static org.sukrupa.platform.hsqldb.SqlRunnerArgs.parseArgs;
 
 public class SqlRunner {
 
-    private static final Logger log = Logger.getLogger(SqlRunner.class);
-
     private final SqlRunnerArgs sqlRunnerArgs;
     private final HsqlDatabase hsqlDatabase;
-    private final ConsoleOutput console;
+    private final Console console;
 
     public static void main(String[] args) {
-        new SqlRunner(parseArgs(args), new HsqlDatabase(), new ConsoleOutput()).run();
+        int status = new SqlRunner(parseArgs(args), new HsqlDatabase(), new Console()).run();
     }
 
-    public SqlRunner(SqlRunnerArgs sqlRunnerArgs, HsqlDatabase hsqlDatabase, ConsoleOutput console) {
+    public SqlRunner(SqlRunnerArgs sqlRunnerArgs, HsqlDatabase hsqlDatabase, Console console) {
         this.hsqlDatabase = hsqlDatabase;
         this.console = console;
         this.sqlRunnerArgs = sqlRunnerArgs;
     }
 
-    public void run() {
-        if (sqlRunnerArgs.invalid()) {
+    public int run() {
+        if (sqlRunnerArgs.isInvalid()) {
             console.println("Sorry, I didn't understand the arguments you passed me.");
             console.println(format("Usage: hsqldb-exec.sh %s", sqlRunnerArgs.describeArguments()));
+            return -1;
         }
 
-        hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.getDatabasePropertiesFilename());
+        hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.databasePropertiesFilename());
+        hsqlDatabase.execute(sqlRunnerArgs.sql(), console);
+        return 0;
     }
 
 }

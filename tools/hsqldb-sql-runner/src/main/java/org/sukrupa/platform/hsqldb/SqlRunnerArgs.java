@@ -21,15 +21,15 @@ public class SqlRunnerArgs {
         return "<database properties file> <sql to execute, e.g. \"SELECT * FROM TABLE_1\">";
     }
 
-    public boolean invalid() {
+    public boolean isInvalid() {
         return false;
     }
 
-    public String getSqlToExecute() {
+    public String sql() {
         return sqlToExecute;
     }
 
-    public String getDatabasePropertiesFilename() {
+    public String databasePropertiesFilename() {
         return databasePropertiesFilename;
     }
 
@@ -38,11 +38,11 @@ public class SqlRunnerArgs {
             super(null, null);
         }
 
-        @Override public boolean invalid() {
+        @Override public boolean isInvalid() {
             return true;
         }
 
-        @Override public String getSqlToExecute() {
+        @Override public String sql() {
             throw new UnsupportedOperationException("There are no arguments here, boyo.");
         }
     }

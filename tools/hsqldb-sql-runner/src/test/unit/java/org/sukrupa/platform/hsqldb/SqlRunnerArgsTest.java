@@ -24,7 +24,7 @@ public class SqlRunnerArgsTest {
     public void extracts_the_sql_query_to_execute() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(SIMPLE_ARGS);
 
-        String sqlToExecute = sqlRunnerArgs.getSqlToExecute();
+        String sqlToExecute = sqlRunnerArgs.sql();
 
         assertThat(sqlToExecute, is(SELECT_FROM_TABLE_A));
     }
@@ -33,14 +33,14 @@ public class SqlRunnerArgsTest {
     public void empty_args_is_invalid() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(EMPTY_ARGS);
 
-        assertThat("Args should be invalid", sqlRunnerArgs.invalid(), is(true));
+        assertThat("Args should be invalid", sqlRunnerArgs.isInvalid(), is(true));
     }
 
     @Test
     public void non_empty_args_are_not_invalid() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(SIMPLE_ARGS);
 
-        assertThat("Args should not be invalid", sqlRunnerArgs.invalid(), is(not(true)));
+        assertThat("Args should not be invalid", sqlRunnerArgs.isInvalid(), is(not(true)));
     }
 
 
@@ -48,7 +48,7 @@ public class SqlRunnerArgsTest {
     public void fails_if_try_to_access_sql_with_empty_args() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(EMPTY_ARGS);
 
-        sqlRunnerArgs.getSqlToExecute();
+        sqlRunnerArgs.sql();
     }
 
 
