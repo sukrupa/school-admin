@@ -32,16 +32,17 @@ public class EventRepository {
     }
 
     public void save(EventRecord eventRecord) {
-	    Set<Student> attendees = retrieveStudent(eventRecord.getAttendees());
-	    sessionFactory.getCurrentSession().save(Event.createFrom(eventRecord, attendees));
+	    sessionFactory.getCurrentSession().save(Event.createFrom(eventRecord, retrieveStudent(eventRecord.getAttendees())));
+	    sessionFactory.getCurrentSession().flush();
     }
 
     private Set<Student> retrieveStudent(String studentIds) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
-        Criterion attendee = Restrictions.in(STUDENT_ID, createStudentIds(studentIds));
-        Disjunction disjunction = Restrictions.disjunction();
-        disjunction.add(attendee);
-        criteria.add(disjunction);
+        criteria.add(
+		        Restrictions.disjunction().add(
+				        Restrictions.in(STUDENT_ID, createStudentIds(studentIds))
+		        )
+        );
         return Sets.newHashSet(criteria.list());
     }
 

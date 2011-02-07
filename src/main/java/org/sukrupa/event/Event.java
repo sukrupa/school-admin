@@ -39,7 +39,7 @@ public class Event {
 
 
 	@ManyToMany
-	@JoinTable(name = "EventAttendees",
+	@JoinTable(name = "EVENTATTENDEES",
 			joinColumns = {@JoinColumn(name = "event_id")},
 			inverseJoinColumns = {@JoinColumn(name = "id")})
 	private Set<Student> attendees;
@@ -90,7 +90,6 @@ public class Event {
 			    .attendees(attendees)
 			    .build();
 	}
-
 
 	private static EventDate parseDateTime(EventRecord eventRecord) {
 		return new EventDate(eventRecord.getDate(), eventRecord.getTime());

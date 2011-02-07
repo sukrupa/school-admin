@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.sukrupa.event.EventRepository.ATTENDEES_SEPARATOR;
 
@@ -51,10 +53,11 @@ public class EventRepositoryTest {
 
     @Test
     public void saveShouldLoadEventsFromDatabase() {
-	    HashSet<Student> attendees = Sets.<Student>newHashSet(sahil, renaud);
-	    Event event = new EventBuilder().attendees(attendees).datetime(new EventDate(2010,01,12,13,45,0,0)).build();
+	    Set<Student> attendees = Sets.<Student>newHashSet(sahil, renaud);
+	    Event event = new EventBuilder().attendees(attendees).datetime(new EventDate(2010, 01, 12, 13, 45, 0, 0)).build();
 	    save(new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(attendees)).build());
         assertThat(eventRepository.getAll().get(0), is(event));
+	    assertThat(eventRepository.getAll().get(0).getAttendees(), is(attendees));
     }
 
     private void save(EventRecord eventRecord) {
