@@ -9,34 +9,31 @@ import static org.hamcrest.Matchers.is;
 
 public class ConsoleOutputTest {
 
-    private static final boolean AUTO_FLUSH = true;
-    private PrintStream previousOut;
-    private PrintStream out;
-    private ByteArrayOutputStream bos;
+    private final SystemOutRecorder systemOutRecorder = new SystemOutRecorder();
 
     @Before
     public void setUp() throws Exception {
-        bos = new ByteArrayOutputStream();
-        out = new PrintStream(bos, AUTO_FLUSH, "UTF-8");
-        previousOut = System.out;
-        System.setOut(out);
+        systemOutRecorder.bos = new ByteArrayOutputStream();
+        systemOutRecorder.out = new PrintStream(systemOutRecorder.bos, SystemOutRecorder.AUTO_FLUSH, "UTF-8");
+        systemOutRecorder.previousOut = System.out;
+        System.setOut(systemOutRecorder.out);
     }
 
     @After
     public void tearDown() {
-        System.setOut(previousOut);
+        System.setOut(systemOutRecorder.previousOut);
     }
 
     @Test
     public void writes_a_line_to_std_out() throws Exception {
         new ConsoleOutput().println("Hello world");
 
-        String output = getOutput();
+        String output = systemOutRecorder.getOutput();
 
         assertThat(output, is("Hello world\n"));
     }
 
     private String getOutput() throws UnsupportedEncodingException {
-        return bos.toString("UTF-8");
+        return systemOutRecorder.getOutput();
     }
 }
