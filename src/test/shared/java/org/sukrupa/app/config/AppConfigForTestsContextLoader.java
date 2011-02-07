@@ -1,4 +1,4 @@
-package org.sukrupa.config;
+package org.sukrupa.app.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextLoader;

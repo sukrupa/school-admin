@@ -1,4 +1,4 @@
-package org.sukrupa.config;
+package org.sukrupa.app.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

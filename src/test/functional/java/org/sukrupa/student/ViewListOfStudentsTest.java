@@ -11,7 +11,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.page.ListOfStudentsPage;
 import org.sukrupa.page.StudentRow;
 import org.sukrupa.platform.DatabaseHelper;
