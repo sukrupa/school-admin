@@ -6,6 +6,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @Entity
 public class Event {
+
+	private static final String DATE_TIME_FORMAT = "dd/MM/YY HH:mm";
 
 	@Id
 	@GeneratedValue
@@ -64,7 +68,7 @@ public class Event {
 	}
 
 	@Transient
-	private String[] excludedFields = new String[] {"eventId", "datetime"};
+	private String[] excludedFields = new String[] {"eventId"};
 
 	public boolean equals(Object other) {
 		return EqualsBuilder.reflectionEquals(this, other, excludedFields);
@@ -78,4 +82,23 @@ public class Event {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
 	}
 
+	public static Event createFrom(EventRecord eventRecord, Set<Student> attendees) {
+		return new EventBuilder().title(eventRecord.getTitle())
+			    .venue(eventRecord.getVenue())
+			    .description(eventRecord.getDescription())
+			    .coordinator(eventRecord.getCoordinator())
+			    .notes(eventRecord.getNotes())
+			    .datetime(parseDateTime(eventRecord))
+			    .attendees(attendees)
+			    .build();
+	}
+
+
+	private static DateTime parseDateTime(EventRecord eventRecord) {
+		return DateTimeFormat.forPattern(DATE_TIME_FORMAT).withZone(DateTimeZone.UTC).parseDateTime(buildDateTimeText(eventRecord));
+	}
+
+	private static String buildDateTimeText(EventRecord eventRecord) {
+		return eventRecord.getDate().trim() + " " + eventRecord.getTime().trim();
+	}
 }
