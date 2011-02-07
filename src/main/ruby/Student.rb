@@ -1,15 +1,17 @@
 require 'rubygems'
 
 class Student
+
+  attr_reader :name
   
-  def initialize(data)
-    @sl = Integer(data[0])
-    @name = data[1]
-    @gender = data[2]
-    @father = data[3]
-    @mother = data[4]
-    @dob = data[5]
-    @contact = data[6]  
+  def initialize args
+    args.each do |k,v|
+      instance_variable_set("@#{k}", v) unless v.nil?
+    end
+  end
+  
+  def fromCSV(data)
+    
   end
   
   def to_s
