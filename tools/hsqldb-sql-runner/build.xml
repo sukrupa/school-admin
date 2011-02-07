@@ -1,6 +1,8 @@
 <project name="hsqldb.sql.runner" default="all">
 
     <property name="module.name" value="hsqldb-sql-runner"/>
+    <property name="module.app.class" value="org.sukrupa.platform.hsqldb.SqlRunnerApp" />
+
     <property name="module.dir" value="${basedir}"/>
 
     <property name="lib.dir" value="${module.dir}/lib"/>
@@ -21,6 +23,7 @@
 
     <property name="target.dist.dir" value="${target.dir}/dist"/>
     <property name="target.dist.lib.dir" value="${target.dist.dir}/lib"/>
+
     <property name="target.dist.executable.jar" value="${target.dist.dir}/${target.executable.jar.name}"/>
 
     <path id="classpath.compile.main">
@@ -71,7 +74,7 @@
 
         <jar destfile="${target.dist.executable.jar}">
             <manifest>
-                <attribute name="Main-Class" value="org.sukrupa.platform.hsqldb.SqlRunner"/>
+                <attribute name="Main-Class" value="${module.app.class}"/>
                 <attribute name="Class-Path" value="${target.dist.executable.jar.manifest.classpath}"/>
             </manifest>
             <fileset dir="${target.classes.main.dir}">
