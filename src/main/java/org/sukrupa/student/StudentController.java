@@ -67,9 +67,9 @@ public class StudentController {
         return SEARCH_VIEW;
     }
 
-    @RequestMapping(value = "update")
-    public String updateStudent(Map<String, Object> model) {
-        Student theStudent = repository.findAll().get(0);
+    @RequestMapping(value = "update/{id}")
+    public String updateStudent(@PathVariable String id, Map<String, Object> model) {
+        Student theStudent = repository.find(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -86,7 +86,7 @@ public class StudentController {
         return UPDATE_VIEW;
     }
 
-    @RequestMapping(value = "updateResults")
+    @RequestMapping(value = "update/updateResults")
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
