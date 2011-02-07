@@ -20,13 +20,15 @@ public class StudentController {
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "studentUpdate";
-    private static final String UPDATE_RESULTS_VIEW = "studentUpdateResults";
+    private static final String UPDATE_RESULTS_VIEW = "student";
+    private static final String UPDATE_RESULTS_FAILED = "studentUpdateResults";
     private static final String STUDENT_VIEW = "student";
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
-    private static final List<String> CASTES = Arrays.asList("Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
+    private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
+    private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
     private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-    private static final List<String> RELIGIONS = Arrays.asList("Hindu", "Christian", "Muslim");
+    private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
 
@@ -35,6 +37,7 @@ public class StudentController {
 
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
+
 
     @Autowired
     public StudentController(StudentRepository repository) {
@@ -79,8 +82,8 @@ public class StudentController {
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
         model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
-        model.put("religion", theStudent.getReligion());
-        model.put("subCaste", theStudent.getSubCaste());
+        model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
+        model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
         model.put("father", "");
         model.put("mother", "");
         model.put("talents", "");
@@ -93,9 +96,14 @@ public class StudentController {
             Map<String, Object> model) {
         boolean succeeded = repository.update(studentParam);
 
-        model.put("message", succeeded ? "Student updated successfully" : "Error updating student");
+        if (succeeded) {
+            model.put("student", studentParam);
+            return UPDATE_RESULTS_VIEW;
+        }else {
+            model.put("message","Error updating student");
+            return UPDATE_RESULTS_FAILED;
+        }
 
-        return UPDATE_RESULTS_VIEW;
     }
 
     private List<DropDownElement> createDropDownList(String selected, List<String> options) {
@@ -107,7 +115,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "{id}")
-    public String find(@PathVariable String id, Map<String, Student> model) {
+    public String viewStudent(@PathVariable String id, Map<String, Student> model) {
         Student student = repository.find(id);
         model.put("student", student);
         return STUDENT_VIEW;
