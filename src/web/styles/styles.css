@@ -11,7 +11,6 @@ margin:0;
 #header {
     width:950px;
     height:115px;
-    border-bottom: 1px solid red;
     background-color: #0065a5;
 }
 
@@ -23,7 +22,6 @@ margin:0;
     width:125px;
     margin-right: 20px;
     float:left;
-    border-right: 1px solid red;
     background-color: #0065a5;
 }
 #sidebar a {
