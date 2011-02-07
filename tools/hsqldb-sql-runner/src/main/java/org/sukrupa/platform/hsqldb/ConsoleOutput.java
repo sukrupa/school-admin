@@ -1,8 +1,10 @@
 package org.sukrupa.platform.hsqldb;
 
+import static java.lang.System.out;
+
 public class ConsoleOutput {
 
     public void println(String output) {
-        System.out.println(output);
+        out.println(output);
     }
 }
