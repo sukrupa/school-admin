@@ -17,8 +17,6 @@ import java.util.Set;
 @Entity
 public class Event {
 
-	private static final String DATE_TIME_FORMAT = "dd/MM/YY HH:mm";
-
 	@Id
 	@GeneratedValue
 	@Column(name = "event_id")
@@ -46,8 +44,8 @@ public class Event {
 			inverseJoinColumns = {@JoinColumn(name = "id")})
 	private Set<Student> attendees;
 
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime datetime;
+	@Type(type = "org.sukrupa.event.PersistentEventDate")
+	private EventDate datetime;
 
 	public Set<Student> getAttendees() {
 		return this.attendees;
@@ -57,7 +55,7 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String title, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+	public Event(String title, EventDate datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
 		this.title = title;
 		this.datetime = datetime;
 		this.venue = venue;
@@ -94,11 +92,7 @@ public class Event {
 	}
 
 
-	private static DateTime parseDateTime(EventRecord eventRecord) {
-		return DateTimeFormat.forPattern(DATE_TIME_FORMAT).withZone(DateTimeZone.UTC).parseDateTime(buildDateTimeText(eventRecord));
-	}
-
-	private static String buildDateTimeText(EventRecord eventRecord) {
-		return eventRecord.getDate().trim() + " " + eventRecord.getTime().trim();
+	private static EventDate parseDateTime(EventRecord eventRecord) {
+		return new EventDate(eventRecord.getDate(), eventRecord.getTime());
 	}
 }

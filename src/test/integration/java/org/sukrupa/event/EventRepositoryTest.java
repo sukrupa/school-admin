@@ -52,7 +52,7 @@ public class EventRepositoryTest {
     @Test
     public void saveShouldLoadEventsFromDatabase() {
 	    HashSet<Student> attendees = Sets.<Student>newHashSet(sahil, renaud);
-	    Event event = new EventBuilder().attendees(attendees).datetime(new DateTime(2010,01,12,13,45,0,0, DateTimeZone.UTC)).build();
+	    Event event = new EventBuilder().attendees(attendees).datetime(new EventDate(2010,01,12,13,45,0,0)).build();
 	    save(new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(attendees)).build());
         assertThat(eventRepository.getAll().get(0), is(event));
     }

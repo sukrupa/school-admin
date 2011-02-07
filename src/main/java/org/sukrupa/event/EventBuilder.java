@@ -15,7 +15,7 @@ public class EventBuilder {
     private String description;
     private String notes;
     private Set<Student> attendees;
-    private DateTime datetime;
+    private EventDate datetime;
 
     public EventBuilder title(String title) {
         this.title = title;
@@ -47,8 +47,8 @@ public class EventBuilder {
         return this;
     }
 
-    public EventBuilder datetime(DateTime dateTime) {
-        this.datetime = dateTime.toDateTime(DateTimeZone.UTC);
+    public EventBuilder datetime(EventDate dateTime) {
+        this.datetime = dateTime;
         return this;
     }
 
