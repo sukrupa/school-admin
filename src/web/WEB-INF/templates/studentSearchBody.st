@@ -1,6 +1,4 @@
 <form name="searchParam" action="searchResult" method="post">
-	<h1>Student Search</h1>
-
 	<table>
 
 
