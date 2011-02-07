@@ -3,21 +3,27 @@ package org.sukrupa.platform.hsqldb;
 import java.io.*;
 
 public class SystemOutRecorder {
-    private static final boolean AUTO_FLUSH = true;
+    private static final boolean AUTO_FLUSH_ON = true;
+
+    private final String encoding = "UTF8";
 
     private PrintStream out;
-    private ByteArrayOutputStream bos;
+    private ByteArrayOutputStream buffer;
     private PrintStream previousOut;
 
     public void attatch() throws UnsupportedEncodingException {
-        bos = new ByteArrayOutputStream();
-        out = new PrintStream(bos, AUTO_FLUSH, "UTF-8");
+        buffer = new ByteArrayOutputStream();
+        out = new PrintStream(buffer, AUTO_FLUSH_ON, getEncoding());
         previousOut = System.out;
         System.setOut(out);
     }
 
     public String getOutput() throws UnsupportedEncodingException {
-        return bos.toString("UTF-8");
+        return buffer.toString(getEncoding());
+    }
+
+    private String getEncoding() {
+        return encoding;
     }
 
     public void detatch() {
