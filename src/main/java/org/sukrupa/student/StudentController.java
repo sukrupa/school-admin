@@ -18,8 +18,8 @@ public class StudentController {
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
-    private static final String UPDATE_VIEW = "update";
-    private static final String UPDATE_RESULTS_VIEW = "updateResults";
+    private static final String UPDATE_VIEW = "studentUpdate";
+    private static final String UPDATE_RESULTS_VIEW = "studentUpdateResults";
     private static final String STUDENT_VIEW = "student";
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
@@ -67,9 +67,9 @@ public class StudentController {
         return SEARCH_VIEW;
     }
 
-    @RequestMapping(value = "update")
-    public String updateStudent(Map<String, Object> model) {
-        Student theStudent = repository.findAll().get(0);
+    @RequestMapping(value = "update/{id}")
+    public String updateStudent(@PathVariable String id, Map<String, Object> model) {
+        Student theStudent = repository.find(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -86,7 +86,7 @@ public class StudentController {
         return UPDATE_VIEW;
     }
 
-    @RequestMapping(value = "updateResults")
+    @RequestMapping(value = "update/updateResults")
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {

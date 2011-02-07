@@ -18,7 +18,4 @@ logs
 Cache/
 profiles/
 
-# JRuby
-!tools/jruby-1.6.0.RC1/bin
-
 *.swp

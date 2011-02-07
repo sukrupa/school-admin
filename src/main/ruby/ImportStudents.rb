@@ -2,13 +2,17 @@ require 'rubygems'
 require 'roo'
 require 'WorksheetParser'
 require 'Student'
+require 'sql_generator'
 
+students_excel = Excelx.new(ARGV[0])
+sheet_names = students_excel.sheets
 
-class ImportStudents
-  students = Excelx.new(ARGV[0])
-  students.default_sheet = students.sheets.first
-  row_manager = WorksheetParser.new(students)
-  puts row_manager.starting_corner
-  puts row_manager.skipped_columns
-  puts row_manager.parse
-end
+File.open('import_students.sql', 'w') { |file|
+  sheet_names.each do |sheet_name|
+    file.puts(sheet_name) 
+    students_excel.default_sheet = sheet_name
+    row_manager = WorksheetParser.new(students_excel)
+    students = row_manager.parse
+    SQLGenerator.new.generate_sql(file, students)
+  end
+}
