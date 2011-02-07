@@ -13,6 +13,10 @@ public class ConsoleOutputTest {
 
     @Before
     public void setUp() throws Exception {
+        attatch();
+    }
+
+    private void attatch() throws UnsupportedEncodingException {
         systemOutRecorder.bos = new ByteArrayOutputStream();
         systemOutRecorder.out = new PrintStream(systemOutRecorder.bos, SystemOutRecorder.AUTO_FLUSH, "UTF-8");
         systemOutRecorder.previousOut = System.out;
