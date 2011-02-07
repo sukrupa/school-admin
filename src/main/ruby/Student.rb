@@ -10,10 +10,6 @@ class Student
     end
   end
   
-  def self.from_excel(data)
-    Student.new :name => data[1], :gender => data[2], :date_of_birth => data[5]
-  end
-  
   def attributes
     attributes = {}
     instance_variables.each do |variable|
