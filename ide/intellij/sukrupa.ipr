@@ -31,6 +31,14 @@
       <maximumStackSize value="2" />
       <properties />
     </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="2" />
+      <properties />
+    </buildFile>
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -260,6 +268,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sukrupa.iml" filepath="$PROJECT_DIR$/sukrupa.iml" />
     </modules>
   </component>
@@ -292,6 +301,15 @@
         <root url="file://$PROJECT_DIR$/../../lib/main" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-main">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
