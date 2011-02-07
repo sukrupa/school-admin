@@ -25,11 +25,11 @@ public class SqlRunnerArgs {
         return false;
     }
 
-    public String sql() {
+    public String getSql() {
         return sqlToExecute;
     }
 
-    public String databasePropertiesFilename() {
+    public String getDatabasePropertiesFilename() {
         return databasePropertiesFilename;
     }
 
@@ -42,7 +42,7 @@ public class SqlRunnerArgs {
             return true;
         }
 
-        @Override public String sql() {
+        @Override public String getSql() {
             throw new UnsupportedOperationException("There are no arguments here, boyo.");
         }
     }

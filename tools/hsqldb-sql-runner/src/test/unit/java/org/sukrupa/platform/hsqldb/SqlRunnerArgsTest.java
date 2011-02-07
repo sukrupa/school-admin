@@ -24,7 +24,7 @@ public class SqlRunnerArgsTest {
     public void extracts_the_sql_query_to_execute() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(SIMPLE_ARGS);
 
-        String sqlToExecute = sqlRunnerArgs.sql();
+        String sqlToExecute = sqlRunnerArgs.getSql();
 
         assertThat(sqlToExecute, is(SELECT_FROM_TABLE_A));
     }
@@ -48,7 +48,7 @@ public class SqlRunnerArgsTest {
     public void fails_if_try_to_access_sql_with_empty_args() {
         SqlRunnerArgs sqlRunnerArgs = parseArgs(EMPTY_ARGS);
 
-        sqlRunnerArgs.sql();
+        sqlRunnerArgs.getSql();
     }
 
 

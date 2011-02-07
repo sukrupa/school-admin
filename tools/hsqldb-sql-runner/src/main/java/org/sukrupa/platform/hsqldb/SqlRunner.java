@@ -28,8 +28,8 @@ public class SqlRunner {
             return -1;
         }
 
-        hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.databasePropertiesFilename());
-        hsqlDatabase.execute(sqlRunnerArgs.sql(), console);
+        hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.getDatabasePropertiesFilename());
+        hsqlDatabase.execute(sqlRunnerArgs.getSql(), console);
         return 0;
     }
 
