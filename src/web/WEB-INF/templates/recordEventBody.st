@@ -1,5 +1,4 @@
 <form name="eventRecord" action="save" method="post">
-	<h1>Record an Event</h1>
 	<span>Title</span>
 	<input type="text" name="title"/>
 

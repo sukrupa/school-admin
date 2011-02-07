@@ -14,6 +14,11 @@ margin:0;
     border-bottom: 1px solid red;
     background-color: #0065a5;
 }
+
+#header h2 {
+    color: #ffffff;
+}
+
 #sidebar{
     width:125px;
     margin-right: 20px;
