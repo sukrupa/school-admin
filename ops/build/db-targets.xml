@@ -98,7 +98,7 @@
                 />
     </target>
 
-    <target name="db:delete-fake-data" description="Removes fake data from the database">
+    <target name="db:delete-fake-data" depends="db:start" description="Removes fake data from the database">
         <sql userid="${db.user}"
              password="${db.password}"
              driver="${db.driver}"

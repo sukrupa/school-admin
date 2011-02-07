@@ -12,10 +12,10 @@ public class SearchForSukrupaWithSAHI {
 		this.browser = browser;
 	}
 
-	public void makeSureWeCanFindTheSukrupaWebsiteUsingGoogle() throws Exception {
-		browser.navigateTo("http://www.google.com");
+	public void makeSureWeCanFindTheSukrupaWebsiteUsingBing() throws Exception {
+		browser.navigateTo("http://www.bing.com");
 		browser.textbox("q").setValue("sukrupa");
-		browser.submit("Google Search").click();
+		browser.submit("go").click();
 		browser.link("Sukrupa Home Page").click();
 	
 		assertTrue(browser.link("Click here to donate online safely and securely").exists());			
