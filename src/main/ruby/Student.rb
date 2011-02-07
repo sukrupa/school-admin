@@ -2,20 +2,55 @@ require 'rubygems'
 
 class Student
 
-  attr_reader :name
+  attr_reader :name, :gender, :date_of_birth
   
   def initialize args
     args.each do |k,v|
-      instance_variable_set("@#{k}", v) unless v.nil?
+      instance_variable_set("@#{k}", parse(v)) unless v.nil?
     end
   end
   
-  def fromCSV(data)
-    
+  def self.from_excel(data)
+    Student.new :name => data[1], :gender => data[2], :date_of_birth => data[5]
   end
   
-  def to_s
-    "#{@sl},#{@name},#{@gender},#{@father},#{@mother},#{@dob},#{@contact}"
+  def attributes
+    attributes = {}
+    instance_variables.each do |variable|
+      variable_name = variable.sub('@','')
+      variable_value = send:"#{variable_name}"
+      attributes[variable_name] = variable_value
+    end
+    attributes
+  end
+  
+  def attribute_names
+    attributes.keys
+  end
+  
+  def attribute_values
+    attributes.values
+  end
+  
+  def parse(value)
+    valid_date?(value) ? format_date(value) : value
+  end
+  
+  def valid_date?(date)
+    begin
+      parse_date date
+      return true;
+    rescue
+      return false;
+    end
+  end
+  
+  def parse_date(date)
+    Date.strptime(date, '%d/%m/%Y')
+  end
+  
+  def format_date(date)
+    return parse_date(date).strftime("%Y-%m-%d")
   end
   
 end

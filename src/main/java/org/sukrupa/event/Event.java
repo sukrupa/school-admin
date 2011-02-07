@@ -91,7 +91,6 @@ public class Event {
 			    .build();
 	}
 
-
 	private static EventDate parseDateTime(EventRecord eventRecord) {
 		return new EventDate(eventRecord.getDate(), eventRecord.getTime());
 	}
