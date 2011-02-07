@@ -268,7 +268,6 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sukrupa.iml" filepath="$PROJECT_DIR$/sukrupa.iml" />
     </modules>
   </component>
@@ -310,6 +309,14 @@
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-test">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../lib/test" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
