@@ -1,8 +1,15 @@
 package org.sukrupa.platform.hsqldb;
 
 public class SqlRunnerArgs {
+    private final String sqlToExecute;
+
     public static SqlRunnerArgs parseArgs(String[] args) {
-        return null;
+        String sqlToExecute = args[0];
+        return new SqlRunnerArgs(sqlToExecute);
+    }
+
+    public SqlRunnerArgs(String sqlToExecute) {
+        this.sqlToExecute = sqlToExecute;
     }
 
     public String describeArguments() {
@@ -11,5 +18,9 @@ public class SqlRunnerArgs {
 
     public boolean invalid() {
         return true;
+    }
+
+    public String getSqlToExecute() {
+        return sqlToExecute;
     }
 }

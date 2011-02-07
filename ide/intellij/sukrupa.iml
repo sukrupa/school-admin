@@ -14,6 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/functional/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/ruby" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
+      <excludeFolder url="file://$MODULE_DIR$/../../tools" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools/apache-ant-1.8.2" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools/cobertura-1.9.4.1" />
     </content>
