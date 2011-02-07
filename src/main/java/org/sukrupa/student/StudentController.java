@@ -14,7 +14,7 @@ import java.util.*;
 public class StudentController {
 
     private static final String STUDENTS_MODEL = "students";
-    private static final String STUDENTS_VIEW = "studentList";
+    private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "studentUpdate";
     private static final String UPDATE_RESULTS_VIEW = "student";
