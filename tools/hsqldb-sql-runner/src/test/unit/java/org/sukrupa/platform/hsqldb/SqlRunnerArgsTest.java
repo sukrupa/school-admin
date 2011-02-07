@@ -44,6 +44,14 @@ public class SqlRunnerArgsTest {
     }
 
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void fails_if_try_to_access_sql_with_empty_args() {
+        SqlRunnerArgs sqlRunnerArgs = parseArgs(EMPTY_ARGS);
+
+        sqlRunnerArgs.getSqlToExecute();
+    }
+
+
     private static final boolean not(boolean input) {
         return !input;
     }

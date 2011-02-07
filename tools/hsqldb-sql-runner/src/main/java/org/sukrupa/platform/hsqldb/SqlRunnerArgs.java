@@ -32,10 +32,12 @@ public class SqlRunnerArgs {
             super(null);
         }
 
-        @Override
-        public boolean invalid() {
+        @Override public boolean invalid() {
             return true;
         }
 
+        @Override public String getSqlToExecute() {
+            throw new UnsupportedOperationException("There are no arguments here, boyo.");
+        }
     }
 }
