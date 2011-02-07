@@ -1,6 +1,7 @@
 package org.sukrupa.platform.hsqldb;
 
 import static java.lang.String.format;
+import static java.lang.System.exit;
 import static org.sukrupa.platform.hsqldb.SqlRunnerArgs.parseArgs;
 
 public class SqlRunner {
@@ -11,6 +12,7 @@ public class SqlRunner {
 
     public static void main(String[] args) {
         int status = new SqlRunner(parseArgs(args), new HsqlDatabase(), new Console()).run();
+        exit(status);
     }
 
     public SqlRunner(SqlRunnerArgs sqlRunnerArgs, HsqlDatabase hsqlDatabase, Console console) {

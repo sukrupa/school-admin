@@ -59,9 +59,10 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="org.springframework.context.annotation.Bean" />
-      <item index="1" class="java.lang.String" itemvalue="org.springframework.context.annotation.Configuration" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="org.mockito.Mock" />
+      <item index="1" class="java.lang.String" itemvalue="org.springframework.context.annotation.Bean" />
+      <item index="2" class="java.lang.String" itemvalue="org.springframework.context.annotation.Configuration" />
     </list>
   </component>
   <component name="FacetAutodetectingManager">
