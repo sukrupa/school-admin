@@ -44,7 +44,7 @@ public class StudentControllerTest {
 
     @Test
     public void shouldPickStudentsViewForDisplayingAllStudents() {
-        assertThat(controller.all(studentsListModel), is("students"));
+        assertThat(controller.all(studentsListModel), is("studentList"));
     }
 
     @Test
