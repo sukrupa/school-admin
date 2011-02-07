@@ -17,7 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -36,6 +39,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
     private final Talent music = new Talent("Music");
     private final Talent sport = new Talent("Sport");
+    private final Talent cooking = new Talent("Cooking");
     private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
     private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).build();
     private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").build();
@@ -48,7 +52,7 @@ public class StudentRepositoryTest {
     @Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory);
-        databaseHelper.save(music, sport);
+        databaseHelper.save(music, sport, cooking);
     }
 
     @Test
@@ -98,6 +102,16 @@ public class StudentRepositoryTest {
         databaseHelper.save(pat);
         Student loaded = repository.find("123");
         assertThat(loaded.getNotes(), hasItems(noteOne, noteTwo));
+    }
+
+    @Test
+    public void shouldReturnListOfTalents() {
+        Set<String> talentsDecriptions = new HashSet<String>();
+        talentsDecriptions.add("Music");
+        talentsDecriptions.add("Sport");
+        talentsDecriptions.add("Cooking");
+        Set<Talent> talents = repository.findTalents(talentsDecriptions);
+        assertThat(talents, hasItems(music, sport, cooking));
     }
 
     @Test

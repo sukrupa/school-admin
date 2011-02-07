@@ -2,14 +2,15 @@ package org.sukrupa.student;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Repository
 public class StudentRepository {
@@ -19,14 +20,14 @@ public class StudentRepository {
     private static final String CASTE = "caste";
     private static final String COMMUNITY_LOCATION = "communityLocation";
     private static final String NAME = "name";
-	private static final String DATE_OF_BIRTH = "dateOfBirth";
+    private static final String DATE_OF_BIRTH = "dateOfBirth";
     private static final String STUDENT_ID = "studentId";
-	private static final String TALENTS = "talents";
-	private static final String DESCRIPTION = "description";
-	private final SessionFactory sessionFactory;
-	private static final String RELIGION = "religion";
+    private static final String TALENTS = "talents";
+    private static final String DESCRIPTION = "description";
+    private final SessionFactory sessionFactory;
+    private static final String RELIGION = "religion";
 
-	@Autowired
+    @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -44,40 +45,40 @@ public class StudentRepository {
         return (Student) criteria.uniqueResult();
     }
 
-	public List<Student> parametricSearch(StudentSearchParameter searchParam) {
+    public List<Student> parametricSearch(StudentSearchParameter searchParam) {
 
-		Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
-				searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
-		if (!searchParam.getAgeFrom().isEmpty()) {
-			addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
-		}
+        Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
+                searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
+        if (!searchParam.getAgeFrom().isEmpty()) {
+            addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
+        }
 
-		Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
-		criteria.add(conjunction);
-		addTalentsSearchCriteria(criteria, searchParam.getTalent());
+        Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
+        criteria.add(conjunction);
+        addTalentsSearchCriteria(criteria, searchParam.getTalent());
 
-		return criteria.list();
-	}
+        return criteria.list();
+    }
 
-	private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {
-		LocalDate birthDateFrom = computeBirthDateFromAge(ageFrom);
-		LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(ageTo));
-		conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
-	}
+    private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {
+        LocalDate birthDateFrom = computeBirthDateFromAge(ageFrom);
+        LocalDate birthDateTo = computeBirthDateFromAge(getInclusiveUpperBoundAge(ageTo));
+        conjunction.add(Restrictions.between(DATE_OF_BIRTH, birthDateTo, birthDateFrom));
+    }
 
-	private int getInclusiveUpperBoundAge(int ageTo) {
-		return ageTo + 1;
-	}
+    private int getInclusiveUpperBoundAge(int ageTo) {
+        return ageTo + 1;
+    }
 
-	private void addTalentsSearchCriteria(Criteria criteria, String talent) {
-		if (!talent.isEmpty()) {
-			criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, talent));
-		}
-	}
+    private void addTalentsSearchCriteria(Criteria criteria, String talent) {
+        if (!talent.isEmpty()) {
+            criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, talent));
+        }
+    }
 
-	private LocalDate computeBirthDateFromAge(int age) {
-		return new LocalDate().minusYears(age);
-	}
+    private LocalDate computeBirthDateFromAge(int age) {
+        return new LocalDate().minusYears(age);
+    }
 
     private Criteria addOrderCriteria(Criteria criteria) {
         return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
@@ -101,7 +102,7 @@ public class StudentRepository {
 
     public boolean update(UpdateStudentParameter studentParam) {
         Student student = find(studentParam.getStudentId());
-        if (student==null){
+        if (student == null) {
             return false;
         }
         student.setStudentClass(studentParam.getStudentClass());
@@ -111,8 +112,22 @@ public class StudentRepository {
         student.setCaste(studentParam.getCaste());
         student.setSubCaste(studentParam.getSubCaste());
         student.setCommunityLocation(studentParam.getArea());
+        student.getTalents().clear();
+        Set<String> talents = studentParam.getTalents();
+        if (talents != null){
+            student.getTalents().addAll(findTalents(talents));
+        }
         sessionFactory.getCurrentSession().save(student);
         sessionFactory.getCurrentSession().flush();
         return true;
+    }
+
+    public Set<Talent> findTalents(Set<String> talentsDecriptions) {
+        Disjunction disjunction = Restrictions.disjunction();
+        for (String description: talentsDecriptions){
+            disjunction.add(Restrictions.eq("description", description));
+        }
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Talent.class).add(disjunction);
+        return new HashSet<Talent>(criteria.list());
     }
 }

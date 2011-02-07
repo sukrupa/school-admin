@@ -18,24 +18,24 @@ import java.util.Set;
 @Entity
 public class Student {
 
-	@Id
+    @Id
     @GeneratedValue
     private long id;
-	@Column(name = "STUDENT_ID")
-	private String studentId;
+    @Column(name = "STUDENT_ID")
+    private String studentId;
     private String name;
     private String religion;
     private String caste;
     @Column(name = "SUB_CASTE")
     private String subCaste;
-	@Column(name = "COMMUNITY_LOCATION")
+    @Column(name = "COMMUNITY_LOCATION")
     private String communityLocation;
     private String gender;
-	@Column(name = "STUDENT_CLASS")
-	private String studentClass;
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	@Column(name = "DATE_OF_BIRTH")
-	private LocalDate dateOfBirth;
+    @Column(name = "STUDENT_CLASS")
+    private String studentClass;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Column(name = "DATE_OF_BIRTH")
+    private LocalDate dateOfBirth;
     @Transient
     private List<Note> notes = new ArrayList<Note>();
 
@@ -49,18 +49,18 @@ public class Student {
     public Student() {
     }
 
-	public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
-		this.studentId = studentId;
-		this.name = name;
-		this.religion = religion;
-		this.caste = caste;
-		this.subCaste = subCaste;
-		this.communityLocation = communityLocation;
-		this.gender = gender;
-		this.studentClass = studentClass;
-		this.dateOfBirth = dateOfBirth;
-		this.talents = talents;
-	}
+    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
+        this.studentId = studentId;
+        this.name = name;
+        this.religion = religion;
+        this.caste = caste;
+        this.subCaste = subCaste;
+        this.communityLocation = communityLocation;
+        this.gender = gender;
+        this.studentClass = studentClass;
+        this.dateOfBirth = dateOfBirth;
+        this.talents = talents;
+    }
 
     public String getName() {
         return name;
@@ -82,31 +82,31 @@ public class Student {
         return communityLocation;
     }
 
-	public String getStudentId() {
-		return studentId;
-	}
+    public String getStudentId() {
+        return studentId;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public String getStudentClass() {
-		return studentClass;
-	}
+    public String getStudentClass() {
+        return studentClass;
+    }
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public Set<Talent> getTalents() {
-		return talents;
-	}
+    public Set<Talent> getTalents() {
+        return talents;
+    }
 
     public String getTalentsForDisplay() {
         return StringUtils.join(talentDescriptions(), ", ");
     }
 
-    private List<String> talentDescriptions() {
+    public List<String> talentDescriptions() {
         List<String> talentDescriptions = new ArrayList<String>();
         for (Talent talent : talents) {
             talentDescriptions.add(talent.getDescription());
@@ -115,10 +115,10 @@ public class Student {
     }
 
     public int getAge() {
-		return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
-	}
+        return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
+    }
 
-	private static String[] excludedFields = new String[]{"id"};
+    private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other, excludedFields);
@@ -132,9 +132,9 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-	protected LocalDate getCurrentDate() {
-		return new LocalDate();
-	}
+    protected LocalDate getCurrentDate() {
+        return new LocalDate();
+    }
 
     public void addNote(Note note) {
         notes.add(note);

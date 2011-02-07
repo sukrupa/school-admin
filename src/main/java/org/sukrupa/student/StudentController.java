@@ -7,27 +7,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/students")
 public class StudentController {
 
     private static final String STUDENTS_MODEL = "students";
-    private static final String STUDENTS_VIEW = "students";
+    private static final String STUDENTS_VIEW = "studentList";
     private static final String SEARCH_VIEW = "studentSearch";
     private static final String UPDATE_VIEW = "studentUpdate";
-    private static final String UPDATE_RESULTS_VIEW = "student";
+    private static final String UPDATE_RESULTS_VIEW = "studentView";
     private static final String UPDATE_RESULTS_FAILED = "studentUpdateResults";
-    private static final String STUDENT_VIEW = "student";
+    private static final String STUDENT_VIEW = "studentView";
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
     private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
     private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
-    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
+    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
     private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
@@ -86,7 +83,7 @@ public class StudentController {
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
         model.put("father", "");
         model.put("mother", "");
-        model.put("talents", "");
+        model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
         return UPDATE_VIEW;
     }
 
@@ -112,6 +109,14 @@ public class StudentController {
             dropDownElements.add(new DropDownElement(genderString, genderString.equals(selected)));
         }
         return dropDownElements;
+    }
+
+    private List<CheckBoxElement> createCheckBoxList(List<String> studentTalents, List<String> allTalents) {
+        List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
+        for (String talent : allTalents) {
+            checkBoxElements.add(new CheckBoxElement(talent, studentTalents.contains(talent)));
+        }
+        return checkBoxElements;
     }
 
     @RequestMapping(value = "{id}")
@@ -147,6 +152,24 @@ public class StudentController {
         public DropDownElement(String value, boolean selected) {
             this.value = value;
             this.selected = selected;
+        }
+    }
+
+    private class CheckBoxElement {
+        public boolean isChecked() {
+            return checked;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        private final String value;
+        private final boolean checked;
+
+        public CheckBoxElement(String value, boolean checked) {
+            this.value = value;
+            this.checked = checked;
         }
     }
 }

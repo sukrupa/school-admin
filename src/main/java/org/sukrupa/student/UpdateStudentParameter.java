@@ -2,6 +2,8 @@ package org.sukrupa.student;
 
 import org.sukrupa.platform.DoNotRemove;
 
+import java.util.Set;
+
 public class UpdateStudentParameter {
 	private String studentId;
     private String name;
@@ -14,9 +16,9 @@ public class UpdateStudentParameter {
 	private String area;
 	private String father;
 	private String mother;
-    private String talents;
+    private Set<String> talents;
 
-    public UpdateStudentParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String area, String father, String mother, String talents) {
+    public UpdateStudentParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String area, String father, String mother, Set<String> talents) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -79,7 +81,7 @@ public class UpdateStudentParameter {
         return mother;
     }
 
-    public String getTalents() {
+    public Set<String> getTalents() {
         return talents;
     }
 
@@ -127,7 +129,7 @@ public class UpdateStudentParameter {
         this.mother = mother;
     }
 
-    public void setTalents(String talents) {
+    public void setTalents(Set<String> talents) {
         this.talents = talents;
     }
 }

@@ -260,6 +260,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sukrupa.iml" filepath="$PROJECT_DIR$/sukrupa.iml" />
     </modules>
   </component>
@@ -292,6 +293,23 @@
         <root url="file://$PROJECT_DIR$/../../lib/main" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-main">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-test">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../lib/test" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
