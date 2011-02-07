@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/students")
@@ -86,7 +83,7 @@ public class StudentController {
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
         model.put("father", "");
         model.put("mother", "");
-        model.put("talents", "");
+        model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
         return UPDATE_VIEW;
     }
 
@@ -112,6 +109,14 @@ public class StudentController {
             dropDownElements.add(new DropDownElement(genderString, genderString.equals(selected)));
         }
         return dropDownElements;
+    }
+
+    private List<CheckBoxElement> createCheckBoxList(List<String> studentTalents, List<String> allTalents) {
+        List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
+        for (String talent : allTalents) {
+            checkBoxElements.add(new CheckBoxElement(talent, studentTalents.contains(talent)));
+        }
+        return checkBoxElements;
     }
 
     @RequestMapping(value = "{id}")
@@ -147,6 +152,24 @@ public class StudentController {
         public DropDownElement(String value, boolean selected) {
             this.value = value;
             this.selected = selected;
+        }
+    }
+
+    private class CheckBoxElement {
+        public boolean isChecked() {
+            return checked;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        private final String value;
+        private final boolean checked;
+
+        public CheckBoxElement(String value, boolean checked) {
+            this.value = value;
+            this.checked = checked;
         }
     }
 }
