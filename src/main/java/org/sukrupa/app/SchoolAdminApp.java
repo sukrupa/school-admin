@@ -1,19 +1,25 @@
 package org.sukrupa.app;
 
+import org.apache.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.server.WebServer;
 
-import java.io.IOException;
+import java.io.*;
 
+import static java.lang.String.format;
 import static org.sukrupa.app.config.ApplicationContextLoader.configureApp;
 import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 
 @Component
 public class SchoolAdminApp {
 
+    private static final Logger log = Logger.getLogger(SchoolAdminApp.class);
+
     public static void main(String[] args) throws IOException {
         configureLogging();
+        log.info(format("-Dweb.root.dir=%s", System.getProperty("web.root.dir")));
+        log.info(format("Real web root is [$s]", new File(System.getProperty("web.root.dir")).getAbsolutePath()));
         configureApp().getBean(SchoolAdminApp.class).start();
     }
 
