@@ -14,4 +14,11 @@ public class SystemOutRecorder {
     String getOutput() throws UnsupportedEncodingException {
         return bos.toString("UTF-8");
     }
+
+    void attatch() throws UnsupportedEncodingException {
+        bos = new ByteArrayOutputStream();
+        out = new PrintStream(bos, AUTO_FLUSH, "UTF-8");
+        previousOut = System.out;
+        System.setOut(out);
+    }
 }
