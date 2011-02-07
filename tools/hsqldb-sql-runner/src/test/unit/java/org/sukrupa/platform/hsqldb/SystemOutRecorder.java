@@ -21,4 +21,8 @@ public class SystemOutRecorder {
         previousOut = System.out;
         System.setOut(out);
     }
+
+    void detatch() {
+        System.setOut(previousOut);
+    }
 }
