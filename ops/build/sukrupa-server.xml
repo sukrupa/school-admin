@@ -4,7 +4,10 @@
     <import file="classpaths.xml"/>
     <import file="macros.xml"/>
 
-    <target name="sukrupa-server:start" depends="db:start, db:insert-fake-data" >
+    <target name="sukrupa-server:start-for-twist" depends="db:start, db:insert-fake-data, sukrupa-server:start"  />
+    <target name="sukrupa-server:stop-for-twist" depends="db:delete-fake-data, sukrupa-server:stop" />
+
+    <target name="sukrupa-server:start" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
         <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
             <jvmarg value="-Xms128m"/>
@@ -16,7 +19,7 @@
         </java>
     </target>
 
-    <target name="sukrupa-server:stop" depends="db:delete-fake-data">
+    <target name="sukrupa-server:stop">
         <exec executable="${ops.deploy.dir}/stop-server.sh"/>
     </target>
 
