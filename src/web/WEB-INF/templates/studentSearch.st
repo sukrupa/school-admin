@@ -2,7 +2,7 @@
 <head>
 	<title>Search</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-	<script type="text/javascript" src="../../scripts/studentSearch.js"></script>
+	<script type="text/javascript" src="../../../scripts/studentSearch.js"></script>
 </head>
 <body>
 
@@ -31,7 +31,7 @@
 				<span>Age From</span>
 			</td>
 			<td>
-				<select name="ageFrom" id="ageFrom" onClick="changeAgeRange()">
+				<select name="ageFrom" id="ageFrom" onchange="changeAgeRange()">
 					<option value="">Any</option>
 					$agesFrom:{
 					<option value="$it$">$it$</option>
