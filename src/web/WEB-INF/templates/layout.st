@@ -1,10 +1,10 @@
 <html>
 <head>
 	<title>$title$</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-	<script type="text/javascript" src="/scripts/studentSearch.js"></script>
-	<script type="text/javascript" src="/scripts/recordEvent.js"></script>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.js"></script>
+	<script type="text/javascript" src="/scripts/$script$.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/$css$.css" />
 </head>
 <body>
 
