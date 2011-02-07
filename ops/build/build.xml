@@ -109,12 +109,12 @@
     </target>
 
     <target name="test:twist"
-            depends="db:delete-fake-data, db:insert-fake-data, compile:test:twist"
+            depends="db:start, db:delete-fake-data, db:insert-fake-data, compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
         <run-against-server startServerTarget="sukrupa-server:start"
                             stopServerTarget="sukrupa-server:stop"
-                            cleanupTarget="db:delete-fake-data"
+                            cleanupTarget="test:twist:cleanup"
                             checkServerUpTarget="sukrupa-server:check-is-running">
             <execute>
                 <ant antfile="${ops.build.dir}/twist.xml"
@@ -127,6 +127,15 @@
 
         <available file="${target.test.twist.failed.file}" property="twist.scenarios.failed"/>
         <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
+    </target>
+
+    <target name="test:twist:cleanup" >
+        <waitfor>
+            <not>
+                <available file="${db.dir}/${db.name}.lck" property="db.server.running"/>
+            </not>
+        </waitfor>
+        <antcall target="db:start" />
     </target>
 
     <target name="package" depends="create.module.jar">
