@@ -23,7 +23,7 @@
 				<span>Age From</span>
 			</td>
 			<td>
-				<select name="ageFrom" id="ageFrom" onClick="changeAgeRange()">
+				<select name="ageFrom" id="ageFrom" onchange="changeAgeRange()">
 					<option value="">Any</option>
 					$agesFrom:{
 					<option value="$it$">$it$</option>
