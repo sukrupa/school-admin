@@ -19,7 +19,7 @@ public class StudentController {
     private static final String UPDATE_VIEW = "studentUpdate";
     private static final String UPDATE_RESULTS_VIEW = "student";
     private static final String UPDATE_RESULTS_FAILED = "studentUpdateResults";
-    private static final String STUDENT_VIEW = "student";
+    private static final String STUDENT_VIEW = "studentView";
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
     private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");

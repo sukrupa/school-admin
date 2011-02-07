@@ -1,0 +1,1 @@
+<p class="name"><a href="update?studentId=$student.studentId$">$student.name$</a></p>
