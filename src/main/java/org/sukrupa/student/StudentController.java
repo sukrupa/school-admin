@@ -18,8 +18,8 @@ public class StudentController {
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "students";
     private static final String SEARCH_VIEW = "studentSearch";
-    private static final String UPDATE_VIEW = "update";
-    private static final String UPDATE_RESULTS_VIEW = "updateResults";
+    private static final String UPDATE_VIEW = "studentUpdate";
+    private static final String UPDATE_RESULTS_VIEW = "studentUpdateResults";
     private static final String STUDENT_VIEW = "student";
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
