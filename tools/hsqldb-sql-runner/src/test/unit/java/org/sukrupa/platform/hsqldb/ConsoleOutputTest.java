@@ -18,6 +18,10 @@ public class ConsoleOutputTest {
 
     @After
     public void tearDown() {
+        detatch();
+    }
+
+    private void detatch() {
         System.setOut(systemOutRecorder.previousOut);
     }
 
