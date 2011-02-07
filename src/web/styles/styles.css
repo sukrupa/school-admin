@@ -1,6 +1,11 @@
 body {
 margin:0;
 }
+.indent {
+    margin-left:10px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
 
 #page {
     width:950px;
@@ -19,7 +24,7 @@ margin:0;
 }
 
 #sidebar{
-    width:125px;
+    width:210px;
     margin-right: 20px;
     float:left;
     background-color: #0065a5;
@@ -31,7 +36,7 @@ margin:0;
     color: #ffdddd;
 }
 #body{
-    width:800px;
+    width:715px;
     float:left;
 }
 img{
