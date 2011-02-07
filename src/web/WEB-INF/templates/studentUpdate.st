@@ -85,6 +85,7 @@
 	<br/>
 
 <input type="submit" value="Update"/>
+<input type="button" value="Cancel" onclick="history.go(-1);return false;" />
 
 </form>
 </body>
