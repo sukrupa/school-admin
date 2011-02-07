@@ -25,5 +25,5 @@
 	<textarea name="notes" rows="3" cols="20"></textarea> <br/>
 
 	<input type="submit" value="Save"/>
-	<input type="button" value="Cancel"/>
+	<input type="button" value="Cancel" onclick="resetFields()"/>
 </form>

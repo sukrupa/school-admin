@@ -32,8 +32,8 @@ public class EventRepository {
     }
 
     public void save(EventRecord eventRecord) {
-	    Set<Student> attendees = retrieveStudent(eventRecord.getAttendees());
-	    sessionFactory.getCurrentSession().save(Event.createFrom(eventRecord, attendees));
+	    sessionFactory.getCurrentSession().save(Event.createFrom(eventRecord, retrieveStudent(eventRecord.getAttendees())));
+	    sessionFactory.getCurrentSession().flush();
     }
 
     private Set<Student> retrieveStudent(String studentIds) {
