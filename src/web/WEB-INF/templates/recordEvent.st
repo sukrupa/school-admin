@@ -1,1 +1,1 @@
-$layout(body=recordEventBody(), title="Record an Event")$
+$layout(css="recordEvent", script="recordEvent", body=recordEventBody(), title="Record an Event")$
