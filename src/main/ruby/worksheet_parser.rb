@@ -71,7 +71,7 @@ class WorksheetParser
 	         cell_value = @worksheet.cell(row_number,column_number)
 	         
 	         if (@worksheet.celltype(row_number,column_number) == :float)
-      	          cell_value = Integer(cell_value)
+      	        cell_value = Integer(cell_value)
 	         elsif (@worksheet.celltype(row_number,column_number) == :string)
 	              cell_value = cell_value.strip()
 	         end
@@ -83,7 +83,7 @@ class WorksheetParser
 	     
 	     end
 	     
-	     @students_array += [Student.new(student)]
+	     @students_array += [Student.from_excel(student)]
 	   end
 	   @students_array
 	end

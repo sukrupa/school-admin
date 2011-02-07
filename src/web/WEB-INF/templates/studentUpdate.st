@@ -31,14 +31,18 @@
     <span>Class</span>
     <select name="studentClass" >
         $classes:{
-        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>src/web/WEB-INF/templates/studentUpdate.st
         }$
     </select>
 
     <br/>
 
     <span>Religion</span>
-    <input type="text" name="religion" value="$religion$"></input>
+     <select name="religion" >
+        $religions:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
 
     <br/>
 
@@ -52,11 +56,11 @@
 	<br/>
 
     <span>Subcaste</span>
-    <input type="text" name="subCaste" value=
-    $subCaste:{
-    $it$
-    }$   >
-    </input>
+    <select name="subCaste" >
+        $subcastes:{
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+        }$
+    </select>
 
     <br/>
 
@@ -85,6 +89,7 @@
 	<br/>
 
 <input type="submit" value="Update"/>
+<input type="button" value="Cancel" onclick="history.go(-1);return false;" />
 
 </form>
 </body>
