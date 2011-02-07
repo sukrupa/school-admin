@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,9 +68,9 @@ public class StudentController {
         return SEARCH_VIEW;
     }
 
-    @RequestMapping(value = "update/{id}")
-    public String updateStudent(@PathVariable String id, Map<String, Object> model) {
-        Student theStudent = repository.find(id);
+    @RequestMapping(value = "update")
+    public String updateStudent(@RequestParam String studentId, Map<String, Object> model) {
+        Student theStudent = repository.find(studentId);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -86,7 +87,7 @@ public class StudentController {
         return UPDATE_VIEW;
     }
 
-    @RequestMapping(value = "update/updateResults")
+    @RequestMapping(value = "updateResults")
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
