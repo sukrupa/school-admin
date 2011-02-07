@@ -30,7 +30,4 @@ public class ConsoleOutputTest {
         assertThat(output, is("Hello world\n"));
     }
 
-    private String getOutput() throws UnsupportedEncodingException {
-        return systemOutRecorder.getOutput();
-    }
 }
