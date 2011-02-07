@@ -4,7 +4,7 @@
     <import file="classpaths.xml"/>
     <import file="macros.xml"/>
 
-    <target name="sukrupa-server:start">
+    <target name="sukrupa-server:start" depends="db:start, db:insert-fake-data" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
         <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
             <jvmarg value="-Xms128m"/>
@@ -16,9 +16,10 @@
         </java>
     </target>
 
-    <target name="sukrupa-server:stop">
+    <target name="sukrupa-server:stop" depends="db:delete-fake-data">
         <exec executable="${ops.deploy.dir}/stop-server.sh"/>
     </target>
+
 
     <target name="sukrupa-server:check-is-running">
         <wait.for.server host="localhost" port="${web.http.port}"/>
