@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EventController {
     private static final String EVENTS_MODEL = "events";
     private static final String RECORD_EVENT_VIEW = "recordEvent";
-    private static final String EVENT_SAVE_VIEW = "events_saved";
+    private static final String EVENT_SAVE_VIEW = "eventSaved";
     private EventRepository repository;
 
     @Autowired

@@ -31,7 +31,7 @@
     <span>Class</span>
     <select name="studentClass" >
         $classes:{
-        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>src/web/WEB-INF/templates/studentUpdate.st
+        <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
         }$
     </select>
 
@@ -83,8 +83,11 @@
 
 	<br/>
 
-	<span>Talents</span>
-	<input type="text" name="talents" value="$talents$"></input>
+    <span>Talents</span>
+    <br/>
+    $talents:{
+        <input type="checkbox" name="talents" value="$it.value$" $if (it.checked)$checked$endif$>$it.value$</input>
+    }$
 
 	<br/>
 

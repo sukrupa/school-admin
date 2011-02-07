@@ -1,0 +1,3 @@
+function resetFields() {
+    $('#title').text("");
+}

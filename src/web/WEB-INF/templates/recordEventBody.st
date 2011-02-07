@@ -1,5 +1,4 @@
 <form name="eventRecord" action="save" method="post">
-	<h1>Record an Event</h1>
 	<span>Title</span>
 	<input type="text" name="title"/>
 
@@ -25,5 +24,5 @@
 	<textarea name="notes" rows="3" cols="20"></textarea> <br/>
 
 	<input type="submit" value="Save"/>
-	<input type="button" value="Cancel"/>
+	<input type="button" value="Cancel" onclick="resetFields()"/>
 </form>

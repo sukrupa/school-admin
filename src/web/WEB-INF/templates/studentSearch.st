@@ -1,1 +1,1 @@
-$layout(body=studentSearchBody())$
+$layout(body=studentSearchBody(), title="Student Search")$

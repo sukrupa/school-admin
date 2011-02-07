@@ -1,19 +1,14 @@
 require 'rubygems'
 require 'roo'
-require 'worksheet_parser'
-require 'student  '
+require 'workbook_parser'
+require 'student'
 require 'sql_generator'
 
-students_excel = Excelx.new(ARGV[0])
-sheet_names = students_excel.sheets
-sql_generator = SQLGenerator.new
+TARGET_SQL_FILE = '../../../target/import_students.sql'
 
-File.open('import_students.sql', 'w') { |file|
-  sheet_names.each do |sheet_name|
-    file.puts(sheet_name) 
-    students_excel.default_sheet = sheet_name
-    worksheet_parser = WorksheetParser.new(students_excel)
-    students = worksheet_parser.parse
-    sql_generator.generate_sql(file, students)
-  end
-}
+workbook = Excelx.new(ARGV[0])
+students = WorkbookParser.new.parse(workbook)
+sql_statements = SQLGenerator.new.generate_sql students
+
+File.open(TARGET_SQL_FILE, 'w') { |file| file.puts sql_statements }
+puts "Wrote #{sql_statements.length} lines to '#{TARGET_SQL_FILE}'."
