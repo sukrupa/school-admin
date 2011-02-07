@@ -29,8 +29,8 @@ body {
 
 .pageheader{
     color: #ffffff;
-    font-size: 24pt;
     vertical-align: text-top;
+    font: 28pt Palatino, serif;
 }
 
 #sidebar{
@@ -40,7 +40,7 @@ body {
     float:left;
     background: transparent;
     color: #ffffff;
-    font: 12px 'Century Gothic', verdana, arial, helvetica, sans-serif;
+    font: 16px Palatino, serif;
 }
 #sidebar a {
     color: #ffffff;
