@@ -86,7 +86,7 @@
     <span>Talents</span>
     <br/>
     $talents:{
-        <input type="checkbox" name="talents" value=$it.value$ $if (it.checked)$checked$endif$>$it.value$</input>
+        <input type="checkbox" name="talents" value="$it.value$" $if (it.checked)$checked$endif$>$it.value$</input>
     }$
 
 	<br/>
