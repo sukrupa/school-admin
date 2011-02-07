@@ -1,6 +1,7 @@
 package org.sukrupa.platform.hsqldb;
 
 public class SqlRunnerArgs {
+    private String databasePropertiesFilename;
     private final String sqlToExecute;
 
     public static SqlRunnerArgs parseArgs(String[] args) {
@@ -8,10 +9,11 @@ public class SqlRunnerArgs {
             return new EmptySqlRunnerArgs();
         }
         String sqlToExecute = args[0];
-        return new SqlRunnerArgs(sqlToExecute);
+        return new SqlRunnerArgs(null, sqlToExecute);
     }
 
-    public SqlRunnerArgs(String sqlToExecute) {
+    public SqlRunnerArgs(String databasePropertiesFilename, String sqlToExecute) {
+        this.databasePropertiesFilename = databasePropertiesFilename;
         this.sqlToExecute = sqlToExecute;
     }
 
@@ -27,9 +29,13 @@ public class SqlRunnerArgs {
         return sqlToExecute;
     }
 
+    public String getDatabasePropertiesFilename() {
+        return databasePropertiesFilename;
+    }
+
     private static class EmptySqlRunnerArgs extends SqlRunnerArgs {
         public EmptySqlRunnerArgs() {
-            super(null);
+            super(null, null);
         }
 
         @Override public boolean invalid() {

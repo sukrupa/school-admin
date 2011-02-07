@@ -8,14 +8,17 @@ import static org.sukrupa.platform.hsqldb.SqlRunnerArgs.parseArgs;
 public class SqlRunner {
 
     private static final Logger log = Logger.getLogger(SqlRunner.class);
-    private ConsoleOutput console;
-    private SqlRunnerArgs sqlRunnerArgs;
+
+    private final SqlRunnerArgs sqlRunnerArgs;
+    private final HsqlDatabase hsqlDatabase;
+    private final ConsoleOutput console;
 
     public static void main(String[] args) {
-        new SqlRunner(parseArgs(args), new ConsoleOutput()).run();
+        new SqlRunner(parseArgs(args), new HsqlDatabase(), new ConsoleOutput()).run();
     }
 
-    public SqlRunner(SqlRunnerArgs sqlRunnerArgs, ConsoleOutput console) {
+    public SqlRunner(SqlRunnerArgs sqlRunnerArgs, HsqlDatabase hsqlDatabase, ConsoleOutput console) {
+        this.hsqlDatabase = hsqlDatabase;
         this.console = console;
         this.sqlRunnerArgs = sqlRunnerArgs;
     }
@@ -23,8 +26,10 @@ public class SqlRunner {
     public void run() {
         if (sqlRunnerArgs.invalid()) {
             console.println("Sorry, I didn't understand the arguments you passed me.");
-            console.println(format("Usage: hsqldb-exec.sh ", sqlRunnerArgs.describeArguments()));
+            console.println(format("Usage: hsqldb-exec.sh %s", sqlRunnerArgs.describeArguments()));
         }
+
+        hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.getDatabasePropertiesFilename());
     }
 
 }
