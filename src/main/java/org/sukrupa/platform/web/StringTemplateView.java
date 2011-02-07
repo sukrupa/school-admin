@@ -2,6 +2,7 @@ package org.sukrupa.platform.web;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
+import org.apache.log4j.*;
 import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.view.InternalResourceView;
 
@@ -10,11 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import static java.lang.String.format;
+
 public class StringTemplateView extends InternalResourceView {
+    private static final Logger log = Logger.getLogger(StringTemplateView.class);
+
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Resource templateFile = getApplicationContext().getResource(getUrl());
-        StringTemplateGroup group = new StringTemplateGroup("view", templateFile.getFile().getParent());
+        String templateRootDir = format("%s/WEB-INF/templates", getServletContext().getRealPath("/"));
+
+        log.info(format("Trying to load string template group from [%s] using url [%s]",
+                templateRootDir,
+                getUrl()));
+
+        StringTemplateGroup group = new StringTemplateGroup("view", templateRootDir);
         StringTemplate template = group.getInstanceOf(getBeanName());
 
         template.setAttributes(model);

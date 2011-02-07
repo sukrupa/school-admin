@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<p class="name">$student.name$</p>
+<p class="name"><a href="update/$student.studentId$">$student.name$</a></p>
 </body>
 
 </html>

@@ -36,6 +36,13 @@
             depends="all, test:twist">
     </target>
 
+    <target name="install:local"
+            depends="clean, init, compile:all, copy-resources, package"
+            description="Use this when you are working locally to just compile and package and install">
+
+        <exec executable="./ops/local/local-package.sh" />
+    </target>
+
     <target name="compile:all"
             depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional, compile:test:twist"/>
 

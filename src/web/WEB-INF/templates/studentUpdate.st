@@ -5,7 +5,7 @@
 <h1>Update Student Record</h1>
 
 	<span>Student ID</span>
-	<input type="text" name="studentId" value="$studentId$"></input>
+	<input type="text" name="studentId" value="$studentId$" readonly></input>
 
 	<br/>
 

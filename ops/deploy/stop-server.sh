@@ -1,9 +1,8 @@
 #!/bin/bash
 findSukrupaServerProcess() {
-	SUKRUPA_WEB_SERVER=SchoolAdminApp
     case $(uname) in
       Darwin | Linux)
-        PID=$(ps aux | grep $SUKRUPA_WEB_SERVER | grep java | grep -v grep | awk '{ print $2 }')
+        PID=$(ps aux | grep java | grep sukrupa | grep -v ant-launcher.jar | awk '{ print $2 }')
         ;;
       *)
        echo "Unrecognised OS, supported OS's are MacOSX, Linux & SunOS (Solaris)"

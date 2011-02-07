@@ -1,7 +1,6 @@
 package org.sukrupa.student;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +8,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.config.AppConfigForTestsContextLoader;
-import org.sukrupa.page.ViewStudentPage;
+import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.students.ViewStudentPage;
 import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;

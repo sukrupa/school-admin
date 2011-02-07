@@ -29,7 +29,12 @@ public class WebServer {
     private final FrontController frontController;
 
     @Autowired
-    public WebServer(@Value("${web.root.dir}") String webRoot, @Value("${web.http.port}") int httpPort, @Value("${web.context.path}") String contextPath, FrontController frontController) {
+    public WebServer(@Value("${web.root.dir}") String webRoot,
+                     @Value("${web.http.port}") int httpPort,
+                     @Value("${web.context.path}") String contextPath,
+                     FrontController frontController) {
+
+
         this.webRoot = webRoot;
         this.contextPath = contextPath;
         this.frontController = frontController;

@@ -1,4 +1,4 @@
-package org.sukrupa.page;
+package org.sukrupa.app.students;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
