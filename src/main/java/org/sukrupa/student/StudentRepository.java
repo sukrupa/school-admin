@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,12 @@ public class StudentRepository {
 
     @SuppressWarnings("unchecked")
     public List<Student> findAll() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
+        Criteria criteria = session().createCriteria(Student.class);
         return addOrderCriteria(criteria).list();
     }
 
     public Student find(String studentId) {
-        Criteria criteria = sessionFactory.getCurrentSession()
+        Criteria criteria = session()
                 .createCriteria(Student.class)
                 .add(Restrictions.eq(STUDENT_ID, studentId));
         return (Student) criteria.uniqueResult();
@@ -52,7 +53,7 @@ public class StudentRepository {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
         }
 
-        Criteria criteria = addOrderCriteria(sessionFactory.getCurrentSession().createCriteria(Student.class));
+        Criteria criteria = addOrderCriteria(session().createCriteria(Student.class));
         criteria.add(conjunction);
         addTalentsSearchCriteria(criteria, searchParam.getTalent());
 
@@ -116,8 +117,8 @@ public class StudentRepository {
         if (talents != null){
             student.getTalents().addAll(findTalents(talents));
         }
-        sessionFactory.getCurrentSession().save(student);
-        sessionFactory.getCurrentSession().flush();
+        session().save(student);
+        session().flush();
         return student;
     }
 
@@ -126,7 +127,15 @@ public class StudentRepository {
         for (String description: talentsDecriptions){
             disjunction.add(Restrictions.eq("description", description));
         }
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Talent.class).add(disjunction);
+        Criteria criteria = session().createCriteria(Talent.class).add(disjunction);
         return new HashSet<Talent>(criteria.list());
+    }
+
+    public void saveOrUpdate(Student student) {
+         session().saveOrUpdate(student);
+    }
+
+    private Session session() {
+        return sessionFactory.getCurrentSession();
     }
 }

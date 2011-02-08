@@ -40,7 +40,9 @@ public class DatabaseHelper {
     public void deleteAndCommit(final Object... savedObjects) {
         transactionTemplate().execute(new TransactionCallbackWithoutResult() {
             protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-                delete(savedObjects);
+                for (Object savedObject : savedObjects) {
+                    delete(session().merge(savedObject));
+                }
             }
         });
     }
@@ -58,6 +60,11 @@ public class DatabaseHelper {
 
     public void deleteAllCreatedObjects() {
         deleteAndCommit(trackedObjects);
+        resetTrackedObjects();
+    }
+
+    private void resetTrackedObjects() {
+        trackedObjects = new Object[]{};
     }
 
 

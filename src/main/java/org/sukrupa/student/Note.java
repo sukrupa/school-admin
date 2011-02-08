@@ -31,9 +31,17 @@ public class Note {
     Note() {
     }
 
+    public Note(String message) {
+        this(message, new LocalDate());
+    }
+
     public Note(String message, LocalDate date) {
         this.message = message;
         this.date = date;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     private static String[] excludedFields = new String[]{"noteId"};
