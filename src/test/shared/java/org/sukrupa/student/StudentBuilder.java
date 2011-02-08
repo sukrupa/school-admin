@@ -2,7 +2,9 @@ package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
@@ -21,6 +23,15 @@ public class StudentBuilder {
     private String gender;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
+    private List<Note> notes = new ArrayList<Note>();
+
+
+    public StudentBuilder notes(Note... notes) {
+        this.notes = asList(notes);
+        return this;
+    }
+
+
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -102,6 +113,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, dateOfBirth);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, dateOfBirth,notes);
     }
 }
