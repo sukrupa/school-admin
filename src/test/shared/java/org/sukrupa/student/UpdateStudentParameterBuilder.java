@@ -15,8 +15,8 @@ public class UpdateStudentParameterBuilder {
     private String caste;
     private String subCaste;
     private String area;
-    private String father = "father";
-    private String mother = "mother";
+    private String father;
+    private String mother;
     private Set<String> talents;
 
     public UpdateStudentParameterBuilder studentId(String studentId) {
