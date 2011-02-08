@@ -3,7 +3,7 @@
 <br />
 
 <span>Name</span>
-<span>$student.name$</span>
+<span class="name">$student.name$</span>
 
 <br/>
 
