@@ -1,0 +1,13 @@
+Tags:
+Preconditions:Navigate to Search Page
+Search Workflow:
+#Select Talent as <Talent>
+#Select minimum age as <Min Age>
+#Select maximum age as <Max Age>
+#Select class as <Class>
+#Select gender as <Gender>
+#Select religion as <Religion>
+#Select caste as <Caste>
+#Select community location as <Community Location>
+#Hit search button
+#Verify that <Name> shows in search results 

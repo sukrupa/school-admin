@@ -1,5 +1,5 @@
 Tags:in-progress
 Preconditions:open admin page,all student records are loaded
 Students Record:
-#verify "Bob1" shows up in the list
-#verify "Bob7" shows up in the list
+#verify "Chandana" shows up in the list
+#verify "Anok" shows up in the list
