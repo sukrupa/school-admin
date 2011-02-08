@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
@@ -112,6 +113,10 @@ public class StudentRepository {
     }
 
     public Set<Talent> findTalents(Set<String> talentsDecriptions) {
+	    if (talentsDecriptions == null) {
+		    return Sets.newHashSet();
+	    }
+
         Disjunction disjunction = Restrictions.disjunction();
         for (String description: talentsDecriptions){
             disjunction.add(Restrictions.eq("description", description));
