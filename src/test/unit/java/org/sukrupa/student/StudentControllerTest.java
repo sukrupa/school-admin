@@ -55,9 +55,14 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void shouldPickStudentViewForDisplayingSingleStudent()
-    {
+    public void shouldPickStudentViewForDisplayingSingleStudent() {
+	    when(repository.find("123")).thenReturn(pat);
         assertThat(controller.viewStudent("123", studentModel),is("studentView"));
+    }
+
+    @Test
+    public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
+        assertThat(controller.viewStudent("0987ihuyi", studentModel),is("studentViewFailed"));
     }
 
 }
