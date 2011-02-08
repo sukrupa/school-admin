@@ -17,6 +17,7 @@ bin
 logs
 Cache/
 profiles/
+reports/
 certs/
 src/test/twist/functional-test/reports/
 
