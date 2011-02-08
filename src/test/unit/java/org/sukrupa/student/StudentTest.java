@@ -76,17 +76,11 @@ public class StudentTest {
 
     @Test
     public void shouldCaptureNotesAboutAStudent() {
-        Student suhas = student("suhas");
-        Note firstNote = new Note("note1");
-        Note secondNote = new Note("note2");
-        suhas.addNote(firstNote);
-        suhas.addNote(secondNote);
-        List<Note> notes = suhas.getNotes();
-        assertThat(notes, hasItems(firstNote, secondNote));
-    }
-
-    private Student student(String name) {
-        return student(name, null);
+        Note firstNote = new Note("note1", new LocalDate());
+        Note secondNote = new Note("note2", new LocalDate());
+        Student suhas = new StudentBuilder().notes(firstNote, secondNote).build();
+        
+        assertThat(suhas.getNotes(), hasItems(firstNote, secondNote));
     }
 
     private Student student(String name, LocalDate dateOfBirth) {

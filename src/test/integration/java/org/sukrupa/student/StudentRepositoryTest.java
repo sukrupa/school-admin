@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-import com.google.common.collect.Sets;
 import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
@@ -18,11 +17,13 @@ import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -36,13 +37,14 @@ public class StudentRepositoryTest {
     private DatabaseHelper databaseHelper;
 
     private StudentRepository repository;
-    private final Talent music = new Talent("Music");
-    private final Talent sport = new Talent("Sport");
-    private final Talent cooking = new Talent("Cooking");
-    Note todo = new Note("do this and that", new LocalDate(2011, 11, 8));
-    private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).notes(todo).build();
-    private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).notes(todo).build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").notes(todo).build();
+
+    private Talent music = new Talent("Music");
+    private Talent sport = new Talent("Sport");
+    private Talent cooking = new Talent("Cooking");
+
+    private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
+    private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").build();
 
     @BeforeClass
     public static void classSetUp() {
@@ -60,8 +62,8 @@ public class StudentRepositoryTest {
         databaseHelper.save(pat, renaud);
         List<Student> students = repository.findAll();
 
-        assertThat(students, hasSize(2));
-        assertThat(Sets.newHashSet(students), hasItems(pat, renaud));
+        assertThat(students.size(), is(2));
+        assertThat(students, hasItems(pat, renaud));
     }
 
     @Test
@@ -69,7 +71,7 @@ public class StudentRepositoryTest {
         databaseHelper.save(sahil, pat, renaud);
 
         List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build());
-        assertThat(students, Matchers.<Object>hasSize(2));
+        assertThat(students.size(), is(2));
         assertThat(students, hasItems(renaud, sahil));
     }
 
@@ -88,14 +90,18 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldPopulateNotes() {
-        Note todo = new Note("do this and that", new LocalDate(2011, 11, 8));
-        Note shopping = new Note("buy milk and bread", new LocalDate(2011, 11, 8));
+    public void shouldPopulateNotesInReverseChronologicalOrder() {
+        Note oldNote = new Note("yesterday", new LocalDate(2011, 11, 24));
+        Note oldestNote = new Note("long time ago", new LocalDate(2008, 3, 29));
+        Note newNote = new Note("today", new LocalDate(2011, 11, 25));
 
-        Student sahil1 = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").notes(todo, shopping).build();
-        databaseHelper.save(sahil1);
+        Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
+        databaseHelper.save(student);
 
-        assertThat(repository.findAll().get(0).getNotes(), hasItems(todo, shopping));
+        Iterator<Note> notes = repository.findAll().get(0).getNotes().iterator();
+        assertThat(notes.next(), is(newNote));
+        assertThat(notes.next(), is(oldNote));
+        assertThat(notes.next(), is(oldestNote));
     }
 
     @Test
@@ -103,7 +109,6 @@ public class StudentRepositoryTest {
         databaseHelper.save(pat);
         assertThat(repository.find("123"), is(pat));
     }
-
 
     @Test
     public void shouldReturnListOfTalents() {

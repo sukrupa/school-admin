@@ -12,6 +12,7 @@ import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,39 +22,49 @@ public class Student {
     @Id
     @GeneratedValue
     private long id;
+
     @Column(name = "STUDENT_ID")
     private String studentId;
+
     private String name;
+
     private String religion;
+
     private String caste;
+
     @Column(name = "SUB_CASTE")
     private String subCaste;
+
     @Column(name = "COMMUNITY_LOCATION")
     private String communityLocation;
+
     private String gender;
+
     @Column(name = "STUDENT_CLASS")
     private String studentClass;
+
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "STUDENT_NOTE",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "note_id")})
-    private List<Note> notes;
-
     @ManyToMany
     @JoinTable(name = "STUDENT_TALENT",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "talent_id")})
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
+
+    @OrderBy("date desc")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "STUDENT_NOTE",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "note_id"))
+    private Set<Note> notes;
 
     @DoNotRemove
     public Student() {
     }
 
-    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth, List<Note> notes) {
+    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth, Set<Note> notes) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -123,20 +134,6 @@ public class Student {
         return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
     }
 
-    private static String[] excludedFields = new String[]{"id", "notes"};
-
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other, excludedFields);
-    }
-
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, excludedFields);
-    }
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-    }
-
     protected LocalDate getCurrentDate() {
         return new LocalDate();
     }
@@ -145,7 +142,7 @@ public class Student {
         notes.add(note);
     }
 
-    public List<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
@@ -175,5 +172,19 @@ public class Student {
 
     public void setCommunityLocation(String communityLocation) {
         this.communityLocation = communityLocation;
+    }
+
+    private static String[] excludedFields = new String[]{"id"};
+
+    public boolean equals(Object other) {
+        return EqualsBuilder.reflectionEquals(this, other, excludedFields);
+    }
+
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, excludedFields);
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

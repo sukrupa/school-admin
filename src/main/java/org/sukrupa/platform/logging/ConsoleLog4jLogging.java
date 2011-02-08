@@ -9,7 +9,7 @@ import static org.apache.log4j.Logger.getRootLogger;
 
 public class ConsoleLog4jLogging {
 
-    private static final Level DEFAULT_LOG_LEVEL = Level.INFO;
+    private static final Level DEFAULT_LOG_LEVEL = Level.WARN;
 
     private static final String LOG_PATTERN = "[%t] %-5p %c %x - %m%n";
 

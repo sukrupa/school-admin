@@ -292,6 +292,7 @@
       </JAVADOC>
       <SOURCES>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/main/commons-lang-2.6-sources.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
     </library>
