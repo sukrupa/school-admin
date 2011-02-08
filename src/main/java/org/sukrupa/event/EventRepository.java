@@ -4,12 +4,14 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sukrupa.student.Student;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 @Repository
 public class EventRepository {
@@ -31,9 +33,8 @@ public class EventRepository {
 
     public boolean save(EventRecord eventRecord) {
 
-        if ( validAttendees(eventRecord.getAttendees()) ) {
-            sessionFactory.getCurrentSession().save(Event.createFrom(eventRecord, studentListFromDB));
-            sessionFactory.getCurrentSession().flush();
+        if (validAttendees(eventRecord.getAttendees())) {
+            session().save(Event.createFrom(eventRecord, studentListFromDB));
             return true;
         } else
             return false;
@@ -43,7 +44,7 @@ public class EventRepository {
     public boolean validAttendees(String studentIds) {
         Set<String> studentIdsFromForm = parseIdsFromForm(studentIds);
         studentListFromDB = retrieveStudent(studentIdsFromForm);
-        return  (studentIdsFromForm.size() == studentListFromDB.size());
+        return (studentIdsFromForm.size() == studentListFromDB.size());
     }
 
     private Set<Student> retrieveStudent(Set<String> studentIdsFromForm) {
@@ -57,9 +58,13 @@ public class EventRepository {
         return Sets.newHashSet(criteria.list());
     }
 
-
     private Set<String> parseIdsFromForm(String studentIds) {
         return Sets.newLinkedHashSet(Splitter.on(ATTENDEES_SEPARATOR).omitEmptyStrings().trimResults().split(studentIds));
+    }
+
+
+    private Session session() {
+        return sessionFactory.getCurrentSession();
     }
 
 }

@@ -22,7 +22,7 @@ public class ViewStudentPage {
     }
 
     public void addNote(String message) {
-        WebElement textArea = driver.findElement(By.xpath("//textarea[@class='new-note']"));
+        WebElement textArea = driver.findElement(By.xpath("//textarea[@name='new-note']"));
         textArea.sendKeys(message);
 
         WebElement addButton = driver.findElement(By.xpath("//input[@class='add-note']"));

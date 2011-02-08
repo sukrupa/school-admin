@@ -76,8 +76,8 @@ public class StudentTest {
 
     @Test
     public void shouldCaptureNotesAboutAStudent() {
-        Note firstNote = new Note("note1", new LocalDate());
-        Note secondNote = new Note("note2", new LocalDate());
+        Note firstNote = new Note("note1");
+        Note secondNote = new Note("note2");
         Student suhas = new StudentBuilder().notes(firstNote, secondNote).build();
         
         assertThat(suhas.getNotes(), hasItems(firstNote, secondNote));

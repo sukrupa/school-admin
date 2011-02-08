@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,8 +24,11 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
+import static org.sukrupa.platform.date.DateManipulation.freezeTime;
+import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -50,13 +54,18 @@ public class StudentRepositoryTest {
             .dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
     private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female")
             .dateOfBirth(new LocalDate(1990, 7, 24)).build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
+    private Student pat = new StudentBuilder().studentId("001").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
             .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
             .father("Renaud").mother("Nice Lady").build();
 
     @BeforeClass
     public static void classSetUp() {
-        DateTimeUtils.setCurrentMillisFixed(new DateMidnight(2010, 12, 31).getMillis());
+        freezeTime();
+    }
+
+    @AfterClass
+    public static void classTearDown() throws Exception {
+        unfreezeTime();
     }
 
     @Before
@@ -64,6 +73,7 @@ public class StudentRepositoryTest {
         repository = new StudentRepository(sessionFactory);
         databaseHelper.save(music, sport, cooking);
     }
+
 
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
@@ -154,5 +164,19 @@ public class StudentRepositoryTest {
     @Test
     public void shouldFailToUpdateNonexistantStudent() {
         assertThat(repository.update(new UpdateStudentParameterBuilder().build()), Matchers.<Object>nullValue());
+    }
+
+    @Test
+    public void shouldUpdateStudent() {
+        databaseHelper.save(pat);
+        
+        Note newNote = new Note("foobar");
+        pat.addNote(newNote);
+
+        repository.saveOrUpdate(pat);
+        databaseHelper.flushHibernateSessionToForceReload();
+
+        Student reloadedStudent = repository.find(pat.getStudentId());
+        assertThat(reloadedStudent.getNotes(), hasItem(newNote));
     }
 }

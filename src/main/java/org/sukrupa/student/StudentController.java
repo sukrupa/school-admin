@@ -13,6 +13,7 @@ import java.util.*;
 @RequestMapping("/students")
 public class StudentController {
 
+    private static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "studentList";
     private static final String SEARCH_VIEW = "studentSearch";
@@ -44,16 +45,31 @@ public class StudentController {
     }
 
     @RequestMapping()
-    public String all(Map<String, List<Student>> model) {
-        model.put(STUDENTS_MODEL, repository.findAll());
+    public String all(Map<String, List<?>> model) {
+        List<Student> students = repository.findAll();
+        List<List<Student>> pages = paginateStudents(students);
+
+        model.put("pages", pages);
         return STUDENTS_VIEW;
+    }
+
+    private List<List<Student>> paginateStudents(List<Student> students) {
+        List<List<Student>> pages = new ArrayList<List<Student>>();
+        while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
+            pages.add(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
+            students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
+        }
+        pages.add(students);
+        return pages;
     }
 
     @RequestMapping(value = "searchResult")
     public String parametricSearchResult(
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-            Map<String, List<Student>> model) {
-        model.put(STUDENTS_MODEL, repository.parametricSearch(searchParam));
+            Map<String, List<?>> model) {
+        List<Student> students = repository.parametricSearch(searchParam);
+        List<List<Student>> pages = paginateStudents(students);
+        model.put("pages", pages);
         return STUDENTS_VIEW;
     }
 
