@@ -41,6 +41,17 @@
 <span>$student.communityLocation$</span>
 
 <br />
+
+<span>Father</span>
+<span>$student.father$</span>
+
+<br />
+
+<span>Mother</span>
+<span>$student.mother$</span>
+
+<br />
+
 <span>Talents</span>
 $student.talents: {
     <span>$it.description$</span>
