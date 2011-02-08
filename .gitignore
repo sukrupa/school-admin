@@ -17,5 +17,5 @@ bin
 logs
 Cache/
 profiles/
-
+certs/
 *.swp
