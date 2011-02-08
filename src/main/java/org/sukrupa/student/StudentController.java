@@ -109,6 +109,9 @@ public class StudentController {
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
+
+	    System.out.println(studentParam.getDateOfBirth());
+
         Student updatedStudent = repository.update(studentParam);
 
         if (updatedStudent != null) {

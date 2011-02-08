@@ -142,10 +142,10 @@ public class StudentRepositoryTest {
     public void shouldUpdateStudentInDatabase() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).build();
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).build();
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
         Student s = repository.findAll().get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
@@ -156,6 +156,7 @@ public class StudentRepositoryTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std")
+		        .dateOfBirth("03/02/2000")
 		        .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
         Student updatedStudent = repository.update(updateParameter);
         assertThat(updatedStudent, is(philNew));

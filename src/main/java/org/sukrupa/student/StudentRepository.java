@@ -112,6 +112,7 @@ public class StudentRepository {
         student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
 
         session().save(student);
+	    session().flush();
         return student;
     }
 
