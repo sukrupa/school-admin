@@ -13,7 +13,7 @@
 	<br/>
 
 	<span>Date of birth</span>
-	<input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" onkeyup="validateDate();"></input>
+	<input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$"></input>
 	<span id="dateErrorMessage"></span>
 
 	<br/>
