@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,28 +43,61 @@ public class EventRepositoryTest {
 
     private Student sahil;
     private Student renaud;
+    private Student sahil1;
 
     @Before
     public void setUp() {
         sahil = new StudentBuilder().name("Sahil").studentId("123459").build();
+        sahil1 = new StudentBuilder().name("Sahil1").studentId("11111").build();
         renaud = new StudentBuilder().name("Renaud").studentId("345458").build();
         databaseHelper.save(sahil, renaud);
         eventRepository = new EventRepository(sessionFactory);
     }
 
     @Test
-    public void saveShouldLoadEventsFromDatabase() {
+    public void shouldValidateAttendees() {
+	    Set<Student> attendees = Sets.<Student>newHashSet(sahil, renaud, sahil1);
+
+        Set<String> eventRecordAttendees = new HashSet<String>();
+        for(Student each : attendees)
+            eventRecordAttendees.add(each.getStudentId());
+
+        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
+
+        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()), is(false));
+    }
+
+    @Test
+    public void shouldSaveEventWithValidAttendees() {
 	    Set<Student> attendees = Sets.<Student>newHashSet(sahil, renaud);
-	    Event event = new EventBuilder().attendees(attendees).datetime(new EventDate(2010, 01, 12, 13, 45, 0, 0)).build();
-	    save(new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(attendees)).build());
-        assertThat(eventRepository.getAll().get(0), is(event));
-	    assertThat(eventRepository.getAll().get(0).getAttendees(), is(attendees));
+
+        Set<String> eventRecordAttendees = new HashSet<String>();
+        for(Student each : attendees)
+            eventRecordAttendees.add(each.getStudentId());
+
+        Event event = new EventBuilder().attendees(attendees).datetime(new EventDate(2010, 01, 12, 13, 45, 0, 0)).build();
+
+        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
+
+        assertThat(eventRepository.save(eventRecord), is(true));
+	    assertThat(eventRepository.getAll().get(0), is(event));
+    }
+
+    @Test
+    public void shouldNotSaveEventWithInvalidAttendees() {
+	    Set<Student> attendees = Sets.<Student>newHashSet(sahil, renaud, sahil1);
+
+        Set<String> eventRecordAttendees = new HashSet<String>();
+        for(Student each : attendees)
+            eventRecordAttendees.add(each.getStudentId());
+
+        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
+	    assertThat(eventRepository.save(eventRecord), is(false));
     }
 
     private void save(EventRecord eventRecord) {
         eventRepository.save(eventRecord);
         databaseHelper.flushHibernateSessionToForceReload();
     }
-
 
 }
