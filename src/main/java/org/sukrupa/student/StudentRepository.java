@@ -111,6 +111,8 @@ public class StudentRepository {
         student.setCaste(studentParam.getCaste());
         student.setSubCaste(studentParam.getSubCaste());
         student.setCommunityLocation(studentParam.getCommunityLocation());
+	    student.setFather(studentParam.getFather());
+	    student.setMother(studentParam.getMother());
         student.getTalents().clear();
         Set<String> talents = studentParam.getTalents();
         if (talents != null){
