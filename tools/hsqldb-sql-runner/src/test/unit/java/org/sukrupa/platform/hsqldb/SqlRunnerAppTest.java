@@ -4,6 +4,10 @@ import org.junit.*;
 import org.mockito.*;
 import org.sukrupa.platform.hsqldb.io.*;
 
+import java.io.FileNotFoundException;
+import java.io.Reader;
+import java.io.StringReader;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -31,7 +35,7 @@ public class SqlRunnerAppTest {
     }
 
     @Test(expected = SystemExitRecorder.ExpectedExitStatusException.class)
-    public void main_method_exits_with_error_status_for_empty_args() {
+    public void main_method_exits_with_error_status_for_empty_args() throws FileNotFoundException {
         systemExitRecorder.expectExitStatusOf(-1);
 
         SqlRunnerApp.main(new String[]{});
@@ -51,7 +55,8 @@ public class SqlRunnerAppTest {
 
     @Test
     public void executes_some_sql() {
-        SqlRunnerArgs sqlRunnerArgs = new SqlRunnerArgsStub("connection.properties", "SELECT SOMETHING HERE!");
+        StringReader reader = new StringReader("");
+        SqlRunnerArgs sqlRunnerArgs = new SqlRunnerArgsStub("connection.properties", reader);
         ConsoleRecorder consoleOutputRecorder = new ConsoleRecorder();
 
         SqlRunnerApp runner = new SqlRunnerApp(sqlRunnerArgs, hsqlDatabase, consoleOutputRecorder);
@@ -59,7 +64,7 @@ public class SqlRunnerAppTest {
         runner.run();
 
         verify(hsqlDatabase).connectUsingPropertiesFrom("connection.properties");
-        verify(hsqlDatabase).execute("SELECT SOMETHING HERE!", consoleOutputRecorder);
+        verify(hsqlDatabase).execute(reader, consoleOutputRecorder);
     }
 
     private class ConsoleRecorder extends Console {
@@ -75,7 +80,7 @@ public class SqlRunnerAppTest {
     }
 
     private class SqlRunnerArgsStub extends SqlRunnerArgs {
-        public SqlRunnerArgsStub(String databasePropertiesName, String sqlToExecute) {
+        public SqlRunnerArgsStub(String databasePropertiesName, Reader sqlToExecute) {
             super(databasePropertiesName, sqlToExecute);
         }
     }

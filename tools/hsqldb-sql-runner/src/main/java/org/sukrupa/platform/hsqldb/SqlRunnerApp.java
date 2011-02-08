@@ -2,6 +2,8 @@ package org.sukrupa.platform.hsqldb;
 
 import org.sukrupa.platform.hsqldb.io.*;
 
+import java.io.FileNotFoundException;
+
 import static java.lang.String.format;
 import static java.lang.System.exit;
 import static org.sukrupa.platform.hsqldb.SqlRunnerArgs.parseArgs;
@@ -13,7 +15,7 @@ public class SqlRunnerApp {
 
     private final HsqlDatabase hsqlDatabase;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int status = new SqlRunnerApp(parseArgs(args), new HsqlDatabase(), new Console()).run();
         exit(status);
     }
@@ -32,7 +34,7 @@ public class SqlRunnerApp {
         }
 
         hsqlDatabase.connectUsingPropertiesFrom(sqlRunnerArgs.getDatabasePropertiesFilename());
-        hsqlDatabase.execute(sqlRunnerArgs.getSql(), console);
+        hsqlDatabase.execute(sqlRunnerArgs.getSqlReader(), console);
         return 0;
     }
 

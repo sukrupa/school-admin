@@ -261,7 +261,8 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$PROJECT_DIR$/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$PROJECT_DIR$/../../../school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sukrupa.iml" filepath="$PROJECT_DIR$/sukrupa.iml" />
     </modules>
   </component>

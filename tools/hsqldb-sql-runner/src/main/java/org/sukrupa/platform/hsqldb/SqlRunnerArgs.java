@@ -1,32 +1,35 @@
 package org.sukrupa.platform.hsqldb;
 
+import java.io.*;
+
 public class SqlRunnerArgs {
     private String databasePropertiesFilename;
-    private final String sqlToExecute;
+    private final Reader sqlReader;
 
-    public static SqlRunnerArgs parseArgs(String[] args) {
+    public static SqlRunnerArgs parseArgs(String[] args) throws FileNotFoundException {
         if (args.length != 1) {
             return new EmptySqlRunnerArgs();
         }
-        String sqlToExecute = args[0];
-        return new SqlRunnerArgs(null, sqlToExecute);
+        String filename = args[0];
+        Reader reader = new BufferedReader(new FileReader(filename));
+        return new SqlRunnerArgs(null, reader);
     }
 
-    public SqlRunnerArgs(String databasePropertiesFilename, String sqlToExecute) {
+    public SqlRunnerArgs(String databasePropertiesFilename, Reader sqlReader) {
         this.databasePropertiesFilename = databasePropertiesFilename;
-        this.sqlToExecute = sqlToExecute;
+        this.sqlReader = sqlReader;
     }
 
     public String describeArguments() {
-        return "<database properties file> <sql to execute, e.g. \"SELECT * FROM TABLE_1\">";
+        return "<database properties file> <file containing sql statement>";
     }
 
     public boolean isInvalid() {
         return false;
     }
 
-    public String getSql() {
-        return sqlToExecute;
+    public Reader getSqlReader() {
+        return sqlReader;
     }
 
     public String getDatabasePropertiesFilename() {
@@ -42,7 +45,7 @@ public class SqlRunnerArgs {
             return true;
         }
 
-        @Override public String getSql() {
+        @Override public Reader getSqlReader() {
             throw new UnsupportedOperationException("There are no arguments here, boyo.");
         }
     }
