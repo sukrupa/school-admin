@@ -32,6 +32,10 @@ public class Student {
 
     private String caste;
 
+    private String mother;
+
+    private String father;
+
     @Column(name = "SUB_CASTE")
     private String subCaste;
 
@@ -64,7 +68,9 @@ public class Student {
     public Student() {
     }
 
-    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth, Set<Note> notes) {
+    public Student(String studentId, String name, String religion, String caste, String subCaste,
+                   String communityLocation, String gender, String studentClass, Set<Talent> talents,
+                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -73,6 +79,8 @@ public class Student {
         this.communityLocation = communityLocation;
         this.gender = gender;
         this.studentClass = studentClass;
+        this.father = father;
+        this.mother = mother;
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
         this.notes = notes;
@@ -108,6 +116,14 @@ public class Student {
 
     public String getStudentClass() {
         return studentClass;
+    }
+
+    public String getMother() {
+        return mother;
+    }
+
+    public String getFather() {
+        return father;
     }
 
     public LocalDate getDateOfBirth() {
@@ -156,6 +172,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
     }
 
     public void setReligion(String religion) {
