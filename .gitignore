@@ -18,4 +18,6 @@ logs
 Cache/
 profiles/
 certs/
+src/test/twist/functional-test/reports/
+
 *.swp

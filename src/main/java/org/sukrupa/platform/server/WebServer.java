@@ -3,6 +3,7 @@ package org.sukrupa.platform.server;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -57,7 +58,6 @@ public class WebServer {
 
     private ResourceHandler resourceHandler() {
         ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setDirectoriesListed(true);
         resourceHandler.setResourceBase(webRoot);
         return resourceHandler;
     }
@@ -66,6 +66,9 @@ public class WebServer {
         ServletContextHandler servletHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         servletHandler.setContextPath(contextPath);
         servletHandler.setResourceBase(webRoot);
+        ErrorHandler errorHandler = new ErrorHandler();
+        errorHandler.setServer(server);
+        servletHandler.setErrorHandler(errorHandler);
         servletHandler.addServlet(new ServletHolder(frontController), "/*");
         return servletHandler;
     }
