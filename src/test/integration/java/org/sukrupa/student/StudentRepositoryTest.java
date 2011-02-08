@@ -132,10 +132,10 @@ public class StudentRepositoryTest {
     public void shouldUpdateStudentInDatabase() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking)).build();
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport, cooking)).build();
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).build();
         databaseHelper.save(philOld);
         Student s = repository.findAll().get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
