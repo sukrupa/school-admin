@@ -53,9 +53,7 @@
 <br />
 
 <span>Talents</span>
-$student.talents: {
-    <span>$it.description$</span>
-}$
+<span>$student.talentsForDisplay$</span>
 
 <br/>
 
