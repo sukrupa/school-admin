@@ -30,6 +30,7 @@ public class StudentController {
 
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
+	static final String STUDENT_RECORD_UPDATED = "Student record updated";
 	private StudentRepository repository;
 
     private static final String ANY = "Any";
@@ -79,7 +80,7 @@ public class StudentController {
         model.put("communityLocations", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
-        model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
+        model.put("dateOfBirth", theStudent.getDatofBirthForDisplay());
         model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
         model.put("father", theStudent.getFather());
@@ -96,6 +97,7 @@ public class StudentController {
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
+	        model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
             return UPDATE_RESULTS_VIEW;
         }else {
             model.put("message","Error updating student");

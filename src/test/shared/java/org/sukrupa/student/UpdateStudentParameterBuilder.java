@@ -1,14 +1,14 @@
 package org.sukrupa.student;
 
-import java.util.HashSet;
-import java.util.Hashtable;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+
 import java.util.Set;
-import java.util.TreeSet;
 
 public class UpdateStudentParameterBuilder {
     private String studentId;
     private String name;
-    private String dateOfBirth;
+    private String dateOfBirth = DateTimeFormat.forPattern("dd/MM/YYYY").print(new LocalDate());
     private String gender;
     private String studentClass;
     private String religion;

@@ -9,6 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
+import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ import java.util.Set;
 @Entity
 public class Student {
 
-    @Id
+	static final String DATE_OF_BIRTH_FORMAT = "dd/MM/YYYY";
+	@Id
     @GeneratedValue
     private long id;
 
@@ -176,6 +178,10 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
+	public String getDatofBirthForDisplay() {
+		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
+	}
+
 	public void updateFrom(UpdateStudentParameter studentParameter, Set<Talent> newTalents) {
 		this.studentClass = studentParameter.getStudentClass();
 		this.gender = studentParameter.getGender();
@@ -187,5 +193,6 @@ public class Student {
 		this.father = studentParameter.getFather();
 		this.mother = studentParameter.getMother();
 		this.talents = Sets.newHashSet(newTalents);
+		this.dateOfBirth = new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(studentParameter.getDateOfBirth()));
 	}
 }

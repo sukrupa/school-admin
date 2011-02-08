@@ -1,3 +1,5 @@
+<div>$studentUpdatedSuccesfullyMessage$</div>
+
 <span>Student ID</span>
 <span>$student.studentId$</span>
 <br />
@@ -8,7 +10,7 @@
 <br/>
 
 <span>Date of birth</span>
-<span>$student.dateOfBirth$</span>
+<span>$student.datofBirthForDisplay$</span>
 
 <br/>
 
