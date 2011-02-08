@@ -10,12 +10,13 @@ import static org.hamcrest.Matchers.not;
 public class NoteTest {
 
     @Test
-    public void testEqualityOfTwoNotes() {
-       assertThat(new Note(1,"He is an Intelligent Person",new LocalDate(2005, 6, 10)),is(new Note(1,"He is an Intelligent Person",new LocalDate(2005, 6, 10))));
+    public void shouldBeEqual() {
+        assertThat(new Note("foo bar", new LocalDate(2005, 6, 10)), is(new Note("foo bar", new LocalDate(2005, 6, 10))));
     }
 
     @Test
-    public void testInequalityOfTwoNotes() {
-       assertThat(new Note(1,"He is an Intelligent Person",new LocalDate(2005, 6, 10)),not(new Note(2, "He is an Intelligent Person", new LocalDate(2005, 6, 10))));
+    public void shouldNotBeEqual() {
+        assertThat(new Note("foo", new LocalDate(2005, 6, 10)), not(is(new Note("foo", new LocalDate(2005, 6, 11)))));
+        assertThat(new Note("foo", new LocalDate(2005, 6, 10)), not(is(new Note("bar", new LocalDate(2005, 6, 10)))));
     }
 }
