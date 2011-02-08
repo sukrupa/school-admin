@@ -19,7 +19,7 @@ public class ViewEventPage {
 
     public ViewEventPage() {
         this.driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080/sukrupa/app/event/" + 1);
+        driver.get("http://localhost:8080/events/" + 1);
     }
 
 
