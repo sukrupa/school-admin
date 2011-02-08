@@ -62,9 +62,9 @@
 
     <br/>
 
-    <span>Area</span>
-    <select name="area" >
-        $areas:{
+    <span>Community location</span>
+    <select name="communityLocation" >
+        $communityLocations:{
         <option$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
         }$
     </select>

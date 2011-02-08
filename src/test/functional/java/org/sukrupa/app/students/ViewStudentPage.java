@@ -11,11 +11,11 @@ public class ViewStudentPage {
 
     public ViewStudentPage(WebDriver driver, String id) {
         this.driver = driver;
-        driver.get("http://localhost:8080/sukrupa/app/students/" + id);
+        driver.get("http://localhost:8080/students/" + id);
     }
 
     public String getStudentName() {
-        List<WebElement> elements = driver.findElements(By.xpath("//p[@class='name']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//span[@class='name']"));
         WebElement nameElement = elements.get(0);
         return nameElement.getText();
     }

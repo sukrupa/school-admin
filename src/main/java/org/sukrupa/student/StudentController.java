@@ -75,7 +75,7 @@ public class StudentController {
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
         model.put("castes", createDropDownList(theStudent.getCaste(), CASTES));
-        model.put("areas", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
+        model.put("communityLocations", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
         model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
@@ -91,10 +91,10 @@ public class StudentController {
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
-        boolean succeeded = repository.update(studentParam);
+        Student updatedStudent = repository.update(studentParam);
 
-        if (succeeded) {
-            model.put("student", studentParam);
+        if (updatedStudent != null) {
+            model.put("student", updatedStudent);
             return UPDATE_RESULTS_VIEW;
         }else {
             model.put("message","Error updating student");

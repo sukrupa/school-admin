@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Repository
 public class StudentRepository {
@@ -100,10 +99,10 @@ public class StudentRepository {
         }
     }
 
-    public boolean update(UpdateStudentParameter studentParam) {
+    public Student update(UpdateStudentParameter studentParam) {
         Student student = find(studentParam.getStudentId());
         if (student == null) {
-            return false;
+            return null;
         }
         student.setStudentClass(studentParam.getStudentClass());
         student.setGender(studentParam.getGender());
@@ -111,7 +110,7 @@ public class StudentRepository {
         student.setReligion(studentParam.getReligion());
         student.setCaste(studentParam.getCaste());
         student.setSubCaste(studentParam.getSubCaste());
-        student.setCommunityLocation(studentParam.getArea());
+        student.setCommunityLocation(studentParam.getCommunityLocation());
         student.getTalents().clear();
         Set<String> talents = studentParam.getTalents();
         if (talents != null){
@@ -119,7 +118,7 @@ public class StudentRepository {
         }
         sessionFactory.getCurrentSession().save(student);
         sessionFactory.getCurrentSession().flush();
-        return true;
+        return student;
     }
 
     public Set<Talent> findTalents(Set<String> talentsDecriptions) {
