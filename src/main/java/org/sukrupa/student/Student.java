@@ -186,6 +186,6 @@ public class Student {
 		this.communityLocation = studentParameter.getCommunityLocation();
 		this.father = studentParameter.getFather();
 		this.mother = studentParameter.getMother();
-		this.talents = Sets.union(this.talents, newTalents);
+		this.talents = Sets.newHashSet(newTalents);
 	}
 }
