@@ -23,7 +23,7 @@ public class StudentControllerTest {
 
     private StudentController controller;
 
-    private Map<String, List<Student>> studentsListModel = new HashMap<String, List<Student>>();
+    private Map<String, List<?>> studentsListModel = new HashMap<String, List<?>>();
     private HashMap<String,Student> studentModel = new HashMap<String,Student>();
     private Student sahil = new StudentBuilder().name("pat").studentClass("LKG").build();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
@@ -36,10 +36,11 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void shouldPopulateModelWithAllStudents() {
+    public void shouldPopulateModelWithPageOfStudents() {
         when(repository.findAll()).thenReturn(asList(sahil, pat));
         controller.all(studentsListModel);
-        assertThat(studentsListModel.get("students"), is(asList(sahil, pat)));
+        List<List<Student>> pages = (List<List<Student>>) studentsListModel.get("pages");
+        assertThat(pages.get(0), is(asList(sahil, pat)));
     }
 
     @Test
