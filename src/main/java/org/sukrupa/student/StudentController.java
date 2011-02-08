@@ -91,10 +91,10 @@ public class StudentController {
     public String confirmUpdateStudent(
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
-        boolean succeeded = repository.update(studentParam);
+        Student updatedStudent = repository.update(studentParam);
 
-        if (succeeded) {
-            model.put("student", studentParam);
+        if (updatedStudent != null) {
+            model.put("student", updatedStudent);
             return UPDATE_RESULTS_VIEW;
         }else {
             model.put("message","Error updating student");

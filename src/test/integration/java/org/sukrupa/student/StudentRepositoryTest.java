@@ -133,14 +133,12 @@ public class StudentRepositoryTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std").build();
-        boolean status = repository.update(updateParameter);
-        Student retrievedPhil = repository.findAll().get(0);
-        assertThat(retrievedPhil, is(philNew));
-        assertThat(status, is(true));
+        Student updatedStudent = repository.update(updateParameter);
+        assertThat(updatedStudent, is(philNew));
     }
 
     @Test
     public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), is(false));
+        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 }
