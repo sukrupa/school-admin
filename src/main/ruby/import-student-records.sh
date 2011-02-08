@@ -7,7 +7,9 @@ elif [[ "$1" = "--help" ]]; then
 \n\teg. "$0" spreadsheet.xls
 	"		
 else 
-#TO DO: check to make sure the string we pass is findable
-ruby RowManager.rb "$1"
+
+ruby import_students.rb "$1"
+javac WriteToDB.java
+java WriteToDB "import_students.sql"
 
 fi

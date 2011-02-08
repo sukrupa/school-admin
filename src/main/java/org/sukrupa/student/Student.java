@@ -36,8 +36,12 @@ public class Student {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
-    @Transient
-    private List<Note> notes = new ArrayList<Note>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "STUDENT_NOTE",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "note_id")})
+    private List<Note> notes;
 
     @ManyToMany
     @JoinTable(name = "STUDENT_TALENT",
@@ -49,7 +53,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth) {
+    public Student(String studentId, String name, String religion, String caste, String subCaste, String communityLocation, String gender, String studentClass, Set<Talent> talents, LocalDate dateOfBirth, List<Note> notes) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -60,6 +64,7 @@ public class Student {
         this.studentClass = studentClass;
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
+        this.notes = notes;
     }
 
     public String getName() {
@@ -118,7 +123,7 @@ public class Student {
         return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
     }
 
-    private static String[] excludedFields = new String[]{"id"};
+    private static String[] excludedFields = new String[]{"id", "notes"};
 
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other, excludedFields);

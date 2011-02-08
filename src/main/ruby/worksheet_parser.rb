@@ -55,13 +55,16 @@ class WorksheetParser
 	
 	def parse
 	   @this_sheets_starting_corner.upto(@worksheet.last_row) do |row_number|
+	     
        name = read_cell_value(row_number,NAME_HEADING)
        date_of_birth = read_cell_value(row_number,DATE_OF_BIRTH_HEADING)
        gender = read_cell_value(row_number,GENDER_HEADING)
        
-       student = Student.new :name => name, :date_of_birth => date_of_birth, :gender => gender
+       if (!name.nil? or  !date_of_birth.nil? or !gender.nil?)
+         student = Student.new :name => name, :date_of_birth => date_of_birth, :gender => gender
+         @students_array += [student]
+       end
        
-	     @students_array += [student]
 	   end
 	   @students_array
 	end
