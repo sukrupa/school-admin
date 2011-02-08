@@ -1,1 +1,1 @@
-$layout(script="studentSearch", body=studentSearchBody(), title="Student Search")$
+$layout(scripts=["studentSearch"], body=studentSearchBody(), title="Student Search")$
