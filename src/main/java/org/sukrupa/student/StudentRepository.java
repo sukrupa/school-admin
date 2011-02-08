@@ -1,9 +1,13 @@
 package org.sukrupa.student;
 
+import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.criterion.*;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -105,26 +109,19 @@ public class StudentRepository {
         if (student == null) {
             return null;
         }
-        student.setStudentClass(studentParam.getStudentClass());
-        student.setGender(studentParam.getGender());
-        student.setName(studentParam.getName());
-        student.setReligion(studentParam.getReligion());
-        student.setCaste(studentParam.getCaste());
-        student.setSubCaste(studentParam.getSubCaste());
-        student.setCommunityLocation(studentParam.getCommunityLocation());
-        student.getTalents().clear();
-        Set<String> talents = studentParam.getTalents();
-        if (talents != null){
-            student.getTalents().addAll(findTalents(talents));
-        }
+        student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
+
         session().save(student);
-        session().flush();
         return student;
     }
 
     public Set<Talent> findTalents(Set<String> talentsDecriptions) {
+        if (talentsDecriptions == null) {
+            return Sets.newHashSet();
+        }
+
         Disjunction disjunction = Restrictions.disjunction();
-        for (String description: talentsDecriptions){
+        for (String description : talentsDecriptions) {
             disjunction.add(Restrictions.eq("description", description));
         }
         Criteria criteria = session().createCriteria(Talent.class).add(disjunction);
@@ -132,7 +129,7 @@ public class StudentRepository {
     }
 
     public void saveOrUpdate(Student student) {
-         session().saveOrUpdate(student);
+        session().saveOrUpdate(student);
     }
 
     private Session session() {

@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import com.google.common.collect.Sets;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -12,7 +13,6 @@ import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -162,42 +162,6 @@ public class Student {
         return notes;
     }
 
-    public void setStudentClass(String studentClass) {
-        this.studentClass = studentClass;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMother(String mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(String father) {
-        this.father = father;
-    }
-
-    public void setReligion(String religion) {
-        this.religion = religion;
-    }
-
-    public void setCaste(String caste) {
-        this.caste = caste;
-    }
-
-    public void setSubCaste(String subCaste) {
-        this.subCaste = subCaste;
-    }
-
-    public void setCommunityLocation(String communityLocation) {
-        this.communityLocation = communityLocation;
-    }
-
     private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
@@ -211,4 +175,17 @@ public class Student {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
+
+	public void updateFrom(UpdateStudentParameter studentParameter, Set<Talent> newTalents) {
+		this.studentClass = studentParameter.getStudentClass();
+		this.gender = studentParameter.getGender();
+		this.name = studentParameter.getName();
+		this.religion = studentParameter.getReligion();
+		this.caste = studentParameter.getCaste();
+		this.subCaste = studentParameter.getSubCaste();
+		this.communityLocation = studentParameter.getCommunityLocation();
+		this.father = studentParameter.getFather();
+		this.mother = studentParameter.getMother();
+		this.talents = Sets.newHashSet(newTalents);
+	}
 }

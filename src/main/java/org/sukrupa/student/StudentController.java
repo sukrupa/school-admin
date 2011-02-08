@@ -19,24 +19,25 @@ public class StudentController {
     private static final String UPDATE_VIEW = "studentUpdate";
     private static final String UPDATE_RESULTS_VIEW = "studentView";
     private static final String UPDATE_RESULTS_FAILED = "studentUpdateResults";
-    private static final String STUDENT_VIEW = "studentView";
-    private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
-    private static final List<String> GENDERS = Arrays.asList("Male", "Female");
-    private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
-    private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
-    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-    private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
+	private static final String STUDENT_VIEW = "studentView";
+	private static final String STUDENT_VIEW_FAILED = "studentViewFailed";
+	private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+	private static final List<String> GENDERS = Arrays.asList("Male", "Female");
+	private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
+	private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
+	private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
+	private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
+
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
+	private StudentRepository repository;
 
-    private StudentRepository repository;
     private static final String ANY = "Any";
+	private static final int AGES_TO = 20;
+	private static final int AGES_FROM = 2;
 
-    private static final int AGES_TO = 20;
-    private static final int AGES_FROM = 2;
 
-
-    @Autowired
+	@Autowired
     public StudentController(StudentRepository repository) {
         this.repository = repository;
     }
@@ -81,8 +82,8 @@ public class StudentController {
         model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
         model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
-        model.put("father", "");
-        model.put("mother", "");
+        model.put("father", theStudent.getFather());
+        model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
         return UPDATE_VIEW;
     }
@@ -121,10 +122,12 @@ public class StudentController {
 
     @RequestMapping(value = "{id}")
     public String viewStudent(@PathVariable String id, Map<String, Student> model) {
-        Student student = repository.find(id);
-        model.put("student", student);
-        return STUDENT_VIEW;
-
+	    Student student = repository.find(id);
+	    if (student != null) {
+			model.put("student", student);
+			return STUDENT_VIEW;
+	    }
+	    return STUDENT_VIEW_FAILED;
     }
 
     private List<String> getAges() {
