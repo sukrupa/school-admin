@@ -47,11 +47,8 @@ public class Event {
 	@Type(type = "org.sukrupa.event.PersistentEventDate")
 	private EventDate datetime;
 
-	public Set<Student> getAttendees() {
-		return this.attendees;
-	}
 
-	@DoNotRemove
+    @DoNotRemove
 	public Event() {
 	}
 
@@ -63,6 +60,11 @@ public class Event {
 		this.description = description;
 		this.notes = notes;
 		this.attendees = attendees;
+	}
+
+
+    public Set<Student> getAttendees() {
+		return this.attendees;
 	}
 
 	@Transient
