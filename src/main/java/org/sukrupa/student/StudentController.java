@@ -81,8 +81,8 @@ public class StudentController {
         model.put("dateOfBirth", theStudent.getDateOfBirth().toString());
         model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
-        model.put("father", "");
-        model.put("mother", "");
+        model.put("father", theStudent.getFather());
+        model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
         return UPDATE_VIEW;
     }
@@ -121,8 +121,7 @@ public class StudentController {
 
     @RequestMapping(value = "{id}")
     public String viewStudent(@PathVariable String id, Map<String, Student> model) {
-        Student student = repository.find(id);
-        model.put("student", student);
+	    model.put("student", repository.find(id));
         return STUDENT_VIEW;
 
     }
