@@ -1,1 +1,1 @@
-$layout(css="recordEvent", script="recordEvent", body=recordEventBody(), title="Record an Event")$
+$layout(stylesheets=["recordEvent"], scripts=["recordEvent"], body=recordEventBody(), title="Record an Event")$

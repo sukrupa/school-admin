@@ -4,9 +4,13 @@
 <head>
 	<title>$title$</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.js"></script>
-	<script type="text/javascript" src="/scripts/$script$.js"></script>
+    $scripts: {
+	<script type="text/javascript" src="/scripts/$it$.js"></script>
+    }$
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/$css$.css" />
+    $stylesheets: {
+    <link rel="stylesheet" type="text/css" href="/styles/$it$.css" />
+    }$
 </head>
 <body>
 
