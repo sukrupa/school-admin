@@ -11,7 +11,7 @@ public class ViewStudentPage {
 
     public ViewStudentPage(WebDriver driver, String id) {
         this.driver = driver;
-        driver.get("http://localhost:8080/sukrupa/app/students/" + id);
+        driver.get("http://localhost:8080/students/" + id);
     }
 
     public String getStudentName() {
