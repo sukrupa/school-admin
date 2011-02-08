@@ -7,8 +7,13 @@
     <jobs>
       <job name="build">
         <tasks>
-          <exec command="./build" />
+          <exec command="./build">
+            <arg value="ci" />
+          </exec>
         </tasks>
+        <tabs>
+          <tab name="Twist" path="reports/html/index.html" />
+        </tabs>
         <artifacts>
           <test src="target/reports" />
           <artifact src="target/school-admin.zip" dest="deploy" />
@@ -19,6 +24,9 @@
   <stage name="sonar">
     <jobs>
       <job name="sonar">
+        <artifacts>
+          <test src="target/reports" />
+        </artifacts>
         <tasks>
           <exec command="./build">
             <arg value="cobertura:all" />
@@ -33,11 +41,12 @@
     </jobs>
   </stage>
   <stage name="deploy-staging">
+    <approval type="manual" />
     <jobs>
       <job name="deploy-staging">
         <tasks>
           <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
-          <exec command="./build" args="deploy:staging" />
+          <exec command="cap" args="-f ops/deploy/capfile staging" />
         </tasks>
       </job>
     </jobs>
