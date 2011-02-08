@@ -58,7 +58,7 @@
 <br/>
 
 <form action="./update">
-    <input type="Submit" value="Edit" />
+    <input type="Submit" value="Update" />
     <input type="hidden" name="studentId" value="$student.studentId$"></input>
 </form>
 
