@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.sukrupa.platform.DoNotRemove;
 
@@ -15,18 +16,36 @@ public class Note {
     @GeneratedValue
     @Column(name = "NOTE_ID")
     private long noteId;
-    @Column(name = "STUDENT_ID")
-    int studentId;
-    private String note;
-    @Column(name = "NOTE_DATE")
-    LocalDate localDate;
+     @Column(name="MESSAGE")
+     private String note;
+     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+     @Column(name = "NOTE_DATE")
+     private LocalDate localDate;
 
     public Note(String note) {
         this.note = note;
     }
 
-    public Note(int student_id, String note, LocalDate localDate) {
-        this.studentId = student_id;
+
+     public String getNote() {
+         return note;
+     }
+
+     public LocalDate getLocalDate() {
+         return localDate;
+     }
+
+
+     public void setNote(String note) {
+         this.note = note;
+     }
+
+     public void setLocalDate(LocalDate localDate) {
+         this.localDate = localDate;
+     }
+
+     public Note( String note, LocalDate localDate) {
+
         this.note = note;
         this.localDate = localDate;
     }
@@ -36,12 +55,13 @@ public class Note {
 
      }
 
+    private static String[] excludedFields = new String[]{"noteId"};
 
     public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
+        return EqualsBuilder.reflectionEquals(this, other, excludedFields);
     }
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return HashCodeBuilder.reflectionHashCode(this, excludedFields);
     }
 }

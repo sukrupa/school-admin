@@ -25,5 +25,5 @@
 
 	<div class="errorMessages" id="errorMessages"></div>
 	<input type="button" value="Save"  onclick="validateMandatoryFields()"/>
-	<input type="button" value="Cancel" onclick="resetFields()"/>
+	<input type="button" value="Clear" onclick="resetFields()"/>
 </form>
