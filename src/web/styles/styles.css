@@ -62,3 +62,8 @@ img{
     padding-top:25px;
 }
 .clear { clear: both; }
+
+div.note {
+    padding: 5px;
+    border: 1px #000000 solid;
+}
