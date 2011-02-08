@@ -18,8 +18,6 @@ public class SchoolAdminApp {
 
     public static void main(String[] args) throws IOException {
         configureLogging();
-        log.info(format("-Dweb.root.dir=%s", System.getProperty("web.root.dir")));
-        log.info(format("Real web root is [$s]", new File(System.getProperty("web.root.dir")).getAbsolutePath()));
         configureApp().getBean(SchoolAdminApp.class).start();
     }
 

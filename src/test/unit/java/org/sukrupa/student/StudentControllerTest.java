@@ -44,20 +44,20 @@ public class StudentControllerTest {
 
     @Test
     public void shouldPickStudentsViewForDisplayingAllStudents() {
-        assertThat(controller.all(studentsListModel), is("students"));
+        assertThat(controller.all(studentsListModel), is("studentList"));
     }
 
     @Test
     public void shouldPopulateModelWithAStudent() {
         when(repository.find("123")).thenReturn(pat);
-        controller.find("123", studentModel);
+        controller.viewStudent("123", studentModel);
         assertThat(studentModel.get("student"),is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent()
     {
-        assertThat(controller.find("123",studentModel),is("student"));
+        assertThat(controller.viewStudent("123", studentModel),is("studentView"));
     }
 
 }

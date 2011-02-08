@@ -1,4 +1,4 @@
-Tags:
+Tags:in-progress
 Preconditions:open admin page,all student records are loaded
 Students Record:
 #verify "Bob1" shows up in the list

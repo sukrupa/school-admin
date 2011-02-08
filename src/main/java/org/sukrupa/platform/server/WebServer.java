@@ -12,14 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
 
-import javax.annotation.PostConstruct;
-
 import static java.lang.String.format;
 
 @Component
 public class WebServer {
-
-    private static final String URL_PATTERN = "/app/*";
 
     private Logger LOG = Logger.getLogger(WebServer.class);
 
@@ -70,7 +66,7 @@ public class WebServer {
         ServletContextHandler servletHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         servletHandler.setContextPath(contextPath);
         servletHandler.setResourceBase(webRoot);
-        servletHandler.addServlet(new ServletHolder(frontController), URL_PATTERN);
+        servletHandler.addServlet(new ServletHolder(frontController), "/*");
         return servletHandler;
     }
 }

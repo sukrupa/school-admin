@@ -13,7 +13,7 @@ public class ListOfStudentsPage {
 
     public ListOfStudentsPage(WebDriver driver) {
         this.driver = driver;
-        driver.get("http://localhost:8080/sukrupa/app/students");
+        driver.get("http://localhost:8080/students");
     }
 
     public List<StudentRow> getStudents() {

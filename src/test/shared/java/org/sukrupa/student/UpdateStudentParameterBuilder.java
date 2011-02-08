@@ -1,5 +1,10 @@
 package org.sukrupa.student;
 
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class UpdateStudentParameterBuilder {
     private String studentId;
     private String name;
@@ -12,7 +17,7 @@ public class UpdateStudentParameterBuilder {
     private String area;
     private String father = "father";
     private String mother = "mother";
-    private String talents = "talents";
+    private Set<String> talents;
 
     public UpdateStudentParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -69,7 +74,7 @@ public class UpdateStudentParameterBuilder {
         return this;
     }
 
-    public UpdateStudentParameterBuilder talents(String talents) {
+    public UpdateStudentParameterBuilder talents(Set<String> talents) {
         this.talents = talents;
         return this;
     }

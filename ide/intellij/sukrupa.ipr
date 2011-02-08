@@ -59,9 +59,10 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="org.springframework.context.annotation.Bean" />
-      <item index="1" class="java.lang.String" itemvalue="org.springframework.context.annotation.Configuration" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="org.mockito.Mock" />
+      <item index="1" class="java.lang.String" itemvalue="org.springframework.context.annotation.Bean" />
+      <item index="2" class="java.lang.String" itemvalue="org.springframework.context.annotation.Configuration" />
     </list>
   </component>
   <component name="FacetAutodetectingManager">
@@ -260,6 +261,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" filepath="$USER_HOME$/sukrupa/school-admin/ide/intellij/hsqldb-sql-runner/hsqldb-sql-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sukrupa.iml" filepath="$PROJECT_DIR$/sukrupa.iml" />
     </modules>
   </component>
@@ -290,8 +292,26 @@
       </JAVADOC>
       <SOURCES>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/main/commons-lang-2.6-sources.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-main">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" recursive="false" />
+    </library>
+    <library name="sql-runner-test">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../lib/test" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>

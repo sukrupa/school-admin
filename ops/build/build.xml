@@ -29,7 +29,10 @@
     </target>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, deploy:save-build-number, package, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
+
+    <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
+                depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci, including functional tests"
@@ -109,12 +112,11 @@
     </target>
 
     <target name="test:twist"
-            depends="db:delete-fake-data, db:insert-fake-data, compile:test:twist"
+            depends="compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
-        <run-against-server startServerTarget="sukrupa-server:start"
-                            stopServerTarget="sukrupa-server:stop"
-                            cleanupTarget="db:delete-fake-data"
+        <run-against-server startServerTarget="sukrupa-server:start-for-twist"
+                            stopServerTarget="sukrupa-server:stop-for-twist"
                             checkServerUpTarget="sukrupa-server:check-is-running">
             <execute>
                 <ant antfile="${ops.build.dir}/twist.xml"
@@ -128,6 +130,7 @@
         <available file="${target.test.twist.failed.file}" property="twist.scenarios.failed"/>
         <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
     </target>
+
 
     <target name="package" depends="create.module.jar">
         <zip destfile="${target.dir}/${module.deployable.name}">

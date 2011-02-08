@@ -11,22 +11,23 @@ role :staging_server, "#{staging_server}"
 namespace :staging do
 
     task :default, :roles => :staging_server do
+        stop_remote_server      
         copy_deploy_artifact
         unzip_deploy_artifact
-        stop_remote_server
         start_remote_server
         recreate_database
         insert_fake_data
         safety_check
     end
-
-    task :copy_deploy_artifact, :roles => :staging_server do
-        run "mkdir -p #{staging_deploy_path}"
-        upload "#{local_path}/#{deploy_artifact}", "#{staging_deploy_path}", :via => :scp
-    end
-
+    
     task :stop_remote_server, :roles => :staging_server do
         run "cd #{staging_deploy_path} && sh stop-server.sh"
+    end    
+
+    task :copy_deploy_artifact, :roles => :staging_server do
+        run "rm -rf #{staging_deploy_path}"      
+        run "mkdir -p #{staging_deploy_path}"
+        upload "#{local_path}/#{deploy_artifact}", "#{staging_deploy_path}", :via => :scp
     end
 
     task :unzip_deploy_artifact, :roles => :staging_server do
@@ -48,7 +49,7 @@ namespace :staging do
     task :safety_check, :roles => :staging_server do
         times = 0;
         while times < 6
-            wgetresult = system "wget --spider http://#{staging_server}:8080/sukrupa/app/students"
+            wgetresult = system "wget --spider http://#{staging_server}:8080/students"
             if wgetresult
                 break
             else

@@ -6,6 +6,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 
@@ -37,13 +39,13 @@ public class Event {
 
 
 	@ManyToMany
-	@JoinTable(name = "EventAttendees",
+	@JoinTable(name = "EVENTATTENDEES",
 			joinColumns = {@JoinColumn(name = "event_id")},
 			inverseJoinColumns = {@JoinColumn(name = "id")})
 	private Set<Student> attendees;
 
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime datetime;
+	@Type(type = "org.sukrupa.event.PersistentEventDate")
+	private EventDate datetime;
 
 	public Set<Student> getAttendees() {
 		return this.attendees;
@@ -53,7 +55,7 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String title, DateTime datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+	public Event(String title, EventDate datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
 		this.title = title;
 		this.datetime = datetime;
 		this.venue = venue;
@@ -64,7 +66,7 @@ public class Event {
 	}
 
 	@Transient
-	private String[] excludedFields = new String[] {"eventId", "datetime"};
+	private String[] excludedFields = new String[] {"eventId"};
 
 	public boolean equals(Object other) {
 		return EqualsBuilder.reflectionEquals(this, other, excludedFields);
@@ -78,4 +80,18 @@ public class Event {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
 	}
 
+	public static Event createFrom(EventRecord eventRecord, Set<Student> attendees) {
+		return new EventBuilder().title(eventRecord.getTitle())
+			    .venue(eventRecord.getVenue())
+			    .description(eventRecord.getDescription())
+			    .coordinator(eventRecord.getCoordinator())
+			    .notes(eventRecord.getNotes())
+			    .datetime(parseDateTime(eventRecord))
+			    .attendees(attendees)
+			    .build();
+	}
+
+	private static EventDate parseDateTime(EventRecord eventRecord) {
+		return new EventDate(eventRecord.getDate(), eventRecord.getTime());
+	}
 }

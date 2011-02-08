@@ -1,10 +1,3 @@
-<html>
-<head>
-    <title>Student List</title>
-    <link rel="stylesheet" type="text/css" href="../../styles/studentList.css"/>
-</head>
-<body>
-
 <table>
     <thead class="header">
     <tr>
@@ -18,7 +11,7 @@
     <tbody>
     $students:{
     <tr class="student">
-        <td class="studentId">$it.studentId$</td>
+        <td class="studentId"><a href="/students/$it.studentId$">$it.studentId$</a></td>
         <td class="name">$it.name$</td>
         <td class="gender">$it.gender$</td>
         <td class="age">$it.age$</td>
@@ -27,6 +20,3 @@
     }$
     </tbody>
 </table>
-
-</body>
-</html>

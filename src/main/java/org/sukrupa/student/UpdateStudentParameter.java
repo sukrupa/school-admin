@@ -2,6 +2,8 @@ package org.sukrupa.student;
 
 import org.sukrupa.platform.DoNotRemove;
 
+import java.util.Set;
+
 public class UpdateStudentParameter {
 	private String studentId;
     private String name;
@@ -11,12 +13,12 @@ public class UpdateStudentParameter {
 	private String religion;
 	private String caste;
 	private String subCaste;
-	private String area;
+	private String communityLocation;
 	private String father;
 	private String mother;
-    private String talents;
+    private Set<String> talents;
 
-    public UpdateStudentParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String area, String father, String mother, String talents) {
+    public UpdateStudentParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -25,7 +27,7 @@ public class UpdateStudentParameter {
         this.religion = religion;
         this.caste = caste;
         this.subCaste = subCaste;
-        this.area = area;
+        this.communityLocation = communityLocation;
         this.father = father;
         this.mother = mother;
         this.talents = talents;
@@ -67,8 +69,8 @@ public class UpdateStudentParameter {
         return subCaste;
     }
 
-    public String getArea() {
-        return area;
+    public String getCommunityLocation() {
+        return communityLocation;
     }
 
     public String getFather() {
@@ -79,7 +81,7 @@ public class UpdateStudentParameter {
         return mother;
     }
 
-    public String getTalents() {
+    public Set<String> getTalents() {
         return talents;
     }
 
@@ -115,8 +117,8 @@ public class UpdateStudentParameter {
         this.subCaste = subCaste;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setCommunityLocation(String communityLocation) {
+        this.communityLocation = communityLocation;
     }
 
     public void setFather(String father) {
@@ -127,7 +129,7 @@ public class UpdateStudentParameter {
         this.mother = mother;
     }
 
-    public void setTalents(String talents) {
+    public void setTalents(Set<String> talents) {
         this.talents = talents;
     }
 }
