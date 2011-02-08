@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import com.google.common.collect.Sets;
 import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateMidnight;
@@ -30,7 +31,10 @@ import static org.hamcrest.Matchers.is;
 @Transactional
 public class StudentRepositoryTest {
 
-    @Autowired
+	static final String MUSIC = "Music";
+	static final String SPORT = "Sport";
+	static final String COOKING = "Cooking";
+	@Autowired
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -38,9 +42,9 @@ public class StudentRepositoryTest {
 
     private StudentRepository repository;
 
-    private final Talent music = new Talent("Music");
-    private final Talent sport = new Talent("Sport");
-    private final Talent cooking = new Talent("Cooking");
+    private final Talent music = new Talent(MUSIC);
+    private final Talent sport = new Talent(SPORT);
+    private final Talent cooking = new Talent(COOKING);
 
     private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery")
             .dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
@@ -117,9 +121,9 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnListOfTalents() {
         Set<String> talentsDecriptions = new HashSet<String>();
-        talentsDecriptions.add("Music");
-        talentsDecriptions.add("Sport");
-        talentsDecriptions.add("Cooking");
+        talentsDecriptions.add(MUSIC);
+        talentsDecriptions.add(SPORT);
+        talentsDecriptions.add(COOKING);
         Set<Talent> talents = repository.findTalents(talentsDecriptions);
         assertThat(talents, hasItems(music, sport, cooking));
     }
@@ -128,10 +132,10 @@ public class StudentRepositoryTest {
     public void shouldUpdateStudentInDatabase() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").build();
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking)).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").build();
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport, cooking)).build();
         databaseHelper.save(philOld);
         Student s = repository.findAll().get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
@@ -141,7 +145,8 @@ public class StudentRepositoryTest {
                 .religion("Catholic")
                 .name("Philippa")
                 .gender("Female")
-                .studentClass("2 Std").build();
+                .studentClass("2 Std")
+		        .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
         Student updatedStudent = repository.update(updateParameter);
         assertThat(updatedStudent, is(philNew));
     }

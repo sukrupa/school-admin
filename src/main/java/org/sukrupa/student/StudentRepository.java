@@ -104,20 +104,8 @@ public class StudentRepository {
         if (student == null) {
             return null;
         }
-        student.setStudentClass(studentParam.getStudentClass());
-        student.setGender(studentParam.getGender());
-        student.setName(studentParam.getName());
-        student.setReligion(studentParam.getReligion());
-        student.setCaste(studentParam.getCaste());
-        student.setSubCaste(studentParam.getSubCaste());
-        student.setCommunityLocation(studentParam.getCommunityLocation());
-	    student.setFather(studentParam.getFather());
-	    student.setMother(studentParam.getMother());
-        student.getTalents().clear();
-        Set<String> talents = studentParam.getTalents();
-        if (talents != null){
-            student.getTalents().addAll(findTalents(talents));
-        }
+	    student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
+
         sessionFactory.getCurrentSession().save(student);
         sessionFactory.getCurrentSession().flush();
         return student;
