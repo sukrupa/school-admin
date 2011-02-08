@@ -40,9 +40,13 @@ public class StudentRepositoryTest {
     private final Talent sport = new Talent("Sport");
     private final Talent cooking = new Talent("Cooking");
     Note todo = new Note("do this and that", new LocalDate(2011, 11, 8));
-    private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).notes(todo).build();
-    private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").dateOfBirth(new LocalDate(1990, 7, 24)).notes(todo).build();
-    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123").notes(todo).build();
+    private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery")
+            .dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).notes(todo).build();
+    private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female")
+            .dateOfBirth(new LocalDate(1990, 7, 24)).notes(todo).build();
+    private Student pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
+            .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
+            .notes(todo).father("Renaud").mother("Nice Lady").build();
 
     @BeforeClass
     public static void classSetUp() {
