@@ -1,0 +1,1 @@
+$layout(body=students/viewBody(), title={$student.name$ - Student Record})$

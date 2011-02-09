@@ -1,1 +1,0 @@
-$layout(body=studentViewFailedBody(), title="Student ID not found")$

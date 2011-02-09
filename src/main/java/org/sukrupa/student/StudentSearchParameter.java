@@ -1,6 +1,17 @@
 package org.sukrupa.student;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import org.springframework.util.ReflectionUtils;
 import org.sukrupa.platform.DoNotRemove;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import static com.google.common.collect.Iterables.all;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Lists.newArrayList;
 
 public class StudentSearchParameter {
 
@@ -92,4 +103,21 @@ public class StudentSearchParameter {
 	public void setReligion(String religion) {
 		this.religion = religion;
 	}
+
+    /* With reflection checks that all bean properties are not set. e.g. getXyz() */
+    public boolean isAllBlank() {
+        Predicate<Method> allPropertiesAreNull = new Predicate<Method>() {
+            @Override
+            public boolean apply(Method m) {
+                return ReflectionUtils.invokeMethod(m, StudentSearchParameter.this) == null;
+            }
+        };
+        Predicate<Method> filterOnlyGetters = new Predicate<Method>() {
+            @Override
+            public boolean apply(Method m) {
+                return m.getName().startsWith("get") && m.getParameterTypes().length == 0;
+            }
+        };
+        return all(filter(newArrayList(getClass().getDeclaredMethods()), filterOnlyGetters), allPropertiesAreNull);
+    }
 }
