@@ -64,7 +64,7 @@ public class EventRepositoryTest {
 
         EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
 
-        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()), is(false));
+        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()).contains("11111"), is(true));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class EventRepositoryTest {
         EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
 
         assertThat(eventRepository.save(eventRecord), is(true));
-	    assertThat(eventRepository.getAll().get(0), is(event));
+	   assertThat(eventRepository.getAll().contains(event), is(true));
     }
 
     @Test
