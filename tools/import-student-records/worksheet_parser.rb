@@ -8,12 +8,20 @@ class WorksheetParser
 
 
   LEGENDS_CORNER = "Sl.No"
-  NAME_HEADING = 'Name'
+  NAME_HEADING = 'Name of the Student'
+  RELIGION_HEADING = 'Religion'
+  CASTE_HEADING = 'Caste'
+  SUB_CASTE_HEADING = 'Sub Caste'
+  COMMUNITY_LOCATION_HEADING = 'Community Location'
+  STUDENT_ID_HEADING = 'Student ID'
+  FATHER_HEADING = "Father's Name"
+  MOTHER_HEADING = "Mother's Name"
   GENDER_HEADING ='Gender'
   DATE_OF_BIRTH_HEADING = 'DOB'
   
   def initialize(worksheet)
     @worksheet = worksheet
+    @student_class = worksheet.default_sheet.strip()
     @this_sheets_column_heading_row = self.calculate_column_heading_row
     @this_sheets_starting_corner = @this_sheets_column_heading_row + 1
     @students_array = []
@@ -56,12 +64,32 @@ class WorksheetParser
 	def parse
 	   @this_sheets_starting_corner.upto(@worksheet.last_row) do |row_number|
 	     
+	     religion = read_cell_value(row_number,RELIGION_HEADING)
+       caste = read_cell_value(row_number,CASTE_HEADING) 
+       sub_caste = read_cell_value(row_number,SUB_CASTE_HEADING)
+       community_location = read_cell_value(row_number,COMMUNITY_LOCATION_HEADING)
+       student_id = read_cell_value(row_number,STUDENT_ID_HEADING)
+       father = read_cell_value(row_number,FATHER_HEADING)
+       mother = read_cell_value(row_number,MOTHER_HEADING)
        name = read_cell_value(row_number,NAME_HEADING)
        date_of_birth = read_cell_value(row_number,DATE_OF_BIRTH_HEADING)
        gender = read_cell_value(row_number,GENDER_HEADING)
        
        if (!name.nil? or  !date_of_birth.nil? or !gender.nil?)
-         student = Student.new :name => name, :date_of_birth => date_of_birth, :gender => gender
+         student_data = {
+           :religion => religion,
+           :caste => caste,
+           :sub_caste => sub_caste,
+           :community_location => community_location,
+           :student_id => student_id,
+           :father => father,
+           :mother => mother,
+           :name => name,
+           :date_of_birth => date_of_birth,
+           :gender => gender,
+           :student_class => @student_class
+         }
+         student = Student.new(student_data)
          @students_array += [student]
        end
        

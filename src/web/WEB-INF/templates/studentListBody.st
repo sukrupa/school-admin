@@ -31,10 +31,14 @@
             </tr>
         }$
             </tbody>
-        </table></div class="page">
+        </table></div>
     }$
-    <a href="#" id="previousButton"> previous </a> &nbsp;
-    <a href="#" id="nextButton"> next </a>
+    <a href="#" id="previousButton" class="navLink">Previous</a> &nbsp;&lt;&lt;&nbsp;
+    $buttons: {
+    <a href="#" class="pageButton navLink">$it$</a> &nbsp;
+    }$
+    &gt;&gt;&nbsp;
+    <a href="#" id="nextButton" class="navLink">Next</a>
  </div>
 
 
