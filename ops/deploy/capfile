@@ -43,7 +43,7 @@ namespace :staging do
     end
 
     task :insert_fake_data, :roles => :staging_server do
-        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -buildfile install/dbdeploy/build.xml db:insert-fake-data:staging"
+        run "cd #{staging_deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.insert.fake.data.sql=install/dbdeploy/sql/insert-fake-data.sql -Dops.deploy.delete.fake.data.sql=install/dbdeploy/sql/delete-fake-data.sql  -buildfile install/dbdeploy/build.xml db:insert-fake-data"
     end
 
     task :safety_check, :roles => :staging_server do
