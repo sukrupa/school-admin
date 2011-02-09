@@ -13,7 +13,7 @@ import java.util.*;
 @RequestMapping("/students")
 public class StudentsController {
 
-    private static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "studentList";
     private static final String SEARCH_VIEW = "studentSearch";
