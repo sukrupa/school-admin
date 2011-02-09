@@ -1,7 +1,6 @@
 package org.sukrupa.event;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
+import org.sukrupa.student.StudentBuilder;
 
 import java.util.Set;
 
@@ -35,7 +35,9 @@ public class ViewEventTest {
 
     @Test
     public void shouldDisplayEvent() {
-        Event event = save(new EventBuilder().build());
+        Student alex = save(new StudentBuilder().name("alex").build());
+        Student bob = save(new StudentBuilder().name("bob").build());
+        Event event = save(new EventBuilder().attendees(alex, bob).build());
 
         ViewEventPage eventPage = new ViewEventPage(driver, event.getId());
 
@@ -55,7 +57,7 @@ public class ViewEventTest {
         }
     }
 
-    private Event save(Event event) {
+    private <T> T save(T event) {
         databaseHelper.saveAndCommit(event);
         return event;
     }

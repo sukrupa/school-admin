@@ -2,8 +2,10 @@ package org.sukrupa.event;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.sukrupa.student.Student;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -44,10 +46,14 @@ public class ViewEventPage {
     }
 
     public Set<String> getAttendees() {
-        return null;//textFor("attendees");
+        Set<String> attendees = new HashSet<String>();
+        for (WebElement element : driver.findElements(By.xpath("//*[@class='attendee']"))) {
+            attendees.add(element.getText());
+        }
+        return attendees;
     }
 
     private String textFor(String field) {
-        return driver.findElement(By.xpath("//div[@class='"+ field +"']")).getText();
+        return driver.findElement(By.xpath("//*[@class='"+ field +"']")).getText();
     }
 }
