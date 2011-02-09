@@ -37,9 +37,8 @@
                 depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional"/>
 
     <target name="ci"
-            description="Runs the build as run on ci, including functional tests"
-            depends="all, test:twist">
-    </target>
+            description="Runs the build as run on ci"
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
 
     <target name="install:local"
             depends="clean, init, compile:all, copy-resources, package"
