@@ -28,6 +28,8 @@
         <mkdir dir="${target.main.dir}"/>
     </target>
 
+	<target name="dev" depends="clean, init, compile:all, copy-resources" />
+
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
 

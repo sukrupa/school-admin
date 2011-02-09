@@ -1,4 +1,4 @@
-<form name="updateStudent" action="updateResults" method="post">
+<form id="updateStudent" name="updateStudent" action="updateResults" method="post">
 
 <h1>Update Student Record</h1>
 
@@ -13,7 +13,7 @@
 	<br/>
 
 	<span>Date of birth</span>
-	<input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" onkeyup="validateDate();"></input>
+	<input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$"></input>
 	<span id="dateErrorMessage"></span>
 
 	<br/>
@@ -90,7 +90,7 @@
 
 	<br/>
 
-<input type="submit" value="Save"/>
+<input type="button" id="save" value="Save"/>
 <input type="button" value="Cancel" onclick="history.go(-1);return false;" />
 
 </form>
