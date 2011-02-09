@@ -6,7 +6,7 @@ class Student
   
   def initialize args
     args.each do |k,v|
-      instance_variable_set("@#{k}", parse(v)) unless v.nil?
+      instance_variable_set("@#{k}", parse(v)) unless (v.nil? or v.empty?)
     end
   end
   

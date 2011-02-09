@@ -4,7 +4,7 @@ require 'workbook_parser'
 require 'student'
 require 'sql_generator'
 
-TARGET_SQL_FILE = '../../../target/import_students.sql'
+TARGET_SQL_FILE = '../../target/import_students.sql'
 
 workbook = Excelx.new(ARGV[0])
 students = WorkbookParser.new.parse(workbook)

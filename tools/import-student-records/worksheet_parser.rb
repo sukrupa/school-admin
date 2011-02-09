@@ -77,6 +77,8 @@ class WorksheetParser
  	      return Integer(cell_value)
     elsif (@worksheet.celltype(row_number,column_number) == :string)
         return cell_value.strip()
+    elsif (@worksheet.celltype(row_number,column_number) == :date)
+        return cell_value.to_s
     end
     return cell_value
 	end
