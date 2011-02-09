@@ -1,5 +1,5 @@
 <div id="studentListPages">
-    $pages: {students|
+    $pages: {page|
         <div class="page">
             <table>
                 <thead class="header">
@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
 
-        $students:{
+        $page.students:{
             <tr class="student">
                 <td class="studentId">$it.studentId$</td>
                 <td class="name"><a href="/students/$it.studentId$">$it.name$</a></td>
@@ -34,8 +34,8 @@
         </table></div>
     }$
     <a href="#" id="previousButton" class="navLink">Previous</a> &nbsp;&lt;&lt;&nbsp;
-    $buttons: {
-    <a href="#" class="pageButton navLink">$it$</a> &nbsp;
+    $pages: {
+    <a href="#" class="pageButton navLink">$i$</a> &nbsp;
     }$
     &gt;&gt;&nbsp;
     <a href="#" id="nextButton" class="navLink">Next</a>
