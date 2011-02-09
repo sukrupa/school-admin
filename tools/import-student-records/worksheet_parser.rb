@@ -18,6 +18,7 @@ class WorksheetParser
   MOTHER_HEADING = "Mother's Name"
   GENDER_HEADING ='Gender'
   DATE_OF_BIRTH_HEADING = 'DOB'
+  TALENT_HEADING = 'Special Talent in Child'
   
   def initialize(worksheet)
     @worksheet = worksheet
@@ -32,10 +33,6 @@ class WorksheetParser
 	def starting_corner
 	 @this_sheets_starting_corner
 	end
-	
-	def skipped_columns
-	 @columns_to_skip
-  end
 	
 	
 	def calculate_column_heading_row
@@ -75,7 +72,17 @@ class WorksheetParser
        date_of_birth = read_cell_value(row_number,DATE_OF_BIRTH_HEADING)
        gender = read_cell_value(row_number,GENDER_HEADING)
        
-       if (!name.nil? or  !date_of_birth.nil? or !gender.nil?)
+       talents_string = read_cell_value(row_number,TALENT_HEADING)
+       if (!talents_string.nil?)
+         talents = talents_string.split(",")
+         talents.map do |talent|
+           talent.strip
+         end
+       end
+       
+       
+       
+       if (!name.nil? or  !student_id.nil?)
          student_data = {
            :religion => religion,
            :caste => caste,
