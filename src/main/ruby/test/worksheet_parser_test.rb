@@ -7,7 +7,7 @@ require 'roo'
 class TestWorksheetParser < Test::Unit::TestCase
   
   def setup
-    @worksheet = Excelx.new('test/Test.xlsx')
+    @worksheet = Excelx.new('Test.xlsx')
     @worksheet.default_sheet = 'happy-path'
     @worksheet_parser = WorksheetParser.new(@worksheet)
   end  
