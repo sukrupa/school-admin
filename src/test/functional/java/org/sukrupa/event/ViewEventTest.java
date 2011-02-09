@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
-@Ignore("pat, suhas - work in progress")
 public class ViewEventTest {
 
     private WebDriver driver = new HtmlUnitDriver();
