@@ -94,3 +94,10 @@
 <input type="button" value="Cancel" onclick="history.go(-1);return false;" />
 
 </form>
+<hr/>
+ <h2> Notes </h2>
+<div class="confirm">
+Note Added Successfully
+</div>
+
+$studentNotes()$
