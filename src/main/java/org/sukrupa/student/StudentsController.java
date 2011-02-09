@@ -47,7 +47,7 @@ public class StudentsController {
     @RequestMapping()
     public String all(Map<String, List<?>> model) {
         List<Student> students = repository.findAll();
-        setupListModel(model, students);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
     }
 
@@ -56,23 +56,8 @@ public class StudentsController {
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
             Map<String, List<?>> model) {
         List<Student> students = repository.parametricSearch(searchParam);
-        setupListModel(model, students);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
-    }
-
-    private void setupListModel(Map<String, List<?>> model, List<Student> students) {
-        List<StudentListPage> pages = paginateStudents(students);
-        List<Integer> buttons = createButtonList(pages);
-        model.put("buttons", buttons);
-        model.put("pages", pages);
-    }
-
-    private List<Integer> createButtonList(List<StudentListPage> pages) {
-        List<Integer> buttons = new ArrayList<Integer>();
-        for (int i=1; i<= pages.size(); i++) {
-            buttons.add(i);
-        }
-        return buttons;
     }
 
     private List<StudentListPage> paginateStudents(List<Student> students) {

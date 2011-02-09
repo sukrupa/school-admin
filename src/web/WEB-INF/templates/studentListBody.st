@@ -34,8 +34,8 @@
         </table></div>
     }$
     <a href="#" id="previousButton" class="navLink">Previous</a> &nbsp;&lt;&lt;&nbsp;
-    $buttons: {
-    <a href="#" class="pageButton navLink">$it$</a> &nbsp;
+    $pages: {
+    <a href="#" class="pageButton navLink">$i$</a> &nbsp;
     }$
     &gt;&gt;&nbsp;
     <a href="#" id="nextButton" class="navLink">Next</a>
