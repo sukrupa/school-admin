@@ -52,6 +52,7 @@ body {
     width:700px;
     float:left;
     padding-bottom: 50px;
+    font: 120% verdana, arial, helvetica, sans-serif;
 }
 img{
     border: none;
@@ -66,4 +67,27 @@ img{
 div.note {
     padding: 5px;
     border: 1px #000000 solid;
+}
+
+
+.page table td {
+    border: 1px #000000 solid;
+    padding: 4px;
+}
+
+.page table  {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page table .header  {
+    background-color: aqua ;
+    font: 107% verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.disabled {
+    text-decoration: none;
+    color: black;
 }

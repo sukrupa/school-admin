@@ -26,6 +26,14 @@ $(window).load( function() {
             showCurrentPage();
         }
     });
+
+    $('#studentListPages a.pageButton').each(function(index) {
+        var thisButton = index+1;
+        $(this).click(function(){
+            currentPage=thisButton;
+            showCurrentPage();
+        });
+    });
 });
 
 
@@ -38,4 +46,25 @@ function showCurrentPage() {
         $(this).hide();
     });
     $('#studentListPages div.page:nth-child('+currentPage+')').show();
+
+    $('#studentListPages a.navLink').each(function(){
+        $(this).removeClass('disabled');
+    });
+
+    if(currentPage == numberOfPages){
+        $('#nextButton').addClass('disabled');
+    }
+
+
+    if(currentPage == 1) {
+        $('#previousButton').addClass('disabled');
+
+    }
+
+    $('#studentListPages a.pageButton').each(function(index){
+        if(currentPage == index+1){
+            $(this).addClass('disabled');
+        }
+    });
+
 }
