@@ -2,7 +2,10 @@ package org.sukrupa.event;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.sukrupa.student.Student;
+
+import java.util.List;
+import java.util.Set;
 
 public class ViewEventPage {
     private WebDriver driver;
@@ -13,10 +16,38 @@ public class ViewEventPage {
     }
 
     public String getTitle() {
-        return driver.findElement(By.xpath("//div[@class='title']")).getText();
+        return textFor("title");
     }
 
     public String getVenue() {
-        return driver.findElement(By.xpath("//div[@class='venue']")).getText();
+        return textFor("venue");
+    }
+
+    public String getDate() {
+        return textFor("date");
+    }
+
+    public String getDay() {
+        return textFor("day");
+    }
+
+    public String getTime() {
+        return textFor("time");
+    }
+
+    public String getDescription() {
+        return textFor("description");
+    }
+
+    public String getNotes() {
+        return textFor("notes");
+    }
+
+    public Set<String> getAttendees() {
+        return null;//textFor("attendees");
+    }
+
+    private String textFor(String field) {
+        return driver.findElement(By.xpath("//div[@class='"+ field +"']")).getText();
     }
 }

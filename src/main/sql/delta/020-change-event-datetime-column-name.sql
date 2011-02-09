@@ -1,0 +1,2 @@
+ALTER TABLE Event ALTER COLUMN datetime RENAME TO date
+;

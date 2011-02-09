@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static java.util.Arrays.asList;
 
 public class EventBuilder {
     private String title = "dummy.title";
@@ -15,7 +14,7 @@ public class EventBuilder {
     private String description = "dummy.description";
     private String notes = "dummy.notes" ;
     private Set<Student> attendees = new HashSet<Student>();
-    private EventDate datetime = EventDate.now();
+    private Date date = Date.now();
 
     public EventBuilder title(String title) {
         this.title = title;
@@ -42,8 +41,8 @@ public class EventBuilder {
         return this;
     }
 
-    public EventBuilder date(EventDate dateTime) {
-        this.datetime = dateTime;
+    public EventBuilder date(Date date) {
+        this.date = date;
         return this;
     }
 
@@ -58,7 +57,7 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(title, datetime, venue, coordinator, description, notes, attendees);
+        return new Event(title, date, venue, coordinator, description, notes, attendees);
     }
 
 

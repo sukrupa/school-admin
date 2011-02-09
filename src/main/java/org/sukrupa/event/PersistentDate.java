@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PersistentEventDate implements UserType, Serializable{
+public class PersistentDate implements UserType, Serializable{
 
 	private PersistentDateTime delegate = new PersistentDateTime();
 
@@ -51,7 +51,7 @@ public class PersistentEventDate implements UserType, Serializable{
 
 	@Override
 	public Class returnedClass() {
-		return EventDate.class;
+		return Date.class;
 	}
 
 	@Override
@@ -70,10 +70,10 @@ public class PersistentEventDate implements UserType, Serializable{
 	}
 
 	private DateTime dateTimeFor(Object date) {
-		return (date == null) ? null : ((EventDate) date).getJodaDateTime();
+		return (date == null) ? null : ((Date) date).getJodaDateTime();
 	}
 
-	private EventDate dateFor(DateTime dateTime) {
-		return (dateTime == null) ? null : new EventDate(dateTime.getMillis());
+	private Date dateFor(DateTime dateTime) {
+		return (dateTime == null) ? null : new Date(dateTime.getMillis());
 	}
 }
