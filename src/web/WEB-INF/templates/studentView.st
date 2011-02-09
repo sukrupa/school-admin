@@ -1,1 +1,1 @@
-$layout(body=studentViewBody(), title={$student.name$ - Student Record}, stylesheets=["studentRecord"])$
+$layout(body=studentViewBody(), title={$student.name$ - Student Record})$
