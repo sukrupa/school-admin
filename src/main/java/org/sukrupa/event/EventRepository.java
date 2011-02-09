@@ -31,14 +31,17 @@ public class EventRepository {
         return sessionFactory.getCurrentSession().createCriteria(Event.class).list();
     }
 
-    public boolean save(EventRecord eventRecord) {
+    public Event getEvent(int eventId) {
+        Session session = sessionFactory.getCurrentSession();
+        return (Event) session.createCriteria(Event.class).add(Restrictions.eq("id", eventId)).uniqueResult();
+    }
 
+    public boolean save(EventRecord eventRecord) {
         if (validAttendees(eventRecord.getAttendees())) {
             session().save(Event.createFrom(eventRecord, studentListFromDB));
             return true;
         } else
             return false;
-
     }
 
     public boolean validAttendees(String studentIds) {
@@ -49,12 +52,7 @@ public class EventRepository {
 
     private Set<Student> retrieveStudent(Set<String> studentIdsFromForm) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
-        criteria.add(
-                Restrictions.disjunction().add(
-                        Restrictions.in(STUDENT_ID, studentIdsFromForm)
-                )
-        );
-
+        criteria.add(Restrictions.disjunction().add(Restrictions.in(STUDENT_ID, studentIdsFromForm)));
         return Sets.newHashSet(criteria.list());
     }
 
@@ -62,9 +60,7 @@ public class EventRepository {
         return Sets.newLinkedHashSet(Splitter.on(ATTENDEES_SEPARATOR).omitEmptyStrings().trimResults().split(studentIds));
     }
 
-
     private Session session() {
         return sessionFactory.getCurrentSession();
     }
-
 }

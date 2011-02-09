@@ -1,15 +1,12 @@
 package org.sukrupa.event;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/events")
@@ -35,6 +32,13 @@ public class EventController {
         else
             return RECORD_EVENT_VIEW;
     }
+
+    @RequestMapping(value = "/{eventId}")
+    public String display(@PathVariable int eventId, Map<String, Event> model) {
+        model.put("event", repository.getEvent(eventId));
+        return "events/show";
+    }
+
 
 
 }
