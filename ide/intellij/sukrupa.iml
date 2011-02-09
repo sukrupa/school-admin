@@ -25,7 +25,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Hamcrest" level="project" />
     <orderEntry type="library" name="test" level="project" />
-    <orderEntry type="library" name="main" level="project" />
+    <orderEntry type="library" exported="" name="main" level="project" />
     <orderEntry type="library" name="twist" level="project" />
   </component>
 </module>

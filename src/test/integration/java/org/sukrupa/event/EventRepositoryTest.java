@@ -59,17 +59,19 @@ public class EventRepositoryTest {
         assertThat(eventRepository.getEvent(event.getId()), is(event));
     }
 
-    @Test
+    @Test // FIXME get rid of this test - this is not repository functionality
     public void shouldValidateAttendees() {
         Set<Student> attendees = newHashSet(sahil, renaud, suhas);
         Set<String> eventRecordAttendees = new HashSet<String>();
         for (Student each : attendees)
             eventRecordAttendees.add(each.getStudentId());
+
         EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
-        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()), is(true));
+
+        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()).contains(sahil.getStudentId()), is(true));
     }
 
-    @Test
+    @Test // FIXME get rid of this test - this is not repository functionality
     public void shouldNotSaveEventWithInvalidAttendees() {
         Student pat = new StudentBuilder().name("Patric").studentId("4").build();
         Set<Student> attendees = newHashSet(sahil, renaud, pat);
@@ -86,11 +88,4 @@ public class EventRepositoryTest {
         databaseHelper.save(event);
         return event;
     }
-
-    @Deprecated // REMOVE!
-    private void save(EventRecord eventRecord) {
-        eventRepository.save(eventRecord);
-        databaseHelper.flushHibernateSessionToForceReload();
-    }
-
 }

@@ -1,6 +1,6 @@
 Tags:
 Preconditions:Navigate to Search Page
-Search Workflow:
+search Workflow:
 #Select Talent as <Talent>
 #Select minimum age as <Min Age>
 #Select maximum age as <Max Age>

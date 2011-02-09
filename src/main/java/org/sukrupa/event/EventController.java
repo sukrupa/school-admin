@@ -14,6 +14,7 @@ public class EventController {
     private static final String RECORD_EVENT_VIEW = "recordEvent";
     private static final String EVENT_SAVE_VIEW = "eventSaved";
     private EventRepository repository;
+    private static final String EVENT_MODEL = "events";
 
     @Autowired
     public EventController(EventRepository repository) {
@@ -21,16 +22,27 @@ public class EventController {
     }
 
     @RequestMapping(value = "record")
-    public String display() {
+    public String display(EventRecord eventRecord, Map<String, String> model) {
+        model.put("eventtitle", eventRecord.getTitle());
+        model.put("date", eventRecord.getDate());
+        model.put("description", eventRecord.getDescription());
+        model.put("time", eventRecord.getTime());
+        model.put("coordinator", eventRecord.getCoordinator());
+        model.put("notes", eventRecord.getNotes());
+        model.put("attendees", eventRecord.getAttendees());
+        model.put("venue", eventRecord.getVenue());
+        model.put("errorMessage", eventRecord.getError());
         return RECORD_EVENT_VIEW;
     }
 
     @RequestMapping(value = "save")
-    public String save(@ModelAttribute(value = "eventRecord")  EventRecord eventRecord) {
-	    if(repository.save(eventRecord))
+    public String save(@ModelAttribute(value = "eventRecord") EventRecord eventRecord, Map<String, String> model) {
+        if (repository.save(eventRecord))
             return EVENT_SAVE_VIEW;
-        else
+        else {
+            display(eventRecord, model);
             return RECORD_EVENT_VIEW;
+        }
     }
 
     @RequestMapping(value = "/{eventId}")
@@ -38,7 +50,4 @@ public class EventController {
         model.put("event", repository.getEvent(eventId));
         return "events/show";
     }
-
-
-
 }

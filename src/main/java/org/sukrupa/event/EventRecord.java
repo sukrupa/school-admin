@@ -1,5 +1,7 @@
 package org.sukrupa.event;
 
+import java.util.Set;
+
 public class EventRecord {
 	private String title;
 	private String date;
@@ -9,6 +11,7 @@ public class EventRecord {
 	private String description;
 	private String notes;
 	private String attendees;
+    private Set<String> invalidIDs;
 
 	public EventRecord() {}
 
@@ -86,4 +89,19 @@ public class EventRecord {
 	public void setAttendees(String attendees) {
 		this.attendees = attendees;
 	}
+
+    public String getError() {
+        String error = "Could not find the following IDs: ";
+        if (invalidIDs == null)
+            return "";
+        else{
+            for(String each : invalidIDs)
+                error += each + ", ";
+            return error;
+        }
+    }
+
+    public void setError(Set<String> invalidIDs) {
+        this.invalidIDs = invalidIDs;
+    }
 }
