@@ -12,6 +12,7 @@ import org.sukrupa.student.Student;
 
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 @Repository
 public class EventRepository {
@@ -33,18 +34,28 @@ public class EventRepository {
 
     public boolean save(EventRecord eventRecord) {
 
-        if (validAttendees(eventRecord.getAttendees())) {
+        if (attendiesAreValid(eventRecord)) {
             session().save(Event.createFrom(eventRecord, studentListFromDB));
             return true;
         } else
+            eventRecord.setError(validAttendees(eventRecord.getAttendees()));
             return false;
 
     }
 
-    public boolean validAttendees(String studentIds) {
+    private boolean attendiesAreValid(EventRecord eventRecord) {
+        return validAttendees(eventRecord.getAttendees()).size()==0;
+    }
+
+    public Set<String> validAttendees(String studentIds) {
         Set<String> studentIdsFromForm = parseIdsFromForm(studentIds);
         studentListFromDB = retrieveStudent(studentIdsFromForm);
-        return (studentIdsFromForm.size() == studentListFromDB.size());
+
+        for(Student each : studentListFromDB){
+            studentIdsFromForm.remove(each.getStudentId());
+        }
+
+        return (studentIdsFromForm);
     }
 
     private Set<Student> retrieveStudent(Set<String> studentIdsFromForm) {

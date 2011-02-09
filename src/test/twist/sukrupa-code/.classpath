@@ -56,5 +56,6 @@
 	<classpathentry kind="lib" path="lib/main/joda-time-1.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/main/usertype.jodatime-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/main/usertype.spi-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/main/guava-r08.jar"/>
 	<classpathentry kind="output" path="sukrupa-code"/>
 </classpath>

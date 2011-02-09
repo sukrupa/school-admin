@@ -11,7 +11,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/students")
-public class StudentController {
+public class StudentsController {
 
     private static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
     private static final String STUDENTS_MODEL = "students";
@@ -40,7 +40,7 @@ public class StudentController {
 
 
 	@Autowired
-    public StudentController(StudentRepository repository) {
+    public StudentsController(StudentRepository repository) {
         this.repository = repository;
     }
 
