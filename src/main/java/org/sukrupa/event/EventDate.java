@@ -10,43 +10,46 @@ import java.io.Serializable;
 
 public class EventDate implements Serializable {
 
-	private static final String DATE_TIME_FORMAT = "dd/MM/YY HH:mm";
+    private static final String DATE_TIME_FORMAT = "dd/MM/YY HH:mm";
 
-	private DateTime jodaTime;
+    private DateTime jodaTime;
 
-	public EventDate(String date, String time) {
-		jodaTime = DateTimeFormat.forPattern(DATE_TIME_FORMAT).withZone(DateTimeZone.UTC).parseDateTime(buildDateTimeText(date, time));
-	}
+    public EventDate(String date, String time) {
+        jodaTime = DateTimeFormat.forPattern(DATE_TIME_FORMAT).withZone(DateTimeZone.UTC).parseDateTime(buildDateTimeText(date, time));
+    }
 
-	public EventDate(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds) {
-		jodaTime = new DateTime(year, month, day, hours, minutes, seconds, milliseconds, DateTimeZone.UTC);
-	}
+    public EventDate(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds) {
+        jodaTime = new DateTime(year, month, day, hours, minutes, seconds, milliseconds, DateTimeZone.UTC);
+    }
 
-	public EventDate(long millis) {
-		jodaTime = new DateTime(millis, DateTimeZone.UTC);
-	}
+    public EventDate(long millis) {
+        jodaTime = new DateTime(millis, DateTimeZone.UTC);
+    }
 
-	private String buildDateTimeText(String date, String time) {
-		return date.trim() + " " + time.trim();
-	}
+    public static EventDate now() {
+        return new EventDate(new DateTime().getMillis());
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return EqualsBuilder.reflectionEquals(this, other);
-	}
+    private String buildDateTimeText(String date, String time) {
+        return date.trim() + " " + time.trim();
+    }
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+    @Override
+    public boolean equals(Object other) {
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
 
-	@Override
-	public String toString() {
-		return jodaTime.toString();
-	}
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-	public DateTime getJodaDateTime() {
-		return jodaTime;
-	}
+    @Override
+    public String toString() {
+        return jodaTime.toString();
+    }
 
+    public DateTime getJodaDateTime() {
+        return jodaTime;
+    }
 }

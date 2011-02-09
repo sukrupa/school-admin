@@ -1,18 +1,11 @@
 package org.sukrupa.event;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.sukrupa.student.Student;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,7 +14,7 @@ public class EventController {
     private static final String RECORD_EVENT_VIEW = "recordEvent";
     private static final String EVENT_SAVE_VIEW = "eventSaved";
     private EventRepository repository;
-    private static final String EVENT_MODEL ="events" ;
+    private static final String EVENT_MODEL = "events";
 
     @Autowired
     public EventController(EventRepository repository) {
@@ -43,14 +36,18 @@ public class EventController {
     }
 
     @RequestMapping(value = "save")
-    public String save(@ModelAttribute(value = "eventRecord")  EventRecord eventRecord,Map<String, String> model) {
-	    if(repository.save(eventRecord))
+    public String save(@ModelAttribute(value = "eventRecord") EventRecord eventRecord, Map<String, String> model) {
+        if (repository.save(eventRecord))
             return EVENT_SAVE_VIEW;
-        else{
-            display(eventRecord,model);
+        else {
+            display(eventRecord, model);
             return RECORD_EVENT_VIEW;
         }
-
     }
 
+    @RequestMapping(value = "/{eventId}")
+    public String display(@PathVariable int eventId, Map<String, Event> model) {
+        model.put("event", repository.getEvent(eventId));
+        return "events/show";
+    }
 }
