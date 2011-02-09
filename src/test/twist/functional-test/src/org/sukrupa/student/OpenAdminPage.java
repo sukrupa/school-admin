@@ -11,7 +11,7 @@ public class OpenAdminPage {
 	}
 
 	public void setUp() throws Exception {
-		browser.navigateTo("http://twu-staging:8080/sukrupa/app/students");
+		browser.navigateTo("http://twu-staging:8080/students");
 	}
 
 	public void tearDown() throws Exception {
