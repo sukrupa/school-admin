@@ -61,14 +61,10 @@ public class EventRepositoryTest {
 
     @Test // FIXME get rid of this test - this is not repository functionality
     public void shouldValidateAttendees() {
-        Set<Student> attendees = newHashSet(sahil, renaud, suhas);
-        Set<String> eventRecordAttendees = new HashSet<String>();
-        for (Student each : attendees)
-            eventRecordAttendees.add(each.getStudentId());
+        Student nonExisting = new StudentBuilder().studentId("42").build();
+        EventRecord eventRecord = new EventRecordBuilder().attendees(suhas, nonExisting).build();
 
-        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(Joiner.on(ATTENDEES_SEPARATOR).join(eventRecordAttendees)).build();
-
-        assertThat(eventRepository.validAttendees(eventRecord.getAttendees()).contains(sahil.getStudentId()), is(true));
+        assertThat(eventRepository.findNonExisting(eventRecord.getAttendees()).contains(nonExisting.getStudentId()), is(true));
     }
 
     @Test // FIXME get rid of this test - this is not repository functionality

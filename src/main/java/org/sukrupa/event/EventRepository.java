@@ -41,15 +41,15 @@ public class EventRepository {
             session().save(Event.createFrom(eventRecord, studentListFromDB));
             return true;
         } else
-            eventRecord.setError(validAttendees(eventRecord.getAttendees()));
+            eventRecord.setError(findNonExisting(eventRecord.getAttendees()));
         return false;
     }
 
     private boolean attendiesAreValid(EventRecord eventRecord) {
-        return validAttendees(eventRecord.getAttendees()).size() == 0;
+        return findNonExisting(eventRecord.getAttendees()).size() == 0;
     }
 
-    public Set<String> validAttendees(String studentIds) {
+    public Set<String> findNonExisting(String studentIds) {
         Set<String> studentIdsFromForm = parseIdsFromForm(studentIds);
         studentListFromDB = retrieveStudent(studentIdsFromForm);
 
