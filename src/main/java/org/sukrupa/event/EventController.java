@@ -2,6 +2,7 @@ package org.sukrupa.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ public class EventController {
     private static final String EVENT_SAVE_VIEW = "eventSaved";
     private EventRepository repository;
     private static final String EVENT_MODEL = "events";
+
+    public EventController() {
+    }
 
     @Autowired
     public EventController(EventRepository repository) {
@@ -36,6 +40,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "save")
+    @Transactional
     public String save(@ModelAttribute(value = "eventRecord") EventRecord eventRecord, Map<String, String> model) {
         if (repository.save(eventRecord))
             return EVENT_SAVE_VIEW;
