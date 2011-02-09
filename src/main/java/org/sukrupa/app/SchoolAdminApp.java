@@ -14,8 +14,6 @@ import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 @Component
 public class SchoolAdminApp {
 
-    private static final Logger log = Logger.getLogger(SchoolAdminApp.class);
-
     public static void main(String[] args) throws IOException {
         configureLogging();
         configureApp().getBean(SchoolAdminApp.class).start();

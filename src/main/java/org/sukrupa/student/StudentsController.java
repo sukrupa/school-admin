@@ -13,7 +13,7 @@ import java.util.*;
 @RequestMapping("/students")
 public class StudentsController {
 
-    private static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
     private static final String STUDENTS_MODEL = "students";
     private static final String STUDENTS_VIEW = "studentList";
     private static final String SEARCH_VIEW = "studentSearch";
@@ -47,20 +47,8 @@ public class StudentsController {
     @RequestMapping()
     public String all(Map<String, List<?>> model) {
         List<Student> students = repository.findAll();
-        List<List<Student>> pages = paginateStudents(students);
-
-        model.put("pages", pages);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
-    }
-
-    private List<List<Student>> paginateStudents(List<Student> students) {
-        List<List<Student>> pages = new ArrayList<List<Student>>();
-        while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
-            pages.add(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
-            students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
-        }
-        pages.add(students);
-        return pages;
     }
 
     @RequestMapping(value = "searchResult")
@@ -68,9 +56,18 @@ public class StudentsController {
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
             Map<String, List<?>> model) {
         List<Student> students = repository.parametricSearch(searchParam);
-        List<List<Student>> pages = paginateStudents(students);
-        model.put("pages", pages);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
+    }
+
+    private List<StudentListPage> paginateStudents(List<Student> students) {
+        List<StudentListPage> pages = new ArrayList<StudentListPage>();
+        while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
+            pages.add(new StudentListPage(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
+            students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
+        }
+        pages.add(new StudentListPage(students));
+        return pages;
     }
 
     @RequestMapping(value = "search")

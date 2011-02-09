@@ -52,6 +52,7 @@ body {
     width:700px;
     float:left;
     padding-bottom: 50px;
+    font: 120% verdana, arial, helvetica, sans-serif;
 }
 img{
     border: none;
@@ -63,6 +64,27 @@ img{
 }
 .clear { clear: both; }
 
+.page table td {
+    border: 1px #000000 solid;
+    padding: 4px;
+}
+
+.page table  {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header  {
+    font: 107% verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.disabled {
+    text-decoration: none;
+    color: black;
+}
+
 div.box {
     float: left;
     width: 300px;
@@ -71,12 +93,16 @@ div.box {
  /*   border-bottom: solid 1px;*/
 
 }
-   div.note{
-   float :left;
-   width: 300px;
-   font-size: 14px;
+
+div.note {
+    float: left;
+    width: 300px;
+    font-size: 14px;
     resize: vertical;
-   height:50px;
+    height: 50px;
+}
 
+.entry{clear:both;}
+.entry label{font-weight: bold; float: left; margin: 0 25px 0 0; width: 75px;}
+.spacer{margin: 15px 0 0 25px; }
 
-   }

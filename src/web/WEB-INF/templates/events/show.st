@@ -1,0 +1,1 @@
+$layout(body=events/showBody(), title="View Event")$

@@ -1,32 +1,59 @@
 package org.sukrupa.event;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.sukrupa.app.students.StudentRow;
+import org.sukrupa.student.Student;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import java.util.Set;
 
 public class ViewEventPage {
     private WebDriver driver;
 
-    public ViewEventPage() {
-        this.driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080/events/" + 1);
+    public ViewEventPage(WebDriver driver, int eventId) {
+        this.driver = driver;
+        this.driver.get("http://localhost:8080/events/" + eventId);
     }
 
+    public String getTitle() {
+        return textFor("title");
+    }
 
-    @Test
-    @Ignore("[Rebecca, Suhas] WIP")
-    public void testGetEvent(){
-        String title = driver.findElements(By.xpath("//p[@class='title']")).get(0).getText();
-        assertThat(title, is("Fake event_title"));
+    public String getVenue() {
+        return textFor("venue");
+    }
+
+    public String getDate() {
+        return textFor("date");
+    }
+
+    public String getDay() {
+        return textFor("day");
+    }
+
+    public String getTime() {
+        return textFor("time");
+    }
+
+    public String getDescription() {
+        return textFor("description");
+    }
+
+    public String getNotes() {
+        return textFor("notes");
+    }
+
+    public Set<String> getAttendees() {
+        Set<String> attendees = new HashSet<String>();
+        for (WebElement element : driver.findElements(By.xpath("//*[@class='attendee']"))) {
+            attendees.add(element.getText());
+        }
+        return attendees;
+    }
+
+    private String textFor(String field) {
+        return driver.findElement(By.xpath("//*[@class='"+ field +"']")).getText();
     }
 }
