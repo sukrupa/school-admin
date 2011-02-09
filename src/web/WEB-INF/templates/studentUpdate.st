@@ -1,1 +1,1 @@
-$layout(body=studentUpdateBody(), title="Update Student", scripts=["dateValidation", "studentUpdate"])$
+$layout(body=studentUpdateBody(), title="Update Student", scripts=["dateValidation", "studentUpdate"], stylesheets=["studentRecord"])$
