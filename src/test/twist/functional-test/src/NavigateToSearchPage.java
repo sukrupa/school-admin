@@ -10,7 +10,7 @@ public class NavigateToSearchPage {
 	}
 
 	public void setUp() throws Exception {
-		browser.navigateTo("http://twu-staging:8080/students/search");
+		browser.navigateTo("http://localhost:8080/students/search");
 	}
 
 	public void tearDown() throws Exception {

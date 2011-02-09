@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 public class ViewStudentTest {
 
-    private Student suhas = new StudentBuilder().name("suhas").studentId("123").build();
+    private Student suhas = new StudentBuilder().name("suhas").studentId("123").notes(new Note("hello")).build();
 
     private WebDriver driver = new HtmlUnitDriver();
 
@@ -42,13 +42,10 @@ public class ViewStudentTest {
     }
 
     @Test
-    public void shouldAddAndListNotes() {
+    public void shouldListNotes() {
         save(suhas);
-
         ViewStudentPage page = new ViewStudentPage(driver, suhas.getStudentId());
-        page.addNote("This is a new note");
-
-        assertThat(page.getNotes(), hasItem("This is a new note"));
+        assertThat(page.getNotes(), hasItem("hello"));
     }
 
     public void save(Object... students) {

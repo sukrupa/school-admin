@@ -16,12 +16,12 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class StudentControllerTest {
+public class StudentsControllerTest {
 
     @Mock
     private StudentRepository repository;
 
-    private StudentController controller;
+    private StudentsController controller;
 
     private Map<String, List<?>> studentsListModel = new HashMap<String, List<?>>();
     private HashMap<String,Student> studentModel = new HashMap<String,Student>();
@@ -32,7 +32,7 @@ public class StudentControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new StudentController(repository);
+        controller = new StudentsController(repository);
     }
 
     @Test

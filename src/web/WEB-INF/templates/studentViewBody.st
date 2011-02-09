@@ -64,4 +64,4 @@
     <input type="hidden" name="studentId" value="$student.studentId$"></input>
 </form>
 
-$studentNotes()$
+$studentNotesDisplay()$

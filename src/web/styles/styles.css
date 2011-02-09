@@ -63,7 +63,20 @@ img{
 }
 .clear { clear: both; }
 
-div.note {
-    padding: 5px;
-    border: 1px #000000 solid;
+div.box {
+    float: left;
+    width: 300px;
+    line-height: 1.25em;
+    margin-bottom:15px;
+ /*   border-bottom: solid 1px;*/
+
 }
+   div.note{
+   float :left;
+   width: 300px;
+   font-size: 14px;
+    resize: vertical;
+   height:50px;
+
+
+   }

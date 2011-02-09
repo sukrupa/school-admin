@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.sukrupa.student.Student;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/events")
@@ -17,6 +21,7 @@ public class EventController {
     private static final String RECORD_EVENT_VIEW = "recordEvent";
     private static final String EVENT_SAVE_VIEW = "eventSaved";
     private EventRepository repository;
+    private static final String EVENT_MODEL ="events" ;
 
     @Autowired
     public EventController(EventRepository repository) {
@@ -24,17 +29,28 @@ public class EventController {
     }
 
     @RequestMapping(value = "record")
-    public String display() {
+    public String display(EventRecord eventRecord, Map<String, String> model) {
+        model.put("eventtitle", eventRecord.getTitle());
+        model.put("date", eventRecord.getDate());
+        model.put("description", eventRecord.getDescription());
+        model.put("time", eventRecord.getTime());
+        model.put("coordinator", eventRecord.getCoordinator());
+        model.put("notes", eventRecord.getNotes());
+        model.put("attendees", eventRecord.getAttendees());
+        model.put("venue", eventRecord.getVenue());
+        model.put("errorMessage", eventRecord.getError());
         return RECORD_EVENT_VIEW;
     }
 
     @RequestMapping(value = "save")
-    public String save(@ModelAttribute(value = "eventRecord")  EventRecord eventRecord) {
+    public String save(@ModelAttribute(value = "eventRecord")  EventRecord eventRecord,Map<String, String> model) {
 	    if(repository.save(eventRecord))
             return EVENT_SAVE_VIEW;
-        else
+        else{
+            display(eventRecord,model);
             return RECORD_EVENT_VIEW;
-    }
+        }
 
+    }
 
 }
