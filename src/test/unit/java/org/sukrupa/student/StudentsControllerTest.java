@@ -39,8 +39,8 @@ public class StudentsControllerTest {
     public void shouldPopulateModelWithPageOfStudents() {
         when(repository.findAll()).thenReturn(asList(sahil, pat));
         controller.all(studentsListModel);
-        List<List<Student>> pages = (List<List<Student>>) studentsListModel.get("pages");
-        assertThat(pages.get(0), is(asList(sahil, pat)));
+        List<StudentListPage> pages = (List<StudentListPage>) studentsListModel.get("pages");
+        assertThat(pages.get(0), is(new StudentListPage(asList(sahil, pat))));
     }
 
     @Test

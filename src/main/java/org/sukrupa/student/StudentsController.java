@@ -47,7 +47,7 @@ public class StudentsController {
     @RequestMapping()
     public String all(Map<String, List<?>> model) {
         List<Student> students = repository.findAll();
-        setupListModel(model, students);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
     }
 
@@ -56,32 +56,17 @@ public class StudentsController {
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
             Map<String, List<?>> model) {
         List<Student> students = repository.parametricSearch(searchParam);
-        setupListModel(model, students);
+        model.put("pages", paginateStudents(students));
         return STUDENTS_VIEW;
     }
 
-    private void setupListModel(Map<String, List<?>> model, List<Student> students) {
-        List<List<Student>> pages = paginateStudents(students);
-        List<Integer> buttons = createButtonList(pages);
-        model.put("buttons", buttons);
-        model.put("pages", pages);
-    }
-
-    private List<Integer> createButtonList(List<List<Student>> pages) {
-        List<Integer> buttons = new ArrayList<Integer>();
-        for (int i=1; i<= pages.size(); i++) {
-            buttons.add(i);
-        }
-        return buttons;
-    }
-
-    private List<List<Student>> paginateStudents(List<Student> students) {
-        List<List<Student>> pages = new ArrayList<List<Student>>();
+    private List<StudentListPage> paginateStudents(List<Student> students) {
+        List<StudentListPage> pages = new ArrayList<StudentListPage>();
         while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
-            pages.add(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
+            pages.add(new StudentListPage(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
             students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
         }
-        pages.add(students);
+        pages.add(new StudentListPage(students));
         return pages;
     }
 

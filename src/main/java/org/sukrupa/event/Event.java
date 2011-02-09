@@ -34,8 +34,8 @@ public class Event {
     @Column(name = "event_notes")
     private String notes;
 
-    @Type(type = "org.sukrupa.event.PersistentEventDate")
-    private EventDate datetime;
+    @Type(type = "org.sukrupa.event.PersistentDate")
+    private Date date;
 
     @ManyToMany
     @JoinTable(name = "EVENTATTENDEES",
@@ -48,9 +48,9 @@ public class Event {
     }
 
 
-    public Event(String title, EventDate datetime, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+    public Event(String title, Date date, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
         this.title = title;
-        this.datetime = datetime;
+        this.date = date;
         this.venue = venue;
         this.coordinator = coordinator;
         this.description = description;
@@ -77,12 +77,20 @@ public class Event {
         return title;
     }
 
-    public String getVenue() {
-        return venue;
+    public Date getDate() {
+        return date;
     }
 
-    private static EventDate parseDateTime(EventRecord eventRecord) {
-        return new EventDate(eventRecord.getDate(), eventRecord.getTime());
+    public String getDay() {
+        return date.getDay();
+    }
+
+    public String getTime() {
+        return date.getTime();
+    }
+
+    private static Date parseDateTime(EventRecord eventRecord) {
+        return new Date(eventRecord.getDate(), eventRecord.getTime());
     }
 
     public Set<Student> getAttendees() {
@@ -102,5 +110,17 @@ public class Event {
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 }
