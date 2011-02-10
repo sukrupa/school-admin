@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
+import org.sukrupa.util.Date;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class Event {
     @Column(name = "event_notes")
     private String notes;
 
-    @Type(type = "org.sukrupa.event.PersistentDate")
+    @Type(type = "org.sukrupa.util.PersistentDate")
     private Date date;
 
     @ManyToMany

@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import org.sukrupa.util.Date;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.Column;
@@ -23,19 +23,19 @@ public class Note {
     @Column(name = "MESSAGE")
     private String message;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+@Type(type = "org.sukrupa.util.PersistentDate")
     @Column(name = "NOTE_DATE")
-    private LocalDate date;
+    private Date date;
 
     @DoNotRemove
     Note() {
     }
 
     public Note(String message) {
-        this(message, new LocalDate());
+        this(message, Date.now());
     }
 
-    public Note(String message, LocalDate date) {
+    public Note(String message, Date date) {
         this.message = message;
         this.date = date;
     }

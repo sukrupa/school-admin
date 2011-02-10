@@ -1,4 +1,4 @@
-package org.sukrupa.event;
+package org.sukrupa.util;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
