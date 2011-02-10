@@ -52,6 +52,7 @@ body {
     width:700px;
     float:left;
     padding-bottom: 50px;
+    font: 120% verdana, arial, helvetica, sans-serif;
 }
 img{
     border: none;
@@ -71,11 +72,34 @@ div.box {
 
 }
 
-div.note{
-   float :left;
-   width: 300px;
-   resize: vertical;
-   height:50px;
+div.note {
+    float: left;
+    width: 300px;
+    resize: vertical;
+    height: 50px;
+}
+
+.spacer{margin: 15px 0 0 25px; }
+
+.page table td {
+    border: 1px #000000 solid;
+    padding: 4px;
+}
+
+.page table  {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header  {
+    font: 107% verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.disabled {
+    text-decoration: none;
+    color: black;
 }
 
 #studentInfo {
@@ -90,7 +114,7 @@ div.note{
 	padding-bottom:1em;
 }
 
-.talents {
+.talentsList {
 	padding-left: 3em;
 	float: left;
 }
@@ -116,7 +140,7 @@ div.note{
 }
 
 .label {
-	width: 125px;
+	width: 160px;
 	float:left;
 }
 

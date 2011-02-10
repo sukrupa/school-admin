@@ -5,7 +5,7 @@
 			<div id="basicInfo">
 				<div class="updateEntry">
 					<div class="label">Student ID</div>
-					<input type="text" name="studentId" value="$studentId$" readonly class="updateValue"></input>
+					<input type="text" name="studentId" id="studentId" value="$studentId$" readonly class="updateValue"></input>
 				</div>
 
 				<div class="updateEntry">
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 
-			<div class="talents">
+			<div class="talentsList">
 				<div class="talentsLabel">Talents</div>
 				<div class="talentsCheckBoxes">
 				$talents:{
@@ -98,7 +98,7 @@
 
 		<div id="update">
 			<input type="button" id="save" value="Save"/>
-			<input type="button" value="Cancel" onclick="history.go(-1);return false;" />
+			<input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';" />
 		</div>
 
 	</form>
