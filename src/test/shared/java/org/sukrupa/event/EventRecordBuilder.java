@@ -1,14 +1,10 @@
 package org.sukrupa.event;
 
-import com.google.common.base.Joiner;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.sukrupa.student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.sukrupa.event.EventRepository.ATTENDEES_SEPARATOR;
 
 public class EventRecordBuilder {
     private String title;
@@ -45,8 +41,8 @@ public class EventRecordBuilder {
         return this;
     }
 
-    public EventRecordBuilder attendees(String attendees) {
-        this.attendees = attendees;
+    public EventRecordBuilder attendees(String... studentIds) {
+        this.attendees = StringUtils.join(studentIds, ",");
         return this;
     }
 

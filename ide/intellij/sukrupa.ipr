@@ -104,6 +104,7 @@
         <option name="myLocal" value="false" />
         <inspection_tool class="AntResolveInspection" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
+        <inspection_tool class="JpaQlInspection" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
           <option name="processCode" value="true" />
           <option name="processLiterals" value="true" />
@@ -111,6 +112,7 @@
         </inspection_tool>
         <inspection_tool class="SpringContextConfigurationInspection" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="SpringJavaAutowiringInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="SpringMVCViewInspection" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="UNUSED_IMPORT" enabled="false" level="WARNING" enabled_by_default="false" />
       </profile>
     </profiles>

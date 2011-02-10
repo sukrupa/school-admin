@@ -2,27 +2,25 @@ package org.sukrupa.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
+import static java.lang.String.format;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
 @RequestMapping("/events")
 public class EventController {
     private static final String RECORD_EVENT_VIEW = "recordEvent";
-    private static final String EVENT_SAVE_VIEW = "eventSaved";
-    private EventRepository repository;
-    private static final String EVENT_MODEL = "events";
+    private final EventService service;
 
-    public EventController() {
-    }
 
     @Autowired
-    public EventController(EventRepository repository) {
-        this.repository = repository;
+    public EventController(EventService service) {
+        this.service = service;
     }
 
     @RequestMapping(value = "record")
@@ -33,26 +31,22 @@ public class EventController {
         model.put("time", eventRecord.getTime());
         model.put("coordinator", eventRecord.getCoordinator());
         model.put("notes", eventRecord.getNotes());
-        model.put("attendees", eventRecord.getAttendees());
+        model.put("attendees", eventRecord.getAttendeesForDisplay());
         model.put("venue", eventRecord.getVenue());
         model.put("errorMessage", eventRecord.getError());
         return RECORD_EVENT_VIEW;
     }
 
-    @RequestMapping(value = "save")
-    @Transactional
+    @RequestMapping(value = "save", method = POST)
     public String save(@ModelAttribute(value = "eventRecord") EventRecord eventRecord, Map<String, String> model) {
-        if (repository.save(eventRecord))
-            return EVENT_SAVE_VIEW;
-        else {
-            display(eventRecord, model);
-            return RECORD_EVENT_VIEW;
-        }
+        Event event = Event.from(eventRecord);
+        service.save(event, eventRecord.getStudentIdsOfAttendees());
+        return format("redirect:/events/%s", event.getId());
     }
 
     @RequestMapping(value = "/{eventId}")
     public String display(@PathVariable int eventId, Map<String, Event> model) {
-        model.put("event", repository.getEvent(eventId));
+        model.put("event", service.getEvent(eventId));
         return "events/show";
     }
 }

@@ -1,20 +1,17 @@
-package org.sukrupa.event;
+package org.sukrupa.app.event;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.sukrupa.student.Student;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ViewEventPage {
     private WebDriver driver;
 
-    public ViewEventPage(WebDriver driver, int eventId) {
+    public ViewEventPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get("http://localhost:8080/events/" + eventId);
     }
 
     public String getTitle() {
@@ -54,6 +51,6 @@ public class ViewEventPage {
     }
 
     private String textFor(String field) {
-        return driver.findElement(By.xpath("//*[@class='"+ field +"']")).getText();
+        return driver.findElement(By.xpath("//*[@class='" + field + "']")).getText();
     }
 }

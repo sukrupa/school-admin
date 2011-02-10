@@ -12,12 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Maps.newHashMap;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -31,7 +28,7 @@ public class StudentsControllerTest {
     private StudentsController controller;
 
     private Map<String, List<?>> studentsListModel = new HashMap<String, List<?>>();
-    private HashMap<String,Student> studentModel = new HashMap<String,Student>();
+    private HashMap<String, Student> studentModel = new HashMap<String, Student>();
     private Student sahil = new StudentBuilder().name("pat").studentClass("LKG").build();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
     private Student renaud = new StudentBuilder().name("renaud").studentClass("Nursery").build();
@@ -52,8 +49,8 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldRenderListIfNoSearchParameterInListView() throws Exception {
-       controller.searchResults(new StudentSearchParameter(), Maps.<String, List<?>>newHashMap());
-       Mockito.verify(repository, never()).parametricSearch((StudentSearchParameter) Matchers.anyObject());
+        controller.searchResults(new StudentSearchParameter(), Maps.<String, List<?>>newHashMap());
+        Mockito.verify(repository, never()).parametricSearch((StudentSearchParameter) Matchers.anyObject());
     }
 
 
@@ -81,21 +78,21 @@ public class StudentsControllerTest {
         return students;
     }
 
-    @Test 
+    @Test
     public void shouldPopulateModelWithAStudent() {
-        when(repository.find("123")).thenReturn(pat);
+        when(repository.load("123")).thenReturn(pat);
         controller.view("123", studentModel);
-        assertThat(studentModel.get("student"),is(pat));
+        assertThat(studentModel.get("student"), is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
-	    when(repository.find("123")).thenReturn(pat);
-        assertThat(controller.view("123", studentModel),is("students/view"));
+        when(repository.load("123")).thenReturn(pat);
+        assertThat(controller.view("123", studentModel), is("students/view"));
     }
 
     @Test
     public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", studentModel),is("students/viewFailed"));
+        assertThat(controller.view("0987ihuyi", studentModel), is("students/viewFailed"));
     }
 }

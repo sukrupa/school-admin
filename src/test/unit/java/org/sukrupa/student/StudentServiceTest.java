@@ -2,7 +2,6 @@ package org.sukrupa.student;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +39,7 @@ public class StudentServiceTest {
         String studentId = "42";
         Note note = new Note("Fish like plankton!");
 
-        when(repository.find(studentId)).thenReturn(new StudentBuilder().build());
+        when(repository.load(studentId)).thenReturn(new StudentBuilder().build());
 
         service.addNoteFor(studentId, note.getMessage());
 

@@ -2,6 +2,7 @@ package org.sukrupa.event;
 
 import org.joda.time.LocalDate;
 import org.junit.Test;
+import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 

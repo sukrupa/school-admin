@@ -1,10 +1,7 @@
 package org.sukrupa.student;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.internal.matchers.TypeSafeMatcher;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -12,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
-import org.sukrupa.app.students.ListOfStudentsPage;
-import org.sukrupa.app.students.StudentRow;
+import org.sukrupa.app.student.ListOfStudentsPage;
+import org.sukrupa.app.student.StudentRow;
 import org.sukrupa.platform.DatabaseHelper;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.sukrupa.platform.Matchers.matches;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -56,41 +53,5 @@ public class ViewListOfStudentsTest {
 
     public void save(Object... students) {
         databaseHelper.saveAndCommit(students);
-    }
-
-    private Matcher<StudentRow> matches(final Student student) {
-        return new TypeSafeMatcher<StudentRow>() {
-
-            private StudentRow studentRow;
-
-            public boolean matchesSafely(StudentRow studentRow) {
-                this.studentRow = studentRow;
-                return sameName() && sameStudentId() && sameGender() && sameAge() && sameTalents();
-            }
-
-            private boolean sameTalents() {
-                return student.getTalentsForDisplay().equals(studentRow.getTalents());
-            }
-
-            private boolean sameName() {
-                return student.getName().equals(studentRow.getName());
-            }
-
-            private boolean sameStudentId() {
-                return student.getStudentId().equals(studentRow.getStudentId());
-            }
-
-            private boolean sameGender() {
-                return student.getGender().equals(studentRow.getGender());
-            }
-
-            private boolean sameAge() {
-                return student.getAge() == studentRow.getAge();
-            }
-
-            public void describeTo(Description description) {
-                description.appendValue(student);
-            }
-        };
     }
 }

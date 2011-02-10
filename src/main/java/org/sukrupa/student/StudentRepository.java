@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Conjunction;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @Repository
 public class StudentRepository {
@@ -42,15 +45,20 @@ public class StudentRepository {
         return addOrderCriteria(criteria).list();
     }
 
-    public Student find(String studentId) {
+    public Student load(String studentId) {
         Criteria criteria = session()
                 .createCriteria(Student.class)
                 .add(Restrictions.eq(STUDENT_ID, studentId));
         return (Student) criteria.uniqueResult();
     }
 
-    public List<Student> parametricSearch(StudentSearchParameter searchParam) {
+    public Set<Student> load(String... studentIds) {
+        Query query = session().createQuery("from Student where studentId in (:studentIds)");
+        query.setParameterList("studentIds", studentIds);
+        return newHashSet(query.list());
+    }
 
+    public List<Student> parametricSearch(StudentSearchParameter searchParam) {
         Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
         if (!searchParam.getAgeFrom().isEmpty()) {
@@ -105,14 +113,14 @@ public class StudentRepository {
     }
 
     public Student update(UpdateStudentParameter studentParam) {
-        Student student = find(studentParam.getStudentId());
+        Student student = load(studentParam.getStudentId());
         if (student == null) {
             return null;
         }
         student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
 
         session().save(student);
-	    session().flush();
+        session().flush();
         return student;
     }
 

@@ -7,30 +7,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/students")
 public class StudentsController {
 
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
-	private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
-	private static final List<String> GENDERS = Arrays.asList("Male", "Female");
-	private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
-	private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
-	private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-	private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
+    private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> GENDERS = Arrays.asList("Male", "Female");
+    private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
+    private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
+    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
+    private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
 
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
-	static final String STUDENT_RECORD_UPDATED = "Student record updated";
-	private StudentRepository repository;
+    static final String STUDENT_RECORD_UPDATED = "Student record updated";
+    private StudentRepository repository;
 
-	private static final int AGES_TO = 20;
-	private static final int AGES_FROM = 2;
+    private static final int AGES_TO = 20;
+    private static final int AGES_FROM = 2;
 
 
-	@Autowired
+    @Autowired
     public StudentsController(StudentRepository repository) {
         this.repository = repository;
     }
@@ -46,7 +49,7 @@ public class StudentsController {
     public void searchResults(
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
             Map<String, List<?>> model) {
-        if(searchParam.isAllBlank()) {
+        if (searchParam.isAllBlank()) {
             list(model);
             return;
         }
@@ -56,7 +59,7 @@ public class StudentsController {
 
     private List<StudentListPage> paginateStudents(List<Student> students) {
         List<StudentListPage> pages = new ArrayList<StudentListPage>();
-        while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
+        while (students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE) {
             pages.add(new StudentListPage(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
             students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
         }
@@ -78,7 +81,7 @@ public class StudentsController {
 
     @RequestMapping(value = "update")
     public void update(@RequestParam String studentId, Map<String, Object> model) {
-        Student theStudent = repository.find(studentId);
+        Student theStudent = repository.load(studentId);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -88,7 +91,7 @@ public class StudentsController {
         model.put("name", theStudent.getName());
         model.put("dateOfBirth", theStudent.getDatofBirthForDisplay());
         model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
-        model.put("subcastes", createDropDownList(theStudent.getSubCaste(),SUBCASTES));
+        model.put("subcastes", createDropDownList(theStudent.getSubCaste(), SUBCASTES));
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
@@ -103,10 +106,10 @@ public class StudentsController {
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
-	        model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
+            model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
             return "students/view";
-        }else {
-            model.put("message","Error updating student");
+        } else {
+            model.put("message", "Error updating student");
             return "students/updateResults";
         }
     }
@@ -129,12 +132,12 @@ public class StudentsController {
 
     @RequestMapping(value = "{id}")
     public String view(@PathVariable String id, Map<String, Student> model) {
-	    Student student = repository.find(id);
-	    if (student != null) {
-			model.put("student", student);
-			return "students/view";
-	    }
-	    return "students/viewFailed";
+        Student student = repository.load(id);
+        if (student != null) {
+            model.put("student", student);
+            return "students/view";
+        }
+        return "students/viewFailed";
     }
 
     private List<String> getAges() {
