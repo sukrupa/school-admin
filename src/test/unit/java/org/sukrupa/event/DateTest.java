@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.junit.Test;
+import org.sukrupa.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

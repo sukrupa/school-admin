@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.util.Date;
 import org.sukrupa.platform.DatabaseHelper;
 
 import java.util.HashSet;
@@ -114,9 +115,9 @@ public class StudentRepositoryIntegrationTest {
 
     @Test
     public void shouldPopulateNotesInReverseChronologicalOrder() {
-        Note oldNote = new Note("yesterday", new LocalDate(2011, 11, 24));
-        Note oldestNote = new Note("long time ago", new LocalDate(2008, 3, 29));
-        Note newNote = new Note("today", new LocalDate(2011, 11, 25));
+        Note oldNote = new Note("yesterday", new Date(24, 11, 2011));
+        Note oldestNote = new Note("long time ago", new Date(29, 3, 2008));
+        Note newNote = new Note("today", new Date(25, 11, 2011));
 
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);

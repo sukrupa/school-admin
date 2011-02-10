@@ -1,9 +1,10 @@
-package org.sukrupa.event;
+package org.sukrupa.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 import org.jadira.usertype.dateandtime.joda.PersistentDateTime;
 import org.joda.time.DateTime;
+import org.sukrupa.util.Date;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;

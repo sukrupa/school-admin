@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.util.Date;
 
 @Service
 public class StudentService {
@@ -20,7 +21,7 @@ public class StudentService {
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
         Student student = repository.find(studentId);
-        student.addNote(new Note(noteMessage));
+        student.addNote(new Note(noteMessage, Date.now()));
         repository.saveOrUpdate(student);
 
     }
