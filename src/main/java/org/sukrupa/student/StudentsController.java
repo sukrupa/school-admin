@@ -38,7 +38,11 @@ public class StudentsController {
     public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
         List<Student> students = repository.parametricSearch(searchParam);
         model.put("page", new StudentListPage(students));
-        model.put("page_number", searchParam.getPage());
+        int page = searchParam.getPage();
+        model.put("previous_page", page-1);
+        model.put("enable_previous", page!=1);
+        model.put("page_number", page);
+        model.put("next_page", page+1);
         return "students/list";
     }
 
