@@ -69,14 +69,12 @@ div.box {
     width: 300px;
     line-height: 1.25em;
     margin-bottom:15px;
- /*   border-bottom: solid 1px;*/
 
 }
 
 div.note {
     float: left;
     width: 300px;
-    font-size: 14px;
     resize: vertical;
     height: 50px;
 }
@@ -116,7 +114,7 @@ div.note {
 	padding-bottom:1em;
 }
 
-#talents {
+.talentsList {
 	padding-left: 3em;
 	float: left;
 }
@@ -133,7 +131,7 @@ div.note {
 
 .entry {
 	clear: both;
-	padding-bottom:3em;
+	padding-bottom:2.5em;
 }
 
 .updateEntry {
@@ -142,7 +140,7 @@ div.note {
 }
 
 .label {
-	width: 125px;
+	width: 160px;
 	float:left;
 }
 
@@ -158,6 +156,7 @@ div.note {
 
 #update {
 	clear:both;
+	margin-top: 50px;
 }
 
 .notes {

@@ -21,14 +21,6 @@ public class ViewStudentPage {
         return nameElement.getText();
     }
 
-    public void addNote(String message) {
-        WebElement textArea = driver.findElement(By.xpath("//textarea[@name='new-note']"));
-        textArea.sendKeys(message);
-
-        WebElement addButton = driver.findElement(By.xpath("//input[@class='add-note']"));
-        addButton.submit();
-    }
-
     public List<String> getNotes() {
         List<WebElement> elements = driver.findElements(By.xpath("//div[@class='note']"));
         List<String> notes = new ArrayList<String>();

@@ -23,6 +23,6 @@ public class NoteController {
     @RequestMapping(method = POST)
     public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote) {
         service.addNoteFor(studentId, newNote);
-        return format("redirect:/students/%s", studentId);
+        return format("redirect:/students/update?studentId=%s", studentId);
     }
 }
