@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'roo'
 require 'student'
+require 'talent'
 
 
 
@@ -25,7 +26,7 @@ class WorksheetParser
     @student_class = worksheet.default_sheet.strip()
     @this_sheets_column_heading_row = self.calculate_column_heading_row
     @this_sheets_starting_corner = @this_sheets_column_heading_row + 1
-    @students_array = []
+    @students_and_talents_array = []
     @column_headings = self.create_column_heading_hash_map
   end
   
@@ -73,12 +74,7 @@ class WorksheetParser
        gender = read_cell_value(row_number,GENDER_HEADING)
        
        talents_string = read_cell_value(row_number,TALENT_HEADING)
-       if (!talents_string.nil?)
-         talents = talents_string.split(",")
-         talents.map do |talent|
-           talent.strip
-         end
-       end
+       talents = Talent.new(talents_string)
        
        
        
@@ -97,11 +93,11 @@ class WorksheetParser
            :student_class => @student_class
          }
          student = Student.new(student_data)
-         @students_array += [student]
+         @students_and_talents_array << [student, talents]
        end
        
 	   end
-	   @students_array
+	   @students_and_talents_array
 	end
 	
 

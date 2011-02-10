@@ -16,8 +16,8 @@ public class ViewStudentPage {
     }
 
     public String getStudentName() {
-        List<WebElement> elements = driver.findElements(By.xpath("//span[@class='name']"));
-        WebElement nameElement = elements.get(0);
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='value']"));
+        WebElement nameElement = elements.get(1);
         return nameElement.getText();
     }
 
