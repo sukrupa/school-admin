@@ -90,7 +90,7 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
-        model.put("note_message",noteUpdateStatus);
+        model.put("note_message", noteUpdateStatus);
 
         return "students/edit";
     }
