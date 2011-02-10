@@ -28,8 +28,9 @@ public class StudentRepository {
     private static final String STUDENT_ID = "studentId";
     private static final String TALENTS = "talents";
     private static final String DESCRIPTION = "description";
-    private final SessionFactory sessionFactory;
     private static final String RELIGION = "religion";
+
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
@@ -40,6 +41,12 @@ public class StudentRepository {
     public List<Student> findAll() {
         Criteria criteria = session().createCriteria(Student.class);
         return addOrderCriteria(criteria).list();
+    }
+    public StudentListPage findAllPage(int pageNumber, int studentsPerPage) {
+        Criteria criteria = session().createCriteria(Student.class);
+        criteria.setFirstResult((pageNumber-1)*studentsPerPage);
+        criteria.setMaxResults(studentsPerPage);
+        return new StudentListPage(addOrderCriteria(criteria).list());
     }
 
     public Student find(String studentId) {

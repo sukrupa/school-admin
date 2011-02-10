@@ -85,6 +85,24 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void shouldRetrieveFirstPageOfStudentsFromDatabase() {
+        databaseHelper.save(pat, renaud);
+        StudentListPage page = repository.findAllPage(1,1);
+
+        assertThat(page.getStudents().size(), is(1));
+        assertThat(page.getStudents(), hasItems(renaud));
+    }
+
+    @Test
+    public void shouldRetrieveSecondPageOfStudentsFromDatabase() {
+        databaseHelper.save(pat, renaud);
+        StudentListPage page = repository.findAllPage(2,1);
+
+        assertThat(page.getStudents().size(), is(1));
+        assertThat(page.getStudents(), hasItems(pat));
+    }
+
+    @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
