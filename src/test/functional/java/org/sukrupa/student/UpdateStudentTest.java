@@ -40,7 +40,7 @@ public class UpdateStudentTest {
         databaseHelper.saveAndCommit(shefali);
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
-        //work in progress shefali , pavithra
+        //work in progress minno , pavithra
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
 
 
