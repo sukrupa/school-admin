@@ -5,16 +5,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
@@ -31,19 +27,21 @@ public class StudentRepository {
     private static final String STUDENT_ID = "studentId";
     private static final String TALENTS = "talents";
     private static final String DESCRIPTION = "description";
-    private final SessionFactory sessionFactory;
     private static final String RELIGION = "religion";
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Student> findAll() {
-        Criteria criteria = session().createCriteria(Student.class);
-        return addOrderCriteria(criteria).list();
-    }
+//    @SuppressWarnings("unchecked")
+//    public List<Student> findAll() {
+//        Criteria criteria = session().createCriteria(Student.class);
+//        return addOrderCriteria(criteria).list();
+//    }
 
     public Student load(String studentId) {
         Criteria criteria = session()
@@ -58,18 +56,33 @@ public class StudentRepository {
         return newHashSet(query.list());
     }
 
-    public List<Student> parametricSearch(StudentSearchParameter searchParam) {
+    public StudentListPage parametricSearch(StudentSearchParameter searchParam) {
+        Criteria countCriteria = generateSearchCriteria(searchParam);
+
+        int firstIndex = (searchParam.getPage() - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+
+        int totalNumberOfResults = ((Number) countCriteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+        int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
+
+        Criteria getPageCriteria = addOrderCriteria(generateSearchCriteria(searchParam));
+        getPageCriteria.setFirstResult(firstIndex);
+        getPageCriteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+
+
+        return new StudentListPage(getPageCriteria.list(), searchParam.getPage(), totalNumberOfPages);
+    }
+
+    private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
         Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
         if (!searchParam.getAgeFrom().isEmpty()) {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
         }
 
-        Criteria criteria = addOrderCriteria(session().createCriteria(Student.class));
+        Criteria criteria = session().createCriteria(Student.class);
         criteria.add(conjunction);
         addTalentsSearchCriteria(criteria, searchParam.getTalent());
-
-        return criteria.list();
+        return criteria;
     }
 
     private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {

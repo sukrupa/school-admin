@@ -16,7 +16,6 @@ import java.util.Map;
 @RequestMapping("/students")
 public class StudentsController {
 
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
     private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
@@ -26,7 +25,7 @@ public class StudentsController {
 
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
-    static final String STUDENT_RECORD_UPDATED = "Student record updated";
+    static final String STUDENT_RECORD_UPDATED = "Student record updated successfully.";
     private StudentRepository repository;
 
     private static final int AGES_TO = 20;
@@ -39,32 +38,10 @@ public class StudentsController {
     }
 
     @RequestMapping()
-    public String list(Map<String, List<?>> model) {
-        List<Student> students = repository.findAll();
-        model.put("pages", paginateStudents(students));
+    public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
+        StudentListPage students = repository.parametricSearch(searchParam);
+        model.put("page", students);
         return "students/list";
-    }
-
-    @RequestMapping(value = "list")
-    public void searchResults(
-            @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-            Map<String, List<?>> model) {
-        if (searchParam.isAllBlank()) {
-            list(model);
-            return;
-        }
-        List<Student> students = repository.parametricSearch(searchParam);
-        model.put("pages", paginateStudents(students));
-    }
-
-    private List<StudentListPage> paginateStudents(List<Student> students) {
-        List<StudentListPage> pages = new ArrayList<StudentListPage>();
-        while (students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE) {
-            pages.add(new StudentListPage(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
-            students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
-        }
-        pages.add(new StudentListPage(students));
-        return pages;
     }
 
     @RequestMapping(value = "search")
@@ -80,7 +57,7 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "update")
-    public void update(@RequestParam String studentId, Map<String, Object> model) {
+    public void update(@RequestParam String studentId, @RequestParam(required = false, defaultValue = "") String noteUpdateStatus, Map<String, Object> model) {
         Student theStudent = repository.load(studentId);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
@@ -95,6 +72,7 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+        model.put("note_message", noteUpdateStatus);
     }
 
     @RequestMapping(value = "updateResults")

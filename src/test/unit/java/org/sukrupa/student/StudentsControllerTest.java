@@ -1,33 +1,30 @@
 package org.sukrupa.student;
 
-import com.google.common.collect.Maps;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.student.StudentsController.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+import static org.sukrupa.student.StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
 public class StudentsControllerTest {
+
 
     @Mock
     private StudentRepository repository;
 
     private StudentsController controller;
 
-    private Map<String, List<?>> studentsListModel = new HashMap<String, List<?>>();
+    private Map<String, Object> studentsListModel = new HashMap<String, Object>();
     private HashMap<String, Student> studentModel = new HashMap<String, Student>();
     private Student sahil = new StudentBuilder().name("pat").studentClass("LKG").build();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
@@ -40,34 +37,23 @@ public class StudentsControllerTest {
     }
 
     @Test
-    public void shouldPopulateModelWithPageOfStudents() {
-        when(repository.findAll()).thenReturn(asList(sahil, pat));
-        controller.list(studentsListModel);
-        List<StudentListPage> pages = (List<StudentListPage>) studentsListModel.get("pages");
-        assertThat(pages.get(0), is(new StudentListPage(asList(sahil, pat))));
-    }
-
-    @Test
-    public void shouldRenderListIfNoSearchParameterInListView() throws Exception {
-        controller.searchResults(new StudentSearchParameter(), Maps.<String, List<?>>newHashMap());
-        Mockito.verify(repository, never()).parametricSearch((StudentSearchParameter) Matchers.anyObject());
-    }
-
-
-    @Test
-    public void shouldDisplayOnePage() {
-        List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        when(repository.findAll()).thenReturn(students);
-        assertThat(controller.list(studentsListModel), is("students/list"));
-        assertThat(studentsListModel.get("pages").size(), is(1));
-    }
-
-    @Test
-    public void shouldDisplayTwoPages() {
+    public void shouldDisplayFirstPage() {
         List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        when(repository.findAll()).thenReturn(students);
-        assertThat(controller.list(studentsListModel), is("students/list"));
-        assertThat(studentsListModel.get("pages").size(), is(2));
+        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(new StudentListPage(students.subList(0, 5), 1, 2));
+        controller.list(new StudentSearchParameterBuilder().page(1).build(), studentsListModel);
+        StudentListPage page = (StudentListPage) studentsListModel.get("page");
+        assertThat(page.getPageNumber(), is(1));
+        assertThat(page.getStudents().size(), is(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
+    }
+
+    @Test
+    public void shouldDisplaySecondPage() {
+        List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
+        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(new StudentListPage(students.subList(5, 6), 2, 2));
+        controller.list(new StudentSearchParameterBuilder().page(2).build(), studentsListModel);
+        StudentListPage page = (StudentListPage) studentsListModel.get("page");
+        assertThat(page.getPageNumber(), is(2));
+        assertThat(page.getStudents().size(), is(1));
     }
 
     private List<Student> createListOfStudents(int size) {

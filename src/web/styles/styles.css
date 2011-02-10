@@ -1,12 +1,13 @@
 body {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     font: 11px 'Century Gothic', verdana, arial, helvetica, sans-serif;
 }
+
 .indent {
-    margin-left:10px;
-    margin-top:0px;
-    margin-bottom:0px;
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .fakelink {
@@ -14,7 +15,7 @@ body {
 }
 
 #page {
-    width:950px;
+    width: 950px;
     margin-left: auto;
     margin-right: auto;
     border: 5px #0065a5 solid;
@@ -22,130 +23,192 @@ body {
 }
 
 #header {
-    width:950px;
-    height:115px;
+    width: 950px;
+    height: 115px;
     background-color: #0065a5;
 }
 
-.pageheader{
+.pageheader {
     color: #ffffff;
     vertical-align: text-top;
     font: 28pt Palatino, serif;
 }
 
-#sidebar{
-    width:210px;
+#sidebar {
+    width: 210px;
     margin-right: 20px;
     padding-left: 10px;
-    float:left;
+    float: left;
     background: transparent;
     color: #ffffff;
     font: 16px Palatino, serif;
 }
+
 #sidebar a {
     color: #ffffff;
 }
+
 #sidebar a:visited {
     color: #ffdddd;
 }
-#body{
-    width:700px;
-    float:left;
+
+#body {
+    width: 700px;
+    float: left;
     padding-bottom: 50px;
+    font: 120% verdana, arial, helvetica, sans-serif;
 }
-img{
+
+img {
     border: none;
 }
-#columns{
+
+#columns {
     background: url("/images/columns-background.png") repeat-y;
     min-height: 70%;
-    padding-top:25px;
+    padding-top: 25px;
 }
-.clear { clear: both; }
+
+.clear {
+    clear: both;
+}
 
 div.box {
     float: left;
     width: 300px;
     line-height: 1.25em;
-    margin-bottom:15px;
- /*   border-bottom: solid 1px;*/
+    margin-bottom: 15px;
 
 }
 
-div.note{
-   float :left;
-   width: 300px;
-   font-size: 14px;
+div.note {
+    float: left;
+    width: 300px;
     resize: vertical;
-   height:50px;
+    height: 50px;
+}
+
+.spacer {
+    margin: 15px 0 0 25px;
+}
+
+.page table td {
+    border: 1px #000000 solid;
+    padding: 4px;
+}
+
+.page table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    font: 107% verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.disabled {
+    text-decoration: none;
+    color: black;
 }
 
 #studentInfo {
-	width:700px;
+    width: 700px;
+    margin-top: 20px;
 }
 
 .talentsLabel, .label {
-	font-weight:bold;
+    font-weight: bold;
 }
 
 .talentsLabel {
-	padding-bottom:1em;
+    padding-bottom: 1em;
 }
 
-.talents {
-	padding-left: 3em;
-	float: left;
+.talentsList {
+    padding-left: 3em;
+    float: left;
 }
 
 .talentsCheckBoxes {
-	border: solid;
-	padding: 1em;
-	border-width:1px;
+    border: solid;
+    padding: 1em;
+    border-width: 1px;
 }
 
 #basicInfo {
-	float:left;
+    float: left;
 }
 
 .entry {
-	clear: both;
-	padding-bottom:3em;
+    clear: both;
+    padding-bottom: 2.5em;
 }
 
 .updateEntry {
-	clear: both;
-	padding-bottom:3em;
+    clear: both;
+    padding-bottom: 3em;
 }
 
 .label {
-	width: 125px;
-	float:left;
+    width: 160px;
+    float: left;
 }
 
-.value{
-	float:left;
-	width:200px;
+.value {
+    float: left;
+    width: 200px;
 }
 
-.updateValue{
-	float:left;
-	width:150px;
+.updateValue {
+    float: left;
+    width: 150px;
 }
 
 #update {
-	clear:both;
+    clear: both;
+    margin-top: 50px;
 }
 
 .notes {
-	clear:both;
+    clear: both;
 }
 
 .errorMessages {
-	color: red;
-    font-weight:bold;
+    color: red;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
 }
 
-.mandatory{
+#dateErrorMessage {
     color: red;
-    font-weight:bold;
+}
+
+.mandatory {
+    color: red;
+    font-weight: bold;
+}
+
+#successDiv {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 40px;
+    background-color: #99CC66;
+}
+
+#confirmMessage {
+    font-weight: bold;
+    padding: 10px 0px 0px 10px;
+    color: #003300;
+}
+
+#successImage {
+    float: left;
+    padding-top: 7px;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
 }

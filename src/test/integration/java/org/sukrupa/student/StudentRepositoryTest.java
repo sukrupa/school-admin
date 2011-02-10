@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.platform.DatabaseHelper;
+import org.sukrupa.platform.date.Date;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,6 +36,7 @@ public class StudentRepositoryTest {
     static final String MUSIC = "Music";
     static final String SPORT = "Sport";
     static final String COOKING = "Cooking";
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -54,6 +56,7 @@ public class StudentRepositoryTest {
     private Student pat = new StudentBuilder().studentId("3").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
             .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
             .father("Renaud").mother("Nice Lady").build();
+    private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
     @BeforeClass
     public static void classSetUp() {
@@ -86,17 +89,24 @@ public class StudentRepositoryTest {
     @Test
     public void shouldFindAllStudentsInDatabase() {
         databaseHelper.save(pat, renaud);
-        List<Student> students = repository.findAll();
+        List<Student> students = repository.parametricSearch(all).getStudents();
 
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(pat, renaud));
     }
 
     @Test
+    public void shouldReturnPageNumberOne() {
+        databaseHelper.save(pat, renaud, sahil);
+        StudentListPage page = repository.parametricSearch(all);
+        assertThat(page.getPageNumber(), is(1));
+    }
+
+    @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build()).getStudents();
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(renaud, sahil));
     }
@@ -104,7 +114,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
         databaseHelper.save(sahil, pat, renaud);
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build()).getStudents();
         assertThat(students.size(), is(1));
         assertThat(students, hasItems(renaud));
     }
@@ -112,19 +122,19 @@ public class StudentRepositoryTest {
     @Test
     public void shouldPopulateTalents() {
         databaseHelper.save(sahil);
-        assertThat(repository.findAll().get(0).getTalents(), hasItems(music, sport));
+        assertThat(repository.parametricSearch(all).getStudents().get(0).getTalents(), hasItems(music, sport));
     }
 
     @Test
     public void shouldPopulateNotesInReverseChronologicalOrder() {
-        Note oldNote = new Note("yesterday", new LocalDate(2011, 11, 24));
-        Note oldestNote = new Note("long time ago", new LocalDate(2008, 3, 29));
-        Note newNote = new Note("today", new LocalDate(2011, 11, 25));
+        Note oldNote = new Note("yesterday", new Date(24, 11, 2011));
+        Note oldestNote = new Note("long time ago", new Date(29, 3, 2008));
+        Note newNote = new Note("today", new Date(25, 11, 2011));
 
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
 
-        Iterator<Note> notes = repository.findAll().get(0).getNotes().iterator();
+        Iterator<Note> notes = repository.parametricSearch(all).getStudents().get(0).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
@@ -149,7 +159,7 @@ public class StudentRepositoryTest {
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
-        Student s = repository.findAll().get(0);
+        Student s = repository.parametricSearch(all).getStudents().get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")

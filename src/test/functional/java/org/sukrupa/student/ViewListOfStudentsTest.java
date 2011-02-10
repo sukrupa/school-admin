@@ -16,6 +16,7 @@ import org.sukrupa.platform.DatabaseHelper;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.sukrupa.platform.Matchers.matches;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,6 +47,7 @@ public class ViewListOfStudentsTest {
 
         List<StudentRow> students = new ListOfStudentsPage(driver).getStudents();
 
+        assertThat(students, hasSize(3));
         assertThat(students.get(0), matches(rebecca));
         assertThat(students.get(1), matches(alex));
         assertThat(students.get(2), matches(bob));
