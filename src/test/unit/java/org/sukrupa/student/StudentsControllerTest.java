@@ -44,19 +44,21 @@ public class StudentsControllerTest {
     @Test
     public void shouldDisplayFirstPage() {
         List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(students.subList(0, 5));
+        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(new StudentListPage(students.subList(0, 5), 1));
         controller.list(new StudentSearchParameterBuilder().page(1).build(), studentsListModel);
-        assertThat((Integer) studentsListModel.get("page_number"), is(1));
-        assertThat(((StudentListPage) studentsListModel.get("page")).getStudents().size(), is(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
+        StudentListPage page = (StudentListPage) studentsListModel.get("page");
+        assertThat(page.getPageNumber(), is(1));
+        assertThat(page.getStudents().size(), is(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
     }
 
     @Test
     public void shouldDisplaySecondPage() {
         List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(students.subList(5, 6));
+        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(new StudentListPage(students.subList(5, 6),2));
         controller.list(new StudentSearchParameterBuilder().page(2).build(), studentsListModel);
-        assertThat((Integer)studentsListModel.get("page_number"), is(2));
-        assertThat(((StudentListPage)studentsListModel.get("page")).getStudents().size(), is(1));
+        StudentListPage page = (StudentListPage) studentsListModel.get("page");
+        assertThat(page.getPageNumber(), is(2));
+        assertThat(page.getStudents().size(), is(1));
     }
 
     private List<Student> createListOfStudents(int size) {

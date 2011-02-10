@@ -45,13 +45,13 @@ public class StudentRepository {
         return (Student) criteria.uniqueResult();
     }
 
-    public List<Student> parametricSearch(StudentSearchParameter searchParam) {
+    public StudentListPage parametricSearch(StudentSearchParameter searchParam) {
         Criteria criteria = generateSearchCriteria(searchParam);
 
         int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
         criteria.setFirstResult(firstIndex);
         criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        return criteria.list();
+        return new StudentListPage(criteria.list(),searchParam.getPage());
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {

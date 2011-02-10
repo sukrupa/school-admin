@@ -3,8 +3,6 @@ package org.sukrupa.student;
 import com.google.common.collect.Sets;
 import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,6 +55,7 @@ public class StudentRepositoryIntegrationTest {
     private Student pat = new StudentBuilder().studentId("001").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
             .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
             .father("Renaud").mother("Nice Lady").build();
+    private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
     @BeforeClass
     public static void classSetUp() {
@@ -78,17 +77,24 @@ public class StudentRepositoryIntegrationTest {
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
         databaseHelper.save(pat, renaud);
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().build());
+        List<Student> students = repository.parametricSearch(all).getStudents();
 
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(pat, renaud));
     }
 
     @Test
+    public void shouldReturnPageNumberOne() {
+        databaseHelper.save(pat, renaud, sahil);
+        StudentListPage page = repository.parametricSearch(all);
+        assertThat(page.getPageNumber(), is(1));
+    }
+
+    @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build()).getStudents();
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(renaud, sahil));
     }
@@ -96,7 +102,7 @@ public class StudentRepositoryIntegrationTest {
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
         databaseHelper.save(sahil, pat, renaud);
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build()).getStudents();
         assertThat(students.size(), is(1));
         assertThat(students, hasItems(renaud));
     }
@@ -104,7 +110,7 @@ public class StudentRepositoryIntegrationTest {
     @Test
     public void shouldPopulateTalents() {
         databaseHelper.save(sahil);
-        assertThat(repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0).getTalents(), hasItems(music, sport));
+        assertThat(repository.parametricSearch(all).getStudents().get(0).getTalents(), hasItems(music, sport));
     }
 
     @Test
@@ -116,7 +122,7 @@ public class StudentRepositoryIntegrationTest {
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
 
-        Iterator<Note> notes = repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0).getNotes().iterator();
+        Iterator<Note> notes = repository.parametricSearch(all).getStudents().get(0).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
@@ -147,7 +153,7 @@ public class StudentRepositoryIntegrationTest {
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
-        Student s = repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0);
+        Student s = repository.parametricSearch(all).getStudents().get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")

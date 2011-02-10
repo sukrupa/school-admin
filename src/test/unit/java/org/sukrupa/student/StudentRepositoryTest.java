@@ -37,14 +37,14 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldRetrieveFirstPageOfStudentsFromDatabase() {
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().page(1).build());
+        repository.parametricSearch(new StudentSearchParameterBuilder().page(1).build());
         Mockito.verify(criteria).setFirstResult(0);
         Mockito.verify(criteria).setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
     public void shouldRetrieveSecondPageOfStudentsFromDatabase() {
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().page(2).build());
+        repository.parametricSearch(new StudentSearchParameterBuilder().page(2).build());
         Mockito.verify(criteria).setFirstResult(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
         Mockito.verify(criteria).setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
