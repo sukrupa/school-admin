@@ -96,7 +96,7 @@ public class EventRecord {
             return "";
         else{
             for(String each : invalidIDs)
-                error += each + ", ";
+                error += each + "  ";
             return error;
         }
     }

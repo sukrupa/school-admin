@@ -14,14 +14,6 @@ import java.util.*;
 public class StudentsController {
 
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
-    private static final String STUDENTS_MODEL = "students";
-    private static final String STUDENTS_VIEW = "studentList";
-    private static final String SEARCH_VIEW = "studentSearch";
-    private static final String UPDATE_VIEW = "studentUpdate";
-    private static final String UPDATE_RESULTS_VIEW = "studentView";
-    private static final String UPDATE_RESULTS_FAILED = "studentUpdateResults";
-	private static final String STUDENT_VIEW = "studentView";
-	private static final String STUDENT_VIEW_FAILED = "studentViewFailed";
 	private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
 	private static final List<String> GENDERS = Arrays.asList("Male", "Female");
 	private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
@@ -34,7 +26,6 @@ public class StudentsController {
 	static final String STUDENT_RECORD_UPDATED = "Student record updated";
 	private StudentRepository repository;
 
-    private static final String ANY = "Any";
 	private static final int AGES_TO = 20;
 	private static final int AGES_FROM = 2;
 
@@ -45,19 +36,22 @@ public class StudentsController {
     }
 
     @RequestMapping()
-    public String all(Map<String, List<?>> model) {
+    public String list(Map<String, List<?>> model) {
         List<Student> students = repository.findAll();
         model.put("pages", paginateStudents(students));
-        return STUDENTS_VIEW;
+        return "students/list";
     }
 
-    @RequestMapping(value = "searchResult")
-    public String parametricSearchResult(
+    @RequestMapping(value = "list")
+    public void searchResults(
             @ModelAttribute("searchParam") StudentSearchParameter searchParam,
             Map<String, List<?>> model) {
+        if(searchParam.isAllBlank()) {
+            list(model);
+            return;
+        }
         List<Student> students = repository.parametricSearch(searchParam);
         model.put("pages", paginateStudents(students));
-        return STUDENTS_VIEW;
     }
 
     private List<StudentListPage> paginateStudents(List<Student> students) {
@@ -71,7 +65,7 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "search")
-    public String parametricSearch(Map<String, Object> model) {
+    public void search(Map<String, Object> model) {
         model.put("classes", STUDENT_CLASSES);
         model.put("genders", GENDERS);
         model.put("castes", CASTES);
@@ -80,11 +74,10 @@ public class StudentsController {
         model.put("agesFrom", getAges());
         model.put("agesTo", getAges());
         model.put("talents", TALENTS);
-        return SEARCH_VIEW;
     }
 
     @RequestMapping(value = "update")
-    public String updateStudent(@RequestParam String studentId, Map<String, Object> model) {
+    public void update(@RequestParam String studentId, Map<String, Object> model) {
         Student theStudent = repository.find(studentId);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
@@ -99,7 +92,6 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
-        return UPDATE_VIEW;
     }
 
     @RequestMapping(value = "updateResults")
@@ -107,19 +99,16 @@ public class StudentsController {
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
 
-	    System.out.println(studentParam.getDateOfBirth());
-
         Student updatedStudent = repository.update(studentParam);
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
 	        model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
-            return UPDATE_RESULTS_VIEW;
+            return "students/view";
         }else {
             model.put("message","Error updating student");
-            return UPDATE_RESULTS_FAILED;
+            return "students/updateResults";
         }
-
     }
 
     private List<DropDownElement> createDropDownList(String selected, List<String> options) {
@@ -139,13 +128,13 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "{id}")
-    public String viewStudent(@PathVariable String id, Map<String, Student> model) {
+    public String view(@PathVariable String id, Map<String, Student> model) {
 	    Student student = repository.find(id);
 	    if (student != null) {
 			model.put("student", student);
-			return STUDENT_VIEW;
+			return "students/view";
 	    }
-	    return STUDENT_VIEW_FAILED;
+	    return "students/viewFailed";
     }
 
     private List<String> getAges() {

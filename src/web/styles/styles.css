@@ -52,7 +52,6 @@ body {
     width:700px;
     float:left;
     padding-bottom: 50px;
-    font: 120% verdana, arial, helvetica, sans-serif;
 }
 img{
     border: none;
@@ -64,27 +63,6 @@ img{
 }
 .clear { clear: both; }
 
-.page table td {
-    border: 1px #000000 solid;
-    padding: 4px;
-}
-
-.page table  {
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.header  {
-    font: 107% verdana, arial, helvetica, sans-serif;
-    font-weight: bold;
-}
-
-.disabled {
-    text-decoration: none;
-    color: black;
-}
-
 div.box {
     float: left;
     width: 300px;
@@ -93,6 +71,32 @@ div.box {
  /*   border-bottom: solid 1px;*/
 
 }
+
+div.note{
+   float :left;
+   width: 300px;
+   font-size: 14px;
+    resize: vertical;
+   height:50px;
+}
+
+#studentInfo {
+	width:700px;
+}
+
+.talentsLabel, .label {
+	font-weight:bold;
+}
+
+.talentsLabel {
+	padding-bottom:1em;
+}
+
+.talents {
+	padding-left: 3em;
+	float: left;
+}
+
    div.note{
    float :left;
    width: 300px;
@@ -102,3 +106,56 @@ div.box {
    resize:vertical;
    overflow:auto; }
 
+
+.talentsCheckBoxes {
+	border: solid;
+	padding: 1em;
+	border-width:1px;
+}
+
+#basicInfo {
+	float:left;
+}
+
+.entry {
+	clear: both;
+	padding-bottom:3em;
+}
+
+.updateEntry {
+	clear: both;
+	padding-bottom:3em;
+}
+
+.label {
+	width: 125px;
+	float:left;
+}
+
+.value{
+	float:left;
+	width:200px;
+}
+
+.updateValue{
+	float:left;
+	width:150px;
+}
+
+#update {
+	clear:both;
+}
+
+.notes {
+	clear:both;
+}
+
+.errorMessages {
+	color: red;
+    font-weight:bold;
+}
+
+.mandatory{
+    color: red;
+    font-weight:bold;
+}
