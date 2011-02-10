@@ -15,7 +15,8 @@ $(document).ready(function (){
 		var dummyTimeStr = "01:01";
         if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
         	$('#dateErrorMessage').html("Invalid date.  Format: dd/mm/yyyy");
-
+        } else if ($('#name').val() === "") {
+            $('#errorMessages').html("Please enter a valid name");
         } else {
         	$('#updateStudent').submit();
         }

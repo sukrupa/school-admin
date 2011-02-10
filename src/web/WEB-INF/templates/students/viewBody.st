@@ -1,5 +1,6 @@
 <div id="student">
-	<div>$studentUpdatedSuccesfullyMessage$</div>
+	<div id ="confirmMessage">$studentUpdatedSuccesfullyMessage$</div>
+
 	<div id="studentInfo">
 		<div id="basicInfo">
 			<div class="entry">

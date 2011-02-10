@@ -10,7 +10,7 @@
 
 				<div class="updateEntry">
 					<div class="label">Name</div>
-					<input type="text" name="name" value="$name$" class="updateValue"></input>
+					<input type="text" id ="name" name="name" value="$name$" class="updateValue"></input>
 				</div>
 
 				<div class="updateEntry">
@@ -100,6 +100,7 @@
 			<input type="button" id="save" value="Save"/>
 			<input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';" />
 		</div>
+		<div id="errorMessages" class="errorMessages"></div>
 
 	</form>
 </div>
