@@ -119,6 +119,16 @@ div.note {
 	float: left;
 }
 
+   div.note{
+   float :left;
+   width: 300px;
+   font-size: 14px;
+    resize: vertical;
+   height:50px;
+   resize:vertical;
+   overflow:auto; }
+
+
 .talentsCheckBoxes {
 	border: solid;
 	padding: 1em;

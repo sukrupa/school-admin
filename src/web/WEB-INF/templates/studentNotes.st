@@ -1,7 +1,8 @@
 <div class="notes">
-    <form action="/students/$student.studentId$/notes" method="post">
-        <textarea name="new-note" rows="3" cols="80"></textarea>
+    <form action="/students/$studentId$/notes" method="post">
+        <textarea name="new-note" rows="3" cols="80"></textarea>  <br/><br/>
         <input type="submit" class="add-note" value="Add a Note"/>
+        <input type="button" class="add-note" value="Cancel"/>
         <div class="box">
         $student.notes:{
         <div class ="note">
