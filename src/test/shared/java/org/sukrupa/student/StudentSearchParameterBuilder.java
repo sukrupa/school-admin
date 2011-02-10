@@ -10,8 +10,9 @@ public class StudentSearchParameterBuilder {
 	private String ageTo = "";
 	private String talent = "";
 	private String religion = "";
+    private int page = 1;
 
-	public StudentSearchParameterBuilder studentClass(String studentClass) {
+    public StudentSearchParameterBuilder studentClass(String studentClass) {
 		this.studentClass = studentClass;
 		return this;
 	}
@@ -61,7 +62,11 @@ public class StudentSearchParameterBuilder {
 	}
 
 	public StudentSearchParameter build(){
-		return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talent, religion);
+		return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talent, religion, page);
 	}
 
+    public StudentSearchParameterBuilder page(int page) {
+        this.page = page;
+        return this;
+    }
 }

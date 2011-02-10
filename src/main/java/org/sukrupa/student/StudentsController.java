@@ -13,8 +13,7 @@ import java.util.*;
 @RequestMapping("/students")
 public class StudentsController {
 
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
-	private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
 	private static final List<String> GENDERS = Arrays.asList("Male", "Female");
 	private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
 	private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
@@ -36,29 +35,18 @@ public class StudentsController {
     }
 
     @RequestMapping()
-    public String list(Map<String, List<?>> model) {
-        List<Student> students = repository.findAll();
-        model.put("pages", paginateStudents(students));
-        return "students/list";
-    }
-
-    @RequestMapping(value = "list")
-    public void searchResults(
-            @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-            Map<String, List<?>> model) {
-        if(searchParam.isAllBlank()) {
-            list(model);
-            return;
-        }
+    public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
         List<Student> students = repository.parametricSearch(searchParam);
-        model.put("pages", paginateStudents(students));
+        model.put("page", new StudentListPage(students));
+        model.put("page_number", searchParam.getPage());
+        return "students/list";
     }
 
     private List<StudentListPage> paginateStudents(List<Student> students) {
         List<StudentListPage> pages = new ArrayList<StudentListPage>();
-        while(students.size() > NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
-            pages.add(new StudentListPage(students.subList(0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
-            students = students.subList(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
+        while(students.size() > StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
+            pages.add(new StudentListPage(students.subList(0, StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
+            students = students.subList(StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
         }
         pages.add(new StudentListPage(students));
         return pages;

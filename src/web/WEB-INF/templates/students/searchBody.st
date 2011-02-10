@@ -1,4 +1,4 @@
-<form name="searchParam" action="list" method="get">
+<form name="searchParam" action="." method="get">
 	<table>
 
 
