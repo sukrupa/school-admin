@@ -69,14 +69,12 @@ div.box {
     width: 300px;
     line-height: 1.25em;
     margin-bottom:15px;
- /*   border-bottom: solid 1px;*/
 
 }
 
 div.note {
     float: left;
     width: 300px;
-    font-size: 14px;
     resize: vertical;
     height: 50px;
 }
@@ -106,6 +104,7 @@ div.note {
 
 #studentInfo {
 	width:700px;
+	margin-top: 20px;
 }
 
 .talentsLabel, .label {
@@ -116,20 +115,10 @@ div.note {
 	padding-bottom:1em;
 }
 
-#talents {
+.talentsList {
 	padding-left: 3em;
 	float: left;
 }
-
-   div.note{
-   float :left;
-   width: 300px;
-   font-size: 14px;
-    resize: vertical;
-   height:50px;
-   resize:vertical;
-   overflow:auto; }
-
 
 .talentsCheckBoxes {
 	border: solid;
@@ -143,7 +132,7 @@ div.note {
 
 .entry {
 	clear: both;
-	padding-bottom:3em;
+	padding-bottom:2.5em;
 }
 
 .updateEntry {
@@ -152,7 +141,7 @@ div.note {
 }
 
 .label {
-	width: 125px;
+	width: 160px;
 	float:left;
 }
 
@@ -168,6 +157,7 @@ div.note {
 
 #update {
 	clear:both;
+	margin-top: 50px;
 }
 
 .notes {
@@ -177,9 +167,37 @@ div.note {
 .errorMessages {
 	color: red;
     font-weight:bold;
+    padding:10px 0px 10px 0px;
+}
+
+#dateErrorMessage {
+	color: red;
 }
 
 .mandatory{
     color: red;
     font-weight:bold;
+}
+
+#successDiv {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height: 40px;
+    background-color: #99CC66;
+}
+
+#confirmMessage{
+    font-weight:bold;
+    padding:10px 0px 0px 10px;
+    color: #003300;
+}
+
+#successImage {
+	float:left;
+	padding-top:7px;
+	margin-right:10px;
+    width:25px;
+    height:25px;
 }

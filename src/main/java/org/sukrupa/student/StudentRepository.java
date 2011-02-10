@@ -28,18 +28,14 @@ public class StudentRepository {
     private static final String STUDENT_ID = "studentId";
     private static final String TALENTS = "talents";
     private static final String DESCRIPTION = "description";
-    private final SessionFactory sessionFactory;
     private static final String RELIGION = "religion";
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Student> findAll() {
-        Criteria criteria = session().createCriteria(Student.class);
-        return addOrderCriteria(criteria).list();
     }
 
     public Student find(String studentId) {
@@ -61,6 +57,9 @@ public class StudentRepository {
         criteria.add(conjunction);
         addTalentsSearchCriteria(criteria, searchParam.getTalent());
 
+        int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+        criteria.setFirstResult(firstIndex);
+        criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
         return criteria.list();
     }
 

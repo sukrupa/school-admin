@@ -33,7 +33,7 @@ import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
-public class StudentRepositoryTest {
+public class StudentRepositoryIntegrationTest {
 
 	static final String MUSIC = "Music";
 	static final String SPORT = "Sport";
@@ -78,7 +78,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
         databaseHelper.save(pat, renaud);
-        List<Student> students = repository.findAll();
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().build());
 
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(pat, renaud));
@@ -88,7 +88,7 @@ public class StudentRepositoryTest {
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build());
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(renaud, sahil));
     }
@@ -96,7 +96,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
         databaseHelper.save(sahil, pat, renaud);
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").build());
+        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build());
         assertThat(students.size(), is(1));
         assertThat(students, hasItems(renaud));
     }
@@ -104,7 +104,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldPopulateTalents() {
         databaseHelper.save(sahil);
-        assertThat(repository.findAll().get(0).getTalents(), hasItems(music, sport));
+        assertThat(repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0).getTalents(), hasItems(music, sport));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class StudentRepositoryTest {
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
 
-        Iterator<Note> notes = repository.findAll().get(0).getNotes().iterator();
+        Iterator<Note> notes = repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
@@ -147,7 +147,7 @@ public class StudentRepositoryTest {
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
-        Student s = repository.findAll().get(0);
+        Student s = repository.parametricSearch(new StudentSearchParameterBuilder().build()).get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")

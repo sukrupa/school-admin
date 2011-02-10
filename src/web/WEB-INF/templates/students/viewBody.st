@@ -1,5 +1,9 @@
 <div id="student">
-	<div>$studentUpdatedSuccesfullyMessage$</div>
+    <div id="successDiv">
+        <img id="successImage" src="/images/success.png" alt="Success" />
+        <div id ="confirmMessage">$studentUpdatedSuccesfullyMessage$</div>
+	</div>
+
 	<div id="studentInfo">
 		<div id="basicInfo">
 			<div class="entry">

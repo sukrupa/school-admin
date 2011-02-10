@@ -27,7 +27,7 @@ import static org.sukrupa.platform.Matchers.hasOnly;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
-public class EventRepositoryTest {
+public class EventRepositoryIntegrationTest {
 
     @Autowired
     SessionFactory sessionFactory;

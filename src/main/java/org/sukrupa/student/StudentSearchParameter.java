@@ -15,17 +15,18 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class StudentSearchParameter {
 
-	private String studentClass;
-    private String gender;
-    private String caste;
-    private String communityLocation;
-	private String ageFrom;
-	private String ageTo;
-	private String talent;
+	private String studentClass = "";
+    private String gender = "";
+    private String caste = "";
+    private String communityLocation = "";
+	private String ageFrom = "";
+	private String ageTo = "";
+	private String talent = "";
 
-	private String religion;
+	private String religion = "";
+    private int page = 1;
 
-	public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
+    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion, int page) {
 		this.studentClass = studentClass;
 		this.gender = gender;
 		this.caste = caste;
@@ -34,6 +35,7 @@ public class StudentSearchParameter {
 		this.ageTo = ageTo;
 		this.talent = talent;
 		this.religion = religion;
+        this.page = page;
 	}
 
 	@DoNotRemove
@@ -104,20 +106,11 @@ public class StudentSearchParameter {
 		this.religion = religion;
 	}
 
-    /* With reflection checks that all bean properties are not set. e.g. getXyz() */
-    public boolean isAllBlank() {
-        Predicate<Method> allPropertiesAreNull = new Predicate<Method>() {
-            @Override
-            public boolean apply(Method m) {
-                return ReflectionUtils.invokeMethod(m, StudentSearchParameter.this) == null;
-            }
-        };
-        Predicate<Method> filterOnlyGetters = new Predicate<Method>() {
-            @Override
-            public boolean apply(Method m) {
-                return m.getName().startsWith("get") && m.getParameterTypes().length == 0;
-            }
-        };
-        return all(filter(newArrayList(getClass().getDeclaredMethods()), filterOnlyGetters), allPropertiesAreNull);
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }
