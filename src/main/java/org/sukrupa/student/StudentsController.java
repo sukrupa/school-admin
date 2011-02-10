@@ -2,12 +2,16 @@ package org.sukrupa.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.format;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("/students")
@@ -64,9 +68,9 @@ public class StudentsController {
         model.put("talents", TALENTS);
     }
 
-    @RequestMapping(value = "update")
-    public void update(@RequestParam String studentId, Map<String, Object> model) {
-        Student theStudent = repository.find(studentId);
+    @RequestMapping(value = "{id}/edit", method = GET)
+    public String edit(@PathVariable String id, Map<String, Object> model) {
+        Student theStudent = repository.find(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -80,10 +84,13 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+
+        return "students/edit";
     }
 
-    @RequestMapping(value = "updateResults")
+    @RequestMapping(value = "{id}", method = POST)
     public String confirmUpdateStudent(
+            @PathVariable String id,
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
 
@@ -92,11 +99,21 @@ public class StudentsController {
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
 	        model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
-            return "students/view";
+            return format("redirect:/students/%s", id);
         }else {
             model.put("message","Error updating student");
-            return "students/updateResults";
+            return format("redirect:/students/%s/edit", id);
         }
+    }
+
+    @RequestMapping(value = "{id}", method = GET)
+    public String view(@PathVariable String id, Map<String, Student> model) {
+	    Student student = repository.find(id);
+	    if (student != null) {
+			model.put("student", student);
+			return "students/view";
+	    }
+	    return "students/viewFailed";
     }
 
     private List<DropDownElement> createDropDownList(String selected, List<String> options) {
@@ -113,16 +130,6 @@ public class StudentsController {
             checkBoxElements.add(new CheckBoxElement(talent, studentTalents.contains(talent)));
         }
         return checkBoxElements;
-    }
-
-    @RequestMapping(value = "{id}")
-    public String view(@PathVariable String id, Map<String, Student> model) {
-	    Student student = repository.find(id);
-	    if (student != null) {
-			model.put("student", student);
-			return "students/view";
-	    }
-	    return "students/viewFailed";
     }
 
     private List<String> getAges() {

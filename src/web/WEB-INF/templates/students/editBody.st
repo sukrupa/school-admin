@@ -1,5 +1,5 @@
 <div id="student">
-	<form id="updateStudent" name="updateStudent" action="updateResults" method="post">
+	<form id="updateStudent" name="updateStudent" action="/students/$studentId$" method="post">
 
 		<div id="studentInfo">
 			<div id="basicInfo">
