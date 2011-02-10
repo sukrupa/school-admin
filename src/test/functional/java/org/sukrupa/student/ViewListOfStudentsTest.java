@@ -49,6 +49,7 @@ public class ViewListOfStudentsTest {
 
         List<StudentRow> students = new ListOfStudentsPage(driver).getStudents();
 
+        assertThat(students.size(), is(3));
         assertThat(students.get(0), matches(rebecca));
         assertThat(students.get(1), matches(alex));
         assertThat(students.get(2), matches(bob));
