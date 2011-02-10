@@ -169,15 +169,35 @@ div.note {
     font-weight:bold;
     padding:10px 0px 10px 0px;
 }
-#confirmMessage{
-font-weight:bold;
-padding:5px 0px 5px 0px;
-text-align:center;
-background-color: #99CC66;
-color: #003300;
+
+#dateErrorMessage {
+	color: red;
 }
 
 .mandatory{
     color: red;
     font-weight:bold;
+}
+
+#successDiv {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height: 40px;
+    background-color: #99CC66;
+}
+
+#confirmMessage{
+    font-weight:bold;
+    padding:10px 0px 0px 10px;
+    color: #003300;
+}
+
+#successImage {
+	float:left;
+	padding-top:7px;
+	margin-right:10px;
+    width:25px;
+    height:25px;
 }

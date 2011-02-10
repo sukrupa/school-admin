@@ -1,5 +1,7 @@
 $(document).ready(function (){
     if ($('#confirmMessage').html() === "") {
-        $('#confirmMessage').hide();
+        $('#successDiv').hide();
+    } else {
+        $('#successDiv').fadeOut(6000);
     }
 });
