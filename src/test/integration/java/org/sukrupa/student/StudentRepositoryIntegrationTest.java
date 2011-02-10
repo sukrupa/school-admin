@@ -73,7 +73,6 @@ public class StudentRepositoryIntegrationTest {
         databaseHelper.save(music, sport, cooking);
     }
 
-
     @Test
     public void shouldRetrieveAllStudentsFromDatabase() {
         databaseHelper.save(pat, renaud);

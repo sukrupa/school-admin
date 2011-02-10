@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -51,7 +50,7 @@ public class StudentRepository {
         int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
         criteria.setFirstResult(firstIndex);
         criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        return new StudentListPage(criteria.list(),searchParam.getPage());
+        return new StudentListPage(criteria.list(),searchParam.getPage(), 0);
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {

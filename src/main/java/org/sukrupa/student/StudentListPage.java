@@ -10,10 +10,12 @@ import java.util.List;
 public class StudentListPage {
     private List<Student> students;
     private int pageNumber;
+    private int maxPageNumber;
 
-    public StudentListPage(List<Student> students, int pageNumber) {
+    public StudentListPage(List<Student> students, int pageNumber, int maxPageNumber) {
         this.students = students;
         this.pageNumber = pageNumber;
+        this.maxPageNumber = maxPageNumber;
     }
 
     public List<Student> getStudents() {
@@ -46,5 +48,9 @@ public class StudentListPage {
 
     public int getPreviousPage() {
         return pageNumber - 1;
+    }
+
+    public boolean isNextEnabled() {
+        return pageNumber < maxPageNumber;
     }
 }
