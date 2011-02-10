@@ -11,14 +11,32 @@ $(document).ready(function (){
 	});
 
 	$('#save').click(function (){
-		var dateStr = $('#dateOfBirth').val();
-		var dummyTimeStr = "01:01";
-        if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
-        	$('#dateErrorMessage').html("Invalid date.  Format: dd/mm/yyyy");
-        } else if ($('#name').val() === "") {
-            $('#errorMessages').html("Please enter a valid name");
-        } else {
+         if (validateFields()) {
         	$('#updateStudent').submit();
         }
 	});
 });
+
+
+function validateFields() {
+    var dateStr = $('#dateOfBirth').val();
+    var dummyTimeStr = "01:01";
+    var valid = true;
+    var errorMessage = "";
+
+    if (dateStr === "") {
+        errorMessage += "Please insert a date<br />";
+        valid = false;
+    } else if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+        $('#dateErrorMessage').html("Invalid date.  Format: dd/mm/yyyy");
+        errorMessage += "Please insert a valid date (Format: dd/mm/yyyy)<br/>";
+        valid = false;
+    }
+    if ($('#name').val() === "") {
+        errorMessage += "Please insert a valid name";
+        valid = false;
+    }
+    $('#errorMessages').html(errorMessage);
+
+    return valid;
+}

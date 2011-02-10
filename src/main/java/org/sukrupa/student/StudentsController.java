@@ -69,7 +69,7 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "update")
-    public void update(@RequestParam String studentId, Map<String, Object> model) {
+    public void update(@RequestParam String studentId, @RequestParam(required = false, defaultValue = "") String noteUpdateStatus, Map<String, Object> model) {
         Student theStudent = repository.find(studentId);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
@@ -84,6 +84,7 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+        model.put("note_message",noteUpdateStatus);
     }
 
     @RequestMapping(value = "updateResults")

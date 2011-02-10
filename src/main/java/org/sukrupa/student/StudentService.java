@@ -18,9 +18,17 @@ public class StudentService {
     }
 
     @Transactional
-    public void addNoteFor(String studentId, String noteMessage) {
+    public String addNoteFor(String studentId, String noteMessage) {
         Student student = repository.find(studentId);
         student.addNote(new Note(noteMessage));
-        repository.saveOrUpdate(student);
+        try {
+            repository.saveOrUpdate(student);
+            return "Note Added Successfully";
+        }
+        catch(Exception e){
+            return "Error Adding Note";
+
+        }
+
     }
 }
