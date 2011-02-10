@@ -108,7 +108,7 @@
  <hr/>
  <h2> Notes </h2>
 <div class="confirm">
-Note Added Successfully
+    $note_message$
 </div>
 
 $studentNotes()$

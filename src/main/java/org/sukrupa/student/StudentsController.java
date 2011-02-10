@@ -42,7 +42,11 @@ public class StudentsController {
     public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
         List<Student> students = repository.parametricSearch(searchParam);
         model.put("page", new StudentListPage(students));
-        model.put("page_number", searchParam.getPage());
+        int page = searchParam.getPage();
+        model.put("previous_page", page-1);
+        model.put("enable_previous", page!=1);
+        model.put("page_number", page);
+        model.put("next_page", page+1);
         return "students/list";
     }
 
@@ -69,7 +73,9 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
-    public String edit(@PathVariable String id, Map<String, Object> model) {
+    public String edit(@PathVariable String id,
+                       @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
+                       Map<String, Object> model) {
         Student theStudent = repository.find(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
@@ -84,6 +90,7 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+        model.put("note_message",noteUpdateStatus);
 
         return "students/edit";
     }
@@ -107,10 +114,13 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "{id}", method = GET)
-    public String view(@PathVariable String id, Map<String, Student> model) {
+    public String view(@PathVariable String id,
+                       @RequestParam(required = false, defaultValue = "") String studentUpdatedSuccesfullyMessage,
+                       Map<String, Object> model) {
 	    Student student = repository.find(id);
 	    if (student != null) {
 			model.put("student", student);
+			model.put("studentUpdatedSuccesfullyMessage", studentUpdatedSuccesfullyMessage);
 			return "students/view";
 	    }
 	    return "students/viewFailed";

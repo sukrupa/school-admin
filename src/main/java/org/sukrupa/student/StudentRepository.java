@@ -46,7 +46,15 @@ public class StudentRepository {
     }
 
     public List<Student> parametricSearch(StudentSearchParameter searchParam) {
+        Criteria criteria = generateSearchCriteria(searchParam);
 
+        int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+        criteria.setFirstResult(firstIndex);
+        criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        return criteria.list();
+    }
+
+    private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
         Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
         if (!searchParam.getAgeFrom().isEmpty()) {
@@ -56,11 +64,7 @@ public class StudentRepository {
         Criteria criteria = addOrderCriteria(session().createCriteria(Student.class));
         criteria.add(conjunction);
         addTalentsSearchCriteria(criteria, searchParam.getTalent());
-
-        int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
-        criteria.setFirstResult(firstIndex);
-        criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        return criteria.list();
+        return criteria;
     }
 
     private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {

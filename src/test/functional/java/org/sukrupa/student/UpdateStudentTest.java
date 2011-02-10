@@ -13,7 +13,6 @@ import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,12 +34,11 @@ public class UpdateStudentTest {
     }
 
     @Test
-    public void shouldAddNotes() {
+   public void shouldAddNotes() {
 
         databaseHelper.saveAndCommit(shefali);
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
-        //work in progress minno , pavithra
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
 
 

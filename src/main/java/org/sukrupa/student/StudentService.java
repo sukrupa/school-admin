@@ -22,5 +22,6 @@ public class StudentService {
         Student student = repository.find(studentId);
         student.addNote(new Note(noteMessage));
         repository.saveOrUpdate(student);
+
     }
 }
