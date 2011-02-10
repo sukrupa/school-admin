@@ -23,7 +23,7 @@ public class StudentsController {
 
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
-	static final String STUDENT_RECORD_UPDATED = "Student record updated";
+	static final String STUDENT_RECORD_UPDATED = "Student record updated successfully.";
 	private StudentRepository repository;
 
 	private static final int AGES_TO = 20;

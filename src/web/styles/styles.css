@@ -104,6 +104,7 @@ div.note {
 
 #studentInfo {
 	width:700px;
+	margin-top: 20px;
 }
 
 .talentsLabel, .label {
@@ -166,6 +167,14 @@ div.note {
 .errorMessages {
 	color: red;
     font-weight:bold;
+    padding:10px 0px 10px 0px;
+}
+#confirmMessage{
+font-weight:bold;
+padding:5px 0px 5px 0px;
+text-align:center;
+background-color: #99CC66;
+color: #003300;
 }
 
 .mandatory{
