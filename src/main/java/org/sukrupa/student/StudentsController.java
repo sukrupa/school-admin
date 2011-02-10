@@ -40,24 +40,9 @@ public class StudentsController {
 
     @RequestMapping()
     public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        List<Student> students = repository.parametricSearch(searchParam);
-        model.put("page", new StudentListPage(students));
-        int page = searchParam.getPage();
-        model.put("previous_page", page-1);
-        model.put("enable_previous", page!=1);
-        model.put("page_number", page);
-        model.put("next_page", page+1);
+        StudentListPage students = repository.parametricSearch(searchParam);
+        model.put("page", students);
         return "students/list";
-    }
-
-    private List<StudentListPage> paginateStudents(List<Student> students) {
-        List<StudentListPage> pages = new ArrayList<StudentListPage>();
-        while(students.size() > StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE){
-            pages.add(new StudentListPage(students.subList(0, StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE)));
-            students = students.subList(StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, students.size());
-        }
-        pages.add(new StudentListPage(students));
-        return pages;
     }
 
     @RequestMapping(value = "search")
