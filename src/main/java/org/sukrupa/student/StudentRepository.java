@@ -4,10 +4,7 @@ import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,12 +42,19 @@ public class StudentRepository {
     }
 
     public StudentListPage parametricSearch(StudentSearchParameter searchParam) {
-        Criteria criteria = generateSearchCriteria(searchParam);
+        Criteria countCriteria = generateSearchCriteria(searchParam);
 
         int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
-        criteria.setFirstResult(firstIndex);
-        criteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        return new StudentListPage(criteria.list(),searchParam.getPage(), 0);
+
+        int totalNumberOfResults = ((Number) countCriteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+        int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
+
+        Criteria getPageCriteria = addOrderCriteria(generateSearchCriteria(searchParam));
+        getPageCriteria.setFirstResult(firstIndex);
+        getPageCriteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+
+
+        return new StudentListPage(getPageCriteria.list(),searchParam.getPage(), totalNumberOfPages);
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
@@ -60,7 +64,7 @@ public class StudentRepository {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
         }
 
-        Criteria criteria = addOrderCriteria(session().createCriteria(Student.class));
+        Criteria criteria = session().createCriteria(Student.class);
         criteria.add(conjunction);
         addTalentsSearchCriteria(criteria, searchParam.getTalent());
         return criteria;
