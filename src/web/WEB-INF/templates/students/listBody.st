@@ -31,12 +31,10 @@
     }$
         </tbody>
     </table></div>
-    <a href="#" id="previousButton" class="navLink">Previous</a> &nbsp;&lt;&lt;&nbsp;
-    $pages: {
-    <a href="#" class="pageButton navLink">$i$</a> &nbsp;
-    }$
+    $if(enable_previous)$<a href="?page=$previous_page$" id="previousButton" class="navLink">Previous</a>$else$Previous$endif$ &nbsp;&lt;&lt;
+    $page_number$
     &gt;&gt;&nbsp;
-    <a href="#" id="nextButton" class="navLink">Next</a>
+    <a href="?page=$next_page$" id="nextButton" class="navLink">Next</a>
  </div>
 
 
