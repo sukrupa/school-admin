@@ -24,9 +24,15 @@ public class NoteController {
 
     @RequestMapping(method = POST)
     public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote,Map<String,Object> model) {
-        model.put("noteUpdateStatus",service.addNoteFor(studentId, newNote));
         model.put("studentId", studentId);
+        try {
+            service.addNoteFor(studentId, newNote);
+            model.put("noteUpdateStatus","Note Added Successfully");
+        } catch (Exception e) {
+            model.put("noteUpdateStatus","Error Adding Note");
+        }
         return format("redirect:/students/update");
+
 
     }
 }
