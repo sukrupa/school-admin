@@ -1,0 +1,19 @@
+REQUIREMENTS
+
+import_students.rb requires ruby and the following gems:
+
+roo, rubyzip, nokogiri, spreadsheet, bones, builder, google-spreadsheet-ruby
+
+To install a gem type sudo gem install "gem name".
+
+In case of errors, try running gem update.
+
+import_students.rb also requires ruby-dev on ubuntu.
+
+RUNNING
+
+command: ruby import_students.rb "spreadsheet path"
+
+RESULT
+
+import_students.rb will generate a SQL file in the deploy/sql folder. You can then run ./build db:import_students
