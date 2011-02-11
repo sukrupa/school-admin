@@ -64,12 +64,10 @@
         </sql>
     </target>
 
-
     <target name="db:update" description="Updates the database schema to the latest version.">
         <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
                   dir="${src.sql.delta.dir}"/>
     </target>
-
 
     <target name="db:insert-fake-data" description="Populates the database with fake data">
         <sql userid="${db.user}"
@@ -89,6 +87,25 @@
                 />
     </target>
 
+    <target name="db:import-talent-data" description="Populates the database with real talent data">
+        <sql userid="${db.user}"
+             password="${db.password}"
+             driver="${db.driver}"
+             url="${db.url}"
+             src="${ops.deploy.sql.data.talent.sql}"
+                />
+    </target>
+
+    <target name="db:import-student-data" depends="db:import-talent-data" description="Populates the database with real student data">
+        <sql userid="${db.user}"
+             password="${db.password}"
+             driver="${db.driver}"
+             url="${db.url}"
+             src="${ops.deploy.sql.data.student.sql}"
+                />
+    </target>
+
+    <target name="db:import-data" depends="db:delete-fake-data,db:import-talent-data,db:import-student-data" description="Populates the database with real data" />
 
     <target name="db:clean" depends="db:stop">
         <delete dir="${db.dir}"/>
