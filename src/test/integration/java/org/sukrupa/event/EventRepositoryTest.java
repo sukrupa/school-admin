@@ -13,6 +13,8 @@ import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.sukrupa.platform.Matchers.hasOnly;
@@ -42,9 +44,13 @@ public class EventRepositoryTest {
     }
 
     @Test
-    public void shouldLoadAndPopulateASavedEvent() {
+    public void shouldLoadAndPopulateASavedEventIncludingAttendees() {
         Event event = save(new EventBuilder().attendees(sahil, suhas).build());
-        assertThat(eventRepository.getAll(), hasOnly(event));
+
+        List<Event> events = eventRepository.getAll();
+
+        assertThat(events, hasOnly(event));
+        assertThat(events.get(0).getAttendees(), hasOnly(sahil, suhas));
     }
 
     @Test

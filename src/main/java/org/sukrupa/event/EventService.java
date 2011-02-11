@@ -2,13 +2,19 @@ package org.sukrupa.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.StudentRepository;
 
 @Component
 public class EventService {
 
-    private final EventRepository eventRepository;
-    private final StudentRepository studentRepository;
+    private EventRepository eventRepository;
+    private StudentRepository studentRepository;
+
+    @DoNotRemove
+    EventService() {
+    }
 
     @Autowired
     public EventService(EventRepository eventRepository, StudentRepository studentRepository) {
@@ -16,6 +22,7 @@ public class EventService {
         this.studentRepository = studentRepository;
     }
 
+    @Transactional
     public void save(Event event, String... studentIdsOfAttendees) {
         event.addAttendees(studentRepository.load(studentIdsOfAttendees));
         eventRepository.save(event);
