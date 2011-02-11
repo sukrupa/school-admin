@@ -26,7 +26,6 @@ public class StudentsController {
 
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
-    static final String STUDENT_RECORD_UPDATED = "Student record updated successfully.";
     private StudentRepository repository;
 
     private static final int AGES_TO = 20;
@@ -90,7 +89,7 @@ public class StudentsController {
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
-	        model.put("studentUpdatedSuccesfullyMessage", STUDENT_RECORD_UPDATED);
+	        model.put("studentUpdatedSuccesfully", true);
             return format("redirect:/students/%s", id);
         }else {
             model.put("message","Error updating student");
@@ -100,12 +99,12 @@ public class StudentsController {
 
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,
-                       @RequestParam(required = false, defaultValue = "") String studentUpdatedSuccesfullyMessage,
+                       @RequestParam(required = false, defaultValue = "false") String studentUpdatedSuccesfully,
                        Map<String, Object> model) {
 	    Student student = repository.load(id);
 	    if (student != null) {
 			model.put("student", student);
-			model.put("studentUpdatedSuccesfullyMessage", studentUpdatedSuccesfullyMessage);
+			model.put("studentUpdatedSuccesfully", Boolean.parseBoolean(studentUpdatedSuccesfully));
 			return "students/view";
 	    }
 	    return "students/viewFailed";
