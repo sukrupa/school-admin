@@ -91,8 +91,8 @@
                 <div class="talentsCheckBoxes">
                     $talents:{
                     <div>
-                        <input type="checkbox" name="talents" value="$it.value$">
-                            $if(it.checked)$checked$endif$$it.value$
+                        <input type="checkbox" name="talents" value="$it.value$" $if (it.checked)$ checked $endif$>
+                            $it.value$
                         </input>
                     </div>
                     }$
