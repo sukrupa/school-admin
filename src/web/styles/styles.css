@@ -34,6 +34,25 @@ body {
     font: 28pt Palatino, serif;
 }
 
+.pageheader .headerImage {
+    float:left;
+    width:190px;
+}
+
+.pageheader .twoLinesTitle, .pageheader .oneLineTitle {
+    float:left;
+    text-align:center;
+    width:760px;
+}
+
+.pageheader .twoLinesTitle {
+    padding-top: 20px;
+}
+
+.pageheader .oneLineTitle {
+    padding-top: 40px;
+}
+
 #sidebar {
     width: 210px;
     margin-right: 20px;
@@ -149,21 +168,22 @@ div.note {
 .updateEntry {
     clear: both;
     padding-bottom: 3em;
+    position:relative;
 }
 
 .label {
-    width: 160px;
+    width: 190px;
     float: left;
 }
 
 .value {
     float: left;
-    width: 200px;
+    width: 250px;
 }
 
 .updateValue {
     float: left;
-    width: 150px;
+    width: 205px;
 }
 
 #update {
@@ -183,6 +203,8 @@ div.note {
 
 #dateErrorMessage {
     color: red;
+    position:absolute;
+    bottom: 0px;
 }
 
 .mandatory {

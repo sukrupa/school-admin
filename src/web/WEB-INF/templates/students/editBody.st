@@ -3,7 +3,7 @@
     <form id="updateStudent" name="updateStudent" action="/students/$studentId$" method="post">
 
         <div id="studentInfo">
-<div id="basicInfo">
+            <div id="basicInfo">
                 <div class="updateEntry">
                     <div class="label">Student ID</div>
                     <input type="text" name="studentId" id="studentId" value="$studentId$" readonly
@@ -16,10 +16,8 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Date of birth</div>
-                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$"
-                           class="updateValue"></input>
-
+                    <div class="label">Date of Birth</div>
+                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" class="updateValue"></input>
                     <div id="dateErrorMessage"></div>
                 </div>
 
@@ -69,7 +67,7 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Community location</div>
+                    <div class="label">Community Location</div>
                     <select name="communityLocation" class="updateValue">
                         $communityLocations:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
@@ -78,12 +76,12 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Father</div>
+                    <div class="label">Father's Name</div>
                     <input type="text" name="father" value="$father$" class="updateValue"></input>
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Mother</div>
+                    <div class="label">Mother's Name</div>
                     <input type="text" name="mother" value="$mother$" class="updateValue"></input>
                 </div>
             </div>

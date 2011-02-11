@@ -1,1 +1,1 @@
-$layout(body=students/viewBody(), title={$student.name$ - Student Record}, scripts="studentView")$
+$layout(body=students/viewBody(), title={$student.name$}, titleLine2="Student Record", scripts="studentView")$
