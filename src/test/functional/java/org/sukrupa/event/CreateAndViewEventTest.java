@@ -17,6 +17,7 @@ import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -32,6 +33,7 @@ public class CreateAndViewEventTest {
 
     @After
     public void tearDown() throws Exception {
+        databaseHelper.deleteAllFromTables("eventattendees", "event");
         databaseHelper.deleteAllCreatedObjects();
     }
 
@@ -56,7 +58,7 @@ public class CreateAndViewEventTest {
                 .venue("palace grounds")
                 .description("bla bla bla")
                 .coordinator("karthik")
-                .attendees(alex.getStudentId() + ", " + bob.getStudentId())
+                .attendees(alex.getStudentId() + "," + bob.getStudentId())
                 .notes("bring food!")
                 .save();
     }
@@ -71,7 +73,7 @@ public class CreateAndViewEventTest {
         assertThat(viewEventPage.getVenue(), is("palace grounds"));
         assertThat(viewEventPage.getDescription(), is("bla bla bla"));
         assertThat(viewEventPage.getNotes(), is("bring food!"));
-        // TODO assertThat(viewEventPage.getAttendees(), hasItems(alex.getStudentId(), bob.getStudentId()));
+        assertThat(viewEventPage.getAttendees(), hasItems(alex.getName(), bob.getName()));
     }
 
     private Student save(Student student) {

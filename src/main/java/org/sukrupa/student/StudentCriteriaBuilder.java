@@ -26,17 +26,12 @@ public class StudentCriteriaBuilder {
         this.sessionFactory = sessionFactory;
     }
 
-    public Criteria countMatchingResultsCriteria(StudentSearchParameter searchParam) {
-        return generateSearchCriteria(searchParam).setProjection(Projections.rowCount());
+    public Criteria orderedSearchCriteria(StudentSearchParameter searchParam) {
+        return addOrderCriteria(generateSearchCriteria(searchParam));
     }
 
-    public Criteria getPageCriteria(StudentSearchParameter searchParam) {
-        Criteria getPageCriteria = addOrderCriteria(generateSearchCriteria(searchParam));
-
-        int firstIndex = (searchParam.getPage() - 1) * StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
-        getPageCriteria.setFirstResult(firstIndex);
-        getPageCriteria.setMaxResults(StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        return getPageCriteria;
+    public Criteria countMatchingResultsCriteria(StudentSearchParameter searchParam) {
+        return generateSearchCriteria(searchParam).setProjection(Projections.rowCount());
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {

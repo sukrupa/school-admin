@@ -28,12 +28,12 @@ function validateFields() {
         errorMessage += "Please insert a date<br />";
         valid = false;
     } else if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
-        $('#dateErrorMessage').html("Invalid date.  Format: dd/mm/yyyy");
-        errorMessage += "Please insert a valid date (Format: dd/mm/yyyy)<br/>";
+        $('#dateErrorMessage').html("Invalid date.  Format: dd/mm/yyyy.");
+        errorMessage += "Please insert a valid date (Format: dd/mm/yyyy).<br/>";
         valid = false;
     }
     if ($('#name').val() === "") {
-        errorMessage += "Please insert a valid name";
+        errorMessage += "Please insert a valid name.";
         valid = false;
     }
     $('#errorMessages').html(errorMessage);

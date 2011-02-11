@@ -13,6 +13,8 @@ import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.sukrupa.platform.Matchers.hasOnly;
@@ -42,30 +44,19 @@ public class EventRepositoryTest {
     }
 
     @Test
-    public void shouldLoadAndPopulateASavedEvent() {
+    public void shouldLoadAndPopulateASavedEventIncludingAttendees() {
         Event event = save(new EventBuilder().attendees(sahil, suhas).build());
-        assertThat(eventRepository.getAll(), hasOnly(event));
+
+        List<Event> events = eventRepository.getAll();
+
+        assertThat(events, hasOnly(event));
+        assertThat(events.get(0).getAttendees(), hasOnly(sahil, suhas));
     }
 
     @Test
     public void shouldLoadEventById() {
         Event event = save(new EventBuilder().attendees(sahil, renaud).build());
         assertThat(eventRepository.getEvent(event.getId()), is(event));
-    }
-
-    @Test // FIXME get rid of this test - this is not repository functionality
-    public void shouldValidateAttendees() {
-        Student nonExisting = new StudentBuilder().studentId("42").build();
-        EventRecord eventRecord = new EventRecordBuilder().attendees(suhas, nonExisting).build();
-
-        assertThat(eventRepository.findNonExisting(eventRecord.getAttendeesForDisplay()).contains(nonExisting.getStudentId()), is(true));
-    }
-
-    @Test // FIXME get rid of this test - this is not repository functionality
-    public void shouldNotSaveEventWithInvalidAttendees() {
-        Student pat = new StudentBuilder().name("Patric").studentId("4").build();
-        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(sahil, renaud, pat).build();
-        assertThat(eventRepository.save(eventRecord), is(false));
     }
 
     private Event save(Event event) {
