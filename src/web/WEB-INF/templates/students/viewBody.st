@@ -1,8 +1,10 @@
 <div id="student">
-    <div id="successDiv">
-        <img id="successImage" src="/images/success.png" alt="Success" />
-        <div id ="confirmMessage">$studentUpdatedSuccesfullyMessage$</div>
-	</div>
+    $if (studentUpdatedSuccesfully)$
+        <div id="successDiv">
+            <img id="successImage" src="/images/success.png" alt="Success" />
+            <div id ="confirmMessage">Student record updated successfully.</div>
+        </div>
+    $endif$
 
 	<div id="studentInfo">
 		<div id="basicInfo">
