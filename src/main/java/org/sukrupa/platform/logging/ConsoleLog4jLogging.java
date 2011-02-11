@@ -15,6 +15,7 @@ public class ConsoleLog4jLogging {
 
     public static void configureLogging() {
         configure(getRootLogger(), DEFAULT_LOG_LEVEL);
+        //configure(Logger.getLogger("org.hibernate.type"), Level.TRACE);
     }
 
     private static void configure(Logger logger, Level level) {
