@@ -67,18 +67,18 @@ public class StudentsControllerTest {
     @Test
     public void shouldPopulateModelWithAStudent() {
         when(repository.load("123")).thenReturn(pat);
-        controller.view("123", studentModel);
-        assertThat(studentModel.get("student"), is(pat));
+        controller.view("123", "", (HashMap) studentModel);
+        assertThat(studentModel.get("student"),is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
-        when(repository.load("123")).thenReturn(pat);
-        assertThat(controller.view("123", studentModel), is("students/view"));
+	    when(repository.load("123")).thenReturn(pat);
+        assertThat(controller.view("123", "", (HashMap) studentModel),is("students/view"));
     }
 
     @Test
     public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", studentModel), is("students/viewFailed"));
+        assertThat(controller.view("0987ihuyi", "", (HashMap) studentModel),is("students/viewFailed"));
     }
 }

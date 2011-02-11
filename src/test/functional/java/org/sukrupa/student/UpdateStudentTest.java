@@ -8,6 +8,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
 import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.platform.DatabaseHelper;
@@ -34,14 +35,11 @@ public class UpdateStudentTest {
     }
 
     @Test
-    public void shouldAddNotes() {
-
+   public void shouldAddNotes() {
         databaseHelper.saveAndCommit(shefali);
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
-
-
     }
 
 

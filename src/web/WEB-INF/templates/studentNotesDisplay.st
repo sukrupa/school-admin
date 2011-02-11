@@ -2,11 +2,9 @@
 	    <div class="label">Notes</div>
         <div class="box">
             $student.notes:{
-            <div class ="note">
-
+                <div class ="note">
                 $it.message$
                 </div>
             }$
-             </div>
-
+        </div>
 </div>

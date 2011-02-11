@@ -11,7 +11,7 @@ public class UpdateStudentPage {
 
     public UpdateStudentPage(WebDriver driver, String id) {
         this.driver = driver;
-        driver.get("http://localhost:8080/students/update?studentId=" + id);
+        driver.get("http://localhost:8080/students/" + id + "/edit");
     }
 
     public void addNote(String message) {
