@@ -172,18 +172,18 @@ div.note {
 }
 
 .label {
-    width: 160px;
+    width: 190px;
     float: left;
 }
 
 .value {
     float: left;
-    width: 200px;
+    width: 250px;
 }
 
 .updateValue {
     float: left;
-    width: 150px;
+    width: 205px;
 }
 
 #update {
