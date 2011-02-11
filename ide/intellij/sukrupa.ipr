@@ -72,15 +72,6 @@
           <module name="sukrupa" />
         </modules>
       </facet-type>
-      <facet-type id="web">
-        <modules>
-          <module name="sukrupa">
-            <files>
-              <file url="file://$PROJECT_DIR$/../../web/WEB-INF/web.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
       <facet-type id="Spring">
         <modules>
           <module name="sukrupa">
@@ -90,6 +81,15 @@
               <file url="file://$PROJECT_DIR$/../../src/test/twist/functional-test/src/applicationContext-suite.xml" />
               <file url="file://$PROJECT_DIR$/../../web/WEB-INF/classes/transaction-config.xml" />
               <file url="file://$PROJECT_DIR$/../../web/WEB-INF/dispatcher-servlet.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="web">
+        <modules>
+          <module name="sukrupa">
+            <files>
+              <file url="file://$PROJECT_DIR$/../../web/WEB-INF/web.xml" />
             </files>
           </module>
         </modules>
