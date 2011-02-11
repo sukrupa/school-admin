@@ -1,7 +1,7 @@
 package org.sukrupa.student;
 
 import org.junit.Test;
-import org.sukrupa.util.Date;
+import org.sukrupa.platform.date.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

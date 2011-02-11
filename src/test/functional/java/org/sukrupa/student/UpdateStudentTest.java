@@ -40,8 +40,6 @@ public class UpdateStudentTest {
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
-
-
     }
 
 

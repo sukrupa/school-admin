@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.*;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @Repository
 public class StudentRepository {
@@ -34,17 +37,29 @@ public class StudentRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public Student find(String studentId) {
+//    @SuppressWarnings("unchecked")
+//    public List<Student> findAll() {
+//        Criteria criteria = session().createCriteria(Student.class);
+//        return addOrderCriteria(criteria).list();
+//    }
+
+    public Student load(String studentId) {
         Criteria criteria = session()
                 .createCriteria(Student.class)
                 .add(Restrictions.eq(STUDENT_ID, studentId));
         return (Student) criteria.uniqueResult();
     }
 
+    public Set<Student> load(String... studentIds) {
+        Query query = session().createQuery("from Student where studentId in (:studentIds)");
+        query.setParameterList("studentIds", studentIds);
+        return newHashSet(query.list());
+    }
+
     public StudentListPage parametricSearch(StudentSearchParameter searchParam) {
         Criteria countCriteria = generateSearchCriteria(searchParam);
 
-        int firstIndex = (searchParam.getPage()-1)*NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+        int firstIndex = (searchParam.getPage() - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
         int totalNumberOfResults = ((Number) countCriteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
@@ -54,7 +69,7 @@ public class StudentRepository {
         getPageCriteria.setMaxResults(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
 
-        return new StudentListPage(getPageCriteria.list(),searchParam.getPage(), totalNumberOfPages);
+        return new StudentListPage(getPageCriteria.list(), searchParam.getPage(), totalNumberOfPages);
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
@@ -111,14 +126,14 @@ public class StudentRepository {
     }
 
     public Student update(UpdateStudentParameter studentParam) {
-        Student student = find(studentParam.getStudentId());
+        Student student = load(studentParam.getStudentId());
         if (student == null) {
             return null;
         }
         student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
 
         session().save(student);
-	    session().flush();
+        session().flush();
         return student;
     }
 

@@ -5,8 +5,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.sukrupa.util.Date;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.date.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Note {
     @Column(name = "MESSAGE")
     private String message;
 
-@Type(type = "org.sukrupa.util.PersistentDate")
+    @Type(type = "org.sukrupa.platform.date.PersistentDate")
     @Column(name = "NOTE_DATE")
     private Date date;
 

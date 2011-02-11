@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$(document).ready(function () {
     if ($('#confirmMessage').html() === "") {
         $('#successDiv').hide();
     } else {

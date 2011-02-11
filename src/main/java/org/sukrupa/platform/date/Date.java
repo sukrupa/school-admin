@@ -1,24 +1,23 @@
-package org.sukrupa.util;
+package org.sukrupa.platform.date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 
 import java.io.Serializable;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.joda.time.DateTimeZone.UTC;
+import static org.joda.time.format.DateTimeFormat.forPattern;
+
 public class Date implements Serializable {
 
-    private static final String DATE_TIME_FORMAT = "dd/MM/YY HH:mm";
-    private static final String DATE_FORMAT = "dd/MM/YYYY";
+    private static final String DATE_TIME_FORMAT = "dd-MM-YY HH:mm";
+    private static final String DATE_FORMAT = "dd-MM-YYYY";
     private static final String TIME_FORMAT = "HH:mm";
 
     private DateTime jodaTime;
-
-    public Date(String date, String time) {
-        jodaTime = DateTimeFormat.forPattern(DATE_TIME_FORMAT).withZone(DateTimeZone.UTC).parseDateTime(buildDateTimeText(date, time));
-    }
 
     public Date(int day, int month, int year) {
         this(day, month, year, 0, 0);
@@ -29,19 +28,28 @@ public class Date implements Serializable {
     }
 
     public Date(int day, int month, int year, int hours, int minutes, int seconds, int milliseconds) {
-        jodaTime = new DateTime(year, month, day, hours, minutes, seconds, milliseconds, DateTimeZone.UTC);
-    }
-
-
-    public static Date now() {
-        return new Date(new DateTime().getMillis());
+        this(new DateTime(year, month, day, hours, minutes, seconds, milliseconds, UTC));
     }
 
     public Date(long millis) {
-        jodaTime = new DateTime(millis, DateTimeZone.UTC);
+        this(new DateTime(millis, UTC));
     }
 
-    private String buildDateTimeText(String date, String time) {
+    private Date(DateTime jodaTime) {
+        this.jodaTime = jodaTime;
+    }
+
+    public static Date now() {
+        return new Date(new DateTime(UTC));
+    }
+
+    public static Date parse(String date, String time) {
+        return isBlank(time) ?
+                parse(date) :
+                new Date(forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time)));
+    }
+
+    private static String buildDateTimeText(String date, String time) {
         return date.trim() + " " + time.trim();
     }
 
@@ -55,6 +63,10 @@ public class Date implements Serializable {
 
     public DateTime getJodaDateTime() {
         return jodaTime;
+    }
+
+    public static Date parse(String date) {
+        return parse(date, "00:00");
     }
 
     @Override

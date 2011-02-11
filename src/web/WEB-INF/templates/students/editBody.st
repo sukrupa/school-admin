@@ -27,7 +27,7 @@
                     <div class="label">Gender</div>
                     <select name="gender" class="updateValue">
                         $genders:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="label">Class</div>
                     <select name="studentClass" class="updateValue">
                         $classes:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="label">Religion</div>
                     <select name="religion" class="updateValue">
                         $religions:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="label">Caste</div>
                     <select name="caste" class="updateValue">
                         $castes:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="label">Subcaste</div>
                     <select name="subCaste" class="updateValue">
                         $subcastes:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="label">Community location</div>
                     <select name="communityLocation" class="updateValue">
                         $communityLocations:{
-                        <option>$if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                     </select>
                 </div>

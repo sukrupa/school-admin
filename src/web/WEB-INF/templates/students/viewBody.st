@@ -77,8 +77,6 @@
 	<div id="update">
 		<form action="/students/$student.studentId$/edit" method="GET">
 			<input type="submit" value="Edit"/>
-			<!--<input type="hidden" name="studentId" value="$student.studentId$"></input>-->
 		</form>
 	</div>
-
 </div>

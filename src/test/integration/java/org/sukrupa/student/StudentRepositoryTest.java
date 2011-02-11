@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
-import org.sukrupa.util.Date;
 import org.sukrupa.platform.DatabaseHelper;
+import org.sukrupa.platform.date.Date;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,21 +23,21 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.sukrupa.platform.Matchers.hasOnly;
 import static org.sukrupa.platform.date.DateManipulation.freezeTime;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
 @Transactional
-public class StudentRepositoryIntegrationTest {
+public class StudentRepositoryTest {
 
-	static final String MUSIC = "Music";
-	static final String SPORT = "Sport";
-	static final String COOKING = "Cooking";
-	@Autowired
+    static final String MUSIC = "Music";
+    static final String SPORT = "Sport";
+    static final String COOKING = "Cooking";
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -49,11 +49,11 @@ public class StudentRepositoryIntegrationTest {
     private final Talent sport = new Talent(SPORT);
     private final Talent cooking = new Talent(COOKING);
 
-    private Student sahil = new StudentBuilder().name("Sahil").studentClass("Nursery")
+    private Student sahil = new StudentBuilder().studentId("1").name("Sahil").studentClass("Nursery")
             .dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
-    private Student renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female")
+    private Student renaud = new StudentBuilder().studentId("2").name("Renaud").studentClass("Nursery").gender("Female")
             .dateOfBirth(new LocalDate(1990, 7, 24)).build();
-    private Student pat = new StudentBuilder().studentId("001").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
+    private Student pat = new StudentBuilder().studentId("3").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
             .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
             .father("Renaud").mother("Nice Lady").build();
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -75,7 +75,19 @@ public class StudentRepositoryIntegrationTest {
     }
 
     @Test
-    public void shouldRetrieveAllStudentsFromDatabase() {
+    public void shouldLoadStudentBasedOnStudentId() {
+        databaseHelper.save(pat);
+        assertThat(repository.load("123"), is(pat));
+    }
+
+    @Test
+    public void shouldLoadStudentsBasedOnStudentIds() {
+        databaseHelper.save(pat, sahil, renaud);
+        assertThat(repository.load(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
+    }
+
+    @Test
+    public void shouldFindAllStudentsInDatabase() {
         databaseHelper.save(pat, renaud);
         List<Student> students = repository.parametricSearch(all).getStudents();
 
@@ -129,12 +141,6 @@ public class StudentRepositoryIntegrationTest {
     }
 
     @Test
-    public void shouldReturnStudentBasedOnStudentId() {
-        databaseHelper.save(pat);
-        assertThat(repository.find("123"), is(pat));
-    }
-
-    @Test
     public void shouldReturnListOfTalents() {
         Set<String> talentsDecriptions = new HashSet<String>();
         talentsDecriptions.add(MUSIC);
@@ -162,8 +168,8 @@ public class StudentRepositoryIntegrationTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std")
-		        .dateOfBirth("03/02/2000")
-		        .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
+                .dateOfBirth("03/02/2000")
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
         Student updatedStudent = repository.update(updateParameter);
         assertThat(updatedStudent, is(philNew));
     }
@@ -176,14 +182,16 @@ public class StudentRepositoryIntegrationTest {
     @Test
     public void shouldUpdateStudent() {
         databaseHelper.save(pat);
-        
+
         Note newNote = new Note("foobar");
         pat.addNote(newNote);
 
         repository.saveOrUpdate(pat);
         databaseHelper.flushHibernateSessionToForceReload();
 
-        Student reloadedStudent = repository.find(pat.getStudentId());
+        Student reloadedStudent = repository.load(pat.getStudentId());
         assertThat(reloadedStudent.getNotes(), hasItem(newNote));
     }
+
+
 }
