@@ -40,7 +40,7 @@ public class StudentsController {
 
     @RequestMapping()
     public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        StudentListPage students = repository.parametricSearch(searchParam);
+        StudentListPage students = new PaginatedStudentSearch(repository, searchParam).getPage();
         model.put("page", students);
         return "students/list";
     }

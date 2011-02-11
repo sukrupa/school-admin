@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
@@ -18,7 +19,6 @@ import static com.google.common.collect.Sets.newHashSet;
 public class StudentRepository {
 
     private static final String STUDENT_ID = "studentId";
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
 
     private final SessionFactory sessionFactory;
     private final StudentCriteriaBuilder studentCriteriaBuilder;
@@ -48,14 +48,18 @@ public class StudentRepository {
         return newHashSet(query.list());
     }
 
-    public StudentListPage parametricSearch(StudentSearchParameter searchParam) {
-        Criteria getPageCriteria = studentCriteriaBuilder.getPageCriteria(searchParam);
+    public List<Student> parametricSearch(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
+        Criteria getPageCriteria = studentCriteriaBuilder.orderedSearchCriteria(searchParam);
 
+        getPageCriteria.setFirstResult(firstIndex);
+        getPageCriteria.setMaxResults(maxResults);
+
+        return getPageCriteria.list();
+    }
+
+    public int countResults(StudentSearchParameter searchParam) {
         Criteria countCriteria = studentCriteriaBuilder.countMatchingResultsCriteria(searchParam);
-        int totalNumberOfResults = ((Number) countCriteria.uniqueResult()).intValue();
-        int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
-
-        return new StudentListPage(getPageCriteria.list(), searchParam.getPage(), totalNumberOfPages);
+        return ((Number) countCriteria.uniqueResult()).intValue();
     }
 
     public Student update(UpdateStudentParameter studentParam) {
