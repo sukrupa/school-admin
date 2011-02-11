@@ -3,7 +3,7 @@
     <form id="updateStudent" name="updateStudent" action="/students/$studentId$" method="post">
 
         <div id="studentInfo">
-<div id="basicInfo">
+            <div id="basicInfo">
                 <div class="updateEntry">
                     <div class="label">Student ID</div>
                     <input type="text" name="studentId" id="studentId" value="$studentId$" readonly
@@ -17,9 +17,7 @@
 
                 <div class="updateEntry">
                     <div class="label">Date of birth</div>
-                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$"
-                           class="updateValue"></input>
-
+                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" class="updateValue"></input>
                     <div id="dateErrorMessage"></div>
                 </div>
 

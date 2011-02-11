@@ -149,6 +149,7 @@ div.note {
 .updateEntry {
     clear: both;
     padding-bottom: 3em;
+    position:relative;
 }
 
 .label {
@@ -183,6 +184,8 @@ div.note {
 
 #dateErrorMessage {
     color: red;
+    position:absolute;
+    bottom: 0px;
 }
 
 .mandatory {
