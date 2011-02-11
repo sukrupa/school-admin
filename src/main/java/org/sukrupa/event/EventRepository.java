@@ -39,45 +39,6 @@ public class EventRepository {
         return (Event) session().createCriteria(Event.class).add(Restrictions.eq("id", eventId)).uniqueResult();
     }
 
-    @Deprecated
-    public boolean save(EventRecord eventRecord) {
-        if (attendiesAreValid(eventRecord)) {
-            session().save(Event.from(eventRecord));
-            return true;
-        } else
-            eventRecord.setError(findNonExisting(eventRecord.getAttendeesForDisplay()));
-        return false;
-    }
-
-    @Deprecated
-    private boolean attendiesAreValid(EventRecord eventRecord) {
-        return findNonExisting(eventRecord.getAttendeesForDisplay()).size() == 0;
-    }
-
-    @Deprecated
-    public Set<String> findNonExisting(String studentIds) {
-        Set<String> studentIdsFromForm = parseIdsFromForm(studentIds);
-        studentListFromDB = retrieveStudent(studentIdsFromForm);
-
-        for (Student each : studentListFromDB) {
-            studentIdsFromForm.remove(each.getStudentId());
-        }
-
-        return (studentIdsFromForm);
-    }
-
-    @Deprecated
-    private Set<Student> retrieveStudent(Set<String> studentIdsFromForm) {
-        Criteria criteria = session().createCriteria(Student.class);
-        criteria.add(Restrictions.disjunction().add(Restrictions.in(STUDENT_ID, studentIdsFromForm)));
-        return Sets.newHashSet(criteria.list());
-    }
-
-    @Deprecated
-    private Set<String> parseIdsFromForm(String studentIds) {
-        return Sets.newLinkedHashSet(Splitter.on(ATTENDEES_SEPARATOR).omitEmptyStrings().trimResults().split(studentIds));
-    }
-
     private Session session() {
         return sessionFactory.getCurrentSession();
     }

@@ -59,21 +59,6 @@ public class EventRepositoryTest {
         assertThat(eventRepository.getEvent(event.getId()), is(event));
     }
 
-    @Test // FIXME get rid of this test - this is not repository functionality
-    public void shouldValidateAttendees() {
-        Student nonExisting = new StudentBuilder().studentId("42").build();
-        EventRecord eventRecord = new EventRecordBuilder().attendees(suhas, nonExisting).build();
-
-        assertThat(eventRepository.findNonExisting(eventRecord.getAttendeesForDisplay()).contains(nonExisting.getStudentId()), is(true));
-    }
-
-    @Test // FIXME get rid of this test - this is not repository functionality
-    public void shouldNotSaveEventWithInvalidAttendees() {
-        Student pat = new StudentBuilder().name("Patric").studentId("4").build();
-        EventRecord eventRecord = new EventRecordBuilder().date("12/01/2010").time("13:45").attendees(sahil, renaud, pat).build();
-        assertThat(eventRepository.save(eventRecord), is(false));
-    }
-
     private Event save(Event event) {
         databaseHelper.save(event);
         return event;
