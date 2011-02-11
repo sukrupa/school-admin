@@ -34,6 +34,25 @@ body {
     font: 28pt Palatino, serif;
 }
 
+.pageheader .headerImage {
+    float:left;
+    width:190px;
+}
+
+.pageheader .twoLinesTitle, .pageheader .oneLineTitle {
+    float:left;
+    text-align:center;
+    width:760px;
+}
+
+.pageheader .twoLinesTitle {
+    padding-top: 20px;
+}
+
+.pageheader .oneLineTitle {
+    padding-top: 40px;
+}
+
 #sidebar {
     width: 210px;
     margin-right: 20px;
