@@ -8,6 +8,8 @@ import org.hibernate.classic.Session;
 import org.hibernate.criterion.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.platform.DoNotRemove;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,20 +22,14 @@ public class StudentRepository {
     private static final String STUDENT_ID = "studentId";
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
 
-    private final SessionFactory sessionFactory;
-    private final StudentCriteriaBuilder studentCriteriaBuilder;
+    private  SessionFactory sessionFactory;
+    private  StudentCriteriaBuilder studentCriteriaBuilder;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         studentCriteriaBuilder = new StudentCriteriaBuilder(this.sessionFactory);
     }
-
-//    @SuppressWarnings("unchecked")
-//    public List<Student> findAll() {
-//        Criteria criteria = session().createCriteria(Student.class);
-//        return addOrderCriteria(criteria).list();
-//    }
 
     public Student load(String studentId) {
         Criteria criteria = session()
