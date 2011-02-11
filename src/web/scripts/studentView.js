@@ -1,7 +1,5 @@
 $(document).ready(function () {
-    if ($('#confirmMessage').html() === "") {
-        $('#successDiv').hide();
-    } else {
+    if ($('#successDiv')) {
         $('#successDiv').fadeOut(6000);
     }
 });
