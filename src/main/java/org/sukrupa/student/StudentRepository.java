@@ -5,11 +5,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.criterion.*;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.DoNotRemove;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,8 +21,8 @@ public class StudentRepository {
 
     private static final String STUDENT_ID = "studentId";
 
-    private  SessionFactory sessionFactory;
-    private  StudentCriteriaBuilder studentCriteriaBuilder;
+    private SessionFactory sessionFactory;
+    private StudentCriteriaBuilder studentCriteriaBuilder;
 
     @Autowired
     public StudentRepository(SessionFactory sessionFactory) {
@@ -32,16 +31,11 @@ public class StudentRepository {
     }
 
     public Student load(String studentId) {
-        Criteria criteria = session()
-                .createCriteria(Student.class)
-                .add(Restrictions.eq(STUDENT_ID, studentId));
-        return (Student) criteria.uniqueResult();
+        return (Student) query("from Student where studentId = ?").setParameter(0, studentId).uniqueResult();
     }
 
     public Set<Student> load(String... studentIds) {
-        Query query = session().createQuery("from Student where studentId in (:studentIds)");
-        query.setParameterList("studentIds", studentIds);
-        return newHashSet(query.list());
+        return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
     }
 
     public List<Student> parametricSearch(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
@@ -85,6 +79,10 @@ public class StudentRepository {
 
     public void saveOrUpdate(Student student) {
         session().saveOrUpdate(student);
+    }
+
+    private Query query(String hql) {
+        return session().createQuery(hql);
     }
 
     private Session session() {
