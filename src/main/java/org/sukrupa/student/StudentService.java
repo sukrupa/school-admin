@@ -3,12 +3,14 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.platform.DoNotRemove;
 
 @Service
 public class StudentService {
     private StudentRepository repository;
 
-    public StudentService() {}
+    @DoNotRemove
+    StudentService() {}
 
     @Autowired
     public StudentService(StudentRepository repository) {

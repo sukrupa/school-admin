@@ -16,7 +16,7 @@ public class Talent {
 	private String description;
 
 	@DoNotRemove
-	public Talent() {}
+    Talent() {}
 
 	public Talent(String description) {
 		this.description = description;

@@ -19,9 +19,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
-
 public class UpdateStudentTest {
-
 
     private Student shefali = new StudentBuilder().name("shefali").studentId("132753456478").build();
 
@@ -36,15 +34,13 @@ public class UpdateStudentTest {
     }
 
     @Test
-   public void shouldAddNotes() {
+    public void shouldAddNotes() {
         databaseHelper.saveAndCommit(shefali);
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
         ViewStudentPage viewPage = new ViewStudentPage(driver, shefali.getStudentId());
-        assertThat(viewPage.getNotes(),hasItem("new note"));
-
+        assertThat(viewPage.getNotes(), hasItem("new note"));
     }
-
 
 }

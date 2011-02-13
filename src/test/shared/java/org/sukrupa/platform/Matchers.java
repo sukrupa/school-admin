@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.sukrupa.app.student.StudentRow;
 import org.sukrupa.event.Event;
+import org.sukrupa.student.Note;
 import org.sukrupa.student.Student;
 
 import java.util.Arrays;
@@ -72,6 +73,21 @@ public class Matchers {
 
             private boolean sameAge() {
                 return student.getAge() == studentRow.getAge();
+            }
+
+            public void describeTo(Description description) {
+                description.appendValue(student);
+            }
+        };
+    }
+
+    public static Matcher<Student> hasNote(final Note note) {
+        return new org.junit.internal.matchers.TypeSafeMatcher<Student>() {
+            private Student student;
+
+            public boolean matchesSafely(Student student) {
+                this.student = student;
+                return student.getNotes().contains(note);
             }
 
             public void describeTo(Description description) {
