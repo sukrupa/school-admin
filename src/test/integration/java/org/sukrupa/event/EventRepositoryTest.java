@@ -53,7 +53,7 @@ public class EventRepositoryTest {
     }
 
     private Event save(Event event) {
-        databaseHelper.save(event);
+        eventRepository.save(event);
         return event;
     }
 }
