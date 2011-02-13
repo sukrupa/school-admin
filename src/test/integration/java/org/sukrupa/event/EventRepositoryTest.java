@@ -13,8 +13,6 @@ import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.sukrupa.platform.Matchers.hasOnly;
@@ -25,6 +23,9 @@ import static org.sukrupa.platform.Matchers.hasOnly;
 @Transactional
 public class EventRepositoryTest {
 
+    private final Student sahil = new StudentBuilder().name("Sahil").studentId("1").build();
+    private final Student suhas = new StudentBuilder().name("Suhas").studentId("2").build();
+
     @Autowired
     SessionFactory sessionFactory;
 
@@ -33,30 +34,22 @@ public class EventRepositoryTest {
 
     private EventRepository eventRepository;
 
-    private Student sahil = new StudentBuilder().name("Sahil").studentId("1").build();
-    private Student suhas = new StudentBuilder().name("Suhas").studentId("2").build();
-    private Student renaud = new StudentBuilder().name("Renaud").studentId("3").build();
-
     @Before
     public void setUp() {
-        databaseHelper.save(sahil, suhas, renaud);
+        databaseHelper.save(sahil, suhas);
         eventRepository = new EventRepository(sessionFactory);
     }
 
     @Test
-    public void shouldLoadAndPopulateASavedEventIncludingAttendees() {
+    public void shouldLoadAndPopulateASavedEvent() {
         Event event = save(new EventBuilder().attendees(sahil, suhas).build());
-
-        List<Event> events = eventRepository.getAll();
-
-        assertThat(events, hasOnly(event));
-        assertThat(events.get(0).getAttendees(), hasOnly(sahil, suhas));
+        assertThat(eventRepository.list(), hasOnly(event));
     }
 
     @Test
     public void shouldLoadEventById() {
-        Event event = save(new EventBuilder().attendees(sahil, renaud).build());
-        assertThat(eventRepository.getEvent(event.getId()), is(event));
+        Event event = save(new EventBuilder().build());
+        assertThat(eventRepository.load(event.getId()), is(event));
     }
 
     private Event save(Event event) {

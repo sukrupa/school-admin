@@ -17,10 +17,8 @@ import static org.sukrupa.platform.Matchers.containsAttendees;
 public class EventServiceTest {
 
     private final Student pat = new StudentBuilder().studentId("1").build();
-
     private final Student jim = new StudentBuilder().studentId("2").build();
-
-    private Event event = new EventBuilder().build();
+    private final Event event = new EventBuilder().build();
 
     @Mock
     private EventRepository eventRepository;

@@ -18,7 +18,7 @@ public class Event {
     @Id
     @GeneratedValue
     @Column(name = "event_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "event_title")
     private String title;
@@ -69,7 +69,7 @@ public class Event {
                 .build();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

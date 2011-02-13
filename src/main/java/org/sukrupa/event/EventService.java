@@ -29,6 +29,6 @@ public class EventService {
     }
 
     public Event getEvent(int eventId) {
-        return eventRepository.getEvent(eventId);
+        return eventRepository.load(eventId);
     }
 }
