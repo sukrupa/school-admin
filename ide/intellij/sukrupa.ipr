@@ -278,13 +278,6 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="Hamcrest">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../../lib/test/hamcrest-all-1.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
     <library name="main">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
@@ -322,23 +315,6 @@
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
     </library>
-    <library name="sql-runner-main">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
-        <root url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/../../tools/hsqldb-sql-runner/lib/main" recursive="false" />
-    </library>
-    <library name="sql-runner-test">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/../../lib/test" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
-    </library>
     <library name="test">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/../../lib/test" />
@@ -346,14 +322,6 @@
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
-    </library>
-    <library name="twist">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/../../lib/twist" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/../../lib/twist" recursive="false" />
     </library>
   </component>
 </project>

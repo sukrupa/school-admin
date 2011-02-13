@@ -8,11 +8,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.student.UpdateStudentPage;
 import org.sukrupa.app.student.ViewStudentPage;
-import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.platform.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
