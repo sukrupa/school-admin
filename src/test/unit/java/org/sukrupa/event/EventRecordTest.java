@@ -9,7 +9,8 @@ public class EventRecordTest {
 
     @Test
     public void shouldReturnStudentIdsOfAttendees() {
-        EventRecord eventRecord = new EventRecordBuilder().attendees("1", "2", "3").build();
+        EventRecord eventRecord = new EventRecord();
+        eventRecord.setAttendees("1, 2, 3");
         assertThat(eventRecord.getStudentIdsOfAttendees(), is(new String[]{"1", "2", "3"}));
     }
 }

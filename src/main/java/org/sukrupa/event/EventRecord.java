@@ -1,5 +1,7 @@
 package org.sukrupa.event;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class EventRecord {
@@ -88,7 +90,11 @@ public class EventRecord {
     }
 
     public String[] getStudentIdsOfAttendees() {
-        return attendees.split(",");
+        List<String> studentIds = new ArrayList<String>();
+        for (String studentId : attendees.split(",")) {
+            studentIds.add(studentId.trim());
+        }
+        return studentIds.toArray(new String[]{});
     }
 
     public void setAttendees(String attendees) {
