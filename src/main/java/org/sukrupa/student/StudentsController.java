@@ -20,26 +20,28 @@ public class StudentsController {
     private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = Arrays.asList("Male", "Female");
     private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
-    private static final List<String> SUBCASTES = Arrays.asList("", "Banjarthi", "AK", "AD", " Kumbara");
+    private static final List<String> SUBCASTES = Arrays.asList("", "AD", "AK", "Banjarthi", "Kumbara");
     private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-    private static final List<String> RELIGIONS = Arrays.asList("", "Hindu", "Christian", "Muslim");
+    private static final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim");
 
-    private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
-            "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
-    private StudentRepository repository;
+    private static final List<String> TALENTS = Arrays.asList("Art", "Choir", "Craft", "Creative Writing", "Dancing", "Debate",
+		    "Drama", "Drawing", "Humanities", "Musical Instrument", "Quiz", "Science Club", "Singing", "Sports", "Story Writing");
+    private StudentService service;
 
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
 
 
     @Autowired
-    public StudentsController(StudentRepository repository) {
-        this.repository = repository;
+    public StudentsController(StudentService service) {
+        this.service = service;
     }
 
     @RequestMapping()
-    public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        StudentListPage students = new PaginatedStudentSearch(repository, searchParam).getPage();
+    public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
+                       @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                       Map<String, Object> model) {
+        StudentListPage students = service.getPage(searchParam, pageNumber);
         model.put("page", students);
         return "students/list";
     }
@@ -60,7 +62,7 @@ public class StudentsController {
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
                        Map<String, Object> model) {
-        Student theStudent = repository.load(id);
+        Student theStudent = service.load(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -85,7 +87,7 @@ public class StudentsController {
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
 
-        Student updatedStudent = repository.update(studentParam);
+        Student updatedStudent = service.update(studentParam);
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
@@ -101,7 +103,7 @@ public class StudentsController {
     public String view(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "false") String studentUpdatedSuccesfully,
                        Map<String, Object> model) {
-	    Student student = repository.load(id);
+	    Student student = service.load(id);
 	    if (student != null) {
 			model.put("student", student);
 			model.put("studentUpdatedSuccesfully", Boolean.parseBoolean(studentUpdatedSuccesfully));
