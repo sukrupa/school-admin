@@ -26,7 +26,6 @@ public class StudentsController {
 
     private static final List<String> TALENTS = Arrays.asList("Art", "Choir", "Craft", "Creative Writing", "Dancing", "Debate",
 		    "Drama", "Drawing", "Humanities", "Musical Instrument", "Quiz", "Science Club", "Singing", "Sports", "Story Writing");
-    private StudentRepository repository;
     private StudentService service;
 
     private static final int AGES_TO = 20;
@@ -34,8 +33,7 @@ public class StudentsController {
 
 
     @Autowired
-    public StudentsController(StudentRepository repository, StudentService service) {
-        this.repository = repository;
+    public StudentsController(StudentService service) {
         this.service = service;
     }
 
@@ -62,7 +60,7 @@ public class StudentsController {
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
                        Map<String, Object> model) {
-        Student theStudent = repository.load(id);
+        Student theStudent = service.load(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -87,7 +85,7 @@ public class StudentsController {
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
 
-        Student updatedStudent = repository.update(studentParam);
+        Student updatedStudent = service.update(studentParam);
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
@@ -103,7 +101,7 @@ public class StudentsController {
     public String view(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "false") String studentUpdatedSuccesfully,
                        Map<String, Object> model) {
-	    Student student = repository.load(id);
+	    Student student = service.load(id);
 	    if (student != null) {
 			model.put("student", student);
 			model.put("studentUpdatedSuccesfully", Boolean.parseBoolean(studentUpdatedSuccesfully));

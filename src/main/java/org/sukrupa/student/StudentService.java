@@ -6,11 +6,24 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StudentService {
     private StudentRepository repository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+
+    public Student load(String studentId) {
+        return repository.load(studentId);
+    }
+
+    public Set<Student> load(String... studentIds) {
+        return repository.load(studentIds);
+    }
+
+    public Student update(UpdateStudentParameter studentParam) {
+        return repository.update(studentParam);
+    }
 
     @DoNotRemove
     StudentService() {}
