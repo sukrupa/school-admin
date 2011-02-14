@@ -40,14 +40,14 @@ public class StudentService {
         repository.saveOrUpdate(student);
 
     }
-    public StudentListPage getPage(StudentSearchParameter searchParam) {
-        int firstIndex = (searchParam.getPage() - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
+    public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber) {
+        int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
         List<Student> students = repository.parametricSearch(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
         int totalNumberOfResults = repository.countResults(searchParam);
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
 
-        return new StudentListPage(students, searchParam.getPage(), totalNumberOfPages);
+        return new StudentListPage(students, pageNumber, totalNumberOfPages);
     }
 }
