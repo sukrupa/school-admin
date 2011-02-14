@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Map;
+
 import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -21,8 +23,15 @@ public class NoteController {
     }
 
     @RequestMapping(method = POST)
-    public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote) {
-        service.addNoteFor(studentId, newNote);
-        return format("redirect:/students/update?studentId=%s", studentId);
+    public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote, Map<String, Object> model) {
+        model.put("studentId", studentId);
+
+        try {
+            service.addNoteFor(studentId, newNote);
+            model.put("noteUpdateStatus", "Note Added Successfully");
+        } catch (Exception e) {
+            model.put("noteUpdateStatus", "Error Adding Note");
+        }
+        return format("redirect:/students/"+studentId+"/edit");
     }
 }

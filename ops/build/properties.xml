@@ -64,6 +64,9 @@
 
     <property name="ops.deploy.dir" value="${ops.dir}/deploy"/>
     <property name="ops.deploy.sql.dir" value="${ops.deploy.dir}/sql"/>
+    <property name="ops.deploy.sql.data.dir" value="${ops.deploy.sql.dir}/data"/>
+    <property name="ops.deploy.sql.data.talent.sql" value="${ops.deploy.sql.data.dir}/talent.sql"/>
+    <property name="ops.deploy.sql.data.student.sql" value="${ops.deploy.sql.data.dir}/student.sql"/>
     <property name="ops.deploy.insert.fake.data.sql" value="${ops.deploy.sql.dir}/insert-fake-data.sql"/>
     <property name="ops.deploy.delete.fake.data.sql" value="${ops.deploy.sql.dir}/delete-fake-data.sql"/>
 

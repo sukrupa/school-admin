@@ -9,9 +9,13 @@ import java.util.List;
 
 public class StudentListPage {
     private List<Student> students;
+    private int pageNumber;
+    private int maxPageNumber;
 
-    public StudentListPage(List<Student> students) {
+    public StudentListPage(List<Student> students, int pageNumber, int maxPageNumber) {
         this.students = students;
+        this.pageNumber = pageNumber;
+        this.maxPageNumber = maxPageNumber;
     }
 
     public List<Student> getStudents() {
@@ -28,5 +32,25 @@ public class StudentListPage {
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public boolean isPreviousEnabled() {
+        return pageNumber > 1;
+    }
+
+    public int getNextPage() {
+        return pageNumber + 1;
+    }
+
+    public int getPreviousPage() {
+        return pageNumber - 1;
+    }
+
+    public boolean isNextEnabled() {
+        return pageNumber < maxPageNumber;
     }
 }

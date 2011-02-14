@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class Event {
     @Id
     @GeneratedValue
     @Column(name = "event_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "event_title")
     private String title;
@@ -34,7 +35,7 @@ public class Event {
     @Column(name = "event_notes")
     private String notes;
 
-    @Type(type = "org.sukrupa.event.PersistentDate")
+    @Type(type = "org.sukrupa.platform.date.PersistentDate")
     private Date date;
 
     @ManyToMany
@@ -58,18 +59,17 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public static Event createFrom(EventRecord eventRecord, Set<Student> attendees) {
+    public static Event from(EventRecord eventRecord) {
         return new EventBuilder().title(eventRecord.getTitle())
                 .venue(eventRecord.getVenue())
                 .description(eventRecord.getDescription())
                 .coordinator(eventRecord.getCoordinator())
                 .notes(eventRecord.getNotes())
                 .date(parseDateTime(eventRecord))
-                .attendees(attendees)
                 .build();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -90,11 +90,15 @@ public class Event {
     }
 
     private static Date parseDateTime(EventRecord eventRecord) {
-        return new Date(eventRecord.getDate(), eventRecord.getTime());
+        return Date.parse(eventRecord.getDate(), eventRecord.getTime());
+    }
+
+    public void addAttendees(Set<Student> attendees) {
+        this.attendees.addAll(attendees);
     }
 
     public Set<Student> getAttendees() {
-        return this.attendees;
+        return attendees;
     }
 
     @Transient

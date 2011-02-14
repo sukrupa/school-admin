@@ -1,5 +1,6 @@
 package org.sukrupa.event;
 
+import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
 import java.util.HashSet;
@@ -12,7 +13,7 @@ public class EventBuilder {
     private String venue = "dummy.venue";
     private String coordinator = "dummy.coordinator";
     private String description = "dummy.description";
-    private String notes = "dummy.notes" ;
+    private String notes = "dummy.notes";
     private Set<Student> attendees = new HashSet<Student>();
     private Date date = Date.now();
 

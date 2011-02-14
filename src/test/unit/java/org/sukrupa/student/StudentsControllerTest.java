@@ -1,28 +1,19 @@
 package org.sukrupa.student;
 
-import com.google.common.collect.Maps;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Maps.newHashMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.student.StudentRepository.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
 public class StudentsControllerTest {
+
 
     @Mock
     private StudentRepository repository;
@@ -30,7 +21,7 @@ public class StudentsControllerTest {
     private StudentsController controller;
 
     private Map<String, Object> studentsListModel = new HashMap<String, Object>();
-    private HashMap<String,Student> studentModel = new HashMap<String,Student>();
+    private HashMap<String, Student> studentModel = new HashMap<String, Student>();
     private Student sahil = new StudentBuilder().name("pat").studentClass("LKG").build();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
     private Student renaud = new StudentBuilder().name("renaud").studentClass("Nursery").build();
@@ -42,46 +33,20 @@ public class StudentsControllerTest {
     }
 
     @Test
-    public void shouldDisplayFirstPage() {
-        List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(students.subList(0, 5));
-        controller.list(new StudentSearchParameterBuilder().page(1).build(), studentsListModel);
-        assertThat((Integer) studentsListModel.get("page_number"), is(1));
-        assertThat(((StudentListPage) studentsListModel.get("page")).getStudents().size(), is(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE));
-    }
-
-    @Test
-    public void shouldDisplaySecondPage() {
-        List<Student> students = createListOfStudents(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        when(repository.parametricSearch(Matchers.<StudentSearchParameter>anyObject())).thenReturn(students.subList(5, 6));
-        controller.list(new StudentSearchParameterBuilder().page(2).build(), studentsListModel);
-        assertThat((Integer)studentsListModel.get("page_number"), is(2));
-        assertThat(((StudentListPage)studentsListModel.get("page")).getStudents().size(), is(1));
-    }
-
-    private List<Student> createListOfStudents(int size) {
-        List<Student> students = new ArrayList<Student>();
-        for (int i = 0; i < size; i++) {
-            students.add(sahil);
-        }
-        return students;
-    }
-
-    @Test 
     public void shouldPopulateModelWithAStudent() {
-        when(repository.find("123")).thenReturn(pat);
-        controller.view("123", studentModel);
+        when(repository.load("123")).thenReturn(pat);
+        controller.view("123", "", (HashMap) studentModel);
         assertThat(studentModel.get("student"),is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
-	    when(repository.find("123")).thenReturn(pat);
-        assertThat(controller.view("123", studentModel),is("students/view"));
+	    when(repository.load("123")).thenReturn(pat);
+        assertThat(controller.view("123", "", (HashMap) studentModel),is("students/view"));
     }
 
     @Test
     public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", studentModel),is("students/viewFailed"));
+        assertThat(controller.view("0987ihuyi", "", (HashMap) studentModel),is("students/viewFailed"));
     }
 }

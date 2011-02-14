@@ -1,41 +1,40 @@
-<form id="eventRecord" name="eventRecord" action="save" method="post" >
+<form id="eventRecord" name="eventRecord" action="save" method="post">
 
-	<span>Title<span class ="mandatory">* </span> </span>
-	<input type="text" name="title" id="title"  value="$eventtitle$"/>
+    <span>Title<span class="mandatory">* </span> </span>
+    <input type="text" name="title" id="title" value="$eventtitle$"/>
 
-	<span>Date (dd/mm/yyyy)<span class ="mandatory">* </span></span>
-	<input size = 12 type="text" name="date" id="date" value="$date$"/>
+    <span>Date (dd-mm-yyyy)<span class="mandatory">* </span></span>
+    <input size= 12 type="text" name="date" id="date" value="$date$"/>
 
-	<span>Time (hh:mm)</span>
-	<input size=7  type="text" name="time" id="time" value="$time$"/> <br/>
-
-	<br/>
-	<span>Venue</span>
-	<input type="text" name="venue" id= "venue" value="$venue$"/><br />
+    <span>Time (hh:mm)</span>
+    <input size=7 type="text" name="time" id="time" value="$time$"/> <br/>
 
     <br/>
-	<span>Description<span class ="mandatory">* </span></span>
-	<textarea name="description" rows="3" cols="20" id="description" >$description$</textarea> <br/>
+    <span>Venue</span>
+    <input type="text" name="venue" id="venue" value="$venue$"/><br/>
 
     <br/>
-	<span>Coordinator</span>
-	<input type="text" name="coordinator" id="coordinator" value="$coordinator$"/><br/>
+    <span>Description<span class="mandatory">* </span></span>
+    <textarea name="description" rows="3" cols="20" id="description">$description$</textarea> <br/>
 
     <br/>
-	<span>Attendees<span class ="mandatory">* </span></span>
-	<textarea name="attendees" rows="3" cols="20" id="attendees">$attendees$</textarea><br />
+    <span>Coordinator</span>
+    <input type="text" name="coordinator" id="coordinator" value="$coordinator$"/><br/>
 
     <br/>
-	<span>Notes</span>
-	<textarea name="notes" rows="3" cols="20" id="notes" >$notes$</textarea> <br/>
+    <span>Attendees<span class="mandatory">* </span></span>
+    <textarea name="attendees" rows="3" cols="20" id="attendees">$attendees$</textarea><br/>
+
+    <br/>
+    <span>Notes</span>
+    <textarea name="notes" rows="3" cols="20" id="notes">$notes$</textarea> <br/>
     <br/>
 
-    <h4><span class ="mandatory">* </span> represents Mandatory fields</h4>
+    <input type="submit" value="Save" onclick="validateFields()"/>
+    <input type="button" value="Clear" onclick="resetFields()"/>
 
-	<input type="button" value="Save"  onclick="validateFields()"/>
-	<input type="button" value="Clear" onclick="resetFields()"/>
+    <br/><br/>
 
-	<br/><br/>
-	<div class="errorMessages" id="errorMessages"> $errorMessage$ </div>
+    <div class="errorMessages" id="errorMessages"> $errorMessage$</div>
 
 </form>

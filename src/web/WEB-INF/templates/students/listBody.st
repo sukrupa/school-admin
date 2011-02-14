@@ -16,28 +16,28 @@
             </thead>
             <tbody>
 
-    $page.students:{
-        <tr class="student">
-            <td class="studentId">$it.studentId$</td>
-            <td class="name"><a href="/students/$it.studentId$">$it.name$</a></td>
-            <td class="gender">$it.gender$</td>
-            <td class="age">$it.age$</td>
-            <td class="talents">$it.talentsForDisplay$</td>
-            <td class="class">$it.studentClass$</td>
-            <td class="religion">$it.religion$</td>
-            <td class="caste">$it.caste$</td>
-            <td class="communityLocation">$it.communityLocation$</td>
-        </tr>
-    }$
-        </tbody>
-    </table></div>
-    <a href="#" id="previousButton" class="navLink">Previous</a> &nbsp;&lt;&lt;&nbsp;
-    $pages: {
-    <a href="#" class="pageButton navLink">$i$</a> &nbsp;
-    }$
+            $page.students:{
+            <tr class="student">
+                <td class="studentId">$it.studentId$</td>
+                <td class="name"><a href="/students/$it.studentId$">$it.name$</a></td>
+                <td class="gender">$it.gender$</td>
+                <td class="age">$it.age$</td>
+                <td class="talents">$it.talentsForDisplay$</td>
+                <td class="class">$it.studentClass$</td>
+                <td class="religion">$it.religion$</td>
+                <td class="caste">$it.caste$</td>
+                <td class="communityLocation">$it.communityLocation$</td>
+            </tr>
+            }$
+            </tbody>
+        </table>
+    </div>
+    $if(page.previousEnabled)$<a href="?page=$page.previousPage$" id="previousButton" class="navLink">Previous</a>$else$Previous$endif$
+    &nbsp;&lt;&lt;
+    $page.pageNumber$
     &gt;&gt;&nbsp;
-    <a href="#" id="nextButton" class="navLink">Next</a>
- </div>
+    $if(page.nextEnabled)$<a href="?page=$page.nextPage$" id="nextButton" class="navLink">Next</a>$else$Next$endif$
+</div>
 
 
 

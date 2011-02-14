@@ -19,8 +19,9 @@ public class StudentService {
 
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
-        Student student = repository.find(studentId);
+        Student student = repository.load(studentId);
         student.addNote(new Note(noteMessage));
         repository.saveOrUpdate(student);
+
     }
 }

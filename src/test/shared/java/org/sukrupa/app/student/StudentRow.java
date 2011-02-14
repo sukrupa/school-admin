@@ -1,11 +1,9 @@
-package org.sukrupa.app.students;
+package org.sukrupa.app.student;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.Set;
 
 public class StudentRow {
     private final WebElement row;
