@@ -38,8 +38,10 @@ public class StudentsController {
     }
 
     @RequestMapping()
-    public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        StudentListPage students = service.getPage(searchParam, searchParam.getPage());
+    public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
+                       @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                       Map<String, Object> model) {
+        StudentListPage students = service.getPage(searchParam, pageNumber);
         model.put("page", students);
         return "students/list";
     }
