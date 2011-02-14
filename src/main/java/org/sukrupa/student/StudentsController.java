@@ -27,19 +27,21 @@ public class StudentsController {
     private static final List<String> TALENTS = Arrays.asList("Sports", "Science Club", "Humanities", "Creative Writing",
             "Dancing", "Debate", "Singing", "Drama", "Musical Instrument", "Quiz", "Story Writing", "Choir", "Art", "Drawing", "Craft");
     private StudentRepository repository;
+    private StudentService service;
 
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
 
 
     @Autowired
-    public StudentsController(StudentRepository repository) {
+    public StudentsController(StudentRepository repository, StudentService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @RequestMapping()
     public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        StudentListPage students = new PaginatedStudentSearch(repository, searchParam).getPage();
+        StudentListPage students = service.getPage(searchParam);
         model.put("page", students);
         return "students/list";
     }

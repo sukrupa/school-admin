@@ -17,6 +17,8 @@ public class StudentsControllerTest {
 
     @Mock
     private StudentRepository repository;
+    @Mock
+    private StudentService service;
 
     private StudentsController controller;
 
@@ -29,7 +31,7 @@ public class StudentsControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new StudentsController(repository);
+        controller = new StudentsController(repository, service);
     }
 
     @Test
