@@ -9,13 +9,13 @@ set :staging_deploy_path, "/var/opt/sukrupa/school-admin"
 role :staging_server, "#{staging_server}"
 
 task :staging do
-  # pat: work in progress
+  puts "Pat: Work in Progress."
 end
 
 task :deploy, :roles => :staging_server do
-  stop_remote_server
   copy_deploy_artifact
   unzip_deploy_artifact
+  stop_remote_server
   start_remote_server
   recreate_database
   insert_real_data
