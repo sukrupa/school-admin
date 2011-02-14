@@ -9,23 +9,21 @@ elif [[ "$#" -ne "1" ]]; then
 	echo "Aborting: Please enter a filename or type --help"
 else 
 	
-	echo 
-	"-------------------------------------
+	echo "\n-------------------------------------
 	Installing Roo...
 	-------------------------------------\n"
-	gem install roo
+	
+	sudo gem install roo
 
-	"-------------------------------------
+	echo "\n-------------------------------------
 	Installing Roo Dependencies...
 	-------------------------------------\n"
 	# ROO DEPENDENCIES #
-	gem install rubyzip
-	gem install nokogiri
-	gem install spreadsheet
-	gem install google_spreadsheet
-	gem install gimite-google-spreadsheet-ruby
-	gem install bones
-	gem install google-spreadsheet-ruby
+	sudo gem install rubyzip
+	sudo gem install nokogiri
+	sudo gem install spreadsheet
+	sudo gem install bones
+	sudo gem install google-spreadsheet-ruby
 
 	
     ruby import_students.rb "$1"
