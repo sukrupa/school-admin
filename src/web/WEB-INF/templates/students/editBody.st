@@ -1,4 +1,12 @@
 <div>
+
+    $if (noteAddedSuccesfully)$
+        <div id="successDiv">
+            <img id="successImage" src="/images/success.png" alt="Success" />
+            <div id ="confirmMessage">Note added successfully.</div>
+        </div>
+    $endif$
+
 <div id="student">
     <form id="updateStudent" name="updateStudent" action="/students/$studentId$" method="post">
 

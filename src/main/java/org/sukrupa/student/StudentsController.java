@@ -61,6 +61,7 @@ public class StudentsController {
     @RequestMapping(value = "{id}/edit", method = GET)
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
+                       @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
         Student theStudent = service.load(id);
 
@@ -76,7 +77,9 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+
         model.put("note_message", noteUpdateStatus);
+        model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";
     }
@@ -101,12 +104,12 @@ public class StudentsController {
 
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,
-                       @RequestParam(required = false, defaultValue = "false") String studentUpdatedSuccesfully,
+                       @RequestParam(required = false) boolean studentUpdatedSuccesfully,
                        Map<String, Object> model) {
 	    Student student = service.load(id);
 	    if (student != null) {
 			model.put("student", student);
-			model.put("studentUpdatedSuccesfully", Boolean.parseBoolean(studentUpdatedSuccesfully));
+			model.put("studentUpdatedSuccesfully",studentUpdatedSuccesfully);
 			return "students/view";
 	    }
 	    return "students/viewFailed";
