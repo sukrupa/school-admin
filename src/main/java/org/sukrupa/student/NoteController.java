@@ -29,6 +29,7 @@ public class NoteController {
         try {
             service.addNoteFor(studentId, newNote);
             model.put("noteUpdateStatus", "Note Added Successfully");
+            model.put("noteAddedSuccesfully", true);
         } catch (Exception e) {
             model.put("noteUpdateStatus", "Error Adding Note");
         }
