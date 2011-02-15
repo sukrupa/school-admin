@@ -9,5 +9,5 @@
         <br/>
 
       Events<br/>
-        <p class="indent fakelink">View Events</p>
+        <p class="indent fakelink"><a href="/events">View Events</a></p>
         <p class="indent"><a href="/events/create">Record Event</a><br/></p>

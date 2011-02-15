@@ -21,7 +21,6 @@
                 <td class="date">15/03/2011</td>
 
             </tr>
-
             </tbody>
         </table>
     </div>

@@ -1,8 +1,10 @@
-Tags:
-Preconditions:Navigate to Event List
+Tags:in-progress
+Preconditions:Navigate to dashboard
+Metadata:ScenarioType=Auto
 Event List:
-#See that event is "Diwali"
-#See that date is "26/10/11"
-#Click on "Diwali" 
-#Verify that you are brought to "Diwali Event Record"
+#Follow the "View Events" link
+#Check that there are "2" events in the list
+#Check that event "2" is titled "Annual Day" and is on "15/03/2011"
+#Click on "Annual Day"
+#Verify that you are brought to "Event Record"
 
