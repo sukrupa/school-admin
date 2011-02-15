@@ -35,6 +35,8 @@
 
     <br/><br/>
 
-    <div class="errorMessages" id="errorMessages"> $errorMessage$</div>
+    $errors:{
+        <div class="errorMessage">$it.defaultMessage$</div>
+    }$
 
 </form>
