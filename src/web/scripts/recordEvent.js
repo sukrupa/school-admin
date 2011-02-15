@@ -32,7 +32,7 @@ function validMandatoryFields(){
 
 
 function validDate(){
-    var validDateformat= /^\d{1,2}\/\d{1,2}\/\d{4}$/
+    var validDateformat= /^\d{1,2}\-\d{1,2}\-\d{4}$/
     var validTimeformat= /^\d{1,2}\:\d{2}$/
 	var dateStr = $('#date').val();
 	var timeStr = $('#time').val();
@@ -40,9 +40,9 @@ function validDate(){
 		$('#errorMessages').html("Invalid Date Format. Please correct and submit again.");
 		return false;
 	}else{
-        var dayfield= dateStr.split("/")[0]
-        var monthfield=dateStr.split("/")[1]
-        var yearfield=dateStr.split("/")[2]
+        var dayfield= dateStr.split("-")[0]
+        var monthfield=dateStr.split("-")[1]
+        var yearfield=dateStr.split("-")[2]
         var hourfield=timeStr.split(":")[0]
         var minutefield=timeStr.split(":")[1]
         var dayobj;
