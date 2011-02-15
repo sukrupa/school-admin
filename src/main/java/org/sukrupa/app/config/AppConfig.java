@@ -60,6 +60,7 @@ public class AppConfig {
         try {
             Properties properties = new Properties();
             properties.load(new ClassPathResource("app.properties").getInputStream());
+
             return properties;
         } catch (IOException e) {
             throw new RuntimeException(e);

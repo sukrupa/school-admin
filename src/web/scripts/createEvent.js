@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    $('#clear').click(function () {
+        resetFields();
+    });
+});
 
 function resetFields() {
     $('#title').val("");
