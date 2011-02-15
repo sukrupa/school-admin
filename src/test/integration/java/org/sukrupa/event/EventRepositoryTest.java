@@ -52,6 +52,15 @@ public class EventRepositoryTest {
         assertThat(eventRepository.load(event.getId()), is(event));
     }
 
+
+    @Test(expected = Exception.class)
+    public void shouldThrowExceptionIfIdDoesNotExist()
+    {
+        int nonExistingId = 99;
+        eventRepository.load(nonExistingId);
+    }
+
+
     private Event save(Event event) {
         eventRepository.save(event);
         return event;

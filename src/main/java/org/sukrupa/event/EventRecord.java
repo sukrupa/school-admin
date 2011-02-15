@@ -85,7 +85,7 @@ public class EventRecord {
         this.notes = notes;
     }
 
-    public String getAttendeesForDisplay() {
+    public String getAttendees() {
         return attendees;
     }
 
