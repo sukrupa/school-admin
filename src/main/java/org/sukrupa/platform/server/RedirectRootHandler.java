@@ -16,8 +16,9 @@ class RedirectRootHandler extends DefaultHandler {
     }
 
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (response.isCommitted() || baseRequest.isHandled())
+        if (response.isCommitted() || baseRequest.isHandled()) {
             return;
+        }
 
         if (request.getRequestURI().equals("/")) {
             response.sendRedirect(redirectTo);
