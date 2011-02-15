@@ -28,13 +28,13 @@
         <mkdir dir="${target.main.dir}"/>
     </target>
 
-	<target name="dev" depends="clean, init, compile:all, copy-resources" />
+    <target name="dev" depends="clean, init, compile:all, copy-resources"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
             depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-                depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
@@ -44,7 +44,7 @@
             depends="clean, init, compile:all, copy-resources, package"
             description="Use this when you are working locally to just compile and package and install">
 
-        <exec executable="./ops/local/local-package.sh" />
+        <exec executable="./ops/local/local-package.sh"/>
     </target>
 
     <target name="compile:all"
@@ -103,7 +103,8 @@
     <target name="test:functional">
         <run-against-server startServerTarget="sukrupa-server:start"
                             checkServerUpTarget="sukrupa-server:check-is-running"
-                            stopServerTarget="sukrupa-server:stop">
+                            stopServerTarget="sukrupa-server:stop"
+                            authenticate="false">
             <execute>
                 <test-without-failing type="functional"/>
             </execute>
@@ -118,7 +119,8 @@
 
         <run-against-server startServerTarget="sukrupa-server:start-for-twist"
                             stopServerTarget="sukrupa-server:stop-for-twist"
-                            checkServerUpTarget="sukrupa-server:check-is-running">
+                            checkServerUpTarget="sukrupa-server:check-is-running"
+                            authenticate="false">
             <execute>
                 <ant antfile="${ops.build.dir}/twist.xml"
                      dir="${src.test.twist.fixtures.dir}"
@@ -140,6 +142,7 @@
             <zipfileset dir="${web.dir}" prefix="${web.root}"/>
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
+            <fileset file="${resources.main.dir}/jetty-realms.properties"/>
             <zipfileset file="${cobertura.dir}" prefix="tools"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
@@ -162,7 +165,7 @@
     </target>
 
     <target name="create.module.jar">
-        <jar basedir="${target.main.dir}" jarfile="${target.module.jar}"/>
+        <jar basedir="${target.main.dir}" jarfile="${target.module.jar}" excludes="jetty-realms.properties" />
     </target>
 
 </project>

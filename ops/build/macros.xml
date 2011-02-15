@@ -58,6 +58,7 @@
         <attribute name="stopServerTarget"/>
         <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
+        <attribute name="authenticate" default="true"/>
 
         <element name="execute"/>
 
@@ -74,6 +75,7 @@
             <parallel>
                 <sequential>
                     <echo message="Starting Server using target [@{startServerTarget}] ..."/>
+                    <property name="authenticate" value="@{authenticate}"/>
                     <antcall target="@{startServerTarget}"/>
                 </sequential>
                 <sequential>
