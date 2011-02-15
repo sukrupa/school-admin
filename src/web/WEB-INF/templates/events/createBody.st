@@ -44,8 +44,10 @@
                 <input type="text" name="notes" id="notes" value="$notes$" class="createValue"></input>
             </div>
 
-            <input type="submit" value="Save"/>
+            <input type="submit" id="save" value="Save"/>
             <input type="button" id="clear" value="Clear"/>
+
+            <div id="errorMessages" class="errorMessages"></div>
 
         </div>
 
