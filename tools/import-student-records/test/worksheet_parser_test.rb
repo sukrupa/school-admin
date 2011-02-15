@@ -21,7 +21,9 @@ class TestWorksheetParser < Test::Unit::TestCase
   end
   
   def test_parse_value
-    student = @worksheet_parser.parse.first
+    students = @worksheet_parser.parse
+    assert_equal(students.length, 2)
+    student = students.first[0]
     assert_equal("Arumugam.P", student.name)
     assert_equal("Male", student.gender)
     assert_equal("2003-06-19", student.date_of_birth)        
@@ -30,7 +32,8 @@ class TestWorksheetParser < Test::Unit::TestCase
   def test_should_cope_with_offset_columns
     @worksheet.default_sheet = 'offset-columns'
     @worksheet_parser = WorksheetParser.new(@worksheet)
-    student = @worksheet_parser.parse.first
+    students = @worksheet_parser.parse
+    student = students.first[0]
     assert_equal("Minno", student.name)
     assert_equal("Female", student.gender)
     assert_equal("1999-12-25", student.date_of_birth)            

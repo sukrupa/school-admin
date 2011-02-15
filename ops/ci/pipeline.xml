@@ -11,9 +11,6 @@
             <arg value="ci" />
           </exec>
         </tasks>
-        <tabs>
-          <tab name="Twist" path="reports/html/index.html" />
-        </tabs>
         <artifacts>
           <test src="target/reports" />
           <artifact src="target/school-admin.zip" dest="deploy" />
@@ -21,12 +18,26 @@
       </job>
     </jobs>
   </stage>
+  <stage name="twist">
+    <jobs>
+      <job name="twist">
+        <tasks>
+          <exec command="./build">
+            <arg value="test:twist" />
+          </exec>
+        </tasks>
+        <tabs>
+          <tab name="Twist" path="reports/html/index.html" />
+        </tabs>
+        <artifacts>
+          <test src="target/reports" />
+        </artifacts>
+      </job>
+    </jobs>
+  </stage>
   <stage name="sonar">
     <jobs>
       <job name="sonar">
-        <artifacts>
-          <test src="target/reports/cobertura" />
-        </artifacts>
         <tasks>
           <exec command="./build">
             <arg value="cobertura:all" />
@@ -37,6 +48,19 @@
             <arg value="sonar:sonar" />
           </exec>
         </tasks>
+        <artifacts>
+          <test src="target/reports/cobertura" />
+        </artifacts>
+      </job>
+    </jobs>
+  </stage>
+  <stage name="deploy-development">
+    <jobs>
+      <job name="deploy-development">
+        <tasks>
+          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+          <exec command="cap" args="-f ops/deploy/capfile development deploy" />
+        </tasks>
       </job>
     </jobs>
   </stage>
@@ -46,7 +70,18 @@
       <job name="deploy-staging">
         <tasks>
           <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
-          <exec command="cap" args="-f ops/deploy/capfile staging" />
+          <exec command="cap" args="-f ops/deploy/capfile staging deploy" />
+        </tasks>
+      </job>
+    </jobs>
+  </stage>
+  <stage name="deploy-production">
+    <approval type="manual" />
+    <jobs>
+      <job name="deploy-production">
+        <tasks>
+          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+          <exec command="cap" args="-f ops/deploy/capfile production deploy" />
         </tasks>
       </job>
     </jobs>
