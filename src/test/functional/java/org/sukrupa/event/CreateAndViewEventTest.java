@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +17,12 @@ import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
+import static org.sukrupa.platform.Matchers.hasOnly;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -42,6 +47,38 @@ public class CreateAndViewEventTest {
         givenThereAreSomeRegisteredStudents();
         whenICreateAndSaveAnEvent();
         thenIShouldBeAbleToViewTheEventDetails();
+    }
+
+    @Test
+    @Ignore
+    public void shouldDisplayCumulativeErrorsOnInvalidEntriesOfEvent() {
+        givenThereAreSomeRegisteredStudents();
+        whenICreateAndSaveAnEventWithInvalidEntries();
+        thenIShouldBeAbleToViewTheErrors();
+    }
+
+    private void whenICreateAndSaveAnEventWithInvalidEntries() {
+        new CreateEventPage(driver)
+                .navigateTo()
+                .title("")
+                .date("31/08/2011")
+                .time("24:00")
+                .venue("palace grounds")
+                .description("")
+                .coordinator("karthik")
+                .attendees(alex.getStudentId() + "," + bob.getStudentId() + ", 22443")
+                .notes("bring food!")
+                .save();
+    }
+
+    private void thenIShouldBeAbleToViewTheErrors() {
+        CreateEventPage createEventPage = new CreateEventPage(driver);
+
+        assertThat(createEventPage.getAllErrors(), containsString("Please fill in all required fields."));
+        assertThat(createEventPage.getAllErrors(), containsString("Invalid date."));
+        assertThat(createEventPage.getAllErrors(), containsString("Invalid time."));
+        assertThat(createEventPage.getAllErrors(), containsString("Could not find the following IDs: 22443."));
+
     }
 
     private void givenThereAreSomeRegisteredStudents() {
@@ -73,7 +110,7 @@ public class CreateAndViewEventTest {
         assertThat(viewEventPage.getVenue(), is("palace grounds"));
         assertThat(viewEventPage.getDescription(), is("bla bla bla"));
         assertThat(viewEventPage.getNotes(), is("bring food!"));
-        assertThat(viewEventPage.getAttendees(), hasItems(alex.getName(), bob.getName()));
+        assertThat(viewEventPage.getAttendees(), hasOnly(alex.getName(), bob.getName()));
     }
 
     private Student save(Student student) {
