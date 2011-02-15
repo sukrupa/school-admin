@@ -239,3 +239,14 @@ div.note {
     width: 25px;
     height: 25px;
 }
+
+
+.eventLabel {
+    width: 190px;
+    float: left;
+}
+
+.eventValue {
+    float: left;
+    width: 250px;
+}

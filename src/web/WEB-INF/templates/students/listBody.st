@@ -36,7 +36,7 @@
     &nbsp;&lt;&lt;
     $page.pageNumber$
     &gt;&gt;&nbsp;
-    $if(page.nextEnabled)$<a href="?page=$page.nextPage$" id="nextButton" class="navLink">Next</a>$else$Next$endif$
+    $if(page.nextEnabled)$<a href="$page.nextPageUrl$" id="nextButton" class="navLink">Next</a>$else$Next$endif$
 </div>
 
 

@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.platform.date.Date;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Proxy(lazy = false)
 public class Event {
 
     @Id
@@ -59,13 +61,13 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public static Event from(EventRecord eventRecord) {
-        return new EventBuilder().title(eventRecord.getTitle())
-                .venue(eventRecord.getVenue())
-                .description(eventRecord.getDescription())
-                .coordinator(eventRecord.getCoordinator())
-                .notes(eventRecord.getNotes())
-                .date(parseDateTime(eventRecord))
+    public static Event from(EventCreateParameter eventCreateParameter) {
+        return new EventBuilder().title(eventCreateParameter.getTitle())
+                .venue(eventCreateParameter.getVenue())
+                .description(eventCreateParameter.getDescription())
+                .coordinator(eventCreateParameter.getCoordinator())
+                .notes(eventCreateParameter.getNotes())
+                .date(parseDateTime(eventCreateParameter))
                 .build();
     }
 
@@ -89,8 +91,8 @@ public class Event {
         return date.getTime();
     }
 
-    private static Date parseDateTime(EventRecord eventRecord) {
-        return Date.parse(eventRecord.getDate(), eventRecord.getTime());
+    private static Date parseDateTime(EventCreateParameter eventCreateParameter) {
+        return Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime());
     }
 
     public void addAttendees(Set<Student> attendees) {

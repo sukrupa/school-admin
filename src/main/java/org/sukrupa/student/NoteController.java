@@ -29,9 +29,10 @@ public class NoteController {
         try {
             service.addNoteFor(studentId, newNote);
             model.put("noteUpdateStatus", "Note Added Successfully");
+            model.put("noteAddedSuccesfully", true);
         } catch (Exception e) {
             model.put("noteUpdateStatus", "Error Adding Note");
         }
-        return format("redirect:/students/"+studentId+"/edit");
+        return format("redirect:/students/%s/edit",studentId);
     }
 }
