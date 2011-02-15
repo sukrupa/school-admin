@@ -16,11 +16,17 @@ function validateFields() {
     var valid = true;
     var errorMessage = "";
     var dateStr = $('#date').val();
+    var timeStr = $('#time').val();
     var dummyTimeStr = "01:01";
+    var dummyDateStr = "01-01-2001"
 
     if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
-        $('#dateErrorMessage').html("Invalid date.  Format: dd-mm-yyyy.");
-        errorMessage += "Please insert a valid date (Format: dd-mm-yyyy).<br/>";
+        errorMessage += "Invalid date.<br/>";
+        valid = false;
+    }
+
+    if ( !(timeStr === "") && !new DateValidator().validate(dummyDateStr, timeStr)) {
+        errorMessage += "Invalid time.<br/>";
         valid = false;
     }
 
