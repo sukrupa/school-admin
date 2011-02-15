@@ -11,7 +11,7 @@ import java.util.Set;
 @Service
 public class StudentService {
     private StudentRepository repository;
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
     public Student load(String studentId) {
         return repository.load(studentId);
@@ -52,7 +52,7 @@ public class StudentService {
         repository.saveOrUpdate(student);
 
     }
-    public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber) {
+    public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber, String queryString) {
         int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
         List<Student> students = repository.parametricSearch(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
@@ -60,7 +60,7 @@ public class StudentService {
         int totalNumberOfResults = repository.countResults(searchParam);
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
 
-        return new StudentListPage(students, pageNumber, totalNumberOfPages);
+        return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
 
 

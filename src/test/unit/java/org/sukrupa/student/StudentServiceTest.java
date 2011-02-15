@@ -55,21 +55,21 @@ public class StudentServiceTest {
     @Test
     public void shouldRetrievePageOneOfOne() {
         when(repository.countResults(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
-        assertThat(service.getPage(all, 1).isNextEnabled(), is(false));
+        assertThat(service.getPage(all, 1, "").isNextEnabled(), is(false));
         Mockito.verify(repository).parametricSearch(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
     public void shouldRetrievePageOneOfMultiple() {
         when(repository.countResults(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        assertThat(service.getPage(all, 1).isNextEnabled(), is(true));
+        assertThat(service.getPage(all, 1, "").isNextEnabled(), is(true));
         Mockito.verify(repository).parametricSearch(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
     public void shouldRetrievePageTwoOfTwo() {
         when(repository.countResults(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
-        assertThat(service.getPage(all, 2).isNextEnabled(), is(false));
+        assertThat(service.getPage(all, 2, "page=2").isNextEnabled(), is(false));
         Mockito.verify(repository).parametricSearch(all, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 

@@ -14,7 +14,7 @@ public class CreateEventPage {
     }
 
     public CreateEventPage navigateTo() {
-        driver.get("http://localhost:8080/events/new");
+        driver.get("http://localhost:8080/events/create");
         return this;
     }
 
@@ -73,6 +73,6 @@ public class CreateEventPage {
     }
 
     private void fillInTextArea(String field, String value) {
-        driver.findElement(By.xpath("//textarea[@name='" + field + "']")).sendKeys(value);
+        driver.findElement(By.xpath("//input[@name='" + field + "']")).sendKeys(value);
     }
 }

@@ -172,7 +172,7 @@ public class StudentRepositoryTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std")
-                .dateOfBirth("03/02/2000")
+                .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
         Student updatedStudent = repository.update(updateParameter);
         assertThat(updatedStudent, is(philNew));

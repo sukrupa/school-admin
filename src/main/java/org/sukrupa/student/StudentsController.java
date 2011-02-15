@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -17,15 +18,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/students")
 public class StudentsController {
 
-    private static final List<String> STUDENT_CLASSES = Arrays.asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
-    private static final List<String> GENDERS = Arrays.asList("Male", "Female");
-    private static final List<String> CASTES = Arrays.asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
-    private static final List<String> SUBCASTES = Arrays.asList("", "AD", "AK", "Banjarthi", "Kumbara");
-    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-    private static final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim");
+    private static final List<String> STUDENT_CLASSES = asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> GENDERS = asList("Male", "Female");
+    private static final List<String> CASTES = asList("", "Achari", "Agnikula", "Arya Vashya", "Baljigru", "Bhramin", "Bohvi", "Chettyar",
+            "Gowdas", "Gownder", "MBC", "Modahaliyar", "Nadar", "Naidu", "Nayak", "Others", "Rajput", "Rathore", "Reddy's", "SC", "Shalai Keta",
+            "Shetty", "ST", "Tigalaru", "Vanniyar", "Vishwa Karma");
+    private static final List<String> SUBCASTES = asList("","Adi Drawida","Adi Janaga","Adi Karnataka","Bale -Balijigru","Bale Banjaguru","BC",
+            "Bhajanthri","Ganiga Shetty","II 'A'","Kamala Achari","Kshathriya","Kumbar Shetty","Singh","Tiwari","Vailu Shetty","Vakkaliga",
+            "Val Nayak","Vaniga Gownder","Vannikula");
+    private static final List<String> COMMUNITY_LOCATIONS = asList("", "Bhuvaneshwari Slum", "Chamundi Nagar",
+            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
+            "Rehmath Nagar", "Residential", "Subramanyanagar");
+    private static final List<String> RELIGIONS = asList("", "Christian", "Hindu", "Muslim", "Sikh");
+    private static final List<String> TALENTS = asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
+            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
 
-    private static final List<String> TALENTS = Arrays.asList("Art", "Choir", "Craft", "Creative Writing", "Dancing", "Debate",
-		    "Drama", "Drawing", "Humanities", "Musical Instrument", "Quiz", "Science Club", "Singing", "Sports", "Story Writing");
     private StudentService service;
 
     private static final int AGES_TO = 20;
@@ -37,12 +44,13 @@ public class StudentsController {
         this.service = service;
     }
 
-    @RequestMapping()
+    @RequestMapping
     public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-                       Map<String, Object> model) {
-        StudentListPage students = service.getPage(searchParam, pageNumber);
+	    Map<String, Object> model, HttpServletRequest request) {
+        StudentListPage students = service.getPage(searchParam, pageNumber, request.getQueryString());
         model.put("page", students);
+
         return "students/list";
     }
 
@@ -97,26 +105,29 @@ public class StudentsController {
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
                        @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
+
         Student theStudent = service.load(id);
 
-        model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
-        model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
-        model.put("castes", createDropDownList(theStudent.getCaste(), CASTES));
-        model.put("communityLocations", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
+        model.put("classes", createDropDownList(STUDENT_CLASSES, theStudent.getStudentClass()));
+        model.put("genders", createDropDownList(GENDERS, theStudent.getGender()));
+        model.put("castes", createDropDownList(CASTES, theStudent.getCaste()));
+        model.put("communityLocations", createDropDownList(COMMUNITY_LOCATIONS, theStudent.getCommunityLocation()));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
-        model.put("dateOfBirth", theStudent.getDatofBirthForDisplay());
-        model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
-        model.put("subcastes", createDropDownList(theStudent.getSubCaste(), SUBCASTES));
+        model.put("dateOfBirth", theStudent.getDateOfBirthForDisplay());
+        model.put("religions", createDropDownList(RELIGIONS, theStudent.getReligion()));
+        model.put("subcastes", createDropDownList(SUBCASTES, theStudent.getSubCaste()));
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
-        model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+        model.put("talents", createCheckBoxList(TALENTS, theStudent.talentDescriptions()));
 
         model.put("note_message", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";
     }
+
+
 
 
     @RequestMapping(value = "{id}", method = GET)
@@ -132,23 +143,23 @@ public class StudentsController {
 	    return "students/viewFailed";
     }
 
-    private List<DropDownElement> createDropDownList(String selected, List<String> options) {
+    private static List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
         List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
-        for (String genderString : options) {
-            dropDownElements.add(new DropDownElement(genderString, genderString.equals(selected)));
+        for (String value : values) {
+            dropDownElements.add(new DropDownElement(value, value.equals(selectedValue)));
         }
         return dropDownElements;
     }
 
-    private List<CheckBoxElement> createCheckBoxList(List<String> studentTalents, List<String> allTalents) {
+    private static List<CheckBoxElement> createCheckBoxList(List<String> values, List<String> selectedValues) {
         List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
-        for (String talent : allTalents) {
-            checkBoxElements.add(new CheckBoxElement(talent, studentTalents.contains(talent)));
+        for (String value : values) {
+            checkBoxElements.add(new CheckBoxElement(value, selectedValues.contains(value)));
         }
         return checkBoxElements;
     }
 
-    private List<String> getAges() {
+    private static List<String> getAges() {
         List<String> ages = new ArrayList<String>();
 
         for (int age = AGES_FROM; age <= AGES_TO; age++) {
@@ -158,7 +169,7 @@ public class StudentsController {
         return ages;
     }
 
-    private class DropDownElement {
+    private static class DropDownElement {
         public boolean isSelected() {
             return selected;
         }
@@ -176,7 +187,7 @@ public class StudentsController {
         }
     }
 
-    private class CheckBoxElement {
+    private static class CheckBoxElement {
         public boolean isChecked() {
             return checked;
         }

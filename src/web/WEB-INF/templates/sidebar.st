@@ -4,7 +4,6 @@
 
       Student Records<br/>
         <p class="indent"><a href="/students">View All</a></p>
-        <p class="fakelink indent">Import</a><br/></p>
 
 
         <form method="post" action="/students/promote">
@@ -14,6 +13,7 @@
 
       <br/>
       Events<br/>
+
         <p class="indent fakelink">View Events</p>
         <p class="indent"><a href="/events/new">Record Event</a><br/></p>
 

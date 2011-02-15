@@ -9,10 +9,13 @@
 
     <target name="sukrupa-server:start" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
+        <property name="authenticate" value="true"/>
         <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
             <jvmarg value="-Xms128m"/>
             <jvmarg value="-Xmx768m"/>
             <sysproperty key="web.root.dir" value="${web.dir}"/>
+            <sysproperty key="web.server.authenticate" value="${authenticate}"/>
+            <sysproperty key="web.server.realm.file" value="${resources.main.dir}/jetty-realms.properties"/>
             <classpath>
                 <path refid="classpath.sukrupa.server.run"/>
             </classpath>
