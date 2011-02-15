@@ -22,7 +22,7 @@ public class ViewStudentPage {
     }
 
     public List<String> getNotes() {
-        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='note']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//p[@class='note']"));
         List<String> notes = new ArrayList<String>();
         for (WebElement element : elements) {
             notes.add(element.getText());
