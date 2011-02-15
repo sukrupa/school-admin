@@ -32,11 +32,12 @@
             </tbody>
         </table>
     </div>
-    $if(page.previousEnabled)$<a href="?page=$page.previousPage$" id="previousButton" class="navLink">Previous</a>$else$Previous$endif$
-    &nbsp;&lt;&lt;
-    $page.pageNumber$
-    &gt;&gt;&nbsp;
-    $if(page.nextEnabled)$<a href="?page=$page.nextPage$" id="nextButton" class="navLink">Next</a>$else$Next$endif$
+    <br />
+    $if(page.previousEnabled)$<a href="$page.previousPageUrl$" id="previousButton" class="navLink"><b>Previous</b></a>$else$<b>Previous</b>$endif$
+    &nbsp;&nbsp;
+    Current page: $page.pageNumber$
+    &nbsp;&nbsp;
+    $if(page.nextEnabled)$<a href="$page.nextPageUrl$" id="nextButton" class="navLink"><b>Next</b></a>$else$<b>Next</b>$endif$
 </div>
 
 

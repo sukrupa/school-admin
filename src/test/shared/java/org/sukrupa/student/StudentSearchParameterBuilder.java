@@ -60,7 +60,7 @@ public class StudentSearchParameterBuilder {
     }
 
     public StudentSearchParameter build() {
-        return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talent, religion, page);
+        return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talent, religion);
     }
 
     public StudentSearchParameterBuilder page(int page) {

@@ -1,9 +1,9 @@
-<form id="eventRecord" name="eventRecord" action="save" method="post">
+<form id="eventCreateParameter" name="eventCreateParameter" action="save" method="post">
 
     <span>Title<span class="mandatory">* </span> </span>
     <input type="text" name="title" id="title" value="$eventtitle$"/>
 
-    <span>Date (dd-mm-yyyy)<span class="mandatory">* </span></span>
+    <span>Date (dd/mm/yyyy)<span class="mandatory">* </span></span>
     <input size= 12 type="text" name="date" id="date" value="$date$"/>
 
     <span>Time (hh:mm)</span>
@@ -30,11 +30,13 @@
     <textarea name="notes" rows="3" cols="20" id="notes">$notes$</textarea> <br/>
     <br/>
 
-    <input type="submit" value="Save" onclick="validateFields()"/>
+    <input type="submit" value="Save"/>
     <input type="button" value="Clear" onclick="resetFields()"/>
 
     <br/><br/>
 
-    <div class="errorMessages" id="errorMessages"> $errorMessage$</div>
+    $errors:{
+        <div class="errorMessage">$it.defaultMessage$</div>
+    }$
 
 </form>

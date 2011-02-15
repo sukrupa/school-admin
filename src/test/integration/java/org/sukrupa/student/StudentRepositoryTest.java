@@ -75,6 +75,17 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void shouldHaveCountZero(){
+        assertThat(repository.countResults(all),is(0));
+    }
+
+    @Test
+    public void shouldHaveCountOne(){
+        databaseHelper.save(pat);
+        assertThat(repository.countResults(all),is(1));
+    }
+
+    @Test
     public void shouldLoadStudentBasedOnStudentId() {
         databaseHelper.save(pat);
         assertThat(repository.load("123"), is(pat));

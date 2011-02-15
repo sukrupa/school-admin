@@ -8,10 +8,13 @@ body {
     margin-left: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
+
 }
 
 .fakelink {
     text-decoration: underline;
+    display:none;
+
 }
 
 #page {
@@ -197,7 +200,7 @@ div.note {
     clear: both;
 }
 
-.errorMessages {
+.errorMessage {
     color: red;
     font-weight: bold;
     padding: 10px 0px 10px 0px;
@@ -235,4 +238,15 @@ div.note {
     margin-right: 10px;
     width: 25px;
     height: 25px;
+}
+
+
+.eventLabel {
+    width: 190px;
+    float: left;
+}
+
+.eventValue {
+    float: left;
+    width: 250px;
 }

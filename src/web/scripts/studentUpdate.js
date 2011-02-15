@@ -15,6 +15,10 @@ $(document).ready(function () {
             $('#updateStudent').submit();
         }
     });
+    
+    $('#clearNote').click(function () {
+        $('#new-note').val('');
+    });
 });
 
 
