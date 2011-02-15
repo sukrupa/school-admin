@@ -11,7 +11,7 @@ import java.util.Set;
 @Service
 public class StudentService {
     private StudentRepository repository;
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 5;
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
     public Student load(String studentId) {
         return repository.load(studentId);
