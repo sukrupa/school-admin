@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.argThat;
@@ -68,5 +71,32 @@ public class StudentServiceTest {
         when(repository.countResults(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
         assertThat(service.getPage(all, 2, "page=2").isNextEnabled(), is(false));
         Mockito.verify(repository).parametricSearch(all, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+    }
+
+    @Test
+    public void  shouldIncrementClassOfEachStudentByOne() {
+        // given
+        List<Student> students = new ArrayList<Student>();
+
+        Student sahil = new StudentBuilder().name("sahil").studentClass("1 Std").build();
+        students.add(sahil);
+
+        Student mark = new StudentBuilder().name("mark").studentClass("1 Std").build();
+        students.add(mark);
+
+        when(repository.getAll()).thenReturn(students);
+
+        // when
+        service.promoteStudentsToNextClass();
+
+        // then
+        Student promotedSahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+        Student promotedMark = new StudentBuilder().name("mark").studentClass("2 Std").build();
+
+        Mockito.verify(repository).saveOrUpdate(promotedSahil);
+        Mockito.verify(repository).saveOrUpdate(promotedMark);
+
+
+
     }
 }

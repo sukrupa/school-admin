@@ -54,6 +54,40 @@ public class StudentsController {
         return "students/list";
     }
 
+
+    @RequestMapping(value = "promote" , method = POST)
+    public String promoteClass(Map<String,Integer> model){
+      int promoteStudentsCount= service.promoteStudentsToNextClass();
+      model.put("numberOfStudentsUpdated",promoteStudentsCount);
+      return "redirect:/students/update-successful";
+    }
+
+    @RequestMapping(value = "update-successful")
+    public String updateSuccessful(@RequestParam("numberOfStudentsUpdated") int promoteStudentCount , Map<String,Integer> model) {
+
+        model.put("numberOfStudentsUpdated", promoteStudentCount);
+       return "students/updateSuccessful";
+    }
+
+    @RequestMapping(value = "{id}", method = POST)
+        public String confirmUpdateStudent(
+                @PathVariable String id,
+                @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
+                Map<String, Object> model) {
+
+            Student updatedStudent = service.update(studentParam);
+
+            if (updatedStudent != null) {
+                model.put("student", updatedStudent);
+                model.put("studentUpdatedSuccesfully", true);
+                return format("redirect:/students/%s", id);
+            }else {
+                model.put("message","Error updating student");
+                return format("redirect:/students/%s/edit", id);
+            }
+        }
+
+
     @RequestMapping(value = "search")
     public void search(Map<String, Object> model) {
         model.put("classes", STUDENT_CLASSES);
@@ -80,7 +114,7 @@ public class StudentsController {
         model.put("communityLocations", createDropDownList(COMMUNITY_LOCATIONS, theStudent.getCommunityLocation()));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
-        model.put("dateOfBirth", theStudent.getDatofBirthForDisplay());
+        model.put("dateOfBirth", theStudent.getDateOfBirthForDisplay());
         model.put("religions", createDropDownList(RELIGIONS, theStudent.getReligion()));
         model.put("subcastes", createDropDownList(SUBCASTES, theStudent.getSubCaste()));
         model.put("father", theStudent.getFather());
@@ -93,23 +127,8 @@ public class StudentsController {
         return "students/edit";
     }
 
-    @RequestMapping(value = "{id}", method = POST)
-    public String confirmUpdateStudent(
-            @PathVariable String id,
-            @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
-            Map<String, Object> model) {
 
-        Student updatedStudent = service.update(studentParam);
 
-        if (updatedStudent != null) {
-            model.put("student", updatedStudent);
-	        model.put("studentUpdatedSuccesfully", true);
-            return format("redirect:/students/%s", id);
-        }
-
-        model.put("message","Error updating student");
-        return format("redirect:/students/%s/edit", id);
-    }
 
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,

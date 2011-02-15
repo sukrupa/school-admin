@@ -5,8 +5,16 @@
       Student Records<br/>
         <p class="indent"><a href="/students">View All</a></p>
 
-        <br/>
 
+        <form method="post" action="/students/promote">
+        <input class="linkbutton" type="submit" value="Annual Class Update"/>
+        </form>
+
+
+      <br/>
       Events<br/>
-        <p class="indent fakelink"><a href="/events">View Events</a></p>
-        <p class="indent"><a href="/events/create">Record Event</a><br/></p>
+
+        <p class="indent fakelink">View Events</p>
+        <p class="indent"><a href="/events/new">Record Event</a><br/></p>
+
+

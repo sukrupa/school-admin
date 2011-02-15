@@ -21,6 +21,11 @@ public class EventController {
     public EventController(EventService service) {
         this.service = service;
     }
+    @RequestMapping()
+    public String list()
+    {
+        return "events/list";
+    }
 
     @RequestMapping(value = "create")
     public String create() {

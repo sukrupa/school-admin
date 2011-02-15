@@ -21,6 +21,18 @@ public class StudentService {
         return repository.load(studentIds);
     }
 
+
+    public int promoteStudentsToNextClass() {
+        List<Student> students = repository.getAll();
+
+        for(Student student : students){
+            student.promote();
+            repository.saveOrUpdate(student);
+        }
+
+       return students.size();
+    }
+
     public Student update(UpdateStudentParameter studentParam) {
         return repository.update(studentParam);
     }
@@ -50,4 +62,6 @@ public class StudentService {
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
+
+
 }
