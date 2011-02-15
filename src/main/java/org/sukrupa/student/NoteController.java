@@ -33,6 +33,6 @@ public class NoteController {
         } catch (Exception e) {
             model.put("noteUpdateStatus", "Error Adding Note");
         }
-        return format("redirect:/students/"+studentId+"/edit");
+        return format("redirect:/students/%s/edit",studentId);
     }
 }

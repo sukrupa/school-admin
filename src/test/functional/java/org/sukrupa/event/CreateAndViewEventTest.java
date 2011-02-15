@@ -81,6 +81,21 @@ public class CreateAndViewEventTest {
 
     }
 
+    public void shouldDisplayErrorPageForNonExistentEvent(){
+        whenWeAccessANonExistentEvent();
+        thenWeShouldBeRedirectedToErrorPage();
+    }
+
+    private void whenWeAccessANonExistentEvent() {
+        ViewEventPage viewEventPage = new ViewEventPage(driver);
+        viewEventPage.navigateTo(123);
+    }
+
+    private void thenWeShouldBeRedirectedToErrorPage() {
+        ErrorPage errorPage = new ErrorPage(driver);
+        assertThat(errorPage.isValid(),is(true));
+    }
+
     private void givenThereAreSomeRegisteredStudents() {
         alex = save(new StudentBuilder().studentId("1").name("alex").build());
         bob = save(new StudentBuilder().studentId("2").name("bob").build());
