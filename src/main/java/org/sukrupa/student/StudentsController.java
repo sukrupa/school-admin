@@ -68,7 +68,7 @@ public class StudentsController {
         model.put("communityLocations", createDropDownList(theStudent.getCommunityLocation(), COMMUNITY_LOCATIONS));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
-        model.put("dateOfBirth", theStudent.getDatofBirthForDisplay());
+        model.put("dateOfBirth", theStudent.getDateOfBirthForDisplay());
         model.put("religions", createDropDownList(theStudent.getReligion(), RELIGIONS));
         model.put("subcastes", createDropDownList(theStudent.getSubCaste(), SUBCASTES));
         model.put("father", theStudent.getFather());

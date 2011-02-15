@@ -20,7 +20,7 @@ import java.util.Set;
 @Entity
 public class Student {
 
-	static final String DATE_OF_BIRTH_FORMAT = "dd/MM/YYYY";
+	static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
 	@Id
     @GeneratedValue
     private long id;
@@ -178,7 +178,7 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-	public String getDatofBirthForDisplay() {
+	public String getDateOfBirthForDisplay() {
 		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
 	}
 
