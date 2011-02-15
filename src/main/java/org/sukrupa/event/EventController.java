@@ -3,7 +3,6 @@ package org.sukrupa.event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,15 +28,10 @@ public class EventController {
     }
 
     @RequestMapping(value = "save", method = POST)
-    public String save(@ModelAttribute(value = "eventCreateParameter") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, String> model) {
-        new EventCreateParameterValidator().validate(eventCreateParameter, result);
-        if (result.hasErrors()) {
-            return "events/create";
-        }else {
-            Event event = Event.from(eventCreateParameter);
-            service.save(event, eventCreateParameter.getStudentIdsOfAttendees());
-            return format("redirect:/events/%s", event.getId());
-        }
+    public String save(@ModelAttribute(value = "createEvent") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, Object> model) {
+        Event event = Event.from(eventCreateParameter);
+        service.save(event, eventCreateParameter.getStudentIdsOfAttendees());
+        return format("redirect:/events/%s", event.getId());
     }
 
     @RequestMapping(value = "/{eventId}")
