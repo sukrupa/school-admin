@@ -33,10 +33,4 @@
     <input type="submit" value="Save"/>
     <input type="button" value="Clear" onclick="resetFields()"/>
 
-    <br/><br/>
-
-    $errors:{
-        <div class="errorMessage">$it.defaultMessage$</div>
-    }$
-
 </form>
