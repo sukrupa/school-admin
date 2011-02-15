@@ -4,7 +4,6 @@
 
       Student Records<br/>
         <p class="indent"><a href="/students">View All</a></p>
-        <p class="fakelink indent">Import</a><br/></p>
 
         <br/>
 
