@@ -241,12 +241,29 @@ div.note {
 }
 
 
+.eventTitle {
+    text-align:center;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 .eventLabel {
-    width: 190px;
+    width: 100px;
     float: left;
+    font-weight: bold;
 }
 
 .eventValue {
     float: left;
     width: 250px;
+}
+
+.eventDescription {
+    margin: 15px 0px 15px 100px;
+}
+
+.eventNotes {
+    margin: 15px 0px 15px 100px;
 }

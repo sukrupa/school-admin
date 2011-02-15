@@ -1,5 +1,6 @@
 package org.sukrupa.event;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -11,6 +12,8 @@ import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -128,5 +131,17 @@ public class Event {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getAttendeesForDisplay() {
+        return StringUtils.join(getAttendeeNames(), ", ");
+    }
+
+    private List<String> getAttendeeNames() {
+        List<String> attendeeNameList = new ArrayList<String>();
+        for(Student attendee: attendees){
+            attendeeNameList.add(attendee.getName());
+        }
+        return attendeeNameList;
     }
 }
