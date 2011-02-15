@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
 
-import java.io.File;
 import java.io.IOException;
 
 import static java.lang.String.format;
@@ -65,9 +64,13 @@ public class WebServer {
     }
 
     private HandlerList handlers() {
-	    HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resourceHandler(), servletHandler()});
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[]{rootHandler(), resourceHandler(), servletHandler()});
         return handlers;
+    }
+
+    private Handler rootHandler() {
+        return new RedirectRootHandler("/students");
     }
 
     private ResourceHandler resourceHandler() {
@@ -91,7 +94,7 @@ public class WebServer {
     }
 
     private void addAuthentication(ServletContextHandler servletHandler) {
-        if(Boolean.parseBoolean(authenticate) == false) return;
+        if (Boolean.parseBoolean(authenticate) == false) return;
 
         ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
         securityHandler.setLoginService(server.getBean(HashLoginService.class));
@@ -109,4 +112,5 @@ public class WebServer {
 
         servletHandler.setSecurityHandler(securityHandler);
     }
+
 }
