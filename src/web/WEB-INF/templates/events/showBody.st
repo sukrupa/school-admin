@@ -6,30 +6,36 @@
         <div class="date">$event.date$</div>
     </div>
 
+    $if(event.day)$
     <div class="eventEntry">
         <div class="eventLabel">Day</div>
         <div class="day">$event.day$</div>
     </div>
+    $endif$
 
-
+    $event.time:{ time |
     <div class="eventEntry">
         <div class="eventLabel">Time</div>
-        <div class="time">$event.time$</div>
+        <div class="time">$time$</div>
     </div>
+    }$
 
-
+    $event.venue:{ venue |
     <div class="eventEntry">
         <div class="eventLabel">Venue</div>
-        <div class="venue">$event.venue$</div>
+        <div class="venue">$venue$</div>
+    </div>
+    }$
+
+    <div class="eventEntry">
+        <div class="eventDescription">$event.description$</div>
     </div>
 
-    <div class="eventEntry spacer">
-        <div class="description">$event.description$</div>
+    $event.notes:{ notes |
+    <div class="eventEntry">
+        <div class="eventNotes">$notes$</div>
     </div>
-
-    <div class="eventEntry spacer">
-        <div class="notes">$event.notes$</div>
-    </div>
+    }$
 
     <div class="eventEntry">
         <div class="eventLabel">Attendees</div>

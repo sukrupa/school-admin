@@ -11,6 +11,6 @@ public class ErrorPage {
     }
 
     public boolean isValid() {
-        return driver.findElement(By.id("body")).getText().equals("Entity you are looking for does not exist");
+        return driver.findElement(By.id("body")).getText().equals("Operation could not be completed");
     }
 }

@@ -35,11 +35,11 @@ public class ViewEventPage {
     }
 
     public String getDescription() {
-        return textFor("description");
+        return textFor("eventDescription");
     }
 
     public String getNotes() {
-        return textFor("notes");
+        return textFor("eventNotes");
     }
 
     public Set<String> getAttendees() {
