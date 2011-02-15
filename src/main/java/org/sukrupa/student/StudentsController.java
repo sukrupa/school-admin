@@ -31,7 +31,7 @@ public class StudentsController {
             "Rehmath Nagar", "Residential", "Subramanyanagar");
     private static final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim", "Sikh");
     private static final List<String> TALENTS = Arrays.asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
-            "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
+            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
 
     private StudentService service;
 
