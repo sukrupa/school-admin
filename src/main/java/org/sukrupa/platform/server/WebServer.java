@@ -30,14 +30,14 @@ public class WebServer {
     private final String webRoot;
     private final String contextPath;
     private final FrontController frontController;
-    private String authenticate;
+    private boolean authenticate;
 
     @Autowired
     public WebServer(@Value("${web.root.dir}") String webRoot,
                      @Value("${web.http.port}") int httpPort,
                      @Value("${web.context.path}") String contextPath,
                      @Value("${web.server.realm.file}") String webServerRealmFile,
-                     @Value("${web.server.authenticate}") String authenticate,
+                     @Value("${web.server.authenticate}") boolean authenticate,
                      FrontController frontController) throws IOException {
 
 
@@ -94,7 +94,7 @@ public class WebServer {
     }
 
     private void addAuthentication(ServletContextHandler servletHandler) {
-        if (Boolean.parseBoolean(authenticate) == false) return;
+        if (!authenticate) return;
 
         ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
         securityHandler.setLoginService(server.getBean(HashLoginService.class));
