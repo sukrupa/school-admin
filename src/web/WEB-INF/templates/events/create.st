@@ -1,1 +1,1 @@
-$layout(scripts=["createEvent"], body=events/createBody(), title="Record an Event")$
+$layout(scripts=["dateValidation", "createEvent"], body=events/createBody(), title="Record an Event")$

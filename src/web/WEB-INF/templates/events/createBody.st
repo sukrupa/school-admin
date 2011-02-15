@@ -10,8 +10,9 @@
             </div>
 
             <div class="createEntry">
-                <div class="label">Date (dd/mm/yyyy)<span class="mandatory">*</span></div>
+                <div class="label">Date (dd-mm-yyyy)<span class="mandatory">*</span></div>
                 <input type="text" name="date" id="date" value="$date$" class="createValue"></input>
+                <div id="dateErrorMessage"></div>
             </div>
 
             <div class="createEntry">
