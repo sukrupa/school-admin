@@ -200,7 +200,7 @@ div.note {
     clear: both;
 }
 
-.errorMessages {
+.errorMessage {
     color: red;
     font-weight: bold;
     padding: 10px 0px 10px 0px;
