@@ -11,4 +11,20 @@ public class EventList {
 		this.browser = browser;
 	}
 
+	public void seeThatEventIs(String string1) throws Exception {
+	
+	}
+
+	public void seeThatDateIs(String string1) throws Exception {
+	
+	}
+
+	public void clickOn(String string1) throws Exception {
+	
+	}
+
+	public void verifyThatYouAreBroughtTo(String string1) throws Exception {
+	
+	}
+
 }
