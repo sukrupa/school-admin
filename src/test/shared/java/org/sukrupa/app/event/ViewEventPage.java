@@ -53,4 +53,8 @@ public class ViewEventPage {
     private String textFor(String field) {
         return driver.findElement(By.xpath("//*[@class='" + field + "']")).getText();
     }
+
+    public void navigateTo(int eventId) {
+        driver.get("http://localhost:8080/events/" + eventId);
+    }
 }

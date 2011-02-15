@@ -16,7 +16,7 @@ public class StudentsControllerTest {
 
 
     @Mock
-    private StudentRepository repository;
+    private StudentService service;
 
     private StudentsController controller;
 
@@ -29,24 +29,24 @@ public class StudentsControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new StudentsController(repository);
+        controller = new StudentsController(service);
     }
 
     @Test
     public void shouldPopulateModelWithAStudent() {
-        when(repository.load("123")).thenReturn(pat);
-        controller.view("123", "", (HashMap) studentModel);
+        when(service.load("123")).thenReturn(pat);
+        controller.view("123", false, (HashMap) studentModel);
         assertThat(studentModel.get("student"),is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
-	    when(repository.load("123")).thenReturn(pat);
-        assertThat(controller.view("123", "", (HashMap) studentModel),is("students/view"));
+	    when(service.load("123")).thenReturn(pat);
+        assertThat(controller.view("123", false, (HashMap) studentModel),is("students/view"));
     }
 
     @Test
     public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", "", (HashMap) studentModel),is("students/viewFailed"));
+        assertThat(controller.view("0987ihuyi", false, (HashMap) studentModel),is("students/viewFailed"));
     }
 }

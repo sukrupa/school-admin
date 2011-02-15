@@ -32,20 +32,22 @@ public class StudentsController {
     private static final List<String> TALENTS = Arrays.asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
             "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
 
-    private StudentRepository repository;
+    private StudentService service;
 
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
 
 
     @Autowired
-    public StudentsController(StudentRepository repository) {
-        this.repository = repository;
+    public StudentsController(StudentService service) {
+        this.service = service;
     }
 
     @RequestMapping()
-    public String list(@ModelAttribute("searchParam") StudentSearchParameter searchParam, Map<String, Object> model) {
-        StudentListPage students = new PaginatedStudentSearch(repository, searchParam).getPage();
+    public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
+                       @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                       Map<String, Object> model) {
+        StudentListPage students = service.getPage(searchParam, pageNumber);
         model.put("page", students);
         return "students/list";
     }
@@ -65,8 +67,9 @@ public class StudentsController {
     @RequestMapping(value = "{id}/edit", method = GET)
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
+                       @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
-        Student theStudent = repository.load(id);
+        Student theStudent = service.load(id);
 
         model.put("classes", createDropDownList(theStudent.getStudentClass(), STUDENT_CLASSES));
         model.put("genders", createDropDownList(theStudent.getGender(), GENDERS));
@@ -80,7 +83,9 @@ public class StudentsController {
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(theStudent.talentDescriptions(), TALENTS));
+
         model.put("note_message", noteUpdateStatus);
+        model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";
     }
@@ -91,7 +96,7 @@ public class StudentsController {
             @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
             Map<String, Object> model) {
 
-        Student updatedStudent = repository.update(studentParam);
+        Student updatedStudent = service.update(studentParam);
 
         if (updatedStudent != null) {
             model.put("student", updatedStudent);
@@ -105,12 +110,12 @@ public class StudentsController {
 
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,
-                       @RequestParam(required = false, defaultValue = "false") String studentUpdatedSuccesfully,
+                       @RequestParam(required = false) boolean studentUpdatedSuccesfully,
                        Map<String, Object> model) {
-	    Student student = repository.load(id);
+	    Student student = service.load(id);
 	    if (student != null) {
 			model.put("student", student);
-			model.put("studentUpdatedSuccesfully", Boolean.parseBoolean(studentUpdatedSuccesfully));
+			model.put("studentUpdatedSuccesfully",studentUpdatedSuccesfully);
 			return "students/view";
 	    }
 	    return "students/viewFailed";

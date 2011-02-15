@@ -1,0 +1,13 @@
+Tags:
+Preconditions:Navigte to Student Profile
+Student Profile:
+#Click on "Bhavani" student record
+#Verify that name is "Bhavani"
+#Verify that talent is "Drama"
+
+Student Profile Two, Student Profile:
+#Go back to Student profile list
+#Click on "Haripriya" student record
+#Verify that name is "Haripriya"
+#Verify that gender is "Female" 
+#Verify that DOB is "20/03/1997" 

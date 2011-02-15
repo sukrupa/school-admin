@@ -1,23 +1,23 @@
-<h1 class="title">$event.title$</h1>
+<div class="title">$event.title$</div>
 
 <div class="entry">
-<label>Date</label>
-<span class="date">$event.date$</span>
+<div class="label">Date</div>
+<div class="date">$event.date$</div>
 </div>
 
 <div class="entry">
-<label>Day</label>
-<span class="day">$event.day$</span>
+<div class="label">Day</div>
+<div class="day">$event.day$</div>
 </div>
 
 <div class="entry">
-<label>Time</label>
-<span class="time">$event.time$</span>
+<div class="label">Time</div>
+<div class="time">$event.time$</div>
 </div>
 
 <div class="entry">
-<label>Venue</label>
-<span class="venue">$event.venue$</span>
+<div class="label">Venue</div>
+<div class="venue">$event.venue$</div>
 </div>
 
 <div class="entry spacer">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="entry">
-<label>Attendees</label>
+<div class="label">Attendees</div>
 <ul>
     $event.attendees:{
     <li class="attendee">$it.name$</li>

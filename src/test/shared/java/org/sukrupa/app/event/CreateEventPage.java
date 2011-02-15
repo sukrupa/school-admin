@@ -2,6 +2,9 @@ package org.sukrupa.app.event;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class CreateEventPage {
     private WebDriver driver;
@@ -11,7 +14,7 @@ public class CreateEventPage {
     }
 
     public CreateEventPage navigateTo() {
-        driver.get("http://localhost:8080/events/record");
+        driver.get("http://localhost:8080/events/new");
         return this;
     }
 
@@ -53,6 +56,12 @@ public class CreateEventPage {
     public CreateEventPage notes(String notes) {
         fillInTextArea("notes", notes);
         return this;
+    }
+
+    public String getAllErrors() {
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='errorMessages']"));
+        WebElement nameElement = elements.get(0);
+        return nameElement.getText();
     }
 
     public void save() {

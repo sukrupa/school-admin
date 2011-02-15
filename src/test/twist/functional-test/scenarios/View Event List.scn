@@ -1,0 +1,8 @@
+Tags:
+Preconditions:Navigate to Event List
+Event List:
+#See that event is "Diwali"
+#See that date is "26/10/11"
+#Click on "Diwali" 
+#Verify that you are brought to "Diwali Event Record"
+
