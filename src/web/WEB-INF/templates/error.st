@@ -1,1 +1,1 @@
-$layout(body="Entity you are looking for does not exist", title="Entity not found")$
+$layout(body="Operation could not be completed", title="Error")$
