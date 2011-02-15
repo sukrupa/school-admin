@@ -1,4 +1,4 @@
-<form id="eventRecord" name="eventRecord" action="save" method="post">
+<form id="eventCreateParameter" name="eventCreateParameter" action="save" method="post">
 
     <span>Title<span class="mandatory">* </span> </span>
     <input type="text" name="title" id="title" value="$eventtitle$"/>
