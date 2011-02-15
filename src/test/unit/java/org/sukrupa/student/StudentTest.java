@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
@@ -81,6 +81,29 @@ public class StudentTest {
         Student suhas = new StudentBuilder().notes(firstNote, secondNote).build();
         
         assertThat(suhas.getNotes(), hasItems(firstNote, secondNote));
+    }
+
+    @Test
+    public void shouldPromoteStudent(){
+        assertEquals("2 Std", promoteStudent("1 Std").getStudentClass());
+        assertEquals("3 Std", promoteStudent("2 Std").getStudentClass());
+        assertEquals("4 Std", promoteStudent("3 Std").getStudentClass());
+        assertEquals("10 Std", promoteStudent("9 Std").getStudentClass());
+
+        assertEquals("UKG",promoteStudent("LKG").getStudentClass());
+        assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
+        assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
+        assertEquals("Graduated",promoteStudent("10 Std").getStudentClass());
+        assertEquals("Graduated",promoteStudent("Graduated").getStudentClass());
+
+
+
+    }
+
+    private Student promoteStudent(String studentClass) {
+        Student student = new StudentBuilder().studentClass(studentClass).build();
+        student.promote();
+        return student;
     }
 
     private Student student(String name, LocalDate dateOfBirth) {

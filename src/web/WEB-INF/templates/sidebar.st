@@ -6,8 +6,15 @@
         <p class="indent"><a href="/students">View All</a></p>
         <p class="fakelink indent">Import</a><br/></p>
 
-        <br/>
 
+        <form method="post" action="/students/promote">
+        <input class="linkbutton" type="submit" value="Annual Class Update"/>
+        </form>
+
+
+      <br/>
       Events<br/>
         <p class="indent fakelink">View Events</p>
         <p class="indent"><a href="/events/new">Record Event</a><br/></p>
+
+

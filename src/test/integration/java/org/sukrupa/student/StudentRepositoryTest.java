@@ -197,5 +197,16 @@ public class StudentRepositoryTest {
         assertThat(reloadedStudent.getNotes(), hasItem(newNote));
     }
 
+    @Test
+    public void shouldReturnAllStudents() {
+       databaseHelper.save(pat);
+       databaseHelper.save(sahil);
+
+       List<Student> students = repository.getAll();
+
+       assertThat(students, hasItems(pat,sahil));
+
+    }
+
 
 }
