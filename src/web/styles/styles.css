@@ -250,3 +250,7 @@ div.note {
     float: left;
     width: 250px;
 }
+
+textarea {
+    resize: vertical;
+}
