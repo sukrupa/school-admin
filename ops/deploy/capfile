@@ -61,7 +61,7 @@ end
 task :safety_check do
   times = 0;
   while times < 6
-    wgetresult = system "wget --spider http://#{target_server}:8080/students"
+    wgetresult = system "wget --spider http://admin:admin@#{target_server}:8080/students"
     if wgetresult
       break
     else
