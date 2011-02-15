@@ -19,6 +19,16 @@ public class StudentListPageTest {
     }
 
     @Test
+    public void shouldHavePreviousPageAsPageTwo(){
+        assertThat(pageThree.getPreviousPageUrl(),is("?foo=bar&page=2&baz=quux"));
+    }
+
+    @Test
+    public void shouldHavePreviousPageAsPageOne(){
+        assertThat(pageTwo.getPreviousPageUrl(),is("?foo=bar&page=1&baz=quux"));
+    }
+
+    @Test
     public void shouldHaveNextPageAsPageThree() {
         assertThat(pageOne.isNextEnabled(), is(true));
         assertThat(pageTwo.getNextPageUrl(), is("?foo=bar&page=3&baz=quux"));

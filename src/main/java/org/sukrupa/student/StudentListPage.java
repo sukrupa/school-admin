@@ -64,7 +64,9 @@ public class StudentListPage {
             return "?" + queryString.replaceFirst("page=[0-9]*","page=" + getNextPage());
         }
         return "?" + queryString + "&page=" + getNextPage();
-       // return "&page=2";
     }
 
+    public String getPreviousPageUrl() {
+        return "?" + queryString.replaceFirst("page=[0-9]*","page=" + getPreviousPage());
+    }
 }
