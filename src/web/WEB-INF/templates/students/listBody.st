@@ -32,7 +32,7 @@
             </tbody>
         </table>
     </div>
-    $if(page.previousEnabled)$<a href="?page=$page.previousPage$" id="previousButton" class="navLink">Previous</a>$else$Previous$endif$
+    $if(page.previousEnabled)$<a href="$page.previousPageUrl$" id="previousButton" class="navLink">Previous</a>$else$Previous$endif$
     &nbsp;&lt;&lt;
     $page.pageNumber$
     &gt;&gt;&nbsp;
