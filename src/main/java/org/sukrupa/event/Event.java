@@ -13,6 +13,7 @@ import org.sukrupa.student.Student;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -64,14 +65,17 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public static Event from(EventCreateParameter eventCreateParameter) {
-        return new EventBuilder().title(eventCreateParameter.getTitle())
-                .venue(eventCreateParameter.getVenue())
-                .description(eventCreateParameter.getDescription())
-                .coordinator(eventCreateParameter.getCoordinator())
-                .notes(eventCreateParameter.getNotes())
-                .date(parseDateTime(eventCreateParameter))
-                .build();
+    public Event(String title, Date date, String venue, String coordinator, String description, String notes) {
+        this(title, date, venue, coordinator, description, notes, new HashSet<Student>());
+    }
+
+    public static Event createFrom(EventCreateParameter eventCreateParameter) {
+        return new Event(eventCreateParameter.getTitle(),
+                Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime()),
+                eventCreateParameter.getVenue(),
+                eventCreateParameter.getCoordinator(),
+                eventCreateParameter.getDescription(),
+                eventCreateParameter.getNotes());
     }
 
     public Integer getId() {
@@ -139,7 +143,7 @@ public class Event {
 
     private List<String> getAttendeeNames() {
         List<String> attendeeNameList = new ArrayList<String>();
-        for(Student attendee: attendees){
+        for (Student attendee : attendees) {
             attendeeNameList.add(attendee.getName());
         }
         return attendeeNameList;

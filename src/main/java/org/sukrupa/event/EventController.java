@@ -34,7 +34,7 @@ public class EventController {
 
     @RequestMapping(value = "save", method = POST)
     public String save(@ModelAttribute(value = "createEvent") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, Object> model) {
-        Event event = Event.from(eventCreateParameter);
+        Event event = Event.createFrom(eventCreateParameter);
         service.save(event, eventCreateParameter.getStudentIdsOfAttendees());
         return format("redirect:/events/%s", event.getId());
     }
