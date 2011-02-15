@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,8 +47,8 @@ public class StudentsController {
     @RequestMapping()
     public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-                       Map<String, Object> model) {
-        StudentListPage students = service.getPage(searchParam, pageNumber);
+                       Map<String, Object> model, HttpServletRequest request) {
+        StudentListPage students = service.getPage(searchParam, pageNumber, request.getQueryString());
         model.put("page", students);
         return "students/list";
     }
