@@ -6,7 +6,11 @@ class Student
   
   def initialize args
     args.each do |k,v|
-      instance_variable_set("@#{k}", parse(v)) unless (v.nil? or v.empty?)
+      if k == :date_of_birth
+        instance_variable_set("@#{k}", format_date(v)) unless (v.nil? or v.empty?)
+      else
+        instance_variable_set("@#{k}", v) unless (v.nil? or v.empty?)
+      end
     end
   end
   
@@ -28,21 +32,8 @@ class Student
     attributes.values
   end
   
-  def parse(value)
-    valid_date?(value) ? format_date(value) : value
-  end
-  
-  def valid_date?(date)
-    begin
-      parse_date date
-      return true;
-    rescue
-      return false;
-    end
-  end
-  
   def parse_date(date)
-    Date.strptime(date, '%d/%m/%Y')
+    Date.strptime(date, '%d-%m-%Y')
   end
   
   def format_date(date)

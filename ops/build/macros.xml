@@ -47,7 +47,6 @@
                 <formatter type="xml"/>
                 <batchtest todir="${target.reports.cobertura.dir}">
                     <fileset dir="${target.test.unit.dir}" includes="**/*Test.class"/>
-                    <fileset dir="${target.test.integration.dir}" includes="**/*Test.class"/>
                 </batchtest>
             </junit>
             <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
@@ -59,6 +58,7 @@
         <attribute name="stopServerTarget"/>
         <attribute name="checkServerUpTarget"/>
         <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
+        <attribute name="authenticate" default="true"/>
 
         <element name="execute"/>
 
@@ -75,6 +75,7 @@
             <parallel>
                 <sequential>
                     <echo message="Starting Server using target [@{startServerTarget}] ..."/>
+                    <property name="authenticate" value="@{authenticate}"/>
                     <antcall target="@{startServerTarget}"/>
                 </sequential>
                 <sequential>

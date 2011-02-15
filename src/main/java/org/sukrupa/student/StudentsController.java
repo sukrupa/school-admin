@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,15 +18,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/students")
 public class StudentsController {
 
-    private static final List<String> STUDENT_CLASSES = asList("Nursery", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
-    private static final List<String> GENDERS = asList("Male", "Female");
-    private static final List<String> CASTES = asList("", "Achari", "Chettiyar", "Ganiga", "Gowda", "Gownder", "Naidu", "Okkaligaru", "SC", "Shetty", "ST", "Syed");
-    private static final List<String> SUBCASTES = asList("", "AD", "AK", "Banjarthi", "Kumbara");
-    private static final List<String> COMMUNITY_LOCATIONS = asList("", "Bhuvaneshwari Slum", "Chamundi Nagar", "Cholanaykanahalli", "Kunthigtrama", "Nagenahalli", "Subramnya Nagar");
-    private static final List<String> RELIGIONS = asList("", "Christian", "Hindu", "Muslim");
+    private static final List<String> STUDENT_CLASSES = Arrays.asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> GENDERS = Arrays.asList("Male", "Female");
+    private static final List<String> CASTES = Arrays.asList("", "Achari", "Agnikula", "Arya Vashya", "Baljigru", "Bhramin", "Bohvi", "Chettyar",
+            "Gowdas", "Gownder", "MBC", "Modahaliyar", "Nadar", "Naidu", "Nayak", "Others", "Rajput", "Rathore", "Reddy's", "SC", "Shalai Keta",
+            "Shetty", "ST", "Tigalaru", "Vanniyar", "Vishwa Karma");
+    private static final List<String> SUBCASTES = Arrays.asList("","Adi Drawida","Adi Janaga","Adi Karnataka","Bale -Balijigru","Bale Banjaguru","BC",
+            "Bhajanthri","Ganiga Shetty","II 'A'","Kamala Achari","Kshathriya","Kumbar Shetty","Singh","Tiwari","Vailu Shetty","Vakkaliga",
+            "Val Nayak","Vaniga Gownder","Vannikula");
+    private static final List<String> COMMUNITY_LOCATIONS = Arrays.asList("", "Bhuvaneshwari Slum", "Chamundi Nagar",
+            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
+            "Rehmath Nagar", "Residential", "Subramanyanagar");
+    private static final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim", "Sikh");
+    private static final List<String> TALENTS = Arrays.asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
+            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
 
-    private static final List<String> TALENTS = asList("Art", "Choir", "Craft", "Creative Writing", "Dancing", "Debate",
-            "Drama", "Drawing", "Humanities", "Musical Instrument", "Quiz", "Science Club", "Singing", "Sports", "Story Writing");
     private StudentService service;
 
     private static final int AGES_TO = 20;
@@ -40,9 +47,10 @@ public class StudentsController {
     @RequestMapping
     public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-                       Map<String, Object> model) {
+	    Map<String, Object> model, HttpServletRequest request) {
+        StudentListPage students = service.getPage(searchParam, pageNumber, request.getQueryString());
+        model.put("page", students);
 
-        model.put("page", service.getPage(searchParam, pageNumber));
         return "students/list";
     }
 

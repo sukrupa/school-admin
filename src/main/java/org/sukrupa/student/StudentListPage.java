@@ -8,14 +8,16 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.util.List;
 
 public class StudentListPage {
-    private List<Student> students;
-    private int pageNumber;
-    private int maxPageNumber;
+    private final List<Student> students;
+    private final int pageNumber;
+    private final int maxPageNumber;
+    private final String queryString;
 
-    public StudentListPage(List<Student> students, int pageNumber, int maxPageNumber) {
+    public StudentListPage(List<Student> students, int pageNumber, int maxPageNumber, String queryString) {
         this.students = students;
         this.pageNumber = pageNumber;
         this.maxPageNumber = maxPageNumber;
+        this.queryString = queryString;
     }
 
     public List<Student> getStudents() {
@@ -52,5 +54,19 @@ public class StudentListPage {
 
     public boolean isNextEnabled() {
         return pageNumber < maxPageNumber;
+    }
+
+    public String getNextPageUrl() {
+        if (queryString==null || queryString.isEmpty()) {
+            return "?page=" + getNextPage();
+        }
+        if (queryString.indexOf("page=") != -1) {
+            return "?" + queryString.replaceFirst("page=[0-9]*","page=" + getNextPage());
+        }
+        return "?" + queryString + "&page=" + getNextPage();
+    }
+
+    public String getPreviousPageUrl() {
+        return "?" + queryString.replaceFirst("page=[0-9]*","page=" + getPreviousPage());
     }
 }

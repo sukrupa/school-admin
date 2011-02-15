@@ -1,11 +1,25 @@
 set :local_path, "target"
 set :deploy_artifact, "school-admin.zip"
 
+task :development do
+  set :user, "go"
+  set :target_server, "twu-ci"
+  set :deploy_path, "/var/opt/sukrupa/school-admin"
+  role :target_server, "#{target_server}"
+end
+
 task :staging do
   set :user, "go"
   set :target_server, "twu-staging"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
   role :target_server, "#{target_server}"
+end
+
+task :production do
+  set :user, "ubuntu"
+  set :target_server, "ec2-122-248-202-124.ap-southeast-1.compute.amazonaws.com"
+  set :deploy_path, "~/sukrupa/school-admin"
+  role :target_server, "#{target_server}", :ssh_options => { :keys => "~/.ssh/sukrupa-ec2.pem" }
 end
 
 task :deploy do
