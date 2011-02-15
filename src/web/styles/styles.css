@@ -241,9 +241,18 @@ div.note {
 }
 
 
+.eventTitle {
+    text-align:center;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 .eventLabel {
     width: 190px;
     float: left;
+    font-weight: bold;
 }
 
 .eventValue {
