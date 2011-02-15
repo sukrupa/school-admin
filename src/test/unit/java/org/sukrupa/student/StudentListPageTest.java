@@ -23,12 +23,10 @@ public class StudentListPageTest {
         assertThat(pageThree.getPreviousPageUrl(),is("?foo=bar&page=2&baz=quux"));
     }
 
-
     @Test
     public void shouldHavePreviousPageAsPageOne(){
         assertThat(pageTwo.getPreviousPageUrl(),is("?foo=bar&page=1&baz=quux"));
     }
-
 
     @Test
     public void shouldHaveNextPageAsPageThree() {
