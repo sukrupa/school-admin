@@ -1,40 +1,54 @@
-<form id="eventCreateParameter" name="eventCreateParameter" action="save" method="post">
+<div id="event">
 
-    <span>Title<span class="mandatory">* </span> </span>
-    <input type="text" name="title" id="title" value="$eventtitle$"/>
+    <form id="createEvent" name="createEvent" action="save" method="post">
 
-    <span>Date (dd-mm-yyyy)<span class="mandatory">* </span></span>
-    <input size= 12 type="text" name="date" id="date" value="$date$"/>
+        <div id="eventInfo">
 
-    <span>Time (hh:mm)</span>
-    <input size=7 type="text" name="time" id="time" value="$time$"/> <br/>
+            <div class="createEntry">
+                <div class="label">Title<span class="mandatory">*</span></div>
+                <input type="text" name="title" id="title" value="$eventtitle$" class="createValue"></input>
+            </div>
 
-    <br/>
-    <span>Venue</span>
-    <input type="text" name="venue" id="venue" value="$venue$"/><br/>
+            <div class="createEntry">
+                <div class="label">Date (dd/mm/yyyy)<span class="mandatory">*</span></div>
+                <input type="text" name="date" id="date" value="$date$" class="createValue"></input>
+            </div>
 
-    <br/>
-    <span>Description<span class="mandatory">* </span></span>
-    <textarea name="description" rows="3" cols="20" id="description">$description$</textarea> <br/>
+            <div class="createEntry">
+                <div class="label">Time (hh:mm)</div>
+                <input type="text" name="time" id="time" value="$time$" class="createValue"></input>
+            </div>
 
-    <br/>
-    <span>Coordinator</span>
-    <input type="text" name="coordinator" id="coordinator" value="$coordinator$"/><br/>
+            <div class="createEntry">
+                <div class="label">Venue</div>
+                <input type="text" name="venue" id="venue" value="$venue$" class="createValue"></input>
+            </div>
 
-    <br/>
-    <span>Attendees<span class="mandatory">* </span></span>
-    <textarea name="attendees" rows="3" cols="20" id="attendees">$attendees$</textarea><br/>
+            <div class="createEntry">
+                <div class="label">Description<span class="mandatory">*</span></div>
+                <input type="text" name="description" id="description" value="$description$" class="createValue"></input>
+            </div>
 
-    <br/>
-    <span>Notes</span>
-    <textarea name="notes" rows="3" cols="20" id="notes">$notes$</textarea> <br/>
-    <br/>
+            <div class="createEntry">
+                <div class="label">Coordinator</div>
+                <input type="text" name="coordinator" id="coordinator" value="$coordinator$" class="createValue"></input>
+            </div>
 
-    <input type="submit" value="Save" onclick="validateFields()"/>
-    <input type="button" value="Clear" onclick="resetFields()"/>
+            <div class="createEntry">
+                <div class="label">Attendees<span class="mandatory">*</span></div>
+                <input type="text" name="attendees" id="attendees" value="$attendees$" class="createValue"></input>
+            </div>
 
-    <br/><br/>
+            <div class="createEntry">
+                <div class="label">Notes</div>
+                <input type="text" name="notes" id="notes" value="$notes$" class="createValue"></input>
+            </div>
 
-    <div class="errorMessages" id="errorMessages"> $errorMessage$</div>
+            <input type="submit" value="Save"/>
+            <input type="button" id="clear" value="Clear"/>
 
-</form>
+        </div>
+
+    </form>
+
+</div>

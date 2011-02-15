@@ -9,7 +9,7 @@ class Talent
         talent.strip
       end
     else
-      @talents = nil
+      @talents = []
     end
   end
   

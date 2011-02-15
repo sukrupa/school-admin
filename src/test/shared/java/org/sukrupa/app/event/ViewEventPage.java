@@ -15,7 +15,7 @@ public class ViewEventPage {
     }
 
     public String getTitle() {
-        return textFor("title");
+        return textFor("eventTitle");
     }
 
     public String getVenue() {
@@ -35,17 +35,18 @@ public class ViewEventPage {
     }
 
     public String getDescription() {
-        return textFor("description");
+        return textFor("eventDescription");
     }
 
     public String getNotes() {
-        return textFor("notes");
+        return textFor("eventNotes");
     }
 
     public Set<String> getAttendees() {
         Set<String> attendees = new HashSet<String>();
-        for (WebElement element : driver.findElements(By.xpath("//*[@class='attendee']"))) {
-            attendees.add(element.getText());
+        WebElement element = driver.findElement(By.xpath("//*[@class='attendees']"));
+        for (String attendeeName : element.getText().split(", ")) {
+            attendees.add(attendeeName);
         }
         return attendees;
     }

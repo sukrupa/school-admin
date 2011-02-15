@@ -1,1 +1,1 @@
-$layout(body=events/showBody(), title="View Event")$
+$layout(body=events/showBody(), title={$event.title$}, titleLine2="View Event")$

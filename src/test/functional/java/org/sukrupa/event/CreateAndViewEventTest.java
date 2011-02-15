@@ -50,6 +50,12 @@ public class CreateAndViewEventTest {
     }
 
     @Test
+    public void shouldDisplayErrorPageForNonExistentEvent(){
+        whenWeAccessANonExistentEvent();
+        thenWeShouldBeRedirectedToErrorPage();
+    }
+
+    @Test
     @Ignore
     public void shouldDisplayCumulativeErrorsOnInvalidEntriesOfEvent() {
         givenThereAreSomeRegisteredStudents();
@@ -79,11 +85,6 @@ public class CreateAndViewEventTest {
         assertThat(createEventPage.getAllErrors(), containsString("Invalid time."));
         assertThat(createEventPage.getAllErrors(), containsString("Could not find the following IDs: 22443."));
 
-    }
-
-    public void shouldDisplayErrorPageForNonExistentEvent(){
-        whenWeAccessANonExistentEvent();
-        thenWeShouldBeRedirectedToErrorPage();
     }
 
     private void whenWeAccessANonExistentEvent() {
