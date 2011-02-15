@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 
 public class StudentListPageTest {
 
-    private final StudentListPage pageOne   = new StudentListPage(Lists.<Student>newArrayList(), 1, 3, "");
+    private final StudentListPage pageOne   = new StudentListPage(Lists.<Student>newArrayList(), 1, 3,"");
     private final StudentListPage pageTwo   = new StudentListPage(Lists.<Student>newArrayList(), 2, 3, "foo=bar&page=2&baz=quux");
     private final StudentListPage pageThree = new StudentListPage(Lists.<Student>newArrayList(), 3, 3, "foo=bar&page=3&baz=quux");
 

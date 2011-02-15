@@ -57,12 +57,14 @@ public class StudentListPage {
     }
 
     public String getNextPageUrl() {
-        if (queryString.isEmpty()) {
+        if (queryString==null || queryString.isEmpty()) {
             return "?page=" + getNextPage();
         }
         if (queryString.indexOf("page=") != -1) {
             return "?" + queryString.replaceFirst("page=[0-9]*","page=" + getNextPage());
         }
         return "?" + queryString + "&page=" + getNextPage();
+       // return "&page=2";
     }
+
 }
