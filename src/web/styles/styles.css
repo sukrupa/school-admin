@@ -8,10 +8,13 @@ body {
     margin-left: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
+
 }
 
 .fakelink {
     text-decoration: underline;
+    display:none;
+
 }
 
 #page {

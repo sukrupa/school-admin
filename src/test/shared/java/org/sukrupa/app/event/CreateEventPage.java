@@ -14,7 +14,7 @@ public class CreateEventPage {
     }
 
     public CreateEventPage navigateTo() {
-        driver.get("http://localhost:8080/events/new");
+        driver.get("http://localhost:8080/events/create");
         return this;
     }
 

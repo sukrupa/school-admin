@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EventRecord {
+public class EventCreateParameter {
     private String title;
     private String date;
     private String time;
@@ -13,12 +13,11 @@ public class EventRecord {
     private String description;
     private String notes;
     private String attendees;
-    private Set<String> invalidIDs;
 
-    public EventRecord() {
+    public EventCreateParameter() {
     }
 
-    public EventRecord(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
         this.title = title;
         this.date = date;
         this.time = time;
@@ -101,18 +100,4 @@ public class EventRecord {
         this.attendees = attendees;
     }
 
-    public String getError() {
-        String error = "Could not find the following IDs: ";
-        if (invalidIDs == null)
-            return "";
-        else {
-            for (String each : invalidIDs)
-                error += each + "  ";
-            return error;
-        }
-    }
-
-    public void setError(Set<String> invalidIDs) {
-        this.invalidIDs = invalidIDs;
-    }
 }
