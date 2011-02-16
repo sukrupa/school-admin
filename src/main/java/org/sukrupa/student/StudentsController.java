@@ -55,7 +55,7 @@ public class StudentsController {
     }
 
 
-    @RequestMapping(value = "promote" , method = POST)
+    // @RequestMapping(value = "promote" , method = POST) feature not available yet
     public String promoteClass(Map<String,Integer> model){
       int promoteStudentsCount= service.promoteStudentsToNextClass();
       model.put("numberOfStudentsUpdated",promoteStudentsCount);
