@@ -522,3 +522,10 @@ position: relative;
     width: 67%;
 }
 
+.confirmationmessage {
+
+  color:#254965;
+  font-size: 1.5em;
+  text-align: center;
+
+}
