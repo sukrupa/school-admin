@@ -11,6 +11,16 @@ class Talent
             talent = "Arts & Crafts"
         elsif talent.match("Music")
             talent = "Musical Instrument"
+        elsif talent.match("Danc")
+            talent = "Dancing"
+        elsif talent.match("Sing")
+            talent = "Singing"
+        elsif talent.match("Sports")
+            talent = "Sports"
+        elsif talent.match("Draw")
+            talent = "Drawing"
+        else
+            puts "what's this? ", talent
         end
         talent
       end
