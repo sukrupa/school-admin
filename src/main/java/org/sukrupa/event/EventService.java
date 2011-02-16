@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import com.google.common.collect.Sets;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +12,15 @@ import org.sukrupa.student.StudentRepository;
 import java.util.List;
 import java.util.Set;
 
+import static java.lang.String.format;
+
 @Component
 public class EventService {
 
     private EventRepository eventRepository;
     private StudentRepository studentRepository;
+
+	private static final Logger LOG = Logger.getLogger(EventService.class);
 
     @DoNotRemove
     EventService() {
@@ -42,6 +47,10 @@ public class EventService {
     }
 
 	public Set<String> validateStudentIdsOfAttendees(Set<String> studentIdsOfAttendees) {
+		if (studentIdsOfAttendees.isEmpty()) {
+			LOG.debug(format("empty student ids"));
+			return Sets.newHashSet("No student ids specified");
+		}
 		Set<Student> students = studentRepository.load(studentIdsOfAttendees.toArray(new String[]{}));
 		Set<String> loadedStudentsIds = Sets.newHashSet();
 

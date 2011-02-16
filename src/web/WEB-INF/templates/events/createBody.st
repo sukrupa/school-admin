@@ -2,20 +2,21 @@
 
     <form id="createEvent" name="createEvent" action="save" method="post">
 
-        <div id="eventInfo">
+        <div class="eventInfo" >
 
+            <div class="eventInfoLeft">
             <div class="createEntry">
                 <div class="label">Title<span class="mandatory">*</span></div>
                 <input type="text" name="title" id="title" value="$eventtitle$" class="createValue"></input>
             </div>
 
-            <div class="createEntry">
-                <div class="label">Date (dd-mm-yyyy)<span class="mandatory">*</span></div>
+            <div class="createEntryDateTime">
+                <div class="label dateTime">Date <br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
                 <input type="text" name="date" id="date" value="$date$" class="createValue"></input>
             </div>
 
-            <div class="createEntry">
-                <div class="label">Time (hh:mm)</div>
+            <div class="createEntryDateTime">
+                <div class="label dateTime">Time <br/>(hh:mm)</div>
                 <input type="text" name="time" id="time" value="$time$" class="createValue"></input>
             </div>
 
@@ -25,33 +26,43 @@
             </div>
 
             <div class="createEntry">
-                <div class="label">Description<span class="mandatory">*</span></div>
-                <textarea name="description" id="description" class="createValue">$description$</textarea>
-            </div>
-
-            <div class="createEntry">
                 <div class="label">Coordinator</div>
-                <input type="text" name="coordinator" id="coordinator" value="$coordinator$" class="createValue"></input>
+                <input type="text" name="coordinator" id="coordinator" value="$coordinator$"
+                       class="createValue"></input>
             </div>
 
             <div class="createEntry">
-                <div class="label">Attendees<span class="mandatory">*</span></div>
-                <textarea name="attendees" id="attendees" class="createValue">$attendees:{$it$, }$</textarea>
+                <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
+                <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$attendees; separator=", "$</textarea>
+
             </div>
+        </div>
+
+        <div class="eventInfoRight">
+            <div class="createEntry">
+                <div class="label">Description<span class="mandatory">*</span></div>
+                <textarea name="description" id="description" class="createValue" rows="7.5" cols="30">$description$</textarea>
+            </div>
+
 
             <div class="createEntry">
                 <div class="label">Notes</div>
-                <textarea name="notes" id="notes" class="createValue">$notes$</textarea>
+                <textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$notes$</textarea>
             </div>
-
-            <input type="submit" id="save" value="Save"/>
-            <input type="button" id="clear" value="Clear"/>
-
-            <div id="errorMessages" class="errorMessages"></div>
-			<div id="invalidAttendees" class="errorMessages"></div>
+        </div>
 
         </div>
 
+        <div class="eventButtons">
+                    <input type="submit" id="save" value="Save"/>
+                    <input type="button" id="clear" value="Clear"/>
+                </div>
+                    <div id="errorMessages" class="errorMessages"></div>
+                <div class="errorMessages">
+				$if (invalidAttendees)$
+					Invalid student ids: $invalidAttendees; separator=", "$
+				$endif$
+			</div>
     </form>
 
 </div>

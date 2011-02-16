@@ -220,7 +220,7 @@ div.note
     margin-top: 20px;
 }
 
-.talentsLabel, .label 
+.talentsLabel, .label, .attendeeLabel
 {
 
     font-weight: bold;
@@ -285,6 +285,10 @@ div.note
     color: red;
     font-weight: bold;
     padding: 10px 0px 10px 0px;
+}
+
+.errorMessages {
+    color: red;
 }
 
 #dateErrorMessage {
@@ -401,6 +405,11 @@ padding-right: 20px;
 
 }
 
+#eventListPages
+{
+    float:left;
+}
+
 #eventRecord
 {
 	padding-left: 20px;
@@ -455,4 +464,75 @@ padding-right: 20px;
 {
     resize:vertical;
 
+}
+.createValue{
+    resize:none;
+}
+
+.eventInfoLeft{
+    float:left;
+	position:relative;
+    width: 60%;
+
+}
+
+.eventInfoRight{
+    float:left;
+	position:relative;
+    width: 40%;
+    height: 250px;
+}
+.eventButtons{
+   clear:both;
+	float:left;
+	width:100%;
+	text-align:left;
+}
+
+.eventInfo .label{
+    width: 100px;
+}
+
+.createEntryDateTime {
+    float:left;
+    position:relative;
+    width: 50%;
+    padding: 2px 0px 10px 0px;
+}
+
+.createEntry {
+    padding: 2px 0px 10px 0px;
+}
+
+.createEntry .eventAddress .createValue {
+width: 100px;
+}
+
+.createEntryDateTime input {
+    width: 70px;
+}
+
+.eventAddress {
+    width:100%;
+    float: left;
+    position: relative;
+}
+
+
+.eventInfoRight .label{
+    width:100%;
+}
+.createEntry input {
+    width: 67%;
+}
+
+.confirmationmessage {
+
+  color:#254965;
+  font-size: 1.5em;
+  text-align: center;
+
+}
+#attendees{
+    width:90%
 }
