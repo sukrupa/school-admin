@@ -71,7 +71,8 @@ public class Event {
 
     public static Event createFrom(EventCreateParameter eventCreateParameter) {
         return new Event(eventCreateParameter.getTitle(),
-                Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime()),
+                Date.parse(eventCreateParameter.getDate(),
+		        eventCreateParameter.getTime()),
                 eventCreateParameter.getVenue(),
                 eventCreateParameter.getCoordinator(),
                 eventCreateParameter.getDescription(),
@@ -148,4 +149,8 @@ public class Event {
         }
         return attendeeNameList;
     }
+
+	public String getCoordinator() {
+		return coordinator;
+	}
 }

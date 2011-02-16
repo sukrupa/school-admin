@@ -45,7 +45,7 @@ public class EventCreateParameter {
     }
 
     public String getTime() {
-        return time;
+        return returnNullIfEmpty(time);
     }
 
     public void setTime(String time) {
@@ -53,7 +53,7 @@ public class EventCreateParameter {
     }
 
     public String getVenue() {
-        return venue;
+        return returnNullIfEmpty(venue);
     }
 
     public void setVenue(String venue) {
@@ -61,7 +61,7 @@ public class EventCreateParameter {
     }
 
     public String getCoordinator() {
-        return coordinator;
+        return returnNullIfEmpty(coordinator);
     }
 
     public void setCoordinator(String coordinator) {
@@ -77,10 +77,14 @@ public class EventCreateParameter {
     }
 
     public String getNotes() {
-        return notes;
+        return returnNullIfEmpty(notes);
     }
 
-    public void setNotes(String notes) {
+	private String returnNullIfEmpty(String value) {
+		return (value.isEmpty()) ? null : value;
+	}
+
+	public void setNotes(String notes) {
         this.notes = notes;
     }
 

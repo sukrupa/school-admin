@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.apache.commons.lang.StringUtils;
+import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +16,9 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.eventFrom;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.sukrupa.platform.date.DateManipulation.freezeTime;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
@@ -66,7 +69,23 @@ public class EventTest {
             expectedAttendeeNames.add(attendee.getName());
         }
         Event event = new EventBuilder().attendees(attendees).build();
-        assertThat(event.getAttendeesForDisplay(), is(StringUtils.join(expectedAttendeeNames , ", ")));
+        assertThat(event.getAttendeesForDisplay(), is(StringUtils.join(expectedAttendeeNames, ", ")));
     }
+
+	@Test
+	public void shouldCreateEventWithNullValuesForNonMandatoryFields() {
+		EventCreateParameter eventCreateParameter = new EventCreateParameter();
+		eventCreateParameter.setCoordinator("");
+		eventCreateParameter.setNotes("");
+		eventCreateParameter.setVenue("");
+		eventCreateParameter.setTime("");
+		eventCreateParameter.setDate("12-12-2001");
+
+		Event event = Event.createFrom(eventCreateParameter);
+
+		assertThat(event.getNotes(), nullValue());
+		assertThat(event.getVenue(), nullValue());
+		assertThat(event.getCoordinator(), nullValue());
+	}
 
 }
