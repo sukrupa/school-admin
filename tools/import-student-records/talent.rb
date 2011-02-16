@@ -19,10 +19,21 @@ class Talent
             talent = "Sports"
         elsif talent.match("Draw")
             talent = "Drawing"
-        else
-            puts "what's this? ", talent
+        elsif talent.match("Writing")
+            talent = "Creative Writing"
+        elsif talent.match("Mimic")
+            talent = "Mimicry"
+        elsif talent.match("Act")
+            talent = "Acting"
+        elsif talent.match("Pick")
+            talent = "Pick & Speak"
+        elsif talent.match("Read")
+            talent = "Reading"
+        elsif talent.match("Story")
+            talent = "Story Telling"
+        elsif talent.match("Public")
+            talent = "Public Speaking"
         end
-        talent
       end
     else
       @talents = []
