@@ -2,6 +2,7 @@ package org.sukrupa.event;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public class EventRepository {
     }
 
     public List<Event> list() {
-        return session().createCriteria(Event.class).list();
+        return session().createCriteria(Event.class).addOrder(Order.desc("date")).list();
     }
 
     public Event load(Integer eventId) {

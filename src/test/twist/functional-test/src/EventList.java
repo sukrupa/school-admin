@@ -28,30 +28,25 @@ public class EventList {
 	
 	}
 
-	public void checkThatEventIsTitled(Integer integer1, String string2)
-			throws Exception {
-		assertEquals("Fake event_title 2", browser.link("Fake event_title 2")
-				.text());
-		assertTrue(browser.link("Fake event_title 2").text()
-				.contains("Fake event_title 2"));
-		assertEquals("Fake event_title 2", browser.link("Fake event_title 2")
-				.text());
-	
-	}
-
 	public void checkThatEventIsOn(String string1) throws Exception {
 		assertEquals("25-03-2011", browser.cell("25-03-2011").text());
 	
 	}
 
-	public void clickOn(String string1) throws Exception {
-		browser.link("Fake event_title 2").click();
+	public void verifyThatYouAreOnRecord(String string1) throws Exception {
+		assertEquals("Sports Day View Event",
+				browser.div("Sports Day View Event").text());
 	
 	}
 
-	public void verifyThatYouAreOnRecord(String string1) throws Exception {
-		assertEquals("Fake event_title 2 View Event",
-				browser.div("Fake event_title 2 View Event").text());
+	public void checkThatEventIsTitled(Integer integer1, String string2)
+			throws Exception {
+		assertEquals(string2, browser.cell(string2).text());
+	
+	}
+
+	public void clickOn(String string1) throws Exception {
+		browser.link(string1).click();
 	
 	}
 

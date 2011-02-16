@@ -15,22 +15,21 @@ $(document).ready(function () {
 function validateFields() {
     var valid = true;
     var errorMessage = "";
-    var dateStr = $('#date').val();
-    var timeStr = $('#time').val();
-    var dummyTimeStr = "01:01";
-    var dummyDateStr = "01-01-2001"
+    var dateStr = $.trim($('#date').val());
+    var timeStr = $.trim($('#time').val());
+    var dummyTimeStr = "00:00";
 
-    if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+    if (!new DateValidator().validate(dateStr, dummyTimeStr, new Date())) {
         errorMessage += "Invalid date.<br/>";
         valid = false;
     }
 
-    if ( !(timeStr === "") && !new DateValidator().validate(dummyDateStr, timeStr)) {
+    if ( !(timeStr === "") && !new DateValidator().validate(dateStr, timeStr, new Date())) {
         errorMessage += "Invalid time.<br/>";
         valid = false;
     }
 
-    if ($('#title').val() === "" || $('#description').val() === "" || $('#date').val() === "" || $('#attendees').val() === "") {
+    if ($.trim($('#title').val()) === "" || $.trim($('#description').val()) === "" || dateStr === "" || $.trim($('#attendees').val()) === "") {
         errorMessage += "Please fill in all required fields.";
         valid = false;
     }
