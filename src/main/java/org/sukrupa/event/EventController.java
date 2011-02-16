@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static java.lang.String.format;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
@@ -22,26 +25,45 @@ public class EventController {
         this.service = service;
     }
     @RequestMapping()
-    public String list()
+    public String list(Map<String, List<Event>> model)
     {
+        model.put("events", service.list());
         return "events/list";
-    }
-
-    @RequestMapping(value = "create")
-    public String create() {
-        return "events/create";
-    }
-
-    @RequestMapping(value = "save", method = POST)
-    public String save(@ModelAttribute(value = "createEvent") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, Object> model) {
-        Event event = Event.createFrom(eventCreateParameter);
-        service.save(event, eventCreateParameter.getStudentIdsOfAttendees());
-        return format("redirect:/events/%s", event.getId());
     }
 
     @RequestMapping(value = "/{eventId}")
     public String display(@PathVariable int eventId, Map<String, Event> model) {
         model.put("event", service.getEvent(eventId));
-        return "events/show";
+        return "events/view";
     }
+
+	@RequestMapping(value = "create", method = GET)
+	public String create() {
+		return "events/create";
+	}
+
+	@RequestMapping(value = "save", method = POST)
+	public String save(@ModelAttribute(value = "createEvent") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, Object> model) {
+		Event event = Event.createFrom(eventCreateParameter);
+		Set<String> studentIdsOfAttendees = eventCreateParameter.getStudentIdsOfAttendees();
+		Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+		if (!invalidAttendees.isEmpty()) {
+			model.put("invalidAttendees",invalidAttendees);
+
+			model.put("eventtitle", eventCreateParameter.getTitle());
+			model.put("date", eventCreateParameter.getDate());
+			model.put("time", eventCreateParameter.getTime());
+			model.put("venue", eventCreateParameter.getVenue());
+			model.put("description", eventCreateParameter.getDescription());
+			model.put("coordinator", eventCreateParameter.getCoordinator());
+			model.put("attendees", eventCreateParameter.getStudentIdsOfAttendees());
+			model.put("notes", eventCreateParameter.getNotes());
+			
+			return "events/create";
+		} else {
+			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
+			return format("redirect:/events/%s", event.getId());
+		}
+	}
+
 }

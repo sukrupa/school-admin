@@ -1,6 +1,9 @@
 package org.sukrupa.event;
 
+import com.google.common.collect.Sets;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -92,12 +95,12 @@ public class EventCreateParameter {
         return attendees;
     }
 
-    public String[] getStudentIdsOfAttendees() {
-        List<String> studentIds = new ArrayList<String>();
+    public Set<String> getStudentIdsOfAttendees() {
+        Set<String> studentIds = Sets.newHashSet();
         for (String studentId : attendees.split(",")) {
             studentIds.add(studentId.trim());
         }
-        return studentIds.toArray(new String[]{});
+        return studentIds;
     }
 
     public void setAttendees(String attendees) {

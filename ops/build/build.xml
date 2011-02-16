@@ -103,8 +103,7 @@
     <target name="test:functional">
         <run-against-server startServerTarget="sukrupa-server:start"
                             checkServerUpTarget="sukrupa-server:check-is-running"
-                            stopServerTarget="sukrupa-server:stop"
-                            authenticate="false">
+                            stopServerTarget="sukrupa-server:stop">
             <execute>
                 <test-without-failing type="functional"/>
             </execute>
@@ -119,8 +118,7 @@
 
         <run-against-server startServerTarget="sukrupa-server:start-for-twist"
                             stopServerTarget="sukrupa-server:stop-for-twist"
-                            checkServerUpTarget="sukrupa-server:check-is-running"
-                            authenticate="false">
+                            checkServerUpTarget="sukrupa-server:check-is-running">
             <execute>
                 <ant antfile="${ops.build.dir}/twist.xml"
                      dir="${src.test.twist.fixtures.dir}"
