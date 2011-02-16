@@ -1,9 +1,10 @@
 var myOptions = new Array();
+var anyValue = "*";
 
 function changeAgeRange() {
 	var minVal = $('#ageFrom').val();
 	removeAll();
-	if (minVal === "") {
+	if (minVal === anyValue) {
 		addAnyToAgeTo();
 	} else {
 		showAllAgeToOptionsFrom(minVal);
@@ -13,7 +14,7 @@ function changeAgeRange() {
 
 function addAnyToAgeTo() {
 	var ageTo = getAgeToOptions();
-	ageTo[ageTo.length] = new Option("Any", "", true, true);
+	ageTo[ageTo.length] = new Option("Any", anyValue, true, true);
 }
 
 function getAgeToOptions() {
@@ -35,8 +36,8 @@ function removeAll() {
 }
 
 function initDropDowns() {
-	$('#ageTo').val("*");
-	$('#ageFrom').val("*");
+	$('#ageTo').val(anyValue);
+	$('#ageFrom').val(anyValue);
 	removeAll();
 	addAnyToAgeTo();
 }
