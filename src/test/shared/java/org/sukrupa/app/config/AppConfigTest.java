@@ -41,14 +41,35 @@ public class AppConfigTest {
     }
 
     @Test
-    public void shouldNotAuthenticateByDefault() {
-        assertThat(new AppConfig().properties().getProperty("web.server.authenticate"), is("false"));
+    public void shouldAuthenticateByDefault() {
+        pretendWeAreNotInIntelliJ();
+        clearEnvironmentVariable();
+        assertThat(property("web.server.authenticate"), is("true"));
     }
 
     @Test
-    public void shouldAlwaysAuthenticateInProduction() {
-        System.setProperty("environment", "production");
-        assertThat(new AppConfig().properties().getProperty("web.server.authenticate"), is("true"));
+    public void shouldNotAuthenticateWhenRunningBuild() {
+        pretendWeAreNotInIntelliJ();
+        System.setProperty("environment", "build");
+        assertThat(property("web.server.authenticate"), is("false"));
     }
 
+    @Test
+    public void shouldUseWebRootInSouceTreeWhenRunningInIntellij() {
+        System.setProperty("java.class.path", "IntelliJ something");
+        clearEnvironmentVariable();
+        assertThat(property("web.root.dir"), is("../../src/web"));
+    }
+
+    private String property(String key) {
+        return new AppConfig().properties().getProperty(key);
+    }
+
+    private void pretendWeAreNotInIntelliJ() {
+        System.setProperty("java.class.path", "");
+    }
+
+    private void clearEnvironmentVariable() {
+        System.setProperty("environment", "");
+    }
 }

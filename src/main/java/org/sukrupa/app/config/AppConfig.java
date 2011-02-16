@@ -27,6 +27,8 @@ import static org.springframework.beans.factory.config.PropertyPlaceholderConfig
 @Import({DBConfig.class})
 public class AppConfig {
 
+    private static final String ENVIRONMENT_KEY = "environment";
+
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -70,6 +72,7 @@ public class AppConfig {
         try {
             Properties properties = new Properties();
             properties.load(defaultAppProperties());
+            detectIfRunningInIntelliJ();
             if (environmentHasBeenSpecified()) {
                 properties.load(environnmentSpecificProperties());
             }
@@ -79,12 +82,26 @@ public class AppConfig {
         }
     }
 
+    private void detectIfRunningInIntelliJ() {
+        if (isRunnintInIntelliJ()) {
+            setEnvironment("intellij");
+        }
+    }
+
+    private boolean isRunnintInIntelliJ() {
+        return System.getProperty("java.class.path").toLowerCase().contains("intellij");
+    }
+
     private boolean environmentHasBeenSpecified() {
         return isNotBlank(environment());
     }
 
     private String environment() {
-        return System.getProperty("environment");
+        return System.getProperty(ENVIRONMENT_KEY);
+    }
+
+    private String setEnvironment(String value) {
+        return System.setProperty(ENVIRONMENT_KEY, value);
     }
 
     private InputStream defaultAppProperties() throws IOException {
@@ -98,5 +115,4 @@ public class AppConfig {
     private InputStream fromClassPath(String fileName) throws IOException {
         return new ClassPathResource(fileName).getInputStream();
     }
-
 }
