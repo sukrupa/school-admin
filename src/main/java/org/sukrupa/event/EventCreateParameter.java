@@ -1,5 +1,6 @@
 package org.sukrupa.event;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
@@ -96,11 +97,7 @@ public class EventCreateParameter {
     }
 
     public Set<String> getStudentIdsOfAttendees() {
-        Set<String> studentIds = Sets.newHashSet();
-        for (String studentId : attendees.split(",")) {
-            studentIds.add(studentId.trim());
-        }
-        return studentIds;
+	    return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
     public void setAttendees(String attendees) {
