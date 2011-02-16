@@ -3,7 +3,7 @@ Preconditions:Navigate to dashboard
 Metadata:ScenarioType=Auto
 Event List:
 #Follow the "View Events" link
-#Check that event "1" is titled "Fake event title 2" 
+#Check that event "1" is titled "Sports Day" 
 #Check that event is on "25/03/2011"
-#Click on "Fake event title 2"
-#Verify that you are on "Fake event title 2" record 
+#Click on "Sports Day"
+#Verify that you are on "Sports Day" record 
