@@ -20,7 +20,7 @@ function validateFields() {
     var dummyTimeStr = "01:01";
     var dummyDateStr = "01-01-2001"
 
-    if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+    if (!new DateValidator().validate(dateStr, dummyTimeStr, new Date())) {
         errorMessage += "Invalid date.<br/>";
         valid = false;
     }
