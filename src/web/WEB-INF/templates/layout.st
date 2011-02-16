@@ -29,8 +29,12 @@ $sidebar()$
 $body$
 </div>
 <br class="clear">
+
 </div>
 </div>
+
+
+
 
 </body>
 </html>
