@@ -56,7 +56,7 @@ public class AppConfigTest {
 
     @Test
     public void shouldUseWebRootInSouceTreeWhenRunningInIntellij() {
-        System.setProperty("java.class.path", "IntelliJ something");
+        System.setProperty("user.dir", "IntelliJ something");
         clearEnvironmentVariable();
         assertThat(property("web.root.dir"), is("../../src/web"));
     }
@@ -66,7 +66,7 @@ public class AppConfigTest {
     }
 
     private void pretendWeAreNotInIntelliJ() {
-        System.setProperty("java.class.path", "");
+        System.setProperty("user.dir", "");
     }
 
     private void clearEnvironmentVariable() {

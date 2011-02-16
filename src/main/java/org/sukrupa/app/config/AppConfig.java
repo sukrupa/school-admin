@@ -89,7 +89,7 @@ public class AppConfig {
     }
 
     private boolean isRunnintInIntelliJ() {
-        return System.getProperty("java.class.path").toLowerCase().contains("intellij");
+        return System.getProperty("user.dir").toLowerCase().contains("intellij");
     }
 
     private boolean environmentHasBeenSpecified() {
