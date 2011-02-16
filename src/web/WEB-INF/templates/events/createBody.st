@@ -58,6 +58,8 @@
                     <input type="button" id="clear" value="Clear"/>
                 </div>
                     <div id="errorMessages" class="errorMessages"></div>
+                    <div id="invalidAttendees" class="errorMessages"></div>
+
 
 
     </form>
