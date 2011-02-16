@@ -69,10 +69,10 @@ public class CreateEventPage {
     }
 
     private void fillInText(String field, String value) {
-        driver.findElement(By.xpath("//input[@name='" + field + "']")).sendKeys(value);
+        driver.findElement(By.xpath("//*[@name='" + field + "']")).sendKeys(value);
     }
 
     private void fillInTextArea(String field, String value) {
-        driver.findElement(By.xpath("//input[@name='" + field + "']")).sendKeys(value);
+        driver.findElement(By.xpath("//*[@name='" + field + "']")).sendKeys(value);
     }
 }

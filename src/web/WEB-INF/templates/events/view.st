@@ -1,0 +1,1 @@
+$layout(body=events/viewBody(), title={$event.title$}, titleLine2="View Event")$

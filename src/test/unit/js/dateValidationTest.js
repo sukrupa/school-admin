@@ -67,6 +67,16 @@ DateValidationTest.prototype.testValidateIncorrect31Jun = function() {
 
 DateValidationTest.prototype.testValidateCorrect31Jan = function() {
     var validator = new DateValidator();
-    assertEquals(true, validator.validate("31-01-2001", "01:01"));
+    assertEquals(true, validator.validate("31-01-2001", "00:00"));
+};
+
+DateValidationTest.prototype.testValidateCorrect31Jan = function() {
+    var validator = new DateValidator();
+    assertEquals(false, validator.validate("31-01-2001", "24:00"));
+};
+
+DateValidationTest.prototype.testValidateCorrect31Jan = function() {
+    var validator = new DateValidator();
+    assertEquals(false, validator.validate("31-01-2001", "00:60"));
 };
 
