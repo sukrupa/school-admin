@@ -78,6 +78,8 @@ body
     width:700px;
 }
 
+
+
 .pageheader .twoLinesTitle {
     padding-top: 40px;
     padding-bottom: 20px;
@@ -278,6 +280,7 @@ div.note
     clear: both;
 }
 
+
 .errorMessage {
     color: red;
     font-weight: bold;
@@ -294,6 +297,7 @@ div.note
     color: red;
     font-weight: bold;
 }
+
 
 #successDiv {
     position: absolute;
@@ -419,7 +423,6 @@ padding-right: 20px;
 }
 
 
-
 .eventTitle {
     text-align:center;
     margin-right: 50px;
@@ -432,15 +435,12 @@ padding-right: 20px;
     width: 100px;
     float: left;
     font-weight: bold;
+
 }
 
 .eventValue {
     float: left;
     width: 250px;
-}
-
-textarea {
-    resize: vertical;
 }
 
 .eventDescription {
@@ -449,6 +449,10 @@ textarea {
 
 .eventNotes {
     margin: 15px 0px 15px 100px;
-
 }
 
+.noHorizontalResize
+{
+    resize:vertical;
+
+}

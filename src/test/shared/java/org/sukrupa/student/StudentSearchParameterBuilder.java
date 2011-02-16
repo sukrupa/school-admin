@@ -2,14 +2,14 @@ package org.sukrupa.student;
 
 public class StudentSearchParameterBuilder {
 
-    private String studentClass = "";
-    private String gender = "";
-    private String caste = "";
-    private String area = "";
-    private String ageFrom = "";
-    private String ageTo = "";
-    private String talent = "";
-    private String religion = "";
+    private String studentClass = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String gender = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String caste = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String area = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String ageFrom = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String ageTo = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String talent = StudentSearchParameter.WILDCARD_CHARACTER;
+    private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
 
     public StudentSearchParameterBuilder studentClass(String studentClass) {

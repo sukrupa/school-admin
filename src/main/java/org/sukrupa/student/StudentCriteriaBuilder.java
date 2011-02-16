@@ -37,7 +37,7 @@ public class StudentCriteriaBuilder {
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
         Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
-        if (!searchParam.getAgeFrom().isEmpty()) {
+        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(searchParam.getAgeFrom())) {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
         }
 
@@ -58,7 +58,7 @@ public class StudentCriteriaBuilder {
     }
 
     private void addTalentsSearchCriteria(Criteria criteria, String talent) {
-        if (!talent.isEmpty()) {
+        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(talent)) {
             criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, talent));
         }
     }
@@ -82,7 +82,7 @@ public class StudentCriteriaBuilder {
     }
 
     private void addRestrictionIfNotEmpty(String field, String parameter, Conjunction conjunction) {
-        if (!parameter.isEmpty()) {
+        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
             conjunction.add(Restrictions.eq(field, parameter));
         }
     }

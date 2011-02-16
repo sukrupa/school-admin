@@ -4,14 +4,16 @@ import org.sukrupa.platform.DoNotRemove;
 
 public class StudentSearchParameter {
 
-    private String studentClass = "";
-    private String gender = "";
-    private String caste = "";
-    private String communityLocation = "";
-    private String ageFrom = "";
-    private String ageTo = "";
-    private String talent = "";
-    private String religion = "";
+    public static final String WILDCARD_CHARACTER = "*";
+
+    private String studentClass = WILDCARD_CHARACTER;
+    private String gender = WILDCARD_CHARACTER;
+    private String caste = WILDCARD_CHARACTER;
+    private String communityLocation = WILDCARD_CHARACTER;
+    private String ageFrom = WILDCARD_CHARACTER;
+    private String ageTo = WILDCARD_CHARACTER;
+    private String talent = WILDCARD_CHARACTER;
+    private String religion = WILDCARD_CHARACTER;
 
     public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
         this.studentClass = studentClass;
