@@ -17,8 +17,7 @@ function validateFields() {
     var errorMessage = "";
     var dateStr = $.trim($('#date').val());
     var timeStr = $.trim($('#time').val());
-    var dummyTimeStr = "01:01";
-    var dummyDateStr = "01-01-2001"
+    var dummyTimeStr = "00:00";
 
     if (!new DateValidator().validate(dateStr, dummyTimeStr, new Date())) {
         errorMessage += "Invalid date.<br/>";

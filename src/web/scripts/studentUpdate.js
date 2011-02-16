@@ -31,7 +31,7 @@ function validateFields() {
     if (dateStr === "") {
         errorMessage += "Please insert a date<br />";
         valid = false;
-    } else if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+    } else if (!new DateValidator().validate(dateStr, dummyTimeStr, new Date())) {
         $('#dateErrorMessage').html("Invalid date.  Format: dd-mm-yyyy.");
         errorMessage += "Please insert a valid date (Format: dd-mm-yyyy).<br/>";
         valid = false;
