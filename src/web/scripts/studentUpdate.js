@@ -3,7 +3,7 @@ $(document).ready(function () {
         var dateStr = $('#dateOfBirth').val();
         var dummyTimeStr = "01:01";
 
-        if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+        if (!new DateValidator().validate(dateStr, dummyTimeStr, new Date())) {
             $('#dateErrorMessage').html("Invalid date.  Format: dd-mm-yyyy");
         } else {
             $('#dateErrorMessage').html("");
