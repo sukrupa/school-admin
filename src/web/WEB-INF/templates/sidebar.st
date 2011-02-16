@@ -1,13 +1,55 @@
-      <a href="/students/search">Search Students</a><br/>
+      <div class="sideBarHeader">Search </div>
+	
+	  <div class="sideBarContent">
+	  <li>
+	  <p class="indent">
+	  <a href="/students/search">Search Students</a></p>
+	  </li>
+	  </div>
+      
+      <br/>
+	  
+	  <div class="sideBarHeader">
+      Student Records
+      <br/>
+      </div>
+      
+      <div class="sideBarContent">
+      <li>
+      <p class="indent"><a href="/students">View All</a>
+      </p>
+      </li>
+      </div>
+       
+	  <br/>
 
-        <br/>
+	  <div class="sideBarHeader">
+      Events
+      </div>
+      
+      <div class="sideBarContent">
+      
+      <li>
+      <p class="indent">
+      View Events
+      </p>
+      </li>
+        
+      <li>
+      <p class="indent">
+      <a href="/events/record">
+      Record Event
+      </a>
+      </p>
+      </li>
+       
+      </div>
+        
+       
 
-      Student Records<br/>
-        <p class="indent"><a href="/students">View All</a></p>
-        <p class="fakelink indent">Import</a><br/></p>
 
-        <br/>
 
-      Events<br/>
-        <p class="indent fakelink">View Events</p>
-        <p class="indent"><a href="/events/record">Record Event</a><br/></p>
+
+
+      
+           

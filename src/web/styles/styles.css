@@ -1,100 +1,159 @@
-body {
-    margin: 0;
-    padding: 0;
-    font: 11px 'Century Gothic', verdana, arial, helvetica, sans-serif;
+body 
+{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: auto;
+    padding: 5px;
+    font: 11px tahoma, verdana, arial, helvetica, sans-serif;
+    background: #24333D;
+    
+    
 }
 
-.indent {
-    margin-left: 10px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-.fakelink {
-    text-decoration: underline;
-}
-
-#page {
+#page 
+{
+    
     width: 950px;
     margin-left: auto;
     margin-right: auto;
-    border: 5px #0065a5 solid;
     border-top: none;
+    
 }
 
+.indent 
+{
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color:#254965;
+}
+
+.fakelink 
+{
+    text-decoration: underline;
+    color: #254965;
+}
+
+
+
 #header {
-    width: 950px;
-    height: 115px;
-    background-color: #0065a5;
+
+    width: 908px;
+    height: 130px;
+    background-color: #254965;
+ 
+ 
+	-moz-border-radius-topright: 5px; 
+    -webkit-border-top-right-radius: 5px;
+    border-top-radius: 5px;
+    
+    -moz-border-radius-topleft: 5px;
+    -webkit-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    
+    border-bottom: solid;
+    border-bottom-color: #FEC700;
+  
+    
+
 }
 
 .pageheader {
     color: #ffffff;
     vertical-align: text-top;
-    font: 28pt Palatino, serif;
+    font: 25pt Palatino, serif;
 }
 
 .pageheader .headerImage {
     float:left;
-    width:190px;
+    width:185px;
+ 
 }
 
 .pageheader .twoLinesTitle, .pageheader .oneLineTitle {
     float:left;
     text-align:center;
-    width:760px;
+    width:700px;
 }
 
 .pageheader .twoLinesTitle {
-    padding-top: 20px;
+    padding-top: 40px;
     padding-bottom: 20px;
+ 
 }
 
 .pageheader .oneLineTitle {
-    padding-top: 40px;
+    padding-top: 50px;
     padding-bottom: 40px;
 }
 
 #sidebar {
-    width: 210px;
-    margin-right: 20px;
+    width: 175px;
+    margin-right: 5px;
     padding-left: 10px;
+    padding-top: 0px;
     float: left;
     background: transparent;
     color: #ffffff;
-    font: 16px Palatino, serif;
+    font: 16px Tahoma, serif;
+    color:#254965; 
+    
+      
 }
 
 #sidebar a {
-    color: #ffffff;
+    color:#254965;
 }
 
 #sidebar a:visited {
-    color: #ffdddd;
+    color: #254965;
 }
 
 #body {
     width: 700px;
     float: left;
-    padding-bottom: 50px;
-    font: 120% verdana, arial, helvetica, sans-serif;
+    height:auto;
+    padding-left: 15px;
+    padding-top: 10px;
+    font: 120%  tahoma, arial, helvetica;
+    border-left:solid;
+    border-color:#254965; 
+   
 }
 
 img {
     border: none;
+    padding-top:40px;
+    padding-left: 5px;
+    width: 180px;
+    height:50px;
 }
 
 #columns {
-    background: url("/images/columns-background.png") repeat-y;
-    min-height: 70%;
+    min-height: 190px;
     padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: white;
+    float:left;
+    
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+   
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+  
 }
 
-.clear {
+.clear 
+{
     clear: both;
 }
 
-div.box {
+div.box 
+{
     float: left;
     width: 300px;
     line-height: 1.25em;
@@ -102,44 +161,59 @@ div.box {
 
 }
 
-div.note {
+div.note 
+{
     float: left;
     width: 300px;
     resize: vertical;
     height: 50px;
 }
 
-.spacer {
+.spacer 
+{
+
     margin: 15px 0 0 25px;
 }
 
-.page table td {
+.page table td 
+{
+
     border: 1px #000000 solid;
     padding: 4px;
 }
 
-.page table {
+.page table 
+{
+
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
+   
 }
 
-.header {
-    font: 107% verdana, arial, helvetica, sans-serif;
+.header 
+{
+
+    font: 107% Tahoma, arial, helvetica, sans-serif;
     font-weight: bold;
 }
 
-.disabled {
+.disabled 
+{
+
     text-decoration: none;
     color: black;
 }
 
-#studentInfo {
+#studentInfo 
+{
     width: 700px;
     margin-top: 20px;
 }
 
-.talentsLabel, .label {
+.talentsLabel, .label 
+{
+
     font-weight: bold;
 }
 
@@ -236,3 +310,73 @@ div.note {
     width: 25px;
     height: 25px;
 }
+
+
+.sideBarHeader
+{
+
+	margin-left: auto;
+	margin-right: auto;
+	width:150px;
+	padding-left: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: justify;
+	background-color: #254965;
+	color:white;
+	
+	
+	
+}
+.sideBarContent
+{
+	border-left:solid;
+	border-right: solid;
+	border-bottom:solid;
+	border-color: #254965;
+	width:148px;
+    margin-left: auto;
+	margin-right: auto;
+	padding-left: 6px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	
+	
+}
+
+li
+{
+
+	list-style: none;
+ 	margin-left: auto;
+ 	margin-right: auto;
+	width:140px;
+	padding-right: 10px;
+	
+
+
+}
+
+#student
+{
+	padding-left: 20px;
+
+}
+
+#studentListPages
+{
+
+padding-right: 20px;
+
+}
+
+#eventRecord
+{
+	padding-left: 20px;
+	padding-right: 20px;
+
+}
+
+
+
+

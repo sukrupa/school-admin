@@ -1,5 +1,7 @@
 <h1 class="pageheader">
-<a class="headerImage"" href="/students"><img width="190" src="/images/SUKRUPA-LOGO-final.jpg" alt="Sukrupa"></a>
+<div class="headerImage">
+<a class="headerImage" "href="/students"><img width="185" src="/images/SUKRUPA-LOGO-final.png" alt="Sukrupa"></a>
+</div>
 
     $if (titleLine2)$
         <div class="twoLinesTitle">

@@ -1,4 +1,5 @@
 <div id="student">
+
     $if (studentUpdatedSuccesfully)$
         <div id="successDiv">
             <img id="successImage" src="/images/success.png" alt="Success" />
@@ -81,4 +82,5 @@
 			<input type="submit" value="Edit"/>
 		</form>
 	</div>
+
 </div>
