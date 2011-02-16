@@ -36,7 +36,7 @@
 
             <div class="createEntry">
                 <div class="label">Attendees<span class="mandatory">*</span></div>
-                <textarea name="attendees" id="attendees" class="createValue">$attendees; separator=", "$</textarea>
+                <textarea name="attendees" id="attendees" class="createValue">$attendees:{$it$, }$</textarea>
             </div>
 
             <div class="createEntry">
@@ -48,11 +48,7 @@
             <input type="button" id="clear" value="Clear"/>
 
             <div id="errorMessages" class="errorMessages"></div>
-			<div class="errorMessages">
-				$if (invalidAttendees)$
-					Invalid student ids: $invalidAttendees; separator=", "$
-				$endif$
-			</div>
+			<div id="invalidAttendees" class="errorMessages"></div>
 
         </div>
 
