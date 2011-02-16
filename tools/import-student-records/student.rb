@@ -2,7 +2,7 @@ require 'rubygems'
 
 class Student
 
-  attr_reader :caste, :sub_caste, :community_location, :student_id, :father, :mother, :name, :date_of_birth, :gender, :religion, :student_class
+  attr_reader :community_location, :student_id, :father, :mother, :name, :date_of_birth, :gender, :religion, :student_class
   
   def initialize args
     args.each do |k,v|

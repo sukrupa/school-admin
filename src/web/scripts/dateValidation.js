@@ -7,21 +7,22 @@ DateValidator.prototype.validate = function validate(dateStr, timeStr){
 	if (!dateTimeStr.match(validformat)){
 		return false;
 	}else{
-		var dayfield= dateStr.split("-")[0]
-		var monthfield=dateStr.split("-")[1]
-		var yearfield=dateStr.split("-")[2]
-		var hourfield=timeStr.split(":")[0]
-		var minutefield=timeStr.split(":")[1]
-		var dayobj = new Date(yearfield, monthfield-1, dayfield,hourfield-1, minutefield-1)
+		var dayfield= dateStr.split("-")[0];
+		var monthfield=dateStr.split("-")[1] - 1;
+		var yearfield=dateStr.split("-")[2];
+		var hourfield=timeStr.split(":")[0];
+		var minutefield=timeStr.split(":")[1];
 
-		if ((dayobj.getMonth()+1!=monthfield)
-				||(dayobj.getDate()!=dayfield)
-				||(dayobj.getFullYear()!=yearfield)
-				||(dayobj.getHours()!=hourfield-1)
-				||(dayobj.getMinutes()!=minutefield-1)){
+		var dayobj = new Date(yearfield, monthfield, dayfield, hourfield, minutefield);
+
+		if ((dayobj.getMonth() != monthfield)
+				||(dayobj.getDate() != dayfield)
+				||(dayobj.getFullYear() != yearfield)
+				||(dayobj.getHours() != hourfield)
+				||(dayobj.getMinutes() != minutefield)){
 			return false;
-		}
-		else
+		} else {
 			return true;
+		}
 	}
 }
