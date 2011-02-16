@@ -287,10 +287,6 @@ div.note
     padding: 10px 0px 10px 0px;
 }
 
-.errorMessages {
-    color: red;
-}
-
 #dateErrorMessage {
     color: red;
     position:absolute;
