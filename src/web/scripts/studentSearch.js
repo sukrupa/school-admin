@@ -35,8 +35,8 @@ function removeAll() {
 }
 
 function initDropDowns() {
-	$('#ageTo').val("");
-	$('#ageFrom').val("");
+	$('#ageTo').val("*");
+	$('#ageFrom').val("*");
 	removeAll();
 	addAnyToAgeTo();
 }
