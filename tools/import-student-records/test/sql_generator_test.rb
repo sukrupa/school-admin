@@ -12,7 +12,7 @@ class SQLGeneratorTest < Test::Unit::TestCase
   end  
   
   def test_should_generate_insert_statement
-    student = Student.new :name => 'minno', :date_of_birth => '15/10/2004', :gender => 'female'
+    student = Student.new :name => 'minno', :date_of_birth => '15-10-2004', :gender => 'female'
     assert_equal("INSERT INTO student (name,gender,date_of_birth) VALUES ('minno','female','2004-10-15');", @generator.generate_sql([[student,Talent.new('')]]).first)
   end
   

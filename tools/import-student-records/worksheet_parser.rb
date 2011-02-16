@@ -11,8 +11,6 @@ class WorksheetParser
   LEGENDS_CORNER = "Sl.No"
   NAME_HEADING = 'Name of the Student'
   RELIGION_HEADING = 'Religion'
-  CASTE_HEADING = 'Caste'
-  SUB_CASTE_HEADING = 'Sub Caste'
   COMMUNITY_LOCATION_HEADING = 'Community Location'
   STUDENT_ID_HEADING = "Student's ID"
   FATHER_HEADING = "Father's Name"
@@ -63,8 +61,6 @@ class WorksheetParser
 	   @this_sheets_starting_corner.upto(@worksheet.last_row) do |row_number|
 	     
 	     religion = read_cell_value(row_number,RELIGION_HEADING)
-       caste = read_cell_value(row_number,CASTE_HEADING) 
-       sub_caste = read_cell_value(row_number,SUB_CASTE_HEADING)
        community_location = read_cell_value(row_number,COMMUNITY_LOCATION_HEADING)
        student_id = read_cell_value(row_number,STUDENT_ID_HEADING)
        father = read_cell_value(row_number,FATHER_HEADING)
@@ -81,8 +77,6 @@ class WorksheetParser
        if (!name.nil? or  !student_id.nil?)
          student_data = {
            :religion => religion,
-           :caste => caste,
-           :sub_caste => sub_caste,
            :community_location => community_location,
            :student_id => student_id,
            :father => father,
