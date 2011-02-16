@@ -104,6 +104,11 @@ class WorksheetParser
 	def read_cell_value(row_number,column_heading)
 	  column_number = @column_headings[column_heading]
 	  cell_value = @worksheet.cell(row_number,column_number)
+	  
+	  if (cell_value == '-')
+	    return nil
+	  end
+	  
     if (@worksheet.celltype(row_number,column_number) == :float)
  	      return Integer(cell_value)
     elsif (@worksheet.celltype(row_number,column_number) == :string)
