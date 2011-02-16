@@ -91,7 +91,7 @@ body
 
 #sidebar {
     width: 175px;
-    margin-right: 5px;
+    margin-right: -3px;
     padding-left: 10px;
     padding-top: 0px;
     float: left;
@@ -99,6 +99,8 @@ body
     color: #ffffff;
     font: 14px Tahoma, serif;
     color:#254965; 
+     border-right:solid;
+    border-color:#254965;
     
       
 }
@@ -115,11 +117,14 @@ body
     width: 700px;
     float: left;
     height:auto;
-    padding-left: 15px;
+    padding-left:15px;
     padding-top: 10px;
-    font: 120%  tahoma, arial, helvetica;
+    font: 120%  tahoma, arial, helvetica; 
     border-left:solid;
-    border-color:#254965; 
+    border-color:#254965;
+    
+  
+ 
    
 }
 
