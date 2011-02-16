@@ -76,15 +76,6 @@
                 />
     </target>
 
-    <target name="db:delete-fake-data" depends="db:start" description="Removes fake data from the database">
-        <sql userid="${db.user}"
-             password="${db.password}"
-             driver="${db.driver}"
-             url="${db.url}"
-             src="${ops.deploy.delete.fake.data.sql}"
-                />
-    </target>
-
     <target name="db:import-talent-data" description="Populates the database with real talent data">
         <sql userid="${db.user}"
              password="${db.password}"
@@ -104,7 +95,7 @@
                 />
     </target>
 
-    <target name="db:import-data" depends="db:delete-fake-data,db:import-talent-data,db:import-student-data"
+    <target name="db:import-data" depends="db:import-talent-data,db:import-student-data"
             description="Populates the database with real data"/>
 
     <target name="db:clean" depends="db:stop">
