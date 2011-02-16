@@ -108,8 +108,8 @@
             </td>
         </tr>
         <tr>
+            <td><input style="float:left;" type="submit" value="Search"/></td>
             <td></td>
-            <td><input style="float:right;" type="submit" value="Search"/></td>
         </tr>
     </table>
 </form>
