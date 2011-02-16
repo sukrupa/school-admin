@@ -1,6 +1,5 @@
 package org.sukrupa.event;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -55,10 +54,9 @@ public class CreateAndViewEventTest {
     }
 
     @Test
-    @Ignore
     public void shouldNotDisplayEmptyNonMandatoryFields(){
         whenThereIsAnEventWithEmptyNonMandatoryFields();
-        thenCorrespondingFieldsShouldNotBeDisplayed();
+        thenCorrespondingFieldsShouldNotBeDisplayedOnViewPage();
     }
 
     @Test
@@ -71,6 +69,7 @@ public class CreateAndViewEventTest {
 
 
     private void whenThereIsAnEventWithEmptyNonMandatoryFields() {
+        givenThereAreSomeRegisteredStudents();
         new CreateEventPage(driver)
                 .navigateTo()
                 .title("Event with empty Non Mandatory Fields")
@@ -84,13 +83,10 @@ public class CreateAndViewEventTest {
                 .save();
     }
 
-    private void thenCorrespondingFieldsShouldNotBeDisplayed() {
+    private void thenCorrespondingFieldsShouldNotBeDisplayedOnViewPage() {
         ViewEventPage viewEventPage = new ViewEventPage(driver);
-//        try{
         assertThat(viewEventPage.getVenue(), nullValue());
-        /*}catch(NoSuchFieldException nSFE){
-                assertThat(nSFE.getMessage(),notNullValue());
-        }*/
+        assertThat(viewEventPage.getNotes(), nullValue());
     }
 
     private void whenICreateAndSaveAnEventWithInvalidEntries() {

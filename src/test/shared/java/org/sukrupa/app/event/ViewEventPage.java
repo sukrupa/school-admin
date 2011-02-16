@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ViewEventPage {
@@ -52,7 +53,10 @@ public class ViewEventPage {
     }
 
     private String textFor(String field) {
-        return driver.findElement(By.xpath("//*[@class='" + field + "']")).getText();
+        List<WebElement> elements = driver.findElements(By.xpath("//*[@class='" + field + "']"));
+        if (elements.isEmpty())
+            return null;
+        return elements.get(0).getText();
     }
 
     public void navigateTo(int eventId) {
