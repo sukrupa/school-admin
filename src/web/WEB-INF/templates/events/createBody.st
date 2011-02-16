@@ -26,7 +26,7 @@
 
             <div class="createEntry">
                 <div class="label">Description<span class="mandatory">*</span></div>
-                <textarea name="description" id="description" value="$description$" class="createValue"></textarea>
+                <textarea name="description" id="description" class="createValue">$description$</textarea>
             </div>
 
             <div class="createEntry">
@@ -36,12 +36,12 @@
 
             <div class="createEntry">
                 <div class="label">Attendees<span class="mandatory">*</span></div>
-                <textarea name="attendees" id="attendees" value="$attendees$" class="createValue"></textarea>
+                <textarea name="attendees" id="attendees" class="createValue">$attendees:{$it$, }$</textarea>
             </div>
 
             <div class="createEntry">
                 <div class="label">Notes</div>
-                <textarea name="notes" id="notes" value="$notes$" class="createValue"></textarea>
+                <textarea name="notes" id="notes" class="createValue">$notes$</textarea>
             </div>
 
             <input type="submit" id="save" value="Save"/>
