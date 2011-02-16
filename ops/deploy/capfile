@@ -30,7 +30,6 @@ task :deploy do
   stop_remote_server
   start_remote_server
   update_or_recreate_database
-  insert_real_data
   safety_check
 end
 
@@ -53,8 +52,12 @@ task :start_remote_server do
 end
 
 task :update_or_recreate_database do
-  recreate_database if should_recreate_database
-  update_database unless should_recreate_database
+  if should_recreate_database
+    recreate_database
+    insert_real_data
+  else
+    update_database
+  end
 end
 
 task :update_database do

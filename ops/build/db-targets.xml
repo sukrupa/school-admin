@@ -8,14 +8,12 @@
     <property name="src.sql.script.dir" value="${src.sql.dir}/script"/>
     <property name="src.sql.delta.dir" value="${src.sql.dir}/delta"/>
 
-    <!-- FIXME: These properties are duplicated between here and our Java code -->
     <property name="db.dir" value="${db.root.dir}"/>
     <property name="db.name" value="${db.name}"/>
     <property name="db.driver" value="${jdbc.driver}"/>
     <property name="db.url" value="${jdbc.url}"/>
     <property name="db.user" value="${jdbc.user}"/>
     <property name="db.password" value="${jdbc.password}"/>
-
 
     <target name="db:recreate" description="Creates or recreates the database from scratch (all data will be deleted)."
             depends="db:stop, db:clean, db:start, db:update"/>
@@ -64,7 +62,7 @@
         </sql>
     </target>
 
-    <target name="db:update" description="Updates the database schema to the latest version.">
+    <target name="db:update" description="Updates the database schema to the latest version." depends="db:start">
         <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
                   dir="${src.sql.delta.dir}"/>
     </target>
@@ -96,7 +94,8 @@
                 />
     </target>
 
-    <target name="db:import-student-data" depends="db:import-talent-data" description="Populates the database with real student data">
+    <target name="db:import-student-data" depends="db:import-talent-data"
+            description="Populates the database with real student data">
         <sql userid="${db.user}"
              password="${db.password}"
              driver="${db.driver}"
@@ -105,7 +104,8 @@
                 />
     </target>
 
-    <target name="db:import-data" depends="db:delete-fake-data,db:import-talent-data,db:import-student-data" description="Populates the database with real data" />
+    <target name="db:import-data" depends="db:delete-fake-data,db:import-talent-data,db:import-student-data"
+            description="Populates the database with real data"/>
 
     <target name="db:clean" depends="db:stop">
         <delete dir="${db.dir}"/>
