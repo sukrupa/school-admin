@@ -79,6 +79,19 @@ public class Event {
                 eventCreateParameter.getNotes());
     }
 
+    public static Event from(EventCreateParameter eventCreateParameter) {
+        String venue = nullIfEmpty(eventCreateParameter.getVenue());
+        String coordinator = nullIfEmpty(eventCreateParameter.getCoordinator());
+        String notes = nullIfEmpty(eventCreateParameter.getNotes());
+
+        return new Event(eventCreateParameter.getTitle(), parseDateTime(eventCreateParameter),
+                venue, coordinator, eventCreateParameter.getDescription(), notes, null);
+    }
+
+    private static String nullIfEmpty(String value) {
+        return (value.isEmpty()) ? null : value;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -153,4 +166,5 @@ public class Event {
 	public String getCoordinator() {
 		return coordinator;
 	}
+
 }

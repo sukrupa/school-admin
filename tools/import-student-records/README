@@ -16,4 +16,4 @@ command: ruby import_students.rb "spreadsheet path"
 
 RESULT
 
-import_students.rb will generate a SQL file in the deploy/sql folder. You can then run ./build db:import_students
+import_students.rb will generate a SQL file in the deploy/sql folder. You can then run ./build db:import-data to delete all current data (to start from a fresh database) and then imports the talents and student data.
