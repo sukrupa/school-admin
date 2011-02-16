@@ -25,7 +25,7 @@ function validateFields() {
         valid = false;
     }
 
-    if ( !(timeStr === "") && !new DateValidator().validate(dummyDateStr, timeStr)) {
+    if ( !(timeStr === "") && !new DateValidator().validate(dateStr, timeStr, new Date())) {
         errorMessage += "Invalid time.<br/>";
         valid = false;
     }
