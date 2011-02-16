@@ -460,3 +460,11 @@ padding-right: 20px;
     resize:vertical;
 
 }
+
+.confirmationmessage {
+
+  color:#254965;
+  font-size: 1.5em;
+  text-align: center;
+
+}

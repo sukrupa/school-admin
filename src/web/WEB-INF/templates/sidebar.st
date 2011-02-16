@@ -17,7 +17,7 @@
       
       <div class="sideBarContent">
       <li>
-      <p class="indent"><a href="/students">View All</a>
+          <p class="indent"><a href="/students">View All</a>
       </p>
       </li>
       
