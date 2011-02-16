@@ -8,7 +8,7 @@ class Student
     args.each do |k,v|
       if k == :date_of_birth
         instance_variable_set("@#{k}", format_date(v)) unless (v.nil? or v.empty?)
-      else
+        else
         instance_variable_set("@#{k}", v) unless (v.nil? or v.empty?)
       end
     end

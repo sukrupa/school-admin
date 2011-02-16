@@ -3,7 +3,7 @@ INSERT INTO "PUBLIC"."TALENT"  VALUES ( 2, 'Arts & Crafts');
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 3, 'Creative Writing');
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 4, 'Dancing' );
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 5, 'Mimicry' );
-INSERT INTO "PUBLIC"."TALENT"  VALUES ( 15, 'Musical Instrument' );
+INSERT INTO "PUBLIC"."TALENT"  VALUES ( 12, 'Musical Instrument' );
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 6, 'Pick & Speak' );
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 7, 'Public Speaking' );
 INSERT INTO "PUBLIC"."TALENT"  VALUES ( 8, 'Reading' );
