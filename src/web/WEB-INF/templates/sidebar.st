@@ -20,12 +20,6 @@
           <p class="indent"><a href="/students">View All</a>
       </p>
       </li>
-      
-      <li>
-      <form method="post" action="/students/promote">
-       <input type="submit" value="Annual Class Update"/>
-      </form>
-      </li>
 
       </div>
        
