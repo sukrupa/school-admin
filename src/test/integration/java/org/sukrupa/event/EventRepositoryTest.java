@@ -15,6 +15,8 @@ import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.eventFrom;
 import static org.hamcrest.Matchers.is;
@@ -30,6 +32,8 @@ public class EventRepositoryTest {
 
 	private final Student sahil = new StudentBuilder().name("Sahil").studentId("1").build();
 	private final Student suhas = new StudentBuilder().name("Suhas").studentId("2").build();
+    private final Event sportsEvent = new EventBuilder().title("Sports Day").date(new Date(21, 12, 2011)).build();
+    private final Event independeceDayEvent = new EventBuilder().title("Independence Day").date(new Date(15, 8, 2011)).build();
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -56,13 +60,14 @@ public class EventRepositoryTest {
 		Event event = save(new EventBuilder().build());
 		assertThat(eventRepository.load(event.getId()), is(event));
 	}
+    
     @Test
-    public void shouldLoadAllEvents() {
-        Event sportsEvent = new EventBuilder().title("Sports Day").date(new Date(1, 1, 2011)).build();
-        Event independeceDayEvent = new EventBuilder().title("Independence Day").date(new Date(15, 8, 2011)).build();
-        databaseHelper.save(sportsEvent);
+    public void shouldLoadAllEventsWithMostRecentEventFirst(){
         databaseHelper.save(independeceDayEvent);
-        assertThat(eventRepository.list(),hasItems(sportsEvent,independeceDayEvent));
+        databaseHelper.save(sportsEvent);
+        List<Event> events = eventRepository.list();
+        assertThat(events.get(0),is(sportsEvent));
+        assertThat(events.get(1),is(independeceDayEvent));
     }
 
 	@Test(expected = Exception.class)
