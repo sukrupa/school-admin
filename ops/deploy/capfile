@@ -17,7 +17,7 @@ end
 
 task :production do
   set :user, "ubuntu"
-  set :target_server, "ec2-122-248-202-124.ap-southeast-1.compute.amazonaws.com"
+  set :target_server, "school.sukrupa.org"
   set :deploy_path, "~/sukrupa/school-admin"
   role :target_server, "#{target_server}", :ssh_options => { :keys => "~/.ssh/sukrupa-ec2.pem" }
 end
@@ -61,7 +61,7 @@ end
 task :safety_check do
   times = 0;
   while times < 6
-    wgetresult = system "wget --spider http://admin:admin@#{target_server}:8080/students"
+    wgetresult = system "wget --spider http://admin123:krusat1324@#{target_server}:8080/students"
     if wgetresult
       break
     else

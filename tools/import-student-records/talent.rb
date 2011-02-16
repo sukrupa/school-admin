@@ -11,8 +11,29 @@ class Talent
             talent = "Arts & Crafts"
         elsif talent.match("Music")
             talent = "Musical Instrument"
+        elsif talent.match("Danc")
+            talent = "Dancing"
+        elsif talent.match("Sing")
+            talent = "Singing"
+        elsif talent.match("Sports")
+            talent = "Sports"
+        elsif talent.match("Draw")
+            talent = "Drawing"
+        elsif talent.match("Writing")
+            talent = "Creative Writing"
+        elsif talent.match("Mimic")
+            talent = "Mimicry"
+        elsif talent.match("Act")
+            talent = "Acting"
+        elsif talent.match("Pick")
+            talent = "Pick & Speak"
+        elsif talent.match("Read")
+            talent = "Reading"
+        elsif talent.match("Story")
+            talent = "Story Telling"
+        elsif talent.match("Public")
+            talent = "Public Speaking"
         end
-        talent
       end
     else
       @talents = []

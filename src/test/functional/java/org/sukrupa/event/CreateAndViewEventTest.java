@@ -1,5 +1,6 @@
 package org.sukrupa.event;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,9 +18,7 @@ import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.sukrupa.platform.Matchers.hasOnly;
@@ -57,10 +56,41 @@ public class CreateAndViewEventTest {
 
     @Test
     @Ignore
+    public void shouldNotDisplayEmptyNonMandatoryFields(){
+        whenThereIsAnEventWithEmptyNonMandatoryFields();
+        thenCorrespondingFieldsShouldNotBeDisplayed();
+    }
+
+    @Test
+    @Ignore
     public void shouldDisplayCumulativeErrorsOnInvalidEntriesOfEvent() {
         givenThereAreSomeRegisteredStudents();
         whenICreateAndSaveAnEventWithInvalidEntries();
         thenIShouldBeAbleToViewTheErrors();
+    }
+
+
+    private void whenThereIsAnEventWithEmptyNonMandatoryFields() {
+        new CreateEventPage(driver)
+                .navigateTo()
+                .title("Event with empty Non Mandatory Fields")
+                .date("31-11-2011")
+                .time("09:00")
+                .venue("")
+                .description("This is a test description")
+                .coordinator("")
+                .attendees(alex.getStudentId() + "," + bob.getStudentId() )
+                .notes("")
+                .save();
+    }
+
+    private void thenCorrespondingFieldsShouldNotBeDisplayed() {
+        ViewEventPage viewEventPage = new ViewEventPage(driver);
+//        try{
+        assertThat(viewEventPage.getVenue(), nullValue());
+        /*}catch(NoSuchFieldException nSFE){
+                assertThat(nSFE.getMessage(),notNullValue());
+        }*/
     }
 
     private void whenICreateAndSaveAnEventWithInvalidEntries() {
