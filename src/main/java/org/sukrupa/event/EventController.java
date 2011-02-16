@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -22,13 +23,15 @@ public class EventController {
         this.service = service;
     }
     @RequestMapping()
-    public String list()
+    public String list(Map<String, List<Event>> model)
     {
+        model.put("events", service.list());
         return "events/list";
     }
 
     @RequestMapping(value = "create")
     public String create() {
+
         return "events/create";
     }
 
