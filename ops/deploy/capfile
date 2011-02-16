@@ -1,11 +1,13 @@
 set :local_path, "target"
 set :deploy_artifact, "school-admin.zip"
+set :should_recreate_database, false
 
 task :development do
   set :user, "go"
   set :target_server, "twu-ci"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
-  role :target_server, "#{target_server}"
+  set :should_recreate_database, true
+  role :target_server, "#{target_server}"  
 end
 
 task :staging do
@@ -27,7 +29,7 @@ task :deploy do
   unzip_deploy_artifact
   stop_remote_server
   start_remote_server
-  recreate_database
+  update_or_recreate_database
   insert_real_data
   safety_check
 end
@@ -49,6 +51,16 @@ end
 task :start_remote_server do
   run "cd #{deploy_path} && sh start-server.sh"
 end
+
+task :update_or_recreate_database do
+  recreate_database if should_recreate_database
+  update_database unless should_recreate_database
+end
+
+task :update_database do
+  run "cd #{deploy_path} && sh install/update-database.sh"
+end
+
 
 task :recreate_database do
   run "cd #{deploy_path} && sh install/install-database.sh"
