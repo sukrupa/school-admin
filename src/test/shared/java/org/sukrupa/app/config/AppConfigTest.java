@@ -10,8 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Properties;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
@@ -40,4 +39,16 @@ public class AppConfigTest {
     public void shouldResolvePropertyValues() {
         assertThat(jdbcUrl, containsString("jdbc:"));
     }
+
+    @Test
+    public void shouldNotAuthenticateByDefault() {
+        assertThat(new AppConfig().properties().getProperty("web.server.authenticate"), is("false"));
+    }
+
+    @Test
+    public void shouldAlwaysAuthenticateInProduction() {
+        System.setProperty("environment", "production");
+        assertThat(new AppConfig().properties().getProperty("web.server.authenticate"), is("true"));
+    }
+
 }

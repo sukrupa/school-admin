@@ -16,8 +16,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.sukrupa.platform.web.StringTemplateView;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
+import static java.lang.String.format;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
 @Configuration
@@ -56,22 +59,44 @@ public class AppConfig {
     }
 
     @Bean
+    public HandlerExceptionResolver handlerExceptionResolver() {
+        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        resolver.setDefaultErrorView("error");
+        return resolver;
+    }
+
+    @Bean
     public Properties properties() {
         try {
             Properties properties = new Properties();
-            properties.load(new ClassPathResource("app.properties").getInputStream());
-
+            properties.load(defaultAppProperties());
+            if (environmentHasBeenSpecified()) {
+                properties.load(environnmentSpecificProperties());
+            }
             return properties;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Bean
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-        resolver.setDefaultErrorView("error");
-        return resolver;
+    private boolean environmentHasBeenSpecified() {
+        return isNotBlank(environment());
+    }
+
+    private String environment() {
+        return System.getProperty("environment");
+    }
+
+    private InputStream defaultAppProperties() throws IOException {
+        return fromClassPath("app.properties");
+    }
+
+    private InputStream environnmentSpecificProperties() throws IOException {
+        return fromClassPath(format("app.%s.properties", environment()));
+    }
+
+    private InputStream fromClassPath(String fileName) throws IOException {
+        return new ClassPathResource(fileName).getInputStream();
     }
 
 }
