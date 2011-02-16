@@ -19,6 +19,13 @@
       <p class="indent"><a href="/students">View All</a>
       </p>
       </li>
+      
+      <li>
+      <form method="post" action="/students/promote">
+       <input class="linkbutton" type="submit" value="Annual Class Update"/>
+      </form>
+      </li>
+
       </div>
        
 	  <br/>
@@ -37,7 +44,7 @@
         
       <li>
       <p class="indent">
-      <a href="/events/record">
+      <a href="/events/create">
       Record Event
       </a>
       </p>
@@ -46,10 +53,3 @@
       </div>
         
        
-
-
-
-
-
-      
-           

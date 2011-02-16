@@ -1,18 +1,24 @@
 package org.sukrupa.event;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
+@Proxy(lazy = false)
 public class Event {
 
     @Id
@@ -59,14 +65,17 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public static Event from(EventRecord eventRecord) {
-        return new EventBuilder().title(eventRecord.getTitle())
-                .venue(eventRecord.getVenue())
-                .description(eventRecord.getDescription())
-                .coordinator(eventRecord.getCoordinator())
-                .notes(eventRecord.getNotes())
-                .date(parseDateTime(eventRecord))
-                .build();
+    public Event(String title, Date date, String venue, String coordinator, String description, String notes) {
+        this(title, date, venue, coordinator, description, notes, new HashSet<Student>());
+    }
+
+    public static Event createFrom(EventCreateParameter eventCreateParameter) {
+        return new Event(eventCreateParameter.getTitle(),
+                Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime()),
+                eventCreateParameter.getVenue(),
+                eventCreateParameter.getCoordinator(),
+                eventCreateParameter.getDescription(),
+                eventCreateParameter.getNotes());
     }
 
     public Integer getId() {
@@ -89,8 +98,8 @@ public class Event {
         return date.getTime();
     }
 
-    private static Date parseDateTime(EventRecord eventRecord) {
-        return Date.parse(eventRecord.getDate(), eventRecord.getTime());
+    private static Date parseDateTime(EventCreateParameter eventCreateParameter) {
+        return Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -126,5 +135,17 @@ public class Event {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getAttendeesForDisplay() {
+        return StringUtils.join(getAttendeeNames(), ", ");
+    }
+
+    private List<String> getAttendeeNames() {
+        List<String> attendeeNameList = new ArrayList<String>();
+        for (Student attendee : attendees) {
+            attendeeNameList.add(attendee.getName());
+        }
+        return attendeeNameList;
     }
 }

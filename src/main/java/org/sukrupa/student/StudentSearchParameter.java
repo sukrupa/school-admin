@@ -11,11 +11,9 @@ public class StudentSearchParameter {
     private String ageFrom = "";
     private String ageTo = "";
     private String talent = "";
-
     private String religion = "";
-    private int page = 1;
 
-    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion, int page) {
+    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
         this.studentClass = studentClass;
         this.gender = gender;
         this.caste = caste;
@@ -24,7 +22,6 @@ public class StudentSearchParameter {
         this.ageTo = ageTo;
         this.talent = talent;
         this.religion = religion;
-        this.page = page;
     }
 
     @DoNotRemove
@@ -95,11 +92,4 @@ public class StudentSearchParameter {
         this.religion = religion;
     }
 
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
 }

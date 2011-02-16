@@ -21,7 +21,7 @@
 
 			<div class="entry">
 				<div class="label">Date of Birth</div>
-				<div class="value">$student.datofBirthForDisplay$</div>
+				<div class="value">$student.dateOfBirthForDisplay$</div>
 			</div>
 
 			<div class="entry">

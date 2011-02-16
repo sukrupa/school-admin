@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-// JUnit Assert framework can be used for verification
 
 import net.sf.sahi.client.Browser;
 import static junit.framework.Assert.*;

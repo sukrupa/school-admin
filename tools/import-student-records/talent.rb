@@ -7,9 +7,15 @@ class Talent
       @talents = comma_separated_talents.split(",")
       @talents = @talents.map do |talent|
         talent.strip
+        if talent.match("Art")
+            talent = "Arts & Crafts"
+        elsif talent.match("Music")
+            talent = "Musical Instrument"
+        end
+        talent
       end
     else
-      @talents = nil
+      @talents = []
     end
   end
   

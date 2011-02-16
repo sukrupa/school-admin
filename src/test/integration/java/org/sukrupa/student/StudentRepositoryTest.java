@@ -75,6 +75,17 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void shouldHaveCountZero(){
+        assertThat(repository.countResults(all),is(0));
+    }
+
+    @Test
+    public void shouldHaveCountOne(){
+        databaseHelper.save(pat);
+        assertThat(repository.countResults(all),is(1));
+    }
+
+    @Test
     public void shouldLoadStudentBasedOnStudentId() {
         databaseHelper.save(pat);
         assertThat(repository.load("123"), is(pat));
@@ -161,7 +172,7 @@ public class StudentRepositoryTest {
                 .name("Philippa")
                 .gender("Female")
                 .studentClass("2 Std")
-                .dateOfBirth("03/02/2000")
+                .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
         Student updatedStudent = repository.update(updateParameter);
         assertThat(updatedStudent, is(philNew));
@@ -184,6 +195,17 @@ public class StudentRepositoryTest {
 
         Student reloadedStudent = repository.load(pat.getStudentId());
         assertThat(reloadedStudent.getNotes(), hasItem(newNote));
+    }
+
+    @Test
+    public void shouldReturnAllStudents() {
+       databaseHelper.save(pat);
+       databaseHelper.save(sahil);
+
+       List<Student> students = repository.getAll();
+
+       assertThat(students, hasItems(pat,sahil));
+
     }
 
 

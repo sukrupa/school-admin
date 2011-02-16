@@ -1,0 +1,10 @@
+Tags:in-progress
+Preconditions:Navigate to dashboard
+Metadata:ScenarioType=Auto
+Event List:
+#Follow the "View Events" link
+#Check that there are "2" events in the list
+#Check that event "2" is titled "Annual Day" and is on "15/03/2011"
+#Click on "Annual Day"
+#Verify that you are brought to "Event Record"
+

@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,6 +53,8 @@ public class StudentRepository {
         return ((Number) countCriteria.uniqueResult()).intValue();
     }
 
+
+
     public Student update(UpdateStudentParameter studentParam) {
         Student student = load(studentParam.getStudentId());
         if (student == null) {
@@ -79,6 +82,7 @@ public class StudentRepository {
 
     public void saveOrUpdate(Student student) {
         session().saveOrUpdate(student);
+        session().flush();
     }
 
     private Query query(String hql) {
@@ -87,5 +91,9 @@ public class StudentRepository {
 
     private Session session() {
         return sessionFactory.getCurrentSession();
+    }
+
+    public List<Student> getAll() {
+        return query("from Student").list();
     }
 }

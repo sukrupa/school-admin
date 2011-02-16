@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +27,11 @@ public class ViewStudentTest {
 
     @Autowired
     private DatabaseHelper databaseHelper;
+
+    @Before
+    public void init() {
+
+    }
 
     @After
     public void tearDown() throws Exception {
