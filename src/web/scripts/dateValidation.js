@@ -1,6 +1,6 @@
 DateValidator = function (){};
 
-DateValidator.prototype.validate = function validate(dateStr, timeStr){
+DateValidator.prototype.validate = function validate(dateStr, timeStr, comparisonDate){
     var validformat= /^\d{1,2}-\d{1,2}-\d{4}\ \d{1,2}\:\d{2}$/
 
 	var dateTimeStr = dateStr + " " + timeStr;
@@ -21,6 +21,8 @@ DateValidator.prototype.validate = function validate(dateStr, timeStr){
 				||(dayobj.getHours() != hourfield)
 				||(dayobj.getMinutes() != minutefield)){
 			return false;
+		} else if (comparisonDate) {
+			return dayobj <= comparisonDate;
 		} else {
 			return true;
 		}
