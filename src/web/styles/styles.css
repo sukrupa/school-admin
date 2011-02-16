@@ -220,7 +220,7 @@ div.note
     margin-top: 20px;
 }
 
-.talentsLabel, .label 
+.talentsLabel, .label, .attendeeLabel
 {
 
     font-weight: bold;
@@ -455,10 +455,13 @@ padding-right: 20px;
     margin: 15px 0px 15px 100px;
 }
 
-textarea
+.noHorizontalResize
 {
     resize:vertical;
 
+}
+.createValue{
+    resize:none;
 }
 
 .eventInfoLeft{
@@ -478,7 +481,7 @@ textarea
    clear:both;
 	float:left;
 	width:100%;
-	text-align:center;
+	text-align:left;
 }
 
 .eventInfo .label{
@@ -510,10 +513,6 @@ width: 100px;
     position: relative;
 }
 
-.random {
-float: left;
-position: relative;
-}
 
 .eventInfoRight .label{
     width:100%;
@@ -528,4 +527,7 @@ position: relative;
   font-size: 1.5em;
   text-align: center;
 
+}
+#attendees{
+    width:90%
 }
