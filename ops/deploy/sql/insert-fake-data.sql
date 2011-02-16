@@ -70,12 +70,12 @@ VALUES (3,7);
 INSERT INTO "PUBLIC"."EVENT"
 ("EVENT_ID","EVENT_TITLE", "EVENT_VENUE","EVENT_COORDINATOR","EVENT_DESCRIPTION","EVENT_NOTES","DATE")
 VALUES
-(1,'Fake event_title', 'Bangalore 2','Rebecca Sliter','This is a event description. It is a test.','This is a note',CURRENT_TIMESTAMP);
+(1,'Fake event_title', 'Bangalore 2','Rebecca Sliter','This is a event description. It is a test.','This is a note','2011-02-20 00:00:00');
 
 INSERT INTO "PUBLIC"."EVENT"
 ("EVENT_ID","EVENT_TITLE", "EVENT_VENUE","EVENT_COORDINATOR","EVENT_DESCRIPTION","EVENT_NOTES","DATE")
 VALUES
-(2,'Fake event_title 2', 'Bangalore agra','Suhas Vishwanath','This is a event description. It is a test.','This is a note',CURRENT_TIMESTAMP);
+(2,'Fake event_title 2', 'Bangalore agra','Suhas Vishwanath','This is a event description. It is a test.','This is a note','2011-03-25 00:00:00');
 
 INSERT INTO EVENTATTENDEES ("EVENT_ID","ID") VALUES (1,1);
 INSERT INTO EVENTATTENDEES ("EVENT_ID","ID") VALUES (1,2);
