@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.StudentRepository;
 
+import java.util.List;
+
 @Component
 public class EventService {
 
@@ -30,5 +32,9 @@ public class EventService {
 
     public Event getEvent(int eventId) {
         return eventRepository.load(eventId);
+    }
+
+    public List<Event> list() {
+        return eventRepository.list();
     }
 }

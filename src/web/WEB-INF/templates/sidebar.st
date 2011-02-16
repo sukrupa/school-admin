@@ -1,3 +1,4 @@
+
       <div class="sideBarHeader">Search </div>
 	
 	  <div class="sideBarContent">
@@ -22,7 +23,7 @@
       
       <li>
       <form method="post" action="/students/promote">
-       <input class="linkbutton" type="submit" value="Annual Class Update"/>
+       <input type="submit" value="Annual Class Update"/>
       </form>
       </li>
 
@@ -38,7 +39,9 @@
       
       <li>
       <p class="indent">
+      <a href="/events">
       View Events
+      </a>
       </p>
       </li>
         
