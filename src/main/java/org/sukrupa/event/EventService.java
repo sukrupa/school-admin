@@ -48,7 +48,7 @@ public class EventService {
 
 	public Set<String> validateStudentIdsOfAttendees(Set<String> studentIdsOfAttendees) {
 		if (studentIdsOfAttendees.isEmpty()) {
-			LOG.warn(format("empty student ids"));
+			LOG.debug(format("empty student ids"));
 			return Sets.newHashSet("No student ids specified");
 		}
 		Set<Student> students = studentRepository.load(studentIdsOfAttendees.toArray(new String[]{}));
