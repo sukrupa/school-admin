@@ -405,6 +405,11 @@ padding-right: 20px;
 
 }
 
+#eventListPages
+{
+float:left;
+}
+
 #eventRecord
 {
 	padding-left: 20px;
