@@ -66,7 +66,7 @@
 		<div id="errorMessages"></div>
 		<div>
 			$if (invalidAttendees)$
-			Invalid student ids: $invalidAttendees; separator=", "$
+			Invalid student IDs: $invalidAttendees; separator=", "$
 			$endif$
 		</div>
 	</div>
