@@ -51,4 +51,6 @@ function saveOptions() {
 $(document).ready(function (){
 	saveOptions();
 	initDropDowns();
+
+	$('#ageFrom').change(changeAgeRange);
 });

@@ -4,6 +4,10 @@ $(document).ready(function () {
             $('#updateStudent').submit();
         }
     });
+
+    $('#cancel').click(function() {
+        location.href = '.';
+    });
     
     $('#clearNote').click(function () {
         $('#new-note').val('');

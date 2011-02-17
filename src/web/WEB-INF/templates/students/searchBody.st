@@ -21,7 +21,7 @@
                 <span>Age From</span>
             </td>
             <td>
-                <select name="ageFrom" id="ageFrom" onchange="changeAgeRange()">
+                <select name="ageFrom" id="ageFrom">
                     <option value="*">Any</option>
                     $agesFrom:{
                     <option value="$it$">$it$</option>
