@@ -403,14 +403,6 @@ li
     color:#254965; 
 }
 
-.eventTitle {
-    text-align:center;
-    margin-right: 50px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
 .eventLabel {
     width: 100px;
     float: left;
