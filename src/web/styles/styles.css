@@ -279,13 +279,6 @@ div.note
     clear: both;
 }
 
-
-#dateErrorMessage {
-    color: red;
-    position:absolute;
-    bottom: 0px;
-}
-
 .mandatory {
     color: red;
     font-weight: bold;

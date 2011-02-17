@@ -24,9 +24,8 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Date of Birth<span class="mandatory">*</span></div>
+                    <div class="label">Date of Birth<br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
                     <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" class="updateValue"></input>
-                    <div id="dateErrorMessage"></div>
                 </div>
 
                 <div class="updateEntry">
