@@ -23,22 +23,22 @@ public class Event {
 
     @Id
     @GeneratedValue
-    @Column(name = "event_id")
+    @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "event_title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "event_venue")
+    @Column(name = "VENUE")
     private String venue;
 
-    @Column(name = "event_coordinator")
+    @Column(name = "COORDINATOR")
     private String coordinator;
 
-    @Column(name = "event_description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "event_notes")
+    @Column(name = "NOTES")
     private String notes;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
@@ -46,7 +46,7 @@ public class Event {
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
-            joinColumns = {@JoinColumn(name = "event_id")},
+            joinColumns = {@JoinColumn(name = "EVENT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")})
     private Set<Student> attendees;
 
