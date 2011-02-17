@@ -509,6 +509,7 @@ width: 100px;
 .createEvent {
 	float: left;
 }
+
 #createEventForm {
 	clear : both;
 }
@@ -516,6 +517,7 @@ width: 100px;
 #createEventErrors {
 	clear:both;
 	float:left;
+    color: red;
 }
 
 #errorMessages {
