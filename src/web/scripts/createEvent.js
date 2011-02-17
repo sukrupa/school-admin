@@ -57,7 +57,7 @@ function isBeforeCurrentDate(dateStr, timeStr) {
 	if (timeStr === "") {
 		timeStr = "00:00";
 	}
-    if (!new DateValidator().isBefore(dateStr, timeStr, new Date())) {
+    if (!new DateValidator().validate(dateStr, timeStr, new Date())) {
         addErrorMessage("You can only record past events.<br/>");
         return false;
     }
