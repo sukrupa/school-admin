@@ -18,7 +18,7 @@ INSERT INTO "PUBLIC"."STUDENT"
 VALUES (6 , 'Armugam', 'Hindu', 'SC', '', 'Cholanaykanahalli','23462', 'Male', '2003-06-19', 'UKG')
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
-VALUES (7 , 'Bhavani', 'Hindu', 'SC', '', 'Bhuvaneshwari Slum','35734', 'Female', '2004-02-22', 'UKG')
+VALUES (7 , 'Bhavani', 'Hindu', 'SC', '', 'Bhuvaneshwari Slum','SK20090080', 'Female', '2004-02-22', 'UKG')
 
 INSERT INTO "PUBLIC"."TALENT" VALUES ( 1, 'Acting' );
 INSERT INTO "PUBLIC"."TALENT" VALUES ( 2, 'Arts & Crafts' );

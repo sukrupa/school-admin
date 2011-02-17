@@ -180,32 +180,33 @@ div.note
 
     border: 1px #000000 solid;
     padding: 4px;
+
 }
 
-.page table 
+.page table
 {
-
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
-   
+    width:auto;
+
 }
 
-.header 
+.header
 {
 
     font: 90% Tahoma, arial, helvetica, sans-serif;
     font-weight: bold;
 }
 
-.disabled 
+.disabled
 {
 
     text-decoration: none;
     color: black;
 }
 
-#studentInfo 
+#studentInfo
 {
     width: 700px;
     margin-top: 20px;
@@ -309,11 +310,11 @@ div.note
 	text-align: justify;
 	background-color: #254965;
 	color:white;
-	
-	-moz-border-radius-topright: 5px; 
+
+	-moz-border-radius-topright: 5px;
     -webkit-border-top-right-radius: 5px;
     border-top-radius: 5px;
-    
+
     -moz-border-radius-topleft: 5px;
     -webkit-border-top-left-radius: 5px;
     border-top-left-radius: 5px;
@@ -330,11 +331,11 @@ div.note
 	padding-left: 6px;
 	padding-bottom: 5px;
 	padding-top: 5px;
-	
-	-moz-border-radius-bottomright: 5px; 
+
+	-moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-bottom-radius: 5px;
-    
+
     -moz-border-radius-bottomleft: 5px;
     -webkit-border-bottom-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -349,7 +350,7 @@ li
  	margin-right: auto;
 	width:140px;
 	padding-right: 10px;
-	
+
 }
 
 #student
@@ -382,7 +383,7 @@ li
     text-decoration: underline;
     display: block;
     font: 14px Tahoma, serif;
-    color:#254965; 
+    color:#254965;
 }
 
 .eventLabel {
@@ -512,4 +513,3 @@ width: 100px;
     font-weight: bold;
     padding: 10px 0px 10px 0px;
 }
-
