@@ -45,15 +45,15 @@ INSERT INTO "PUBLIC"."STUDENT_TALENT" VALUES (6,11);
 INSERT INTO "PUBLIC"."STUDENT_TALENT" VALUES (7,6);
 
 INSERT INTO "PUBLIC"."NOTE"
-( "NOTE_ID", "MESSAGE", "NOTE_DATE" )
+( "ID", "MESSAGE", "DATE" )
 VALUES ( 1, 'Good girl', '2010-09-14 00:00:00');
 
 INSERT INTO "PUBLIC"."NOTE"
-( "NOTE_ID", "MESSAGE", "NOTE_DATE" )
+( "ID", "MESSAGE", "DATE" )
 VALUES ( 2, 'Very talented and smart. Got a gold medal in maths today and broke the record', '2010-09-14 00:00:00');
 
 INSERT INTO "PUBLIC"."NOTE"
-( "NOTE_ID", "MESSAGE", "NOTE_DATE" )
+( "ID", "MESSAGE", "DATE" )
 VALUES ( 3, 'Very talented and smart. Got a gold medal in maths today and broke the record :)', '2010-09-14 00:00:00');
 
 INSERT INTO "PUBLIC"."STUDENT_NOTE"

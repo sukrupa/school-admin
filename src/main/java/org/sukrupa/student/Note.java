@@ -17,14 +17,14 @@ import javax.persistence.Id;
 public class Note {
     @Id
     @GeneratedValue
-    @Column(name = "NOTE_ID")
+    @Column(name = "ID")
     private long noteId;
 
     @Column(name = "MESSAGE")
     private String message;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
-    @Column(name = "NOTE_DATE")
+    @Column(name = "DATE")
     private Date date;
 
     @HibernateConstructor
