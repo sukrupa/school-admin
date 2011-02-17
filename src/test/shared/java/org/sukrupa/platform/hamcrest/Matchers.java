@@ -4,7 +4,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.sukrupa.app.student.StudentRow;
+import org.sukrupa.app.students.StudentRow;
 import org.sukrupa.event.Event;
 import org.sukrupa.student.Note;
 import org.sukrupa.student.Student;

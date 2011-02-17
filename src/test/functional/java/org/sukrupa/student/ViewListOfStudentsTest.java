@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.app.student.ListOfStudentsPage;
-import org.sukrupa.app.student.StudentRow;
+import org.sukrupa.app.students.ListOfStudentsPage;
+import org.sukrupa.app.students.StudentRow;
 import org.sukrupa.platform.db.DatabaseHelper;
 
 import java.util.List;

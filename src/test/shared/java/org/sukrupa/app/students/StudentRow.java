@@ -1,4 +1,4 @@
-package org.sukrupa.app.student;
+package org.sukrupa.app.students;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

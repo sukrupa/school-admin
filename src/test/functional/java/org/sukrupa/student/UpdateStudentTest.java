@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.app.student.UpdateStudentPage;
-import org.sukrupa.app.student.ViewStudentPage;
+import org.sukrupa.app.students.UpdateStudentPage;
+import org.sukrupa.app.students.ViewStudentPage;
 import org.sukrupa.platform.db.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
