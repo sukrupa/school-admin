@@ -9,7 +9,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.config.SpringContextLoaderForTesting;
 import org.sukrupa.app.event.CreateEventPage;
 import org.sukrupa.app.event.ViewEventPage;
 import org.sukrupa.platform.DatabaseHelper;
@@ -23,7 +23,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.sukrupa.platform.Matchers.hasOnly;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
+@ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class CreateAndViewEventTest {
 
     private WebDriver driver = new HtmlUnitDriver();

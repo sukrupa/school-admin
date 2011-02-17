@@ -13,8 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
-public class AppConfigTest {
+@ContextConfiguration(loader = SpringContextLoaderForTesting.class)
+public class AppConfigurationTest {
 
     @Value("${jdbc.url}")
     private String jdbcUrl;
@@ -62,7 +62,7 @@ public class AppConfigTest {
     }
 
     private String property(String key) {
-        return new AppConfig().properties().getProperty(key);
+        return new AppConfiguration().properties().getProperty(key);
     }
 
     private void pretendWeAreNotInIntelliJ() {

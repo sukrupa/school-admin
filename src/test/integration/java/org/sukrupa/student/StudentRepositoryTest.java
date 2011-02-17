@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.platform.date.Date;
 
@@ -29,7 +29,7 @@ import static org.sukrupa.platform.date.DateManipulation.freezeTime;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
+@ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 @Transactional
 public class StudentRepositoryTest {
 
