@@ -120,5 +120,7 @@
  <hr/>
  <h2> Notes </h2>
 
+ <div id="noteTooLongMessage" class="errorMessages"></div>
+
 $studentNotes()$
 </div>

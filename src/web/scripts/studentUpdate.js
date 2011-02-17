@@ -19,6 +19,17 @@ $(document).ready(function () {
     $('#clearNote').click(function () {
         $('#new-note').val('');
     });
+
+    $('#addNoteForm').submit(function () {
+        var charLimit = 1000;
+        var currentCharNumber = $('#new-note').val().length;
+        if (currentCharNumber > charLimit) {
+            $('#noteTooLongMessage').html("Character limit exceeded by " + eval(currentCharNumber - charLimit) + ".");
+            return false;
+        }
+        return true;
+    });
+
 });
 
 
