@@ -5,7 +5,7 @@
     <import file="macros.xml"/>
 
     <target name="sukrupa-server:start-for-twist" depends="db:start, db:insert-fake-data, sukrupa-server:start"  />
-    <target name="sukrupa-server:stop-for-twist" depends="db:delete-fake-data, sukrupa-server:stop" />
+    <target name="sukrupa-server:stop-for-twist" depends="db:recreate, sukrupa-server:stop" />
 
     <target name="sukrupa-server:start" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>

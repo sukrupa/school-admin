@@ -32,7 +32,7 @@
             </div>
 
             <div class="createEntry">
-                <div class="random"><div class="label">Attendees<span class="mandatory">*</span></div></div>
+                <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
                 <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$attendees; separator=", "$</textarea>
 
             </div>
@@ -41,7 +41,7 @@
         <div class="eventInfoRight">
             <div class="createEntry">
                 <div class="label">Description<span class="mandatory">*</span></div>
-                <textarea name="description" id="description" class="createValue" rows="5" cols="30">$description$</textarea>
+                <textarea name="description" id="description" class="createValue" rows="7.5" cols="30">$description$</textarea>
             </div>
 
 
