@@ -1,7 +1,7 @@
 DateValidator = function (){};
 
-DateValidator.prototype.validate = function validate(dateStr, timeStr){
-	return this.isBefore(dateStr, timeStr);
+DateValidator.prototype.validate = function validate(dateStr, timeStr, comparisonDate){
+	return this.isBefore(dateStr, timeStr, comparisonDate);
 }
 
 DateValidator.prototype.isBefore = function isBefore(dateStr, timeStr, comparisonDate){
