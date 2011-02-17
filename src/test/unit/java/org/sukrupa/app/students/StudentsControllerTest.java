@@ -1,8 +1,12 @@
-package org.sukrupa.student;
+package org.sukrupa.app.students;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.sukrupa.app.students.StudentsController;
+import org.sukrupa.student.Student;
+import org.sukrupa.student.StudentBuilder;
+import org.sukrupa.student.StudentService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +24,8 @@ public class StudentsControllerTest {
 
     private StudentsController controller;
 
-    private Map<String, Object> studentsListModel = new HashMap<String, Object>();
     private HashMap<String, Student> studentModel = new HashMap<String, Student>();
-    private Student sahil = new StudentBuilder().name("pat").studentClass("LKG").build();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
-    private Student renaud = new StudentBuilder().name("renaud").studentClass("Nursery").build();
 
     @Before
     public void setUp() throws Exception {
