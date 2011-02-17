@@ -1,6 +1,6 @@
 <div id="eventListPages">
-    <div class="page">
-        <table>
+    <div class="page" class="listTable">
+        <table class="listTable">
             <thead class="header">
             <tr>
                 <td>Event</td>

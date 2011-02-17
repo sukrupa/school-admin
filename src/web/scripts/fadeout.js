@@ -1,5 +1,5 @@
 $(document).ready(function () {
     if ($('#successDiv')) {
-        $('#successDiv').fadeOut(6000);
+        $('#successDiv').fadeOut(10000);
     }
 });

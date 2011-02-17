@@ -3,7 +3,7 @@
     $if (noteAddedSuccesfully)$
         <div id="successDiv">
             <img id="successImage" src="/images/success.png" alt="Success" />
-            <div id ="confirmMessage">Note added successfully.</div>
+            <div id ="confirmMessage">$noteUpdateStatus$</div>
         </div>
     $endif$
 
@@ -19,12 +19,12 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Name</div>
+                    <div class="label">Name<span class="mandatory">*</span></div>
                     <input type="text" id="name" name="name" value="$name$" class="updateValue"></input>
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Date of Birth</div>
+                    <div class="label">Date of Birth<span class="mandatory">*</span></div>
                     <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" class="updateValue"></input>
                     <div id="dateErrorMessage"></div>
                 </div>
@@ -119,9 +119,6 @@
 
  <hr/>
  <h2> Notes </h2>
-<div class="confirm">
-    $note_message$
-</div>
 
 $studentNotes()$
 </div>
