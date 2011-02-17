@@ -281,17 +281,6 @@ div.note
 }
 
 
-.errorMessage {
-    color: red;
-    font-weight: bold;
-    padding: 10px 0px 10px 0px;
-}
-
-.errorMessages {
-	margin-top: 10px;
-    color: red;
-}
-
 #dateErrorMessage {
     color: red;
     position:absolute;
@@ -414,14 +403,6 @@ li
     color:#254965; 
 }
 
-.eventTitle {
-    text-align:center;
-    margin-right: 50px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
 .eventLabel {
     width: 100px;
     float: left;
@@ -528,6 +509,7 @@ width: 100px;
 .createEvent {
 	float: left;
 }
+
 #createEventForm {
 	clear : both;
 }
@@ -535,5 +517,17 @@ width: 100px;
 #createEventErrors {
 	clear:both;
 	float:left;
+    color: red;
+}
+
+#errorMessages {
+	margin-top: 10px;
+    color: red;
+}
+
+.errorMessage {
+    color: red;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
 }
 
