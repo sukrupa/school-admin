@@ -1,8 +1,6 @@
 package org.sukrupa.student;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.HibernateConstructor;
 
 import java.util.Set;
 
@@ -35,7 +33,7 @@ public class UpdateStudentParameter {
         this.talents = talents;
     }
 
-    @DoNotRemove
+    @HibernateConstructor
 	public UpdateStudentParameter() {
 	}
 

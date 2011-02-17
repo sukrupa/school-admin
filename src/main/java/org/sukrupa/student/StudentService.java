@@ -3,7 +3,7 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.HibernateConstructor;
 
 import java.util.List;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class StudentService {
         return repository.update(studentParam);
     }
 
-    @DoNotRemove
+    @HibernateConstructor
     StudentService() {}
 
     @Autowired

@@ -83,12 +83,12 @@ public class AppConfiguration {
     }
 
     private void detectIfRunningInIntelliJ() {
-        if (isRunnintInIntelliJ()) {
+        if (isRunningInIntelliJ()) {
             setEnvironment("intellij");
         }
     }
 
-    private boolean isRunnintInIntelliJ() {
+    private boolean isRunningInIntelliJ() {
         return System.getProperty("user.dir").toLowerCase().contains("intellij");
     }
 

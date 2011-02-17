@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.HibernateConstructor;
 import org.sukrupa.platform.date.Date;
 
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ public class Note {
     @Column(name = "NOTE_DATE")
     private Date date;
 
-    @DoNotRemove
+    @HibernateConstructor
     Note() {
     }
 
