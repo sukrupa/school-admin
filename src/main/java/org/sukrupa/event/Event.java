@@ -45,7 +45,7 @@ public class Event {
     private Date date;
 
     @ManyToMany
-    @JoinTable(name = "EVENTATTENDEES",
+    @JoinTable(name = "EVENT_ATTENDEES",
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "id")})
     private Set<Student> attendees;

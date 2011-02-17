@@ -36,7 +36,7 @@ public class CreateAndViewEventTest {
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllFromTables("eventattendees", "event");
+        databaseHelper.deleteAllFromTables("EVENT_ATTENDEES", "event");
         databaseHelper.deleteAllCreatedObjects();
     }
 

@@ -20,8 +20,6 @@ import static com.google.common.collect.Sets.newHashSet;
 @Repository
 public class StudentRepository {
 
-    private static final String STUDENT_ID = "studentId";
-
     private SessionFactory sessionFactory;
     private StudentCriteriaBuilder studentCriteriaBuilder;
 
