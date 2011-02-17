@@ -1,12 +1,14 @@
 set :local_path, "target"
 set :deploy_artifact, "school-admin.zip"
 set :should_recreate_database, false
+set :port, 80
 
 task :development do
   set :user, "go"
   set :target_server, "twu-ci"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
   set :should_recreate_database, true
+  set :port, 8080
   role :target_server, "#{target_server}"  
 end
 
@@ -14,6 +16,7 @@ task :staging do
   set :user, "go"
   set :target_server, "twu-staging"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
+  set :port, 8080  
   role :target_server, "#{target_server}"
 end
 
@@ -81,7 +84,7 @@ end
 task :safety_check do
   times = 0;
   while times < 6
-    wgetresult = system "wget --spider http://#{login_info}@#{target_server}:8080/students"
+    wgetresult = system "wget --spider http://#{login_info}@#{target_server}:#{port}/students"
     if wgetresult
       break
     else
