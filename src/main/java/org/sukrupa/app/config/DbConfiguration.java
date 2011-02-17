@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @ImportResource("classpath:transaction-config.xml")
-public class DBConfig {
+public class DbConfiguration {
 
     private static final String BASE_PACKAGE = "org.sukrupa";
 

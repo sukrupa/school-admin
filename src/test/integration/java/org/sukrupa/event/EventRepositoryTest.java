@@ -1,6 +1,5 @@
 package org.sukrupa.event;
 
-import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.app.config.AppConfigForTestsContextLoader;
+import org.sukrupa.app.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.DatabaseHelper;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
@@ -26,7 +25,7 @@ import static org.sukrupa.platform.Matchers.hasOnly;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AppConfigForTestsContextLoader.class)
+@ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 @Transactional
 public class EventRepositoryTest {
 

@@ -4,13 +4,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
-public class ApplicationContextLoader {
+public class SpringConfiguration {
 
-    private static final String BASE_PACKAGE = "org.sukrupa";
-
-    public static ApplicationContext configureApp() {
+	public static ApplicationContext configureApp(String basePackage) {
         ConfigurableWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation(BASE_PACKAGE);
+        context.setConfigLocation(basePackage);
         context.refresh();
         return context;
     }
