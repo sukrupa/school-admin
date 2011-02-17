@@ -288,6 +288,7 @@ div.note
 }
 
 .errorMessages {
+	margin-top: 10px;
     color: red;
 }
 
@@ -523,3 +524,16 @@ width: 100px;
 #attendees{
     width:90%
 }
+
+.createEvent {
+	float: left;
+}
+#createEventForm {
+	clear : both;
+}
+
+#createEventErrors {
+	clear:both;
+	float:left;
+}
+

@@ -112,6 +112,7 @@
             <input type="button" id="save" value="Save"/>
             <input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';"/>
         </div>
+
         <div id="errorMessages" class="errorMessages"></div>
 
     </form>
