@@ -1,1 +1,1 @@
-$layout(body=students/listBody(), title="View List of Students")$
+$layout(body=students/listBody(), title="List of Students")$

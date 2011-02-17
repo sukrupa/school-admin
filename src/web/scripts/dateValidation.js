@@ -1,10 +1,6 @@
 DateValidator = function (){};
 
-DateValidator.prototype.validate = function validate(dateStr, timeStr){
-	return this.isBefore(dateStr, timeStr);
-}
-
-DateValidator.prototype.isBefore = function isBefore(dateStr, timeStr, comparisonDate){
+DateValidator.prototype.validate = function validate(dateStr, timeStr, comparisonDate){
     var validformat= /^\d{1,2}-\d{1,2}-\d{4}\ \d{1,2}\:\d{2}$/
 
 	var dateTimeStr = dateStr + " " + timeStr;

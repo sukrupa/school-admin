@@ -1,5 +1,9 @@
 <div>
-    <div class="eventTitle">$event.title$</div>
+    <div class="eventEntry">
+        <div class="eventLabel">Title</div>
+        <div class="title">$event.title$</div>
+    </div>
+
 
     <div class="eventEntry">
         <div class="eventLabel">Date</div>

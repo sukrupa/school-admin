@@ -39,7 +39,6 @@ body
 
 
 #header {
-
     width: 903px;
     height: 140px;
     background-color: #254965;
@@ -203,7 +202,7 @@ div.note
 .header 
 {
 
-    font: 107% Tahoma, arial, helvetica, sans-serif;
+    font: 90% Tahoma, arial, helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -278,24 +277,6 @@ div.note
 
 .notes {
     clear: both;
-}
-
-
-.errorMessage {
-    color: red;
-    font-weight: bold;
-    padding: 10px 0px 10px 0px;
-}
-
-.errorMessages {
-	margin-top: 10px;
-    color: red;
-}
-
-#dateErrorMessage {
-    color: red;
-    position:absolute;
-    bottom: 0px;
 }
 
 .mandatory {
@@ -414,14 +395,6 @@ li
     color:#254965; 
 }
 
-.eventTitle {
-    text-align:center;
-    margin-right: 50px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
 .eventLabel {
     width: 100px;
     float: left;
@@ -471,7 +444,7 @@ li
 }
 
 .eventInfo .label{
-    width: 100px;
+    width: 110px;
 }
 
 .createEntryDateTime {
@@ -522,12 +495,13 @@ width: 100px;
 }
 
 #attendees{
-    width:90%
+    width:93%
 }
 
 .createEvent {
 	float: left;
 }
+
 #createEventForm {
 	clear : both;
 }
@@ -535,5 +509,17 @@ width: 100px;
 #createEventErrors {
 	clear:both;
 	float:left;
+    color: red;
+}
+
+#errorMessages {
+	margin-top: 10px;
+    color: red;
+}
+
+.errorMessage {
+    color: red;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
 }
 

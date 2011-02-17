@@ -1,4 +1,3 @@
-
       <div class="sideBarHeader">Search </div>
 	
 	  <div class="sideBarContent">
@@ -7,7 +6,6 @@
 	  <a href="/students/search">Search Students</a></p>
 	  </li>
 	  </div>
-      
       <br/>
 	  
 	  <div class="sideBarHeader">
@@ -48,5 +46,6 @@
       </li>
        
       </div>
+
         
        
