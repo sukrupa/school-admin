@@ -1,6 +1,6 @@
 <div id="studentListPages">
     <div class="page">
-        <table>
+        <table class="listTable">
             <thead class="header">
             <tr>
                 <td>Student ID</td>

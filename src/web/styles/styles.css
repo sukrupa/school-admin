@@ -534,3 +534,9 @@ position: relative;
   text-align: center;
 
 }
+
+.listTable {
+    width:680px;
+    table-layout:fixed;
+    word-wrap:break-word;
+}
