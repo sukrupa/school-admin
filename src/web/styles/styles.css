@@ -281,17 +281,6 @@ div.note
 }
 
 
-.errorMessage {
-    color: red;
-    font-weight: bold;
-    padding: 10px 0px 10px 0px;
-}
-
-.errorMessages {
-	margin-top: 10px;
-    color: red;
-}
-
 #dateErrorMessage {
     color: red;
     position:absolute;
@@ -535,5 +524,16 @@ width: 100px;
 #createEventErrors {
 	clear:both;
 	float:left;
+}
+
+#errorMessages {
+	margin-top: 10px;
+    color: red;
+}
+
+.errorMessage {
+    color: red;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
 }
 

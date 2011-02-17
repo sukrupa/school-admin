@@ -113,7 +113,7 @@
             <input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';"/>
         </div>
 
-        <div id="errorMessages" class="errorMessages"></div>
+        <div id="errorMessages"></div>
 
     </form>
 </div>
