@@ -49,6 +49,11 @@ public class StudentsController {
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
 	    Map<String, Object> model, HttpServletRequest request) {
         StudentListPage students = service.getPage(searchParam, pageNumber, request.getQueryString());
+
+        if (students.getStudents().isEmpty()) {
+            return "students/listEmpty";
+        }
+        
         model.put("page", students);
 
         return "students/list";
