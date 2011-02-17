@@ -39,7 +39,6 @@ body
 
 
 #header {
-
     width: 903px;
     height: 140px;
     background-color: #254965;
@@ -203,7 +202,7 @@ div.note
 .header 
 {
 
-    font: 107% Tahoma, arial, helvetica, sans-serif;
+    font: 90% Tahoma, arial, helvetica, sans-serif;
     font-weight: bold;
 }
 
