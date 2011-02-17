@@ -1,6 +1,8 @@
 <div id="studentListPages">
+
     <div class="page">
-        <table>
+
+        <table class="listTable">
             <thead class="header">
             <tr>
                 <td>Student ID</td>
@@ -42,7 +44,7 @@
     &nbsp;&nbsp;
     $if(page.nextEnabled)$<a href="$page.nextPageUrl$" id="nextButton" class="navLink"><b>Next</b></a>$else$<b>Next</b>$endif$
 
-    </div>
+</div>
 
 
 

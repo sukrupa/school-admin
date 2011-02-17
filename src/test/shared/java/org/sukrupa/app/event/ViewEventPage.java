@@ -16,7 +16,7 @@ public class ViewEventPage {
     }
 
     public String getTitle() {
-        return textFor("eventTitle");
+        return textFor("title");
     }
 
     public String getVenue() {

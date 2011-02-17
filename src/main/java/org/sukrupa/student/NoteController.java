@@ -26,13 +26,10 @@ public class NoteController {
     public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote, Map<String, Object> model) {
         model.put("studentId", studentId);
 
-        try {
-            service.addNoteFor(studentId, newNote);
-            model.put("noteUpdateStatus", "Note Added Successfully");
-            model.put("noteAddedSuccesfully", true);
-        } catch (Exception e) {
-            model.put("noteUpdateStatus", "Error Adding Note");
-        }
+        service.addNoteFor(studentId, newNote);
+        model.put("noteUpdateStatus", "Note Added Successfully");
+        model.put("noteAddedSuccesfully", true);
+        
         return format("redirect:/students/%s/edit",studentId);
     }
 }

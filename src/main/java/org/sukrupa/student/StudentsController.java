@@ -49,6 +49,11 @@ public class StudentsController {
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
 	    Map<String, Object> model, HttpServletRequest request) {
         StudentListPage students = service.getPage(searchParam, pageNumber, request.getQueryString());
+
+        if (students.getStudents().isEmpty()) {
+            return "students/listEmpty";
+        }
+        
         model.put("page", students);
 
         return "students/list";
@@ -121,7 +126,7 @@ public class StudentsController {
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(TALENTS, theStudent.talentDescriptions()));
 
-        model.put("note_message", noteUpdateStatus);
+        model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";

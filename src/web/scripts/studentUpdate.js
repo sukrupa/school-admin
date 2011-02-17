@@ -1,15 +1,4 @@
 $(document).ready(function () {
-    $('#dateOfBirth').keyup(function () {
-        var dateStr = $('#dateOfBirth').val();
-        var dummyTimeStr = "01:01";
-
-        if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
-            $('#dateErrorMessage').html("Invalid date.  Format: dd-mm-yyyy");
-        } else {
-            $('#dateErrorMessage').html("");
-        }
-    });
-
     $('#save').click(function () {
         if (validateFields()) {
             $('#updateStudent').submit();
@@ -19,6 +8,24 @@ $(document).ready(function () {
     $('#clearNote').click(function () {
         $('#new-note').val('');
     });
+
+
+    $('#addNoteForm').submit(function () {
+        var charLimit = 1000;
+        var currentCharNumber = $('#new-note').val().length;
+
+        if (currentCharNumber > charLimit) {
+            $('#noteTooLongMessage').html("Character limit exceeded by " + eval(currentCharNumber - charLimit) + ".");
+            return false;
+        }
+
+        else if ($('#new-note').val().trim().length == 0) {
+            return false;
+        }
+
+        return true;
+    });
+
 });
 
 

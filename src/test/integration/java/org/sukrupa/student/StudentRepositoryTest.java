@@ -207,6 +207,15 @@ public class StudentRepositoryTest {
        assertThat(students, hasItems(pat,sahil));
 
     }
+    @Test
+    public void shouldTreatNullCasteAsEmpty(){
+        Student withoutCaste = new StudentBuilder().studentId("98765").caste(null).build();
+        databaseHelper.save(withoutCaste);
+        StudentSearchParameter blankCaste = new StudentSearchParameterBuilder().caste("").build();
+        List <Student> list = repository.parametricSearch(blankCaste, 0, 100);
+        assertThat(list,hasItem(withoutCaste));
+
+    }
 
 
 }

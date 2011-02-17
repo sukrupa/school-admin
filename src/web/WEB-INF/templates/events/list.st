@@ -1,1 +1,1 @@
-$layout(body=events/listBody(), title="View List of Events")$
+$layout(body=events/listBody(), title="List of Events")$

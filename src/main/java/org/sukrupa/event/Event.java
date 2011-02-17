@@ -109,7 +109,7 @@ public class Event {
     }
 
     public String getTime() {
-        return date.getTime();
+        return date.getTime().equals("00:00") ? null: date.getTime();
     }
 
     private static Date parseDateTime(EventCreateParameter eventCreateParameter) {

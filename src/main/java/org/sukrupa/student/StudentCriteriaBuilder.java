@@ -2,10 +2,7 @@ package org.sukrupa.student;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 
 public class StudentCriteriaBuilder {
@@ -73,17 +70,26 @@ public class StudentCriteriaBuilder {
 
     private Conjunction createConjunction(String studentClass, String gender, String caste, String communityLocation, String religion) {
         Conjunction conjunction = Restrictions.conjunction();
-        addRestrictionIfNotEmpty(STUDENT_CLASS, studentClass, conjunction);
-        addRestrictionIfNotEmpty(GENDER, gender, conjunction);
-        addRestrictionIfNotEmpty(CASTE, caste, conjunction);
-        addRestrictionIfNotEmpty(COMMUNITY_LOCATION, communityLocation, conjunction);
-        addRestrictionIfNotEmpty(RELIGION, religion, conjunction);
+        addRestrictionIfNotWildcard(STUDENT_CLASS, studentClass, conjunction);
+        addRestrictionIfNotWildcard(GENDER, gender, conjunction);
+        addRestrictionIfNotWildcard(CASTE, caste, conjunction);
+        addRestrictionIfNotWildcard(COMMUNITY_LOCATION, communityLocation, conjunction);
+        addRestrictionIfNotWildcard(RELIGION, religion, conjunction);
         return conjunction;
     }
 
-    private void addRestrictionIfNotEmpty(String field, String parameter, Conjunction conjunction) {
+    private void addRestrictionIfNotWildcard(String field, String parameter, Conjunction conjunction) {
         if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
-            conjunction.add(Restrictions.eq(field, parameter));
+            SimpleExpression equalToParam = Restrictions.eq(field, parameter);
+            if (parameter.isEmpty()) {
+                Disjunction disj = Restrictions.disjunction();
+                disj.add(Restrictions.isNull(field));
+                disj.add(equalToParam);
+                conjunction.add(disj);
+            }
+            else {
+                conjunction.add(equalToParam);
+            }
         }
     }
 }

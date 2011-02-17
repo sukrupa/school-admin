@@ -3,7 +3,7 @@
     $if (noteAddedSuccesfully)$
         <div id="successDiv">
             <img id="successImage" src="/images/success.png" alt="Success" />
-            <div id ="confirmMessage">Note added successfully.</div>
+            <div id ="confirmMessage">$noteUpdateStatus$</div>
         </div>
     $endif$
 
@@ -19,14 +19,13 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Name</div>
+                    <div class="label">Name<span class="mandatory">*</span></div>
                     <input type="text" id="name" name="name" value="$name$" class="updateValue"></input>
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Date of Birth</div>
+                    <div class="label">Date of Birth<br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
                     <input type="text" id="dateOfBirth" name="dateOfBirth" value="$dateOfBirth$" class="updateValue"></input>
-                    <div id="dateErrorMessage"></div>
                 </div>
 
                 <div class="updateEntry">
@@ -112,16 +111,16 @@
             <input type="button" id="save" value="Save"/>
             <input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';"/>
         </div>
-        <div id="errorMessages" class="errorMessages"></div>
+
+        <div id="errorMessages"></div>
 
     </form>
 </div>
 
  <hr/>
  <h2> Notes </h2>
-<div class="confirm">
-    $note_message$
-</div>
+
+ <div id="noteTooLongMessage" class="errorMessages"></div>
 
 $studentNotes()$
 </div>
