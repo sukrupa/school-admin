@@ -34,7 +34,7 @@ public class EventService {
 
     @Transactional
     public void save(Event event, String... studentIdsOfAttendees) {
-        event.addAttendees(studentRepository.load(studentIdsOfAttendees));
+        event.addAttendees(studentRepository.findByStudentIds(studentIdsOfAttendees));
         eventRepository.save(event);
     }
 
@@ -51,7 +51,7 @@ public class EventService {
 			LOG.debug(format("empty student ids"));
 			return Sets.newHashSet("No student ids specified");
 		}
-		Set<Student> students = studentRepository.load(studentIdsOfAttendees.toArray(new String[]{}));
+		Set<Student> students = studentRepository.findByStudentIds(studentIdsOfAttendees.toArray(new String[]{}));
 		Set<String> loadedStudentsIds = Sets.newHashSet();
 
 		for (Student student : students) {

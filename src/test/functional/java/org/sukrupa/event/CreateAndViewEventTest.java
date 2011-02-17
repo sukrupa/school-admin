@@ -109,7 +109,7 @@ public class CreateAndViewEventTest {
         assertThat(createEventPage.getAllErrors(), containsString("Please fill in all required fields."));
         assertThat(createEventPage.getAllErrors(), containsString("Invalid date."));
         assertThat(createEventPage.getAllErrors(), containsString("Invalid time."));
-        assertThat(createEventPage.getAllErrors(), containsString("Could not find the following IDs: 22443."));
+        assertThat(createEventPage.getAllErrors(), containsString("Could not findBy the following IDs: 22443."));
 
     }
 

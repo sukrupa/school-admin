@@ -1,11 +1,13 @@
-package org.sukrupa.student;
+package org.sukrupa.student.db;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
+import org.sukrupa.student.Student;
+import org.sukrupa.student.StudentSearchParameter;
 
-public class StudentCriteriaBuilder {
+public class FindStudentsHibernateCriteria {
     private final SessionFactory sessionFactory;
 
     private static final String STUDENT_CLASS = "studentClass";
@@ -19,7 +21,7 @@ public class StudentCriteriaBuilder {
     private static final String RELIGION = "religion";
     private static final String DESCRIPTION = "description";
 
-    public StudentCriteriaBuilder(SessionFactory sessionFactory) {
+    public FindStudentsHibernateCriteria(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

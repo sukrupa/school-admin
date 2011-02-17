@@ -84,31 +84,31 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldHaveCountZero(){
-        assertThat(repository.countResults(all),is(0));
+        assertThat(repository.count(all),is(0));
     }
 
     @Test
     public void shouldHaveCountOne(){
         databaseHelper.save(pat);
-        assertThat(repository.countResults(all),is(1));
+        assertThat(repository.count(all),is(1));
     }
 
     @Test
     public void shouldLoadStudentBasedOnStudentId() {
         databaseHelper.save(pat);
-        assertThat(repository.load("123"), is(pat));
+        assertThat(repository.findByStudentId("123"), is(pat));
     }
 
     @Test
     public void shouldLoadStudentsBasedOnStudentIds() {
         databaseHelper.save(pat, sahil, renaud);
-        assertThat(repository.load(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
+        assertThat(repository.findByStudentIds(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
     }
 
     @Test
     public void shouldFindAllStudentsInDatabase() {
         databaseHelper.save(pat, renaud);
-        List<Student> students = repository.parametricSearch(all,0,100);
+        List<Student> students = repository.findBy(all, 0, 100);
 
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(pat, renaud));
@@ -118,7 +118,7 @@ public class StudentRepositoryTest {
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build(),0,100);
+        List<Student> students = repository.findBy(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build(), 0, 100);
         assertThat(students.size(), is(2));
         assertThat(students, hasItems(renaud, sahil));
     }
@@ -126,7 +126,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
         databaseHelper.save(sahil, pat, renaud);
-        List<Student> students = repository.parametricSearch(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(),0,100);
+        List<Student> students = repository.findBy(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(), 0, 100);
         assertThat(students.size(), is(1));
         assertThat(students, hasItems(renaud));
     }
@@ -134,7 +134,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldPopulateTalents() {
         databaseHelper.save(sahil);
-        assertThat(repository.parametricSearch(all,0,100).get(0).getTalents(), hasItems(music, sport));
+        assertThat(repository.findBy(all, 0, 100).get(0).getTalents(), hasItems(music, sport));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class StudentRepositoryTest {
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
 
-        Iterator<Note> notes = repository.parametricSearch(all,0,100).get(0).getNotes().iterator();
+        Iterator<Note> notes = repository.findBy(all, 0, 100).get(0).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
@@ -171,7 +171,7 @@ public class StudentRepositoryTest {
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
-        Student s = repository.parametricSearch(all,0,100).get(0);
+        Student s = repository.findBy(all, 0, 100).get(0);
         UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
@@ -198,10 +198,10 @@ public class StudentRepositoryTest {
         Note newNote = new Note("foobar");
         pat.addNote(newNote);
 
-        repository.saveOrUpdate(pat);
+        repository.put(pat);
         databaseHelper.flushHibernateSessionToForceReload();
 
-        Student reloadedStudent = repository.load(pat.getStudentId());
+        Student reloadedStudent = repository.findByStudentId(pat.getStudentId());
         assertThat(reloadedStudent.getNotes(), hasItem(newNote));
     }
 
@@ -210,7 +210,7 @@ public class StudentRepositoryTest {
        databaseHelper.save(pat);
        databaseHelper.save(sahil);
 
-       List<Student> students = repository.getAll();
+       List<Student> students = repository.findAll();
 
        assertThat(students, hasItems(pat,sahil));
 
@@ -220,7 +220,7 @@ public class StudentRepositoryTest {
         Student withoutCaste = new StudentBuilder().studentId("98765").caste(null).build();
         databaseHelper.save(withoutCaste);
         StudentSearchParameter blankCaste = new StudentSearchParameterBuilder().caste("").build();
-        List <Student> list = repository.parametricSearch(blankCaste, 0, 100);
+        List <Student> list = repository.findBy(blankCaste, 0, 100);
         assertThat(list,hasItem(withoutCaste));
 
     }
