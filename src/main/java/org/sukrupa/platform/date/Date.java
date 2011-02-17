@@ -2,6 +2,7 @@ package org.sukrupa.platform.date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -13,9 +14,9 @@ import static org.joda.time.format.DateTimeFormat.forPattern;
 
 public class Date implements Serializable {
 
-    private static final String DATE_TIME_FORMAT = "dd-MM-YY HH:mm";
     private static final String DATE_FORMAT = "dd-MM-YYYY";
     private static final String TIME_FORMAT = "HH:mm";
+    private static final String DATE_TIME_FORMAT = "dd-MM-YYYY HH:mm";
 
     private DateTime jodaTime;
 
@@ -44,9 +45,7 @@ public class Date implements Serializable {
     }
 
     public static Date parse(String date, String time) {
-        return isBlank(time) ?
-                parse(date) :
-                new Date(forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time)));
+        return isBlank(time) ? parseDate(date) : parseDateAndTime(date, time);
     }
 
     private static String buildDateTimeText(String date, String time) {
@@ -65,8 +64,12 @@ public class Date implements Serializable {
         return jodaTime;
     }
 
-    public static Date parse(String date) {
+    private static Date parseDate(String date) {
         return parse(date, "00:00");
+    }
+
+    private static Date parseDateAndTime(String date, String time) {
+        return new Date(forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time)));
     }
 
     @Override

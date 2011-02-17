@@ -88,4 +88,9 @@ public class EventTest {
 		assertThat(event.getCoordinator(), nullValue());
 	}
 
+    @Test
+	public void shouldNotDisplayTimeIfMidnight() {
+        Event event = new EventBuilder().date(new Date(31, 01, 2011, 00, 00)).build();
+        assertThat(event.getTime(), nullValue());
+    }
 }
