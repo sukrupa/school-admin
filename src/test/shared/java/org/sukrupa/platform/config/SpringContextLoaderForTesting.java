@@ -1,10 +1,10 @@
-package org.sukrupa.app.config;
+package org.sukrupa.platform.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextLoader;
 import org.sukrupa.app.SchoolAdminApp;
 
-import static org.sukrupa.app.config.SpringConfiguration.configureApp;
+import static org.sukrupa.platform.config.SpringConfiguration.configureApp;
 import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 
 public class SpringContextLoaderForTesting implements ContextLoader {

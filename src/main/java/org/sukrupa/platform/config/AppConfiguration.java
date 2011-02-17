@@ -1,4 +1,4 @@
-package org.sukrupa.app.config;
+package org.sukrupa.platform.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;

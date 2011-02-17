@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.HibernateConstructor;
+import org.sukrupa.platform.db.HibernateConstructor;
 
 import java.util.Set;
 

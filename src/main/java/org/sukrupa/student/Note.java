@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.sukrupa.platform.HibernateConstructor;
+import org.sukrupa.platform.db.HibernateConstructor;
 import org.sukrupa.platform.date.Date;
 
 import javax.persistence.Column;

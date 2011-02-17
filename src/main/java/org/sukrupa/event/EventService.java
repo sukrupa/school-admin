@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.HibernateConstructor;
+import org.sukrupa.platform.db.HibernateConstructor;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentRepository;
 

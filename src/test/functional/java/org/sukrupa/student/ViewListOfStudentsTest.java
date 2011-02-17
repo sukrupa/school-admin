@@ -8,16 +8,16 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.app.config.SpringContextLoaderForTesting;
+import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.app.student.ListOfStudentsPage;
 import org.sukrupa.app.student.StudentRow;
-import org.sukrupa.platform.DatabaseHelper;
+import org.sukrupa.platform.db.DatabaseHelper;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.sukrupa.platform.Matchers.matches;
+import static org.sukrupa.platform.hamcrest.Matchers.matches;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)

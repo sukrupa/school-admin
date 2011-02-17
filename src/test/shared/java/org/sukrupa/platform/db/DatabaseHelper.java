@@ -1,4 +1,4 @@
-package org.sukrupa.platform;
+package org.sukrupa.platform.db;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.SessionFactory;

@@ -1,4 +1,4 @@
-package org.sukrupa.app.config;
+package org.sukrupa.platform.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;

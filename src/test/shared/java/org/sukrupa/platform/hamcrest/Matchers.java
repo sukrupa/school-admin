@@ -1,4 +1,4 @@
-package org.sukrupa.platform;
+package org.sukrupa.platform.hamcrest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.hamcrest.Description;

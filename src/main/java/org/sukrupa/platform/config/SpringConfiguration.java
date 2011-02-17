@@ -1,4 +1,4 @@
-package org.sukrupa.app.config;
+package org.sukrupa.platform.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ConfigurableWebApplicationContext;

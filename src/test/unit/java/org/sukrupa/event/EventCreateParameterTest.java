@@ -1,13 +1,10 @@
 package org.sukrupa.event;
 
-import com.google.common.collect.Sets;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.sukrupa.platform.Matchers.hasOnly;
+import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 
 public class EventCreateParameterTest {
 

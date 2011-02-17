@@ -7,7 +7,7 @@ import org.sukrupa.platform.server.WebServer;
 import java.io.*;
 
 import static java.lang.String.format;
-import static org.sukrupa.app.config.SpringConfiguration.configureApp;
+import static org.sukrupa.platform.config.SpringConfiguration.configureApp;
 import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 
 @Component

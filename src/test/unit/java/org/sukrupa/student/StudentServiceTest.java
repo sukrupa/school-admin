@@ -15,7 +15,7 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.platform.Matchers.hasNote;
+import static org.sukrupa.platform.hamcrest.Matchers.hasNote;
 import static org.sukrupa.platform.date.DateManipulation.freezeTime;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static org.sukrupa.student.StudentService.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
