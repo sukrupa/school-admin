@@ -24,10 +24,6 @@ import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
 public class EventTest {
 
-    private Student sahil;
-    private Student renaud;
-    private Student pat;
-
     @Before
     public void setUp() throws Exception {
         freezeTime();
@@ -46,14 +42,14 @@ public class EventTest {
     @Test
     public void shouldReturnTheCorrectStudentList() {
         Set<Student> attendees = createAttendees();
-        Event event1 = new EventBuilder().title("Dummy event").date(new Date(29, 8, 2010, 10, 10, 10, 0)).venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
-        assertThat(attendees.equals(event1.getAttendees()), is(true));
+        Event event = new EventBuilder().title("Dummy event").date(new Date(29, 8, 2010, 10, 10, 10, 0)).venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
+        assertThat(event.getAttendees(), is(attendees));
     }
 
     private Set<Student> createAttendees() {
-        sahil = new StudentBuilder().name("Sahil").studentClass("Nursery").gender("Male").build();
-        renaud = new StudentBuilder().name("Renaud").studentClass("Nursery").gender("Female").build();
-        pat = new StudentBuilder().name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD").gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("abcdef").build();
+        Student sahil = new StudentBuilder().name("Sahil").build();
+        Student renaud = new StudentBuilder().name("Renaud").build();
+        Student pat = new StudentBuilder().name("pat").build();
         Set<Student> attendees = new HashSet<Student>();
         attendees.add(sahil);
         attendees.add(renaud);
