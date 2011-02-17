@@ -49,13 +49,21 @@ public class StudentRepositoryTest {
     private final Talent sport = new Talent(SPORT);
     private final Talent cooking = new Talent(COOKING);
 
-    private Student sahil = new StudentBuilder().studentId("1").name("Sahil").studentClass("Nursery")
-            .dateOfBirth(new LocalDate(1995, 10, 1)).gender("Male").talents(music, sport).build();
-    private Student renaud = new StudentBuilder().studentId("2").name("Renaud").studentClass("Nursery").gender("Female")
-            .dateOfBirth(new LocalDate(1990, 7, 24)).build();
-    private Student pat = new StudentBuilder().studentId("3").name("pat").religion("n/a").caste("huh?").subCaste("hmm").area("DD")
-            .gender("male").dateOfBirth(new LocalDate(1985, 5, 24)).studentClass("4th grade").studentId("123")
-            .father("Renaud").mother("Nice Lady").build();
+    private Student sahil = new StudentBuilder()
+            .studentId("1")             .name("Sahil")
+            .studentClass("Nursery")    .dateOfBirth(new LocalDate(1995, 10, 1))
+            .gender("Male")             .talents(music, sport)
+            .build();
+    private Student renaud = new StudentBuilder()
+            .studentId("2")             .name("Renaud")
+            .studentClass("Nursery")    .dateOfBirth(new LocalDate(1990, 7, 24))
+            .gender("Female")
+            .build();
+    private Student pat = new StudentBuilder()
+            .studentId("123")           .name("pat")
+            .studentClass("4th grade")  .dateOfBirth(new LocalDate(1985, 5, 24))
+            .gender("male")
+            .build();
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
     @BeforeClass
