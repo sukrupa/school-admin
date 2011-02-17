@@ -98,7 +98,6 @@ body
     background: transparent;
     color: #ffffff;
     font: 14px Tahoma, serif;
-    color:#254965; 
     border-right:solid;
 }
 
@@ -113,16 +112,12 @@ body
 #body {
     width: 700px;
     float: left;
-    height:auto;
+   min-height:210px;
     padding-left:15px;
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica; 
     border-left:solid;
     border-color:#254965;
-    
-  
- 
-   
 }
 
 img {
