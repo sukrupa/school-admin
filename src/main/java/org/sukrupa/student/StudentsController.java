@@ -121,7 +121,7 @@ public class StudentsController {
         model.put("mother", theStudent.getMother());
         model.put("talents", createCheckBoxList(TALENTS, theStudent.talentDescriptions()));
 
-        model.put("note_message", noteUpdateStatus);
+        model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";

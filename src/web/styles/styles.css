@@ -302,7 +302,6 @@ div.note
     font-weight: bold;
 }
 
-
 #successDiv {
     position: absolute;
     left: 0px;
@@ -326,11 +325,8 @@ div.note
     height: 25px;
 }
 
-
-
 .sideBarHeader
 {
-
 	margin-left: auto;
 	margin-right: auto;
 	width:150px;
@@ -348,13 +344,8 @@ div.note
     -moz-border-radius-topleft: 5px;
     -webkit-border-top-left-radius: 5px;
     border-top-left-radius: 5px;
-
-
-
-	
-	
-	
 }
+
 .sideBarContent
 {
 	border-left:solid;
@@ -375,8 +366,7 @@ div.note
     -moz-border-radius-bottomleft: 5px;
     -webkit-border-bottom-left-radius: 5px;
     border-bottom-left-radius: 5px;
-	
-	
+
 }
 
 li
@@ -388,21 +378,16 @@ li
 	width:140px;
 	padding-right: 10px;
 	
-
-
 }
 
 #student
 {
 	padding-left: 20px;
-
 }
 
 #studentListPages
 {
-
-padding-right: 20px;
-
+    padding-right: 20px;
 }
 
 #eventListPages
@@ -414,9 +399,7 @@ padding-right: 20px;
 {
 	padding-left: 20px;
 	padding-right: 20px;
-
 }
-
 
 .linkbutton {
   	padding:           3px 5px;
@@ -428,9 +411,7 @@ padding-right: 20px;
     display: block;
     font: 14px Tahoma, serif;
     color:#254965; 
-
 }
-
 
 .eventTitle {
     text-align:center;
@@ -444,7 +425,6 @@ padding-right: 20px;
     width: 100px;
     float: left;
     font-weight: bold;
-
 }
 
 .eventValue {
@@ -463,8 +443,8 @@ padding-right: 20px;
 .noHorizontalResize
 {
     resize:vertical;
-
 }
+
 .createValue{
     resize:none;
 }
@@ -473,7 +453,6 @@ padding-right: 20px;
     float:left;
 	position:relative;
     width: 60%;
-
 }
 
 .eventInfoRight{
@@ -482,8 +461,9 @@ padding-right: 20px;
     width: 40%;
     height: 250px;
 }
+
 .eventButtons{
-   clear:both;
+    clear:both;
 	float:left;
 	width:100%;
 	text-align:left;

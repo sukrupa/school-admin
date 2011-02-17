@@ -23,7 +23,7 @@ public class UpdateStudentPage {
 
 
     public String getNoteAddedConfirmation() {
-        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='confirm']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@id='confirmMessage']"));
         WebElement nameElement = elements.get(0);
         return nameElement.getText();
     }
