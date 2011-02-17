@@ -108,7 +108,7 @@
             </td>
         </tr>
         <tr>
-            <td><input style="float:left;" type="submit" value="Search"/></td>
+            <td><input type="submit" value="Search"/></td>
             <td></td>
         </tr>
     </table>
