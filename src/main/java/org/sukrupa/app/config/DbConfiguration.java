@@ -19,7 +19,8 @@ import java.util.Properties;
 @ImportResource("classpath:transaction-config.xml")
 public class DbConfiguration {
 
-    private static final String BASE_PACKAGE = "org.sukrupa";
+	@Value("${base.package}")
+	private String basePackageName;
 
     @Value("${jdbc.url}")
     private String jdbcUrl;
@@ -62,7 +63,7 @@ public class DbConfiguration {
         try {
             AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
-            sessionFactory.setPackagesToScan(new String[]{BASE_PACKAGE,});
+            sessionFactory.setPackagesToScan(new String[]{basePackageName});
             sessionFactory.setHibernateProperties(properties);
             sessionFactory.afterPropertiesSet();
             return sessionFactory.getObject();
