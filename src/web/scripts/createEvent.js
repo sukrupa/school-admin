@@ -22,7 +22,7 @@ function validateFields() {
 	var dateValid = validateDate(dateStr);
 	var timeValid = validateTime(timeStr);
 
-	if (timeValid && dateValid) {
+	if (dateStr !== "" && timeValid && dateValid) {
 		if (!isBeforeCurrentDate(dateStr, timeStr)) {
 			valid = false;
 		}
@@ -66,7 +66,7 @@ function isBeforeCurrentDate(dateStr, timeStr) {
 
 function validateDate(dateStr) {
     var dummyTimeStr = "00:00";
-    if (!new DateValidator().validate(dateStr, dummyTimeStr)) {
+    if (dateStr !== "" && !new DateValidator().validate(dateStr, dummyTimeStr)) {
 		addErrorMessage("Invalid date.<br/>");
         return false;
     }
