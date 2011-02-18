@@ -34,12 +34,12 @@ public class StudentRepository {
 		session().flush();
 	}
 
-	public Student update(StudentUpdateParameter studentUpdateParam) {
-		Student student = findByStudentId(studentUpdateParam.getStudentId());
+	public Student update(UpdateStudentParameter studentParam) {
+		Student student = findByStudentId(studentParam.getStudentId());
 		if (student == null) {
 			return null;
 		}
-		student.updateFrom(studentUpdateParam, findTalents(studentUpdateParam.getTalents()));
+		student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
 
 		session().save(student);
 		session().flush();

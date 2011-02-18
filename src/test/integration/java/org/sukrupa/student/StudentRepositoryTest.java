@@ -172,7 +172,7 @@ public class StudentRepositoryTest {
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
         databaseHelper.save(philOld);
         Student s = repository.findBy(all, 0, 100).get(0);
-        StudentUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(s.getStudentId())
+        UpdateStudentParameter updateParameter = new UpdateStudentParameterBuilder().studentId(s.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -188,7 +188,7 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(repository.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
+        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 
     @Test
