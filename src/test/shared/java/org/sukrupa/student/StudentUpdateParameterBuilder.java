@@ -5,7 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 
 import java.util.Set;
 
-public class UpdateStudentParameterBuilder {
+public class StudentUpdateParameterBuilder {
     private String studentId;
     private String name;
     private String dateOfBirth = DateTimeFormat.forPattern("dd/MM/YYYY").print(new LocalDate());
@@ -19,67 +19,67 @@ public class UpdateStudentParameterBuilder {
     private String mother;
     private Set<String> talents;
 
-    public UpdateStudentParameterBuilder studentId(String studentId) {
+    public StudentUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
         return this;
     }
 
-    public UpdateStudentParameterBuilder name(String name) {
+    public StudentUpdateParameterBuilder name(String name) {
         this.name = name;
         return this;
     }
 
-    public UpdateStudentParameterBuilder dateOfBirth(String dateOfBirth) {
+    public StudentUpdateParameterBuilder dateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
 
-    public UpdateStudentParameterBuilder gender(String gender) {
+    public StudentUpdateParameterBuilder gender(String gender) {
         this.gender = gender;
         return this;
     }
 
-    public UpdateStudentParameterBuilder studentClass(String studentClass) {
+    public StudentUpdateParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
         return this;
     }
 
-    public UpdateStudentParameterBuilder religion(String religion) {
+    public StudentUpdateParameterBuilder religion(String religion) {
         this.religion = religion;
         return this;
     }
 
-    public UpdateStudentParameterBuilder caste(String caste) {
+    public StudentUpdateParameterBuilder caste(String caste) {
         this.caste = caste;
         return this;
     }
 
-    public UpdateStudentParameterBuilder subCaste(String subCaste) {
+    public StudentUpdateParameterBuilder subCaste(String subCaste) {
         this.subCaste = subCaste;
         return this;
     }
 
-    public UpdateStudentParameterBuilder area(String area) {
+    public StudentUpdateParameterBuilder area(String area) {
         this.area = area;
         return this;
     }
 
-    public UpdateStudentParameterBuilder father(String father) {
+    public StudentUpdateParameterBuilder father(String father) {
         this.father = father;
         return this;
     }
 
-    public UpdateStudentParameterBuilder mother(String mother) {
+    public StudentUpdateParameterBuilder mother(String mother) {
         this.mother = mother;
         return this;
     }
 
-    public UpdateStudentParameterBuilder talents(Set<String> talents) {
+    public StudentUpdateParameterBuilder talents(Set<String> talents) {
         this.talents = talents;
         return this;
     }
 
-    public UpdateStudentParameter build() {
-        return new UpdateStudentParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
+    public StudentUpdateParameter build() {
+        return new StudentUpdateParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
     }
 }
