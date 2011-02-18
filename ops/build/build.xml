@@ -31,14 +31,14 @@
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, test:js, db:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, test:js, db:recreate, test:integration, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
-            depends="clean, init, compile:all, copy-resources, test:unit, test:js, db:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
 
     <target name="install:local"
             depends="clean, init, compile:all, copy-resources, package"
