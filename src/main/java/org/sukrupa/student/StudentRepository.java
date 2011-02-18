@@ -34,13 +34,7 @@ public class StudentRepository {
 		session().flush();
 	}
 
-	public Student update(UpdateStudentParameter studentParam) {
-		Student student = findByStudentId(studentParam.getStudentId());
-		if (student == null) {
-			return null;
-		}
-		student.updateFrom(studentParam, findTalents(studentParam.getTalents()));
-
+	public Student update(Student student) {
 		session().save(student);
 		session().flush();
 		return student;
@@ -72,18 +66,6 @@ public class StudentRepository {
 		return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
 	}
 
-	public Set<Talent> findTalents(Set<String> talentsDecriptions) {
-		if (talentsDecriptions == null) {
-			return Sets.newHashSet();
-		}
-
-		Disjunction disjunction = Restrictions.disjunction();
-		for (String description : talentsDecriptions) {
-			disjunction.add(Restrictions.eq("description", description));
-		}
-		Criteria criteria = session().createCriteria(Talent.class).add(disjunction);
-		return new HashSet<Talent>(criteria.list());
-	}
 
 	private Query query(String hql) {
 		return session().createQuery(hql);

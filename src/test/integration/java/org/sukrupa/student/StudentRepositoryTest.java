@@ -153,16 +153,6 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldReturnListOfTalents() {
-        Set<String> talentsDecriptions = new HashSet<String>();
-        talentsDecriptions.add(MUSIC);
-        talentsDecriptions.add(SPORT);
-        talentsDecriptions.add(COOKING);
-        Set<Talent> talents = repository.findTalents(talentsDecriptions);
-        assertThat(talents, hasItems(music, sport, cooking));
-    }
-
-    @Test
     public void shouldUpdateStudentInDatabase() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
@@ -182,13 +172,9 @@ public class StudentRepositoryTest {
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
-        Student updatedStudent = repository.update(updateParameter);
+	    s.updateFrom(updateParameter, Sets.newHashSet(music,sport));
+        Student updatedStudent = repository.update(s);
         assertThat(updatedStudent, is(philNew));
-    }
-
-    @Test
-    public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(repository.update(new UpdateStudentParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 
     @Test
