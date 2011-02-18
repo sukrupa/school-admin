@@ -17,14 +17,11 @@ import javax.persistence.Id;
 public class Note {
     @Id
     @GeneratedValue
-    @Column(name = "ID")
-    private long noteId;
+    private long id;
 
-    @Column(name = "MESSAGE")
     private String message;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
-    @Column(name = "DATE")
     private Date date;
 
     @HibernateConstructor
@@ -44,7 +41,7 @@ public class Note {
         return message;
     }
 
-    private static String[] excludedFields = new String[]{"noteId"};
+    private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other, excludedFields);
