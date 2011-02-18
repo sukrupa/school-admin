@@ -20,4 +20,4 @@ discoverFirefoxCommand() {
 FIREFOX=$(discoverFirefoxCommand)
 CONFIGFILE=src/test/resources/jsTestDriver.conf
 
-java -jar lib/JsTestDriver.jar --port 4224 --browser $FIREFOX --tests all --config $CONFIGFILE
+java -jar lib/JsTestDriver.jar --port 4224 --browser $FIREFOX --tests all --config $CONFIGFILE --testOutput target/reports
