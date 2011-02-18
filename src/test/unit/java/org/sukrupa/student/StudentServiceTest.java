@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,14 +26,16 @@ public class StudentServiceTest {
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
     @Mock
-    private StudentRepository repository;
+    private StudentRepository studentRepository;
+	@Mock
+	private TalentRepository talentRepository;
 
     private StudentService service;
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(repository);
+        service = new StudentService(studentRepository, talentRepository);
         freezeTime();
     }
 
@@ -46,31 +49,31 @@ public class StudentServiceTest {
         String studentId = "42";
         Note note = new Note("Fish like plankton!");
 
-        when(repository.findByStudentId(studentId)).thenReturn(new StudentBuilder().build());
+        when(studentRepository.findByStudentId(studentId)).thenReturn(new StudentBuilder().build());
 
         service.addNoteFor(studentId, note.getMessage());
 
-        verify(repository).put(argThat(hasNote(note)));
+        verify(studentRepository).put(argThat(hasNote(note)));
     }
     @Test
     public void shouldRetrievePageOneOfOne() {
-        when(repository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        when(studentRepository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
         assertThat(service.getPage(all, 1, "").isNextEnabled(), is(false));
-        Mockito.verify(repository).findBy(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        Mockito.verify(studentRepository).findBy(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
     public void shouldRetrievePageOneOfMultiple() {
-        when(repository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
+        when(studentRepository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
         assertThat(service.getPage(all, 1, "").isNextEnabled(), is(true));
-        Mockito.verify(repository).findBy(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        Mockito.verify(studentRepository).findBy(all, 0, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
     public void shouldRetrievePageTwoOfTwo() {
-        when(repository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
+        when(studentRepository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1);
         assertThat(service.getPage(all, 2, "page=2").isNextEnabled(), is(false));
-        Mockito.verify(repository).findBy(all, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        Mockito.verify(studentRepository).findBy(all, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
     }
 
     @Test
@@ -84,7 +87,7 @@ public class StudentServiceTest {
         Student mark = new StudentBuilder().name("mark").studentClass("1 Std").build();
         students.add(mark);
 
-        when(repository.findAll()).thenReturn(students);
+        when(studentRepository.findAll()).thenReturn(students);
 
         // when
         service.promoteStudentsToNextClass();
@@ -93,10 +96,12 @@ public class StudentServiceTest {
         Student promotedSahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
         Student promotedMark = new StudentBuilder().name("mark").studentClass("2 Std").build();
 
-        Mockito.verify(repository).put(promotedSahil);
-        Mockito.verify(repository).put(promotedMark);
+        Mockito.verify(studentRepository).put(promotedSahil);
+        Mockito.verify(studentRepository).put(promotedMark);
+    }
 
-
-
+    @Test
+    public void shouldFailToUpdateNonexistantStudent() {
+        assertThat(service.update(new UpdateStudentParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 }
