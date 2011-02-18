@@ -149,18 +149,18 @@ public class StudentsController {
 	    return "students/viewFailed";
     }
 
-    private static List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
-        List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
+    private static List<StudentOptionsElement> createDropDownList(List<String> values, String selectedValue) {
+        List<StudentOptionsElement> dropDownElements = new ArrayList<StudentOptionsElement>();
         for (String value : values) {
-            dropDownElements.add(new DropDownElement(value, value.equals(selectedValue)));
+            dropDownElements.add(new StudentOptionsElement(value, value.equals(selectedValue)));
         }
         return dropDownElements;
     }
 
-    private static List<CheckBoxElement> createCheckBoxList(List<String> values, List<String> selectedValues) {
-        List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
+    private static List<StudentOptionsElement> createCheckBoxList(List<String> values, List<String> selectedValues) {
+        List<StudentOptionsElement> checkBoxElements = new ArrayList<StudentOptionsElement>();
         for (String value : values) {
-            checkBoxElements.add(new CheckBoxElement(value, selectedValues.contains(value)));
+            checkBoxElements.add(new StudentOptionsElement(value, selectedValues.contains(value)));
         }
         return checkBoxElements;
     }
@@ -175,39 +175,4 @@ public class StudentsController {
         return ages;
     }
 
-    private static class DropDownElement {
-        public boolean isSelected() {
-            return selected;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        private final String value;
-        private final boolean selected;
-
-        public DropDownElement(String value, boolean selected) {
-            this.value = value;
-            this.selected = selected;
-        }
-    }
-
-    private static class CheckBoxElement {
-        public boolean isChecked() {
-            return checked;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        private final String value;
-        private final boolean checked;
-
-        public CheckBoxElement(String value, boolean checked) {
-            this.value = value;
-            this.checked = checked;
-        }
-    }
 }
