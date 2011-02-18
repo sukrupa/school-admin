@@ -1,0 +1,7 @@
+DROP TABLE STUDENT_NOTE;
+
+CREATE TABLE STUDENT_NOTE(
+NOTE_ID int foreign key references NOTE(ID),
+STUDENT_ID int foreign key references Student(id),
+PRIMARY KEY (NOTE_ID, STUDENT_ID)
+);

@@ -21,7 +21,7 @@
                 <span>Age From</span>
             </td>
             <td>
-                <select name="ageFrom" id="ageFrom" onchange="changeAgeRange()">
+                <select name="ageFrom" id="ageFrom">
                     <option value="*">Any</option>
                     $agesFrom:{
                     <option value="$it$">$it$</option>
@@ -108,7 +108,7 @@
             </td>
         </tr>
         <tr>
-            <td><input style="float:left;" type="submit" value="Search"/></td>
+            <td><input type="submit" value="Search"/></td>
             <td></td>
         </tr>
     </table>

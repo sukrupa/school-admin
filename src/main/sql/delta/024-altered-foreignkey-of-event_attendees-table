@@ -1,0 +1,7 @@
+DROP TABLE EVENT_ATTENDEES;
+
+CREATE TABLE EVENT_ATTENDEES(
+EVENT_ID int foreign key references Event(ID),
+STUDENT_ID int foreign key references Student(id),
+PRIMARY KEY (EVENT_ID, STUDENT_ID)
+);

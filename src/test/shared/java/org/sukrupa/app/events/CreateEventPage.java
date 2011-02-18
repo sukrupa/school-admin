@@ -1,4 +1,4 @@
-package org.sukrupa.app.event;
+package org.sukrupa.app.events;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -21,8 +21,8 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.platform.Matchers.containsAttendees;
-import static org.sukrupa.platform.Matchers.hasOnly;
+import static org.sukrupa.platform.hamcrest.Matchers.containsAttendees;
+import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 
 public class EventServiceTest {
 
@@ -49,20 +49,20 @@ public class EventServiceTest {
 
 	@Test
 	public void shouldSaveEventWithStudents() {
-		when(studentRepository.load(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
+		when(studentRepository.findByStudentIds(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
 		service.save(event, pat.getStudentId(), jim.getStudentId());
 		verify(eventRepository).save(contains(pat, jim));
 	}
 
 	@Test
 	public void shouldReturnEmptyListForValidStudents() {
-		when(studentRepository.load((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
 		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId())).isEmpty(), is(true));
 	}
 
 	@Test
 	public void shouldReturnListOfInvalidStudentIds() {
-		when(studentRepository.load((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
 		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId(), "97543")), hasOnly("97543"));
 	}
 

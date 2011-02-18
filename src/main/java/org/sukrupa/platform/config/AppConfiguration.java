@@ -1,4 +1,4 @@
-package org.sukrupa.app.config;
+package org.sukrupa.platform.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -24,8 +24,8 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
 @Configuration
-@Import({DBConfig.class})
-public class AppConfig {
+@Import({DbConfiguration.class})
+public class AppConfiguration {
 
     private static final String ENVIRONMENT_KEY = "environment";
 
@@ -83,12 +83,12 @@ public class AppConfig {
     }
 
     private void detectIfRunningInIntelliJ() {
-        if (isRunnintInIntelliJ()) {
+        if (isRunningInIntelliJ()) {
             setEnvironment("intellij");
         }
     }
 
-    private boolean isRunnintInIntelliJ() {
+    private boolean isRunningInIntelliJ() {
         return System.getProperty("user.dir").toLowerCase().contains("intellij");
     }
 

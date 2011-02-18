@@ -109,7 +109,7 @@
 
         <div id="update">
             <input type="button" id="save" value="Save"/>
-            <input type="button" value="Cancel" onclick="location.href = '/students/$studentId$';"/>
+            <input type="button" id="cancel" value="Cancel" />
         </div>
 
         <div id="errorMessages"></div>

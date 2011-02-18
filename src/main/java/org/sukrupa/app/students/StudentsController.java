@@ -1,8 +1,9 @@
-package org.sukrupa.student;
+package org.sukrupa.app.students;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

@@ -7,7 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.db.HibernateConstructor;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
@@ -23,34 +23,34 @@ public class Event {
 
     @Id
     @GeneratedValue
-    @Column(name = "event_id")
+    @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "event_title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "event_venue")
+    @Column(name = "VENUE")
     private String venue;
 
-    @Column(name = "event_coordinator")
+    @Column(name = "COORDINATOR")
     private String coordinator;
 
-    @Column(name = "event_description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "event_notes")
+    @Column(name = "NOTES")
     private String notes;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
     private Date date;
 
     @ManyToMany
-    @JoinTable(name = "EVENTATTENDEES",
-            joinColumns = {@JoinColumn(name = "event_id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
+    @JoinTable(name = "EVENT_ATTENDEES",
+            joinColumns = {@JoinColumn(name = "EVENT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")})
     private Set<Student> attendees;
 
-    @DoNotRemove
+    @HibernateConstructor
     public Event() {
     }
 

@@ -1,8 +1,8 @@
-package org.sukrupa.platform;
+package org.sukrupa.platform.db;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.CLASS)
-public @interface DoNotRemove {
+public @interface HibernateConstructor {
 }

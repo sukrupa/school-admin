@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.db.HibernateConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "note_id"))
     private Set<Note> notes;
 
-    @DoNotRemove
+    @HibernateConstructor
     public Student() {
     }
 

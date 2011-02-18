@@ -4,7 +4,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.db.HibernateConstructor;
 
 import javax.persistence.*;
 
@@ -15,7 +15,7 @@ public class Talent {
 	private long id;
 	private String description;
 
-	@DoNotRemove
+	@HibernateConstructor
     Talent() {}
 
 	public Talent(String description) {

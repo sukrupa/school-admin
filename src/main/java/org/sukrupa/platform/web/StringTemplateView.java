@@ -20,7 +20,7 @@ public class StringTemplateView extends InternalResourceView {
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String templateRootDir = format("%s/WEB-INF/templates", getServletContext().getRealPath("/"));
 
-        log.info(format("Trying to load string template group from [%s] using url [%s]",
+        log.info(format("Trying to findByStudentId string template group from [%s] using url [%s]",
                 templateRootDir,
                 getUrl()));
 
