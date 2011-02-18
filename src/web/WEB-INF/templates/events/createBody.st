@@ -7,33 +7,34 @@
 			<div class="eventInfoLeft">
 				<div class="createEntry">
 					<div class="label">Title<span class="mandatory">*</span></div>
-					<input type="text" name="title" id="title" value="$event.title$" class="createValue"></input>
+					<input type="text" name="title" id="title" value="$eventtitle$" class="createValue"></input>
 				</div>
 
 				<div class="createEntryDateTime">
 					<div class="label dateTime">Date <br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
-					<input type="text" name="date" id="date" value="$event.date$" class="createValue"></input>
+					<input type="text" name="date" id="date" value="$date$" class="createValue"></input>
 				</div>
 
 				<div class="createEntryDateTime">
 					<div class="label dateTime">Time <br/>(hh:mm)</div>
-					<input type="text" name="time" id="time" value="$event.time$" class="createValue"></input>
+					<input type="text" name="time" id="time" value="$time$" class="createValue"></input>
 				</div>
 
 				<div class="createEntry">
 					<div class="label">Venue</div>
-					<input type="text" name="venue" id="venue" value="$event.venue$" class="createValue"></input>
+					<input type="text" name="venue" id="venue" value="$venue$" class="createValue"></input>
 				</div>
 
 				<div class="createEntry">
 					<div class="label">Coordinator</div>
-					<input type="text" name="coordinator" id="coordinator" value="$event.coordinator$"
+					<input type="text" name="coordinator" id="coordinator" value="$coordinator$"
 						   class="createValue"></input>
 				</div>
 
 				<div class="createEntry">
 					<div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$event.attendees$</textarea>
+					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$attendees;
+						separator=", "$</textarea>
 
 				</div>
 			</div>
@@ -42,13 +43,13 @@
 				<div class="createEntry">
 					<div class="label">Description<span class="mandatory">*</span></div>
 					<textarea name="description" id="description" class="createValue" rows="7.5"
-							  cols="30">$event.description$</textarea>
+							  cols="30">$description$</textarea>
 				</div>
 
 
 				<div class="createEntry">
 					<div class="label">Notes</div>
-					<textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$event.notes$</textarea>
+					<textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$notes$</textarea>
 				</div>
 			</div>
 
@@ -63,7 +64,7 @@
 
 	<div id="createEventErrors">
 		<div id="errorMessages"></div>
-		<div id = errorAttendees>
+		<div>
 			$if (invalidAttendees)$
 			Invalid student IDs: $invalidAttendees; separator=", "$
 			$endif$

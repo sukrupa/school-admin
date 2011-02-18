@@ -78,10 +78,10 @@ public class StudentsController {
     @RequestMapping(value = "{id}", method = POST)
         public String confirmUpdateStudent(
                 @PathVariable String id,
-                @ModelAttribute("updateStudent") StudentUpdateParameter studentUpdateParam,
+                @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
                 Map<String, Object> model) {
 
-            Student updatedStudent = service.update(studentUpdateParam);
+            Student updatedStudent = service.update(studentParam);
 
             if (updatedStudent != null) {
                 model.put("student", updatedStudent);

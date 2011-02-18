@@ -182,18 +182,18 @@ public class Student {
 		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
 	}
 
-	public void updateFrom(StudentUpdateParameter studentUpdateParameter, Set<Talent> newTalents) {
-		this.studentClass = studentUpdateParameter.getStudentClass();
-		this.gender = studentUpdateParameter.getGender();
-		this.name = studentUpdateParameter.getName();
-		this.religion = studentUpdateParameter.getReligion();
-		this.caste = studentUpdateParameter.getCaste();
-		this.subCaste = studentUpdateParameter.getSubCaste();
-		this.communityLocation = studentUpdateParameter.getCommunityLocation();
-		this.father = studentUpdateParameter.getFather();
-		this.mother = studentUpdateParameter.getMother();
+	public void updateFrom(UpdateStudentParameter studentParameter, Set<Talent> newTalents) {
+		this.studentClass = studentParameter.getStudentClass();
+		this.gender = studentParameter.getGender();
+		this.name = studentParameter.getName();
+		this.religion = studentParameter.getReligion();
+		this.caste = studentParameter.getCaste();
+		this.subCaste = studentParameter.getSubCaste();
+		this.communityLocation = studentParameter.getCommunityLocation();
+		this.father = studentParameter.getFather();
+		this.mother = studentParameter.getMother();
 		this.talents = Sets.newHashSet(newTalents);
-		this.dateOfBirth = new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(studentUpdateParameter.getDateOfBirth()));
+		this.dateOfBirth = new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(studentParameter.getDateOfBirth()));
 	}
 
     public void promote() {
