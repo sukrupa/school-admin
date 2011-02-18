@@ -49,16 +49,7 @@ public class EventController {
 		Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-
-			model.put("eventtitle", eventCreateParameter.getTitle());
-			model.put("date", eventCreateParameter.getDate());
-			model.put("time", eventCreateParameter.getTime());
-			model.put("venue", eventCreateParameter.getVenue());
-			model.put("description", eventCreateParameter.getDescription());
-			model.put("coordinator", eventCreateParameter.getCoordinator());
-			model.put("attendees", eventCreateParameter.getStudentIdsOfAttendees());
-			model.put("notes", eventCreateParameter.getNotes());
-			
+			model.put("event", eventCreateParameter);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
