@@ -11,12 +11,28 @@ import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("/students")
 public class StudentsController {
+
+    private static final List<String> STUDENT_CLASSES = asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> GENDERS = asList("Male", "Female");
+    private static final List<String> CASTES = asList("", "Achari", "Agnikula", "Arya Vashya", "Baljigru", "Bhramin", "Bohvi", "Chettyar",
+            "Gowdas", "Gownder", "MBC", "Modahaliyar", "Nadar", "Naidu", "Nayak", "Others", "Rajput", "Rathore", "Reddy's", "SC", "Shalai Keta",
+            "Shetty", "ST", "Tigalaru", "Vanniyar", "Vishwa Karma");
+    private static final List<String> SUBCASTES = asList("","Adi Drawida","Adi Janaga","Adi Karnataka","Bale -Balijigru","Bale Banjaguru","BC",
+            "Bhajanthri","Ganiga Shetty","II 'A'","Kamala Achari","Kshathriya","Kumbar Shetty","Singh","Tiwari","Vailu Shetty","Vakkaliga",
+            "Val Nayak","Vaniga Gownder","Vannikula");
+    private static final List<String> COMMUNITY_LOCATIONS = asList("", "Bhuvaneshwari Slum", "Chamundi Nagar",
+            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
+            "Rehmath Nagar", "Residential", "Subramanyanagar");
+    private static final List<String> RELIGIONS = asList("", "Christian", "Hindu", "Muslim", "Sikh");
+    private static final List<String> TALENTS = asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
+            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
 
     private StudentService service;
 
@@ -80,14 +96,14 @@ public class StudentsController {
 
     @RequestMapping(value = "search")
     public void search(Map<String, Object> model) {
-        model.put("classes", StudentOptionsGenerator.STUDENT_CLASSES);
-        model.put("genders", StudentOptionsGenerator.GENDERS);
-        model.put("castes", StudentOptionsGenerator.CASTES);
-        model.put("communityLocations", StudentOptionsGenerator.COMMUNITY_LOCATIONS);
-        model.put("religions", StudentOptionsGenerator.RELIGIONS);
+        model.put("classes", STUDENT_CLASSES);
+        model.put("genders", GENDERS);
+        model.put("castes", CASTES);
+        model.put("communityLocations", COMMUNITY_LOCATIONS);
+        model.put("religions", RELIGIONS);
         model.put("agesFrom", getAges());
         model.put("agesTo", getAges());
-        model.put("talents", StudentOptionsGenerator.TALENTS);
+        model.put("talents", TALENTS);
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
@@ -98,18 +114,18 @@ public class StudentsController {
 
         Student theStudent = service.load(id);
 
-        model.put("classes", createDropDownList(StudentOptionsGenerator.STUDENT_CLASSES, theStudent.getStudentClass()));
-        model.put("genders", createDropDownList(StudentOptionsGenerator.GENDERS, theStudent.getGender()));
-        model.put("castes", createDropDownList(StudentOptionsGenerator.CASTES, theStudent.getCaste()));
-        model.put("communityLocations", createDropDownList(StudentOptionsGenerator.COMMUNITY_LOCATIONS, theStudent.getCommunityLocation()));
+        model.put("classes", createDropDownList(STUDENT_CLASSES, theStudent.getStudentClass()));
+        model.put("genders", createDropDownList(GENDERS, theStudent.getGender()));
+        model.put("castes", createDropDownList(CASTES, theStudent.getCaste()));
+        model.put("communityLocations", createDropDownList(COMMUNITY_LOCATIONS, theStudent.getCommunityLocation()));
         model.put("studentId", theStudent.getStudentId());
         model.put("name", theStudent.getName());
         model.put("dateOfBirth", theStudent.getDateOfBirthForDisplay());
-        model.put("religions", createDropDownList(StudentOptionsGenerator.RELIGIONS, theStudent.getReligion()));
-        model.put("subcastes", createDropDownList(StudentOptionsGenerator.SUBCASTES, theStudent.getSubCaste()));
+        model.put("religions", createDropDownList(RELIGIONS, theStudent.getReligion()));
+        model.put("subcastes", createDropDownList(SUBCASTES, theStudent.getSubCaste()));
         model.put("father", theStudent.getFather());
         model.put("mother", theStudent.getMother());
-        model.put("talents", createCheckBoxList(StudentOptionsGenerator.TALENTS, theStudent.talentDescriptions()));
+        model.put("talents", createCheckBoxList(TALENTS, theStudent.talentDescriptions()));
 
         model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
