@@ -96,6 +96,12 @@
         <test type="unit"/>
     </target>
 
+    <target name="test:js">
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <exec executable="${ops.local.dir}/run-js-tests.sh"/>
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+    </target>
+
     <target name="test:integration">
         <test type="integration"/>
     </target>

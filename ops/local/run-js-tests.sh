@@ -20,3 +20,5 @@ discoverFirefoxCommand() {
 FIREFOX=$(discoverFirefoxCommand)
 
 java -jar lib/JsTestDriver.jar --port 4224 --browser $FIREFOX --tests all
+
+ops/local/kill-firefox.sh
