@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
-public class UpdateStudentTest {
+public class StudentUpdateTest {
 
     private Student shefali = new StudentBuilder().name("shefali").studentId("132753456478").build();
 

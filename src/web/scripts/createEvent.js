@@ -92,4 +92,5 @@ function resetFields() {
     $('#attendees').val("");
     $('#notes').val("");
     $('#errorMessages').text('');
+    $('#errorAttendees').text('');
 }
