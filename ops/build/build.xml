@@ -98,8 +98,12 @@
 
     <target name="test:js">
         <exec executable="${ops.local.dir}/kill-firefox.sh"/>
-        <exec executable="${ops.local.dir}/run-js-tests.sh"/>
+        <exec executable="${ops.local.dir}/run-js-tests.sh" resultproperty="js.test.fail.code"/>
         <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <condition property="js.test.failed">
+            <not><equals arg1="${js.test.fail.code}" arg2="0"/></not>
+        </condition>
+        <fail if="js.test.failed" message="Javascript unit tests failed"/>
     </target>
 
     <target name="test:integration">
