@@ -75,6 +75,25 @@ public class StudentsController {
        return "students/updateSuccessful";
     }
 
+    @RequestMapping(value = "{id}", method = POST)
+        public String confirmUpdateStudent(
+                @PathVariable String id,
+                @ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
+                Map<String, Object> model) {
+
+            Student updatedStudent = service.update(studentParam);
+
+            if (updatedStudent != null) {
+                model.put("student", updatedStudent);
+                model.put("studentUpdatedSuccesfully", true);
+                return format("redirect:/students/%s", id);
+            }else {
+                model.put("message","Error updating student");
+                return format("redirect:/students/%s/edit", id);
+            }
+        }
+
+
     @RequestMapping(value = "search")
     public void search(Map<String, Object> model) {
         model.put("classes", STUDENT_CLASSES);
@@ -86,7 +105,6 @@ public class StudentsController {
         model.put("agesTo", getAges());
         model.put("talents", TALENTS);
     }
-
 
     @RequestMapping(value = "{id}/edit", method = GET)
     public String edit(@PathVariable String id,
@@ -115,6 +133,9 @@ public class StudentsController {
         return "students/edit";
     }
 
+
+
+
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,
                        @RequestParam(required = false) boolean studentUpdatedSuccesfully,
@@ -127,24 +148,6 @@ public class StudentsController {
 	    }
 	    return "students/viewFailed";
     }
-
-	@RequestMapping(value = "{id}", method = POST)
-	public String update(
-			@PathVariable String id,
-			@ModelAttribute("updateStudent") UpdateStudentParameter studentParam,
-			Map<String, Object> model) {
-
-		Student updatedStudent = service.update(studentParam);
-
-		if (updatedStudent != null) {
-			model.put("student", updatedStudent);
-			model.put("studentUpdatedSuccesfully", true);
-			return format("redirect:/students/%s", id);
-		}else {
-			model.put("message","Error updating student");
-			return format("redirect:/students/%s/edit", id);
-		}
-	}
 
     private static List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
         List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
