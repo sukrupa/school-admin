@@ -10,54 +10,61 @@ import java.util.Set;
 
 @Service
 public class StudentService {
-    private StudentRepository repository;
+    private StudentRepository studentRepository;
+	private TalentRepository talentRepository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
+	@HibernateConstructor
+	StudentService() {}
+
+	@Autowired
+	public StudentService(StudentRepository studentRepository, TalentRepository talentRepository) {
+		this.studentRepository = studentRepository;
+		this.talentRepository = talentRepository;
+	}
+
     public Student load(String studentId) {
-        return repository.findByStudentId(studentId);
+        return studentRepository.findByStudentId(studentId);
     }
 
     public Set<Student> load(String... studentIds) {
-        return repository.findByStudentIds(studentIds);
+        return studentRepository.findByStudentIds(studentIds);
     }
 
-
     public int promoteStudentsToNextClass() {
-        List<Student> students = repository.findAll();
+        List<Student> students = studentRepository.findAll();
 
         for(Student student : students){
             student.promote();
-            repository.put(student);
+            studentRepository.put(student);
         }
 
        return students.size();
     }
 
     public Student update(UpdateStudentParameter studentParam) {
-        return repository.update(studentParam);
-    }
+		Student student = studentRepository.findByStudentId(studentParam.getStudentId());
+		if (student == null) { //TODO is this test needed?
+			return null;
+		}
+		student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalents()));
 
-    @HibernateConstructor
-    StudentService() {}
-
-    @Autowired
-    public StudentService(StudentRepository repository) {
-        this.repository = repository;
+        return studentRepository.update(student);
     }
 
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
-        Student student = repository.findByStudentId(studentId);
+        Student student = studentRepository.findByStudentId(studentId);
         student.addNote(new Note(noteMessage));
-        repository.put(student);
+        studentRepository.put(student);
 
     }
     public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber, String queryString) {
         int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
-        List<Student> students = repository.findBy(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        List<Student> students = studentRepository.findBy(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
-        int totalNumberOfResults = repository.count(searchParam);
+        int totalNumberOfResults = studentRepository.count(searchParam);
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
