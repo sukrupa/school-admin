@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -53,25 +55,6 @@ public class StudentsController {
         return "students/updateSuccessful";
     }
 
-    @RequestMapping(value = "{id}", method = POST)
-    public String confirmUpdateStudent(
-            @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentUpdateParameter studentUpdateParam,
-            Map<String, Object> model) {
-
-        Student updatedStudent = studentService.update(studentUpdateParam);
-
-        if (updatedStudent != null) {
-            model.put("student", updatedStudent);
-            model.put("studentUpdatedSuccesfully", true);
-            return format("redirect:/students/%s", id);
-        } else {
-            model.put("message", "Error updating student");
-            return format("redirect:/students/%s/edit", id);
-        }
-    }
-
-
     @RequestMapping(value = "search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getReferenceData());
@@ -94,10 +77,10 @@ public class StudentsController {
         return "students/edit";
     }
 
+
     private StudentEditFormHelper formHelperFor(Student theStudent) {
         return new StudentEditFormHelper(theStudent, studentService.getReferenceData());
     }
-
 
     @RequestMapping(value = "{id}", method = GET)
     public String view(@PathVariable String id,
@@ -108,8 +91,26 @@ public class StudentsController {
             model.put("student", student);
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
             return "students/view";
-        }
-        return "students/viewFailed";
+	    }
+	    return "students/viewFailed";
     }
+
+	@RequestMapping(value = "{id}", method = POST)
+	public String update(
+			@PathVariable String id,
+			@ModelAttribute("updateStudent") StudentUpdateParameter studentParam,
+			Map<String, Object> model) {
+
+		Student updatedStudent = studentService.update(studentParam);
+
+		if (updatedStudent != null) {
+			model.put("student", updatedStudent);
+			model.put("studentUpdatedSuccesfully", true);
+			return format("redirect:/students/%s", id);
+		}else {
+			model.put("message","Error updating student");
+			return format("redirect:/students/%s/edit", id);
+		}
+	}
 
 }

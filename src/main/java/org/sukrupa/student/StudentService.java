@@ -13,19 +13,21 @@ import java.util.Set;
 
 @Service
 public class StudentService {
+	
     private StudentRepository studentRepository;
+	private TalentRepository talentRepository;
     private ReferenceDataRepository referenceDataRepository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
+	@DoNotRemove
+	StudentService() {}
 
-    @DoNotRemove
-    StudentService() {}
-
-    @Autowired
-    public StudentService(StudentRepository studentRepository,ReferenceDataRepository referenceDataRepository) {
-        this.studentRepository = studentRepository;
-        this.referenceDataRepository = referenceDataRepository;
-    }
+	@Autowired
+	public StudentService(StudentRepository studentRepository, TalentRepository talentRepository, ReferenceDataRepository referenceDataRepository) {
+		this.studentRepository = studentRepository;
+		this.talentRepository = talentRepository;
+		this.referenceDataRepository = referenceDataRepository;
+	}
 
     public Student load(String studentId) {
         return studentRepository.findByStudentId(studentId);
@@ -34,7 +36,6 @@ public class StudentService {
     public Set<Student> load(String... studentIds) {
         return studentRepository.findByStudentIds(studentIds);
     }
-
 
     public int promoteStudentsToNextClass() {
         List<Student> students = studentRepository.findAll();
@@ -47,8 +48,14 @@ public class StudentService {
        return students.size();
     }
 
-    public Student update(StudentUpdateParameter studentUpdateParam) {
-        return studentRepository.update(studentUpdateParam);
+    public Student update(StudentUpdateParameter studentParam) {
+		Student student = studentRepository.findByStudentId(studentParam.getStudentId());
+		if (student == null) { //TODO is this test needed?
+			return null;
+		}
+		student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalents()));
+
+        return studentRepository.update(student);
     }
 
     @Transactional

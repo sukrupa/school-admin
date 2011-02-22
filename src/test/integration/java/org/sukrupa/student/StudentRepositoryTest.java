@@ -38,6 +38,10 @@ public class StudentRepositoryTest {
     static final String SPORT = "Sport";
     static final String COOKING = "Cooking";
 
+	private final Talent music = new Talent(MUSIC);
+	private final Talent sport = new Talent(SPORT);
+	private final Talent cooking = new Talent(COOKING);
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -45,10 +49,6 @@ public class StudentRepositoryTest {
     private DatabaseHelper databaseHelper;
 
     private StudentRepository repository;
-
-    private final Talent music = new Talent(MUSIC);
-    private final Talent sport = new Talent(SPORT);
-    private final Talent cooking = new Talent(COOKING);
 
     private Student sahil = new StudentBuilder()
             .studentId("1")             .name("Sahil")
@@ -151,45 +151,6 @@ public class StudentRepositoryTest {
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
-    }
-
-    @Test
-    public void shouldReturnListOfTalents() {
-        Set<String> talentsDecriptions = new HashSet<String>();
-        talentsDecriptions.add(MUSIC);
-        talentsDecriptions.add(SPORT);
-        talentsDecriptions.add(COOKING);
-        Set<Talent> talents = repository.findTalents(talentsDecriptions);
-        assertThat(talents, hasItems(music, sport, cooking));
-    }
-
-    @Test
-    public void shouldUpdateStudentInDatabase() {
-        Student philOld = new StudentBuilder().studentId("12345")
-                .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).build();
-        Student philNew = new StudentBuilder().studentId("12345")
-                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).build();
-        databaseHelper.save(philOld);
-        Student s = repository.findBy(all, 0, 100).get(0);
-        StudentUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(s.getStudentId())
-                .area("Chamundi Nagar")
-                .caste("ST")
-                .subCaste("AK")
-                .religion("Catholic")
-                .name("Philippa")
-                .gender("Female")
-                .studentClass("2 Std")
-                .dateOfBirth("03-02-2000")
-                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
-        Student updatedStudent = repository.update(updateParameter);
-        assertThat(updatedStudent, is(philNew));
-    }
-
-    @Test
-    public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(repository.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 
     @Test
