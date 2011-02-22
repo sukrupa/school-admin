@@ -2,8 +2,7 @@ package org.sukrupa.platform.web;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
-import org.apache.log4j.*;
-import org.springframework.core.io.Resource;
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import javax.servlet.http.HttpServletRequest;

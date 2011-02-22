@@ -3,7 +3,6 @@ package org.sukrupa.event;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 
 public class EventCreateParameterTest {

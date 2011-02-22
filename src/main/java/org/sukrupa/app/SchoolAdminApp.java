@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.server.WebServer;
 
-import java.io.*;
+import java.io.IOException;
 
-import static java.lang.String.format;
 import static org.sukrupa.platform.config.SpringConfiguration.configureApp;
 import static org.sukrupa.platform.logging.ConsoleLog4jLogging.configureLogging;
 

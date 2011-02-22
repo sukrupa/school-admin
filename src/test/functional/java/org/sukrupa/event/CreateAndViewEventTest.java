@@ -9,17 +9,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.app.events.CreateEventPage;
 import org.sukrupa.app.events.ViewEventPage;
+import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.DatabaseHelper;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 
 @RunWith(SpringJUnit4ClassRunner.class)

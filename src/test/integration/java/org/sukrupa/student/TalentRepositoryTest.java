@@ -1,12 +1,7 @@
 package org.sukrupa.student;
 
-import com.google.common.collect.Sets;
-import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
-import org.joda.time.LocalDate;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +10,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.students.Talent;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.DatabaseHelper;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.sukrupa.platform.date.DateManipulation.freezeTime;
-import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
-import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
+import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)

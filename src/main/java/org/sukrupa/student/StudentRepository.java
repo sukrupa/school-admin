@@ -1,18 +1,13 @@
 package org.sukrupa.student;
 
-import com.google.common.collect.Sets;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.app.students.Talent;
 import org.sukrupa.student.db.FindStudentsHibernateCriteria;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

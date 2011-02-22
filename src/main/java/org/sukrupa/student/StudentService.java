@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.students.ReferenceData;
 import org.sukrupa.app.students.ReferenceDataRepository;
-import org.sukrupa.app.students.StudentEditFormHelper;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.List;

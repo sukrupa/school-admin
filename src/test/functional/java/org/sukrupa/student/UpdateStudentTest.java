@@ -8,10 +8,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.event.ErrorPage;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.app.students.ViewStudentPage;
+import org.sukrupa.event.ErrorPage;
+import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.DatabaseHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;

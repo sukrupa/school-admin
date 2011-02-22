@@ -1,7 +1,5 @@
 package org.sukrupa.app.students;
 
-import org.sukrupa.student.Student;
-
 import java.util.ArrayList;
 import java.util.List;
 

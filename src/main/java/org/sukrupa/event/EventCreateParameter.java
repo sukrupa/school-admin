@@ -3,9 +3,6 @@ package org.sukrupa.event;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class EventCreateParameter {
