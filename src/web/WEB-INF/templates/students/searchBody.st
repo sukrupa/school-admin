@@ -9,7 +9,7 @@
             <td>
                 <select name="talent">
                     <option value="*">Any</option>
-                    $talents:{
+                    $formhelper.talents:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -23,7 +23,7 @@
             <td>
                 <select name="ageFrom" id="ageFrom">
                     <option value="*">Any</option>
-                    $agesFrom:{
+                    $formhelper.ages:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -31,7 +31,7 @@
                 &nbsp;<span>to</span>&nbsp;
                 <select name="ageTo" id="ageTo">
                     <option value="*">Any</option>
-                    $agesTo:{
+                    $formhelper.ages:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -45,7 +45,7 @@
             <td>
                 <select name="studentClass">
                     <option value="*">Any</option>
-                    $classes:{
+                    $formhelper.studentClasses:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -59,7 +59,7 @@
             <td>
                 <select name="gender">
                     <option value="*">Any</option>
-                    $genders:{
+                    $formhelper.genders:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -73,7 +73,7 @@
             <td>
                 <select name="religion">
                     <option value="*">Any</option>
-                    $religions:{
+                    $formhelper.religions:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -87,7 +87,7 @@
             <td>
                 <select name="caste">
                     <option value="*">Any</option>
-                    $castes:{
+                    $formhelper.castes:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
@@ -101,7 +101,7 @@
             <td>
                 <select name="communityLocation">
                     <option value="*">Any</option>
-                    $communityLocations:{
+                    $formhelper.communityLocations:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>

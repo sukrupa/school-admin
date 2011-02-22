@@ -12,7 +12,7 @@ INSERT INTO "PUBLIC"."STUDENT"
 VALUES (4 , 'Abhishek', 'Hindu', 'SC', 'AK', 'Chamundi Nagar','16346', 'Male', '2001-11-19', '4 Std')
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
-VALUES (5 , 'Chandana', 'Christian', 'Shetty', '', 'Gudadhalli','83415', 'Female', '2003-05-15', '1 Std')
+VALUES (5 , 'Chandana', 'Christian', 'Shetty', '', 'Guddadahalli','83415', 'Female', '2003-05-15', '1 Std')
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
 VALUES (6 , 'Armugam', 'Hindu', 'SC', '', 'Cholanaykanahalli','23462', 'Male', '2003-06-19', 'UKG')

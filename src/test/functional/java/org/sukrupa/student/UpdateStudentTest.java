@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class UpdateStudentTest {
 
-    private Student shefali = new StudentBuilder().name("shefali").studentId("132753456478").build();
+    private Student shefali = new StudentBuilder().name("shefali").studentId("1234567").build();
 
     private WebDriver driver = new HtmlUnitDriver();
 
