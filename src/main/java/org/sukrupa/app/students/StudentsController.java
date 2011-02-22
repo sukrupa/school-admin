@@ -83,13 +83,17 @@ public class StudentsController {
                        @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
 
-        Student theStudent = studentService.load(id);
-        model.put("formhelper", studentService.getStudentFormHelper(theStudent));
-        model.put("student", theStudent);
+        Student student = studentService.load(id);
+        model.put("student", student);
+        model.put("formhelper", formHelperFor(student));
         model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
         return "students/edit";
+    }
+
+    private StudentEditFormHelper formHelperFor(Student theStudent) {
+        return new StudentEditFormHelper(theStudent, studentService.getReferenceData());
     }
 
 

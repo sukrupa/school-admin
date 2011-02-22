@@ -29,10 +29,6 @@ public class ReferenceData {
         AGES_TO = ages_to;
     }
 
-    public ReferenceData(Student theStudent, List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes, List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to) {
-        this(student_classes,genders, castes,subcastes,community_locations,religions,talents,ages_from,ages_to);
-    }
-
     public List<String> getStudentClasses() {
         return STUDENT_CLASSES;
     }

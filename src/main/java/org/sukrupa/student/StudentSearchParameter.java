@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.spring.SpringConstructor;
+import org.sukrupa.platform.DoNotRemove;
 
 public class StudentSearchParameter {
 
@@ -26,7 +26,7 @@ public class StudentSearchParameter {
         this.religion = religion;
     }
 
-    @SpringConstructor
+    @DoNotRemove
     public StudentSearchParameter() {
     }
 

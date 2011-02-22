@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.db.HibernateConstructor;
+import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class StudentUpdateParameter {
         this.talents = talents;
     }
 
-    @HibernateConstructor
+    @DoNotRemove
 	public StudentUpdateParameter() {
 	}
 

@@ -6,28 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentEditFormHelper {
-    final ReferenceData referenceData;
+    private final ReferenceData referenceData;
     private Student student;
 
     public StudentEditFormHelper(Student theStudent, ReferenceData referenceData) {
         this.student = theStudent;
         this.referenceData = referenceData;
-    }
-
-    List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
-        List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
-        for (String value : values) {
-            dropDownElements.add(new DropDownElement(value, value.equals(selectedValue)));
-        }
-        return dropDownElements;
-    }
-
-    List<CheckBoxElement> createCheckBoxList(List<String> values, List<String> selectedValues) {
-        List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
-        for (String value : values) {
-            checkBoxElements.add(new CheckBoxElement(value, selectedValues.contains(value)));
-        }
-        return checkBoxElements;
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {
@@ -57,7 +41,24 @@ public class StudentEditFormHelper {
     public List<DropDownElement> getClassesDropDownList() {
         return createDropDownList(referenceData.getStudentClasses(), student.getStudentClass());
     }
-        static class DropDownElement {
+
+    private List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
+        List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
+        for (String value : values) {
+            dropDownElements.add(new DropDownElement(value, value.equals(selectedValue)));
+        }
+        return dropDownElements;
+    }
+
+    private List<CheckBoxElement> createCheckBoxList(List<String> values, List<String> selectedValues) {
+        List<CheckBoxElement> checkBoxElements = new ArrayList<CheckBoxElement>();
+        for (String value : values) {
+            checkBoxElements.add(new CheckBoxElement(value, selectedValues.contains(value)));
+        }
+        return checkBoxElements;
+    }
+
+    static class DropDownElement {
         public boolean isSelected() {
             return selected;
         }
@@ -92,5 +93,5 @@ public class StudentEditFormHelper {
             this.checked = checked;
         }
     }
-    
+
 }

@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.app.students.ReferenceData;
 import org.sukrupa.app.students.ReferenceDataRepository;
 import org.sukrupa.app.students.StudentEditFormHelper;
-import org.sukrupa.platform.db.HibernateConstructor;
+import org.sukrupa.platform.DoNotRemove;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +16,16 @@ public class StudentService {
     private StudentRepository studentRepository;
     private ReferenceDataRepository referenceDataRepository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
+
+
+    @DoNotRemove
+    StudentService() {}
+
+    @Autowired
+    public StudentService(StudentRepository studentRepository,ReferenceDataRepository referenceDataRepository) {
+        this.studentRepository = studentRepository;
+        this.referenceDataRepository = referenceDataRepository;
+    }
 
     public Student load(String studentId) {
         return studentRepository.findByStudentId(studentId);
@@ -41,15 +51,6 @@ public class StudentService {
         return studentRepository.update(studentUpdateParam);
     }
 
-    @HibernateConstructor
-    StudentService() {}
-
-    @Autowired
-    public StudentService(StudentRepository studentRepository,ReferenceDataRepository referenceDataRepository) {
-        this.studentRepository = studentRepository;
-        this.referenceDataRepository = referenceDataRepository;
-    }
-
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
         Student student = studentRepository.findByStudentId(studentId);
@@ -68,12 +69,7 @@ public class StudentService {
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
 
-
     public ReferenceData getReferenceData() {
         return referenceDataRepository.getReferenceData();
-    }
-
-    public StudentEditFormHelper getStudentFormHelper(Student theStudent) {
-        return new StudentEditFormHelper(theStudent, referenceDataRepository.getReferenceData());
     }
 }
