@@ -1,11 +1,10 @@
 package org.sukrupa.event;
 
 import org.apache.commons.lang.StringUtils;
-import org.hamcrest.Matchers;
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.sukrupa.EventBuilder;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;

@@ -1,4 +1,4 @@
-package org.sukrupa.event;
+package org.sukrupa.app.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,6 +6,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.sukrupa.event.Event;
+import org.sukrupa.event.EventCreateParameter;
+import org.sukrupa.event.EventService;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +20,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("/events")
-public class EventController {
+public class EventsController {
     private final EventService service;
 
     @Autowired
-    public EventController(EventService service) {
+    public EventsController(EventService service) {
         this.service = service;
     }
     @RequestMapping()
