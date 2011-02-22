@@ -3,6 +3,8 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.app.students.ReferenceDataRepository;
+import org.sukrupa.app.students.StudentFormHelper;
 import org.sukrupa.platform.db.HibernateConstructor;
 
 import java.util.List;
@@ -10,58 +12,67 @@ import java.util.Set;
 
 @Service
 public class StudentService {
-    private StudentRepository repository;
+    private StudentRepository studentRepository;
+    private ReferenceDataRepository referenceDataRepository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
     public Student load(String studentId) {
-        return repository.findByStudentId(studentId);
+        return studentRepository.findByStudentId(studentId);
     }
 
     public Set<Student> load(String... studentIds) {
-        return repository.findByStudentIds(studentIds);
+        return studentRepository.findByStudentIds(studentIds);
     }
 
 
     public int promoteStudentsToNextClass() {
-        List<Student> students = repository.findAll();
+        List<Student> students = studentRepository.findAll();
 
         for(Student student : students){
             student.promote();
-            repository.put(student);
+            studentRepository.put(student);
         }
 
        return students.size();
     }
 
     public Student update(StudentUpdateParameter studentUpdateParam) {
-        return repository.update(studentUpdateParam);
+        return studentRepository.update(studentUpdateParam);
     }
 
     @HibernateConstructor
     StudentService() {}
 
     @Autowired
-    public StudentService(StudentRepository repository) {
-        this.repository = repository;
+    public StudentService(StudentRepository studentRepository,ReferenceDataRepository referenceDataRepository) {
+        this.studentRepository = studentRepository;
+        this.referenceDataRepository = referenceDataRepository;
     }
 
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
-        Student student = repository.findByStudentId(studentId);
+        Student student = studentRepository.findByStudentId(studentId);
         student.addNote(new Note(noteMessage));
-        repository.put(student);
+        studentRepository.put(student);
 
     }
     public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber, String queryString) {
         int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
-        List<Student> students = repository.findBy(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        List<Student> students = studentRepository.findBy(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
-        int totalNumberOfResults = repository.count(searchParam);
+        int totalNumberOfResults = studentRepository.count(searchParam);
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
 
 
+    public StudentFormHelper getStudentFormHelper() {
+        return new StudentFormHelper(referenceDataRepository.getReferenceData());
+    }
+
+    public StudentFormHelper getStudentFormHelper(Student theStudent) {
+        return new StudentFormHelper(theStudent, referenceDataRepository.getReferenceData());
+    }
 }

@@ -32,7 +32,7 @@ public class StudentServiceTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(repository);
+        service = new StudentService(repository, null);
         freezeTime();
     }
 
@@ -52,6 +52,7 @@ public class StudentServiceTest {
 
         verify(repository).put(argThat(hasNote(note)));
     }
+
     @Test
     public void shouldRetrievePageOneOfOne() {
         when(repository.count(org.mockito.Matchers.<StudentSearchParameter>anyObject())).thenReturn(NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
@@ -74,7 +75,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void  shouldIncrementClassOfEachStudentByOne() {
+    public void shouldIncrementClassOfEachStudentByOne() {
         // given
         List<Student> students = new ArrayList<Student>();
 
@@ -95,8 +96,6 @@ public class StudentServiceTest {
 
         Mockito.verify(repository).put(promotedSahil);
         Mockito.verify(repository).put(promotedMark);
-
-
 
     }
 }
