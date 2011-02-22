@@ -49,7 +49,7 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "update-successful")
-    public String updateSuccessful(@RequestParam("numberOfStudentsUpdated") int promoteStudentCount, Map<String, Integer> model) {
+    public String promoteUpdateSuccessful(@RequestParam("numberOfStudentsUpdated") int promoteStudentCount, Map<String, Integer> model) {
 
         model.put("numberOfStudentsUpdated", promoteStudentCount);
         return "students/updateSuccessful";

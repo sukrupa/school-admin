@@ -32,7 +32,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/{eventId}")
-    public String display(@PathVariable int eventId, Map<String, Event> model) {
+    public String view(@PathVariable int eventId, Map<String, Event> model) {
         model.put("event", service.getEvent(eventId));
         return "events/view";
     }

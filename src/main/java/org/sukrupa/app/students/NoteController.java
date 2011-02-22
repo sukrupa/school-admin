@@ -24,7 +24,7 @@ public class NoteController {
     }
 
     @RequestMapping(method = POST)
-    public String all(@PathVariable String studentId, @RequestParam("new-note") String newNote, Map<String, Object> model) {
+    public String addNoteTo(@PathVariable String studentId, @RequestParam("new-note") String newNote, Map<String, Object> model) {
         model.put("studentId", studentId);
 
         service.addNoteFor(studentId, newNote);
