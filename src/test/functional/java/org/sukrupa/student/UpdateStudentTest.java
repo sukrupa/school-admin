@@ -8,6 +8,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.sukrupa.event.ErrorPage;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.app.students.ViewStudentPage;
@@ -41,6 +42,13 @@ public class UpdateStudentTest {
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));
         ViewStudentPage viewPage = new ViewStudentPage(driver, shefali.getStudentId());
         assertThat(viewPage.getNotes(), hasItem("new note"));
+    }
+
+    @Test
+    public void shouldDisplayErrorWhenAskingToEditInvalidStudentId() {
+        String invalidStudentId = "asdfasd";
+        UpdateStudentPage updateStudentPage = new UpdateStudentPage(driver, invalidStudentId);
+        assertThat(new ErrorPage(driver).isValid(),is(true));
     }
 
 }

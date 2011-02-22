@@ -8,7 +8,7 @@
     $endif$
 
 <div id="student">
-    <form id="updateStudent" name="updateStudent" action="/students/$studentId$" method="post">
+    <form id="updateStudent" name="updateStudent" action="/students/$student.studentId$" method="post">
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -25,7 +25,7 @@
 
                 <div class="updateEntry">
                     <div class="label">Date of Birth<br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
-                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$student.dateOfBirth$" class="updateValue"></input>
+                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$student.dateOfBirthForDisplay$" class="updateValue"></input>
                 </div>
 
                 <div class="updateEntry">

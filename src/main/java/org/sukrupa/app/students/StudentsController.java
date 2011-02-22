@@ -84,6 +84,8 @@ public class StudentsController {
                        Map<String, Object> model) {
 
         Student student = studentService.load(id);
+        //[Karthik,Suhas] Find a better way to recognize when users tries to edit non-existent student
+        student.getStudentId();
         model.put("student", student);
         model.put("formhelper", formHelperFor(student));
         model.put("noteUpdateStatus", noteUpdateStatus);
