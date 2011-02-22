@@ -5,26 +5,13 @@ import org.sukrupa.student.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentFormHelper {
-    private final ReferenceData referenceData;
+public class StudentEditFormHelper {
+    final ReferenceData referenceData;
     private Student student;
 
-    public StudentFormHelper(ReferenceData referenceData) {
-        this.referenceData = referenceData;
-        student=null;
-    }
-
-    public StudentFormHelper(Student theStudent, ReferenceData referenceData) {
+    public StudentEditFormHelper(Student theStudent, ReferenceData referenceData) {
         this.student = theStudent;
         this.referenceData = referenceData;
-    }
-
-    public int getAgesTo() {
-        return referenceData.getAGES_TO();
-    }
-
-    public int getAgesFrom() {
-        return referenceData.getAGES_FROM();
     }
 
     List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
@@ -41,14 +28,6 @@ public class StudentFormHelper {
             checkBoxElements.add(new CheckBoxElement(value, selectedValues.contains(value)));
         }
         return checkBoxElements;
-    }
-
-    public List<String> getAges() {
-        List<String> ages = new ArrayList<String>();
-        for (int age = getAgesFrom(); age <= getAgesTo(); age++) {
-            ages.add(age + "");
-        }
-        return ages;
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {

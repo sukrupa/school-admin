@@ -1,4 +1,4 @@
-package org.sukrupa.student;
+package org.sukrupa.app.students;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

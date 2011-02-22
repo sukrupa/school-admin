@@ -9,6 +9,7 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.sukrupa.app.students.Talent;
 import org.sukrupa.student.db.FindStudentsHibernateCriteria;
 
 import java.util.HashSet;

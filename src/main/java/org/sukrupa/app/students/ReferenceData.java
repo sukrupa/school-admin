@@ -2,6 +2,7 @@ package org.sukrupa.app.students;
 
 import org.sukrupa.student.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReferenceData {
@@ -60,12 +61,19 @@ public class ReferenceData {
         return TALENTS;
     }
 
-    public int getAGES_TO() {
+    public List<String> getAges() {
+        List<String> ages = new ArrayList<String>();
+        for (int age = AGES_FROM; age <= AGES_TO; age++) {
+            ages.add(age + "");
+        }
+        return ages;
+    }
+
+    public int getAgesTo() {
         return AGES_TO;
     }
 
-    public int getAGES_FROM() {
+    public int getAgesFrom() {
         return AGES_FROM;
     }
-
 }

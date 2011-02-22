@@ -3,8 +3,9 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.app.students.ReferenceData;
 import org.sukrupa.app.students.ReferenceDataRepository;
-import org.sukrupa.app.students.StudentFormHelper;
+import org.sukrupa.app.students.StudentEditFormHelper;
 import org.sukrupa.platform.db.HibernateConstructor;
 
 import java.util.List;
@@ -68,11 +69,11 @@ public class StudentService {
     }
 
 
-    public StudentFormHelper getStudentFormHelper() {
-        return new StudentFormHelper(referenceDataRepository.getReferenceData());
+    public ReferenceData getReferenceData() {
+        return referenceDataRepository.getReferenceData();
     }
 
-    public StudentFormHelper getStudentFormHelper(Student theStudent) {
-        return new StudentFormHelper(theStudent, referenceDataRepository.getReferenceData());
+    public StudentEditFormHelper getStudentFormHelper(Student theStudent) {
+        return new StudentEditFormHelper(theStudent, referenceDataRepository.getReferenceData());
     }
 }

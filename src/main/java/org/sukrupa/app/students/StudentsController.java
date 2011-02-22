@@ -74,7 +74,7 @@ public class StudentsController {
 
     @RequestMapping(value = "search")
     public void search(Map<String, Object> model) {
-        model.put("formhelper", studentService.getStudentFormHelper());
+        model.put("formhelper", studentService.getReferenceData());
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
