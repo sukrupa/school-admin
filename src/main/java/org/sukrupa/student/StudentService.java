@@ -33,8 +33,8 @@ public class StudentService {
        return students.size();
     }
 
-    public Student update(UpdateStudentParameter studentParam) {
-        return repository.update(studentParam);
+    public Student update(StudentUpdateParameter studentUpdateParam) {
+        return repository.update(studentUpdateParam);
     }
 
     @HibernateConstructor

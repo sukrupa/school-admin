@@ -4,7 +4,7 @@ import org.sukrupa.platform.db.HibernateConstructor;
 
 import java.util.Set;
 
-public class UpdateStudentParameter {
+public class StudentUpdateParameter {
 	private String studentId;
     private String name;
     private String dateOfBirth;
@@ -18,7 +18,7 @@ public class UpdateStudentParameter {
 	private String mother;
     private Set<String> talents;
 
-    public UpdateStudentParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents) {
+    public StudentUpdateParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -34,7 +34,7 @@ public class UpdateStudentParameter {
     }
 
     @HibernateConstructor
-	public UpdateStudentParameter() {
+	public StudentUpdateParameter() {
 	}
 
     public String getStudentId() {
