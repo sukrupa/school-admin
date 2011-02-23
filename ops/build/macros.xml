@@ -34,25 +34,6 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="cobertura-report-gen">
-        <sequential>
-            <junit printsummary="false" fork="true" forkmode="once" dir="${target.test.cobertura_instrumented.dir}"
-                   failureProperty="cobertura-report-gen.failed">
-                <sysproperty key="net.sourceforge.cobertura.datafile"
-                             file="${target.reports.cobertura.dir}/cobertura.ser"/>
-                <classpath location="${target.test.cobertura_instrumented.dir}"/>
-                <classpath location="${target.main.dir}"/>
-                <classpath refid="classpath.cobertura"/>
-
-                <formatter type="xml"/>
-                <batchtest todir="${target.reports.cobertura.dir}">
-                    <fileset dir="${target.test.unit.dir}" includes="**/*Test.class"/>
-                </batchtest>
-            </junit>
-            <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
-        </sequential>
-    </macrodef>
-
     <macrodef name="run-against-server">
         <attribute name="startServerTarget"/>
         <attribute name="stopServerTarget"/>
