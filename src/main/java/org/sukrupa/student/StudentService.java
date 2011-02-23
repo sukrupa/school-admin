@@ -1,11 +1,9 @@
 package org.sukrupa.student;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
-import org.sukrupa.student.db.StudentsSearchCriteriaGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -13,11 +11,10 @@ import java.util.Set;
 @Service
 public class StudentService {
 
-    private StudentRepository studentRepository;
+    StudentRepository studentRepository;
     private TalentRepository talentRepository;
     private ReferenceDataRepository referenceDataRepository;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
-    private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
 
     @DoNotRemove
     StudentService() {
@@ -25,12 +22,10 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository,
-                          StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator) {
+                          ReferenceDataRepository referenceDataRepository){
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
-        this.studentsSearchCriteriaGenerator = studentsSearchCriteriaGenerator;
     }
 
     public Student load(String studentId) {
@@ -73,25 +68,17 @@ public class StudentService {
     public StudentListPage getPage(StudentSearchParameter searchParam, int pageNumber, String queryString) {
         int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
-        List<Student> students = findBySearchParameter(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
+        List<Student> students = studentRepository.findBySearchParameter(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
-        int totalNumberOfResults = getCountBasedOn(searchParam);
+        int totalNumberOfResults = studentRepository.getCountBasedOn(searchParam);
         int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
 
 
-    public List<Student> findBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
-        return studentRepository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(searchParam), firstIndex, maxResults);
-    }
-
     public ReferenceData getReferenceData() {
         return referenceDataRepository.getReferenceData();
     }
 
-    int getCountBasedOn(StudentSearchParameter searchParam) {
-		Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
-        return studentRepository.getCountBasedOn(countCriteria);
-    }
 }

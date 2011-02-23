@@ -1,4 +1,4 @@
-package org.sukrupa.student.db;
+package org.sukrupa.student;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -6,11 +6,9 @@ import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentSearchParameter;
 
 @Repository
-public class StudentsSearchCriteriaGenerator {
+class StudentsSearchCriteriaGenerator {
     private final SessionFactory sessionFactory;
 
     private static final String STUDENT_CLASS = "studentClass";

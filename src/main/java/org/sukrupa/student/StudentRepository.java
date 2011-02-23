@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.student.db.StudentsSearchCriteriaGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -20,10 +19,10 @@ public class StudentRepository {
 	private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
 
 	@Autowired
-	public StudentRepository(SessionFactory sessionFactory) {
+	public StudentRepository(SessionFactory sessionFactory,StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator) {
 		this.sessionFactory = sessionFactory;
-		studentsSearchCriteriaGenerator = new StudentsSearchCriteriaGenerator(this.sessionFactory);
-	}
+        this.studentsSearchCriteriaGenerator = studentsSearchCriteriaGenerator;
+    }
 
 	public void put(Student student) {
 		session().saveOrUpdate(student);
@@ -36,19 +35,9 @@ public class StudentRepository {
 		return student;
 	}
 
-    public int getCountBasedOn(Criteria countCriteria) {
-        return Integer.parseInt(countCriteria.uniqueResult().toString());
-    }
-
     public List<Student> findAll() {
 		return query("from Student").list();
 	}
-
-    public List<Student> findByCriteria(Criteria getPageCriteria, int firstIndex, int maxResults) {
-        getPageCriteria.setFirstResult(firstIndex);
-        getPageCriteria.setMaxResults(maxResults);
-        return getPageCriteria.list();
-    }
 
     public Student findByStudentId(String studentId) {
 		return (Student) query("from Student where studentId = ?").setParameter(0, studentId).uniqueResult();
@@ -66,4 +55,15 @@ public class StudentRepository {
 		return sessionFactory.getCurrentSession();
 	}
 
+    public List<Student> findBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
+        Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(searchParam);
+        getPageCriteria.setFirstResult(firstIndex);
+        getPageCriteria.setMaxResults(maxResults);
+        return getPageCriteria.list();
+    }
+
+    int getCountBasedOn(StudentSearchParameter searchParam) {
+		Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
+        return Integer.parseInt(countCriteria.uniqueResult().toString());
+    }
 }
