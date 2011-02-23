@@ -1,89 +1,208 @@
-<pipeline name="all">
-  <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
-  <materials>
-    <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa.git" />
-  </materials>
-  <stage name="build">
-    <jobs>
-      <job name="build">
-        <tasks>
-          <exec command="./build">
-            <arg value="ci" />
-          </exec>
-        </tasks>
-        <artifacts>
-          <test src="target/reports" />
-          <artifact src="target/school-admin.zip" dest="deploy" />
-        </artifacts>
-      </job>
-    </jobs>
-  </stage>
-  <stage name="twist">
-    <jobs>
-      <job name="twist">
-        <tasks>
-          <exec command="./build">
-            <arg value="test:twist" />
-          </exec>
-        </tasks>
-        <tabs>
-          <tab name="Twist" path="reports/html/index.html" />
-        </tabs>
-        <artifacts>
-          <test src="target/reports" />
-        </artifacts>
-      </job>
-    </jobs>
-  </stage>
-  <stage name="sonar">
-    <jobs>
-      <job name="sonar">
-        <tasks>
-          <exec command="./build">
-            <arg value="cobertura:all" />
-          </exec>
-          <exec command="mvn">
-            <arg value="--file" />
-            <arg value="ops/sonar/pom.xml" />
-            <arg value="sonar:sonar" />
-          </exec>
-        </tasks>
-        <artifacts>
-          <test src="target/reports/cobertura" />
-        </artifacts>
-      </job>
-    </jobs>
-  </stage>
-  <stage name="deploy-development">
-    <jobs>
-      <job name="deploy-development">
-        <tasks>
-          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
-          <exec command="cap" args="-f ops/deploy/capfile development deploy" />
-        </tasks>
-      </job>
-    </jobs>
-  </stage>
-  <stage name="deploy-staging">
-    <approval type="manual" />
-    <jobs>
-      <job name="deploy-staging">
-        <tasks>
-          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
-          <exec command="cap" args="-f ops/deploy/capfile staging deploy" />
-        </tasks>
-      </job>
-    </jobs>
-  </stage>
-  <stage name="deploy-production">
-    <approval type="manual" />
-    <jobs>
-      <job name="deploy-production">
-        <tasks>
-          <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
-          <exec command="cap" args="-f ops/deploy/capfile production deploy" />
-        </tasks>
-      </job>
-    </jobs>
-  </stage>
-</pipeline>
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="24">
+  <server artifactsdir="artifacts">
+    <license user="TWU">FwknkIG23GlbqParSpI/qld4+2a2nbKuXXyYWow73jBOFtC0tXwbpL32vqK8
+jPPCTC3zhGo1CFPf/tZGlLbJ3AJHu6Rxcnu2spzdgxAW8IsfJcohN8IOz7CZ
+f8rn8Se7MMRc94aWPfc+eGfi7XO/V9WgB7y0XVAGj23/rmyPJjH3oaZd3ec4
+tECcve5hIk9NU8d+2R1j4Vf3TbYh186KEzAnKgmSQhkexy6UDkWq3ku3k97P
+ad2jdhJhlFh0gy+TUw23FxkhR/r9Q2dxU9ie6wtApg3g/Trd3VV0tpJFQKbu
+qXj/aUNmTt9h/3EALIyBTKcspAAlYxy1FhC4uqK3ig==</license>
+  </server>
+  <pipelines group="Test">
+    <pipeline name="Test">
+      <materials>
+        <pipeline pipelineName="all" stageName="build" />
+      </materials>
+      <stage name="defaultStage">
+        <jobs>
+          <job name="defaultJob">
+            <tasks>
+              <exec command="free" args="-m" />
+              <exec command="uname" args="-a" />
+              <exec command="ps" args="aux" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="sukrupa">
+    <pipeline name="wordpress-cms">
+      <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
+      <materials>
+        <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa-website.git" />
+      </materials>
+      <stage name="manual-deploy-to-staging-server">
+        <approval type="manual" />
+        <jobs>
+          <job name="bootstrap-wordpress-and-ping">
+            <tasks>
+              <exec command="cap" args="-f ops/deploy/capfile deploy:staging" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="all">
+      <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
+      <materials>
+        <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./build">
+                <arg value="ci" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <test src="target/reports" />
+              <artifact src="target/school-admin.zip" dest="deploy" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="twist">
+        <jobs>
+          <job name="twist">
+            <tasks>
+              <exec command="./build">
+                <arg value="test:twist" />
+              </exec>
+            </tasks>
+            <tabs>
+              <tab name="Twist" path="reports/html/index.html" />
+            </tabs>
+            <artifacts>
+              <test src="target/reports" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="sonar">
+        <jobs>
+          <job name="sonar">
+            <tasks>
+              <exec command="./build">
+                <arg value="cobertura:all" />
+              </exec>
+              <exec command="mvn">
+                <arg value="--file" />
+                <arg value="ops/sonar/pom.xml" />
+                <arg value="sonar:sonar" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <test src="target/reports/cobertura" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="deploy-development">
+        <jobs>
+          <job name="deploy-development">
+            <tasks>
+              <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+              <exec command="cap" args="-f ops/deploy/capfile development deploy" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="deploy-staging">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy-staging">
+            <tasks>
+              <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+              <exec command="cap" args="-f ops/deploy/capfile staging deploy" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="deploy-production">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy-production">
+            <tasks>
+              <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+              <exec command="cap" args="-f ops/deploy/capfile production deploy" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="release">
+      <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
+      <materials>
+        <git url="git@github.com:ThoughtWorksDonateNow2/sukrupa.git" branch="release" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./build">
+                <arg value="ci" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <test src="target/reports" />
+              <artifact src="target/school-admin.zip" dest="deploy" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="twist">
+        <jobs>
+          <job name="twist">
+            <tasks>
+              <exec command="./build">
+                <arg value="test:twist" />
+              </exec>
+            </tasks>
+            <tabs>
+              <tab name="Twist" path="reports/html/index.html" />
+            </tabs>
+            <artifacts>
+              <test src="target/reports" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="deploy-staging">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy-staging">
+            <tasks>
+              <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+              <exec command="cap" args="-f ops/deploy/capfile staging deploy" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="deploy-production">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy-production">
+            <tasks>
+              <fetchartifact stage="build" job="build" srcfile="deploy/school-admin.zip" dest="target" />
+              <exec command="cap" args="-f ops/deploy/capfile production deploy" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <agents>
+    <agent hostname="TWU-CI" ipaddress="10.7.4.77" uuid="cd4c7271-39e1-48a7-a41e-bd6d72d8ddc6">
+      <resources>
+        <resource>ci-server</resource>
+      </resources>
+    </agent>
+    <agent hostname="Baby-TWU-CI" ipaddress="10.7.4.77" uuid="d8b9df16-dde6-496a-aefd-5750a26f8b71" isDisabled="true">
+      <resources>
+        <resource>ci-server</resource>
+      </resources>
+    </agent>
+  </agents>
+</cruise>

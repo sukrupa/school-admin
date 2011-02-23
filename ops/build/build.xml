@@ -5,7 +5,6 @@
     <import file="db-targets.xml"/>
     <import file="deploy-targets.xml"/>
     <import file="macros.xml"/>
-    <import file="cobertura.xml"/>
     <import file="sukrupa-server.xml"/>
 
     <target name="clean">

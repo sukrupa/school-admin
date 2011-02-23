@@ -1,6 +1,6 @@
-<project name="cobertura">
+<project name="cobertura" basedir="../.." default="cobertura:all">
 
-    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <!-- used to test cobertura instruements -->
@@ -47,6 +47,6 @@
         </cobertura-report>
     </target>
 
-    <target name="cobertura:all" depends="cobertura:instrument, cobertura:run, cobertura:report"/>
+    <target name="cobertura:all" depends="cobertura:instrument, cobertura:run, cobertura:report" description="Instrument, run and generate cobertura report"/>
 
 </project>
