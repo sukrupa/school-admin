@@ -36,25 +36,21 @@ public class StudentRepository {
 		return student;
 	}
 
-	public int count(StudentSearchParameter searchParam) {
-		Criteria countCriteria = studentsSearchCriteriaGenerator.countMatchingResultsCriteria(searchParam);
-		return ((Number) countCriteria.uniqueResult()).intValue();
-	}
+    public int getCountBasedOn(Criteria countCriteria) {
+        return Integer.parseInt(countCriteria.uniqueResult().toString());
+    }
 
-	public List<Student> findAll() {
+    public List<Student> findAll() {
 		return query("from Student").list();
 	}
 
-	public List<Student> findBy(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
-		Criteria getPageCriteria = studentsSearchCriteriaGenerator.orderedSearchCriteria(searchParam);
+    public List<Student> findByCriteria(Criteria getPageCriteria, int firstIndex, int maxResults) {
+        getPageCriteria.setFirstResult(firstIndex);
+        getPageCriteria.setMaxResults(maxResults);
+        return getPageCriteria.list();
+    }
 
-		getPageCriteria.setFirstResult(firstIndex);
-		getPageCriteria.setMaxResults(maxResults);
-
-		return getPageCriteria.list();
-	}
-
-	public Student findByStudentId(String studentId) {
+    public Student findByStudentId(String studentId) {
 		return (Student) query("from Student where studentId = ?").setParameter(0, studentId).uniqueResult();
 	}
 

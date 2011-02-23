@@ -4,9 +4,12 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentSearchParameter;
 
+@Repository
 public class StudentsSearchCriteriaGenerator {
     private final SessionFactory sessionFactory;
 
@@ -21,15 +24,16 @@ public class StudentsSearchCriteriaGenerator {
     private static final String RELIGION = "religion";
     private static final String DESCRIPTION = "description";
 
+    @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public Criteria orderedSearchCriteria(StudentSearchParameter searchParam) {
+    public Criteria createOrderedCriteriaFrom(StudentSearchParameter searchParam) {
         return addOrderCriteria(generateSearchCriteria(searchParam));
     }
 
-    public Criteria countMatchingResultsCriteria(StudentSearchParameter searchParam) {
+    public Criteria createCountCriteriaBasedOn(StudentSearchParameter searchParam) {
         return generateSearchCriteria(searchParam).setProjection(Projections.rowCount());
     }
 

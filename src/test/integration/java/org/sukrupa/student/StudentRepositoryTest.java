@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.student.db.StudentsSearchCriteriaGenerator;
 
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,9 @@ public class StudentRepositoryTest {
     @Autowired
     private DatabaseHelper databaseHelper;
 
+    @Autowired
+    private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
+
     private StudentRepository repository;
 
     private Student sahil = new StudentBuilder()
@@ -55,12 +59,15 @@ public class StudentRepositoryTest {
             .studentClass("Nursery")    .dateOfBirth(new LocalDate(1990, 7, 24))
             .gender("Female")
             .build();
+
     private Student pat = new StudentBuilder()
             .studentId("123")           .name("pat")
             .studentClass("4th grade")  .dateOfBirth(new LocalDate(1985, 5, 24))
             .gender("male")
             .build();
+
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
+
 
     @BeforeClass
     public static void classSetUp() {
@@ -80,13 +87,13 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldHaveCountZero(){
-        assertThat(repository.count(all),is(0));
+        assertThat(repository.getCountBasedOn(studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(all)),is(0));
     }
 
     @Test
     public void shouldHaveCountOne(){
         databaseHelper.save(pat);
-        assertThat(repository.count(all),is(1));
+        assertThat(repository.getCountBasedOn(studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(all)), is(1));
     }
 
     @Test
@@ -104,33 +111,33 @@ public class StudentRepositoryTest {
     @Test
     public void shouldFindAllStudentsInDatabase() {
         databaseHelper.save(pat, renaud);
-        List<Student> students = repository.findBy(all, 0, 100);
+        List<Student> students = repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(all), 0, 100);
 
         assertThat(students.size(), is(2));
-        assertThat(students, hasItems(pat, renaud));
+        assertThat(students, hasOnly(pat, renaud));
     }
 
     @Test
     public void shouldReturnNurseryStudents() {
         databaseHelper.save(sahil, pat, renaud);
 
-        List<Student> students = repository.findBy(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build(), 0, 100);
+        List<Student> students = repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build()), 0, 100);
         assertThat(students.size(), is(2));
-        assertThat(students, hasItems(renaud, sahil));
+        assertThat(students, hasOnly(renaud, sahil));
     }
 
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
         databaseHelper.save(sahil, pat, renaud);
-        List<Student> students = repository.findBy(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(), 0, 100);
+        List<Student> students = repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build()), 0, 100);
         assertThat(students.size(), is(1));
-        assertThat(students, hasItems(renaud));
+        assertThat(students, hasOnly(renaud));
     }
 
     @Test
     public void shouldPopulateTalents() {
         databaseHelper.save(sahil);
-        assertThat(repository.findBy(all, 0, 100).get(0).getTalents(), hasItems(music, sport));
+        assertThat(repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(all), 0, 100).get(0).getTalents(), hasOnly(music, sport));
     }
 
     @Test
@@ -142,7 +149,7 @@ public class StudentRepositoryTest {
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
 
-        Iterator<Note> notes = repository.findBy(all, 0, 100).get(0).getNotes().iterator();
+        Iterator<Note> notes = repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(all), 0, 100).get(0).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
         assertThat(notes.next(), is(oldestNote));
@@ -169,7 +176,7 @@ public class StudentRepositoryTest {
 
        List<Student> students = repository.findAll();
 
-       assertThat(students, hasItems(pat,sahil));
+       assertThat(students, hasOnly(pat, sahil));
 
     }
     @Test
@@ -177,7 +184,7 @@ public class StudentRepositoryTest {
         Student withoutCaste = new StudentBuilder().studentId("98765").caste(null).build();
         databaseHelper.save(withoutCaste);
         StudentSearchParameter blankCaste = new StudentSearchParameterBuilder().caste("").build();
-        List <Student> list = repository.findBy(blankCaste, 0, 100);
+        List <Student> list = repository.findByCriteria(studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(blankCaste), 0, 100);
         assertThat(list,hasItem(withoutCaste));
 
     }
