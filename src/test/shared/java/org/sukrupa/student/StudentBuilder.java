@@ -1,7 +1,6 @@
 package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
-import org.sukrupa.app.students.Talent;
 
 import java.util.HashSet;
 import java.util.Set;

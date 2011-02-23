@@ -10,7 +10,6 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
-import org.sukrupa.app.students.Talent;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;

@@ -10,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.app.students.ListOfStudentsPage;
 import org.sukrupa.app.students.StudentRow;
-import org.sukrupa.app.students.Talent;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.DatabaseHelper;
 
