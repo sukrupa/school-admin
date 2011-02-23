@@ -159,6 +159,7 @@
             <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
                 <include name="*.xml"/>
+                <exclude name="cobertura.xml"/>
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
                 <include name="ant"/>
