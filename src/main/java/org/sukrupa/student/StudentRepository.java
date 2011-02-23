@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.student.db.FindStudentsHibernateCriteria;
+import org.sukrupa.student.db.StudentsSearchCriteriaGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -17,12 +17,12 @@ import static com.google.common.collect.Sets.newHashSet;
 public class StudentRepository {
 
 	private SessionFactory sessionFactory;
-	private FindStudentsHibernateCriteria findStudentsHibernateCriteria;
+	private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
 
 	@Autowired
 	public StudentRepository(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-		findStudentsHibernateCriteria = new FindStudentsHibernateCriteria(this.sessionFactory);
+		studentsSearchCriteriaGenerator = new StudentsSearchCriteriaGenerator(this.sessionFactory);
 	}
 
 	public void put(Student student) {
@@ -37,7 +37,7 @@ public class StudentRepository {
 	}
 
 	public int count(StudentSearchParameter searchParam) {
-		Criteria countCriteria = findStudentsHibernateCriteria.countMatchingResultsCriteria(searchParam);
+		Criteria countCriteria = studentsSearchCriteriaGenerator.countMatchingResultsCriteria(searchParam);
 		return ((Number) countCriteria.uniqueResult()).intValue();
 	}
 
@@ -46,7 +46,7 @@ public class StudentRepository {
 	}
 
 	public List<Student> findBy(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
-		Criteria getPageCriteria = findStudentsHibernateCriteria.orderedSearchCriteria(searchParam);
+		Criteria getPageCriteria = studentsSearchCriteriaGenerator.orderedSearchCriteria(searchParam);
 
 		getPageCriteria.setFirstResult(firstIndex);
 		getPageCriteria.setMaxResults(maxResults);

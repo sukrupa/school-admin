@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentSearchParameter;
 
-public class FindStudentsHibernateCriteria {
+public class StudentsSearchCriteriaGenerator {
     private final SessionFactory sessionFactory;
 
     private static final String STUDENT_CLASS = "studentClass";
@@ -21,7 +21,7 @@ public class FindStudentsHibernateCriteria {
     private static final String RELIGION = "religion";
     private static final String DESCRIPTION = "description";
 
-    public FindStudentsHibernateCriteria(SessionFactory sessionFactory) {
+    public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
