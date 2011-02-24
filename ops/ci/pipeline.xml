@@ -8,24 +8,6 @@ tECcve5hIk9NU8d+2R1j4Vf3TbYh186KEzAnKgmSQhkexy6UDkWq3ku3k97P
 ad2jdhJhlFh0gy+TUw23FxkhR/r9Q2dxU9ie6wtApg3g/Trd3VV0tpJFQKbu
 qXj/aUNmTt9h/3EALIyBTKcspAAlYxy1FhC4uqK3ig==</license>
   </server>
-  <pipelines group="Test">
-    <pipeline name="Test">
-      <materials>
-        <pipeline pipelineName="all" stageName="build" />
-      </materials>
-      <stage name="defaultStage">
-        <jobs>
-          <job name="defaultJob">
-            <tasks>
-              <exec command="free" args="-m" />
-              <exec command="uname" args="-a" />
-              <exec command="ps" args="aux" />
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-    </pipeline>
-  </pipelines>
   <pipelines group="sukrupa">
     <pipeline name="wordpress-cms">
       <trackingtool link="https://minglehosting.thoughtworks.com/sip/projects/sukrupa/cards/${ID}" regex="##(\d+)" />
@@ -84,9 +66,7 @@ qXj/aUNmTt9h/3EALIyBTKcspAAlYxy1FhC4uqK3ig==</license>
         <jobs>
           <job name="sonar">
             <tasks>
-              <exec command="./build">
-                <arg value="cobertura:all" />
-              </exec>
+              <exec command="./ops/sonar/build-cobertura" />
               <exec command="mvn">
                 <arg value="--file" />
                 <arg value="ops/sonar/pom.xml" />
@@ -206,3 +186,5 @@ qXj/aUNmTt9h/3EALIyBTKcspAAlYxy1FhC4uqK3ig==</license>
     </agent>
   </agents>
 </cruise>
+
+

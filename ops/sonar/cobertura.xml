@@ -1,14 +1,34 @@
 <project name="cobertura" basedir="../.." default="cobertura:all">
 
-    <import file="classpaths.xml"/>
+    <import file="../build/classpaths.xml"/>
+    <property name="target.cobertura_instrumented.dir" value="${target.dir}/cobertura_instrumented"/>
+    <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
+    <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1"/>
+    <mkdir dir="${target.cobertura_instrumented.dir}"/>
+    <mkdir dir="${target.reports.cobertura.dir}"/>
+    
+    <path id="classpath.cobertura">
+        <fileset dir="${cobertura.dir}">
+            <include name="cobertura.jar"/>
+            <include name="lib/**/*.jar"/>
+        </fileset>
+        <fileset dir="${lib.test.dir}" includes="*.jar"/>
+        <fileset dir="${lib.main.dir}" includes="*.jar"/>
+        <pathelement location="${target.test.unit.dir}"/>
+        <pathelement location="${target.test.shared.dir}"/>
+        <pathelement location="${target.test.integration.dir}"/>
+        <!--
+        <pathelement location="${target.test.functional.dir}"/>
+        -->
+    </path>
+    
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
-    <!-- used to test cobertura instruements -->
     <target name="cobertura:instrument">
-        <copy todir="${target.test.cobertura_instrumented.dir}">
+        <copy todir="${target.cobertura_instrumented.dir}">
             <fileset dir="${resources.main.dir}"/>
         </copy>
-        <cobertura-instrument todir="${target.test.cobertura_instrumented.dir}"
+        <cobertura-instrument todir="${target.cobertura_instrumented.dir}"
                               datafile="${target.reports.cobertura.dir}/cobertura.ser">
             <fileset dir="${target.main.dir}">
                 <include name="**/*.class"/>
@@ -17,24 +37,26 @@
     </target>
 
     <target name="cobertura:run">
-        <junit printsummary="false" fork="true" forkmode="once" dir="${target.test.cobertura_instrumented.dir}"
+        <junit printsummary="false" fork="true" forkmode="once" dir="${target.cobertura_instrumented.dir}"
                failureProperty="cobertura-report-gen.failed">
             <sysproperty key="net.sourceforge.cobertura.datafile"
                          file="${target.reports.cobertura.dir}/cobertura.ser"/>
-            <classpath location="${target.test.cobertura_instrumented.dir}"/>
-            <classpath location="${target.main.dir}"/>
+            <classpath location="${target.cobertura_instrumented.dir}"/>
+            <classpath location="${target.test.dir}"/>
             <classpath refid="classpath.cobertura"/>
 
             <formatter type="xml"/>
             <batchtest todir="${target.reports.cobertura.dir}">
                 <fileset dir="${target.test.unit.dir}" includes="**/*Test.class"/>
                 <fileset dir="${target.test.integration.dir}" includes="**/*Test.class"/>
+                <!--
+                <fileset dir="${target.test.functional.dir}" includes="**/*Test.class"/>
+                -->
             </batchtest>
         </junit>
         <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
     </target>
 
-    <!-- used to test cobertura report generation-->
     <target name="cobertura:report">
         <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}"
                           datafile="${target.reports.cobertura.dir}/cobertura.ser">

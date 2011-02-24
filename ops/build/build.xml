@@ -17,13 +17,11 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
-        <mkdir dir="${target.test.functional.dir}"/>
-        <mkdir dir="${target.test.cobertura_instrumented.dir}"/>
+        <mkdir dir="${target.test.functional.dir}"/>        
         <mkdir dir="${target.test.twist.fixtures.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.twist.dir}"/>
-        <mkdir dir="${target.reports.cobertura.dir}"/>
         <mkdir dir="${target.main.dir}"/>
     </target>
 
@@ -150,7 +148,6 @@
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
             <fileset file="${resources.main.dir}/jetty-realms.properties"/>
-            <zipfileset file="${cobertura.dir}" prefix="tools"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
             <zipfileset file="${resources.main.dir}/app.properties" prefix="install/dbdeploy"/>
@@ -158,7 +155,6 @@
             <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
                 <include name="*.xml"/>
-                <exclude name="cobertura.xml"/>
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
                 <include name="ant"/>

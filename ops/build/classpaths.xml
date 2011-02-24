@@ -71,19 +71,6 @@
         <fileset dir="${ant.library.dir}" includes="*.jar"/>
     </path>
 
-    <path id="classpath.cobertura">
-        <fileset dir="${cobertura.dir}">
-            <include name="cobertura.jar"/>
-            <include name="lib/**/*.jar"/>
-        </fileset>
-        <fileset dir="${lib.test.dir}" includes="*.jar"/>
-        <fileset dir="${lib.main.dir}" includes="*.jar"/>
-        <pathelement location="${target.test.unit.dir}"/>
-        <pathelement location="${target.test.shared.dir}"/>
-        <pathelement location="${target.test.integration.dir}"/>
-        <pathelement location="${target.test.functional.dir}"/>
-    </path>
-
     <path id="classpath.sukrupa.server.run">
         <path refid="classpath.run"/>
     </path>

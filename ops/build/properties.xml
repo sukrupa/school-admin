@@ -33,7 +33,6 @@
     <property name="target.main.dir" value="${target.dir}/main"/>
     <property name="target.test.dir" value="${target.dir}/test"/>
 
-    <property name="target.test.cobertura_instrumented.dir" value="${target.test.dir}/cobertura_instrumented"/>
     <property name="target.test.shared.dir" value="${target.test.dir}/shared"/>
     <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>
     <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
@@ -47,7 +46,7 @@
               value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
 
     <property name="target.reports.dir" value="${target.dir}/reports"/>
-    <property name="target.reports.cobertura.dir" value="${target.reports.dir}/cobertura/"/>
+    
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
 
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
@@ -72,7 +71,7 @@
     <property name="ops.scripts.dir" value="${ops.dir}/scripts"/>
 
     <property name="twist-config" value="${src.test.twist.fixtures.dir}/twist-conf"/>
-    <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1"/>
+    
 
     <loadproperties srcFile="${resources.main.dir}/app.properties"/>
 </project>
