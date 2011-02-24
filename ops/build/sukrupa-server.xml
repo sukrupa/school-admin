@@ -7,7 +7,7 @@
     <target name="sukrupa-server:start-for-twist" depends="db:start, db:insert-fake-data, sukrupa-server:start"  />
     <target name="sukrupa-server:stop-for-twist" depends="db:recreate, sukrupa-server:stop" />
 
-    <target name="sukrupa-server:start" >
+    <target name="sukrupa-server:start" depends="db:start" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
         <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
             <jvmarg value="-Xms128m"/>

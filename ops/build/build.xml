@@ -107,7 +107,7 @@
         <test type="integration"/>
     </target>
 
-    <target name="test:functional">
+    <target name="test:functional" >
         <run-against-server startServerTarget="sukrupa-server:start"
                             checkServerUpTarget="sukrupa-server:check-is-running"
                             stopServerTarget="sukrupa-server:stop">
