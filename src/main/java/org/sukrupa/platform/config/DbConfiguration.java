@@ -48,7 +48,6 @@ public class DbConfiguration {
     }
 
     @Bean(destroyMethod = "close")
-    @DependsOn("dbServer")
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(true);
