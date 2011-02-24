@@ -6,22 +6,14 @@
     <property name="cobertura.dir" value="${module.dir}/tools/cobertura-1.9.4.1"/>
     <mkdir dir="${target.cobertura_instrumented.dir}"/>
     <mkdir dir="${target.reports.cobertura.dir}"/>
-    
+
     <path id="classpath.cobertura">
         <fileset dir="${cobertura.dir}">
             <include name="cobertura.jar"/>
             <include name="lib/**/*.jar"/>
         </fileset>
-        <fileset dir="${lib.test.dir}" includes="*.jar"/>
-        <fileset dir="${lib.main.dir}" includes="*.jar"/>
-        <pathelement location="${target.test.unit.dir}"/>
-        <pathelement location="${target.test.shared.dir}"/>
-        <pathelement location="${target.test.integration.dir}"/>
-        <!--
-        <pathelement location="${target.test.functional.dir}"/>
-        -->
     </path>
-    
+
     <taskdef classpathref="classpath.cobertura" resource="tasks.properties"/>
 
     <target name="cobertura:instrument">
@@ -36,39 +28,54 @@
         </cobertura-instrument>
     </target>
 
-    <target name="cobertura:run">
+    <path id="cobertura.run">
+        <fileset dir="${lib.test.dir}" includes="*.jar"/>
+        <fileset dir="${lib.main.dir}" includes="*.jar"/>
+        <pathelement location="${target.cobertura_instrumented.dir}"/>
+        <pathelement location="${target.test.unit.dir}"/>
+        <pathelement location="${target.test.shared.dir}"/>
+        <pathelement location="${target.test.integration.dir}"/>
+        <path refid="classpath.cobertura"/>
+    </path>
+
+
+    <target name="cobertura:unit_integration">
         <junit printsummary="false" fork="true" forkmode="once" dir="${target.cobertura_instrumented.dir}"
                failureProperty="cobertura-report-gen.failed">
             <sysproperty key="net.sourceforge.cobertura.datafile"
-                         file="${target.reports.cobertura.dir}/cobertura.ser"/>
-            <classpath location="${target.cobertura_instrumented.dir}"/>
-            <classpath location="${target.test.dir}"/>
-            <classpath refid="classpath.cobertura"/>
-
+                         file="${target.reports.cobertura.dir}/unit_integration_cobertura.ser"/>
             <formatter type="xml"/>
+            <classpath refid="cobertura.run"/>
             <batchtest todir="${target.reports.cobertura.dir}">
-                <fileset dir="${target.test.unit.dir}" includes="**/*Test.class"/>
-                <fileset dir="${target.test.integration.dir}" includes="**/*Test.class"/>
-                <!--
-                <fileset dir="${target.test.functional.dir}" includes="**/*Test.class"/>
-                -->
+                <fileset dir="${src.test.unit.dir}" includes="**/*Test.java"/>
+                <fileset dir="${src.test.integration.dir}" includes="**/*Test.java"/>
             </batchtest>
         </junit>
         <fail if="cobertura-report-gen.failed" message="Cobertura report generation failed"/>
     </target>
 
+
     <target name="cobertura:report">
-        <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}"
-                          datafile="${target.reports.cobertura.dir}/cobertura.ser">
-            <fileset dir="${src.main.dir}">
-                <include name="**/*.java"/>
-            </fileset>
-            <fileset dir="${src.test.dir}">
-                <include name="**/*.java"/>
-            </fileset>
-        </cobertura-report>
+        <sequential>
+            <cobertura-merge datafile="${target.cobertura_instrumented.dir}/merged_cobertura.ser">
+                <fileset dir="${target.reports.cobertura.dir}/">
+                    <include name="cobertura.ser"/>
+                    <include name="unit_integration_cobertura.ser"/>
+                </fileset>
+            </cobertura-merge>
+            <cobertura-report format="xml" destdir="${target.reports.cobertura.dir}"
+                              datafile="${target.cobertura_instrumented.dir}/merged_cobertura.ser">
+                <fileset dir="${src.main.dir}">
+                    <include name="**/*.java"/>
+                </fileset>
+                <fileset dir="${src.test.dir}">
+                    <include name="**/*.java"/>
+                </fileset>
+            </cobertura-report>
+        </sequential>
     </target>
 
-    <target name="cobertura:all" depends="cobertura:instrument, cobertura:run, cobertura:report" description="Instrument, run and generate cobertura report"/>
+    <target name="cobertura:all" depends="cobertura:instrument, cobertura:unit_integration, cobertura:report"
+            description="Instrument, run and generate cobertura report"/>
 
 </project>
