@@ -95,5 +95,13 @@ public class SearchWorkflow {
 		assertEquals(string1, browser.cell(string1).text());					
 	}
 
+	public void thenDoesNotShowInSearchResults(String string1) throws Exception {
+		assertFalse(browser.cell(string1).exists());
+	}
+
+	public void andDoesNotShowInSearchResults(String string1) throws Exception {
+		thenDoesNotShowInSearchResults(string1);
+	}
+
 
 }
