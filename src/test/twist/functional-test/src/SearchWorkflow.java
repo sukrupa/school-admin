@@ -12,31 +12,40 @@ public class SearchWorkflow {
 		this.browser = browser;
 	}
 
-	public void selectTalentAs(String string1) throws Exception {
-		if (!string1.isEmpty()) 
-		{
-		browser.select("talent").choose(string1);
-		}
+	public void givenISelectTheTalent(String string1) throws Exception {
+		selectTalent(string1);
 	}
 
-	public void hitSearchButton() throws Exception {
+	public void andISelectTheTalent(String string1) throws Exception {
+		selectTalent(string1);
+	}
+
+	private void selectTalent(String talent) {
+		if (!talent.isEmpty())	{
+			browser.checkbox(talent).check();
+		}
+	}
+	
+
+
+	public void whenIHitSearchButton() throws Exception {
 		browser.submit("Search").click();
 	
 	}
 
-	public void verifyThatShowsInSearchResults(String string1) throws Exception {
+	public void thenShowsInSearchResults(String string1) throws Exception {
 		assertEquals(string1, browser.cell(string1).text());
 	
 	}
 
-	public void selectMinimumAgeAs(String string1) throws Exception {
+	public void andISelectMinimumAgeAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("ageFrom").choose(string1);
 		}
 	}
 
-	public void selectMaximumAgeAs(String string1) throws Exception {
+	public void andISelectMaximumAgeAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("ageTo").choose(string1);
@@ -44,21 +53,21 @@ public class SearchWorkflow {
 	
 	}
 
-	public void selectReligionAs(String string1) throws Exception {
+	public void andISelectReligionAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("religion").choose(string1);
 		}
 	}
 
-	public void selectClassAs(String string1) throws Exception {
+	public void andISelectClassAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("studentClass").choose(string1);
 		}
 	}
 
-	public void selectGenderAs(String string1) throws Exception {
+	public void andISelectGenderAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("gender").choose(string1);
@@ -66,14 +75,14 @@ public class SearchWorkflow {
 	
 	}
 
-	public void selectCasteAs(String string1) throws Exception {
+	public void andISelectCasteAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 		browser.select("caste").choose(string1);
 		}
 	}
 
-	public void selectCommunityLocationAs(String string1) throws Exception {
+	public void andISelectCommunityLocationAs(String string1) throws Exception {
 		if (!string1.isEmpty()) 
 		{
 			browser.select("communityLocation").choose(string1);
@@ -81,5 +90,10 @@ public class SearchWorkflow {
 		
 	
 	}
+
+	public void andShowsInSearchResults(String string1) throws Exception {
+		assertEquals(string1, browser.cell(string1).text());					
+	}
+
 
 }

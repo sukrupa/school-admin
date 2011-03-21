@@ -1,13 +1,13 @@
 Tags:
 Preconditions:Navigate to Search Page
 search Workflow:
-#Select Talent as <Talent>
-#Select minimum age as <Min Age>
-#Select maximum age as <Max Age>
-#Select class as <Class>
-#Select gender as <Gender>
-#Select religion as <Religion>
-#Select caste as <Caste>
-#Select community location as <Community Location>
-#Hit search button
-#Verify that <Name> shows in search results 
+#Given I select the talent <Talent>
+#And I select minimum age as <Min Age>
+#And I select maximum age as <Max Age>
+#And I select class as <Class>
+#And I select gender as <Gender>
+#And I select religion as <Religion>
+#And I select caste as <Caste>
+#And I select community location as <Community Location>
+#When I hit search button
+#Then  <Name> shows in search results 

@@ -7,12 +7,10 @@
                 <span>Talent</span>
             </td>
             <td>
-                <select name="talent">
-                    <option value="*">Any</option>
                     $formhelper.talents:{
-                    <option value="$it$">$it$</option>
+                    <input type="checkbox" value="$it$">$it$</input>
                     }$
-                </select>
+
             </td>
         </tr>
 
