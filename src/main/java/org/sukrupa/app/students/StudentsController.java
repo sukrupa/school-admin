@@ -30,15 +30,21 @@ public class StudentsController {
     public String list(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
                        Map<String, Object> model, HttpServletRequest request) {
-        StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
 
-        if (students.getStudents().isEmpty()) {
-            return "students/listEmpty";
+        try {
+            StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
+
+            if (students.getStudents().isEmpty()) {
+                return "students/listEmpty";
+            }
+
+            model.put("page", students);
+
+            return "students/list";
+        } catch (Throwable t) {
+            t.printStackTrace();
+            throw new RuntimeException("Problem occured (See Cause)", t);
         }
-
-        model.put("page", students);
-
-        return "students/list";
     }
 
 

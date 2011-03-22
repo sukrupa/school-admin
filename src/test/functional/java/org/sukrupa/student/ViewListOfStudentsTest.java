@@ -1,23 +1,21 @@
 package org.sukrupa.student;
 
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.app.students.ListOfStudentsPage;
-import org.sukrupa.app.students.StudentRow;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.junit.*;
+import org.junit.runner.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.htmlunit.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.sukrupa.app.students.*;
+import org.sukrupa.platform.config.*;
+import org.sukrupa.platform.db.*;
 
-import java.util.List;
+import java.util.*;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.sukrupa.platform.hamcrest.Matchers.matches;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.sukrupa.platform.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
