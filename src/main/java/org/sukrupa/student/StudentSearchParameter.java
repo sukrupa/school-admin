@@ -2,6 +2,8 @@ package org.sukrupa.student;
 
 import org.sukrupa.platform.DoNotRemove;
 
+import java.util.*;
+
 public class StudentSearchParameter {
 
     public static final String WILDCARD_CHARACTER = "*";
@@ -12,7 +14,7 @@ public class StudentSearchParameter {
     private String communityLocation = WILDCARD_CHARACTER;
     private String ageFrom = WILDCARD_CHARACTER;
     private String ageTo = WILDCARD_CHARACTER;
-    private String talent = WILDCARD_CHARACTER;
+    private List<String> talents = new ArrayList<String>();
     private String religion = WILDCARD_CHARACTER;
 
     public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
@@ -22,7 +24,7 @@ public class StudentSearchParameter {
         this.communityLocation = communityLocation;
         this.ageFrom = ageFrom;
         this.ageTo = ageTo;
-        this.talent = talent;
+        this.talents = Arrays.asList(talent);
         this.religion = religion;
     }
 
@@ -79,11 +81,11 @@ public class StudentSearchParameter {
     }
 
     public String getTalent() {
-        return talent;
+        return talents.get(0);
     }
 
     public void setTalent(String talent) {
-        this.talent = talent;
+        this.talents = Arrays.asList(talent);
     }
 
     public String getReligion() {
