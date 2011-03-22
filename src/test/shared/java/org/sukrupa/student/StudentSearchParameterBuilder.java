@@ -67,4 +67,8 @@ public class StudentSearchParameterBuilder {
         this.page = page;
         return this;
     }
+
+    public void withTalents(Talent cooking, Talent music) {
+
+    }
 }

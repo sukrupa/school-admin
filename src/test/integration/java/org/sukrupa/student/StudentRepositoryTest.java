@@ -1,29 +1,23 @@
 package org.sukrupa.student;
 
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.joda.time.LocalDate;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
+import org.hibernate.*;
+import org.joda.time.*;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.transaction.annotation.*;
+import org.sukrupa.platform.config.*;
 import org.sukrupa.platform.date.Date;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.*;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.sukrupa.platform.date.DateManipulation.freezeTime;
-import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
-import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
+import static org.sukrupa.platform.date.DateManipulation.*;
+import static org.sukrupa.platform.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -53,6 +47,11 @@ public class StudentRepositoryTest {
             .studentId("1").name("Sahil")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Male").talents(music, sport)
+            .build();
+    private Student jimbo = new StudentBuilder()
+            .studentId("1").name("Jimbo")
+            .studentClass("Nursery").dateOfBirth(new LocalDate(1975, 10, 1))
+            .gender("Male").talents(cooking)
             .build();
     private Student renaud = new StudentBuilder()
             .studentId("2").name("Renaud")
@@ -143,13 +142,19 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void shouldReturnStudentsBasedOnMultipleTalents() {
+//        List<Student> students = repository.findBySearchParameter(new StudentSearchParameterBuilder().withTalents(cooking, music), 0, 100);
+//        assertThat(students.size(), is(2));
+    }
+
+    @Test
     public void shouldPopulateNotesInReverseChronologicalOrder() {
         Note oldNote = new Note("yesterday", new Date(24, 11, 2011));
         Note oldestNote = new Note("long time ago", new Date(29, 3, 2008));
         Note newNote = new Note("today", new Date(25, 11, 2011));
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
         databaseHelper.save(student);
-        List<Student> students = repository.findBySearchParameter(all,0,200);
+        List<Student> students = repository.findBySearchParameter(all, 0, 200);
         Iterator<Note> notes = (students.get(0)).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
