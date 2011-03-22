@@ -3,6 +3,9 @@
 out
 .DS_Store
 
+# Emacs
+*~
+
 # Build Artifacts
 target
 web/WEB-INF/classes
