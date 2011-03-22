@@ -31,20 +31,15 @@ public class StudentsController {
                        @ModelAttribute("searchParam") StudentSearchParameter searchParam,
                        Map<String, Object> model, HttpServletRequest request) {
 
-        try {
-            StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
+        StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
 
-            if (students.getStudents().isEmpty()) {
-                return "students/listEmpty";
-            }
-
-            model.put("page", students);
-
-            return "students/list";
-        } catch (Throwable t) {
-            t.printStackTrace();
-            throw new RuntimeException("Problem occured (See Cause)", t);
+        if (students.getStudents().isEmpty()) {
+            return "students/listEmpty";
         }
+
+        model.put("page", students);
+
+        return "students/list";
     }
 
 
