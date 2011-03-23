@@ -2,6 +2,8 @@ package org.sukrupa.student;
 
 import org.sukrupa.platform.DoNotRemove;
 
+import java.util.*;
+
 public class StudentSearchParameter {
 
     public static final String WILDCARD_CHARACTER = "*";

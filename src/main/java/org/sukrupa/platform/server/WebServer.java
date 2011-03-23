@@ -57,6 +57,7 @@ public class WebServer {
         try {
             LOG.info(format("Starting Web Server (web root:%s)...", webRoot));
             server.start();
+            System.out.println("WebServer Started.");
             server.join();
         } catch (Exception e) {
             throw new WebServerStartupException(e);
