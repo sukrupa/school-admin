@@ -2,8 +2,9 @@ Tags:
 Preconditions:Navigate to Search Page
 search Workflow:
 #Given I select the talent "Sports"
+#And I select the talent "Acting"
 #When I hit search button
-#Then  "Chandana" does not show in search results 
-#And "Abhishek" does not show in search results
+#Then  "Chandana" shows in search results 
+#And "Abhishek" shows in search results
 #And "Armugam" shows in search results
 #And "Chandru" shows in search results

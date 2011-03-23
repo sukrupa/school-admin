@@ -7,8 +7,12 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 class StudentsSearchCriteriaGenerator {
+    private static final String ID = "id";
     private final SessionFactory sessionFactory;
 
     private static final String STUDENT_CLASS = "studentClass";
@@ -44,7 +48,7 @@ class StudentsSearchCriteriaGenerator {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
         criteria.add(conjunction);
-        addTalentsSearchCriteria(criteria, searchParam.getTalent());
+        addTalentsSearchCriteria(criteria, searchParam.getTalents());
         return criteria;
     }
 
@@ -58,10 +62,16 @@ class StudentsSearchCriteriaGenerator {
         return ageTo + 1;
     }
 
-    private void addTalentsSearchCriteria(Criteria criteria, String talent) {
-        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(talent)) {
-            criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, talent));
+    private void addTalentsSearchCriteria(Criteria criteria, List<Talent> talents) {
+        if (talents.isEmpty()) {
+            return;
         }
+
+        List<String> descriptions = new ArrayList<String>();
+        for(Talent talent : talents){
+            descriptions.add(talent.getDescription());
+        }
+        criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     }
 
     private LocalDate computeBirthDateFromAge(int age) {
