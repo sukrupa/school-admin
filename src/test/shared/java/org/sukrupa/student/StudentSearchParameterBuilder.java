@@ -11,6 +11,7 @@ public class StudentSearchParameterBuilder {
     private String talent = StudentSearchParameter.WILDCARD_CHARACTER;
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
+    private Talent[] talents;
 
     public StudentSearchParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
@@ -60,7 +61,7 @@ public class StudentSearchParameterBuilder {
     }
 
     public StudentSearchParameter build() {
-        return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talent, religion);
+        return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talents, religion);
     }
 
     public StudentSearchParameterBuilder page(int page) {
@@ -68,7 +69,8 @@ public class StudentSearchParameterBuilder {
         return this;
     }
 
-    public void withTalents(Talent cooking, Talent music) {
-
+    public StudentSearchParameterBuilder withTalents(Talent[] talents) {
+        this.talents = talents;
+        return this;
     }
 }

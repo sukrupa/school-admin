@@ -142,9 +142,17 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void shouldReturnStudentsBasedOnSingleTalent() {
+        List<Student> students = repository.findBySearchParameter(
+                      new StudentSearchParameterBuilder().withTalents(new Talent[] { music }).build(), 0, 100);
+        assertThat(students.size(), is(1));
+    }
+
+    @Test
     public void shouldReturnStudentsBasedOnMultipleTalents() {
-//        List<Student> students = repository.findBySearchParameter(new StudentSearchParameterBuilder().withTalents(cooking, music), 0, 100);
-//        assertThat(students.size(), is(2));
+        List<Student> students = repository.findBySearchParameter(
+                      new StudentSearchParameterBuilder().withTalents(new Talent[] { cooking , music }).build(), 0, 100);
+        assertThat(students.size(), is(2));
     }
 
     @Test

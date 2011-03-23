@@ -12,17 +12,17 @@ public class StudentSearchParameter {
     private String communityLocation = WILDCARD_CHARACTER;
     private String ageFrom = WILDCARD_CHARACTER;
     private String ageTo = WILDCARD_CHARACTER;
-    private String talent = WILDCARD_CHARACTER;
+    private Talent[] talents = new Talent[0];
     private String religion = WILDCARD_CHARACTER;
 
-    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, String talent, String religion) {
+    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, Talent[] talent, String religion) {
         this.studentClass = studentClass;
         this.gender = gender;
         this.caste = caste;
         this.communityLocation = communityLocation;
         this.ageFrom = ageFrom;
         this.ageTo = ageTo;
-        this.talent = talent;
+        this.talents = talent;
         this.religion = religion;
     }
 
@@ -78,12 +78,12 @@ public class StudentSearchParameter {
         this.ageTo = ageTo;
     }
 
-    public String getTalent() {
-        return talent;
+    public Talent[] getTalents() {
+        return talents;
     }
 
-    public void setTalent(String talent) {
-        this.talent = talent;
+    public void setTalents(Talent[] talents) {
+        this.talents = talents;
     }
 
     public String getReligion() {
