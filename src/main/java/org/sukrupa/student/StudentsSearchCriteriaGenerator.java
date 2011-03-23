@@ -48,7 +48,7 @@ class StudentsSearchCriteriaGenerator {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
         criteria.add(conjunction);
-        addTalentsSearchCriteria(criteria, searchParam.getTalent());
+        addTalentsSearchCriteria(criteria, searchParam.getTalents());
         return criteria;
     }
 

@@ -8,7 +8,7 @@
             </td>
             <td>
                     $formhelper.talents:{
-                    <input type="checkbox" value="$it$" name = "talent">$it$</input>
+                    <input type="checkbox" value="$it$" name = "talents">$it$</input>
                     }$
 
             </td>

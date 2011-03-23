@@ -80,11 +80,11 @@ public class StudentSearchParameter {
         this.ageTo = ageTo;
     }
 
-    public Talent[] getTalent() {
+    public Talent[] getTalents() {
         return talents;
     }
 
-    public void setTalent(Talent[] talents) {
+    public void setTalents(Talent[] talents) {
         this.talents = talents;
     }
 

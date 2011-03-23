@@ -151,6 +151,7 @@ public class StudentRepositoryTest {
         assertThat(students.size(), is(2));
     }
 
+
     @Test
     public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {
         databaseHelper.save(jimbo, pat, sahil, renaud);
