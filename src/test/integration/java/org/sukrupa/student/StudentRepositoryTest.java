@@ -146,8 +146,12 @@ public class StudentRepositoryTest {
     public void shouldReturnStudentsBasedOnMultipleTalents() {
         databaseHelper.save(jimbo, pat, sahil, renaud);
 
+        List<Talent> talents = new ArrayList<Talent>();
+        talents.add(cooking);
+        talents.add(music);
+
         List<Student> students = repository.findBySearchParameter(
-                      new StudentSearchParameterBuilder().withTalents(new Talent[] { cooking , music }).build(), 0, 100);
+                      new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
         assertThat(students.size(), is(2));
     }
 
@@ -156,8 +160,12 @@ public class StudentRepositoryTest {
     public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {
         databaseHelper.save(jimbo, pat, sahil, renaud);
 
+        List<Talent> talents = new ArrayList<Talent>();
+        talents.add(sport);
+        talents.add(music);
+
         List<Student> students = repository.findBySearchParameter(
-                      new StudentSearchParameterBuilder().withTalents(new Talent[] { sport , music }).build(), 0, 100);
+                      new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
         assertThat(students.size(), is(1));
     }
 

@@ -1,5 +1,8 @@
 package org.sukrupa.student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentSearchParameterBuilder {
 
     private String studentClass = StudentSearchParameter.WILDCARD_CHARACTER;
@@ -11,7 +14,7 @@ public class StudentSearchParameterBuilder {
     private String talent = StudentSearchParameter.WILDCARD_CHARACTER;
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
-    private Talent[] talents = new Talent[0];
+    private List<Talent> talents = new ArrayList<Talent>();
 
     public StudentSearchParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
@@ -69,7 +72,7 @@ public class StudentSearchParameterBuilder {
         return this;
     }
 
-    public StudentSearchParameterBuilder withTalents(Talent[] talents) {
+    public StudentSearchParameterBuilder withTalents(List<Talent> talents) {
         this.talents = talents;
         return this;
     }

@@ -62,14 +62,16 @@ class StudentsSearchCriteriaGenerator {
         return ageTo + 1;
     }
 
-    private void addTalentsSearchCriteria(Criteria criteria, Talent[] talents) {
-        if (talents.length > 0) {
-            List<String> descriptions = new ArrayList<String>();
-            for(Talent talent : talents){
-                descriptions.add(talent.getDescription());
-            }
-            criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+    private void addTalentsSearchCriteria(Criteria criteria, List<Talent> talents) {
+        if (talents.isEmpty()) {
+            return;
         }
+
+        List<String> descriptions = new ArrayList<String>();
+        for(Talent talent : talents){
+            descriptions.add(talent.getDescription());
+        }
+        criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     }
 
     private LocalDate computeBirthDateFromAge(int age) {
