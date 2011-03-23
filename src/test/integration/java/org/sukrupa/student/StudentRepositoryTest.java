@@ -44,7 +44,7 @@ public class StudentRepositoryTest {
     private StudentRepository repository;
 
     private Student sahil = new StudentBuilder()
-            .studentId("1").name("Sahil")
+            .studentId("99").name("Sahil")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Male").talents(music, sport)
             .build();
@@ -81,6 +81,7 @@ public class StudentRepositoryTest {
     @Before
     public void setUp() throws Exception {
         repository = new StudentRepository(sessionFactory, studentsSearchCriteriaGenerator);
+
         databaseHelper.save(music, sport, cooking);
     }
 
@@ -142,17 +143,21 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldReturnStudentsBasedOnSingleTalent() {
-        List<Student> students = repository.findBySearchParameter(
-                      new StudentSearchParameterBuilder().withTalents(new Talent[] { music }).build(), 0, 100);
-        assertThat(students.size(), is(1));
-    }
-
-    @Test
     public void shouldReturnStudentsBasedOnMultipleTalents() {
+        databaseHelper.save(jimbo, pat, sahil, renaud);
+
         List<Student> students = repository.findBySearchParameter(
                       new StudentSearchParameterBuilder().withTalents(new Talent[] { cooking , music }).build(), 0, 100);
         assertThat(students.size(), is(2));
+    }
+
+    @Test
+    public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {
+        databaseHelper.save(jimbo, pat, sahil, renaud);
+
+        List<Student> students = repository.findBySearchParameter(
+                      new StudentSearchParameterBuilder().withTalents(new Talent[] { sport , music }).build(), 0, 100);
+        assertThat(students.size(), is(1));
     }
 
     @Test

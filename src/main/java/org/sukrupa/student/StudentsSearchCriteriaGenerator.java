@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-import net.sourceforge.htmlunit.corejs.javascript.ast.ArrayLiteral;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
@@ -9,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
 class StudentsSearchCriteriaGenerator {
+    private static final String ID = "id";
     private final SessionFactory sessionFactory;
 
     private static final String STUDENT_CLASS = "studentClass";
@@ -49,7 +48,7 @@ class StudentsSearchCriteriaGenerator {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
         criteria.add(conjunction);
-        addTalentsSearchCriteria(criteria, searchParam.getTalents());
+        addTalentsSearchCriteria(criteria, searchParam.getTalent());
         return criteria;
     }
 
@@ -65,13 +64,11 @@ class StudentsSearchCriteriaGenerator {
 
     private void addTalentsSearchCriteria(Criteria criteria, Talent[] talents) {
         if (talents.length > 0) {
-//        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(talents)) {
             List<String> descriptions = new ArrayList<String>();
             for(Talent talent : talents){
                 descriptions.add(talent.getDescription());
             }
-            System.out.println(descriptions.get(0));
-            criteria.createCriteria(TALENTS).add(Restrictions.eq(DESCRIPTION, descriptions.get(0)));
+            criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         }
     }
 

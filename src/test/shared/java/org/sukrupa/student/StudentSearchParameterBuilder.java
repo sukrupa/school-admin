@@ -11,7 +11,7 @@ public class StudentSearchParameterBuilder {
     private String talent = StudentSearchParameter.WILDCARD_CHARACTER;
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
-    private Talent[] talents;
+    private Talent[] talents = new Talent[0];
 
     public StudentSearchParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
