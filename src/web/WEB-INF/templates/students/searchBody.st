@@ -1,4 +1,5 @@
-<form name="searchParam" action="." method="get">
+
+<form id="searchStudentsForm" name="searchParam" action="." method="get">
     <table>
 
 
@@ -7,9 +8,60 @@
                 <span>Talent</span>
             </td>
             <td>
-                    $formhelper.talents:{
-                    <input type="checkbox" value="$it$" name = "talents">$it$</input>
-                    }$
+                <table border="0">
+
+                <tr>
+
+                    <td>
+
+                        <!-- Multiple Select List with 20 rows size and 70 pixels wide -->
+
+                        <!-- Using Â  for SPACING and alignment -->
+
+                        <select multiple size="6" style="width:150px" name="listLeft" id="listLeft">
+                            $formhelper.talents:{
+                                <option value="$it$">$it$</option>
+                            }$
+
+                        </select>
+
+                    </td>
+
+                    <td>
+                        <NOBR>
+                            <input type="button" style="width:90"
+                                   onclick="moveDualList( this.form.listLeft,  this.form.talents, false )"
+
+                                   name="Add >" value="Add >"><BR>
+                            <NOBR>
+                                <input type="button" style="width:90"
+                                       onclick="moveDualList( this.form.talents, this.form.listLeft,  false )"
+                                       name="Remove <" value="Remove <"><BR>
+
+                                    <NOBR>
+                                        <input type="button" style="width:90" onclick="moveDualList( this.form.talents, this.form.listLeft,  true  )"
+
+    name="Clear <<"  value="Clear <<"><BR>
+
+    </NOBR>
+
+                                    </NOBR>
+
+                    </td>
+
+                    <td>
+
+                        <select multiple size="6" style="width:150px" name="talents" id="talents">
+
+
+                        </select>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
 
             </td>
         </tr>
