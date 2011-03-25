@@ -19,8 +19,8 @@
     </target>
 
     <target name="deploy:save-build-number">
-        <echo message="Saving build number: ${env.GO_PIPELINE_COUNTER}"/>
-        <echo file="${web.dir}/build-number.txt">${env.GO_PIPELINE_COUNTER}</echo>
+        <echo message="Saving build number: ${env.GO_PIPELINE_COUNTER} - ${env.GO_REVISION}"/>
+        <echo file="${web.dir}/build-number.txt">${env.GO_PIPELINE_COUNTER} - ${env.GO_REVISION}</echo>
     </target>
 
 </project>
