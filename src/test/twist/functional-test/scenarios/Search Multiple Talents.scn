@@ -1,11 +1,11 @@
-Tags:
+Tags:in-progress
 Preconditions:Navigate to Search Page
 search Workflow:
 #Given I select the talent "Sports"
 #And I select the talent "Acting"
 #When I hit search button
 #Then  "Chandana" shows in search results 
-#And "Abhishek" shows in search results
+#And "Abhishek" shows in search resultss
 #And "Armugam" shows in search results
 #And "Chandru" shows in search results
 #And "Anok" does not show in search results

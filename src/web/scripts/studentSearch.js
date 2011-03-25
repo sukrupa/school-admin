@@ -1,5 +1,7 @@
+var dualListBox = dualListBox || {};
 var myOptions = new Array();
 var anyValue = "*";
+var allTalents;
 
 function changeAgeRange() {
 	var minVal = $('#ageFrom').val();
@@ -51,168 +53,119 @@ function saveOptions() {
 $(document).ready(function (){
 	saveOptions();
 	initDropDowns();
-
+    var dualBox = dualListBox.box($('#availableTalents'),$('#chosenTalents'));
+	$('#addTalent').click(dualBox.add);
+	$('#removeTalent').click(dualBox.remove);
+	$('#clearTalents').click(dualBox.clear);
 	$('#ageFrom').change(changeAgeRange);
+
 });
 
+dualListBox.box = function(available,chosen) {
+    var allOptions = available.find('option');
+    unselectSelectedOptions(chosen);
+    unselectSelectedOptions(available);
+
+    var self = {
+        add : function() {
+            removeAny();
+            addTalentToChosen();
+            syncHiddenFieldWithChosen();
+
+        },
+        remove : function() {
+            removeAny();
+            unselectSelectedOptions(available);
+            moveOptionsFrom(chosen).to(available);
+            sortOptions(available);
+            syncHiddenFieldWithChosen();
+            addAnyIfChosenIsEmpty();
+        },
+        clear : function() {
+            removeAllTalentsFromChosen();
+            removeAny();
+            syncHiddenFieldWithChosen();
+            addAnyIfChosenIsEmpty();
+        }
+    };
+
+    function syncHiddenFieldWithChosen() {
+        $(".hiddenTalents").remove();
+        var chosenOnes = chosen.find("option");
+        for (var i=0; i<chosenOnes.size(); i++) {
+             $(chosen[0].form).append("<input value=\"" + chosenOnes[i].value + "\" class=\"hiddenTalents\" name=\"talents\" type=\"hidden\" />");
+        }
+    }
+
+    function addTalentToChosen() {
+        unselectSelectedOptions(chosen);
+        moveOptionsFrom(available).to(chosen);
+        sortOptions(chosen);
+    }
+
+    function selectedOptionsIn(dropDown) {
+        var selectedOptions = new Array();
+        var listOptions = dropDown.find('option');
+        for (var index=0;index < listOptions.size();index++) {
+            var option = listOptions[index];
+            if (option.selected) {
+                selectedOptions.push(option);
+            }
+        }
+        return selectedOptions;
+    }
+
+    function removeAny() {
+        if(selectedOptionsIn(available).length > 0) {
+            chosen.find('option[value="*"]').remove()
+        }
+    }
+
+    function unselectSelectedOptions(selectBox) {
+        var selectBoxOptions = selectBox.find('option');
+        for (var index=0 ; index < selectBoxOptions.size() ; index++) {
+            selectBoxOptions[index].selected = false;
+        }
+    }
+
+    function moveOptionsFrom(oneList) {
+        return {
+            to : function(otherList) {
+                otherList.append(selectedOptionsIn(oneList));
+            }
+        };
+    }
 
 
-///////////////////////////
+    function sortOptions(selectBox) {
+        var orderedTalents = getOrderedOptions(selectBox);
+        selectBox.find('option').remove();
+        selectBox.append(orderedTalents);
+    }
 
-function compareOptionValues(a, b)
-{
+    function addAnyIfChosenIsEmpty(){
+        if(chosen.find('option').length === 0){
+            chosen.append('<option value="*" disabled=disabled>Any</option>')
+        }
+    }
 
-    // Radix 10: for numeric values
+    function removeAllTalentsFromChosen() {
+        chosen.find('option').remove();
+        available.append(allOptions);
 
-    // Radix 36: for alphanumeric values
+    }
 
-    var sA = parseInt( a.value, 36 );
+    function getOrderedOptions(selectBox) {
+        return selectBox.find('option').sort(function(a, b) {
+            if ($(a).val()>$(b).val()) {
+                return 1;
+            } else if ($(a).val()==$(b).val()) {
+                return 0;
+            } else{
+                return -1;
+            }
+         });
+    }
 
-    var sB = parseInt( b.value, 36 );
-
-    return sA - sB;
+    return self;
 }
-
-
-
-  // Compare two options within a list by TEXT
-
-  function compareOptionText(a, b)
-
-  {
-
-    // Radix 10: for numeric values
-
-    // Radix 36: for alphanumeric values
-
-    var sA = parseInt( a.text, 36 );
-
-    var sB = parseInt( b.text, 36 );
-
-    return sA - sB;
-
-  }
-
-
-
-  // Dual list move function
-
-  function moveDualList( srcList, destList, moveAll )
-
-  {
-
-    // Do nothing if nothing is selected
-
-    if (  ( srcList.selectedIndex == -1 ) && ( moveAll == false )   )
-
-    {
-
-      return;
-
-    }
-
-
-
-    newDestList = new Array( destList.options.length );
-
-
-
-    var len = 0;
-
-
-
-    for( len = 0; len < destList.options.length; len++ )
-
-    {
-
-      if ( destList.options[ len ] != null )
-
-      {
-
-        newDestList[ len ] = new Option( destList.options[ len ].text, destList.options[ len ].value, destList.options[ len ].defaultSelected, destList.options[ len ].selected );
-
-      }
-
-    }
-
-
-
-    for( var i = 0; i < srcList.options.length; i++ )
-
-    {
-
-      if ( srcList.options[i] != null && ( srcList.options[i].selected == true || moveAll ) )
-
-      {
-
-         // Statements to perform if option is selected
-
-
-
-         // Incorporate into new list
-
-         newDestList[ len ] = new Option( srcList.options[i].text, srcList.options[i].value, srcList.options[i].defaultSelected, srcList.options[i].selected );
-
-         len++;
-
-      }
-
-    }
-
-
-
-    // Sort out the new destination list
-
-    newDestList.sort( compareOptionValues );   // BY VALUES
-
-    //newDestList.sort( compareOptionText );   // BY TEXT
-
-
-
-    // Populate the destination with the items from the new array
-
-    for ( var j = 0; j < newDestList.length; j++ )
-
-    {
-
-      if ( newDestList[ j ] != null )
-
-      {
-
-        destList.options[ j ] = newDestList[ j ];
-
-      }
-
-    }
-
-
-
-    // Erase source list selected elements
-
-    for( var i = srcList.options.length - 1; i >= 0; i-- )
-
-    {
-
-      if ( srcList.options[i] != null && ( srcList.options[i].selected == true || moveAll ) )
-
-      {
-
-         // Erase Source
-
-         //srcList.options[i].value = "";
-
-         //srcList.options[i].text  = "";
-
-         srcList.options[i]       = null;
-
-      }
-
-    }
-  } // End of moveDualList()
-
- var j = jQuery;
- j(function() {
-    j("#searchStudentsForm").submit(function() {
-        j("#talents option").attr("selected", true);
-    });
- });
