@@ -22,8 +22,8 @@ public class SearchWorkflow {
 
 	private void selectTalent(String talent) {
 		if (!talent.isEmpty())	{
-			browser.select("listLeft").choose(talent);
-			browser.click(browser.button("Add >"));
+			browser.select("availableTalents").choose(talent);
+			browser.click(browser.byId("addTalent"));
 		}
 	}
 	
