@@ -16,15 +16,19 @@
                         </select>
                     </td>
                     <td>
-                        <input type="button" style="width:90" id='addTalent' name="addTalent" value="Add >"><BR>
-                        <input type="button" style="width:90" id='removeTalent' name="removeTalent" value="Remove <"><BR>
-                        <input type="button" style="width:90" id='clearTalents' name="clearTalents" value="Clear <<"><BR>
+                        <div>
+                            <input type="button" style="width:90" id='addTalent' name="addTalent" value="Add >">
+                        </div>
+                        <div>
+                            <input type="button" style="width:90" id='removeTalent' name="removeTalent" value="Remove <">
+                        </div>
+                        <div>
+                            <input type="button" style="width:90" id='clearTalents' name="clearTalents" value="Clear <<">
+                        </div>
 
                     </td>
                     <td>
-                        <div id="hiddenChosenOnes">
 
-                        </div>
 
 
                         <select multiple size="6" style="width:150px" id="chosenTalents">

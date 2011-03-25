@@ -61,36 +61,44 @@ $(document).ready(function (){
 
 });
 
-dualListBox.box = function(src,des) {
-    var allOptions = src.find('option');
+dualListBox.box = function(available,chosen) {
+    var allOptions = available.find('option');
 
     var self = {
         add : function() {
+            removeAny();
             addTalentToChosen();
             syncHiddenFieldWithChosen();
+
         },
         remove : function() {
-            removeTalentFromChosen();
+            unselectSelectedOptions(available);
+            moveOptionsFrom(chosen).to(available);
+            sortOptions(available);
+            removeAny();
             syncHiddenFieldWithChosen();
+            addAnyIfChosenIsEmpty();
         },
         clear : function() {
             removeAllTalentsFromChosen();
+            removeAny();
             syncHiddenFieldWithChosen();
+            addAnyIfChosenIsEmpty();
         }
     };
 
     function syncHiddenFieldWithChosen() {
-        $("#hiddenChosenOnes").html("");
-        var chosenOnes = des.find("option");
+        $(".hiddenTalents").remove();
+        var chosenOnes = chosen.find("option");
         for (var i=0; i<chosenOnes.size(); i++) {
-             $("#hiddenChosenOnes").append("<input value=\"" + chosenOnes[i].value + "\" name=\"talents\" type=\"hidden\" />");
+             $(chosen[0].form).append("<input value=\"" + chosenOnes[i].value + "\" class=\"hiddenTalents\" name=\"talents\" type=\"hidden\" />");
         }
     }
 
     function addTalentToChosen() {
-        removeAny();
-        unselectChosenTalents();
-        moveOptionsFrom(src).to(des);
+        unselectSelectedOptions(chosen);
+        moveOptionsFrom(available).to(chosen);
+        sortOptions(chosen);
     }
 
     function selectedOptionsIn(dropDown) {
@@ -106,15 +114,15 @@ dualListBox.box = function(src,des) {
     }
 
     function removeAny() {
-        if(selectedOptionsIn(src).length > 0) {
-            des.find('option[value="*"]').remove()
+        if(selectedOptionsIn(available).length > 0) {
+            chosen.find('option[value="*"]').remove()
         }
     }
 
-    function unselectChosenTalents() {
-        var chosenTalentsOptions = des.find('option');
-        for (var index=0 ; index < chosenTalentsOptions.size() ; index++) {
-            chosenTalentsOptions[index].selected = false;
+    function unselectSelectedOptions(selectBox) {
+        var selectBoxOptions = selectBox.find('option');
+        for (var index=0 ; index < selectBoxOptions.size() ; index++) {
+            selectBoxOptions[index].selected = false;
         }
     }
 
@@ -126,30 +134,27 @@ dualListBox.box = function(src,des) {
         };
     }
 
-    function removeTalentFromChosen() {
-        moveOptionsFrom(des).to(src);
 
-        var orderedTalents = getOrderedOptions();
-        src.find('option').remove();
-        src.append(orderedTalents);
-
-        addAnyIfChosenIsEmpty();
+    function sortOptions(selectBox) {
+        var orderedTalents = getOrderedOptions(selectBox);
+        selectBox.find('option').remove();
+        selectBox.append(orderedTalents);
     }
 
     function addAnyIfChosenIsEmpty(){
-        if(des.find('option').length === 0){
-            des.append("<option disabled=disabled>Any</option>")
+        if(chosen.find('option').length === 0){
+            chosen.append('<option value="*" disabled=disabled>Any</option>')
         }
     }
 
     function removeAllTalentsFromChosen() {
-        des.find('option').remove();
-        src.append(allOptions);
-        addAnyIfChosenIsEmpty();
+        chosen.find('option').remove();
+        available.append(allOptions);
+
     }
 
-    function getOrderedOptions() {
-        return src.find('option').sort(function(a, b) {
+    function getOrderedOptions(selectBox) {
+        return selectBox.find('option').sort(function(a, b) {
             if ($(a).val()>$(b).val()) {
                 return 1;
             } else if ($(a).val()==$(b).val()) {
