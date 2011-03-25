@@ -63,6 +63,8 @@ $(document).ready(function (){
 
 dualListBox.box = function(available,chosen) {
     var allOptions = available.find('option');
+    unselectSelectedOptions(chosen);
+    unselectSelectedOptions(available);
 
     var self = {
         add : function() {
@@ -72,10 +74,10 @@ dualListBox.box = function(available,chosen) {
 
         },
         remove : function() {
+            removeAny();
             unselectSelectedOptions(available);
             moveOptionsFrom(chosen).to(available);
             sortOptions(available);
-            removeAny();
             syncHiddenFieldWithChosen();
             addAnyIfChosenIsEmpty();
         },
