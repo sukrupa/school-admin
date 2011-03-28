@@ -1,1 +1,1 @@
-local build
+local build - ${env.GO_REVISION}

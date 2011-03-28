@@ -12,12 +12,12 @@ public class SearchWorkflow {
 		this.browser = browser;
 	}
 
-	public void givenISelectTheTalent(String string1) throws Exception {
-		selectTalent(string1);
+	public void givenISelectTheTalent(String talent) throws Exception {
+		selectTalent(talent);
 	}
 
-	public void andISelectTheTalent(String string1) throws Exception {
-		selectTalent(string1);
+	public void andISelectTheTalent(String talent) throws Exception {
+		selectTalent(talent);
 	}
 
 	private void selectTalent(String talent) {

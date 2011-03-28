@@ -14,7 +14,7 @@ public class EventList {
 	public void followTheLink(String linkName) throws Exception {
 		browser.link(linkName).click();
 	
-		assertThat(browser.title(), is("View List of Events"));
+		assertThat(browser.title(), is("List of Events"));
 	}
 
 	public void checkThatThereAreEventsInTheList(Integer integer1) throws Exception {
@@ -34,8 +34,8 @@ public class EventList {
 	}
 
 	public void verifyThatYouAreOnRecord(String string1) throws Exception {
-		assertEquals("Sports Day View Event",
-				browser.div("Sports Day View Event").text());
+		assertEquals("Sports Day",
+				browser.div("Sports Day").text());
 	
 	}
 

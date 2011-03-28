@@ -1,5 +1,0 @@
-Tags:
-Preconditions:
-Make some assertions:
-#Assert that <input> is false
-#When I greet a student called <strudentName> I should get <expectedGreeting> as a greeting
