@@ -1,2 +1,10 @@
 Sukrupa School Adminstration System - Here is where we look after the kids! 
- 
+
+Currently you:
+ - ./build -p                       (to see build targets)
+ - ./build sanity                   (do a dev build, less the twist tests)
+ - ./build db:insert-fake-data      (to add fake data)
+ - ./build db:start                 (start the db)
+ - launch the app within the IDE, run org.sukrupa.app.SchoolAdminApp#main()
+ - visit http://sukrupa.localhost:8080/
+
