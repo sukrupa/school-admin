@@ -1,0 +1,14 @@
+Tags:blog,create
+Preconditions:Login as "username" with "password"
+
+_As a blogger I should be able to create blog entries that appear on the home page so that users can read it._
+
+Let us create a simple workflow for this test.
+
+Blog Creation:
+#create a new blog entry
+#add some sample content
+#verify that the content appears on the home page
+
+
+Continue to  *05 EditBlogEntries*

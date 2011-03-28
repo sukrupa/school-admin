@@ -1,0 +1,34 @@
+Tags:smoke,settings
+Preconditions:Login as "username" with "password"
+_As a blogger I should be able to change my blog settings so that I can customize it._
+
+*One way want to express the functionality is*
+	  Login as "username" and "password"
+      Go to configuration options
+      Rename the blog name to "TwistedBlog"      *
+      verify that the blog name is "TwistedBlog"
+
+Logging into the system with a valid set of user credentials is a pre-requisite for many stories. 
+Also, we would like to logout of the system once the test is complete.
+Logging in and Logging out, however truly don't "belong" to the story. We don't want to
+unnecessarily clutter our Workflows with such peripheral details. 
+
+This is a good case to model the *login as "username" and "password"* operation as a _Context_. 
+Try navigating to the _Context_ *Login as "username" and "password"* at the top of this editor. 
+
+We can implement any setup activities as part of the _setUp_ method. Similarly we can do any cleanup in _tearDown_.
+
+Observe that we have reused the Login fixture in the Context's implementation, instead of writing  handcrafted Selenium scripts.
+
+Our test now becomes:-
+ 
+Blog Configuration:
+#Go to configuration options
+#rename the blog name to "Twisted Blog" description to "My Thoughts on Twist" and about blurb to "About Twist"
+#verify that the blog name is "Twisted Blog" and description is "My Thoughts on Twist" and about blurb is "About Twist"
+
+
+
+
+Continue to  *04 CreateBlogEntries*
+

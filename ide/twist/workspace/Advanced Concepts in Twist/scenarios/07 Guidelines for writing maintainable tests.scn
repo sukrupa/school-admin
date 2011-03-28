@@ -1,0 +1,30 @@
+Tags:blog,create
+Preconditions:Login as "username" with "password"
+We have taken a brief look at some the concepts in Twist. Here are some guidelines that we think help create mantainable test suites.
+
+h1.Abstractions
+Writing your scenarios at the right level of abstraction is critical to building an effective test suite. Here are a few guidelines that can help
+	
+Tests should be independent of the user interface of the application. 
+Tests should strive to be at the highest level of abstraction possible, without sacrificing readabilty.
+Don’t repeat yourself: Repeating a series of steps at any level – at a scenario, or in the implementation can increase the maintenance overhead.
+
+    *	Note: The Screen / Page object pattern is a nice way to group all the actions that are possible on a given screen as operations on a class.
+
+
+h1.Contexts
+Using Contexts appropriately can help keep your Scenarios simple. Actions that are part of the execution of scenario, but not relevant directly to 
+the test should be modelled as a Context.
+
+h1.Tags
+Tags provide you with the ability to quickly select a subset of your scenarios for execution. Appropriate tagging can help you idenfity the scenarios 
+affected when you make changes to the application.
+
+Some of the suggested ways of tagging scenarios are:-
+		1. Based on feature covered
+	    2. Type of test (smoke, regression and so on)
+		3. In progress. (This allows you to quickly isolate scenarios that you are not complete yet from being built)
+
+
+
+

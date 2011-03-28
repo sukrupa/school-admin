@@ -1,0 +1,17 @@
+Tags: in-progress, example
+Preconditions:Navigate to Search Page
+h1.
+search Workflow:
+#Given I select the talent "Sports"
+#And I select the talent "Acting"
+#And I select the talent "Arts & Crafts"
+#And I select the talent "Mimicry"
+#And I select the talent "Story Telling"
+#When I hit search button
+#Then  "Chandana" shows in search results 
+#And "Abhishek" shows in search results
+#And "Armugam" shows in search results
+#And "Chandru" shows in search results
+#And "Bhavani" does not show in search results
+#And "Haripriya" does not show in search results
+

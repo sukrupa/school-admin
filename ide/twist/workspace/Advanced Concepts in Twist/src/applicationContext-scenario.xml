@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans org/springframework/beans/factory/xml/spring-beans-2.5.xsd">
+
+
+	<!-- create this bean to reset the blog engine for every test -->
+	<bean id="reset_blog" class="com.thoughtworks.blog.beans.ResetBlog" init-method="resetBlog" lazy-init="false">
+		<constructor-arg value="http://localhost:8080" />
+		<constructor-arg value="tomcat" />
+		<constructor-arg value="tomcat" />
+	</bean>
+	
+</beans>

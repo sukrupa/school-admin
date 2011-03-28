@@ -1,0 +1,30 @@
+Tags:readme
+Preconditions:
+_Twist - Collaborative Test Automation from ThoughtWorks Studios_
+
+Welcome to this interactive tutorial that takes you through a step-by-step exercise that demonstrates testing a 
+web based application using Twist.
+
+For the purpose of this tutorial, it is required that you download and install a simple blogging application. This tutorial 
+will demonstrate testing the blog application using Selenium.
+
+
+   1. We have provided a pre-packaged blog on the Twist download site. You can download the application from 
+   http://twist.thoughtworks.com/twist/samples/pebbles-blog.zip.
+   2. Once you have downloaded and extracted the zip file, start off the blog running on Apache Tomcat from the directory 
+        where you extracted the zip file.
+
+        BLOG_INSTALLATION_LOCATION> bin\catalina.bat run (for windows)
+        BLOG_INSTALLATION_LOCATION$ bin/catalina.sh run (for mac and linux)
+
+   3. Once tomcat starts up, pointing your browser to http://localhost:8080/blog.
+
+
+
+For more information and help please refer the following link (Please use with CTRL+Click)
+http://studios.thoughtworks.com/twist-agile-test-automation/2.0/help/index.html
+	
+More tutorials are available under *Help* > *Twist Tutorials and Examples* 
+
+
+Continue to  *01 Hello World*
