@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigte to Student Profile
+Preconditions:Navigte to Student Profile,Log In
 Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"

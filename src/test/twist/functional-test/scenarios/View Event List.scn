@@ -1,5 +1,5 @@
 Tags:in-progress
-Preconditions:Navigate to dashboard
+Preconditions:Navigate to dashboard,Log In
 Metadata:ScenarioType=Auto
 Event List:
 #Follow the "View Events" link
