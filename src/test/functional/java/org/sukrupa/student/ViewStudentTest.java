@@ -16,6 +16,7 @@ import org.sukrupa.platform.db.DatabaseHelper;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.sukrupa.platform.webdriver.AuthenticatedHtmlUnitDriver.authenticatedDriver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -23,7 +24,7 @@ public class ViewStudentTest {
 
     private Student suhas = new StudentBuilder().name("suhas").studentId("123").notes(new Note("hello")).build();
 
-    private WebDriver driver = new HtmlUnitDriver();
+    WebDriver driver = authenticatedDriver("admin", "password");
 
     @Autowired
     private DatabaseHelper databaseHelper;

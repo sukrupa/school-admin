@@ -1,3 +1,0 @@
-Selenium:
-	fieldName: selenium
-	class: com.thoughtworks.twist.driver.selenium.TwistSelenium

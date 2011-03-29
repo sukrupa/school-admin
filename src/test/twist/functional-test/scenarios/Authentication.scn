@@ -1,0 +1,9 @@
+Tags:
+Preconditions:Navigate to Dashboard
+Invalid Login Workflow:
+#When I enter invalid credentials
+#Then I should be prompted for login again
+
+Valid Login Workflow:
+#When I enter valid credentials
+#Then I should see the students page

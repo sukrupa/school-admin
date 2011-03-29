@@ -1,1 +1,1 @@
-local build - ${env.GO_REVISION}
+${env.GO_PIPELINE_LABEL} - ${env.GO_REVISION}
