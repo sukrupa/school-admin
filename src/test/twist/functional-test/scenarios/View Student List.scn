@@ -1,5 +1,5 @@
 Tags:in-progress
-Preconditions:Open Admin Page,Log In
+Preconditions:Open Admin Page,Log In,	Log out afterwards
 Students Record:
 #verify "Chandana" shows up in the list
 #verify "Anok" shows up in the list

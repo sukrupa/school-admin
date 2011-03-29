@@ -1,5 +1,5 @@
 Tags:New Item,
-Preconditions:Open Admin Page,Log In
+Preconditions:Open Admin Page,Log In,	Log out afterwards
 Student Record:
 #Verify "Haripriya" profile comes up
 #Verify "Bhavani" profile comes up

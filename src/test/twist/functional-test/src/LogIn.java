@@ -10,10 +10,10 @@ public class LogIn {
 	}
 
 	public void setUp() throws Exception {
-		if (browser.textbox("authUser").exists()) {
-			browser.textbox("authUser").setValue("admin");
-			browser.password("authPassword").setValue("password");
-			browser.submit("Authenticate").click();	
+		if (browser.textbox("j_username").exists()) {
+			browser.textbox("j_username").setValue("admin");
+			browser.password("j_password").setValue("password");
+			browser.submit("loginButton").click();	
 		}
 	}
 

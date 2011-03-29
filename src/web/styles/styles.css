@@ -120,6 +120,16 @@ body
     border-color:#254965;
 }
 
+#basicBody {
+    width: 700px;
+    float: left;
+   min-height:210px;
+    padding-left:15px;
+    padding-top: 10px;
+    font: 120%  tahoma, arial, helvetica;
+
+}
+
 img {
     border: none;
     padding-top:40px;
@@ -197,6 +207,31 @@ div.note
 
     font: 90% Tahoma, arial, helvetica, sans-serif;
     font-weight: bold;
+}
+
+.logout
+{
+   float: right;
+   font-size: 14px;
+   margin-right: 10px;
+   position: relative;
+   bottom: 10px;
+   background: #f7c320;
+
+
+}
+
+.logout a
+{
+text-decoration: none;
+   font-color: white;
+   font-weight: lighter;
+   padding: 3px;
+
+
+}
+.logout a:visited {
+    color: #24333D;
 }
 
 .disabled

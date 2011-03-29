@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.sukrupa.platform.db.DatabaseHelper;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
-import static org.sukrupa.platform.webdriver.AuthenticatedHtmlUnitDriver.authenticatedDriver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -24,19 +24,23 @@ public class ViewStudentTest {
 
     private Student suhas = new StudentBuilder().name("suhas").studentId("123").notes(new Note("hello")).build();
 
-    WebDriver driver = authenticatedDriver("admin", "password");
+    WebDriver driver = new HtmlUnitDriver();
+
+    @Before
+    public void setUp() throws Exception {
+        driver.get("http://localhost:8080/authentication/login");
+        driver.findElement(By.xpath("//*[@name='j_username']")).sendKeys("admin");
+        driver.findElement(By.xpath("//*[@name='j_password']")).sendKeys("password");
+        driver.findElement(By.xpath("//input[@value='Login']")).click();
+    }
 
     @Autowired
     private DatabaseHelper databaseHelper;
 
-    @Before
-    public void init() {
-
-    }
-
     @After
     public void tearDown() throws Exception {
         databaseHelper.deleteAllCreatedObjects();
+        driver.get("http://localhost:8080/authentication/logout");
     }
 
     @Test

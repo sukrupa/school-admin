@@ -1,5 +1,5 @@
-Tags: in-progress, example
-Preconditions:Navigate to Search Page,Log In
+Tags:
+Preconditions:Navigate to Search Page,Log In,	Log out afterwards
 h1.
 search Workflow:
 #Given I select the talent "Sports"
