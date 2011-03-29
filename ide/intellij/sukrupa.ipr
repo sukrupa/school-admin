@@ -320,6 +320,7 @@
         <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-servlet-7.2.2.v20101205-sources.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-server-7.2.2.v20101205-config.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-server-7.2.2.v20101205-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-security-7.2.2.v20101205-sources.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
     </library>
