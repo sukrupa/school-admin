@@ -16,12 +16,13 @@ import java.util.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.sukrupa.platform.hamcrest.Matchers.*;
+import static org.sukrupa.platform.webdriver.AuthenticatedHtmlUnitDriver.authenticatedDriver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class ViewListOfStudentsTest {
 
-    private WebDriver driver = new HtmlUnitDriver();
+    WebDriver driver = authenticatedDriver("admin", "password");
 
     @Autowired
     private DatabaseHelper databaseHelper;
