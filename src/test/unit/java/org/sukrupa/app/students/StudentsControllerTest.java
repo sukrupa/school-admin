@@ -1,13 +1,16 @@
 package org.sukrupa.app.students;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.ui.ModelMap;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentService;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,7 +25,7 @@ public class StudentsControllerTest {
 
     private StudentsController controller;
 
-    private HashMap<String, Student> studentModel = new HashMap<String, Student>();
+    private HashMap<String, Object> studentModel = new HashMap<String, Object>();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
 
     @Before
@@ -34,18 +37,23 @@ public class StudentsControllerTest {
     @Test
     public void shouldPopulateModelWithAStudent() {
         when(service.load("123")).thenReturn(pat);
-        controller.view("123", false, (HashMap) studentModel);
-        assertThat(studentModel.get("student"),is(pat));
+        controller.view("123", false, studentModel);
+        assertThat((Student)studentModel.get("student"),is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
 	    when(service.load("123")).thenReturn(pat);
-        assertThat(controller.view("123", false, (HashMap) studentModel),is("students/view"));
+        assertThat(controller.view("123", false, studentModel),is("students/view"));
     }
 
     @Test
     public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", false, (HashMap) studentModel),is("students/viewFailed"));
+        assertThat(controller.view("0987ihuyi", false, studentModel),is("students/viewFailed"));
+    }
+
+    @Test
+    public void shouldDirectToNewStudentForm() {
+        assertThat(controller.create(studentModel), is("students/create"));
     }
 }

@@ -3,11 +3,11 @@
 
 import net.sf.sahi.client.Browser;
 
-public class NewWorkflow {
+public class NewStudentRecord {
 
 	private Browser browser;
 
-	public NewWorkflow(Browser browser) {
+	public NewStudentRecord(Browser browser) {
 		this.browser = browser;
 	}
 

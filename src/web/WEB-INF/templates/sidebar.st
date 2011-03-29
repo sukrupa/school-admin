@@ -15,8 +15,13 @@
       
       <div class="sideBarContent">
       <li>
-          <p class="indent"><a href="/students">View All</a>
-      </p>
+          <p class="indent">
+              <a href="/students">View All</a>
+          </p>
+          <p class="indent">
+              <a href="/students/create">Add New Student</a>
+          </p>
+
       </li>
 
       </div>
