@@ -21,7 +21,7 @@ public class AddStudentRecord {
 	}
 
 	public void andIClick(String label) throws Exception {
-		browser.button(label).click();
+		browser.submit(label).click();
 	}
 
 	public void thenIShouldSeeThePage(String expectedTitle) throws Exception {

@@ -4,14 +4,17 @@ import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Any;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
+import org.sukrupa.student.StudentCreateOrUpdateParameter;
 import org.sukrupa.student.StudentService;
 
 import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -59,10 +62,13 @@ public class StudentsControllerTest {
     @Test
     public void shouldCreateANewStudent () {
         Student student = mock(Student.class);
-        when(student.getStudentId()).thenReturn("SK111");
-        when(service.create("SK20091001", "Yael", new LocalDate(1982,3,6))).thenReturn(student);
+        StudentCreateOrUpdateParameter createParameter = new StudentCreateOrUpdateParameter();
+        createParameter.setDateOfBirth("11-10-1982");
 
-        assertThat(controller.create(null), is("redirect:/students/SK111"));
+        when(student.getStudentId()).thenReturn("SK111");
+        when(service.create(any(String.class), any(String.class), any(String.class))).thenReturn(student);
+
+        assertThat(controller.create(createParameter), is("redirect:/students/SK111"));
     }
 
 }

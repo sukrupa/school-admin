@@ -131,7 +131,7 @@ public class StudentsController {
         Student student = studentService.create(
                 studentParam.getStudentId(),
                 studentParam.getName(),
-                DateTimeFormat.forPattern("dd-MM-YYYY").parseDateTime(studentParam.getDateOfBirth()).toLocalDate());
+                studentParam.getDateOfBirth());
 
         return format ("redirect:/students/%s", student.getStudentId());
     }

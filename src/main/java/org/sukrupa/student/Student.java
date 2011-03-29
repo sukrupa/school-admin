@@ -88,11 +88,14 @@ public class Student {
         this.notes = notes;
     }
 
-    public Student(String studentId, String name, LocalDate dateOfBirth) {
-
+    public Student(String studentId, String name, String dateOfBirth) {
         this.studentId = studentId;
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = convertDate(dateOfBirth);
+    }
+
+    private LocalDate convertDate(String dateOfBirth) {
+        return new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(dateOfBirth));
     }
 
     public String getName() {
@@ -200,7 +203,7 @@ public class Student {
 		this.father = studentUpdateParameter.getFather();
 		this.mother = studentUpdateParameter.getMother();
 		this.talents = Sets.newHashSet(newTalents);
-		this.dateOfBirth = new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(studentUpdateParameter.getDateOfBirth()));
+		this.dateOfBirth = convertDate(studentUpdateParameter.getDateOfBirth());
 	}
 
     public void promote() {

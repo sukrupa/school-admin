@@ -152,21 +152,15 @@ public class StudentServiceTest {
     public void shouldCreateStudent() {
         String studentId = "SK20091001";
         String studentName = "Yael";
-        LocalDate studentDateOfBirth = new LocalDate(1982,3,6);
+        String studentDateOfBirth = "06-03-1982";
 
         Student expectedStudent = mock(Student.class);
-        when(expectedStudent.getStudentId()).thenReturn(studentId);
-        when(expectedStudent.getName()).thenReturn(studentName);
-        when(expectedStudent.getDateOfBirth()).thenReturn(new LocalDate(1982,3,6));
         when(studentFactory.create(studentId, studentName, studentDateOfBirth)).thenReturn(expectedStudent);
 
         Student student = service.create(studentId, studentName, studentDateOfBirth);
 
         verify(studentRepository).put(expectedStudent);
-
-        assertEquals(studentId, student.getStudentId());
-        assertEquals(studentName, student.getName());
-        assertEquals(studentDateOfBirth, student.getDateOfBirth());
+        assertEquals(expectedStudent, student);
     }
 
 

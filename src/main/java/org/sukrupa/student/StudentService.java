@@ -84,10 +84,9 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(String studentId, String name, LocalDate dateOfBirth) {
+    public Student create(String studentId, String name, String dateOfBirth) {
         Student student = studentFactory.create(studentId,name,dateOfBirth);
         studentRepository.put(student);
         return student;
-
     }
 }
