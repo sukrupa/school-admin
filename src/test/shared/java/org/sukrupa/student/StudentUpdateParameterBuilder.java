@@ -79,7 +79,7 @@ public class StudentUpdateParameterBuilder {
         return this;
     }
 
-    public StudentUpdateParameter build() {
-        return new StudentUpdateParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
+    public StudentCreateOrUpdateParameter build() {
+        return new StudentCreateOrUpdateParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
     }
 }

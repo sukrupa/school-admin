@@ -1,5 +1,7 @@
 package org.sukrupa.app.students;
 
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -68,6 +71,8 @@ public class StudentsController {
                        @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
 
+
+
         Student student = studentService.load(id);
         //[Karthik,Suhas] Find a better way to recognize when users tries to edit non-existent student
         student.getStudentId();
@@ -100,7 +105,7 @@ public class StudentsController {
 	@RequestMapping(value = "{id}", method = POST)
 	public String update(
 			@PathVariable String id,
-			@ModelAttribute("updateStudent") StudentUpdateParameter studentParam,
+			@ModelAttribute("updateStudent") StudentCreateOrUpdateParameter studentParam,
 			Map<String, Object> model) {
 
 		Student updatedStudent = studentService.update(studentParam);
@@ -115,4 +120,19 @@ public class StudentsController {
 		}
 	}
 
+    @RequestMapping(value = "create", method = GET)
+    public String newStudent(HashMap<String, Object> model) {
+        return "students/create";
+    }
+
+    @RequestMapping(value = "create", method = POST)
+    public String create(
+            @ModelAttribute("createStudent") StudentCreateOrUpdateParameter studentParam) {
+        Student student = studentService.create(
+                studentParam.getStudentId(),
+                studentParam.getName(),
+                studentParam.getDateOfBirth());
+
+        return format ("redirect:/students/%s", student.getStudentId());
+    }
 }

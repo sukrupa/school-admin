@@ -14,7 +14,10 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.argThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -42,10 +45,13 @@ public class StudentServiceTest {
 
     private StudentService service;
 
-	@Before
+    @Mock
+    private StudentFactory studentFactory;
+
+    @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, null);
+        service = new StudentService(studentRepository, talentRepository, null, studentFactory);
         freezeTime();
     }
 
@@ -123,7 +129,7 @@ public class StudentServiceTest {
 	    when(studentRepository.update(philNew)).thenReturn(philNew);
 	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentCreateOrUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -141,5 +147,22 @@ public class StudentServiceTest {
     public void shouldFailToUpdateNonexistantStudent() {
         assertThat(service.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
     }
+
+    @Test
+    public void shouldCreateStudent() {
+        String studentId = "SK20091001";
+        String studentName = "Yael";
+        String studentDateOfBirth = "06-03-1982";
+
+        Student expectedStudent = mock(Student.class);
+        when(studentFactory.create(studentId, studentName, studentDateOfBirth)).thenReturn(expectedStudent);
+
+        Student student = service.create(studentId, studentName, studentDateOfBirth);
+
+        verify(studentRepository).put(expectedStudent);
+        assertEquals(expectedStudent, student);
+    }
+
+
 
 }
