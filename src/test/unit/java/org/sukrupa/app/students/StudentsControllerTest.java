@@ -1,19 +1,18 @@
 package org.sukrupa.app.students;
 
-import org.hamcrest.CoreMatchers;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.ui.ModelMap;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentService;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -54,6 +53,16 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldDirectToNewStudentForm() {
-        assertThat(controller.create(studentModel), is("students/create"));
+        assertThat(controller.newStudent(studentModel), is("students/create"));
     }
+
+    @Test
+    public void shouldCreateANewStudent () {
+        Student student = mock(Student.class);
+        when(student.getStudentId()).thenReturn("SK111");
+        when(service.create("SK20091001", "Yael", new LocalDate(1982,3,6))).thenReturn(student);
+
+        assertThat(controller.create(null), is("redirect:/students/SK111"));
+    }
+
 }

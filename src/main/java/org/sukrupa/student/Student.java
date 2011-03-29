@@ -88,6 +88,13 @@ public class Student {
         this.notes = notes;
     }
 
+    public Student(String studentId, String name, LocalDate dateOfBirth) {
+
+        this.studentId = studentId;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getName() {
         return name;
     }
@@ -182,7 +189,7 @@ public class Student {
 		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
 	}
 
-	public void updateFrom(StudentUpdateParameter studentUpdateParameter, Set<Talent> newTalents) {
+	public void updateFrom(StudentCreateOrUpdateParameter studentUpdateParameter, Set<Talent> newTalents) {
 		this.studentClass = studentUpdateParameter.getStudentClass();
 		this.gender = studentUpdateParameter.getGender();
 		this.name = studentUpdateParameter.getName();

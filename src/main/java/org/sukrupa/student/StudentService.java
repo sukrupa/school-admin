@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ public class StudentService {
     StudentRepository studentRepository;
     private TalentRepository talentRepository;
     private ReferenceDataRepository referenceDataRepository;
+    private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
 
     @DoNotRemove
@@ -22,10 +24,11 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository){
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory){
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
+        this.studentFactory = studentFactory;
     }
 
     public Student load(String studentId) {
@@ -47,7 +50,7 @@ public class StudentService {
         return students.size();
     }
 
-    public Student update(StudentUpdateParameter studentParam) {
+    public Student update(StudentCreateOrUpdateParameter studentParam) {
         Student student = studentRepository.findByStudentId(studentParam.getStudentId());
         if (student == null) { //TODO is this test needed?
             return null;
@@ -81,4 +84,10 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
+    public Student create(String studentId, String name, LocalDate dateOfBirth) {
+        Student student = studentFactory.create(studentId,name,dateOfBirth);
+        studentRepository.put(student);
+        return student;
+
+    }
 }

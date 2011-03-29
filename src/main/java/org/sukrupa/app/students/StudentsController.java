@@ -1,8 +1,9 @@
 package org.sukrupa.app.students;
 
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,7 +105,7 @@ public class StudentsController {
 	@RequestMapping(value = "{id}", method = POST)
 	public String update(
 			@PathVariable String id,
-			@ModelAttribute("updateStudent") StudentUpdateParameter studentParam,
+			@ModelAttribute("updateStudent") StudentCreateOrUpdateParameter studentParam,
 			Map<String, Object> model) {
 
 		Student updatedStudent = studentService.update(studentParam);
@@ -120,7 +121,18 @@ public class StudentsController {
 	}
 
     @RequestMapping(value = "create", method = GET)
-    public String create(HashMap<String, Object> model) {
+    public String newStudent(HashMap<String, Object> model) {
         return "students/create";
+    }
+
+    @RequestMapping(value = "create", method = POST)
+    public String create(
+            @ModelAttribute("createStudent") StudentCreateOrUpdateParameter studentParam) {
+        Student student = studentService.create(
+                studentParam.getStudentId(),
+                studentParam.getName(),
+                DateTimeFormat.forPattern("dd-MM-YYYY").parseDateTime(studentParam.getDateOfBirth()).toLocalDate());
+
+        return format ("redirect:/students/%s", student.getStudentId());
     }
 }

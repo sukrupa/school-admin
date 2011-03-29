@@ -1,9 +1,8 @@
 
 // JUnit Assert framework can be used for verification
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import net.sf.sahi.client.Browser;
+import static junit.framework.Assert.*;
 
 public class AddStudentRecord {
 
@@ -14,13 +13,20 @@ public class AddStudentRecord {
 	}
 
 	public void whenIClickOnTheLink(String addStudentRecord) throws Exception {
-		browser.link(addStudentRecord).click();
-		
-		
+		browser.link(addStudentRecord).click();	
 	}
 
-	public void iShouldSeeAPage(String addStudentRecord) throws Exception {
-		assertThat(browser.title(), is(addStudentRecord));
+	public void andIEnterTheAs(String fieldName, String fieldValue) throws Exception {
+		browser.textbox(fieldName).setValue(fieldValue);
 	}
+
+	public void andIClick(String label) throws Exception {
+		browser.button(label).click();
+	}
+
+	public void thenIShouldSeeThePage(String expectedTitle) throws Exception {
+		assertEquals(browser.title(), expectedTitle);
+	}
+	
 
 }
