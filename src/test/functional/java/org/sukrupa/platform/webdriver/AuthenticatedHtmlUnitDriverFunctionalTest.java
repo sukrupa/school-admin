@@ -12,7 +12,7 @@ public class AuthenticatedHtmlUnitDriverFunctionalTest {
 
     @Test
     public void canMakeAnAuthenticatedRequest() {
-        WebDriver driver = authenticatedDriver("admin123", "krusat1324");
+        WebDriver driver = authenticatedDriver("admin", "password");
 
         driver.navigate().to("http://localhost:8080");
 
