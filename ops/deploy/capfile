@@ -13,11 +13,10 @@ task :development do
 end
 
 task :staging do
-  set :user, "go"
-  set :target_server, "twu-staging"
-  set :deploy_path, "/var/opt/sukrupa/school-admin"
-  set :web_server_port, 8080  
-  role :target_server, "#{target_server}"
+  set :user, "ubuntu"
+  set :target_server, "ec2-122-248-217-239.ap-southeast-1.compute.amazonaws.com"
+  set :deploy_path, "~/sukrupa/school-admin"
+  role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-bot.pem" }
 end
 
 task :production do
