@@ -24,6 +24,7 @@ public class StudentBuilder {
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
+    private String imageLink;
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -120,6 +121,11 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink);
+    }
+
+    public StudentBuilder imageLink(String imageLink) {
+        this.imageLink = imageLink;
+        return this;
     }
 }

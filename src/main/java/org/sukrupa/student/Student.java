@@ -21,7 +21,8 @@ import java.util.Set;
 public class Student {
 
 	static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
-	@Id
+    private static final String PLACEHOLDER_IMAGE = "placeholderImage";
+    @Id
     @GeneratedValue
     private long id;
 
@@ -49,6 +50,9 @@ public class Student {
     @Column(name = "STUDENT_CLASS")
     private String studentClass;
 
+    @Column(name = "IMAGE_LINK")
+    private String imageLink;
+
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
@@ -58,7 +62,6 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
-
     @OrderBy("date desc")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "STUDENT_NOTE",
@@ -72,7 +75,7 @@ public class Student {
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes) {
+                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -86,6 +89,7 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
         this.notes = notes;
+        this.imageLink = imageLink;
     }
 
     public Student(String studentId, String name, String dateOfBirth) {
@@ -223,6 +227,15 @@ public class Student {
             int studentClassInt = Integer.parseInt(this.studentClass.substring(0,1));
             studentClassInt++;
             this.studentClass = this.studentClass.replace(this.studentClass.substring(0,1), Integer.toString(studentClassInt));
+        }
+
+    }
+
+    public String getImageLink() {
+        if (imageLink==null){
+            return PLACEHOLDER_IMAGE;
+        } else {
+        return imageLink;
         }
 
     }

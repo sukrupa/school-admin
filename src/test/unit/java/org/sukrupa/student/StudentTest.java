@@ -38,9 +38,21 @@ public class StudentTest {
         assertThat(student("pat", null).hashCode(), is(student("pat", null).hashCode()));
     }
 
+
     @Test
     public void shouldNotBeEqualIfDifferentName() {
         assertThat(student("pat", null).equals(student("mr. jones", null)), is(false));
+    }
+
+    @Test
+    public void shouldHaveDefaultImageLink() {
+        String defaultLink = "placeholderImage";
+        assertThat(student("pat",null).getImageLink(),is(defaultLink));
+    }
+
+    @Test
+    public void shouldReturnImageLinkIfHasImage() {
+        assertThat(studentWithImage("Balaji","HappyBalaji").getImageLink(),is("HappyBalaji"));
     }
 
     @Test
@@ -112,6 +124,10 @@ public class StudentTest {
 
     private Student student(String name, LocalDate dateOfBirth, Talent... talents) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).talents(new HashSet(Arrays.asList(talents))).build();
+    }
+
+    private Student studentWithImage(String name, String imageLink) {
+        return new StudentBuilder().name(name).imageLink(imageLink).build();
     }
 
 }

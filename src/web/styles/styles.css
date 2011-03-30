@@ -113,7 +113,7 @@ body
     width: 700px;
     float: left;
    min-height:210px;
-    padding-left:15px;
+    padding-left:15px
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica; 
     border-left:solid;
@@ -130,7 +130,7 @@ body
 
 }
 
-img {
+.pageheader img {
     border: none;
     padding-top:40px;
     padding-left: 5px;
@@ -546,4 +546,15 @@ width: 100px;
     color: red;
     font-weight: bold;
     padding: 10px 0px 10px 0px;
+}
+
+#changeImageLink{
+    display:block;
+}
+
+.studentImage{
+    height: 175px;
+    margin-bottom: 55px;
+    width: 160px;
+    border: solid 1px;
 }

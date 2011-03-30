@@ -1,0 +1,8 @@
+Tags:
+Preconditions:Navigte to Student Profile,Log In,	Log out afterwards
+Metadata:ScenarioType=Auto
+Student Record With No Photo:
+#Click on "Bhavani" student record
+#Verify that a placeholder is shown
+
+ 
