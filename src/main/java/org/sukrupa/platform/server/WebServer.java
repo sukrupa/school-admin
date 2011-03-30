@@ -104,7 +104,7 @@ public class WebServer {
         ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
         securityHandler.setLoginService(server.getBean(HashLoginService.class));
 
-        FormAuthenticator authenticator=new FormAuthenticator("/authentication/login","/authentication/login",true);
+        FormAuthenticator authenticator = new FormAuthenticator("/authentication/login?success=true","/authentication/login?success=false",true);
 
 
         securityHandler.setAuthenticator(authenticator);
@@ -116,6 +116,7 @@ public class WebServer {
 
         ConstraintMapping events = createConstaintMapping(constraint, "/events/*");
         ConstraintMapping students = createConstaintMapping(constraint, "/students/*");
+
 
         securityHandler.setConstraintMappings(Arrays.asList(events, students));
 
