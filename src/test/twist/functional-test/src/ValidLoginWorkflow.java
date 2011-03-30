@@ -12,10 +12,11 @@ public class ValidLoginWorkflow {
 		this.browser = browser;
 	}
 
-	public void whenIEnterValidCredentials() throws Exception {
-		browser.textbox("j_username").setValue("admin");
-		browser.password("j_password").setValue("password");
-		browser.byId("loginButton").click();
+	public void whenIEnterValidCredentialsWithUsernameAndPassword(String username, String password) 
+	throws Exception {
+		browser.textbox("j_username").setValue(username);
+		browser.password("j_password").setValue(password);
+		browser.byId("loginButton").click();	
 	}
 
 	public void thenIShouldSeeTheStudentsPage() throws Exception {

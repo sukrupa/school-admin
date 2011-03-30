@@ -12,11 +12,11 @@ public class InvalidLoginWorkflow {
 		this.browser = browser;
 	}
 
-	public void whenIEnterInvalidCredentials() throws Exception {
-		browser.textbox("j_username").setValue("admin");
-		browser.password("j_password").setValue("wrongPassword");
-		browser.byId("loginButton").click();
-		
+	public void whenIEnterInvalidCredentialsWithUsernameAndPassword(String username,
+			String wrongPassword) throws Exception {
+		browser.textbox("j_username").setValue(username);
+		browser.password("j_password").setValue(wrongPassword);
+		browser.byId("loginButton").click();	
 	}
 
 	public void thenIShouldBePromptedForLoginAgain() throws Exception {
