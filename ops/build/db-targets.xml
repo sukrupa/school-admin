@@ -63,8 +63,11 @@
     </target>
 
     <target name="db:update" description="Updates the database schema to the latest version." depends="db:start">
+        <echo>driver=${db.driver} url=${db.url} userid=${db.user} password=${db.password}
+                  dir=${src.sql.delta.dir}</echo>
         <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
                   dir="${src.sql.delta.dir}"/>
+
     </target>
 
     <target name="db:insert-fake-data" description="Populates the database with fake data">
