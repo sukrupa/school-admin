@@ -7,13 +7,6 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
-/**
- * Created by IntelliJ IDEA.
- * User: ysembira
- * Date: 29/03/2011
- * Time: 12:15
- * To change this template use File | Settings | File Templates.
- */
 public class StudentFactoryTest {
 
     @Test
