@@ -106,11 +106,10 @@ public class WebServer {
 
         FormAuthenticator authenticator = new FormAuthenticator("/authentication/login?success=true","/authentication/login?success=false",true);
 
-
         securityHandler.setAuthenticator(authenticator);
 
         Constraint constraint = new Constraint();
-        constraint.setName(Constraint.__FORM_AUTH);   // Constraint.__FORM_AUTH
+        constraint.setName(Constraint.__FORM_AUTH);
         constraint.setRoles(new String[]{"SukrupaSchoolAdmin"});
         constraint.setAuthenticate(true);
 

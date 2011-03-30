@@ -1,17 +1,14 @@
 package org.sukrupa.student;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.app.students.UpdateStudentPage;
 import org.sukrupa.app.students.ViewStudentPage;
+import org.sukrupa.base.FunctionalTestBase;
 import org.sukrupa.event.ErrorPage;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.DatabaseHelper;
@@ -22,22 +19,12 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
-public class UpdateStudentTest {
+public class UpdateStudentTest extends FunctionalTestBase {
 
     private Student shefali = new StudentBuilder().name("shefali").studentId("1234567").build();
 
-    WebDriver driver = new HtmlUnitDriver();
-
     @Autowired
     private DatabaseHelper databaseHelper;
-
-     @Before
-    public void setUp() throws Exception {
-        driver.get("http://localhost:8080/authentication/login");
-        driver.findElement(By.xpath("//*[@name='j_username']")).sendKeys("admin");
-        driver.findElement(By.xpath("//*[@name='j_password']")).sendKeys("password");
-        driver.findElement(By.xpath("//input[@value='Login']")).click();
-    }
 
     @After
     public void tearDown() throws Exception {

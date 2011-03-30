@@ -123,7 +123,7 @@ body
 #basicBody {
     width: 700px;
     float: left;
-   min-height:210px;
+    min-height:210px;
     padding-left:15px;
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica;
@@ -211,14 +211,13 @@ div.note
 
 .logout
 {
-   float: right;
    font-size: 14px;
    margin-right: 10px;
    position: relative;
    bottom: 10px;
+   left: 850px;
    background: #f7c320;
-
-
+   display: inline;
 }
 
 .logout a
