@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigate To HomePage,Log In
+Preconditions:Navigate To HomePage,Log In,Log out afterwards
 Add Student Record:
 #When I click on the "Add New Student" link
 #And I enter the "studentId" as "SK20100820"

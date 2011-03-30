@@ -1,5 +1,5 @@
-Tags:in-progress
-Preconditions:Navigate to Dashboard
+Tags:
+Preconditions:Navigate to Login,Log out afterwards
 Invalid Login Workflow:
 #When I enter invalid credentials
 #Then I should be prompted for login again

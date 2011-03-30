@@ -13,14 +13,14 @@ public class InvalidLoginWorkflow {
 	}
 
 	public void whenIEnterInvalidCredentials() throws Exception {
-		browser.textbox("authUser").setValue("admin123");
-		browser.password("authPassword").setValue("wrongPassword");
-		browser.submit("Authenticate");
+		browser.textbox("j_username").setValue("admin");
+		browser.password("j_password").setValue("wrongPassword");
+		browser.submit("loginButton");
 		
 	}
 
 	public void thenIShouldBePromptedForLoginAgain() throws Exception {
-		assertTrue(browser.table("sahiAuth").exists());
+		assertEquals("Login",browser.title());
 	}
 
 }

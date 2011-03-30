@@ -1,9 +1,8 @@
 package org.sukrupa.event;
 
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,12 @@ import org.sukrupa.student.StudentBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
-import static org.sukrupa.platform.webdriver.AuthenticatedHtmlUnitDriver.authenticatedDriver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class CreateAndViewEventTest {
 
-    WebDriver driver = authenticatedDriver("admin", "password");
+    WebDriver driver = new HtmlUnitDriver();
 
     @Autowired
     private DatabaseHelper databaseHelper;
@@ -33,11 +31,21 @@ public class CreateAndViewEventTest {
     private Student alex;
     private Student bob;
 
+    @Before
+    public void setUp() throws Exception {
+        driver.get("http://localhost:8080/authentication/login");
+        driver.findElement(By.xpath("//*[@name='j_username']")).sendKeys("admin");
+        driver.findElement(By.xpath("//*[@name='j_password']")).sendKeys("password");
+        driver.findElement(By.xpath("//input[@value='Login']")).click();
+    }
+
     @After
     public void tearDown() throws Exception {
         databaseHelper.deleteAllFromTables("EVENT_ATTENDEES", "event");
         databaseHelper.deleteAllCreatedObjects();
+        driver.get("http://localhost:8080/authentication/logout");
     }
+
 
     @Test
     public void shouldCreateAndViewAnEvent() {

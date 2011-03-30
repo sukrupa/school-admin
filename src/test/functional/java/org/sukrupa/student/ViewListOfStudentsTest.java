@@ -16,20 +16,27 @@ import java.util.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.sukrupa.platform.hamcrest.Matchers.*;
-import static org.sukrupa.platform.webdriver.AuthenticatedHtmlUnitDriver.authenticatedDriver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class ViewListOfStudentsTest {
 
-    WebDriver driver = authenticatedDriver("admin", "password");
+    WebDriver driver = new HtmlUnitDriver();
 
     @Autowired
     private DatabaseHelper databaseHelper;
 
+    @Before
+    public void setUp() throws Exception {
+        driver.get("http://localhost:8080/authentication/login");
+        driver.findElement(By.xpath("//*[@name='j_username']")).sendKeys("admin");
+        driver.findElement(By.xpath("//*[@name='j_password']")).sendKeys("password");
+        driver.findElement(By.xpath("//input[@value='Login']")).click();
+    }
     @After
     public void tearDown() throws Exception {
         databaseHelper.deleteAllCreatedObjects();
+        driver.get("http://localhost:8080/authentication/logout");
     }
 
     @Test

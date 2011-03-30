@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigate to Search Page,Log In
+Preconditions:Navigate to Search Page,Log In,	Log out afterwards
 search Workflow:
 #Given I select the talent "Sports"
 #And I select the talent "Acting"

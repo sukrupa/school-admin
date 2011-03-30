@@ -1,0 +1,7 @@
+Tags:
+Preconditions:Navigate to Dashboard,Log in
+Valid Logout Workflow:
+#When I click "Logout"
+#Then I should see the logout page
+
+

@@ -5,6 +5,7 @@ import org.eclipse.jetty.http.security.Constraint;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.authentication.FormAuthenticator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ErrorHandler;
@@ -17,7 +18,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
 
+
 import java.io.IOException;
+import java.util.Arrays;
+
 
 import static java.lang.String.format;
 
@@ -100,18 +104,29 @@ public class WebServer {
         ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
         securityHandler.setLoginService(server.getBean(HashLoginService.class));
 
+        FormAuthenticator authenticator=new FormAuthenticator("/authentication/login","/authentication/login",true);
+
+
+        securityHandler.setAuthenticator(authenticator);
+
         Constraint constraint = new Constraint();
-        constraint.setName(Constraint.__BASIC_AUTH);
+        constraint.setName(Constraint.__FORM_AUTH);   // Constraint.__FORM_AUTH
         constraint.setRoles(new String[]{"SukrupaSchoolAdmin"});
         constraint.setAuthenticate(true);
 
-        ConstraintMapping cm = new ConstraintMapping();
-        cm.setPathSpec("/*");
-        cm.setConstraint(constraint);
+        ConstraintMapping events = createConstaintMapping(constraint, "/events/*");
+        ConstraintMapping students = createConstaintMapping(constraint, "/students/*");
 
-        securityHandler.addConstraintMapping(cm);
+        securityHandler.setConstraintMappings(Arrays.asList(events, students));
 
         servletHandler.setSecurityHandler(securityHandler);
+    }
+
+    private ConstraintMapping createConstaintMapping(Constraint constraint, String path) {
+        ConstraintMapping cm = new ConstraintMapping();
+        cm.setPathSpec(path);
+        cm.setConstraint(constraint);
+        return cm;
     }
 
 }

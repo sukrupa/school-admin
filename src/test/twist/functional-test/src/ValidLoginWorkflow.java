@@ -13,9 +13,9 @@ public class ValidLoginWorkflow {
 	}
 
 	public void whenIEnterValidCredentials() throws Exception {
-		browser.textbox("authUser").setValue("admin");
-		browser.password("authPassword").setValue("password");
-		browser.submit("Authenticate").click();	
+		browser.textbox("j_username").setValue("admin");
+		browser.password("j_password").setValue("password");
+		browser.submit("loginButton").click();	
 	}
 
 	public void thenIShouldSeeTheStudentsPage() throws Exception {

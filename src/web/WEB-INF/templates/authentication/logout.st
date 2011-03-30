@@ -1,0 +1,1 @@
+$basicLayout(body=authentication/logoutBody(),login="true", title="Logout")$
