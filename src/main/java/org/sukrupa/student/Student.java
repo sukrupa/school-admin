@@ -159,6 +159,7 @@ public class Student {
 
     public List<String> talentDescriptions() {
         List<String> talentDescriptions = new ArrayList<String>();
+
         for (Talent talent : talents) {
             talentDescriptions.add(talent.getDescription());
         }

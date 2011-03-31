@@ -2,8 +2,16 @@ Tags:
 Preconditions:Navigate To HomePage,Log In,Log out afterwards
 Add Student Record:
 #When I click on the "Add New Student" link
-#And I enter the "studentId" as "SK20100820"
+#And I enter the "studentId" as "SK2010082011"
 #And I enter the "name" as "Yael"
 #And I enter the "dateOfBirth" as "06-03-1982"
+#And I select the "gender" as"Male"
+#And I select the "studentClass" as "Preschool"
+#And I select the "religion" as "Christian"
+#and I select the "caste" as "Achari"
+#And I select the "subCaste" as "Adi Drawida"
+#And I select the "communityLocation" as "Hebbal"
+#And I enter the "father" as "Bob"
+#And i enter the "mother" as "Sheila"
 #And I click "Submit"
 #Then I should see the "Student Record:" page
