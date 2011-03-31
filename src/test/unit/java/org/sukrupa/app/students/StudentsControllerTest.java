@@ -37,7 +37,6 @@ public class StudentsControllerTest {
     public void setUp() throws Exception {
         initMocks(this);
         studentValidator = new FakeStudentValidator();
-
         controller = new StudentsController(service, studentValidator);
     }
 
@@ -88,6 +87,42 @@ public class StudentsControllerTest {
         controller.create(userDidNotEnterName, model);
 
         assertNotNull(model.get("nameError").toString());
+    }
+
+    @Test
+    public void shouldDefineIfStudentIsActiveOnViewStudent() throws Exception {
+        Map<String,Object> model = new HashMap<String, Object>();
+        Student student = mock(Student.class);
+        when(service.load("id")).thenReturn(student);
+        when(student.getStatus()).thenReturn(StudentStatus.ACTIVE);
+
+        controller.view("id", false, model);
+
+        assertThat((String) model.get("statusType"), is("active"));
+    }
+
+    @Test
+    public void shouldDefineIfStudentIsInactiveOnViewStudent() throws Exception {
+        Map<String, Object> model = new HashMap<String, Object>();
+        Student student = mock(Student.class);
+        when(service.load("id")).thenReturn(student);
+        when(student.getStatus()).thenReturn(StudentStatus.INACTIVE);
+
+        controller.view("id", false, model);
+
+        assertThat((String) model.get("statusType"), is("inactive"));
+    }
+
+    @Test
+    public void shouldDefineIfStudentStatusIsAlumniOrNotSetOnViewStudent() throws Exception {
+        Map<String, Object> model = new HashMap<String, Object>();
+        Student student = mock(Student.class);
+        when(service.load("id")).thenReturn(student);
+        when(student.getStatus()).thenReturn(StudentStatus.ALUMNI);
+
+        controller.view("id", false, model);
+
+        assertThat((String) model.get("statusType"), is("default"));
     }
 
     private class FakeStudentValidator extends StudentValidator {
