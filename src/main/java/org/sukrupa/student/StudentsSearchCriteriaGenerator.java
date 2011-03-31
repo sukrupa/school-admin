@@ -40,7 +40,7 @@ class StudentsSearchCriteriaGenerator {
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
-        Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
+        Conjunction conjunction = createConjunction(searchParam.getName(), searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
         if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(searchParam.getAgeFrom())) {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
@@ -82,8 +82,10 @@ class StudentsSearchCriteriaGenerator {
         return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
     }
 
-    private Conjunction createConjunction(String studentClass, String gender, String caste, String communityLocation, String religion) {
+    private Conjunction createConjunction(String name, String studentClass, String gender, String caste, String communityLocation, String religion) {
         Conjunction conjunction = Restrictions.conjunction();
+
+        addRestrictionIfNotWildcard(NAME, name, conjunction);
         addRestrictionIfNotWildcard(STUDENT_CLASS, studentClass, conjunction);
         addRestrictionIfNotWildcard(GENDER, gender, conjunction);
         addRestrictionIfNotWildcard(CASTE, caste, conjunction);

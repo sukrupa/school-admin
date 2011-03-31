@@ -221,5 +221,20 @@ public class StudentRepositoryTest {
 
     }
 
+    @Test
+    public void shouldReturnAStudentIfWeMatchTheNameExactly() {
+        Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+        databaseHelper.save(yael);
+
+        String searchTerm = "Yael";
+        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+
+        assertThat(students, hasItem(yael));
+    }
+
+    private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {
+        return new StudentSearchParameterBuilder().name(searchTerm).build();
+    }
+
 
 }
