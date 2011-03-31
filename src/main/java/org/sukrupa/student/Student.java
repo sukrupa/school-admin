@@ -69,8 +69,8 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "note_id"))
     private Set<Note> notes;
 
-    @Transient
-    private String status = "Not Set";
+    @Enumerated(EnumType.ORDINAL)
+    private StudentStatus status;
 
     @DoNotRemove
     public Student() {
@@ -169,10 +169,6 @@ public class Student {
         return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     protected LocalDate getCurrentDate() {
         return new LocalDate();
     }
@@ -183,6 +179,10 @@ public class Student {
 
     public Set<Note> getNotes() {
         return notes;
+    }
+
+    public StudentStatus getStatus() {
+        return status;
     }
 
     private static String[] excludedFields = new String[]{"id"};
