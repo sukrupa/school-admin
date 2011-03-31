@@ -13,34 +13,17 @@ public class StudentProfile {
 		this.browser = browser;
 	}
 
-	public void verifyStudentRecord(String string1) throws Exception {
-		browser.div(string1).mouseOver();
+	public void verifyThatTalentIs(String expectedTalent) throws Exception {
+		assertEquals(expectedTalent, browser.div("talent").text());
+	}
+
+	public void verifyThatNameIs(String expectedName) throws Exception {
+		assertEquals(expectedName, browser.div(expectedName).text());
 	
 	}
 
-	public void navigateToStudentRecord(String string1) throws Exception {
-		browser.link(string1).click();
-	
+	public void clickOnStudentRecord(String name) throws Exception {
+		browser.link(name).click();
 	}
-
-	public void navigateToProfile(String string1) throws Exception {
-	
-	}
-
-	public void verifyThatTalentIs(String string1) throws Exception {
-		assertEquals(string1, browser.div("talent").text());
-	
-	}
-
-	public void verifyThatNameIs(String string1) throws Exception {
-		assertEquals(string1, browser.div(string1).text());
-	
-	}
-
-	public void clickOnStudentRecord(String string1) throws Exception {
-		browser.link(string1).click();
-	}
-
-
 
 }
