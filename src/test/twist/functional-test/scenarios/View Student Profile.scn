@@ -4,6 +4,7 @@ Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"
 #Verify that talent is "Pick & Speak"
+#Verify that status is "Not Set"
 
 Student Profile Two, Student Profile:
 #Go back to Student profile list
