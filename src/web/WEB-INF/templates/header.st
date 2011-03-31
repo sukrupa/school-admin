@@ -14,10 +14,11 @@
     <div class="oneLineTitle">
         $title$
     </div>
-    $if (!login)$
+
+    $endif$
+</h1>
+$if (!login)$
     <div class="logout">
         <a href="/authentication/logout">Logout</a>
     </div>
-    $endif$
-    $endif$
-</h1>
+$endif$

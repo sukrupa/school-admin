@@ -2,6 +2,7 @@
 // JUnit Assert framework can be used for verification
 
 import net.sf.sahi.client.Browser;
+
 import static junit.framework.Assert.*;
 
 public class StudentProfile {
@@ -39,5 +40,7 @@ public class StudentProfile {
 	public void clickOnStudentRecord(String string1) throws Exception {
 		browser.link(string1).click();
 	}
+
+
 
 }

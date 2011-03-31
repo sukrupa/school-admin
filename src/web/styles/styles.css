@@ -113,7 +113,7 @@ body
     width: 700px;
     float: left;
    min-height:210px;
-    padding-left:15px;
+    padding-left:15px
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica; 
     border-left:solid;
@@ -123,14 +123,14 @@ body
 #basicBody {
     width: 700px;
     float: left;
-   min-height:210px;
+    min-height:210px;
     padding-left:15px;
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica;
 
 }
 
-img {
+.pageheader img {
     border: none;
     padding-top:40px;
     padding-left: 5px;
@@ -211,14 +211,13 @@ div.note
 
 .logout
 {
-   float: right;
    font-size: 14px;
    margin-right: 10px;
    position: relative;
    bottom: 10px;
+   left: 850px;
    background: #f7c320;
-
-
+   display: inline;
 }
 
 .logout a
@@ -546,4 +545,15 @@ width: 100px;
 .errorMessage {
     color: red;
     padding: 10px 0px 10px 0px;
+}
+
+#changeImageLink{
+    display:block;
+}
+
+.studentImage{
+    height: 175px;
+    margin-bottom: 55px;
+    width: 160px;
+    border: solid 1px;
 }

@@ -2,12 +2,11 @@ package org.sukrupa.student;
 
 import org.junit.*;
 import org.junit.runner.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.htmlunit.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
 import org.sukrupa.app.students.*;
+import org.sukrupa.base.FunctionalTestBase;
 import org.sukrupa.platform.config.*;
 import org.sukrupa.platform.db.*;
 
@@ -19,20 +18,11 @@ import static org.sukrupa.platform.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
-public class ViewListOfStudentsTest {
-
-    WebDriver driver = new HtmlUnitDriver();
+public class ViewListOfStudentsTest extends FunctionalTestBase {
 
     @Autowired
     private DatabaseHelper databaseHelper;
 
-    @Before
-    public void setUp() throws Exception {
-        driver.get("http://localhost:8080/authentication/login");
-        driver.findElement(By.xpath("//*[@name='j_username']")).sendKeys("admin");
-        driver.findElement(By.xpath("//*[@name='j_password']")).sendKeys("password");
-        driver.findElement(By.xpath("//input[@value='Login']")).click();
-    }
     @After
     public void tearDown() throws Exception {
         databaseHelper.deleteAllCreatedObjects();

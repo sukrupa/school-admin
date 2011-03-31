@@ -2,9 +2,11 @@ package org.sukrupa.app.authentication;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 
 @Controller
@@ -12,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthenticationController {
 
     @RequestMapping(value = "login")
-    public String create() {
-
+    public String create(@RequestParam("success") boolean success, Map<String, Object> model) {
+        model.put("success", success);
         return "/authentication/login";
     }
 

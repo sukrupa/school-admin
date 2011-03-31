@@ -18,8 +18,6 @@
     <div id="header">
         $header()$
     </div>
-
-
     <div id="columns">
 
         <div id="basicBody">
