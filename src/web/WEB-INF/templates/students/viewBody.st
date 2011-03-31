@@ -71,16 +71,13 @@
             </div>
         </div>
         <div id="secondaryInfo">
-            <div id="recordImage">
+            <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
-                <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
-
-                <div id="talents">
-                    <div class="talentsLabel">Talents</div>
-                    $student.talents:{
-                    <div class="talent">$it.description$</div>
-                    }$
-                </div>
+            <div id="talents">
+                <div class="talentsLabel">Talents</div>
+                $student.talents:{
+                <div class="talent">$it.description$</div>
+                }$
             </div>
         </div>
 
