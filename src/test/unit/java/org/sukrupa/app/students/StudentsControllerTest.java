@@ -70,7 +70,7 @@ public class StudentsControllerTest {
         studentToCreate.setDateOfBirth("11-10-1982");
 
         Student studentThatGetsCreated = new Student("SK111","", "01-01-2001");
-        when(service.create(any(String.class), any(String.class), any(String.class))).thenReturn(studentThatGetsCreated);
+        when(service.create(any(StudentCreateOrUpdateParameter.class))).thenReturn(studentThatGetsCreated);
 
         String result = controller.create(studentToCreate, null);
 

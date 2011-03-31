@@ -150,14 +150,18 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
+        StudentCreateOrUpdateParameter studentParam =new StudentCreateOrUpdateParameter();
         String studentId = "SK20091001";
         String studentName = "Yael";
         String studentDateOfBirth = "06-03-1982";
+        studentParam.setStudentId("SK20091001");
+        studentParam.setName("Yael");
+        studentParam.setDateOfBirth("06-03-1982");
 
         Student expectedStudent = mock(Student.class);
-        when(studentFactory.create(studentId, studentName, studentDateOfBirth)).thenReturn(expectedStudent);
+        when(studentFactory.createBasic(studentParam)).thenReturn(expectedStudent);
 
-        Student student = service.create(studentId, studentName, studentDateOfBirth);
+        Student student = service.create(studentParam);
 
         verify(studentRepository).put(expectedStudent);
         assertEquals(expectedStudent, student);

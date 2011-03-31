@@ -135,7 +135,7 @@ public class StudentsController {
         studentValidator.validate(studentParam, errors);
 
         if (mandatoryFieldsExist(errors)) {
-            Student student = studentService.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth());
+            Student student = studentService.create(studentParam);
             return format("redirect:/students/%s", student.getStudentId());
         } else {
             model.put("student", studentParam);

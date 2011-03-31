@@ -72,6 +72,9 @@ public class Student {
     private Set<Note> notes;
     public static final Student EMPTY_STUDENT = new EmptyStudent();
 
+    @Enumerated(EnumType.ORDINAL)
+    private StudentStatus status;
+
     @DoNotRemove
     public Student() {
     }
@@ -159,6 +162,7 @@ public class Student {
 
     public List<String> talentDescriptions() {
         List<String> talentDescriptions = new ArrayList<String>();
+
         for (Talent talent : talents) {
             talentDescriptions.add(talent.getDescription());
         }
@@ -187,6 +191,10 @@ public class Student {
 
     public Set<Note> getNotes() {
         return notes;
+    }
+
+    public StudentStatus getStatus() {
+        return status;
     }
 
     private static String[] excludedFields = new String[]{"id"};
