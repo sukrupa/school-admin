@@ -1,6 +1,7 @@
 package org.sukrupa.event;
 
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +28,8 @@ import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 @Transactional
 public class EventRepositoryTest {
 
-	private final Student sahil = new StudentBuilder().name("Sahil").studentId("1").build();
-	private final Student suhas = new StudentBuilder().name("Suhas").studentId("2").build();
+	private final Student sahil = new StudentBuilder().name("Sahil").studentId("1").dateOfBirth(new LocalDate(1987,1,12)).build();
+	private final Student suhas = new StudentBuilder().name("Suhas").studentId("2").dateOfBirth(new LocalDate(1987,1,12)).build();
     private final Event sportsEvent = new EventBuilder().title("Sports Day").date(new Date(21, 12, 2011)).build();
     private final Event independeceDayEvent = new EventBuilder().title("Independence Day").date(new Date(15, 8, 2011)).build();
 

@@ -537,14 +537,13 @@ width: 100px;
     color: red;
 }
 
-#errorMessages {
+#errorMessages  {
 	margin-top: 10px;
     color: red;
 }
 
 .errorMessage {
     color: red;
-    font-weight: bold;
     padding: 10px 0px 10px 0px;
 }
 

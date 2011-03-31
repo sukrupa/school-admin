@@ -1,6 +1,7 @@
 
 // JUnit Assert framework can be used for verification
 
+
 import net.sf.sahi.client.Browser;
 import static junit.framework.Assert.*;
 
@@ -26,6 +27,10 @@ public class AddStudentRecord {
 
 	public void thenIShouldSeeThePage(String expectedTitle) throws Exception {
 		assertEquals(browser.title(), expectedTitle);
+	}
+
+	public void andISelectTheAs(String selectBox, String option) throws Exception {
+		browser.select(selectBox).choose(option);
 	}
 	
 

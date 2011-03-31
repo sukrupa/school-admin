@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,8 +83,10 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(String studentId, String name, String dateOfBirth) {
-        Student student = studentFactory.create(studentId,name,dateOfBirth);
+    public Student create(StudentCreateOrUpdateParameter studentParam) {
+
+        Student student = studentFactory.createBasic(studentParam);
+        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalents()));
         studentRepository.put(student);
         return student;
     }
