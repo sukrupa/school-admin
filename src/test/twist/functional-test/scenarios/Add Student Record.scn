@@ -15,3 +15,8 @@ Add Student Record:
 #And i enter the "mother" as "Sheila"
 #And I click "Submit"
 #Then I should see the "Student Record:" page
+
+Cancel Button:
+#When I navigate to "/students/create"
+#When I click on the "cancel" button
+#I should see the title "List of Students"
