@@ -65,6 +65,18 @@ public class StudentRepositoryTest {
             .gender("male")
             .build();
 
+    private Student yael = new StudentBuilder()
+            .studentId("555").name("Yael")
+            .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
+            .gender("Female").talents(music, sport)
+            .build();
+
+    private Student yam = new StudentBuilder()
+            .studentId("559").name("Yam")
+            .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
+            .gender("Male").talents(music, sport)
+            .build();
+
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
 
@@ -223,7 +235,8 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnAStudentIfWeMatchTheNameExactly() {
-        Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+
         databaseHelper.save(yael);
 
         String searchTerm = "Yael";
@@ -231,10 +244,48 @@ public class StudentRepositoryTest {
 
         assertThat(students, hasItem(yael));
     }
+    @Test
+    public void shouldReturnAStudentIfWeMatchTheNameStringButNotCase() {
+       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+
+        databaseHelper.save(yael);
+
+        String searchTerm = "yAeL";
+        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+
+        assertThat(students, hasItem(yael));
+    }
+
+    @Test
+    public void shouldReturnAStudentIfWeMatchTheNamePartially() {
+       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+
+        databaseHelper.save(yael);
+
+        String searchTerm = "Ya";
+        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+
+        assertThat(students, hasItem(yael));
+    }
+    @Test
+    public void shouldReturnAllStudentsIfWeMatchTheNamePartially() {
+       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+
+        databaseHelper.save(yael);
+        databaseHelper.save(yam);
+
+        String searchTerm = "Ya";
+        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+
+        assertThat(students, hasItem(yael));
+        assertThat(students, hasItem(yam));
+    }
 
     private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {
         return new StudentSearchParameterBuilder().name(searchTerm).build();
     }
+
+
 
 
 }

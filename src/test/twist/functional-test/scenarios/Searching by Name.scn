@@ -1,0 +1,8 @@
+Tags:
+Preconditions:Navigate to Search Page,Log In,	Log out afterwards
+Metadata:ScenarioType=Auto
+search Workflow:
+#Given I select the name <Search>
+#When I hit search button
+#Then  <Shows> shows in search results 
+#Then <DoesNotShow> does not show in search results
