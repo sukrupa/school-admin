@@ -25,6 +25,7 @@ public class StudentBuilder {
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
+    private StudentStatus status = StudentStatus.ACTIVE;
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -121,7 +122,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, StudentStatus.NOT_SET);
     }
 
     public StudentBuilder imageLink(String imageLink) {

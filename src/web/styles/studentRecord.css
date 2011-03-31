@@ -21,3 +21,11 @@
 #secondaryInfo .entry .value {
     width: 100px;
 }
+
+.entry .value.active {
+    color: green;
+}
+
+.entry .value.inactive {
+    color: red;
+}
