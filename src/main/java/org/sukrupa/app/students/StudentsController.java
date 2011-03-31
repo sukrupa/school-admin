@@ -1,9 +1,10 @@
 package org.sukrupa.app.students;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class StudentsController {
 
     private StudentService studentService;
+    private StudentValidator studentValidator;
 
     @Autowired
-    public StudentsController(StudentService studentService) {
+    public StudentsController(StudentService studentService, StudentValidator studentValidator) {
         this.studentService = studentService;
+        this.studentValidator = studentValidator;
     }
 
     @RequestMapping
@@ -72,7 +75,6 @@ public class StudentsController {
                        Map<String, Object> model) {
 
 
-
         Student student = studentService.load(id);
         //[Karthik,Suhas] Find a better way to recognize when users tries to edit non-existent student
         student.getStudentId();
@@ -98,41 +100,66 @@ public class StudentsController {
             model.put("student", student);
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
             return "students/view";
-	    }
-	    return "students/viewFailed";
+        }
+        return "students/viewFailed";
     }
 
-	@RequestMapping(value = "{id}", method = POST)
-	public String update(
-			@PathVariable String id,
-			@ModelAttribute("updateStudent") StudentCreateOrUpdateParameter studentParam,
-			Map<String, Object> model) {
+    @RequestMapping(value = "{id}", method = POST)
+    public String update(
+            @PathVariable String id,
+            @ModelAttribute("updateStudent") StudentCreateOrUpdateParameter studentParam,
+            Map<String, Object> model) {
 
-		Student updatedStudent = studentService.update(studentParam);
+        Student updatedStudent = studentService.update(studentParam);
 
-		if (updatedStudent != null) {
-			model.put("student", updatedStudent);
-			model.put("studentUpdatedSuccesfully", true);
-			return format("redirect:/students/%s", id);
-		}else {
-			model.put("message","Error updating student");
-			return format("redirect:/students/%s/edit", id);
-		}
-	}
+        if (updatedStudent != null) {
+            model.put("student", updatedStudent);
+            model.put("studentUpdatedSuccesfully", true);
+            return format("redirect:/students/%s", id);
+        } else {
+            model.put("message", "Error updating student");
+            return format("redirect:/students/%s/edit", id);
+        }
+    }
 
     @RequestMapping(value = "create", method = GET)
     public String newStudent(HashMap<String, Object> model) {
+        model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
         return "students/create";
     }
 
     @RequestMapping(value = "create", method = POST)
     public String create(
-            @ModelAttribute("createStudent") StudentCreateOrUpdateParameter studentParam) {
-        Student student = studentService.create(
-                studentParam.getStudentId(),
-                studentParam.getName(),
-                studentParam.getDateOfBirth());
+            @ModelAttribute("createStudent") StudentCreateOrUpdateParameter studentParam, Map<String, Object> model) {
+        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentCreateOrUpdateParameter");
+        studentValidator.validate(studentParam, errors);
 
-        return format ("redirect:/students/%s", student.getStudentId());
+        if (mandatoryFieldsExist(errors)) {
+            Student student = studentService.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth());
+            return format("redirect:/students/%s", student.getStudentId());
+        } else {
+            model.put("student", studentParam);
+            model.put("errors", errors);
+
+            addErrorToFieldIfNecessary("name", model, errors);
+            addErrorToFieldIfNecessary("dateOfBirth", model, errors);
+            addErrorToFieldIfNecessary("studentId", model, errors);
+            model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
+            return "students/create";
+        }
+    }
+
+    private boolean mandatoryFieldsExist(Errors errors) {
+        return errors.getErrorCount() == 0;
+    }
+
+    private void addErrorToFieldIfNecessary(String name, Map<String, Object> model, Errors errors) {
+        FieldError nameError = errors.getFieldError(name);
+        model.put(format("%sError", name), no(nameError) ? null : nameError.getDefaultMessage());
+
+    }
+
+    private boolean no(FieldError nameError) {
+        return nameError == null;
     }
 }

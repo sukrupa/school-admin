@@ -14,13 +14,14 @@ import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Student {
 
-	static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
+	public static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
 	@Id
     @GeneratedValue
     private long id;
@@ -65,6 +66,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "note_id"))
     private Set<Note> notes;
+    public static final Student EMPTY_STUDENT = new EmptyStudent();
 
     @DoNotRemove
     public Student() {
@@ -225,5 +227,83 @@ public class Student {
             this.studentClass = this.studentClass.replace(this.studentClass.substring(0,1), Integer.toString(studentClassInt));
         }
 
+    }
+
+
+    private static class EmptyStudent extends Student {
+        @Override
+        public String getName() {
+            return "";
+        }
+
+        @Override
+        public String getReligion() {
+            return "";
+        }
+
+        @Override
+        public String getCaste() {
+            return "";
+        }
+
+        @Override
+        public String getSubCaste() {
+            return "";
+        }
+
+        @Override
+        public String getCommunityLocation() {
+            return "";
+        }
+
+        @Override
+        public String getStudentId() {
+            return "";
+        }
+
+        @Override
+        public String getGender() {
+            return "";
+        }
+
+        @Override
+        public String getStudentClass() {
+            return "";
+        }
+
+        @Override
+        public String getMother() {
+            return "";
+        }
+
+        @Override
+        public String getFather() {
+            return "";
+        }
+
+        @Override
+        public LocalDate getDateOfBirth() {
+            return new LocalDate();
+        }
+
+        @Override
+        public Set<Talent> getTalents() {
+            return Collections.emptySet();
+        }
+
+        @Override
+        public String getTalentsForDisplay() {
+            return "";
+        }
+
+        @Override
+        public List<String> talentDescriptions() {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public int getAge() {
+            return 0;
+        }
     }
 }

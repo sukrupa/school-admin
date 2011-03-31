@@ -1,17 +1,18 @@
 package org.sukrupa.app.students;
 
-import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.Any;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentBuilder;
-import org.sukrupa.student.StudentCreateOrUpdateParameter;
-import org.sukrupa.student.StudentService;
+import org.springframework.validation.Errors;
+import org.sukrupa.student.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
@@ -30,10 +31,14 @@ public class StudentsControllerTest {
     private HashMap<String, Object> studentModel = new HashMap<String, Object>();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
 
+    private FakeStudentValidator studentValidator;
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new StudentsController(service);
+        studentValidator = new FakeStudentValidator();
+
+        controller = new StudentsController(service, studentValidator);
     }
 
     @Test
@@ -61,14 +66,46 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldCreateANewStudent () {
-        Student student = mock(Student.class);
-        StudentCreateOrUpdateParameter createParameter = new StudentCreateOrUpdateParameter();
-        createParameter.setDateOfBirth("11-10-1982");
+        StudentCreateOrUpdateParameter studentToCreate = new StudentCreateOrUpdateParameter();
+        studentToCreate.setDateOfBirth("11-10-1982");
 
-        when(student.getStudentId()).thenReturn("SK111");
-        when(service.create(any(String.class), any(String.class), any(String.class))).thenReturn(student);
+        Student studentThatGetsCreated = new Student("SK111","", "01-01-2001");
+        when(service.create(any(String.class), any(String.class), any(String.class))).thenReturn(studentThatGetsCreated);
 
-        assertThat(controller.create(createParameter), is("redirect:/students/SK111"));
+        String result = controller.create(studentToCreate, null);
+
+        assertThat(result, is("redirect:/students/SK111"));
     }
 
+    @Test
+    public void shouldAddNameErrorIfTheUserDoesNotEnterAName() {
+        studentValidator.addErrorTo("name");
+
+        Map<String, Object> model = new HashMap<String, Object>();
+
+        StudentCreateOrUpdateParameter userDidNotEnterName = new StudentUpdateParameterBuilder().name("").build();
+
+        controller.create(userDidNotEnterName, model);
+
+        assertNotNull(model.get("nameError").toString());
+    }
+
+    private class FakeStudentValidator extends StudentValidator {
+        private List<String> errorFields;
+
+        public FakeStudentValidator() {
+            errorFields = new ArrayList<String>();
+        }
+
+        @Override
+        public void validate(Object target, Errors errors) {
+            for (String field : errorFields) {
+                errors.rejectValue(field, "", "made up error");
+            }
+        }
+
+        public void addErrorTo(String field) {
+            errorFields.add(field);
+        }
+    }
 }

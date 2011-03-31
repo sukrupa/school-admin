@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
@@ -48,6 +49,11 @@ public class StudentCreateOrUpdateParameter {
     public String getDateOfBirth() {
         return dateOfBirth;
     }
+
+    public String getDateOfBirthForDisplay() {
+        return getDateOfBirth();
+    }
+
 
     public String getGender() {
         return gender;
