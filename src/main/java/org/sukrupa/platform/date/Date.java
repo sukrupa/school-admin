@@ -3,7 +3,9 @@ package org.sukrupa.platform.date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.DateTimeComparator;
 
 import java.io.Serializable;
 
@@ -51,6 +53,7 @@ public class Date implements Serializable {
         return date.trim() + " " + time.trim();
     }
 
+
     public String getDay() {
         return jodaTime.dayOfWeek().getAsText();
     }
@@ -85,4 +88,14 @@ public class Date implements Serializable {
     public String toString() {
         return jodaTime.toString(DateTimeFormat.forPattern(DATE_FORMAT));
     }
+
+    public boolean isInThePast() {
+        if (DateTimeComparator.getInstance().compare(jodaTime,Date.now().getJodaDateTime())==-1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 }

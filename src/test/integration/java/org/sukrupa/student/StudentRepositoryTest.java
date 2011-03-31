@@ -70,7 +70,7 @@ public class StudentRepositoryTest {
 
     @BeforeClass
     public static void classSetUp() {
-        freezeTime();
+        freezeDateToMidnightOn_31_12_2010();
     }
 
     @AfterClass
