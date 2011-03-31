@@ -21,7 +21,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.platform.date.DateManipulation.freezeTime;
+import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static org.sukrupa.platform.hamcrest.Matchers.hasNote;
 import static org.sukrupa.student.StudentService.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
@@ -52,7 +52,7 @@ public class StudentServiceTest {
     public void setUp() throws Exception {
         initMocks(this);
         service = new StudentService(studentRepository, talentRepository, null, studentFactory);
-        freezeTime();
+        freezeDateToMidnightOn_31_12_2010();
     }
 
     @After

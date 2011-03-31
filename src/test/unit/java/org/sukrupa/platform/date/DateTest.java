@@ -28,4 +28,25 @@ public class DateTest {
         assertThat(Date.parse("10-08-2011", "13:12"), is(new Date(10, 8, 2011, 13, 12)));
         assertThat(Date.parse("10-08-2011", "00:00"), is(new Date(10, 8, 2011)));
     }
+
+    @Test
+    public void shouldReturnTrueIfDateIsInThePast() {
+        DateManipulation.freezeDateToMidnightOn_31_12_2010();
+        assertThat(new Date(1,1,2010).isInThePast(),is(true));
+        DateManipulation.unfreezeTime();
+    }
+    @Test
+    public void shouldReturnFalseIfDateIsNotInThePast() {
+        DateManipulation.freezeDateToMidnightOn_31_12_2010();
+        assertThat(new Date(1,1,2011).isInThePast(),is(false));
+        DateManipulation.unfreezeTime();
+    }
+    @Test
+    public void shouldReturnFalseIfSameDate() {
+        DateManipulation.freezeDateToMidnightOn_31_12_2010();
+        assertThat(new Date(31,12,2011).isInThePast(),is(false));
+        DateManipulation.unfreezeTime();
+    }
+
+
 }

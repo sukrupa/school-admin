@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.sukrupa.platform.date.Date;
 
 import java.util.Set;
 
@@ -27,6 +28,10 @@ public class StudentUpdateParameterBuilder {
     public StudentUpdateParameterBuilder name(String name) {
         this.name = name;
         return this;
+    }
+
+    public StudentUpdateParameterBuilder dateOfBirth(Date date) {
+        return dateOfBirth(date.toString());
     }
 
     public StudentUpdateParameterBuilder dateOfBirth(String dateOfBirth) {
@@ -82,4 +87,6 @@ public class StudentUpdateParameterBuilder {
     public StudentCreateOrUpdateParameter build() {
         return new StudentCreateOrUpdateParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
     }
+
+
 }
