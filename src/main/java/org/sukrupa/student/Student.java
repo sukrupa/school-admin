@@ -69,6 +69,9 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "note_id"))
     private Set<Note> notes;
 
+    @Transient
+    private String status = "Not Set";
+
     @DoNotRemove
     public Student() {
     }
@@ -164,6 +167,10 @@ public class Student {
 
     public int getAge() {
         return Years.yearsBetween(dateOfBirth, getCurrentDate()).getYears();
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     protected LocalDate getCurrentDate() {

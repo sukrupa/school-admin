@@ -18,12 +18,17 @@ public class StudentProfile {
 	}
 
 	public void verifyThatNameIs(String expectedName) throws Exception {
-		assertEquals(expectedName, browser.div(expectedName).text());
-	
+		assertEquals(expectedName,browser.div("value").near(browser.div("Name")).text());
 	}
 
 	public void clickOnStudentRecord(String name) throws Exception {
 		browser.link(name).click();
 	}
+
+	public void verifyThatStatusIs(String expectedStatus) throws Exception {
+		assertEquals(expectedStatus,browser.div("value").near(browser.div("Student Status")).text());
+	}
+
+
 
 }
