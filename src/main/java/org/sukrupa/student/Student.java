@@ -72,13 +72,17 @@ public class Student {
     private Set<Note> notes;
     public static final Student EMPTY_STUDENT = new EmptyStudent();
 
+    @Enumerated(EnumType.ORDINAL)
+    private StudentStatus status = StudentStatus.NOT_SET;
+
     @DoNotRemove
     public Student() {
     }
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink) {
+                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
+                   StudentStatus status) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -93,6 +97,7 @@ public class Student {
         this.talents = talents;
         this.notes = notes;
         this.imageLink = imageLink;
+        this.status = status;
     }
 
     public Student(String studentId, String name, String dateOfBirth) {
@@ -188,6 +193,10 @@ public class Student {
 
     public Set<Note> getNotes() {
         return notes;
+    }
+
+    public StudentStatus getStatus() {
+        return status;
     }
 
     private static String[] excludedFields = new String[]{"id"};

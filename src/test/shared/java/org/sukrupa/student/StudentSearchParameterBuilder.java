@@ -5,6 +5,7 @@ import java.util.List;
 
 public class StudentSearchParameterBuilder {
 
+    private String name = StudentSearchParameter.WILDCARD_CHARACTER;
     private String studentClass = StudentSearchParameter.WILDCARD_CHARACTER;
     private String gender = StudentSearchParameter.WILDCARD_CHARACTER;
     private String caste = StudentSearchParameter.WILDCARD_CHARACTER;
@@ -15,6 +16,11 @@ public class StudentSearchParameterBuilder {
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
     private List<Talent> talents = new ArrayList<Talent>();
+
+    public StudentSearchParameterBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
 
     public StudentSearchParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
@@ -64,7 +70,7 @@ public class StudentSearchParameterBuilder {
     }
 
     public StudentSearchParameter build() {
-        return new StudentSearchParameter(studentClass, gender, caste, area, ageFrom, ageTo, talents, religion);
+        return new StudentSearchParameter(name, studentClass, gender, caste, area, ageFrom, ageTo, talents, religion);
     }
 
     public StudentSearchParameterBuilder page(int page) {

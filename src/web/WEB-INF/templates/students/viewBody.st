@@ -64,11 +64,16 @@
                 <div class="label">Mother's Name</div>
                 <div class="value">$student.mother$</div>
             </div>
+
+
         </div>
         <div id="secondaryInfo">
-            <div id="recordImage">
+            <div class="entry">
+                <div class="label">Student Status</div>
+                <div class="value">$student.status$</div>
+            </div>
 
-                <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+            <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
             <div id="talents">
                 <div class="talentsLabel">Talents</div>
@@ -77,16 +82,15 @@
                 }$
             </div>
         </div>
-    </div>
 
-    <div class="notes">
-        $studentNotesDisplay()$
-    </div>
+        <div class="notes">
+            $studentNotesDisplay()$
+        </div>
 
-    <div id="update">
-        <form action="/students/$student.studentId$/edit" method="GET">
-            <input type="submit" value="Edit"/>
-        </form>
+        <div id="update">
+            <form action="/students/$student.studentId$/edit" method="GET">
+                <input type="submit" value="Edit"/>
+            </form>
+        </div>
     </div>
-
 </div>

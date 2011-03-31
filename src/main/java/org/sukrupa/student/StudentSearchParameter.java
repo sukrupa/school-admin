@@ -8,6 +8,7 @@ public class StudentSearchParameter {
 
     public static final String WILDCARD_CHARACTER = "*";
 
+    private String name = WILDCARD_CHARACTER;
     private String studentClass = WILDCARD_CHARACTER;
     private String gender = WILDCARD_CHARACTER;
     private String caste = WILDCARD_CHARACTER;
@@ -17,7 +18,8 @@ public class StudentSearchParameter {
     private List<Talent> talents = new ArrayList<Talent>();
     private String religion = WILDCARD_CHARACTER;
 
-    public StudentSearchParameter(String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, List<Talent> talents, String religion) {
+    public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, List<Talent> talents, String religion) {
+        this.name = name;
         this.studentClass = studentClass;
         this.gender = gender;
         this.caste = caste;
@@ -30,6 +32,14 @@ public class StudentSearchParameter {
 
     @DoNotRemove
     public StudentSearchParameter() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStudentClass() {
