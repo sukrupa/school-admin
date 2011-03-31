@@ -7,6 +7,7 @@
             <tr>
                 <td>Student ID</td>
                 <td>Name</td>
+                <td>Father's Name</td>
                 <td>Gender</td>
                 <td>Age</td>
                 <td>Talents</td>
@@ -22,6 +23,7 @@
             <tr class="student">
                 <td class="studentId">$it.studentId$</td>
                 <td class="name"><a href="/students/$it.studentId$">$it.name$</a></td>
+                <td class="father">$it.father$</td>
                 <td class="gender">$it.gender$</td>
                 <td class="age">$it.age$</td>
                 <td class="talents">$it.talentsForDisplay$</td>
@@ -29,6 +31,7 @@
                 <td class="religion">$it.religion$</td>
                 <td class="caste">$it.caste$</td>
                 <td class="communityLocation">$it.communityLocation$</td>
+
             </tr>
             }$
             </tbody>

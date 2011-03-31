@@ -104,5 +104,9 @@ public class SearchWorkflow {
 		thenDoesNotShowInSearchResults(string1);
 	}
 
+	public void givenISelectTheName(String string1) throws Exception {
+		browser.textbox("name").setValue(string1);
+	}
+
 
 }

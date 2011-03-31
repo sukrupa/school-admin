@@ -3,11 +3,20 @@
     <table>
         <tr>
             <td>
+                <span>Name</span>
+            </td>
+            <td>
+              <input type="text" id="name" name="name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <span>Talent</span>
             </td>
             <td>
                 <table border="0">
-                <tr>
+
+                    <tr>
                     <td>
                         <select multiple size="6" style="width:150px"  id="availableTalents">
                             $formhelper.talents:{

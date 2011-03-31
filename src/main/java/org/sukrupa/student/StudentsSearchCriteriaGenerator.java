@@ -40,7 +40,7 @@ class StudentsSearchCriteriaGenerator {
     }
 
     private Criteria generateSearchCriteria(StudentSearchParameter searchParam) {
-        Conjunction conjunction = createConjunction(searchParam.getStudentClass(), searchParam.getGender(),
+        Conjunction conjunction = createConjunction(searchParam.getName(), searchParam.getStudentClass(), searchParam.getGender(),
                 searchParam.getCaste(), searchParam.getCommunityLocation(), searchParam.getReligion());
         if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(searchParam.getAgeFrom())) {
             addAgeCriteria(Integer.parseInt(searchParam.getAgeFrom()), Integer.parseInt(searchParam.getAgeTo()), conjunction);
@@ -48,6 +48,7 @@ class StudentsSearchCriteriaGenerator {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Student.class);
         criteria.add(conjunction);
+
         addTalentsSearchCriteria(criteria, searchParam.getTalents());
         return criteria;
     }
@@ -82,19 +83,37 @@ class StudentsSearchCriteriaGenerator {
         return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
     }
 
-    private Conjunction createConjunction(String studentClass, String gender, String caste, String communityLocation, String religion) {
+    private Conjunction createConjunction(String name, String studentClass, String gender, String caste, String communityLocation, String religion) {
         Conjunction conjunction = Restrictions.conjunction();
-        addRestrictionIfNotWildcard(STUDENT_CLASS, studentClass, conjunction);
-        addRestrictionIfNotWildcard(GENDER, gender, conjunction);
-        addRestrictionIfNotWildcard(CASTE, caste, conjunction);
-        addRestrictionIfNotWildcard(COMMUNITY_LOCATION, communityLocation, conjunction);
-        addRestrictionIfNotWildcard(RELIGION, religion, conjunction);
+
+        addContainsRestrictionIfNotWildcard(NAME, name, conjunction);
+        addEqualsRestrictionIfNotWildcard(STUDENT_CLASS, studentClass, conjunction);
+        addEqualsRestrictionIfNotWildcard(GENDER, gender, conjunction);
+        addEqualsRestrictionIfNotWildcard(CASTE, caste, conjunction);
+        addEqualsRestrictionIfNotWildcard(COMMUNITY_LOCATION, communityLocation, conjunction);
+        addEqualsRestrictionIfNotWildcard(RELIGION, religion, conjunction);
         return conjunction;
     }
 
-    private void addRestrictionIfNotWildcard(String field, String parameter, Conjunction conjunction) {
+    private void addEqualsRestrictionIfNotWildcard(String field, String parameter, Conjunction conjunction) {
         if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
             SimpleExpression equalToParam = Restrictions.eq(field, parameter);
+            if (parameter.isEmpty()) {
+                Disjunction disj = Restrictions.disjunction();
+                disj.add(Restrictions.isNull(field));
+                disj.add(equalToParam);
+                conjunction.add(disj);
+            }
+            else {
+                conjunction.add(equalToParam);
+            }
+        }
+    }
+
+
+    private void addContainsRestrictionIfNotWildcard(String field, String parameter, Conjunction conjunction) {
+        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
+            SimpleExpression equalToParam = Restrictions.like(field, parameter+"%").ignoreCase();
             if (parameter.isEmpty()) {
                 Disjunction disj = Restrictions.disjunction();
                 disj.add(Restrictions.isNull(field));
