@@ -65,12 +65,14 @@
                 <div class="value">$student.mother$</div>
             </div>
 
+
+        </div>
+        <div id="secondaryInfo">
             <div class="entry">
                 <div class="label">Student Status</div>
                 <div class="value">$student.status$</div>
             </div>
-        </div>
-        <div id="secondaryInfo">
+
             <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
             <div id="talents">

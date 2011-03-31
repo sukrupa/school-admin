@@ -271,11 +271,6 @@ text-decoration: none;
     float: left;
 }
 
-.entry {
-    clear: both;
-    padding-bottom: 2.5em;
-}
-
 .updateEntry {
     clear: both;
     padding-bottom: 3em;

@@ -1,0 +1,23 @@
+.entry {
+    padding-bottom: 2.5em;
+}
+
+.entry * {
+    float: left;
+}
+
+#basicInfo .entry .label {
+    width: 190px;
+}
+
+#basicInfo .entry .value {
+    width: 250px;
+}
+
+#secondaryInfo .entry .label {
+    width: 130px;
+}
+
+#secondaryInfo .entry .value {
+    width: 100px;
+}
