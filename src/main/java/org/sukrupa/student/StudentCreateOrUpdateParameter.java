@@ -18,8 +18,9 @@ public class StudentCreateOrUpdateParameter {
 	private String father;
 	private String mother;
     private Set<String> talents;
+    private String status;
 
-    public StudentCreateOrUpdateParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents) {
+    public StudentCreateOrUpdateParameter(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -32,6 +33,7 @@ public class StudentCreateOrUpdateParameter {
         this.father = father;
         this.mother = mother;
         this.talents = talents;
+        this.status = status;
     }
 
     @DoNotRemove
@@ -89,6 +91,14 @@ public class StudentCreateOrUpdateParameter {
 
     public Set<String> getTalents() {
         return talents;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setStudentId(String studentId) {

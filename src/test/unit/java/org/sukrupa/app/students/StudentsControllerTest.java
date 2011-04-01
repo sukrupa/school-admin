@@ -98,7 +98,7 @@ public class StudentsControllerTest {
 
         controller.view("id", false, model);
 
-        assertThat((String) model.get("statusType"), is("active"));
+        assertThat((String) model.get("statusType"), is("existing"));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class StudentsControllerTest {
 
         controller.view("id", false, model);
 
-        assertThat((String) model.get("statusType"), is("inactive"));
+        assertThat((String) model.get("statusType"), is("dropout"));
     }
 
     @Test

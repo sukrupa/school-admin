@@ -229,6 +229,8 @@ public class Student {
 		this.mother = studentUpdateParameter.getMother();
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameter.getDateOfBirth());
+        this.status = StudentStatus.fromString(studentUpdateParameter.getStatus());
+
 	}
 
     public void promote() {
@@ -327,6 +329,7 @@ public class Student {
         public int getAge() {
             return 0;
         }
+
 
     }
 }
