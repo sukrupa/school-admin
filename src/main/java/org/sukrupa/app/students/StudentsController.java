@@ -76,7 +76,7 @@ public class StudentsController {
 
 
         Student student = studentService.load(id);
-        //[Karthik,Suhas] Find a better way to recognize when users tries to edit non-existent student
+
         student.getStudentId();
         model.put("student", student);
         model.put("formhelper", formHelperFor(student));
@@ -99,8 +99,20 @@ public class StudentsController {
         if (student != null) {
             model.put("student", student);
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
+            switch (student.getStatus()) {
+                case ACTIVE:
+                    model.put("statusType", "active");
+                    break;
+                case INACTIVE:
+                    model.put("statusType", "inactive");
+                    break;
+                default:
+                    model.put("statusType", "default");
+                    break;
+            }
             return "students/view";
         }
+
         return "students/viewFailed";
     }
 

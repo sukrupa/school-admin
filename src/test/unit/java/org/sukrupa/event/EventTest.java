@@ -16,14 +16,14 @@ import java.util.Set;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.sukrupa.platform.date.DateManipulation.freezeTime;
+import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
 public class EventTest {
 
     @Before
     public void setUp() throws Exception {
-        freezeTime();
+        freezeDateToMidnightOn_31_12_2010();
     }
 
     @After
