@@ -93,6 +93,16 @@
                 </div>
             </div>
 
+            <div class="editStatus">
+                <div class="statusLabel">Student Status</div>
+                <select name="status" class="updateStatusValue">
+                    <option>Existing Student</option>
+                    <option>Dropout</option>
+                    <option>Alumni</option>
+                </select>
+            </div>
+
+
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>
                 <div class="talentsCheckBoxes">
