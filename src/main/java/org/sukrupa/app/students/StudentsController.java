@@ -101,10 +101,10 @@ public class StudentsController {
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
             switch (student.getStatus()) {
                 case ACTIVE:
-                    model.put("statusType", "active");
+                    model.put("statusType", "existing");
                     break;
                 case INACTIVE:
-                    model.put("statusType", "inactive");
+                    model.put("statusType", "dropout");
                     break;
                 default:
                     model.put("statusType", "default");

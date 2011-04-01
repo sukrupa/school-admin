@@ -70,7 +70,7 @@
         <div id="secondaryInfo">
             <div class="entry">
                 <div class="label">Student Status</div>
-                <div class="value">$student.status$</div>
+                <div class="value $statusType$">$student.status$</div>
             </div>
 
             <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
