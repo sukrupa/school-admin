@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
+import org.sukrupa.platform.web.ImageController;
 
 
+import javax.servlet.Servlet;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -42,7 +44,8 @@ public class WebServer {
                      @Value("${web.context.path}") String contextPath,
                      @Value("${web.server.realm.file}") String webServerRealmFile,
                      @Value("${web.server.authenticate}") boolean authenticate,
-                     FrontController frontController) throws IOException {
+                     FrontController frontController,
+                     ImageController imageController) throws IOException {
 
 
         this.webRoot = webRoot;

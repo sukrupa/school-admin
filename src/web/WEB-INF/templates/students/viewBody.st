@@ -73,7 +73,7 @@
         <div id="secondaryInfo">
             <div id="recordImage">
 
-                <img src="/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+                <img src="/students/image/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
                 <div id="talents">
                     <div class="talentsLabel">Talents</div>
