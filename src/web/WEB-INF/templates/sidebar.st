@@ -18,9 +18,11 @@
           <p class="indent">
               <a href="/students">View All</a>
           </p>
+          <!-- WIP Story #200
           <p class="indent">
               <a href="/students/create">Add New Student</a>
           </p>
+          -->
 
       </li>
 
