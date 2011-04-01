@@ -4,6 +4,7 @@
     <import file="classpaths.xml"/>
     <import file="db-targets.xml"/>
     <import file="deploy-targets.xml"/>
+    <import file="image-targets.xml"/>
     <import file="macros.xml"/>
     <import file="sukrupa-server.xml"/>
 
