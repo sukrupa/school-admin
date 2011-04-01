@@ -3,11 +3,15 @@ package org.sukrupa.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.sukrupa.platform.config.AppConfiguration;
+import org.sukrupa.student.StudentService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
+@Service
 public class ImageLoaderService {
 
     private static final String PLACEHOLDER_IMAGE = "placeholderImage";

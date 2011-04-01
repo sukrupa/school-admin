@@ -73,7 +73,7 @@
                 <div class="value">$student.status$</div>
             </div>
 
-            <img src="/students/image/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+            <img src="/application/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
             <div id="talents">
                 <div class="talentsLabel">Talents</div>

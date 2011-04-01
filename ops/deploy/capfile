@@ -1,6 +1,7 @@
 set :local_path, "target"
 set :deploy_artifact, "school-admin.zip"
 set :should_recreate_database, false
+set :should_recreate_image_folder, true
 set :web_server_port, 80
 
 task :development do
@@ -8,6 +9,7 @@ task :development do
   set :target_server, "twu-ci"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
   set :should_recreate_database, true
+  set :should_recreate_image_folder, true
   set :web_server_port, 8080
   role :target_server, "#{target_server}"  
 end
@@ -17,6 +19,7 @@ task :staging do
   set :target_server, "staging.school.sukrupa.org"
   set :deploy_path, "~/sukrupa/school-admin"
   set :should_recreate_database, true
+  set :should_recreate_image_folder, true
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-bot.pem" }
 end
 
@@ -33,6 +36,7 @@ task :deploy do
   stop_remote_server
   start_remote_server
   update_or_recreate_database
+  update_or_recreate_image_folder
   safety_check
 end
 
@@ -60,6 +64,12 @@ task :update_or_recreate_database do
     insert_real_data
   else
     update_database
+  end
+end
+
+task :update_or_recreate_image_folder do
+  if should_recreate_image_folder
+    run "cd #{deploy_path} && sh install/create-image-folder.sh"
   end
 end
 
