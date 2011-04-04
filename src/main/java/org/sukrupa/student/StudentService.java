@@ -23,7 +23,7 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory){
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
@@ -32,10 +32,6 @@ public class StudentService {
 
     public Student load(String studentId) {
         return studentRepository.findByStudentId(studentId);
-    }
-
-    public Set<Student> load(String... studentIds) {
-        return studentRepository.findByStudentIds(studentIds);
     }
 
     public int promoteStudentsToNextClass() {
@@ -49,15 +45,26 @@ public class StudentService {
         return students.size();
     }
 
-    public Student update(StudentCreateOrUpdateParameters studentParam) {
-        Student student = studentRepository.findByStudentId(studentParam.getStudentId());
-        if (student == null) { //TODO is this test needed?
+    public Student create(StudentProfileForm studentProfileForm) {
+        Student student = studentFactory.create(studentProfileForm.getStudentId(),
+                studentProfileForm.getName(),
+                studentProfileForm.getDateOfBirth());
+
+        studentRepository.put(student);
+        return student;
+    }
+
+    public Student update(StudentProfileForm studentProfileForm) {
+        Student student = studentRepository.findByStudentId(studentProfileForm.getStudentId());
+        if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
-        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalentDescriptions()));
+        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+        student.updateFrom(studentProfileForm, talents);
 
         return studentRepository.update(student);
     }
+
 
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
@@ -83,14 +90,4 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(StudentCreateOrUpdateParameters studentCreateOrUpdateParameters) {
-        Set<Talent> talents = talentRepository.findTalents(studentCreateOrUpdateParameters.getTalentDescriptions());
-        Student student = studentFactory.create(studentCreateOrUpdateParameters.getStudentId(),
-                                                studentCreateOrUpdateParameters.getName(),
-                                                studentCreateOrUpdateParameters.getDateOfBirth());
-
-        student.updateFrom(studentCreateOrUpdateParameters, talents);
-        studentRepository.put(student);
-        return student;
-    }
 }

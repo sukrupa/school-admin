@@ -101,19 +101,18 @@ public class StudentsController {
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
 
             if (student.getStatus() == null)
-                 model.put("statusType", "default");
-            else
-            {
-               switch (student.getStatus()) {
-                case ACTIVE:
-                    model.put("statusType", "existing");
-                    break;
-                case INACTIVE:
-                    model.put("statusType", "dropout");
-                    break;
-                default:
-                    model.put("statusType", "default");
-                    break;
+                model.put("statusType", "default");
+            else {
+                switch (student.getStatus()) {
+                    case ACTIVE:
+                        model.put("statusType", "existing");
+                        break;
+                    case INACTIVE:
+                        model.put("statusType", "dropout");
+                        break;
+                    default:
+                        model.put("statusType", "default");
+                        break;
                 }
             }
 
@@ -124,10 +123,31 @@ public class StudentsController {
         return "students/viewFailed";
     }
 
+    @RequestMapping(value = "create", method = POST)
+    public String create(
+            @ModelAttribute("createStudent") StudentProfileForm studentParam, Map<String, Object> model) {
+        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentProfileForm");
+        studentValidator.validate(studentParam, errors);
+
+        if (mandatoryFieldsExist(errors)) {
+            Student student = studentService.create(studentParam);
+            return format("redirect:/students/%s/edit", student.getStudentId());
+        } else {
+            model.put("student", studentParam);
+            model.put("errors", errors);
+
+            addErrorToFieldIfNecessary("name", model, errors);
+            addErrorToFieldIfNecessary("dateOfBirth", model, errors);
+            addErrorToFieldIfNecessary("studentId", model, errors);
+            model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
+            return "students/create";
+        }
+    }
+
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentCreateOrUpdateParameters studentParam,
+            @ModelAttribute("updateStudent") StudentProfileForm studentParam,
             Map<String, Object> model) {
 
         Student updatedStudent = studentService.update(studentParam);
@@ -146,27 +166,6 @@ public class StudentsController {
     public String newStudent(HashMap<String, Object> model) {
         model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
         return "students/create";
-    }
-
-    @RequestMapping(value = "create", method = POST)
-    public String create(
-            @ModelAttribute("createStudent") StudentCreateOrUpdateParameters studentParam, Map<String, Object> model) {
-        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentCreateOrUpdateParameters");
-        studentValidator.validate(studentParam, errors);
-
-        if (mandatoryFieldsExist(errors)) {
-            Student student = studentService.create(studentParam);
-            return format("redirect:/students/%s", student.getStudentId());
-        } else {
-            model.put("student", studentParam);
-            model.put("errors", errors);
-
-            addErrorToFieldIfNecessary("name", model, errors);
-            addErrorToFieldIfNecessary("dateOfBirth", model, errors);
-            addErrorToFieldIfNecessary("studentId", model, errors);
-            model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
-            return "students/create";
-        }
     }
 
     private boolean mandatoryFieldsExist(Errors errors) {

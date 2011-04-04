@@ -1,7 +1,7 @@
 set :local_path, "target"
 set :deploy_artifact, "school-admin.zip"
 set :should_recreate_database, false
-set :should_recreate_image_folder, true
+set :should_recreate_image_folder, false
 set :web_server_port, 80
 
 task :development do
@@ -9,7 +9,7 @@ task :development do
   set :target_server, "twu-ci"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
   set :should_recreate_database, true
-  set :should_recreate_image_folder, true
+  set :should_recreate_image_folder, false
   set :web_server_port, 8080
   role :target_server, "#{target_server}"  
 end
@@ -25,9 +25,9 @@ end
 
 task :production do
   set :user, "ubuntu"
-  set :target_server, "school.sukrupa.org"
+  set :target_server, "ec2-122-248-198-134.ap-southeast-1.compute.amazonaws.com"
   set :deploy_path, "~/sukrupa/school-admin"
-  role :target_server, "#{target_server}", :ssh_options => { :keys => "~/.ssh/sukrupa-ec2.pem" }
+  role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-prod.pem" }
 end
 
 task :deploy do

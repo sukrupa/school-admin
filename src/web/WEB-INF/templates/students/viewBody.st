@@ -55,6 +55,8 @@
                 <div class="value">$student.communityLocation$</div>
             </div>
 
+
+
             <div class="entry">
                 <div class="label">Father's Name</div>
                 <div class="value">$student.father$</div>
@@ -63,6 +65,21 @@
             <div class="entry">
                 <div class="label">Mother's Name</div>
                 <div class="value">$student.mother$</div>
+            </div>
+
+            <div class="entry">
+                 <div class="label">Background</div>
+                 $if(student.profile)$<div class="value" id="student-background" name="student-background">$student.profile.background$</div>$endif$
+            </div>
+
+            <div class="entry">
+                 <div class="label">Disciplinary</div>
+                 <div class="value" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
+            </div>
+
+            <div class="entry">
+                 <div class="label">Academic Performance</div>
+                 <div class="value" id="student-performance" name="student-performance">$student.performance$</div>
             </div>
 
 
@@ -89,7 +106,7 @@
 
         <div id="update">
             <form action="/students/$student.studentId$/edit" method="GET">
-                <input type="submit" value="Edit"/>
+                <input type="submit" value="Edit" id="student-edit"/>
             </form>
         </div>
     </div>
