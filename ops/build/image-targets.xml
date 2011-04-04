@@ -9,7 +9,7 @@
     <target name="img:recreate" depends="img:clean">
         <mkdir dir="${app.image.dir}"/>
         <copy todir="${app.image.dir}">
-            <fileset dir="${resources.main.dir}/images"/>
+            <fileset dir="/images"/>
         </copy>
     </target>
 </project>
