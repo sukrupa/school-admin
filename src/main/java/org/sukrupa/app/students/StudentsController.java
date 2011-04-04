@@ -99,7 +99,12 @@ public class StudentsController {
         if (student != null) {
             model.put("student", student);
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
-            switch (student.getStatus()) {
+
+            if (student.getStatus() == null)
+                 model.put("statusType", "default");
+            else
+            {
+               switch (student.getStatus()) {
                 case ACTIVE:
                     model.put("statusType", "existing");
                     break;
@@ -109,7 +114,10 @@ public class StudentsController {
                 default:
                     model.put("statusType", "default");
                     break;
+                }
             }
+
+
             return "students/view";
         }
 

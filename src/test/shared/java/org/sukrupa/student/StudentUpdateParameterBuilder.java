@@ -19,7 +19,7 @@ public class StudentUpdateParameterBuilder {
     private String father;
     private String mother;
     private Set<String> talents;
-    private StudentStatus status;
+    private StudentStatus status = StudentStatus.NOT_SET;
 
     public StudentUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
