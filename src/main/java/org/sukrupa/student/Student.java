@@ -253,6 +253,8 @@ public class Student {
 		this.communityLocation = studentUpdateParameters.getCommunityLocation();
 		this.father = studentUpdateParameters.getFather();
 		this.mother = studentUpdateParameters.getMother();
+        this.performance = studentUpdateParameters.getPerformance();
+        this.disciplinary = studentUpdateParameters.getDisciplinary();
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());

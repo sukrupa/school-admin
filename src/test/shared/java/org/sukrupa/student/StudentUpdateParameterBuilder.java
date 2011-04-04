@@ -20,6 +20,8 @@ public class StudentUpdateParameterBuilder {
     private String mother;
     private Set<String> talents;
     private StudentStatus status = StudentStatus.NOT_SET;
+    private String disciplinary;
+    private String performance;
 
     public StudentUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -42,6 +44,16 @@ public class StudentUpdateParameterBuilder {
 
     public StudentUpdateParameterBuilder gender(String gender) {
         this.gender = gender;
+        return this;
+    }
+
+     public StudentUpdateParameterBuilder disciplinary(String disciplinary) {
+        this.disciplinary = disciplinary;
+        return this;
+    }
+
+     public StudentUpdateParameterBuilder performance(String performance) {
+        this.performance = performance;
         return this;
     }
 
@@ -86,7 +98,7 @@ public class StudentUpdateParameterBuilder {
     }
 
     public StudentCreateOrUpdateParameters build() {
-        return new StudentCreateOrUpdateParameters(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString());
+        return new StudentCreateOrUpdateParameters(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance);
     }
 
 
