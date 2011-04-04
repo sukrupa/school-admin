@@ -32,11 +32,11 @@
             depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
 
     <target name="install:local"
             depends="clean, init, compile:all, copy-resources, package"
