@@ -4,9 +4,9 @@
 	<classpathentry exported="true" kind="con" path="com.thoughtworks.twist.CORE"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="com.thoughtworks.twist.language.JAVA"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="con" path="com.thoughtworks.twist.driver.SAHI/2.0.0"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sukrupa-code"/>
 	<classpathentry kind="lib" path="/sukrupa-code/lib/test/hamcrest-all-1.2.jar"/>
+	<classpathentry kind="lib" path="/sukrupa-code/lib/test/junit-dep-4.8.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

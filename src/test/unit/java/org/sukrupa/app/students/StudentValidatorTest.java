@@ -104,11 +104,4 @@ public class StudentValidatorTest {
 
         assertThat(errors.getErrorCount(), is(0));
     }
-
-//    @Test
-//    public void shouldHaveErrorsIfStudentIdIsNotUnique(){
-//
-//    }
-
-
 }

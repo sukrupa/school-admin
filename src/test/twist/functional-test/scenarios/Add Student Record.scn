@@ -1,8 +1,7 @@
-Tags:
-Preconditions:Navigate To HomePage,Log In,Log out afterwards
+Tags:in-progress
+Preconditions:Navigate To Create Student Page,Log In,Log out afterwards,Remove Added Students
 Add Student Record:
-#When I click on the "Add New Student" link
-#And I enter the "studentId" as "SK2010082011"
+#And I enter the student id "SK2010082011"
 #And I enter the "name" as "Yael"
 #And I enter the "dateOfBirth" as "06-03-1982"
 #And I select the "gender" as"Male"
@@ -13,10 +12,19 @@ Add Student Record:
 #And I select the "communityLocation" as "Hebbal"
 #And I enter the "father" as "Bob"
 #And i enter the "mother" as "Sheila"
-#And I click "Submit"
+#And I select the talent "Acting" 
+#When I click Submit
 #Then I should see the "Student Record:" page
+#And "Acting" shows in the page
 
 Cancel Button:
 #When I navigate to "/students/create"
 #When I click on the "cancel" button
 #I should see the title "List of Students"
+
+
+Add Student Record:
+#When I click on the "Add New Student" link
+#And I enter the "studentId" as "SK2010082011"
+#And I enter the "name" as "Yael"
+#Then I should see the "Add New Student" page

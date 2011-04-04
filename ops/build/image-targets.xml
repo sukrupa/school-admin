@@ -1,0 +1,10 @@
+<project name="image-targets">
+    <import file="properties.xml"/>
+    <target name="img:clean">
+        <delete dir="${app.image.dir}"/>
+    </target>
+    <target name="img:recreate" depends="img:clean">
+        <mkdir dir="${app.image.dir}"/>
+        <copydir src="${resources.main.dir}/images" dest="${app.image.dir}"/>
+    </target>
+</project>
