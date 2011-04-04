@@ -1,5 +1,7 @@
 package org.sukrupa.app.events;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.sukrupa.event.Event;
 import org.sukrupa.event.EventCreateOrUpdateParameter;
 import org.sukrupa.event.EventService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,9 +57,11 @@ public class EventsController {
 
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, BindingResult result, Map<String, Object> model) {
-		Event event = Event.createFrom(eventCreateOrUpdateParameter);
-		Set<String> studentIdsOfAttendees = eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
-		Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+        Event event = Event.createFrom(eventCreateOrUpdateParameter);
+        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+
+
+        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
 			model.put("event", eventCreateOrUpdateParameter);

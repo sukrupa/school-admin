@@ -22,6 +22,12 @@ public class EventRepository {
         session().save(event);
     }
 
+    public Event update(Event event) {
+        session().save(event);
+        session().flush();
+        return event;
+    }
+
     public List<Event> list() {
         return session().createCriteria(Event.class).addOrder(Order.desc("date")).list();
     }
@@ -32,5 +38,9 @@ public class EventRepository {
 
     private Session session() {
         return sessionFactory.getCurrentSession();
+    }
+
+    public Event findByTitle(String title) {
+        return (Event) session().createQuery("from Event where title = ?").setParameter(0, title).uniqueResult();
     }
 }

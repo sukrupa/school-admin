@@ -84,6 +84,7 @@ public class EventRepositoryTest {
 	}
 
 
+
 	private Event save(Event event) {
 		eventRepository.save(event);
 		return event;

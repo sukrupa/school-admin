@@ -55,5 +55,12 @@ public class EventService {
 		}
 		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
 	}
+
+    public Event update(EventCreateOrUpdateParameter eventParam) {
+        Event event = eventRepository.findByTitle(eventParam.getTitle());
+        event.updateFrom(eventParam, studentRepository.findByStudentIds(eventParam.getAttendeesString()));
+        return eventRepository.update(event);
+
+    }
 	
 }

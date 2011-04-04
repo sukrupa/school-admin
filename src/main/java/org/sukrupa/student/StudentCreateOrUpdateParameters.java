@@ -18,6 +18,7 @@ public class StudentCreateOrUpdateParameters {
 	private String father;
 	private String mother;
     private Set<String> talents;
+
     private String status;
 
     public StudentCreateOrUpdateParameters(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {

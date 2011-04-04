@@ -167,4 +167,13 @@ public class Event {
 		return coordinator;
 	}
 
+    public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
+        this.title = eventParam.getTitle();
+        this.date = Date.parse(eventParam.getDate(),"00:00");
+        this.venue = eventParam.getVenue();
+        this.coordinator = eventParam.getCoordinator();
+        this.description = eventParam.getDescription();
+        this.notes = eventParam.getNotes();
+        this.attendees = attendees;
+    }
 }
