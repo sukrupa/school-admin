@@ -22,7 +22,7 @@ public class StudentCreateOrUpdateParameters {
     private String disciplinary;
     private String performance;
 
-    public StudentCreateOrUpdateParameters(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String performance, String disciplinary) {
+    public StudentCreateOrUpdateParameters(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;

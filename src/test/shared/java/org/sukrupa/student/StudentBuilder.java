@@ -139,7 +139,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, StudentStatus.NOT_SET, disciplinary, performance, profile);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
     }
 
     public StudentBuilder imageLink(String imageLink) {
