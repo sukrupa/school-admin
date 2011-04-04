@@ -94,6 +94,10 @@ public class Student {
         this.talents = talents;
         this.notes = notes;
         this.imageLink = imageLink;
+
+        if(status == null)
+            status = StudentStatus.NOT_SET;
+
         this.status = status;
     }
 
