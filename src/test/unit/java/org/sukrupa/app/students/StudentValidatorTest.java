@@ -1,17 +1,12 @@
 package org.sukrupa.app.students;
 
-import org.joda.time.LocalDate;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.date.DateManipulation;
-import org.sukrupa.student.StudentCreateOrUpdateParameter;
+import org.sukrupa.student.StudentCreateOrUpdateParameters;
 import org.sukrupa.student.StudentUpdateParameterBuilder;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +16,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldAddANameErrorIfNoNameProvided() {
-        StudentCreateOrUpdateParameter paramsWithNoName = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters paramsWithNoName = new StudentUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(VALID_DOB)
                 .name("").build();
@@ -35,7 +30,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldAddStudentIdIfNoIdProvided() {
-        StudentCreateOrUpdateParameter paramsWithNoStudentId = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters paramsWithNoStudentId = new StudentUpdateParameterBuilder()
                 .studentId("")
                 .dateOfBirth(VALID_DOB)
                 .name("bob").build();
@@ -49,7 +44,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldThrowErrorIfNoDateIsProvided() {
-        StudentCreateOrUpdateParameter paramsWithNoDateOfBirth = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters paramsWithNoDateOfBirth = new StudentUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth("")
                 .name("bob").build();
@@ -64,7 +59,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldThrowErrorIfIncorrectDateFormat() {
-        StudentCreateOrUpdateParameter paramsWithWrongDate = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters paramsWithWrongDate = new StudentUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth("33/22/2001")
                 .name("Steve").build();
@@ -81,7 +76,7 @@ public class StudentValidatorTest {
     public void shouldNotAcceptFutureDate() {
         DateManipulation.freezeDateToMidnightOn_31_12_2010();
         Date futureDate = new Date(1,1,2011);
-        StudentCreateOrUpdateParameter paramsWithFutureDate = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters paramsWithFutureDate = new StudentUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(futureDate)
                 .name("futurechild").build();
@@ -94,7 +89,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldNotHaveErrorsIfCorrectMandatoryFieldProvided() {
-        StudentCreateOrUpdateParameter allFieldsProvided = new StudentUpdateParameterBuilder()
+        StudentCreateOrUpdateParameters allFieldsProvided = new StudentUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(VALID_DOB)
                 .name("bob").build();

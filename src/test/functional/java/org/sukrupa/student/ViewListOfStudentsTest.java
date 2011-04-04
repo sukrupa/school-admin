@@ -14,18 +14,18 @@ import java.util.*;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.sukrupa.platform.hamcrest.Matchers.*;
+import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 public class ViewListOfStudentsTest extends FunctionalTestBase {
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllCreatedObjects();
+        hibernateSession.deleteAllCreatedObjects();
         driver.get("http://localhost:8080/authentication/logout");
     }
 
@@ -50,6 +50,6 @@ public class ViewListOfStudentsTest extends FunctionalTestBase {
     }
 
     public void save(Object... students) {
-        databaseHelper.saveAndCommit(students);
+        hibernateSession.saveAndCommit(students);
     }
 }

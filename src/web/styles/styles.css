@@ -283,6 +283,14 @@ text-decoration: none;
     float: left;
 }
 
+.statusLabel {
+    width: 112px;
+    float: left;
+    padding-left: 39px;
+    font-weight: bold;
+    height: 30px;
+}
+
 .value {
     float: left;
     width: 250px;
@@ -293,6 +301,10 @@ text-decoration: none;
     width: 205px;
 }
 
+.updateStatusValue {
+    float: left;
+    width: 120px;
+}
 #update {
     clear: both;
     margin-top: 50px;

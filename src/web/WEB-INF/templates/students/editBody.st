@@ -93,6 +93,16 @@
                 </div>
             </div>
 
+            <div class="editStatus">
+                <div class="statusLabel">Student Status<span class="mandatory">*</span></div>
+                <select name="status" id="status" class="updateStatusValue">
+                    $formhelper.statusesDropDownList:{
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        }$
+                </select>
+            </div>
+
+
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>
                 <div class="talentsCheckBoxes">

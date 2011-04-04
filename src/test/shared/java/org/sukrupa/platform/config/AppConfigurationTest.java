@@ -48,10 +48,10 @@ public class AppConfigurationTest {
     }
 
     @Test
-    public void shouldNotAuthenticateWhenRunningBuild() {
+    public void shouldAuthenticateWhenRunningBuild() {
         pretendWeAreNotInIntelliJ();
         System.setProperty("environment", "build");
-        assertThat(property("web.server.authenticate"), is("false"));
+        assertThat(property("web.server.authenticate"), is("true"));
     }
 
     @Test

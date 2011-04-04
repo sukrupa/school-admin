@@ -19,6 +19,7 @@ public class StudentUpdateParameterBuilder {
     private String father;
     private String mother;
     private Set<String> talents;
+    private StudentStatus status = StudentStatus.NOT_SET;
 
     public StudentUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -84,9 +85,13 @@ public class StudentUpdateParameterBuilder {
         return this;
     }
 
-    public StudentCreateOrUpdateParameter build() {
-        return new StudentCreateOrUpdateParameter(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents);
+    public StudentCreateOrUpdateParameters build() {
+        return new StudentCreateOrUpdateParameters(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString());
     }
 
 
+    public StudentUpdateParameterBuilder status(StudentStatus statusIn) {
+        this.status = statusIn;
+        return this;
+    }
 }
