@@ -131,7 +131,7 @@ public class StudentsController {
 
         if (mandatoryFieldsExist(errors)) {
             Student student = studentService.create(studentParam);
-            return format("redirect:/students/%s", student.getStudentId());
+            return format("redirect:/students/%s/edit", student.getStudentId());
         } else {
             model.put("student", studentParam);
             model.put("errors", errors);

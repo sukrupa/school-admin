@@ -46,12 +46,10 @@ public class StudentService {
     }
 
     public Student create(StudentProfileForm studentProfileForm) {
-        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
         Student student = studentFactory.create(studentProfileForm.getStudentId(),
                 studentProfileForm.getName(),
                 studentProfileForm.getDateOfBirth());
 
-        student.updateFrom(studentProfileForm, talents);
         studentRepository.put(student);
         return student;
     }
