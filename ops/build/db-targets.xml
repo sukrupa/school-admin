@@ -57,9 +57,11 @@
     </target>
 
     <target name="db:setup">
-        <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}">
+        <echo>driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"</echo>
+        <sql showwarnings="true" driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}">
             <fileset file="${src.sql.script.dir}/create-changelog-table.sql"/>
         </sql>
+
     </target>
 
     <target name="db:update" description="Updates the database schema to the latest version." depends="db:start">
