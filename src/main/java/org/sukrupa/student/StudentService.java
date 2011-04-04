@@ -49,12 +49,12 @@ public class StudentService {
         return students.size();
     }
 
-    public Student update(StudentCreateOrUpdateParameter studentParam) {
+    public Student update(StudentCreateOrUpdateParameters studentParam) {
         Student student = studentRepository.findByStudentId(studentParam.getStudentId());
         if (student == null) { //TODO is this test needed?
             return null;
         }
-        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalents()));
+        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalentDescriptions()));
 
         return studentRepository.update(student);
     }
@@ -83,10 +83,13 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(StudentCreateOrUpdateParameter studentParam) {
+    public Student create(StudentCreateOrUpdateParameters studentCreateOrUpdateParameters) {
+        Set<Talent> talents = talentRepository.findTalents(studentCreateOrUpdateParameters.getTalentDescriptions());
+        Student student = studentFactory.create(studentCreateOrUpdateParameters.getStudentId(),
+                                                studentCreateOrUpdateParameters.getName(),
+                                                studentCreateOrUpdateParameters.getDateOfBirth());
 
-        Student student = studentFactory.createBasic(studentParam);
-        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalents()));
+        student.updateFrom(studentCreateOrUpdateParameters, talents);
         studentRepository.put(student);
         return student;
     }
