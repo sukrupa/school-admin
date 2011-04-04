@@ -1,0 +1,8 @@
+Tags:
+Preconditions:Navigte to Student Profile,Log in,Log out afterwards
+Edit Student:
+#Click on "Bhavani" student record
+#Click on Edit Button
+#Verify that background is "Born in India"
+#Verify that performance is "A+"
+#Verify that disciplinary is "Excellent"

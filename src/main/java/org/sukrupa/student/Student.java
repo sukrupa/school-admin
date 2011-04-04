@@ -13,10 +13,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Student {
@@ -59,6 +56,17 @@ public class Student {
     @Column(name = "DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
 
+    @Column(name = "STUDENT_DISCIPLINARY")
+    private String disciplinary;
+
+    @Column(name = "STUDENT_PERFORMANCE")
+    private String performance;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_profile", referencedColumnName = "id")
+    private Profile profile;
+
+
     @ManyToMany
     @JoinTable(name = "STUDENT_TALENT",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -82,7 +90,7 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
-                   StudentStatus status) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile) {
         this.studentId = studentId;
         this.name = name;
         this.religion = religion;
@@ -97,13 +105,21 @@ public class Student {
         this.talents = talents;
         this.notes = notes;
         this.imageLink = imageLink;
+
+        if(status == null)
+            status = StudentStatus.NOT_SET;
+
         this.status = status;
+        this.disciplinary = disciplinary;
+        this.performance = performance;
+        this.profile = profile;
     }
 
     public Student(String studentId, String name, String dateOfBirth) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = convertDate(dateOfBirth);
+        this.talents = new HashSet<Talent>();
     }
 
     private LocalDate convertDate(String dateOfBirth) {
@@ -128,6 +144,18 @@ public class Student {
 
     public String getCommunityLocation() {
         return communityLocation;
+    }
+
+    public String getDisciplinary(){
+        return disciplinary;
+    }
+
+    public String getPerformance(){
+        return performance;
+    }
+
+    public Profile getProfile(){
+        return profile;
     }
 
     public String getStudentId() {
@@ -217,7 +245,7 @@ public class Student {
 		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
 	}
 
-	public void updateFrom(StudentCreateOrUpdateParameters studentUpdateParameters, Set<Talent> newTalents) {
+	public void updateFrom(StudentProfileForm studentUpdateParameters, Set<Talent> newTalents) {
 		this.studentClass = studentUpdateParameters.getStudentClass();
 		this.gender = studentUpdateParameters.getGender();
 		this.name = studentUpdateParameters.getName();
@@ -227,6 +255,8 @@ public class Student {
 		this.communityLocation = studentUpdateParameters.getCommunityLocation();
 		this.father = studentUpdateParameters.getFather();
 		this.mother = studentUpdateParameters.getMother();
+        this.performance = studentUpdateParameters.getPerformance();
+        this.disciplinary = studentUpdateParameters.getDisciplinary();
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());

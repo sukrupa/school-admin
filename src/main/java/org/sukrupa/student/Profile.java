@@ -10,28 +10,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang.builder.ToStringStyle.DEFAULT_STYLE;
-
 @Entity
-public class Talent {
-	@Id
-	@GeneratedValue
-	private long id;
-	private String description;
+public class Profile {
 
-	@DoNotRemove
-    Talent() {}
+    @Id
+    @GeneratedValue
+    private long id;
 
-	public Talent(String description) {
-		this.description = description;
-	}
+    @DoNotRemove
+    Profile(){
+    }
 
-	public String getDescription() {
-		return description;
-	}
 
-	private static String[] excludedFields = new String[]{"id"};
+    private String background;
+
+    public Profile(String background){
+        this.background = background;
+    }
+    public String getBackground(){
+        return background;
+    }
+
+    private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other, excludedFields);
@@ -42,7 +42,6 @@ public class Talent {
     }
 
     public String toString() {
-        return reflectionToString(this, DEFAULT_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
-
 }

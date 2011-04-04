@@ -65,11 +65,11 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldCreateANewStudent () {
-        StudentCreateOrUpdateParameters studentToCreate = new StudentCreateOrUpdateParameters();
+        StudentProfileForm studentToCreate = new StudentProfileForm();
         studentToCreate.setDateOfBirth("11-10-1982");
 
         Student studentThatGetsCreated = new Student("SK111","", "01-01-2001");
-        when(service.create(any(StudentCreateOrUpdateParameters.class))).thenReturn(studentThatGetsCreated);
+        when(service.create(any(StudentProfileForm.class))).thenReturn(studentThatGetsCreated);
 
         String result = controller.create(studentToCreate, null);
 
@@ -82,7 +82,7 @@ public class StudentsControllerTest {
 
         Map<String, Object> model = new HashMap<String, Object>();
 
-        StudentCreateOrUpdateParameters userDidNotEnterName = new StudentUpdateParameterBuilder().name("").build();
+        StudentProfileForm userDidNotEnterName = new StudentUpdateParameterBuilder().name("").build();
 
         controller.create(userDidNotEnterName, model);
 

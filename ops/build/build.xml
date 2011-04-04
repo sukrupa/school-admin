@@ -149,7 +149,7 @@
             <fileset file="${ops.deploy.dir}/stop-server.sh"/>
             <fileset file="${ops.deploy.dir}/start-server.sh"/>
             <fileset file="${resources.main.dir}/jetty-realms.properties"/>
-            <fileset dir="${resources.main.dir}/images"/>
+            <zipfileset dir="${resources.main.dir}/images" prefix="images"/>
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/create-image-folder.sh" prefix="install"/>

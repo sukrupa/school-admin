@@ -5,7 +5,7 @@ import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
 
-public class StudentCreateOrUpdateParameters {
+public class StudentProfileForm {
 	private String studentId;
     private String name;
     private String dateOfBirth;
@@ -19,8 +19,10 @@ public class StudentCreateOrUpdateParameters {
 	private String mother;
     private Set<String> talents;
     private String status;
+    private String disciplinary;
+    private String performance;
 
-    public StudentCreateOrUpdateParameters(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status,  String disciplinary, String performance) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -34,10 +36,12 @@ public class StudentCreateOrUpdateParameters {
         this.mother = mother;
         this.talents = talents;
         this.status = status;
+        this.disciplinary = disciplinary;
+        this.performance = performance;
     }
 
     @DoNotRemove
-	public StudentCreateOrUpdateParameters() {
+	public StudentProfileForm() {
 	}
 
     public String getStudentId() {
@@ -55,6 +59,7 @@ public class StudentCreateOrUpdateParameters {
     public String getDateOfBirthForDisplay() {
         return getDateOfBirth();
     }
+
 
 
     public String getGender() {
@@ -147,5 +152,21 @@ public class StudentCreateOrUpdateParameters {
 
     public void setTalents(Set<String> talents) {
         this.talents = talents;
+    }
+
+    public void setPerformance(String performance) {
+        this.performance = performance;
+    }
+
+    public void setDisciplinary(String disciplinary) {
+        this.disciplinary = disciplinary;
+    }
+
+    public String getPerformance() {
+        return performance;
+    }
+
+    public String getDisciplinary() {
+        return disciplinary;
     }
 }
