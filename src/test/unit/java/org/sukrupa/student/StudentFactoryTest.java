@@ -11,12 +11,12 @@ public class StudentFactoryTest {
     @Test
     public void shouldCreateAStudent(){
         StudentFactory studentFactory = new StudentFactory();
-        StudentCreateOrUpdateParameter studentParam = new StudentCreateOrUpdateParameter();
+        StudentCreateOrUpdateParameters studentParam = new StudentCreateOrUpdateParameters();
         studentParam.setStudentId("SK123");
         studentParam.setName("Frank");
         studentParam.setDateOfBirth("11-10-1982");
 
-        Student student = studentFactory.createBasic(studentParam);
+        Student student = studentFactory.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth());
         assertEquals("SK123",student.getStudentId());
         assertEquals("Frank",student.getName());
         assertEquals(new LocalDate(1982, 10, 11), student.getDateOfBirth());

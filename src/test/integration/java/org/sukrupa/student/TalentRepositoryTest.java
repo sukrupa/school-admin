@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.HibernateSession;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +34,7 @@ public class TalentRepositoryTest {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     private TalentRepository repository;
 
@@ -45,7 +45,7 @@ public class TalentRepositoryTest {
 
     @Test
     public void shouldReturnListOfTalents() {
-	    databaseHelper.save(music, sport, cooking);
+	    hibernateSession.save(music, sport, cooking);
         Set<String> talentsDecriptions = new HashSet<String>();
         talentsDecriptions.add(MUSIC);
         talentsDecriptions.add(SPORT);

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import static java.lang.String.format;
 
 @Component
-public class DatabaseHelper {
+public class HibernateSession {
 
     @Autowired
     private SessionFactory sessionFactory;

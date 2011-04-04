@@ -9,7 +9,7 @@ import org.sukrupa.app.events.CreateEventPage;
 import org.sukrupa.app.events.ViewEventPage;
 import org.sukrupa.base.FunctionalTestBase;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.HibernateSession;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -22,15 +22,15 @@ import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
 public class CreateAndViewEventTest extends FunctionalTestBase {
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     private Student alex;
     private Student bob;
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllFromTables("EVENT_ATTENDEES", "event");
-        databaseHelper.deleteAllCreatedObjects();
+        hibernateSession.deleteAllFromTables("EVENT_ATTENDEES", "event");
+        hibernateSession.deleteAllCreatedObjects();
         driver.get("http://localhost:8080/authentication/logout");
     }
 
@@ -150,7 +150,7 @@ public class CreateAndViewEventTest extends FunctionalTestBase {
     }
 
     private Student save(Student student) {
-        databaseHelper.saveAndCommit(student);
+        hibernateSession.saveAndCommit(student);
         return student;
     }
 }

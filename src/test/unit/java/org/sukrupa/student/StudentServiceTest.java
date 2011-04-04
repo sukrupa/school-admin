@@ -129,7 +129,7 @@ public class StudentServiceTest {
 	    when(studentRepository.update(philNew)).thenReturn(philNew);
 	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentCreateOrUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentCreateOrUpdateParameters updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -139,7 +139,7 @@ public class StudentServiceTest {
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
-        Student updatedStudent = service.update(updateParameter);
+        Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
 
@@ -155,7 +155,7 @@ public class StudentServiceTest {
 	    when(studentRepository.update(philNew)).thenReturn(philNew);
 	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentCreateOrUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentCreateOrUpdateParameters updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -166,7 +166,7 @@ public class StudentServiceTest {
                 .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT))
                 .status(StudentStatus.ALUMNI).build();
-        Student updatedStudent = service.update(updateParameter);
+        Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
 
@@ -177,7 +177,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
-        StudentCreateOrUpdateParameter studentParam =new StudentCreateOrUpdateParameter();
+        StudentCreateOrUpdateParameters studentParam =new StudentCreateOrUpdateParameters();
         String studentId = "SK20091001";
         String studentName = "Yael";
         String studentDateOfBirth = "06-03-1982";
@@ -186,7 +186,7 @@ public class StudentServiceTest {
         studentParam.setDateOfBirth("06-03-1982");
 
         Student expectedStudent = mock(Student.class);
-        when(studentFactory.createBasic(studentParam)).thenReturn(expectedStudent);
+        when(studentFactory.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth())).thenReturn(expectedStudent);
 
         Student student = service.create(studentParam);
 
