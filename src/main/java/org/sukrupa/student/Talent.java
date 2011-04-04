@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang.builder.ToStringStyle.DEFAULT_STYLE;
+
 @Entity
 public class Talent {
 	@Id
@@ -39,7 +42,7 @@ public class Talent {
     }
 
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+        return reflectionToString(this, DEFAULT_STYLE);
     }
 
 }

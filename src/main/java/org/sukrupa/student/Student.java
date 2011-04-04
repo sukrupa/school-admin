@@ -13,10 +13,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Student {
@@ -104,6 +101,7 @@ public class Student {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = convertDate(dateOfBirth);
+        this.talents = new HashSet<Talent>();
     }
 
     private LocalDate convertDate(String dateOfBirth) {
