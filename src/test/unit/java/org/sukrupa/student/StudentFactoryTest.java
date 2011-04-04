@@ -29,14 +29,4 @@ public class StudentFactoryTest {
         assertThat(student.getDateOfBirth(), is(new LocalDate(1982, 10, 11)));
     }
 
-    @Test
-    public void shouldCreateAStudentWithTalents() {
-        Talent someTalent = new TalentBuilder().description("Some Talent").build();
-        Talent someOtherTalent = new TalentBuilder().description("Some Other Talent").build();
-
-        Student student = studentFactory.create(null, null, "11-10-1982", someTalent, someOtherTalent);
-
-        assertThat(student.getTalents(), hasOnly(someTalent, someOtherTalent));
-    }
-
 }

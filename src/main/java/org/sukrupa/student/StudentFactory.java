@@ -14,10 +14,4 @@ public class StudentFactory {
         return new Student(studentId, name, dateOfBirth);
     }
 
-    public Student create(String studentId, String name, String dateOfBirth, Talent... talents) {
-        Student student = new Student(studentId, name, dateOfBirth);
-        student.getTalents().addAll(asList(talents));
-        return student;
-    }
-
 }
