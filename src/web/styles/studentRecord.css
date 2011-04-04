@@ -22,10 +22,10 @@
     width: 100px;
 }
 
-.entry .value.active {
+.entry .value.existing {
     color: green;
 }
 
-.entry .value.inactive {
+.entry .value.dropout {
     color: red;
 }

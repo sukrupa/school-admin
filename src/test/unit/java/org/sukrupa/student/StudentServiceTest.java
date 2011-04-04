@@ -144,6 +144,33 @@ public class StudentServiceTest {
     }
 
     @Test
+    public void shouldUpdateStudentStatus() {
+        Student philOld = new StudentBuilder().studentId("12345")
+                .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.NOT_SET).build();
+        Student philNew = new StudentBuilder().studentId("12345")
+                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ALUMNI).build();
+	    when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
+	    when(studentRepository.update(philNew)).thenReturn(philNew);
+	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
+
+        StudentCreateOrUpdateParameters updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+                .area("Chamundi Nagar")
+                .caste("ST")
+                .subCaste("AK")
+                .religion("Catholic")
+                .name("Philippa")
+                .gender("Female")
+                .studentClass("2 Std")
+                .dateOfBirth("03-02-2000")
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT))
+                .status(StudentStatus.ALUMNI).build();
+        Student updatedStudent = service.update(updateParameters);
+        assertThat(updatedStudent, Matchers.is(philNew));
+    }
+
+    @Test
     public void shouldFailToUpdateNonexistantStudent() {
         assertThat(service.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
     }

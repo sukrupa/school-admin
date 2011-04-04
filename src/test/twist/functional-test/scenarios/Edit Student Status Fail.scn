@@ -1,0 +1,8 @@
+Tags: in-progress, example
+Preconditions:Navigte to Student Profile,LogIn,Log out afterwards
+h1.
+Edit Status Fails If Left Blank:
+# When I select student status as ""
+#And I click Save
+#Then I should see "Please select a status"
+
