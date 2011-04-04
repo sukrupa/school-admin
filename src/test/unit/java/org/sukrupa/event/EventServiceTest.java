@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentRepository;
@@ -11,11 +12,13 @@ import org.sukrupa.student.StudentRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyVararg;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
@@ -75,6 +78,45 @@ public class EventServiceTest {
     {
         when(eventRepository.list()).thenReturn(events);
         assertThat(service.list(),hasItems(sportsEvent,annualEvent));
+    }
+
+    @Test
+    public void shouldUpdateEvent() {
+    Set newAttendees = newHashSet();
+        newAttendees.add(pat);
+        newAttendees.add(jim);
+    Event spiceGirlsOld = new EventBuilder().title("Spice Girls")
+                                                    .attendees(pat)
+                                                    .date(new Date(1,12,2011))
+                                                    .description("Wahoo Spice Girls")
+                                                    .venue("P-81")
+                                                    .coordinator("Joel Tellez")
+                                                    .notes("Sick as party")
+                                                    .build();
+    Event spiceGirlsNew = new EventBuilder().title("Spice Girls")
+                                                    .attendees(newAttendees)
+                                                    .date(new Date(12, 12, 2011))
+                                                    .description("Spice Girls 4 Lyf")
+                                                    .venue("P-81")
+                                                    .coordinator("Joel Tellez")
+                                                    .notes("Sick as party")
+                                                    .build();
+
+        when(eventRepository.findByTitle(spiceGirlsOld.getTitle())).thenReturn(spiceGirlsOld);
+        when(eventRepository.update(any(Event.class))).thenReturn(spiceGirlsNew);
+        when(studentRepository.findByStudentIds(newAttendees.toString())).thenReturn(newAttendees);
+
+        EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().title(spiceGirlsOld.getTitle())
+                                .date(new Date(12, 12, 2011))
+                                .description("Spice Girls 4 Lyf")
+                                .venue("P-81")
+                                .coordinator("Joel Tellez")
+                                .notes("Sick as party")
+                                .attendees(newAttendees)
+                                    .build();
+        Event updatedEvent = service.update(updateParameter);
+        assertThat(updatedEvent, is(spiceGirlsNew));
+
     }
 
 }

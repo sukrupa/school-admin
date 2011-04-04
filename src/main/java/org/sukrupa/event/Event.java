@@ -69,23 +69,23 @@ public class Event {
         this(title, date, venue, coordinator, description, notes, new HashSet<Student>());
     }
 
-    public static Event createFrom(EventCreateParameter eventCreateParameter) {
-        return new Event(eventCreateParameter.getTitle(),
-                Date.parse(eventCreateParameter.getDate(),
-		        eventCreateParameter.getTime()),
-                eventCreateParameter.getVenue(),
-                eventCreateParameter.getCoordinator(),
-                eventCreateParameter.getDescription(),
-                eventCreateParameter.getNotes());
+    public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
+        return new Event(eventCreateOrUpdateParameter.getTitle(),
+                Date.parse(eventCreateOrUpdateParameter.getDate(),
+		        eventCreateOrUpdateParameter.getTime()),
+                eventCreateOrUpdateParameter.getVenue(),
+                eventCreateOrUpdateParameter.getCoordinator(),
+                eventCreateOrUpdateParameter.getDescription(),
+                eventCreateOrUpdateParameter.getNotes());
     }
 
-    public static Event from(EventCreateParameter eventCreateParameter) {
-        String venue = nullIfEmpty(eventCreateParameter.getVenue());
-        String coordinator = nullIfEmpty(eventCreateParameter.getCoordinator());
-        String notes = nullIfEmpty(eventCreateParameter.getNotes());
+    public static Event from(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
+        String venue = nullIfEmpty(eventCreateOrUpdateParameter.getVenue());
+        String coordinator = nullIfEmpty(eventCreateOrUpdateParameter.getCoordinator());
+        String notes = nullIfEmpty(eventCreateOrUpdateParameter.getNotes());
 
-        return new Event(eventCreateParameter.getTitle(), parseDateTime(eventCreateParameter),
-                venue, coordinator, eventCreateParameter.getDescription(), notes, null);
+        return new Event(eventCreateOrUpdateParameter.getTitle(), parseDateTime(eventCreateOrUpdateParameter),
+                venue, coordinator, eventCreateOrUpdateParameter.getDescription(), notes, null);
     }
 
     private static String nullIfEmpty(String value) {
@@ -112,8 +112,8 @@ public class Event {
         return date.getTime().equals("00:00") ? null: date.getTime();
     }
 
-    private static Date parseDateTime(EventCreateParameter eventCreateParameter) {
-        return Date.parse(eventCreateParameter.getDate(), eventCreateParameter.getTime());
+    private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
+        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -167,4 +167,13 @@ public class Event {
 		return coordinator;
 	}
 
+    public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
+        this.title = eventParam.getTitle();
+        this.date = Date.parse(eventParam.getDate(),"00:00");
+        this.venue = eventParam.getVenue();
+        this.coordinator = eventParam.getCoordinator();
+        this.description = eventParam.getDescription();
+        this.notes = eventParam.getNotes();
+        this.attendees = attendees;
+    }
 }

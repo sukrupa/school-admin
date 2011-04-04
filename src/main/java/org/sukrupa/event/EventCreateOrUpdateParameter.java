@@ -2,10 +2,11 @@ package org.sukrupa.event;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
+import com.google.common.base.Joiner;
 
 import java.util.Set;
 
-public class EventCreateParameter {
+public class EventCreateOrUpdateParameter {
     private String title;
     private String date;
     private String time;
@@ -15,10 +16,11 @@ public class EventCreateParameter {
     private String notes;
     private String attendees;
 
-    public EventCreateParameter() {
+
+    public EventCreateOrUpdateParameter() {
     }
 
-    public EventCreateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateOrUpdateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
         this.title = title;
         this.date = date;
         this.time = time;
@@ -27,6 +29,7 @@ public class EventCreateParameter {
         this.description = description;
         this.notes = notes;
         this.attendees = attendees;
+//        this.attendees = Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
     public String getTitle() {
@@ -89,11 +92,13 @@ public class EventCreateParameter {
         this.notes = notes;
     }
 
-    public String getAttendees() {
+    public String getAttendeesString() {
         return attendees;
+//        return Joiner.on(", ").join(attendees);
     }
 
     public Set<String> getStudentIdsOfAttendees() {
+//        return attendees;
 	    return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
