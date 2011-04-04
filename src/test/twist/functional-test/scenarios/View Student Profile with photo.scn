@@ -4,10 +4,4 @@ Metadata:ScenarioType=Auto
 Student Record With No Photo:
 #Click on "Bhavani" student record
 #Verify that a placeholder is shown
-
-
-Student Record with Photo:
-#goto All Students
-#click on "Anok" student record
-#verify that "3" profile image is shown
  

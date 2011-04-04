@@ -82,6 +82,8 @@
                     </select>
                 </div>
 
+
+
                 <div class="updateEntry">
                     <div class="label">Father's Name</div>
                     <input type="text" name="father" value="$student.father$" class="updateValue"></input>
@@ -91,6 +93,22 @@
                     <div class="label">Mother's Name</div>
                     <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
                 </div>
+
+                 <div class="updateEntry">
+                    <div class="label-header">Background</div>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
+                </div>
+
+                <div class="updateEntry">
+                    <div class="label-header">Disciplinary</div>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary">$student.disciplinary$</textarea>
+                </div>
+
+                <div class="updateEntry">
+                    <div class="label-header">Academic Performance</div>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance">$student.performance$</textarea>
+                </div>
+
             </div>
 
             <div class="editStatus">

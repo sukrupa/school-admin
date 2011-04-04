@@ -19,8 +19,10 @@ public class StudentProfileForm {
 	private String mother;
     private Set<String> talents;
     private String status;
+    private String disciplinary;
+    private String performance;
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status,  String disciplinary, String performance) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -34,6 +36,8 @@ public class StudentProfileForm {
         this.mother = mother;
         this.talents = talents;
         this.status = status;
+        this.disciplinary = disciplinary;
+        this.performance = performance;
     }
 
     @DoNotRemove
@@ -55,6 +59,7 @@ public class StudentProfileForm {
     public String getDateOfBirthForDisplay() {
         return getDateOfBirth();
     }
+
 
 
     public String getGender() {
@@ -147,5 +152,21 @@ public class StudentProfileForm {
 
     public void setTalents(Set<String> talents) {
         this.talents = talents;
+    }
+
+    public void setPerformance(String performance) {
+        this.performance = performance;
+    }
+
+    public void setDisciplinary(String disciplinary) {
+        this.disciplinary = disciplinary;
+    }
+
+    public String getPerformance() {
+        return performance;
+    }
+
+    public String getDisciplinary() {
+        return disciplinary;
     }
 }
