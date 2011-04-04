@@ -1,21 +1,20 @@
 package org.sukrupa.student;
 
-import net.sf.sahi.client.Browser;
+import org.sukrupa.twist.ScenarioDataUnitOfWork;
 
 public class RemoveAddedStudents {
 
-	private Browser browser;
+	private final ScenarioDataUnitOfWork scenarioDataUnitOfWork;
 
-	public RemoveAddedStudents(Browser browser) {
-		this.browser = browser;
+	public RemoveAddedStudents(ScenarioDataUnitOfWork scenarioDataUnitOfWork) {
+		this.scenarioDataUnitOfWork = scenarioDataUnitOfWork;
 	}
 
 	public void setUp() throws Exception {
-		// Create something to store the student ids
 	}
 
 	public void tearDown() throws Exception {
-		// remove the added student ids
+		scenarioDataUnitOfWork.removeAllCreatedObjects();
 	}
 
 }
