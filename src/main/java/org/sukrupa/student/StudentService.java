@@ -23,7 +23,7 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory){
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
@@ -45,6 +45,17 @@ public class StudentService {
         return students.size();
     }
 
+    public Student create(StudentProfileForm studentProfileForm) {
+        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+        Student student = studentFactory.create(studentProfileForm.getStudentId(),
+                studentProfileForm.getName(),
+                studentProfileForm.getDateOfBirth());
+
+        student.updateFrom(studentProfileForm, talents);
+        studentRepository.put(student);
+        return student;
+    }
+
     public Student update(StudentProfileForm studentProfileForm) {
         Student student = studentRepository.findByStudentId(studentProfileForm.getStudentId());
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
@@ -55,6 +66,7 @@ public class StudentService {
 
         return studentRepository.update(student);
     }
+
 
     @Transactional
     public void addNoteFor(String studentId, String noteMessage) {
@@ -80,14 +92,4 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(StudentProfileForm studentProfileForm) {
-        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
-        Student student = studentFactory.create(studentProfileForm.getStudentId(),
-                                                studentProfileForm.getName(),
-                                                studentProfileForm.getDateOfBirth());
-
-        student.updateFrom(studentProfileForm, talents);
-        studentRepository.put(student);
-        return student;
-    }
 }
