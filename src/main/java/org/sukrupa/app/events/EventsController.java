@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.event.Event;
-import org.sukrupa.event.EventCreateParameter;
+import org.sukrupa.event.EventCreateOrUpdateParameter;
 import org.sukrupa.event.EventService;
 
 import java.util.List;
@@ -53,13 +53,13 @@ public class EventsController {
 	}
 
 	@RequestMapping(value = "save", method = POST)
-	public String save(@ModelAttribute(value = "createEvent") EventCreateParameter eventCreateParameter, BindingResult result, Map<String, Object> model) {
-		Event event = Event.createFrom(eventCreateParameter);
-		Set<String> studentIdsOfAttendees = eventCreateParameter.getStudentIdsOfAttendees();
+	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, BindingResult result, Map<String, Object> model) {
+		Event event = Event.createFrom(eventCreateOrUpdateParameter);
+		Set<String> studentIdsOfAttendees = eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
 		Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", eventCreateParameter);
+			model.put("event", eventCreateOrUpdateParameter);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));

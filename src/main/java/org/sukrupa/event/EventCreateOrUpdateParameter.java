@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 
 import java.util.Set;
 
-public class EventCreateParameter {
+public class EventCreateOrUpdateParameter {
     private String title;
     private String date;
     private String time;
@@ -15,10 +15,10 @@ public class EventCreateParameter {
     private String notes;
     private String attendees;
 
-    public EventCreateParameter() {
+    public EventCreateOrUpdateParameter() {
     }
 
-    public EventCreateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateOrUpdateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
         this.title = title;
         this.date = date;
         this.time = time;

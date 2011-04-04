@@ -67,14 +67,14 @@ public class EventTest {
 
 	@Test
 	public void shouldCreateEventWithNullValuesForNonMandatoryFields() {
-		EventCreateParameter eventCreateParameter = new EventCreateParameter();
-		eventCreateParameter.setCoordinator("");
-		eventCreateParameter.setNotes("");
-		eventCreateParameter.setVenue("");
-		eventCreateParameter.setTime("");
-		eventCreateParameter.setDate("12-12-2001");
+		EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
+		eventCreateOrUpdateParameter.setCoordinator("");
+		eventCreateOrUpdateParameter.setNotes("");
+		eventCreateOrUpdateParameter.setVenue("");
+		eventCreateOrUpdateParameter.setTime("");
+		eventCreateOrUpdateParameter.setDate("12-12-2001");
 
-		Event event = Event.createFrom(eventCreateParameter);
+		Event event = Event.createFrom(eventCreateOrUpdateParameter);
 
 		assertThat(event.getNotes(), nullValue());
 		assertThat(event.getVenue(), nullValue());
