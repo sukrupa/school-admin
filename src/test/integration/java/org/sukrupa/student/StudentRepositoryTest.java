@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.*;
 import org.sukrupa.platform.config.*;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.*;
+import org.sukrupa.platform.hamcrest.CollectionMatchers;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.platform.date.DateManipulation.*;
-import static org.sukrupa.platform.hamcrest.Matchers.*;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -129,9 +130,7 @@ public class StudentRepositoryTest {
         assertThat(returnedStudent.getDateOfBirth(), is(new LocalDate(2001, 1, 11)));
         assertThat(returnedStudent.getFather(), is("someFather"));
         assertThat(returnedStudent.getMother(), is("someMother"));
-        assertThat(returnedStudent.getTalents(), hasItems(actingTalent, singingTalent));
-        assertThat(returnedStudent.getTalents(), not(hasItems(sportsTalent)));
-
+        assertThat(returnedStudent.getTalents(), hasOnly(actingTalent, singingTalent));
     }
 
     @Test
@@ -154,7 +153,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldLoadStudentsBasedOnStudentIds() {
         hibernateSession.save(pat, sahil, renaud);
-        assertThat(studentRepository.findByStudentIds(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
+        assertThat(studentRepository.findByStudentIds(pat.getStudentId(), sahil.getStudentId()), CollectionMatchers.hasOnly(pat, sahil));
     }
 
     @Test
@@ -165,7 +164,7 @@ public class StudentRepositoryTest {
         getPageCriteria.setMaxResults(100);
         List<Student> students = getPageCriteria.list();
         assertThat(students.size(), is(2));
-        assertThat(students, hasOnly(pat, renaud));
+        assertThat(students, CollectionMatchers.hasOnly(pat, renaud));
     }
 
     @Test
@@ -178,7 +177,7 @@ public class StudentRepositoryTest {
 
         // Then we should have only see renaud and sahil in the results
         assertThat(students.size(), is(2));
-        assertThat(students, hasOnly(renaud, sahil));
+        assertThat(students, CollectionMatchers.hasOnly(renaud, sahil));
     }
 
     @Test
@@ -186,7 +185,7 @@ public class StudentRepositoryTest {
         hibernateSession.save(sahil, pat, renaud);
         List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(), 0, 100);
         assertThat(students.size(), is(1));
-        assertThat(students, hasOnly(renaud));
+        assertThat(students, CollectionMatchers.hasOnly(renaud));
     }
 
     @Test
@@ -198,7 +197,7 @@ public class StudentRepositoryTest {
         List<Student> students = studentRepository.findBySearchParameter(all, 0, 100);
 
         // Then
-        assertThat(students.get(0).getTalents(), hasOnly(music, sport));
+        assertThat(students.get(0).getTalents(), CollectionMatchers.hasOnly(music, sport));
     }
 
     @Test
@@ -263,7 +262,7 @@ public class StudentRepositoryTest {
 
         List<Student> students = studentRepository.findAll();
 
-        assertThat(students, hasOnly(pat, sahil));
+        assertThat(students, CollectionMatchers.hasOnly(pat, sahil));
 
     }
 

@@ -15,7 +15,7 @@ import org.sukrupa.student.StudentBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)

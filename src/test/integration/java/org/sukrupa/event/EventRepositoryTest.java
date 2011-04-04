@@ -20,7 +20,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

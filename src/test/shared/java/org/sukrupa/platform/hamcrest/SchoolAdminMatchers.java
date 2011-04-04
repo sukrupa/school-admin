@@ -15,23 +15,10 @@ import java.util.Collection;
 import static java.util.Arrays.asList;
 import static org.apache.commons.collections.CollectionUtils.isEqualCollection;
 
-public class Matchers {
-
-    public static <T> Matcher<Collection<T>> hasOnly(final T... items) {
-        return new TypeSafeMatcher<Collection<T>>() {
-            public boolean matchesSafely(Collection<T> actual) {
-                return CollectionUtils.isEqualCollection(actual, asList(items));
-            }
-
-            public void describeTo(Description description) {
-                description.appendText(Arrays.toString(items));
-            }
-        };
-    }
-
+public class SchoolAdminMatchers {
 
     public static Matcher<Event> containsAttendees(final Student... attendees) {
-        return new org.junit.internal.matchers.TypeSafeMatcher<Event>() {
+        return new TypeSafeMatcher<Event>() {
             private Event event;
 
             public boolean matchesSafely(Event event) {
@@ -46,7 +33,7 @@ public class Matchers {
     }
 
     public static Matcher<StudentRow> matches(final Student student) {
-        return new org.junit.internal.matchers.TypeSafeMatcher<StudentRow>() {
+        return new TypeSafeMatcher<StudentRow>() {
 
             private StudentRow studentRow;
 
@@ -82,7 +69,7 @@ public class Matchers {
     }
 
     public static Matcher<Student> hasNote(final Note note) {
-        return new org.junit.internal.matchers.TypeSafeMatcher<Student>() {
+        return new TypeSafeMatcher<Student>() {
             private Student student;
 
             public boolean matchesSafely(Student student) {
