@@ -85,8 +85,8 @@ public class StudentUpdateParameterBuilder {
         return this;
     }
 
-    public StudentCreateOrUpdateParameters build() {
-        return new StudentCreateOrUpdateParameters(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString());
+    public StudentProfileForm build() {
+        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString());
     }
 
 

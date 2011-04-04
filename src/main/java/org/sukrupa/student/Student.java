@@ -215,7 +215,7 @@ public class Student {
 		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
 	}
 
-	public void updateFrom(StudentCreateOrUpdateParameters studentUpdateParameters, Set<Talent> newTalents) {
+	public void updateFrom(StudentProfileForm studentUpdateParameters, Set<Talent> newTalents) {
 		this.studentClass = studentUpdateParameters.getStudentClass();
 		this.gender = studentUpdateParameters.getGender();
 		this.name = studentUpdateParameters.getName();

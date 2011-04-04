@@ -34,10 +34,6 @@ public class StudentService {
         return studentRepository.findByStudentId(studentId);
     }
 
-    public Set<Student> load(String... studentIds) {
-        return studentRepository.findByStudentIds(studentIds);
-    }
-
     public int promoteStudentsToNextClass() {
         List<Student> students = studentRepository.findAll();
 
@@ -49,12 +45,13 @@ public class StudentService {
         return students.size();
     }
 
-    public Student update(StudentCreateOrUpdateParameters studentParam) {
-        Student student = studentRepository.findByStudentId(studentParam.getStudentId());
-        if (student == null) { //TODO is this test needed?
+    public Student update(StudentProfileForm studentProfileForm) {
+        Student student = studentRepository.findByStudentId(studentProfileForm.getStudentId());
+        if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
-        student.updateFrom(studentParam, talentRepository.findTalents(studentParam.getTalentDescriptions()));
+        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+        student.updateFrom(studentProfileForm, talents);
 
         return studentRepository.update(student);
     }
@@ -83,13 +80,13 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
-    public Student create(StudentCreateOrUpdateParameters studentCreateOrUpdateParameters) {
-        Set<Talent> talents = talentRepository.findTalents(studentCreateOrUpdateParameters.getTalentDescriptions());
-        Student student = studentFactory.create(studentCreateOrUpdateParameters.getStudentId(),
-                                                studentCreateOrUpdateParameters.getName(),
-                                                studentCreateOrUpdateParameters.getDateOfBirth());
+    public Student create(StudentProfileForm studentProfileForm) {
+        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+        Student student = studentFactory.create(studentProfileForm.getStudentId(),
+                                                studentProfileForm.getName(),
+                                                studentProfileForm.getDateOfBirth());
 
-        student.updateFrom(studentCreateOrUpdateParameters, talents);
+        student.updateFrom(studentProfileForm, talents);
         studentRepository.put(student);
         return student;
     }

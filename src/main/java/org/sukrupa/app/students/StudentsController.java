@@ -127,7 +127,7 @@ public class StudentsController {
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentCreateOrUpdateParameters studentParam,
+            @ModelAttribute("updateStudent") StudentProfileForm studentParam,
             Map<String, Object> model) {
 
         Student updatedStudent = studentService.update(studentParam);
@@ -150,8 +150,8 @@ public class StudentsController {
 
     @RequestMapping(value = "create", method = POST)
     public String create(
-            @ModelAttribute("createStudent") StudentCreateOrUpdateParameters studentParam, Map<String, Object> model) {
-        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentCreateOrUpdateParameters");
+            @ModelAttribute("createStudent") StudentProfileForm studentParam, Map<String, Object> model) {
+        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentProfileForm");
         studentValidator.validate(studentParam, errors);
 
         if (mandatoryFieldsExist(errors)) {

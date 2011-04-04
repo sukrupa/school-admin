@@ -5,7 +5,7 @@ import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
 
-public class StudentCreateOrUpdateParameters {
+public class StudentProfileForm {
 	private String studentId;
     private String name;
     private String dateOfBirth;
@@ -20,7 +20,7 @@ public class StudentCreateOrUpdateParameters {
     private Set<String> talents;
     private String status;
 
-    public StudentCreateOrUpdateParameters(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -37,7 +37,7 @@ public class StudentCreateOrUpdateParameters {
     }
 
     @DoNotRemove
-	public StudentCreateOrUpdateParameters() {
+	public StudentProfileForm() {
 	}
 
     public String getStudentId() {

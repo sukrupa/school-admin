@@ -32,10 +32,11 @@ public class StudentFactoryTest {
     @Test
     public void shouldCreateAStudentWithTalents() {
         Talent someTalent = new TalentBuilder().description("Some Talent").build();
+        Talent someOtherTalent = new TalentBuilder().description("Some Other Talent").build();
 
-        Student student = studentFactory.create(null, null, "11-10-1982", someTalent);
+        Student student = studentFactory.create(null, null, "11-10-1982", someTalent, someOtherTalent);
 
-        assertThat(student.getTalents(), hasOnly(someTalent));
+        assertThat(student.getTalents(), hasOnly(someTalent, someOtherTalent));
     }
 
 }
