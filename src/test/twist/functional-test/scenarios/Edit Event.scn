@@ -1,0 +1,7 @@
+Tags: in-progress
+Preconditions:Navigate  to Events,Log In,Log Out Afterwards
+h1.
+Navigate to edit event page:
+#Given i am viewing spice girls event
+#When I click "Edit"
+#Then I see the "Edit Event: Spice Girls" page

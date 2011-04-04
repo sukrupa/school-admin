@@ -1,0 +1,1 @@
+$layout(body=events/createBody(), title="Edit Event: "+{$event.title$})$

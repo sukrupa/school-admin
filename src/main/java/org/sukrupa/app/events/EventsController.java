@@ -40,6 +40,13 @@ public class EventsController {
         return "events/view";
     }
 
+    @RequestMapping(value = "/{eventId}/edit", method = GET)
+    public String edit(@PathVariable int eventId, Map<String, Event> model) {
+        model.put("event",service.getEvent(eventId));
+        return "events/edit";
+    }
+
+
 	@RequestMapping(value = "create", method = GET)
 	public String create() {
 		return "events/create";

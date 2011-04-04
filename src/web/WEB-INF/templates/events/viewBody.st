@@ -47,5 +47,11 @@
             $event.attendeesForDisplay$
         </div>
     </div>
+
+        <div id="update">
+            <form action="/events/$event.id$/edit" method="GET">
+                <input type="submit" value="Edit"/>
+            </form>
+        </div>
 </div>
 
