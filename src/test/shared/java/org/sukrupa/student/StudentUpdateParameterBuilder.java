@@ -22,6 +22,7 @@ public class StudentUpdateParameterBuilder {
     private StudentStatus status = StudentStatus.NOT_SET;
     private String disciplinary;
     private String performance;
+    private String background;
 
     public StudentUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -54,6 +55,11 @@ public class StudentUpdateParameterBuilder {
 
      public StudentUpdateParameterBuilder performance(String performance) {
         this.performance = performance;
+        return this;
+    }
+
+     public StudentUpdateParameterBuilder background(String background) {
+        this.background = background;
         return this;
     }
 
@@ -98,7 +104,7 @@ public class StudentUpdateParameterBuilder {
     }
 
     public StudentProfileForm build() {
-        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance);
+        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance, background);
     }
 
 

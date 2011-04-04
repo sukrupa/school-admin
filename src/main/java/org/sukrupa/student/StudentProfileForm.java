@@ -21,8 +21,9 @@ public class StudentProfileForm {
     private String status;
     private String disciplinary;
     private String performance;
+    private String background;
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status,  String disciplinary, String performance) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status,  String disciplinary, String performance, String background) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -38,6 +39,7 @@ public class StudentProfileForm {
         this.status = status;
         this.disciplinary = disciplinary;
         this.performance = performance;
+        this.background = background;
     }
 
     @DoNotRemove
@@ -162,11 +164,19 @@ public class StudentProfileForm {
         this.disciplinary = disciplinary;
     }
 
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
     public String getPerformance() {
         return performance;
     }
 
     public String getDisciplinary() {
         return disciplinary;
+    }
+
+    public String getBackground() {
+        return this.background;
     }
 }

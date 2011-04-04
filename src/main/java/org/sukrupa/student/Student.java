@@ -223,6 +223,10 @@ public class Student {
         return notes;
     }
 
+    public void setBackground(String background){
+        this.profile.background(background);
+    }
+
     public StudentStatus getStatus() {
         return status;
     }
@@ -260,7 +264,10 @@ public class Student {
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+        setBackground(studentUpdateParameters.getBackground());
 	}
+
+
 
     public void promote() {
 
@@ -282,6 +289,7 @@ public class Student {
         }
 
     }
+
 
     private static class EmptyStudent extends Student {
         @Override
@@ -353,6 +361,17 @@ public class Student {
         public List<String> talentDescriptions() {
             return Collections.emptyList();
         }
+
+        @Override
+        public String getDisciplinary(){
+            return "";
+        }
+
+        @Override
+        public String getPerformance(){
+            return "";
+        }
+
 
         @Override
         public int getAge() {
