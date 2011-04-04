@@ -31,6 +31,10 @@ public class Profile {
         return background;
     }
 
+    public void background(String background){
+        this.background = background;
+    }
+
     private static String[] excludedFields = new String[]{"id"};
 
     public boolean equals(Object other) {
