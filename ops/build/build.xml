@@ -176,6 +176,7 @@
     </target>
 
     <target name="copy.keystore.to.homedir">
+        <echo>Copy the keystore file to the ${user.home}</echo>
         <copy file="${resources.main.dir}/.keystore" tofile="${user.home}/.keystore" />
     </target>
 
