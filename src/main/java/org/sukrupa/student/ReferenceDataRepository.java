@@ -24,7 +24,7 @@ public class ReferenceDataRepository {
             "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private final int AGES_TO = 20;
     private final int AGES_FROM = 2;
-    private final List<String> STATUSES = Arrays.asList("Existing Student", "Dropout", "Alumni");
+    private final List<String> STATUSES = Arrays.asList("", "Existing Student", "Dropout", "Alumni");
     private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES);
 
 
