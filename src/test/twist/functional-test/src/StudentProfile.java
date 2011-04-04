@@ -29,6 +29,26 @@ public class StudentProfile {
 		assertEquals(expectedStatus,browser.div("value").near(browser.div("Student Status")).text());
 	}
 
+	public void verifyThatDisciplinaryIs(String string1) throws Exception {
+		assertEquals(string1,browser.div("student-disciplinary").text());
+	}
+
+	public void verifyThatPerformanceIs(String string1) throws Exception {
+		assertEquals(string1,browser.div("student-performance").text());
+
+	}
+
+	public void clickOnEditButton() throws Exception {
+		browser.button("student-edit").click();
+	}
+
+	public void verifyThatBackgroundIs(String string1) throws Exception {
+		assertEquals(string1,browser.textarea("student-background").text());
+
+	}
+
+
+
 
 
 }

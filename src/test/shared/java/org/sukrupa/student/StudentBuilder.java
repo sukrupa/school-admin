@@ -26,6 +26,10 @@ public class StudentBuilder {
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
     private StudentStatus status = StudentStatus.ACTIVE;
+    private String disciplinary;
+    private String performance;
+    private  Profile profile;
+
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -82,6 +86,21 @@ public class StudentBuilder {
         return this;
     }
 
+     public StudentBuilder disciplinary(String disciplinary) {
+        this.disciplinary = disciplinary;
+        return this;
+    }
+
+     public StudentBuilder performance(String performance) {
+        this.performance = performance;
+        return this;
+    }
+
+    public StudentBuilder profile(Profile profile) {
+        this.profile = profile;
+        return this;
+    }
+
     public StudentBuilder age(int age) {
         dateOfBirth = new LocalDate().minusYears(age);
         return this;
@@ -122,7 +141,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, StudentStatus.NOT_SET);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, StudentStatus.NOT_SET, disciplinary, performance, profile);
     }
 
     public StudentBuilder imageLink(String imageLink) {

@@ -28,4 +28,9 @@ public class StudentProfileTwo {
 	
 	}
 
+	public void verifyThatBackgroundIs(String string1) throws Exception {
+		assertEquals(string1, browser.div("student-background").text());
+
+	}
+
 }

@@ -247,7 +247,7 @@ text-decoration: none;
     margin-top: 20px;
 }
 
-.talentsLabel, .label, .attendeeLabel
+.talentsLabel, .label, .label-header,  .attendeeLabel
 {
 
     font-weight: bold;
@@ -277,6 +277,11 @@ text-decoration: none;
     padding-bottom: 3em;
     position:relative;
 }
+
+.label-header {
+    width: 190px;
+}
+
 
 .label {
     width: 190px;
