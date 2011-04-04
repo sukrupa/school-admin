@@ -21,11 +21,11 @@ import static org.sukrupa.platform.hamcrest.Matchers.*;
 public class ViewListOfStudentsTest extends FunctionalTestBase {
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllCreatedObjects();
+        hibernateSession.deleteAllCreatedObjects();
         driver.get("http://localhost:8080/authentication/logout");
     }
 
@@ -50,6 +50,6 @@ public class ViewListOfStudentsTest extends FunctionalTestBase {
     }
 
     public void save(Object... students) {
-        databaseHelper.saveAndCommit(students);
+        hibernateSession.saveAndCommit(students);
     }
 }

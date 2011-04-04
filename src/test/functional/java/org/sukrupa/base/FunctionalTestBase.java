@@ -1,15 +1,9 @@
 package org.sukrupa.base;
 
 import org.junit.*;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
 
 public abstract class FunctionalTestBase
 {

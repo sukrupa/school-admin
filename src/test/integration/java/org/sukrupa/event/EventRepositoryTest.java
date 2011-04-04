@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.date.Date;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.HibernateSession;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -37,13 +37,13 @@ public class EventRepositoryTest {
 	SessionFactory sessionFactory;
 
 	@Autowired
-	private DatabaseHelper databaseHelper;
+	private HibernateSession hibernateSession;
 
 	private EventRepository eventRepository;
 
 	@Before
 	public void setUp() {
-		databaseHelper.save(sahil, suhas);
+		hibernateSession.save(sahil, suhas);
 		eventRepository = new EventRepository(sessionFactory);
 	}
 
@@ -61,8 +61,8 @@ public class EventRepositoryTest {
     
     @Test
     public void shouldLoadAllEventsWithMostRecentEventFirst(){
-        databaseHelper.save(independeceDayEvent);
-        databaseHelper.save(sportsEvent);
+        hibernateSession.save(independeceDayEvent);
+        hibernateSession.save(sportsEvent);
         List<Event> events = eventRepository.list();
         assertThat(events.get(0),is(sportsEvent));
         assertThat(events.get(1),is(independeceDayEvent));

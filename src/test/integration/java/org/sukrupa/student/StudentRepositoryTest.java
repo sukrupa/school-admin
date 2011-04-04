@@ -16,6 +16,8 @@ import java.util.*;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.allOf;
+import static org.junit.Assert.assertTrue;
 import static org.sukrupa.platform.date.DateManipulation.*;
 import static org.sukrupa.platform.hamcrest.Matchers.*;
 
@@ -36,12 +38,12 @@ public class StudentRepositoryTest {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private DatabaseHelper schoolAdminDatabase;
+    private HibernateSession hibernateSession;
 
     @Autowired
     private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
 
-    private StudentRepository repository;
+    private StudentRepository studentRepository;
 
     private Student sahil = new StudentBuilder()
             .studentId("99").name("Sahil")
@@ -92,28 +94,33 @@ public class StudentRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-
-        repository = new StudentRepository(sessionFactory, studentsSearchCriteriaGenerator);
-        schoolAdminDatabase.save(music, sport, cooking);
+        studentRepository = new StudentRepository(sessionFactory, studentsSearchCriteriaGenerator);
+        hibernateSession.save(music, sport, cooking);
     }
 
     @Test
     public void shouldPersistAStudent() {
-        Student student = new StudentBuilder()
-                                    .studentId("SK12345")
-                                    .name("John")
-                                    .religion("Hindi")
-                                    .caste("someCaste")
-                                    .subCaste("someSubCaste")
-                                    .dateOfBirth(new LocalDate(2001, 1, 11))
-                                    .father("someFather")
-                                    .gender("Male")
-                                    .mother("someMother")
-                                    .build();
+        // Given we have acting, singing and sports talents in the database
+        Talent actingTalent = new TalentBuilder().description("Acting").build();
+        Talent singingTalent = new TalentBuilder().description("Singing").build();
+        Talent sportsTalent = new TalentBuilder().description("Sports").build();
+        hibernateSession.save(actingTalent, singingTalent, sportsTalent);
 
-        schoolAdminDatabase.save(student);
+        studentRepository.put(new StudentBuilder()
+                .studentId("SK12345")
+                .name("John")
+                .religion("Hindi")
+                .caste("someCaste")
+                .subCaste("someSubCaste")
+                .dateOfBirth(new LocalDate(2001, 1, 11))
+                .father("someFather")
+                .gender("Male")
+                .mother("someMother")
+                .talents(actingTalent, singingTalent)
+                .build());
 
-        Student returnedStudent = repository.findByStudentId("SK12345");
+        // Then we should be able to find it again by student id
+        Student returnedStudent = studentRepository.findByStudentId("SK12345");
 
         assertThat(returnedStudent.getStudentId(), is("SK12345"));
         assertThat(returnedStudent.getName(), is("John"));
@@ -122,34 +129,37 @@ public class StudentRepositoryTest {
         assertThat(returnedStudent.getDateOfBirth(), is(new LocalDate(2001, 1, 11)));
         assertThat(returnedStudent.getFather(), is("someFather"));
         assertThat(returnedStudent.getMother(), is("someMother"));
+        assertThat(returnedStudent.getTalents(), hasItems(actingTalent, singingTalent));
+        assertThat(returnedStudent.getTalents(), not(hasItems(sportsTalent)));
+
     }
 
     @Test
     public void shouldHaveCountZero() {
-        assertThat(repository.getCountBasedOn(all), is(0));
+        assertThat(studentRepository.getCountBasedOn(all), is(0));
     }
 
     @Test
     public void shouldHaveCountOne() {
-        schoolAdminDatabase.save(pat);
-        assertThat(repository.getCountBasedOn(all), is(1));
+        hibernateSession.save(pat);
+        assertThat(studentRepository.getCountBasedOn(all), is(1));
     }
 
     @Test
     public void shouldLoadStudentBasedOnStudentId() {
-        schoolAdminDatabase.save(pat);
-        assertThat(repository.findByStudentId("123"), is(pat));
+        hibernateSession.save(pat);
+        assertThat(studentRepository.findByStudentId("123"), is(pat));
     }
 
     @Test
     public void shouldLoadStudentsBasedOnStudentIds() {
-        schoolAdminDatabase.save(pat, sahil, renaud);
-        assertThat(repository.findByStudentIds(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
+        hibernateSession.save(pat, sahil, renaud);
+        assertThat(studentRepository.findByStudentIds(pat.getStudentId(), sahil.getStudentId()), hasOnly(pat, sahil));
     }
 
     @Test
     public void shouldFindAllStudentsInDatabase() {
-        schoolAdminDatabase.save(pat, renaud);
+        hibernateSession.save(pat, renaud);
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(all);
         getPageCriteria.setFirstResult(0);
         getPageCriteria.setMaxResults(100);
@@ -161,10 +171,10 @@ public class StudentRepositoryTest {
     @Test
     public void shouldReturnNurseryStudents() {
         // Given that renaud and sahil are in the nursery class pat is not
-        schoolAdminDatabase.save(sahil, pat, renaud);
+        hibernateSession.save(sahil, pat, renaud);
 
         // When we search the repositoty for students who are in the nursery class
-        List<Student> students = repository.findBySearchParameter(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build(), 0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().studentClass("Nursery").page(1).build(), 0, 100);
 
         // Then we should have only see renaud and sahil in the results
         assertThat(students.size(), is(2));
@@ -173,8 +183,8 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnStudentsBetweenEighteenAndTwentyTwo() {
-        schoolAdminDatabase.save(sahil, pat, renaud);
-        List<Student> students = repository.findBySearchParameter(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(), 0, 100);
+        hibernateSession.save(sahil, pat, renaud);
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().ageFrom("18").ageTo("22").page(1).build(), 0, 100);
         assertThat(students.size(), is(1));
         assertThat(students, hasOnly(renaud));
     }
@@ -182,10 +192,10 @@ public class StudentRepositoryTest {
     @Test
     public void shouldPopulateTalents() {
         // Given
-        schoolAdminDatabase.save(sahil);
+        hibernateSession.save(sahil);
 
         // When
-        List<Student> students = repository.findBySearchParameter(all, 0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(all, 0, 100);
 
         // Then
         assertThat(students.get(0).getTalents(), hasOnly(music, sport));
@@ -193,28 +203,28 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnStudentsBasedOnMultipleTalents() {
-        schoolAdminDatabase.save(jimbo, pat, sahil, renaud);
+        hibernateSession.save(jimbo, pat, sahil, renaud);
 
         List<Talent> talents = new ArrayList<Talent>();
         talents.add(cooking);
         talents.add(music);
 
-        List<Student> students = repository.findBySearchParameter(
-                      new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(
+                new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
         assertThat(students.size(), is(2));
     }
 
 
     @Test
     public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {
-        schoolAdminDatabase.save(jimbo, pat, sahil, renaud);
+        hibernateSession.save(jimbo, pat, sahil, renaud);
 
         List<Talent> talents = new ArrayList<Talent>();
         talents.add(sport);
         talents.add(music);
 
-        List<Student> students = repository.findBySearchParameter(
-                      new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(
+                new StudentSearchParameterBuilder().withTalents(talents).build(), 0, 100);
         assertThat(students.size(), is(1));
     }
 
@@ -224,8 +234,8 @@ public class StudentRepositoryTest {
         Note oldestNote = new Note("long time ago", new Date(29, 3, 2008));
         Note newNote = new Note("today", new Date(25, 11, 2011));
         Student student = new StudentBuilder().notes(oldestNote, newNote, oldNote).build();
-        schoolAdminDatabase.save(student);
-        List<Student> students = repository.findBySearchParameter(all, 0, 200);
+        hibernateSession.save(student);
+        List<Student> students = studentRepository.findBySearchParameter(all, 0, 200);
         Iterator<Note> notes = (students.get(0)).getNotes().iterator();
         assertThat(notes.next(), is(newNote));
         assertThat(notes.next(), is(oldNote));
@@ -234,24 +244,24 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldUpdateStudent() {
-        schoolAdminDatabase.save(pat);
+        hibernateSession.save(pat);
 
         Note newNote = new Note("foobar");
         pat.addNote(newNote);
 
-        repository.put(pat);
-        schoolAdminDatabase.flushHibernateSessionToForceReload();
+        studentRepository.put(pat);
+        hibernateSession.flushHibernateSessionToForceReload();
 
-        Student reloadedStudent = repository.findByStudentId(pat.getStudentId());
+        Student reloadedStudent = studentRepository.findByStudentId(pat.getStudentId());
         assertThat(reloadedStudent.getNotes(), hasItem(newNote));
     }
 
     @Test
     public void shouldReturnAllStudents() {
-        schoolAdminDatabase.save(pat);
-        schoolAdminDatabase.save(sahil);
+        hibernateSession.save(pat);
+        hibernateSession.save(sahil);
 
-        List<Student> students = repository.findAll();
+        List<Student> students = studentRepository.findAll();
 
         assertThat(students, hasOnly(pat, sahil));
 
@@ -260,7 +270,7 @@ public class StudentRepositoryTest {
     @Test
     public void shouldTreatNullCasteAsEmpty() {
         Student withoutCaste = new StudentBuilder().studentId("98765").caste(null).build();
-        schoolAdminDatabase.save(withoutCaste);
+        hibernateSession.save(withoutCaste);
         StudentSearchParameter blankCaste = new StudentSearchParameterBuilder().caste("").build();
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(blankCaste);
         getPageCriteria.setFirstResult(0);
@@ -272,47 +282,49 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnAStudentIfWeMatchTheNameExactly() {
-       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
 
-        schoolAdminDatabase.save(yael);
+        hibernateSession.save(yael);
 
         String searchTerm = "Yael";
-        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+        List<Student> students = studentRepository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
 
         assertThat(students, hasItem(yael));
     }
+
     @Test
     public void shouldReturnAStudentIfWeMatchTheNameStringButNotCase() {
-       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
 
-        schoolAdminDatabase.save(yael);
+        hibernateSession.save(yael);
 
         String searchTerm = "yAeL";
-        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+        List<Student> students = studentRepository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
 
         assertThat(students, hasItem(yael));
     }
 
     @Test
     public void shouldReturnAStudentIfWeMatchTheNamePartially() {
-       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
 
-        schoolAdminDatabase.save(yael);
+        hibernateSession.save(yael);
 
         String searchTerm = "Ya";
-        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+        List<Student> students = studentRepository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
 
         assertThat(students, hasItem(yael));
     }
+
     @Test
     public void shouldReturnAllStudentsIfWeMatchTheNamePartially() {
-       // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
+        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
 
-        schoolAdminDatabase.save(yael);
-        schoolAdminDatabase.save(yam);
+        hibernateSession.save(yael);
+        hibernateSession.save(yam);
 
         String searchTerm = "Ya";
-        List<Student> students = repository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
+        List<Student> students = studentRepository.findBySearchParameter(searchParametersWithNameAs(searchTerm), 0, 10);
 
         assertThat(students, hasItem(yael));
         assertThat(students, hasItem(yam));
@@ -321,8 +333,6 @@ public class StudentRepositoryTest {
     private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {
         return new StudentSearchParameterBuilder().name(searchTerm).build();
     }
-
-
 
 
 }
