@@ -28,7 +28,7 @@ public class StudentBuilder {
     private StudentStatus status = StudentStatus.ACTIVE;
     private String disciplinary;
     private String performance;
-    private  Profile profile;
+    private  Profile profile = new Profile();
     public StudentBuilder name(String name) {
         this.name = name;
         return this;

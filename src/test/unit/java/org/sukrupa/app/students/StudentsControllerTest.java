@@ -73,7 +73,7 @@ public class StudentsControllerTest {
 
         String result = controller.create(studentToCreate, null);
 
-        assertThat(result, is("redirect:/students/SK111"));
+        assertThat(result, is("redirect:/students/SK111/edit"));
     }
 
     @Test
