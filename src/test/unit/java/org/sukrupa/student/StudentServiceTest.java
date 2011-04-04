@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
-import static org.sukrupa.platform.hamcrest.Matchers.hasNote;
+import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.hasNote;
 import static org.sukrupa.student.StudentService.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
 public class StudentServiceTest {
@@ -129,7 +129,7 @@ public class StudentServiceTest {
 	    when(studentRepository.update(philNew)).thenReturn(philNew);
 	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentCreateOrUpdateParameter updateParameter = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentCreateOrUpdateParameters updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -139,7 +139,34 @@ public class StudentServiceTest {
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).build();
-        Student updatedStudent = service.update(updateParameter);
+        Student updatedStudent = service.update(updateParameters);
+        assertThat(updatedStudent, Matchers.is(philNew));
+    }
+
+    @Test
+    public void shouldUpdateStudentStatus() {
+        Student philOld = new StudentBuilder().studentId("12345")
+                .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.NOT_SET).build();
+        Student philNew = new StudentBuilder().studentId("12345")
+                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ALUMNI).build();
+	    when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
+	    when(studentRepository.update(philNew)).thenReturn(philNew);
+	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
+
+        StudentCreateOrUpdateParameters updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+                .area("Chamundi Nagar")
+                .caste("ST")
+                .subCaste("AK")
+                .religion("Catholic")
+                .name("Philippa")
+                .gender("Female")
+                .studentClass("2 Std")
+                .dateOfBirth("03-02-2000")
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT))
+                .status(StudentStatus.ALUMNI).build();
+        Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
 
@@ -150,7 +177,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
-        StudentCreateOrUpdateParameter studentParam =new StudentCreateOrUpdateParameter();
+        StudentCreateOrUpdateParameters studentParam =new StudentCreateOrUpdateParameters();
         String studentId = "SK20091001";
         String studentName = "Yael";
         String studentDateOfBirth = "06-03-1982";
@@ -159,7 +186,7 @@ public class StudentServiceTest {
         studentParam.setDateOfBirth("06-03-1982");
 
         Student expectedStudent = mock(Student.class);
-        when(studentFactory.createBasic(studentParam)).thenReturn(expectedStudent);
+        when(studentFactory.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth())).thenReturn(expectedStudent);
 
         Student student = service.create(studentParam);
 

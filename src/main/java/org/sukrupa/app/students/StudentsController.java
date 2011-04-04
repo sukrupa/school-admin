@@ -99,17 +99,25 @@ public class StudentsController {
         if (student != null) {
             model.put("student", student);
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
-            switch (student.getStatus()) {
+
+            if (student.getStatus() == null)
+                 model.put("statusType", "default");
+            else
+            {
+               switch (student.getStatus()) {
                 case ACTIVE:
-                    model.put("statusType", "active");
+                    model.put("statusType", "existing");
                     break;
                 case INACTIVE:
-                    model.put("statusType", "inactive");
+                    model.put("statusType", "dropout");
                     break;
                 default:
                     model.put("statusType", "default");
                     break;
+                }
             }
+
+
             return "students/view";
         }
 
@@ -119,7 +127,7 @@ public class StudentsController {
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentCreateOrUpdateParameter studentParam,
+            @ModelAttribute("updateStudent") StudentCreateOrUpdateParameters studentParam,
             Map<String, Object> model) {
 
         Student updatedStudent = studentService.update(studentParam);
@@ -142,8 +150,8 @@ public class StudentsController {
 
     @RequestMapping(value = "create", method = POST)
     public String create(
-            @ModelAttribute("createStudent") StudentCreateOrUpdateParameter studentParam, Map<String, Object> model) {
-        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentCreateOrUpdateParameter");
+            @ModelAttribute("createStudent") StudentCreateOrUpdateParameters studentParam, Map<String, Object> model) {
+        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentCreateOrUpdateParameters");
         studentValidator.validate(studentParam, errors);
 
         if (mandatoryFieldsExist(errors)) {

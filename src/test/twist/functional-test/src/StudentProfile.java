@@ -26,7 +26,7 @@ public class StudentProfile {
 	}
 
 	public void verifyThatStatusIs(String expectedStatus) throws Exception {
-		assertEquals(expectedStatus,browser.div("value").near(browser.div("Student Status")).text());
+		assertEquals(expectedStatus, browser.div("value default").near(browser.div("Student Status")).text());
 	}
 
 	public void verifyThatDisciplinaryIs(String string1) throws Exception {

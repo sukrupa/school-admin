@@ -1,28 +1,24 @@
 package org.sukrupa.app.students;
 
-import org.joda.time.DateTimeComparator;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.sukrupa.platform.date.Date;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentCreateOrUpdateParameter;
+import org.sukrupa.student.StudentCreateOrUpdateParameters;
 
 @Service
 public class StudentValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return StudentCreateOrUpdateParameter.class.isAssignableFrom(clazz);
+        return StudentCreateOrUpdateParameters.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-        StudentCreateOrUpdateParameter studentParam = (StudentCreateOrUpdateParameter) target;
+        StudentCreateOrUpdateParameters studentParam = (StudentCreateOrUpdateParameters) target;
         String dateOfBirthString = studentParam.getDateOfBirth();
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required", "Missing Student Name. Please re-enter.") ;

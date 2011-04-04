@@ -21,8 +21,8 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.sukrupa.platform.hamcrest.Matchers.containsAttendees;
-import static org.sukrupa.platform.hamcrest.Matchers.hasOnly;
+import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.containsAttendees;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 
 public class EventServiceTest {
 

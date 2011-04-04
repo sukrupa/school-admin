@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.sukrupa.app.students.ViewStudentPage;
 import org.sukrupa.base.FunctionalTestBase;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.HibernateSession;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -22,11 +22,11 @@ public class ViewStudentTest extends FunctionalTestBase {
     private Student suhas = new StudentBuilder().name("suhas").studentId("123").notes(new Note("hello")).build();
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllCreatedObjects();
+        hibernateSession.deleteAllCreatedObjects();
         driver.get("http://localhost:8080/authentication/logout");
     }
 
@@ -47,7 +47,7 @@ public class ViewStudentTest extends FunctionalTestBase {
     }
 
     public void save(Object... students) {
-        databaseHelper.saveAndCommit(students);
+        hibernateSession.saveAndCommit(students);
     }
 }
 

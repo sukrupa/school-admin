@@ -43,6 +43,10 @@ public class StudentEditFormHelper {
         return createDropDownList(referenceData.getStudentClasses(), student.getStudentClass());
     }
 
+    public List<DropDownElement> getStatusesDropDownList() {
+        return createDropDownList(referenceData.getStatuses(), student.getStatus().getName());
+    }
+
     private List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
         List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
         for (String value : values) {

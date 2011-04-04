@@ -11,7 +11,7 @@ import org.sukrupa.app.students.ViewStudentPage;
 import org.sukrupa.base.FunctionalTestBase;
 import org.sukrupa.event.ErrorPage;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.DatabaseHelper;
+import org.sukrupa.platform.db.HibernateSession;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -24,17 +24,17 @@ public class UpdateStudentTest extends FunctionalTestBase {
     private Student shefali = new StudentBuilder().name("shefali").studentId("1234567").build();
 
     @Autowired
-    private DatabaseHelper databaseHelper;
+    private HibernateSession hibernateSession;
 
     @After
     public void tearDown() throws Exception {
-        databaseHelper.deleteAllCreatedObjects();
+        hibernateSession.deleteAllCreatedObjects();
         driver.get("http://localhost:8080/authentication/logout");
     }
 
     @Test
     public void shouldAddNotes() {
-        databaseHelper.saveAndCommit(shefali);
+        hibernateSession.saveAndCommit(shefali);
         UpdateStudentPage page = new UpdateStudentPage(driver, shefali.getStudentId());
         page.addNote("new note");
         assertThat(page.getNoteAddedConfirmation(), is("Note Added Successfully"));

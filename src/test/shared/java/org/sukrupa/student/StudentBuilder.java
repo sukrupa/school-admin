@@ -25,11 +25,15 @@ public class StudentBuilder {
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
+<<<<<<< HEAD
     private StudentStatus status = StudentStatus.ACTIVE;
     private String disciplinary;
     private String performance;
     private  Profile profile;
 
+=======
+    private StudentStatus status;
+>>>>>>> master
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -141,11 +145,20 @@ public class StudentBuilder {
     }
 
     public Student build() {
+<<<<<<< HEAD
         return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, StudentStatus.NOT_SET, disciplinary, performance, profile);
+=======
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, status);
+>>>>>>> master
     }
 
     public StudentBuilder imageLink(String imageLink) {
         this.imageLink = imageLink;
+        return this;
+    }
+
+    public StudentBuilder status(StudentStatus statusIn) {
+        this.status = statusIn;
         return this;
     }
 }

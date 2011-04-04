@@ -50,6 +50,10 @@ function validateFields() {
         errorMessage += "Please insert a valid name.";
         valid = false;
     }
+    if($("#status").val() === ""){
+        errorMessage += "Please select a status.";
+        valid = false;
+    }
     $('#errorMessages').html(errorMessage);
 
     return valid;
