@@ -112,7 +112,10 @@
                 </select>
             </div>
 
-            <img src="/application/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+            <div class="studentImage">
+            <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
+            <input type="file" id="changeImageLink" />
+            </div>
 
 
             <div class="talentsList">

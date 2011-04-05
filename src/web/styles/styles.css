@@ -560,11 +560,7 @@ width: 100px;
     padding: 10px 0px 10px 0px;
 }
 
-#changeImageLink{
-    display:block;
-}
-
-.studentImage{
+img.studentImage{
     height: 175px;
     margin-bottom: 55px;
     width: 160px;
@@ -573,9 +569,13 @@ width: 100px;
 
 #updateStudent .studentImage{
     height: 175px;
-    margin-bottom: 55px;
     width: 160px;
-    border: solid 1px;
+    margin-bottom: 2px;
     margin-left: 40px;
     margin-top: 11px;
+    float:left;
+}
+
+#updateStudent .studentImage img {
+    border: solid 1px;
 }
