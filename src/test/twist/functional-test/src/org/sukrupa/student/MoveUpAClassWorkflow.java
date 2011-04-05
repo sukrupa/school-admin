@@ -1,6 +1,5 @@
 package org.sukrupa.student;
 
-// JUnit Assert framework can be used for verification
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -20,6 +19,14 @@ public class MoveUpAClassWorkflow {
 
 	public void thenThereShouldBeAnInformationMessage() throws Exception {
 		assertThat(browser.div("informationMessage").exists(), is(true));
+	}
+
+	public void whenIClickTheMoveStudentsButton() throws Exception {
+		browser.submit("Move all students...").click();
+	}
+
+	public void thenIShouldBeTakenToTheSuccessPage() throws Exception {
+		assertThat(browser.title(), is("Moved all students successfully"));
 	}
 
 }

@@ -3,3 +3,8 @@
 
 </div>
 
+<div id="submitForm">
+    <form action="/students/moveupaclass" method="POST">
+        <input type="submit" name="submit" value="Move all students..." />
+    </form>
+</div>
