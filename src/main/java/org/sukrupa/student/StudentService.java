@@ -59,9 +59,9 @@ public class StudentService {
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
+
         Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
         student.updateFrom(studentProfileForm, talents);
-
         return studentRepository.update(student);
     }
 

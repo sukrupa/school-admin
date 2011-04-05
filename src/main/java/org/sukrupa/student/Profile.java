@@ -32,7 +32,8 @@ public class Profile {
     }
 
     public void background(String background){
-        this.background = background;
+        if(background != null)
+            this.background = background;
     }
 
     private static String[] excludedFields = new String[]{"id"};
