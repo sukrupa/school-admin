@@ -115,10 +115,11 @@ public class Student {
         this.profile = profile;
     }
 
-    public Student(String studentId, String name, String dateOfBirth) {
+    public Student(String studentId, String name, String dateOfBirth, String gender) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = convertDate(dateOfBirth);
+        this.gender = gender;
         this.talents = new HashSet<Talent>();
     }
 
