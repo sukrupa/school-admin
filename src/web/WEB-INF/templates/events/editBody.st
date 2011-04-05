@@ -1,10 +1,11 @@
 <div id="event">
 
-	<form id="editEvent" name="editEvent" action="save" method="post">
+	<form id="editEvent" name="editEvent" action="/events/$event.id$" method="post">
 
 		<div class="eventInfo">
 
 			<div class="eventInfoLeft">
+                <input type="hidden" name="id" id="id" value="$event.id$" class="createValue"></input>
 				<div class="createEntry">
 					<div class="label">Title<span class="mandatory">*</span></div>
 					<input type="text" name="title" id="title" value="$event.title$" class="createValue"></input>
@@ -33,7 +34,7 @@
 
 				<div class="createEntry">
 					<div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$event.attendees:{ $it.studentId$ }$</textarea>
+					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$trunc(event.attendees):{$it.studentId$,}$$last(event.attendees).studentId$</textarea>
 
 				</div>
 
@@ -58,7 +59,7 @@
 
 		<div class="eventButtons">
 			<input type="submit" id="save" value="Save"/>
-			<input type="button" id="cancel" value="cancel" />
+			<input type="button" id="cancel" value="Cancel" />
 		</div>
 	</form>
 

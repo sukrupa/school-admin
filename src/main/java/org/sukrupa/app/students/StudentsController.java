@@ -48,22 +48,12 @@ public class StudentsController {
         return "students/list";
     }
 
-
-    // @RequestMapping(value = "promote" , method = POST) feature not available yet
-    public String promoteClass(Map<String, Integer> model) {
-        int promoteStudentsCount = studentService.promoteStudentsToNextClass();
-        model.put("numberOfStudentsUpdated", promoteStudentsCount);
-        return "redirect:/students/update-successful";
+    @RequestMapping("moveupaclass")
+    public String moveUpAClass(){
+        return "students/moveUpAClass";
     }
 
-    @RequestMapping(value = "update-successful")
-    public String promoteUpdateSuccessful(@RequestParam("numberOfStudentsUpdated") int promoteStudentCount, Map<String, Integer> model) {
-
-        model.put("numberOfStudentsUpdated", promoteStudentCount);
-        return "students/updateSuccessful";
-    }
-
-    @RequestMapping(value = "search")
+    @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getReferenceData());
     }

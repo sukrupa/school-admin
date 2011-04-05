@@ -56,7 +56,7 @@
 
 		<div class="eventButtons">
 			<input type="submit" id="save" value="Save"/>
-			<input type="button" id="cancel" value="cancel" />
+			<input type="button" id="clear" value="Clear" />
 		</div>
 	</form>
 
