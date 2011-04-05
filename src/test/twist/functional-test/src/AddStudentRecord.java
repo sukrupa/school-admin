@@ -38,31 +38,17 @@ public class AddStudentRecord {
 	}
 
 	public void thenIShouldSeeThePage(String expectedTitle) throws Exception {
-		assertThat(browser.title(), is(expectedTitle));
+		assertThat(browser.div("twoLinesTitle").getText(), is(expectedTitle));
 	}
 
 	public void andISelectTheAs(String selectBox, String option) throws Exception {
 		browser.select(selectBox).choose(option);
 	}
-	
-	public void andISelectTheTalent(String option) throws Exception {
-		browser.checkbox(option).click();
-	}
+
 	
 	public void andShowsInThePage(String selected) throws Exception {
 		assertEquals(selected, browser.cell(selected).text());
 	
 	}
-
-	public void whenIClickSubmit() throws Exception {
-		browser.submit("Submit").click();
-	}
-
-	public void fofo() throws Exception {
-		browser.checkbox("talents").click();
-	
-	}
-
-	
 
 }

@@ -115,10 +115,11 @@ public class Student {
         this.profile = profile;
     }
 
-    public Student(String studentId, String name, String dateOfBirth) {
+    public Student(String studentId, String name, String dateOfBirth, String gender) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = convertDate(dateOfBirth);
+        this.gender = gender;
         this.talents = new HashSet<Talent>();
     }
 
@@ -155,6 +156,9 @@ public class Student {
     }
 
     public Profile getProfile(){
+        if(profile == null){
+            this.profile = new Profile();
+        }
         return profile;
     }
 
@@ -224,7 +228,7 @@ public class Student {
     }
 
     public void setBackground(String background){
-        this.profile.background(background);
+        this.getProfile().background(background);
     }
 
     public StudentStatus getStatus() {

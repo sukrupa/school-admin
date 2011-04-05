@@ -48,7 +48,8 @@ public class StudentService {
     public Student create(StudentProfileForm studentProfileForm) {
         Student student = studentFactory.create(studentProfileForm.getStudentId(),
                 studentProfileForm.getName(),
-                studentProfileForm.getDateOfBirth());
+                studentProfileForm.getDateOfBirth(),
+                studentProfileForm.getGender());
 
         studentRepository.put(student);
         return student;
@@ -59,9 +60,9 @@ public class StudentService {
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
+
         Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
         student.updateFrom(studentProfileForm, talents);
-
         return studentRepository.update(student);
     }
 
