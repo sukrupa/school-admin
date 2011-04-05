@@ -112,6 +112,8 @@
                 </select>
             </div>
 
+            <img src="/application/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+
 
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>

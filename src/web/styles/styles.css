@@ -570,3 +570,12 @@ width: 100px;
     width: 160px;
     border: solid 1px;
 }
+
+#updateStudent .studentImage{
+    height: 175px;
+    margin-bottom: 55px;
+    width: 160px;
+    border: solid 1px;
+    margin-left: 40px;
+    margin-top: 11px;
+}
