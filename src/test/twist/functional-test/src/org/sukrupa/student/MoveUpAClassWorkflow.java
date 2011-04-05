@@ -18,4 +18,8 @@ public class MoveUpAClassWorkflow {
 		assertThat(browser.title(), is("Move all students up a class"));
 	}
 
+	public void thenThereShouldBeAnInformationMessage() throws Exception {
+		assertThat(browser.div("informationMessage").exists(), is(true));
+	}
+
 }

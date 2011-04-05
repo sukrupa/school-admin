@@ -1,1 +1,1 @@
-$layout(body="<p>Hello</p>", title="Move all students up a class")$
+$layout(body=students/moveUpAClassBody(), title="Move all students up a class")$
