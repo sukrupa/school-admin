@@ -16,6 +16,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 public class EventUpdateParameterBuilder {
+    private int id;
     private String title;
     private Date date;
     private String notes;
@@ -24,6 +25,12 @@ public class EventUpdateParameterBuilder {
     private String description;
     private Set<Student> attendees;
     private String time;
+
+    public EventUpdateParameterBuilder id(int id)
+    {
+        this.id = id;
+        return this;
+    }
 
     public EventUpdateParameterBuilder title(String title) {
           this.title = title;
@@ -71,7 +78,7 @@ public class EventUpdateParameterBuilder {
       }
 
       public EventCreateOrUpdateParameter build() {
-          return new EventCreateOrUpdateParameter(1, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds());
+          return new EventCreateOrUpdateParameter(id, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds());
       }
 
     private String attendeesIds() {

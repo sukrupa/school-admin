@@ -1,18 +1,22 @@
 package org.sukrupa.event;
 
 import com.google.common.collect.Sets;
+import static com.natpryce.makeiteasy.MakeItEasy.an;
+import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.date.Date;
+import org.sukrupa.student.Builders;
+
+import static junit.framework.Assert.assertEquals;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,9 +35,9 @@ public class EventServiceTest {
 
     private final Student pat = new StudentBuilder().studentId("1").build();
     private final Student jim = new StudentBuilder().studentId("2").build();
-    private final Event event = new EventBuilder().build();
-    private final Event sportsEvent = new EventBuilder().title("Sports").build();
-    private final Event annualEvent = new EventBuilder().title("Annual Day").build();
+    private final Event event = make(an(Event));
+    private final Event sportsEvent = make(an(Event, with(title, "Sports")));
+    private final Event annualEvent = make(an(Event, with(title, "Annual Day")));
     private final List<Event> events = new ArrayList<Event>(Arrays.asList(sportsEvent, annualEvent));
 
 	@Mock
@@ -82,18 +86,22 @@ public class EventServiceTest {
 
     @Test
     public void shouldUpdateEvent() {
-    Set newAttendees = newHashSet();
+
+        Set<Student> newAttendees = newHashSet();
         newAttendees.add(pat);
         newAttendees.add(jim);
-    Event spiceGirlsOld = new EventBuilder().title("Spice Girls")
-                                                    .attendees(pat)
-                                                    .date(new Date(1,12,2011))
-                                                    .description("Wahoo Spice Girls")
-                                                    .venue("P-81")
-                                                    .coordinator("Joel Tellez")
-                                                    .notes("Sick as party")
-                                                    .build();
-    Event spiceGirlsNew = new EventBuilder().title("Spice Girls")
+
+        EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().id(1)
+                                .title("Spice Girls")
+                                .date(new Date(12, 12, 2011))
+                                .description("Spice Girls 4 Lyf")
+                                .venue("P-81")
+                                .coordinator("Joel Tellez")
+                                .notes("Sick as party")
+                                .attendees(newAttendees)
+                                .build();
+
+        Event newEvent = new EventBuilder().title("Spice Girls")
                                                     .attendees(newAttendees)
                                                     .date(new Date(12, 12, 2011))
                                                     .description("Spice Girls 4 Lyf")
@@ -102,20 +110,11 @@ public class EventServiceTest {
                                                     .notes("Sick as party")
                                                     .build();
 
-        when(eventRepository.findByTitle(spiceGirlsOld.getTitle())).thenReturn(spiceGirlsOld);
-        when(eventRepository.update(any(Event.class))).thenReturn(spiceGirlsNew);
-        when(studentRepository.findByStudentIds(newAttendees.toString())).thenReturn(newAttendees);
+        when(eventRepository.load(1)).thenReturn(sportsEvent);
+        when(service.update(updateParameter)).thenReturn(newEvent);
 
-        EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().title(spiceGirlsOld.getTitle())
-                                .date(new Date(12, 12, 2011))
-                                .description("Spice Girls 4 Lyf")
-                                .venue("P-81")
-                                .coordinator("Joel Tellez")
-                                .notes("Sick as party")
-                                .attendees(newAttendees)
-                                    .build();
         Event updatedEvent = service.update(updateParameter);
-        assertThat(updatedEvent, is(spiceGirlsNew));
+        assertEquals(newEvent, updatedEvent);
 
     }
 

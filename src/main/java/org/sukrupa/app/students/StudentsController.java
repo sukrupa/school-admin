@@ -48,9 +48,14 @@ public class StudentsController {
         return "students/list";
     }
 
-    @RequestMapping("moveupaclass")
-    public String moveUpAClass(){
+    @RequestMapping(value="moveupaclass", method= GET)
+    public String moveUpAClassPage(){
         return "students/moveUpAClass";
+    }
+
+    @RequestMapping(value="moveupaclass", method= POST)
+    public String moveAllStudentsUpAClass(){
+        return "students/moveUpAClassSuccess";
     }
 
     @RequestMapping("search")

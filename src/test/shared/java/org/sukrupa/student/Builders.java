@@ -7,6 +7,9 @@ import com.natpryce.makeiteasy.PropertyLookup;
 import org.sukrupa.event.Event;
 import org.sukrupa.platform.date.Date;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Builders {
     public static final Property<Event, String> title = newProperty();
     public static final Property<Event, Date> date = newProperty();
@@ -14,6 +17,7 @@ public class Builders {
     public static final Property<Event, String> coordinator = newProperty();
     public static final Property<Event, String> description = newProperty();
     public static final Property<Event, String> notes = newProperty();
+    public static final Property<Event, Set<Student>> attendees = newProperty();
 
     
     public static final Instantiator<Event> Event = new Instantiator<Event>() {
@@ -24,7 +28,8 @@ public class Builders {
                              lookup.valueOf(venue, "dummy.venue"),
                              lookup.valueOf(coordinator, "dummy.coordinator"),
                              lookup.valueOf(description, "dummy.description"),
-                             lookup.valueOf(notes, "dummy.notes"));
+                             lookup.valueOf(notes, "dummy.notes"),
+                             lookup.valueOf(attendees, new HashSet<Student>()));
         }
     };
 

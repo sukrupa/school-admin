@@ -5,6 +5,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sukrupa.platform.date.Date;
+import org.sukrupa.student.Builders;
+import static org.sukrupa.student.Builders.*;
+import static org.sukrupa.student.Builders.*;
+import static org.sukrupa.student.Builders.*;
+import static org.sukrupa.student.Builders.*;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -18,6 +24,11 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
+
+import static com.natpryce.makeiteasy.MakeItEasy.an;
+import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
+import static org.sukrupa.student.Builders.*;
 
 public class EventTest {
 
@@ -33,14 +44,16 @@ public class EventTest {
 
     @Test
     public void shouldBeEqual() {
-        assertThat(new EventBuilder().build(), is(new EventBuilder().build()));
+        assertThat(make(an(Event)), is(make(an(Event))));
     }
 
     @Test
     public void shouldReturnTheCorrectStudentList() {
-        Set<Student> attendees = createAttendees();
-        Event event = new EventBuilder().title("Dummy event").date(new Date(29, 8, 2010, 10, 10, 10, 0)).venue("DD").coordinator("coord").description("desc").notes("notes").attendees(attendees).build();
-        assertThat(event.getAttendees(), is(attendees));
+        Set<Student> eventAttendees = createAttendees();
+
+        Event event = make(an(Event, with(attendees, eventAttendees)));
+
+        assertThat(event.getAttendees(), is(eventAttendees));
     }
 
     private Set<Student> createAttendees() {
@@ -61,7 +74,7 @@ public class EventTest {
         for(Student attendee: attendees){
             expectedAttendeeNames.add(attendee.getName());
         }
-        Event event = new EventBuilder().attendees(attendees).build();
+        Event event = make(an(Event, with(Builders.attendees, attendees)));
         assertThat(event.getAttendeesForDisplay(), is(StringUtils.join(expectedAttendeeNames, ", ")));
     }
 
@@ -74,7 +87,7 @@ public class EventTest {
 		eventCreateOrUpdateParameter.setTime("");
 		eventCreateOrUpdateParameter.setDate("12-12-2001");
 
-		Event event = Event.createFrom(eventCreateOrUpdateParameter);
+		Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
 
 		assertThat(event.getNotes(), nullValue());
 		assertThat(event.getVenue(), nullValue());
@@ -83,7 +96,7 @@ public class EventTest {
 
     @Test
 	public void shouldNotDisplayTimeIfMidnight() {
-        Event event = new EventBuilder().date(new Date(31, 01, 2011, 00, 00)).build();
+        Event event = make(an(Event, with(date, new Date(31, 01, 2011, 00, 00))));
         assertThat(event.getTime(), nullValue());
     }
 }
