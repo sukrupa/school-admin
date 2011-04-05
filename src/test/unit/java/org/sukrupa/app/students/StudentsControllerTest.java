@@ -68,7 +68,7 @@ public class StudentsControllerTest {
         StudentProfileForm studentToCreate = new StudentProfileForm();
         studentToCreate.setDateOfBirth("11-10-1982");
 
-        Student studentThatGetsCreated = new Student("SK111","", "01-01-2001");
+        Student studentThatGetsCreated = new Student("SK111","", "01-01-2001", "Male");
         when(service.create(any(StudentProfileForm.class))).thenReturn(studentThatGetsCreated);
 
         String result = controller.create(studentToCreate, null);

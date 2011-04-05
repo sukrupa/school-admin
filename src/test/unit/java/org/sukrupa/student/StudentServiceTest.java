@@ -28,20 +28,20 @@ import static org.sukrupa.student.StudentService.NUMBER_OF_STUDENTS_TO_LIST_PER_
 
 public class StudentServiceTest {
 
-	private static final String MUSIC = "Music";
-	private static final String SPORT = "Sport";
-	private static final String COOKING = "Cooking";
+    private static final String MUSIC = "Music";
+    private static final String SPORT = "Sport";
+    private static final String COOKING = "Cooking";
 
-	private final Talent music = new Talent(MUSIC);
-	private final Talent sport = new Talent(SPORT);
-	private final Talent cooking = new Talent(COOKING);
+    private final Talent music = new Talent(MUSIC);
+    private final Talent sport = new Talent(SPORT);
+    private final Talent cooking = new Talent(COOKING);
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
     @Mock
     private StudentRepository studentRepository;
-	@Mock
-	private TalentRepository talentRepository;
+    @Mock
+    private TalentRepository talentRepository;
 
     private StudentService service;
 
@@ -125,9 +125,9 @@ public class StudentServiceTest {
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ACTIVE).build();
-	    when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
-	    when(studentRepository.update(philNew)).thenReturn(philNew);
-	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
+        when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
+        when(studentRepository.update(philNew)).thenReturn(philNew);
+        when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
         StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
@@ -151,9 +151,9 @@ public class StudentServiceTest {
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ALUMNI).build();
-	    when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
-	    when(studentRepository.update(philNew)).thenReturn(philNew);
-	    when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
+        when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
+        when(studentRepository.update(philNew)).thenReturn(philNew);
+        when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
         StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
@@ -177,20 +177,23 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
-        StudentProfileForm studentParam =new StudentProfileForm();
+        StudentProfileForm studentParam = new StudentProfileForm();
         studentParam.setStudentId("SK20091001");
         studentParam.setName("Yael");
         studentParam.setDateOfBirth("06-03-1982");
+        studentParam.setGender("Female");
 
         Student expectedStudent = mock(Student.class);
-        when(studentFactory.create(studentParam.getStudentId(), studentParam.getName(), studentParam.getDateOfBirth())).thenReturn(expectedStudent);
+        when(studentFactory.create(studentParam.getStudentId(),
+                studentParam.getName(),
+                studentParam.getDateOfBirth(),
+                studentParam.getGender())).thenReturn(expectedStudent);
 
         Student student = service.create(studentParam);
 
         verify(studentRepository).put(expectedStudent);
         assertEquals(expectedStudent, student);
     }
-
 
 
 }

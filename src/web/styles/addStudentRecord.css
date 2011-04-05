@@ -1,0 +1,33 @@
+.updateEntry {
+    clear: none;
+    position:relative;
+}
+
+.updateEntry * {
+    float: none;
+}
+
+.updateEntry .label {
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+
+    vertical-align: top;
+    width: 115px;
+    margin-right: 75px;
+}
+
+.updateEntry .updateValue {
+    width: 250px;
+}
+
+.updateEntry .textSpace {
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+
+    width:  250px;
+}
+
