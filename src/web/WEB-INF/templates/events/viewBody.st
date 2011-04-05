@@ -32,7 +32,7 @@
     }$
 
     <div class="eventEntry">
-        <div class="eventDescription">$event.description$</div>
+        <div id="eventDescription" class="eventDescription">$event.description$</div>
     </div>
 
     $event.notes:{ notes |

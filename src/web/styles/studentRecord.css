@@ -1,9 +1,12 @@
 .entry {
     padding-bottom: 2.5em;
+    display: block;
 }
 
-.entry * {
-    float: left;
+.entry .inline-block {
+    float:none;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #basicInfo .entry .label {

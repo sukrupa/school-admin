@@ -1,6 +1,7 @@
 
 // JUnit Assert framework can be used for verification
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 import net.sf.sahi.client.Browser;
 
@@ -25,8 +26,12 @@ public class CancelChangesOfEventEdit {
 		assertEquals("Edit Event: Spice Girls",browser.title());
 	}
 
-	public void thenTheEventTitleShouldBe(String string1) throws Exception {
-		assertEquals(string1,browser.title());
+	public void thenTheEventTitleShouldBe(String eventTitle) throws Exception {
+		assertEquals("Event: "+eventTitle,browser.title());
+	}
+
+	public void thenISeeThePage(String string1) throws Exception {
+		assertEquals("Event: Spice Girls",browser.title());
 	}
 
 }

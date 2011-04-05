@@ -9,6 +9,8 @@ import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentRepository;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -58,7 +60,11 @@ public class EventService {
 
     public Event update(EventCreateOrUpdateParameter eventParam) {
         Event event = eventRepository.findByTitle(eventParam.getTitle());
-        event.updateFrom(eventParam, studentRepository.findByStudentIds(eventParam.getAttendeesString()));
+        String listOfAttendees = eventParam.getAttendeesString();
+
+        String[] arrayOfAttendees = listOfAttendees.split(",");
+
+        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
         return eventRepository.update(event);
 
     }
