@@ -5,20 +5,26 @@
             <div id="basicInfo" >
                 <div class="updateEntry">
                     <div class="label">Student ID<span class="mandatory">*</span></div>
-                    <input type="text" name="studentId" id="studentId" value="$student.studentId$" class="updateValue"></input>
-                    <div class="errorMessage">$studentIdError$</div>
+                    <div class="textSpace">
+                        <input type="text" name="studentId" id="studentId" value="$student.studentId$" class="updateValue"></input>
+                        <span class="errorMessage">$studentIdError$</span>
+                    </div>
                 </div>
 
                 <div class="updateEntry">
                     <div class="label">Name<span class="mandatory">*</span></div>
-                    <input type="text" id="name" name="name" value="$student.name$" class="updateValue"></input>
-                    <div class="errorMessage">$nameError$</div>
+                    <div class="textSpace">
+                        <input type="text" id="name" name="name" value="$student.name$" class="updateValue"></input>
+                        <span class="errorMessage">$nameError$</span>
+                    </div>
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Date of Birth<br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
-                    <input type="text" id="dateOfBirth" name="dateOfBirth" value="$student.dateOfBirthForDisplay$" class="updateValue"></input>
-                    <div class="errorMessage">$dateOfBirthError$</div>
+                    <div class="label">Date of Birth (dd-mm-yyyy)<span class="mandatory">*</span></div>
+                    <div class="textSpace">
+                        <input type="text" id="dateOfBirth" name="dateOfBirth" value="$student.dateOfBirthForDisplay$" class="updateValue"></input>
+                        <span class="errorMessage">$dateOfBirthError$</span>
+                    </div>
                 </div>
 
 
