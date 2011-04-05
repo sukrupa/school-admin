@@ -107,9 +107,12 @@ public class StudentTest {
         assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
         assertEquals("Graduated",promoteStudent("10 Std").getStudentClass());
         assertEquals("Graduated",promoteStudent("Graduated").getStudentClass());
+    }
 
-
-
+    @Test
+    public void shouldHaveStudentIDAsUppercase() {
+        Student student = new StudentBuilder().studentId("sk123").build();
+        assertThat(student.getStudentId(), is("SK123"));
     }
 
     private Student promoteStudent(String studentClass) {
@@ -129,5 +132,7 @@ public class StudentTest {
     private Student studentWithImage(String name, String imageLink) {
         return new StudentBuilder().name(name).imageLink(imageLink).build();
     }
+
+
 
 }

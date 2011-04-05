@@ -27,3 +27,9 @@ Navigate back to Event:
 #When I navigate to View Students
 #And I navigate to Spice Girls event
 #Then the description should not contain "No longer happening" 
+
+Event Edit Mandatory Fields:
+#Given I am on the "Edit Spice Girls" event page
+#When I clear "title"
+#And I click "save"
+#Then I should get an error "Please fill in all required fields"

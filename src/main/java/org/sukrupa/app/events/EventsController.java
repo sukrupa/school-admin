@@ -60,8 +60,13 @@ public class EventsController {
             Map<String, Object> model)
     {
         Event updatedEvent = service.update(eventCreateOrUpdateParameter);
+
+        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+
         if (updatedEvent != null) {
             model.put("event", updatedEvent);
+            model.put("invalidAttendees",invalidAttendees);
             return format("redirect:/events/%s", eventId);
         } else {
             model.put("message", "Error updating event");
@@ -71,11 +76,12 @@ public class EventsController {
 
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
+
         Event event = Event.createFrom(eventCreateOrUpdateParameter);
+
         Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
-
-
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
 			model.put("event", eventCreateOrUpdateParameter);
