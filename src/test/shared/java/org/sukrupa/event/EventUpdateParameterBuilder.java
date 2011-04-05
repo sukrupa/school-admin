@@ -71,7 +71,7 @@ public class EventUpdateParameterBuilder {
       }
 
       public EventCreateOrUpdateParameter build() {
-          return new EventCreateOrUpdateParameter(title, date.toString(), time, venue, coordinator, description, notes, attendeesIds());
+          return new EventCreateOrUpdateParameter(1, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds());
       }
 
     private String attendeesIds() {
