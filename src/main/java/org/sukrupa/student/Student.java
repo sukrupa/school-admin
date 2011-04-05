@@ -156,6 +156,9 @@ public class Student {
     }
 
     public Profile getProfile(){
+        if(profile == null){
+            this.profile = new Profile();
+        }
         return profile;
     }
 
@@ -225,7 +228,7 @@ public class Student {
     }
 
     public void setBackground(String background){
-        this.profile.background(background);
+        this.getProfile().background(background);
     }
 
     public StudentStatus getStatus() {
