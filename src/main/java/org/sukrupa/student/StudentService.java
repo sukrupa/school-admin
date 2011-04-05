@@ -48,7 +48,8 @@ public class StudentService {
     public Student create(StudentProfileForm studentProfileForm) {
         Student student = studentFactory.create(studentProfileForm.getStudentId(),
                 studentProfileForm.getName(),
-                studentProfileForm.getDateOfBirth());
+                studentProfileForm.getDateOfBirth(),
+                studentProfileForm.getGender());
 
         studentRepository.put(student);
         return student;

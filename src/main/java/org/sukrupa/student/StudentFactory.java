@@ -10,8 +10,8 @@ import static java.util.Arrays.asList;
 @Component
 public class StudentFactory {
 
-    public Student create(String studentId, String name, String dateOfBirth) {
-        return new Student(studentId, name, dateOfBirth);
+    public Student create(String studentId, String name, String dateOfBirth, String gender) {
+        return new Student(studentId, name, dateOfBirth, gender);
     }
 
 }
