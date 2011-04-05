@@ -64,18 +64,18 @@ public class WebServer {
         server = new Server(httpPort);
         HashLoginService hashLoginService = new HashLoginService("SukrupaSchoolAdmin", webServerRealmFile);
         server.addBean(hashLoginService);
-
-        SslSocketConnector sslConnector = new SslSocketConnector();
-        sslConnector.setPort(sslPort);
-
-        sslConnector.setPassword(keystorePassword);
-        sslConnector.setKeyPassword(keystorePassword);
-        sslConnector.setTrustPassword(keystorePassword);
         server.setHandler(handlers());
-
-        SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
-        selectChannelConnector.setPort(httpPort);
-        server.setConnectors( new Connector[]{ sslConnector, selectChannelConnector } );
+//        SslSocketConnector sslConnector = new SslSocketConnector();
+//        sslConnector.setPort(sslPort);
+//
+//        sslConnector.setPassword(keystorePassword);
+//        sslConnector.setKeyPassword(keystorePassword);
+//        sslConnector.setTrustPassword(keystorePassword);
+//
+//
+//        SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
+//        selectChannelConnector.setPort(httpPort);
+//        server.setConnectors( new Connector[]{ sslConnector, selectChannelConnector } );
     }
 
     public void start() {
