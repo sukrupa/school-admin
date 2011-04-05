@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class EventCreateOrUpdateParameter {
 
+    private int id;
     private String title;
     private String date;
     private String time;
@@ -21,7 +22,8 @@ public class EventCreateOrUpdateParameter {
     public EventCreateOrUpdateParameter() {
     }
 
-    public EventCreateOrUpdateParameter(String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateOrUpdateParameter(int id, String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+        this.id = id;
         this.title = title;
         this.date = date;
         this.time = time;
@@ -31,6 +33,14 @@ public class EventCreateOrUpdateParameter {
         this.notes = notes;
         this.attendees = attendees;
 //        this.attendees = Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

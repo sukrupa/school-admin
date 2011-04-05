@@ -19,7 +19,7 @@ public class AddAttendeeToEvent {
 	}
 
 	public void whenIAddTo(String item, String list) throws Exception {
-		 String newText = browser.textarea(list).value() + ", "+ item;
+		 String newText = browser.textarea(list).value() + "," + item;
 		 browser.textarea(list).setValue(newText);
 	
 	}
@@ -33,7 +33,6 @@ public class AddAttendeeToEvent {
 	}
 
 	public void itShouldDisplayTheAttendeeId(String attendeeId) throws Exception {
-//		assertEquals(attendeeId, browser.textarea("attendees").getText());
 		assertTrue(browser.textarea("attendees").value().contains(attendeeId));
 	}
 

@@ -18,4 +18,12 @@ Cancel Changes of Event Edit:
 #Given I am on the spice girls edit event page
 #And I change the event title to "Backstreet Boys Concert"
 #When I click "cancel"
+#Then I see the "Event: Spice Girls" page
 #Then the event title should be "Spice Girls"
+
+Navigate back to Event:
+#Given I am on the "Edit Spice Girls" event page
+#And I change the description to "No longer happening"
+#When I navigate to View Students
+#And I navigate to Spice Girls event
+#Then the description should not contain "No longer happening" 
