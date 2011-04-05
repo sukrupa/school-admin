@@ -1,5 +1,8 @@
 package org.sukrupa.event;
 
+import static com.natpryce.makeiteasy.MakeItEasy.an;
+import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import org.hibernate.SessionFactory;
 import org.joda.time.LocalDate;
 import org.junit.Before;
@@ -12,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.HibernateSession;
+import org.sukrupa.student.Builders;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -30,8 +35,10 @@ public class EventRepositoryTest {
 
 	private final Student sahil = new StudentBuilder().name("Sahil").studentId("1").dateOfBirth(new LocalDate(1987,1,12)).build();
 	private final Student suhas = new StudentBuilder().name("Suhas").studentId("2").dateOfBirth(new LocalDate(1987,1,12)).build();
-    private final Event sportsEvent = new EventBuilder().title("Sports Day").date(new Date(21, 12, 2011)).build();
-    private final Event independeceDayEvent = new EventBuilder().title("Independence Day").date(new Date(15, 8, 2011)).build();
+    
+    private final Event sportsEvent = make(an(Event, with(title, "Sports Day"), with(date, new Date(21, 12, 2011))));
+    private final Event independeceDayEvent = make(an(Event, with(title, "Independence Day"), with(date, new Date(15, 8, 2011))));
+    
 
 	@Autowired
 	SessionFactory sessionFactory;
