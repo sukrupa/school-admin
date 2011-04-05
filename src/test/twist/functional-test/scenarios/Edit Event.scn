@@ -10,8 +10,8 @@ Add Attendee to Event:
 #given i am on the spice girls edit event page
 #It should display the attendee id "34545"
 #When I add "64262" to "attendees"
-#And Click on "Save"
-#break
+#And Click on "save"
+#Then I see the "Event: Spice Girls" page
 #Then "Anok" should be listed as an attendee
 
 Cancel Changes of Event Edit:

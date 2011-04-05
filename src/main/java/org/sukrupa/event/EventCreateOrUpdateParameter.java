@@ -7,6 +7,7 @@ import com.google.common.base.Joiner;
 import java.util.Set;
 
 public class EventCreateOrUpdateParameter {
+
     private String title;
     private String date;
     private String time;

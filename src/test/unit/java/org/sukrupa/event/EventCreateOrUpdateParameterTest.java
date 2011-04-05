@@ -14,13 +14,6 @@ public class EventCreateOrUpdateParameterTest {
     @Test
     public void shouldReturnStudentIdsOfAttendees() {
         EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
-//        Set attendees = new HashSet();
-//        attendees.add("1");
-//        attendees.add("2");
-//        attendees.add('3');
-
-
-
         eventCreateOrUpdateParameter.setAttendees("1,2,3");
         assertThat(eventCreateOrUpdateParameter.getStudentIdsOfAttendees(), hasOnly("1","2","3"));
     }

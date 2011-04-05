@@ -49,14 +49,28 @@ public class EventsController {
         return "events/edit";
     }
 
-
 	@RequestMapping(value = "create", method = GET)
 	public String create() {
 		return "events/create";
 	}
 
+    @RequestMapping(value = "{eventId}", method = POST)
+    public String update(@PathVariable String eventId,
+            @ModelAttribute("editEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter,
+            Map<String, Object> model)
+    {
+        Event updatedEvent = service.update(eventCreateOrUpdateParameter);
+        if (updatedEvent != null) {
+            model.put("event", updatedEvent);
+            return format("redirect:/events/%s", eventId);
+        } else {
+            model.put("message", "Error updating event");
+            return format("redirect:/events/%s/edit", eventId);
+        }
+    }
+
 	@RequestMapping(value = "save", method = POST)
-	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, BindingResult result, Map<String, Object> model) {
+	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
         Event event = Event.createFrom(eventCreateOrUpdateParameter);
         Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
 
