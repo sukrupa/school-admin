@@ -91,13 +91,14 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label-header">Disciplinary</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary">$student.disciplinary$</textarea>
-                </div>
-
-                <div class="updateEntry">
                     <div class="label-header">Academic Performance</div>
                     <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance">$student.performance$</textarea>
+                </div>
+
+
+                <div class="updateEntry">
+                    <div class="label-header">Disciplinary</div>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary">$student.disciplinary$</textarea>
                 </div>
 
             </div>
