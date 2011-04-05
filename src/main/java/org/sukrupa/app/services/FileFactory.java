@@ -9,6 +9,10 @@ import java.io.FileNotFoundException;
 @Component
 public class FileFactory {
     public File create(String fileName) throws FileNotFoundException {
-        return new File(fileName);
+        File file = new File(fileName);
+        if(!file.exists()){
+            throw new FileNotFoundException("Image not found");
+        }
+        return file;
     }
 }
