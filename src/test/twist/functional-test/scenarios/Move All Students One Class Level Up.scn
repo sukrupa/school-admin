@@ -1,7 +1,0 @@
-Tags:
-Preconditions:Navigate to Move Up A Class Page,Log in,Log out afterwards
-Move Up A Class Workflow:
-#Given I am on the Move up a class page
-#Then there should be an information message
-#When I click the move students button
-#Then I should be taken to the success page

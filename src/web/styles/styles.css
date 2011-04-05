@@ -576,7 +576,7 @@ width: 100px;
 .informationMessage {
     margin : 20px;
     border : 4px solid #CC6666;
-    background : #FF9999;
+    background : white;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -586,6 +586,8 @@ width: 100px;
 .informationMessage p {
     margin :10px;
     font-size : 2em;
+    text-align : center;
+    color : #990000;
 }
 
 .buttonBar {
