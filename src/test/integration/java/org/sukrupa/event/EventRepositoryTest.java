@@ -17,10 +17,14 @@ import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.HibernateSession;
 import org.sukrupa.student.Builders;
 import static org.sukrupa.student.Builders.*;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -56,13 +60,17 @@ public class EventRepositoryTest {
 
 	@Test
 	public void shouldLoadAndPopulateASavedEvent() {
-		Event event = save(new EventBuilder().attendees(sahil, suhas).build());
+        HashSet<Student> eventAttendees = new HashSet<Student>();
+        eventAttendees.add(sahil);
+        eventAttendees.add(suhas);
+
+        Event event = save(make(an(Event, with(attendees, eventAttendees))));
 		assertThat(eventRepository.list(), hasOnly(event));
 	}
 
 	@Test
 	public void shouldLoadEventById() {
-		Event event = save(new EventBuilder().build());
+		Event event = save(make(an(Event)));
 		assertThat(eventRepository.load(event.getId()), is(event));
 	}
     
@@ -83,7 +91,8 @@ public class EventRepositoryTest {
 
 	@Test
 	public void shouldSaveEmptyNonMandatoryFieldsAsNull() {
-		Event eventSaved = save(new EventBuilder().notes(null).coordinator(null).venue(null).build());
+        String nullString  = null;
+		Event eventSaved = save(make(an(Event, with(venue, nullString), with(notes, nullString), with(coordinator, nullString))));
 		Event eventLoaded = eventRepository.load(eventSaved.getId());
 		assertThat(eventLoaded.getNotes(), nullValue());
 		assertThat(eventLoaded.getVenue(), nullValue());

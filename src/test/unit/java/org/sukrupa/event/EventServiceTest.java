@@ -1,18 +1,20 @@
 package org.sukrupa.event;
 
 import com.google.common.collect.Sets;
+import static com.natpryce.makeiteasy.MakeItEasy.an;
+import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.date.Date;
+import org.sukrupa.student.Builders;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,89 +33,87 @@ public class EventServiceTest {
 
     private final Student pat = new StudentBuilder().studentId("1").build();
     private final Student jim = new StudentBuilder().studentId("2").build();
-    private final Event event = new EventBuilder().build();
-    private final Event sportsEvent = new EventBuilder().title("Sports").build();
-    private final Event annualEvent = new EventBuilder().title("Annual Day").build();
+    private final Event event = make(an(Event));
+    private final Event sportsEvent = make(an(Event, with(title, "Sports")));
+    private final Event annualEvent = make(an(Event, with(title, "Annual Day")));
     private final List<Event> events = new ArrayList<Event>(Arrays.asList(sportsEvent, annualEvent));
 
-	@Mock
-	private EventRepository eventRepository;
+    @Mock
+    private EventRepository eventRepository;
 
-	@Mock
-	private StudentRepository studentRepository;
+    @Mock
+    private StudentRepository studentRepository;
 
-	private EventService service;
+    private EventService service;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-		service = new EventService(eventRepository, studentRepository);
-	}
-
-	@Test
-	public void shouldSaveEventWithStudents() {
-		when(studentRepository.findByStudentIds(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
-		service.save(event, pat.getStudentId(), jim.getStudentId());
-		verify(eventRepository).save(contains(pat, jim));
-	}
-
-	@Test
-	public void shouldReturnEmptyListForValidStudents() {
-		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
-		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId())).isEmpty(), is(true));
-	}
-
-	@Test
-	public void shouldReturnListOfInvalidStudentIds() {
-		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
-		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId(), "97543")), hasOnly("97543"));
-	}
-
-	private Event contains(Student... attendees) {
-		return argThat(containsAttendees(attendees));
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        service = new EventService(eventRepository, studentRepository);
+    }
 
     @Test
-    public void shouldListAllEvents()
-    {
+    public void shouldSaveEventWithStudents() {
+        when(studentRepository.findByStudentIds(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
+        service.save(event, pat.getStudentId(), jim.getStudentId());
+        verify(eventRepository).save(contains(pat, jim));
+    }
+
+    @Test
+    public void shouldReturnEmptyListForValidStudents() {
+        when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+        assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId())).isEmpty(), is(true));
+    }
+
+    @Test
+    public void shouldReturnListOfInvalidStudentIds() {
+        when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+        assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId(), "97543")), hasOnly("97543"));
+    }
+
+    private Event contains(Student... attendees) {
+        return argThat(containsAttendees(attendees));
+    }
+
+    @Test
+    public void shouldListAllEvents() {
         when(eventRepository.list()).thenReturn(events);
-        assertThat(service.list(),hasItems(sportsEvent,annualEvent));
+        assertThat(service.list(), hasItems(sportsEvent, annualEvent));
     }
 
     @Test
     public void shouldUpdateEvent() {
-    Set newAttendees = newHashSet();
+        Set<Student> newAttendees = newHashSet();
         newAttendees.add(pat);
         newAttendees.add(jim);
-    Event spiceGirlsOld = new EventBuilder().title("Spice Girls")
-                                                    .attendees(pat)
-                                                    .date(new Date(1,12,2011))
-                                                    .description("Wahoo Spice Girls")
-                                                    .venue("P-81")
-                                                    .coordinator("Joel Tellez")
-                                                    .notes("Sick as party")
-                                                    .build();
-    Event spiceGirlsNew = new EventBuilder().title("Spice Girls")
-                                                    .attendees(newAttendees)
-                                                    .date(new Date(12, 12, 2011))
-                                                    .description("Spice Girls 4 Lyf")
-                                                    .venue("P-81")
-                                                    .coordinator("Joel Tellez")
-                                                    .notes("Sick as party")
-                                                    .build();
+        Event spiceGirlsOld = make(an(Event, with(title, "Spice Girls"),
+                with(date, new Date(1, 12, 2011)),
+                with(description, "Wahoo Spice Girls"),
+                with(venue, "P-81"),
+                with(coordinator, "Joel Tellez"),
+                with(notes, "Sick as party"),
+                with(attendees, Collections.singleton(pat))));
+
+        Event spiceGirlsNew = make(an(Event, with(title, "Spice Girls"),
+                with(date, new Date(12, 12, 2011)),
+                with(description, "Spice Girls 4 Lyf"),
+                with(venue, "P-81"),
+                with(coordinator, "Joel Tellez"),
+                with(notes, "Sick as party"),
+                with(attendees, newAttendees)));
 
         when(eventRepository.findByTitle(spiceGirlsOld.getTitle())).thenReturn(spiceGirlsOld);
         when(eventRepository.update(any(Event.class))).thenReturn(spiceGirlsNew);
         when(studentRepository.findByStudentIds(newAttendees.toString())).thenReturn(newAttendees);
 
         EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().title(spiceGirlsOld.getTitle())
-                                .date(new Date(12, 12, 2011))
-                                .description("Spice Girls 4 Lyf")
-                                .venue("P-81")
-                                .coordinator("Joel Tellez")
-                                .notes("Sick as party")
-                                .attendees(newAttendees)
-                                    .build();
+                .date(new Date(12, 12, 2011))
+                .description("Spice Girls 4 Lyf")
+                .venue("P-81")
+                .coordinator("Joel Tellez")
+                .notes("Sick as party")
+                .attendees(newAttendees)
+                .build();
         Event updatedEvent = service.update(updateParameter);
         assertThat(updatedEvent, is(spiceGirlsNew));
 
