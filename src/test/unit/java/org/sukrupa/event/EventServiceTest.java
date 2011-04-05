@@ -1,21 +1,24 @@
 package org.sukrupa.event;
 
 import com.google.common.collect.Sets;
+import static com.natpryce.makeiteasy.MakeItEasy.an;
+import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.date.Date;
+import org.sukrupa.student.Builders;
+
+import static junit.framework.Assert.assertEquals;
+import static org.sukrupa.student.Builders.*;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 import org.sukrupa.student.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
@@ -32,10 +35,9 @@ public class EventServiceTest {
 
     private final Student pat = new StudentBuilder().studentId("1").build();
     private final Student jim = new StudentBuilder().studentId("2").build();
-
-    private final Event event = new EventBuilder().build();
-    private final Event sportsEvent = new EventBuilder().title("Sports").build();
-    private final Event annualEvent = new EventBuilder().title("Annual Day").build();
+    private final Event event = make(an(Event));
+    private final Event sportsEvent = make(an(Event, with(title, "Sports")));
+    private final Event annualEvent = make(an(Event, with(title, "Annual Day")));
     private final List<Event> events = new ArrayList<Event>(Arrays.asList(sportsEvent, annualEvent));
 
 	@Mock
