@@ -54,7 +54,12 @@ public class StudentsController {
     }
 
     @RequestMapping(value="annualupdate", method= POST)
-    public String annualUpdateBodySuccess(){
+    public String performAnnualUpdate(){
+        return "redirect:annualupdate/success";
+    }
+
+    @RequestMapping(value = "annualupdate/success",  method=GET)
+    public String annualUpdateSuccess() {
         return "students/annualUpdateSuccess";
     }
 
