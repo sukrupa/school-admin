@@ -18,6 +18,7 @@ public class StudentProfileForm {
 	private String father;
 	private String mother;
     private Set<String> talents;
+
     private String status;
     private String disciplinary;
     private String performance;

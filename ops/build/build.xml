@@ -29,14 +29,14 @@
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional, test:twist, deploy:save-build-number, package"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, copy.keystore.to.homedir, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
 
     <target name="install:local"
             depends="clean, init, compile:all, copy-resources, package"
@@ -173,6 +173,11 @@
 
     <target name="create.module.jar">
         <jar basedir="${target.main.dir}" jarfile="${target.module.jar}" excludes="jetty-realms.properties" />
+    </target>
+
+    <target name="copy.keystore.to.homedir">
+        <echo>Copy the keystore file to the ${user.home}</echo>
+        <copy file="${resources.main.dir}/.keystore" tofile="${user.home}/.keystore" />
     </target>
 
 </project>

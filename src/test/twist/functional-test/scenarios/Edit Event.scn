@@ -1,0 +1,21 @@
+Tags: in-progress
+Preconditions:Navigate  to Events,Log In,Log Out Afterwards
+h1.
+Navigate to edit event page:
+#Given i am viewing spice girls event
+#When I click "Edit"
+#Then I see the "Edit Event: Spice Girls" page
+
+Add Attendee to Event:
+#given i am on the spice girls edit event page
+#It should display the attendee id "34545"
+#When I add "64262" to "attendees"
+#And Click on "Save"
+#break
+#Then "Anok" should be listed as an attendee
+
+Cancel Changes of Event Edit:
+#Given I am on the spice girls edit event page
+#And I change the event title to "Backstreet Boys Concert"
+#When I click "cancel"
+#Then the event title should be "Spice Girls"

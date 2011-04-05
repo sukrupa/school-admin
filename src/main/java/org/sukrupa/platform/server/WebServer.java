@@ -6,15 +6,20 @@ import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.security.authentication.FormAuthenticator;
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.server.ssl.SslSocketConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.resource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
 import org.sukrupa.platform.web.ImageController;
@@ -22,6 +27,7 @@ import org.sukrupa.platform.web.ImageController;
 
 import javax.servlet.Servlet;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Arrays;
 
 
@@ -44,6 +50,8 @@ public class WebServer {
                      @Value("${web.context.path}") String contextPath,
                      @Value("${web.server.realm.file}") String webServerRealmFile,
                      @Value("${web.server.authenticate}") boolean authenticate,
+                     @Value("${web.server.ssl.keystore.password}") String keystorePassword,
+                     @Value("${web.server.ssl.keystore.port}") int sslPort,
                      FrontController frontController,
                      ImageController imageController) throws IOException {
 
@@ -53,11 +61,21 @@ public class WebServer {
         this.frontController = frontController;
         this.authenticate = authenticate;
 
-
         server = new Server(httpPort);
         HashLoginService hashLoginService = new HashLoginService("SukrupaSchoolAdmin", webServerRealmFile);
         server.addBean(hashLoginService);
+
+        SslSocketConnector sslConnector = new SslSocketConnector();
+        sslConnector.setPort(sslPort);
+
+        sslConnector.setPassword(keystorePassword);
+        sslConnector.setKeyPassword(keystorePassword);
+        sslConnector.setTrustPassword(keystorePassword);
         server.setHandler(handlers());
+
+        SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
+        selectChannelConnector.setPort(httpPort);
+        server.setConnectors( new Connector[]{ sslConnector, selectChannelConnector } );
     }
 
     public void start() {
