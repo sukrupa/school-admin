@@ -8,8 +8,16 @@ Add Student Record:
 #And I click "Register"
 #Then I should see the "Edit Student: Yael" page
 
-Cancel Button:
+Add Student Record:
 #When I navigate to "/students/create"
 #When I click on the "cancel" button
 #I should see the title "List of Students"
+
+
+Add Student Record:
+#When I navigate to "/students/create"
+#And I click "Register"
+#Then I should see the error message "Missing Student ID. Please re-enter." for the "studentId" field
+#Then I should see the error message "Missing Student Name. Please re-enter." for the "name" field
+#Then I should see the error message "Please enter a valid date format" for the "dateOfBirth" field
 

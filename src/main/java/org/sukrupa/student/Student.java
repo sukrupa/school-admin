@@ -91,7 +91,7 @@ public class Student {
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
                    StudentStatus status, String disciplinary, String performance, Profile profile) {
-        this.studentId = studentId;
+        this.studentId = setStudentId(studentId);
         this.name = name;
         this.religion = religion;
         this.caste = caste;
@@ -106,8 +106,9 @@ public class Student {
         this.notes = notes;
         this.imageLink = imageLink;
 
-        if(status == null)
+        if(status == null) {
             status = StudentStatus.NOT_SET;
+        }
 
         this.status = status;
         this.disciplinary = disciplinary;
@@ -116,11 +117,15 @@ public class Student {
     }
 
     public Student(String studentId, String name, String dateOfBirth, String gender) {
-        this.studentId = studentId;
+        this.studentId = setStudentId(studentId);
         this.name = name;
         this.dateOfBirth = convertDate(dateOfBirth);
         this.gender = gender;
         this.talents = new HashSet<Talent>();
+    }
+
+    private String setStudentId(String studentId) {
+        return StringUtils.upperCase(studentId);
     }
 
     private LocalDate convertDate(String dateOfBirth) {
