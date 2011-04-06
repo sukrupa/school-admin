@@ -30,11 +30,12 @@
                 <div class="updateEntry">
                     <div class="label">Gender</div>
                     <div class="textSpace">
-                        <select name="gender" class="updateValue">
+                        <select name="gender" id="gender" class="updateValue">
                             $formhelper.gendersDropDownList:{
                             <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                             }$
                         </select>
+                        <span class="errorMessage">$genderError$</span>
                     </div>
                 </div>
         </div>

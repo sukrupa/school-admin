@@ -129,7 +129,7 @@ public class StudentServiceTest {
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -155,7 +155,7 @@ public class StudentServiceTest {
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -172,7 +172,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(service.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
+        assertThat(service.update(new StudentCreateOrUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 
     @Test
