@@ -9,7 +9,7 @@ task :development do
   set :target_server, "twu-ci"
   set :deploy_path, "/var/opt/sukrupa/school-admin"
   set :should_recreate_database, true
-  set :should_recreate_image_folder, false
+  set :should_recreate_image_folder, true
   set :web_server_port, 8080
   role :target_server, "#{target_server}"  
 end
@@ -19,7 +19,7 @@ task :staging do
   set :target_server, "staging.school.sukrupa.org"
   set :deploy_path, "~/sukrupa/school-admin"
   set :should_recreate_database, true
-  set :should_recreate_image_folder, false
+  set :should_recreate_image_folder, true
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-bot.pem" }
 end
 
@@ -83,7 +83,7 @@ task :recreate_database do
 end
 
 task :insert_real_data do
-  run "cd #{deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.sql.dir=install/dbdeploy/sql/ -buildfile install/build.xml db:import-data"
+  run "cd #{deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.sql.dir=install/dbdeploy/sql/ -buildfile install/build/build.xml db:import-data"
 end
 
 def login_info
