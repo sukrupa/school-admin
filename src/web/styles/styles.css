@@ -578,7 +578,7 @@ img.studentImage{
 }
 
 #updateStudent .studentImage input {
-    display:none;
+    display:block;
 }
 
 #updateStudent .studentImage img {
