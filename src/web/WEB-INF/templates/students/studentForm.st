@@ -113,8 +113,9 @@
             </div>
 
             <div class="studentImage">
-            <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
-            <input type="file" id="changeImageLink" />
+
+                <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
+                <input type="file" id="changeImageLink" />
             </div>
 
 

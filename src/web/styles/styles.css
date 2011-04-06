@@ -577,6 +577,10 @@ img.studentImage{
     float:left;
 }
 
+#updateStudent .studentImage input {
+    display:none;
+}
+
 #updateStudent .studentImage img {
     border: solid 1px;
 }
