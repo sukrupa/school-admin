@@ -24,7 +24,6 @@ public class StudentValidatorTest {
 
         new StudentValidator().validate(paramsWithNoName, errors);
 
-        assertThat(errors.getErrorCount(), is(1));
         assertThat(errors.getFieldErrorCount("name"), is(1));
     }
 
@@ -38,7 +37,6 @@ public class StudentValidatorTest {
 
         new StudentValidator().validate(paramsWithNoStudentId, errors);
 
-        assertThat(errors.getErrorCount(), is(1));
         assertThat(errors.getFieldErrorCount("studentId"), is(1));
     }
 
@@ -52,7 +50,6 @@ public class StudentValidatorTest {
 
         new StudentValidator().validate(paramsWithNoDateOfBirth, errors);
 
-        assertThat(errors.getErrorCount(), is(1));
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
 
     }
@@ -67,7 +64,6 @@ public class StudentValidatorTest {
 
         new StudentValidator().validate(paramsWithWrongDate, errors);
 
-        assertThat(errors.getErrorCount(), is(1));
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
     }
 
@@ -82,7 +78,6 @@ public class StudentValidatorTest {
                 .name("futurechild").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithFutureDate, "futurechild");
         new StudentValidator().validate(paramsWithFutureDate, errors);
-        assertThat(errors.getErrorCount(), is(1));
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
         DateManipulation.unfreezeTime();
     }
@@ -92,7 +87,7 @@ public class StudentValidatorTest {
         StudentProfileForm allFieldsProvided = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(VALID_DOB)
-                .name("bob").build();
+                .name("bob").gender("male").build();
         Errors errors = new BeanPropertyBindingResult(allFieldsProvided, "bob");
 
         new StudentValidator().validate(allFieldsProvided, errors);
