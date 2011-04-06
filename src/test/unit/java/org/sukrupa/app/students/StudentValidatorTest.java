@@ -72,7 +72,7 @@ public class StudentValidatorTest {
         Student student = mock(Student.class);
         when(studentRepository.findByStudentId("1234")).thenReturn(student);
         studentValidator.validate(paramsWithDuplicateStudentId, errors);
-        verify(studentRepository.findByStudentId("1234"));
+        verify(studentRepository).findByStudentId("1234");
 
         assertThat(errors.getFieldErrorCount("studentId"), is(1));
     }
