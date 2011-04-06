@@ -1,22 +1,23 @@
 package org.sukrupa.student;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
 
 public class StudentProfileForm {
-	private String studentId;
+    private String studentId;
     private String name;
     private String dateOfBirth;
     private String gender;
-	private String studentClass;
-	private String religion;
-	private String caste;
-	private String subCaste;
-	private String communityLocation;
-	private String father;
-	private String mother;
+    private String studentClass;
+    private String religion;
+    private String caste;
+    private String subCaste;
+    private String communityLocation;
+    private String father;
+    private String mother;
     private Set<String> talents;
 
     private String status;
@@ -24,7 +25,9 @@ public class StudentProfileForm {
     private String performance;
     private String background;
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status,  String disciplinary, String performance, String background) {
+    private CommonsMultipartFile imageToUpload;
+
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -44,8 +47,8 @@ public class StudentProfileForm {
     }
 
     @DoNotRemove
-	public StudentProfileForm() {
-	}
+    public StudentProfileForm() {
+    }
 
     public String getStudentId() {
         return studentId;
@@ -63,7 +66,13 @@ public class StudentProfileForm {
         return getDateOfBirth();
     }
 
+    public CommonsMultipartFile getFileData() {
+        return imageToUpload;
+    }
 
+    public void setFileData(CommonsMultipartFile imageToUpload) {
+        this.imageToUpload = imageToUpload;
+    }
 
     public String getGender() {
         return gender;
