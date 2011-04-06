@@ -156,7 +156,7 @@
             <zipfileset file="${resources.main.dir}/app.properties" prefix="install"/>
             <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
-            <zipfileset dir="${ops.build.dir}" prefix="install">
+            <zipfileset dir="${ops.build.dir}" prefix="install/build">
                 <include name="*.xml"/>
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
