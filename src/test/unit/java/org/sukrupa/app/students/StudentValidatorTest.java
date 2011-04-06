@@ -5,8 +5,8 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.date.DateManipulation;
+import org.sukrupa.student.StudentCreateOrUpdateParameterBuilder;
 import org.sukrupa.student.StudentProfileForm;
-import org.sukrupa.student.StudentUpdateParameterBuilder;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,7 +16,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldAddANameErrorIfNoNameProvided() {
-        StudentProfileForm paramsWithNoName = new StudentUpdateParameterBuilder()
+        StudentProfileForm paramsWithNoName = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(VALID_DOB)
                 .name("").build();
@@ -30,7 +30,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldAddStudentIdIfNoIdProvided() {
-        StudentProfileForm paramsWithNoStudentId = new StudentUpdateParameterBuilder()
+        StudentProfileForm paramsWithNoStudentId = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("")
                 .dateOfBirth(VALID_DOB)
                 .name("bob").build();
@@ -44,7 +44,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldThrowErrorIfNoDateIsProvided() {
-        StudentProfileForm paramsWithNoDateOfBirth = new StudentUpdateParameterBuilder()
+        StudentProfileForm paramsWithNoDateOfBirth = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth("")
                 .name("bob").build();
@@ -59,7 +59,7 @@ public class StudentValidatorTest {
 
     @Test
     public void shouldThrowErrorIfIncorrectDateFormat() {
-        StudentProfileForm paramsWithWrongDate = new StudentUpdateParameterBuilder()
+        StudentProfileForm paramsWithWrongDate = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth("33/22/2001")
                 .name("Steve").build();
@@ -75,21 +75,21 @@ public class StudentValidatorTest {
     @Test
     public void shouldNotAcceptFutureDate() {
         DateManipulation.freezeDateToMidnightOn_31_12_2010();
-        Date futureDate = new Date(1,1,2011);
-        StudentProfileForm paramsWithFutureDate = new StudentUpdateParameterBuilder()
+        Date futureDate = new Date(1, 1, 2011);
+        StudentProfileForm paramsWithFutureDate = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(futureDate)
                 .name("futurechild").build();
-        Errors errors = new BeanPropertyBindingResult(paramsWithFutureDate,"futurechild");
+        Errors errors = new BeanPropertyBindingResult(paramsWithFutureDate, "futurechild");
         new StudentValidator().validate(paramsWithFutureDate, errors);
-        assertThat(errors.getErrorCount(),is(1));
-        assertThat(errors.getFieldErrorCount("dateOfBirth"),is(1));
+        assertThat(errors.getErrorCount(), is(1));
+        assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
         DateManipulation.unfreezeTime();
     }
 
     @Test
     public void shouldNotHaveErrorsIfCorrectMandatoryFieldProvided() {
-        StudentProfileForm allFieldsProvided = new StudentUpdateParameterBuilder()
+        StudentProfileForm allFieldsProvided = new StudentCreateOrUpdateParameterBuilder()
                 .studentId("abc")
                 .dateOfBirth(VALID_DOB)
                 .name("bob").build();
@@ -98,5 +98,16 @@ public class StudentValidatorTest {
         new StudentValidator().validate(allFieldsProvided, errors);
 
         assertThat(errors.getErrorCount(), is(0));
+    }
+
+    @Test
+    public void shouldAddAGenderErrorIfNoGenderProvided() {
+        StudentProfileForm paramsWithNoGender = new StudentCreateOrUpdateParameterBuilder()
+                .gender("").build();
+        Errors errors = new BeanPropertyBindingResult(paramsWithNoGender, "bob");
+
+        new StudentValidator().validate(paramsWithNoGender, errors);
+
+        assertThat(errors.getFieldErrorCount("gender"), is(1));
     }
 }

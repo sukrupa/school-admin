@@ -6,7 +6,7 @@ import org.sukrupa.platform.date.Date;
 
 import java.util.Set;
 
-public class StudentUpdateParameterBuilder {
+public class StudentCreateOrUpdateParameterBuilder {
     private String studentId;
     private String name;
     private String dateOfBirth = DateTimeFormat.forPattern("dd/MM/YYYY").print(new LocalDate());
@@ -24,81 +24,81 @@ public class StudentUpdateParameterBuilder {
     private String performance;
     private String background;
 
-    public StudentUpdateParameterBuilder studentId(String studentId) {
+    public StudentCreateOrUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
         return this;
     }
 
-    public StudentUpdateParameterBuilder name(String name) {
+    public StudentCreateOrUpdateParameterBuilder name(String name) {
         this.name = name;
         return this;
     }
 
-    public StudentUpdateParameterBuilder dateOfBirth(Date date) {
+    public StudentCreateOrUpdateParameterBuilder dateOfBirth(Date date) {
         return dateOfBirth(date.toString());
     }
 
-    public StudentUpdateParameterBuilder dateOfBirth(String dateOfBirth) {
+    public StudentCreateOrUpdateParameterBuilder dateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
 
-    public StudentUpdateParameterBuilder gender(String gender) {
+    public StudentCreateOrUpdateParameterBuilder gender(String gender) {
         this.gender = gender;
         return this;
     }
 
-     public StudentUpdateParameterBuilder disciplinary(String disciplinary) {
+     public StudentCreateOrUpdateParameterBuilder disciplinary(String disciplinary) {
         this.disciplinary = disciplinary;
         return this;
     }
 
-     public StudentUpdateParameterBuilder performance(String performance) {
+     public StudentCreateOrUpdateParameterBuilder performance(String performance) {
         this.performance = performance;
         return this;
     }
 
-     public StudentUpdateParameterBuilder background(String background) {
+     public StudentCreateOrUpdateParameterBuilder background(String background) {
         this.background = background;
         return this;
     }
 
-    public StudentUpdateParameterBuilder studentClass(String studentClass) {
+    public StudentCreateOrUpdateParameterBuilder studentClass(String studentClass) {
         this.studentClass = studentClass;
         return this;
     }
 
-    public StudentUpdateParameterBuilder religion(String religion) {
+    public StudentCreateOrUpdateParameterBuilder religion(String religion) {
         this.religion = religion;
         return this;
     }
 
-    public StudentUpdateParameterBuilder caste(String caste) {
+    public StudentCreateOrUpdateParameterBuilder caste(String caste) {
         this.caste = caste;
         return this;
     }
 
-    public StudentUpdateParameterBuilder subCaste(String subCaste) {
+    public StudentCreateOrUpdateParameterBuilder subCaste(String subCaste) {
         this.subCaste = subCaste;
         return this;
     }
 
-    public StudentUpdateParameterBuilder area(String area) {
+    public StudentCreateOrUpdateParameterBuilder area(String area) {
         this.area = area;
         return this;
     }
 
-    public StudentUpdateParameterBuilder father(String father) {
+    public StudentCreateOrUpdateParameterBuilder father(String father) {
         this.father = father;
         return this;
     }
 
-    public StudentUpdateParameterBuilder mother(String mother) {
+    public StudentCreateOrUpdateParameterBuilder mother(String mother) {
         this.mother = mother;
         return this;
     }
 
-    public StudentUpdateParameterBuilder talents(Set<String> talents) {
+    public StudentCreateOrUpdateParameterBuilder talents(Set<String> talents) {
         this.talents = talents;
         return this;
     }
@@ -108,7 +108,7 @@ public class StudentUpdateParameterBuilder {
     }
 
 
-    public StudentUpdateParameterBuilder status(StudentStatus statusIn) {
+    public StudentCreateOrUpdateParameterBuilder status(StudentStatus statusIn) {
         this.status = statusIn;
         return this;
     }
