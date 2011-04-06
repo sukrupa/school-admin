@@ -85,18 +85,8 @@ public class StudentService {
 
         for (Student student : students) {
             student.promote();
+
             studentRepository.put(student);
         }
     }
 }
-
-//   public int promoteStudentsToNextClass() {
-//        List<Student> students = studentRepository.findAll();
-
-//        for (Student student : students) {
-//            student.promote();
-//            studentRepository.put(student);
-//        }
-
-//        return students.size();
-//    }

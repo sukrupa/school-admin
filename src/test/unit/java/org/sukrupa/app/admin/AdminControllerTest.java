@@ -26,8 +26,8 @@ public class AdminControllerTest {
 
     @Test
     public void shouldPromoteAllStudents() {
- //       controller.performAnnualUpdate();
+        controller.performAnnualUpdate();
 
- //       verify(studentService).promoteStudentsToNextClass();
+        verify(studentService).promoteStudentsToNextClass();
     }
 }
