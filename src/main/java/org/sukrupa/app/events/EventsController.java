@@ -59,18 +59,17 @@ public class EventsController {
             @ModelAttribute("editEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter,
             Map<String, Object> model)
     {
-        Event updatedEvent = service.update(eventCreateOrUpdateParameter);
-
         Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
-        if (updatedEvent != null) {
-            model.put("event", updatedEvent);
+        if (!invalidAttendees.isEmpty()) {
+            model.put("event", eventCreateOrUpdateParameter);
             model.put("invalidAttendees",invalidAttendees);
-            return format("redirect:/events/%s", eventId);
+            return "events/edit";
+
         } else {
-            model.put("message", "Error updating event");
-            return format("redirect:/events/%s/edit", eventId);
+            service.update(eventCreateOrUpdateParameter);
+            return format("redirect:/events/%s", eventId);
         }
     }
 

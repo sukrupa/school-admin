@@ -110,6 +110,7 @@ public class EventCreateOrUpdateParameter {
 
     public Set<String> getStudentIdsOfAttendees() {
 //        return attendees;
+        attendees = attendees.replace(" ","");
 	    return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
