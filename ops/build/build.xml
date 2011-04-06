@@ -153,10 +153,10 @@
             <zipfileset file="${ops.deploy.dir}/update-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/install-database.sh" prefix="install"/>
             <zipfileset file="${ops.deploy.dir}/create-image-folder.sh" prefix="install"/>
-            <zipfileset file="${resources.main.dir}/app.properties" prefix="install/dbdeploy"/>
+            <zipfileset file="${resources.main.dir}/app.properties" prefix="install"/>
             <zipfileset dir="${src.sql.dir}" prefix="install/dbdeploy/sql"/>
             <zipfileset dir="${ops.deploy.sql.dir}" prefix="install/dbdeploy/sql"/>
-            <zipfileset dir="${ops.build.dir}" prefix="install/dbdeploy">
+            <zipfileset dir="${ops.build.dir}" prefix="install">
                 <include name="*.xml"/>
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
