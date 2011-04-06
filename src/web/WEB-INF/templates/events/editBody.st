@@ -28,7 +28,7 @@
 
 				<div class="createEntry">
 					<div class="label">Coordinator</div>
-					<input type="text" name="coordinator" id="event.coordinator" value="$coordinator$"
+					<input type="text" name="coordinator" id="coordinator" value="$event.coordinator$"
 						   class="createValue"></input>
 				</div>
 
