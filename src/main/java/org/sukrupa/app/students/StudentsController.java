@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,10 +104,10 @@ public class StudentsController {
                 model.put("statusType", "default");
             else {
                 switch (student.getStatus()) {
-                    case ACTIVE:
+                    case EXISTING_STUDENT:
                         model.put("statusType", "existing");
                         break;
-                    case INACTIVE:
+                    case DROPOUT:
                         model.put("statusType", "dropout");
                         break;
                     default:

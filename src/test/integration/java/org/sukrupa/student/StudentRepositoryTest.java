@@ -80,6 +80,20 @@ public class StudentRepositoryTest {
             .gender("Male").talents(music, sport)
             .build();
 
+    private Student peter = new StudentBuilder()
+            .studentId("123321").name("Peter")
+            .studentClass("Preschool").dateOfBirth(new LocalDate(1990, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.DROPOUT)
+            .build();
+
+    private Student toy = new StudentBuilder()
+            .studentId("556677").name("Toy")
+            .studentClass("4th grade").dateOfBirth(new LocalDate(1987, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.NOT_SET)
+            .build();
+
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
 
@@ -178,6 +192,16 @@ public class StudentRepositoryTest {
         // Then we should have only see renaud and sahil in the results
         assertThat(students.size(), is(2));
         assertThat(students, CollectionMatchers.hasOnly(renaud, sahil));
+    }
+
+    @Test
+    public void shouldReturnDropoutStudents() {
+        hibernateSession.save(toy, peter);
+
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().studentStatus(StudentStatus.DROPOUT).page(1).build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(peter));
     }
 
     @Test

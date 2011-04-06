@@ -101,8 +101,7 @@ public class SearchWorkflow {
 	}
 
 	public void andDoesNotShowInSearchResults(String studentName) throws Exception {
-		//thenDoesNotShowInSearchResults(studentName);
-		assertFalse(browser.byText(studentName).exists());
+		thenDoesNotShowInSearchResults(studentName);
 	}
 
 	public void givenISelectTheName(String studentName) throws Exception {

@@ -1,4 +1,4 @@
-Tags:
+Tags:In Progress
 Preconditions:Navigate to Search Page,Log In,	Log out afterwards
 search Workflow:
 #Given I select the talent <Talent>
@@ -12,4 +12,3 @@ search Workflow:
 #And I select status as "Dropout"
 #When I hit search button
 #Then  <Name> shows in search results
-#And "Anok" does not show in search results 

@@ -16,6 +16,7 @@ public class StudentSearchParameterBuilder {
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
     private List<Talent> talents = new ArrayList<Talent>();
+    private StudentStatus status = StudentStatus.NOT_SET;
 
     public StudentSearchParameterBuilder name(String name) {
         this.name = name;
@@ -70,7 +71,7 @@ public class StudentSearchParameterBuilder {
     }
 
     public StudentSearchParameter build() {
-        return new StudentSearchParameter(name, studentClass, gender, caste, area, ageFrom, ageTo, talents, religion);
+        return new StudentSearchParameter(name, studentClass, gender, caste, area, ageFrom, ageTo, talents, religion, status.toString());
     }
 
     public StudentSearchParameterBuilder page(int page) {
@@ -80,6 +81,11 @@ public class StudentSearchParameterBuilder {
 
     public StudentSearchParameterBuilder withTalents(List<Talent> talents) {
         this.talents = talents;
+        return this;
+    }
+
+    public StudentSearchParameterBuilder studentStatus(StudentStatus status) {
+        this.status = status;
         return this;
     }
 }

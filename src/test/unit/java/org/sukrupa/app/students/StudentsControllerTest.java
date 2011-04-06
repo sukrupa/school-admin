@@ -102,7 +102,7 @@ public class StudentsControllerTest {
         Map<String,Object> model = new HashMap<String, Object>();
         Student student = mock(Student.class);
         when(service.load("id")).thenReturn(student);
-        when(student.getStatus()).thenReturn(StudentStatus.ACTIVE);
+        when(student.getStatus()).thenReturn(StudentStatus.EXISTING_STUDENT);
 
         controller.view("id", false, model);
 
@@ -114,7 +114,7 @@ public class StudentsControllerTest {
         Map<String, Object> model = new HashMap<String, Object>();
         Student student = mock(Student.class);
         when(service.load("id")).thenReturn(student);
-        when(student.getStatus()).thenReturn(StudentStatus.INACTIVE);
+        when(student.getStatus()).thenReturn(StudentStatus.DROPOUT);
 
         controller.view("id", false, model);
 
