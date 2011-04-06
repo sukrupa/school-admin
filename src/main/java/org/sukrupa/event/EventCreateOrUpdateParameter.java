@@ -103,7 +103,7 @@ public class EventCreateOrUpdateParameter {
         this.notes = notes;
     }
 
-    public String getAttendeesString() {
+    public String getAttendees() {
         return attendees;
 //        return Joiner.on(", ").join(attendees);
     }
