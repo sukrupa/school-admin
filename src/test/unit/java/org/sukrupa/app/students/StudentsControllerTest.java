@@ -79,14 +79,22 @@ public class StudentsControllerTest {
     @Test
     public void shouldAddNameErrorIfTheUserDoesNotEnterAName() {
         studentValidator.addErrorTo("name");
-
         Map<String, Object> model = new HashMap<String, Object>();
-
-        StudentProfileForm userDidNotEnterName = new StudentUpdateParameterBuilder().name("").build();
+        StudentProfileForm userDidNotEnterName = mock(StudentProfileForm.class);
 
         controller.create(userDidNotEnterName, model);
 
-        assertNotNull(model.get("nameError").toString());
+        assertNotNull(model.get("nameError"));
+    }
+
+    @Test
+    public void createShouldShowErrorForGenderIfNotSelected() {
+        studentValidator.addErrorTo("gender");
+        Map<String,Object> model = new HashMap<String, Object>();
+        StudentProfileForm userWithoutGender = mock(StudentProfileForm.class);
+
+        controller.create(userWithoutGender, model);
+        assertNotNull(model.get("genderError"));
     }
 
     @Test

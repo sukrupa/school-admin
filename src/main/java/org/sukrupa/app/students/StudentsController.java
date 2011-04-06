@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,13 +137,13 @@ public class StudentsController {
             model.put("student", studentParam);
             model.put("errors", errors);
 
-            addErrorToFieldIfNecessary("name", model, errors);
-            addErrorToFieldIfNecessary("dateOfBirth", model, errors);
-            addErrorToFieldIfNecessary("studentId", model, errors);
+            addErrorToFields(model, errors);
             model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
             return "students/create";
         }
     }
+
+
 
     @RequestMapping(value = "{id}", method = POST)
     public String update(
@@ -171,13 +172,11 @@ public class StudentsController {
         return errors.getErrorCount() == 0;
     }
 
-    private void addErrorToFieldIfNecessary(String name, Map<String, Object> model, Errors errors) {
-        FieldError nameError = errors.getFieldError(name);
-        model.put(format("%sError", name), no(nameError) ? null : nameError.getDefaultMessage());
+    private void addErrorToFields(Map<String, Object> model, Errors errors) {
+        for (FieldError error : errors.getFieldErrors()) {
+            model.put(format("%sError", error.getField()), error.getDefaultMessage());
+        }
 
     }
 
-    private boolean no(FieldError nameError) {
-        return nameError == null;
-    }
 }
