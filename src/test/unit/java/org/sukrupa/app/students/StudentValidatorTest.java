@@ -1,18 +1,38 @@
 package org.sukrupa.app.students;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.date.DateManipulation;
+import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentCreateOrUpdateParameterBuilder;
 import org.sukrupa.student.StudentProfileForm;
+import org.sukrupa.student.StudentRepository;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class StudentValidatorTest {
     private static final String VALID_DOB = "11-11-2001";
+
+    @Mock
+    private StudentRepository studentRepository;
+
+    private StudentValidator studentValidator;
+
+    @Before
+    public void setUp() {
+        studentValidator = new StudentValidator(studentRepository);
+    }
 
     @Test
     public void shouldAddANameErrorIfNoNameProvided() {
@@ -22,7 +42,8 @@ public class StudentValidatorTest {
                 .name("").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithNoName, "bob");
 
-        new StudentValidator().validate(paramsWithNoName, errors);
+
+        studentValidator.validate(paramsWithNoName, errors);
 
         assertThat(errors.getFieldErrorCount("name"), is(1));
     }
@@ -35,10 +56,28 @@ public class StudentValidatorTest {
                 .name("bob").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithNoStudentId, "bob");
 
-        new StudentValidator().validate(paramsWithNoStudentId, errors);
+        studentValidator.validate(paramsWithNoStudentId, errors);
 
         assertThat(errors.getFieldErrorCount("studentId"), is(1));
     }
+
+    @Test
+    public void shouldReturnErrorIfStudentIDExists() {
+        StudentProfileForm paramsWithDuplicateStudentId = new StudentCreateOrUpdateParameterBuilder()
+                .studentId("1234")
+                .dateOfBirth(VALID_DOB)
+                .name("bob").build();
+        Errors errors = new BeanPropertyBindingResult(paramsWithDuplicateStudentId, "bob");
+
+        Student student = mock(Student.class);
+        when(studentRepository.findByStudentId("1234")).thenReturn(student);
+        studentValidator.validate(paramsWithDuplicateStudentId, errors);
+        verify(studentRepository).findByStudentId("1234");
+
+        assertThat(errors.getFieldErrorCount("studentId"), is(1));
+    }
+
+
 
     @Test
     public void shouldThrowErrorIfNoDateIsProvided() {
@@ -48,7 +87,7 @@ public class StudentValidatorTest {
                 .name("bob").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithNoDateOfBirth, "bob");
 
-        new StudentValidator().validate(paramsWithNoDateOfBirth, errors);
+        studentValidator.validate(paramsWithNoDateOfBirth, errors);
 
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
 
@@ -62,7 +101,7 @@ public class StudentValidatorTest {
                 .name("Steve").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithWrongDate, "Steve");
 
-        new StudentValidator().validate(paramsWithWrongDate, errors);
+        studentValidator.validate(paramsWithWrongDate, errors);
 
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
     }
@@ -77,7 +116,7 @@ public class StudentValidatorTest {
                 .dateOfBirth(futureDate)
                 .name("futurechild").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithFutureDate, "futurechild");
-        new StudentValidator().validate(paramsWithFutureDate, errors);
+        studentValidator.validate(paramsWithFutureDate, errors);
         assertThat(errors.getFieldErrorCount("dateOfBirth"), is(1));
         DateManipulation.unfreezeTime();
     }
@@ -90,7 +129,7 @@ public class StudentValidatorTest {
                 .name("bob").gender("male").build();
         Errors errors = new BeanPropertyBindingResult(allFieldsProvided, "bob");
 
-        new StudentValidator().validate(allFieldsProvided, errors);
+        studentValidator.validate(allFieldsProvided, errors);
 
         assertThat(errors.getErrorCount(), is(0));
     }
@@ -101,7 +140,7 @@ public class StudentValidatorTest {
                 .gender("").build();
         Errors errors = new BeanPropertyBindingResult(paramsWithNoGender, "bob");
 
-        new StudentValidator().validate(paramsWithNoGender, errors);
+        studentValidator.validate(paramsWithNoGender, errors);
 
         assertThat(errors.getFieldErrorCount("gender"), is(1));
     }

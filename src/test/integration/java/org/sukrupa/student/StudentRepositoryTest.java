@@ -69,7 +69,7 @@ public class StudentRepositoryTest {
             .build();
 
     private Student yael = new StudentBuilder()
-            .studentId("555").name("Yael")
+            .studentId("SK555").name("Yael")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Female").talents(music, sport)
             .build();
@@ -301,6 +301,15 @@ public class StudentRepositoryTest {
         List<Student> list = getPageCriteria.list();
         assertThat(list, hasItem(withoutCaste));
 
+    }
+
+    @Test
+    public void shouldReturnTheStudentIfWeMatchIdButNotCase(){
+        hibernateSession.save(yael);
+
+        Student student = studentRepository.findByStudentId("sk555");
+
+        assertThat(student, is(yael));
     }
 
     @Test

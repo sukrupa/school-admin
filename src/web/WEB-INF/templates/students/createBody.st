@@ -6,7 +6,7 @@
                 <div class="updateEntry">
                     <div class="label">Student ID<span class="mandatory">*</span></div>
                     <div class="textSpace">
-                        <input type="text" name="studentId" id="studentId" class="updateValue"></input>
+                        <input type="text" name="studentId" id="studentId"  value="$student.studentId$" class="updateValue"></input>
                         <span class="errorMessage">$studentIdError$</span>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                 <div class="updateEntry">
                     <div class="label">Name<span class="mandatory">*</span></div>
                     <div class="textSpace">
-                        <input type="text" id="name" name="name" class="updateValue"></input>
+                        <input type="text" id="name" name="name"  value="$student.name$" class="updateValue"></input>
                         <span class="errorMessage">$nameError$</span>
                     </div>
                 </div>
@@ -22,13 +22,13 @@
                 <div class="updateEntry">
                     <div class="label">Date of Birth (dd-mm-yyyy)<span class="mandatory">*</span></div>
                     <div class="textSpace">
-                        <input type="text" id="dateOfBirth" name="dateOfBirth" class="updateValue"></input>
+                        <input type="text" id="dateOfBirth" name="dateOfBirth"  value="$student.dateOfBirth$" class="updateValue"></input>
                         <span class="errorMessage">$dateOfBirthError$</span>
                     </div>
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Gender</div>
+                    <div class="label">Gender<span class="mandatory">*</span></div>
                     <div class="textSpace">
                         <select name="gender" id="gender" class="updateValue">
                             $formhelper.gendersDropDownList:{

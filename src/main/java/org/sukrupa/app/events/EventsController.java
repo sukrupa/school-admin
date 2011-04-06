@@ -63,7 +63,7 @@ public class EventsController {
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
         if (!invalidAttendees.isEmpty()) {
-            model.put("event", eventCreateOrUpdateParameter);
+            model.put("event", service.getEvent(Integer.parseInt(eventId)));
             model.put("invalidAttendees",invalidAttendees);
             return "events/edit";
 
@@ -78,7 +78,7 @@ public class EventsController {
 
         Event event = Event.createFrom(eventCreateOrUpdateParameter);
 
-        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+        Set<String> studentIdsOfAttendees = eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
 		if (!invalidAttendees.isEmpty()) {
