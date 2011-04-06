@@ -1,4 +1,4 @@
-Tags:In Progress
+Tags:
 Preconditions:Navigate to Search Page,Log In,	Log out afterwards
 search Workflow:
 #Given I select the talent <Talent>
@@ -9,6 +9,5 @@ search Workflow:
 #And I select religion as <Religion>
 #And I select caste as <Caste>
 #And I select community location as <Community Location>
-#And I select status as "Dropout"
 #When I hit search button
 #Then  <Name> shows in search results

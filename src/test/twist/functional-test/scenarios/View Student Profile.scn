@@ -4,7 +4,7 @@ Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"
 #Verify that talent is "Pick & Speak"
-#Verify that status is ""
+#Verify that status is "Existing Student"
 #Verify that disciplinary is "Excellent"
 #Verify that performance is "A+"
 

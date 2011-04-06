@@ -16,7 +16,7 @@ public class StudentSearchParameterBuilder {
     private String religion = StudentSearchParameter.WILDCARD_CHARACTER;
     private int page = 1;
     private List<Talent> talents = new ArrayList<Talent>();
-    private StudentStatus status = StudentStatus.NOT_SET;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     public StudentSearchParameterBuilder name(String name) {
         this.name = name;
