@@ -83,7 +83,7 @@ public class EventsController {
 
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", eventCreateOrUpdateParameter);
+			model.put("event", event);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
