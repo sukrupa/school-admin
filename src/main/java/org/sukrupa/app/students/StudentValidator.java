@@ -44,7 +44,7 @@ public class StudentValidator implements Validator {
         }
 
         if(null != studentRepository.findByStudentId(studentParam.getStudentId())){
-            errors.rejectValue("studentId", "studentID.duplicate", "Student with the same ID already exists");
+            errors.rejectValue("studentId", "studentID.duplicate", "Student with the same ID already exists.");
         }
 
     }

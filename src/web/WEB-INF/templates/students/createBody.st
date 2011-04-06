@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Gender</div>
+                    <div class="label">Gender<span class="mandatory">*</span></div>
                     <div class="textSpace">
                         <select name="gender" id="gender" class="updateValue">
                             $formhelper.gendersDropDownList:{
