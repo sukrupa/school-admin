@@ -5,7 +5,7 @@
 </div>
 
 <div class="buttonBar">
-    <form action="/students/annualupdate" method="POST">
+    <form action="/admin/annualupdate" method="POST">
         <input type="submit" name="submit" value="Update students" />
     </form>
 </div>

@@ -1,0 +1,1 @@
+$layout(title="Admin")$
