@@ -1,9 +1,11 @@
 package org.sukrupa.student;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.date.Date;
 
 import java.util.List;
 import java.util.Set;
@@ -16,18 +18,21 @@ public class StudentService {
     private ReferenceDataRepository referenceDataRepository;
     private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
+    private SystemEventLogRepository systemEventLogRepository;
 
     @DoNotRemove
-    StudentService() {
+    StudentService(SystemEventLogRepository systemEventLogRepository) {
+        this.systemEventLogRepository = systemEventLogRepository;
     }
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory) {
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
         this.studentFactory = studentFactory;
+        this.systemEventLogRepository = systemEventLogRepository;
     }
 
     public Student load(String studentId) {
@@ -81,12 +86,19 @@ public class StudentService {
     }
 
     public void promoteStudentsToNextClass() {
-        List<Student> students = studentRepository.findAll();
+        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find("annual class update");
+        if (annualClassUpdateEventLog != null && happenedThisYear(annualClassUpdateEventLog)) {
+            List<Student> students = studentRepository.findAll();
 
-        for (Student student : students) {
-            student.promote();
+            for (Student student : students) {
+                student.promote();
 
-            studentRepository.put(student);
+                studentRepository.put(student);
+            }
         }
+    }
+
+    private boolean happenedThisYear(SystemEventLog annualClassUpdateEventLog) {
+        return annualClassUpdateEventLog.lastHappened().year() != new LocalDate().year();
     }
 }

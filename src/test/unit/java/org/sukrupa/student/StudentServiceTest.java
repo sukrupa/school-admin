@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -47,11 +48,14 @@ public class StudentServiceTest {
 
     @Mock
     private StudentFactory studentFactory;
+    @Mock
+    private SystemEventLogRepository systemEventLogRepository;
+
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, null, studentFactory);
+        service = new StudentService(studentRepository, talentRepository, null, studentFactory, systemEventLogRepository);
         freezeDateToMidnightOn_31_12_2010();
     }
 
@@ -115,6 +119,45 @@ public class StudentServiceTest {
 
         Mockito.verify(studentRepository).put(promotedSahil);
         Mockito.verify(studentRepository).put(promotedMark);
+    }
+
+    @Test
+    public void shouldNotLetUsPromoteStudentsTwice() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(null).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+        service.promoteStudentsToNextClass();
+
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        assertEquals("3 Std", Sahil.getStudentClass());
+    }
+
+    @Test
+    public void shouldLetUsPromoteStudentsIfItWasDoneLastDoneLastYear() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2010, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        assertEquals("3 Std", Sahil.getStudentClass());
     }
 
     @Test
