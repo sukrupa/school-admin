@@ -1,16 +1,28 @@
 package org.sukrupa.student;
 
+import com.sun.deploy.ui.ImageLoader;
+import org.apache.commons.io.IOUtils;
+import org.eclipse.jetty.io.RuntimeIOException;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sukrupa.app.services.ImageLoaderService;
+import org.sukrupa.platform.config.AppConfiguration;
 
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.io.*;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.commons.io.IOUtils.copy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
@@ -47,13 +59,18 @@ public class StudentTest {
     @Test
     public void shouldHaveDefaultImageLink() {
         String defaultLink = "placeholderImage";
-        assertThat(student("pat",null).getImageLink(),is(defaultLink));
+        assertThat(student("pat", null).getImageLink(), is(defaultLink));
     }
 
     @Test
     public void shouldReturnImageLinkIfHasImage() {
-        assertThat(studentWithImage("Balaji","HappyBalaji").getImageLink(),is("HappyBalaji"));
+        assertThat(studentWithImage("Balaji", "HappyBalaji").getImageLink(), is("HappyBalaji"));
     }
+
+    //load image from class path
+    //take input stream
+    //create outputstream
+    //save to hard disk
 
     @Test
     public void shouldBe5YearsOld() {
@@ -91,22 +108,22 @@ public class StudentTest {
         Note firstNote = new Note("note1");
         Note secondNote = new Note("note2");
         Student suhas = new StudentBuilder().notes(firstNote, secondNote).build();
-        
+
         assertThat(suhas.getNotes(), hasItems(firstNote, secondNote));
     }
 
     @Test
-    public void shouldPromoteStudent(){
+    public void shouldPromoteStudent() {
         assertEquals("2 Std", promoteStudent("1 Std").getStudentClass());
         assertEquals("3 Std", promoteStudent("2 Std").getStudentClass());
         assertEquals("4 Std", promoteStudent("3 Std").getStudentClass());
         assertEquals("10 Std", promoteStudent("9 Std").getStudentClass());
 
-        assertEquals("UKG",promoteStudent("LKG").getStudentClass());
-        assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
-        assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
-        assertEquals("Graduated",promoteStudent("10 Std").getStudentClass());
-        assertEquals("Graduated",promoteStudent("Graduated").getStudentClass());
+        assertEquals("UKG", promoteStudent("LKG").getStudentClass());
+        assertEquals("1 Std", promoteStudent("UKG").getStudentClass());
+        assertEquals("LKG", promoteStudent("Preschool").getStudentClass());
+        assertEquals("Graduated", promoteStudent("10 Std").getStudentClass());
+        assertEquals("Graduated", promoteStudent("Graduated").getStudentClass());
     }
 
     @Test
@@ -133,6 +150,73 @@ public class StudentTest {
         return new StudentBuilder().name(name).imageLink(imageLink).build();
     }
 
+    @Test
+    public void createOutputOnDiskFromServer() throws IOException {
+
+        File photoFile = new File(System.getProperty("user.home") + "/.sukrupa/images/placeholderImage");
+
+        byte[] originalBytes = readBytesFrom(photoFile);
+
+
+        File copyOfPhotoFile = new File(System.getProperty("user.home") + "/.sukrupa/images/copyOfplaceholderImage");
+
+        writeBytesTo(originalBytes, copyOfPhotoFile);
+
+        byte[] copiedBytes = readBytesFrom(copyOfPhotoFile);
+
+        System.out.println(Arrays.toString(originalBytes));
+        System.out.println(Arrays.toString(copiedBytes));
+
+
+        assertTrue(Arrays.equals(originalBytes, copiedBytes));
+
+
+    }
+
+    private static void writeBytesTo(byte[] bytes, File outputFile) {
+
+        BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(bytes));
+        BufferedOutputStream out = null;
+        try {
+            if (!outputFile.exists()) {
+                outputFile.createNewFile();
+            }
+            out = new BufferedOutputStream(new FileOutputStream(outputFile));
+            copy(in, out);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            closeQuietly(in);
+            closeQuietly(out);
+        }
+
+
+    }
+
+    private static byte[] readBytesFrom(File f) {
+        InputStream in = null;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            in = new FileInputStream(f);
+
+            copy(in, out);
+
+            return out.toByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            closeQuietly(in);
+            closeQuietly(out);
+        }
+    }
+
+    private void tryToClose(BufferedInputStream bufferedInputStream) {
+        try {
+            bufferedInputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }
