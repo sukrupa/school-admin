@@ -137,6 +137,7 @@ public class StudentsControllerTest {
         private List<String> errorFields;
 
         public FakeStudentValidator() {
+            super(null);
             errorFields = new ArrayList<String>();
         }
 
