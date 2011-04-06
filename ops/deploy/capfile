@@ -83,7 +83,7 @@ task :recreate_database do
 end
 
 task :insert_real_data do
-  run "cd #{deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install/dbdeploy -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.sql.dir=install/dbdeploy/sql/ -buildfile install/dbdeploy/build.xml db:import-data"
+  run "cd #{deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.sql.dir=install/dbdeploy/sql/ -buildfile install/build.xml db:import-data"
 end
 
 def login_info
