@@ -150,7 +150,6 @@
                    $rest(formhelper.statuses):{
                     <option value="$it$">$it$</option>
                     }$
-                    <option value=""></option>
                 </select>
             </td>
            </tr>
