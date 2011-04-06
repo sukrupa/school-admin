@@ -153,7 +153,6 @@ public class StudentsController {
         Student updatedStudent = studentService.update(studentParam);
 
         if (updatedStudent != null) {
-            model.put("student", updatedStudent);
             model.put("studentUpdatedSuccesfully", true);
             return format("redirect:/students/%s", id);
         } else {
