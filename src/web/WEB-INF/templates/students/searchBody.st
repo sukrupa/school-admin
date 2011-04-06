@@ -140,6 +140,21 @@
                     }$
                 </select>
             </td>
+
+           <tr>
+            <td>
+                <span>Status</span>
+            </td>
+            <td>
+                <select name="status">
+                   $rest(formhelper.statuses):{
+                    <option value="$it$">$it$</option>
+                    }$
+                    <option value=""></option>
+                </select>
+            </td>
+           </tr>
+
         </tr>
         <tr>
             <td><input type="submit" value="Search"/></td>

@@ -9,5 +9,7 @@ search Workflow:
 #And I select religion as <Religion>
 #And I select caste as <Caste>
 #And I select community location as <Community Location>
+#And I select status as "Dropout"
 #When I hit search button
-#Then  <Name> shows in search results 
+#Then  <Name> shows in search results
+#And "Anok" does not show in search results 
