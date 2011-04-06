@@ -1,5 +1,9 @@
 <div id="student">
-    <form id="updateStudent" name="updateStudent" action="/students/$student.studentId$" method="post">
+    <form id="updateStudent"
+          name="updateStudent"
+          action="/students/$student.studentId$"
+          enctype="multipart/form-data"
+          method="post">
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -115,7 +119,7 @@
             <div class="studentImage">
 
                 <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
-                <input type="file" id="changeImageLink" />
+                <input type="file" name="imageToUpload" />
             </div>
 
 
