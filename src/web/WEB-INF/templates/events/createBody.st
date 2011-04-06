@@ -33,7 +33,7 @@
 
 				<div class="createEntry">
 					<div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$trunc(event.attendees):{$it.studentId$,}$$last(event.attendees).studentId$</textarea>
+					<textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$event.attendees$</textarea>
 
 				</div>
 			</div>
