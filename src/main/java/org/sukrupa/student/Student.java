@@ -276,11 +276,15 @@ public class Student {
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
 
-        this.father = new Caregiver();
-        this.mother = new Caregiver();
+        if (studentUpdateParameters.getFather() != null) {
+            this.father = new Caregiver();
+            this.father.setName(studentUpdateParameters.getFather());
+        }
 
-        this.father.setName(studentUpdateParameters.getFather());
-		this.mother.setName(studentUpdateParameters.getMother());
+        if (studentUpdateParameters.getFather() != null) {
+            this.mother = new Caregiver();
+            this.mother.setName(studentUpdateParameters.getMother());
+        }
 
         setBackground(studentUpdateParameters.getBackground());
 	}
