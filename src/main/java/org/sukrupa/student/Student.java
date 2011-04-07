@@ -81,7 +81,7 @@ public class Student {
     public static final Student EMPTY_STUDENT = new EmptyStudent();
 
     @Enumerated(EnumType.ORDINAL)
-    private StudentStatus status = StudentStatus.NOT_SET;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     @DoNotRemove
     public Student() {
@@ -107,7 +107,7 @@ public class Student {
         this.imageLink = imageLink;
 
         if(status == null) {
-            status = StudentStatus.NOT_SET;
+            status = StudentStatus.EXISTING_STUDENT;
         }
 
         this.status = status;
