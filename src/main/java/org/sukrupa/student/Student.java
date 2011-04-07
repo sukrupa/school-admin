@@ -287,6 +287,7 @@ public class Student {
             this.mother = new Caregiver();
             this.mother.setName(studentUpdateParameters.getMother().getName());
             this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
+            this.mother.setContact(studentUpdateParameters.getMother().getContact());
         }
 
         setBackground(studentUpdateParameters.getBackground());

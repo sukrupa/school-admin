@@ -151,6 +151,10 @@
                         <div class="label">Education</div>
                         <input type="text" name="mother.education" value="$student.mother.education$" class="updateValue"></input>
                     </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
+                    </div>
                 </div>
             </div>
         </div>
