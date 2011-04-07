@@ -16,8 +16,8 @@ public class EditParentsDetail {
 		assertTrue(browser.textbox(fieldName).near(browser.div(fatherField)).exists());
 	}
 
-	public void enterInTheFieldForThe(String caregiverName, String fieldName, String caregiver) throws Exception {
-		browser.textbox(fieldName).near(browser.div(caregiver)).setValue(caregiverName);	
+	public void enterInTheFieldForThe(String value, String fieldLabel, String caregiver) throws Exception {
+//		browser.textbox().near(browser.div(fieldLabel).in(browser.byId(caregiver + "Details"))).setValue(value);	
 	}
 
 	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
@@ -26,6 +26,10 @@ public class EditParentsDetail {
 
 	public void verifyThatTheFieldNameInIs(String fieldName, String divName, String fieldValue) throws Exception {
 		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldName)).in(browser.div(divName)).getText());
+	}
+
+	public void enterInThe(String value, String fieldName) throws Exception {
+		browser.textbox(fieldName).setValue(value);
 	}
 
 }
