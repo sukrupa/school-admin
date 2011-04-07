@@ -21,8 +21,8 @@ public class StudentRecordWithNoPhoto {
 		assertTrue(browser.link("changeImage").exists());
 	}
 
-	public void verifyThatAPlaceholderIsShown() throws Exception {
-		assertTrue(browser.image("placeholderImage").exists());
+	public void verifyThatAImageIsShown(Integer integer1) throws Exception {
+		assertTrue(browser.byId(integer1).exists());
 	}
 
 }
