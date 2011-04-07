@@ -50,34 +50,54 @@ public class StudentRepositoryTest {
             .studentId("99").name("Sahil")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Male").talents(music, sport)
+            .status(StudentStatus.EXISTING_STUDENT)
             .build();
     private Student jimbo = new StudentBuilder()
             .studentId("1").name("Jimbo")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1975, 10, 1))
             .gender("Male").talents(cooking)
+            .status(StudentStatus.EXISTING_STUDENT)
             .build();
     private Student renaud = new StudentBuilder()
             .studentId("2").name("Renaud")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1990, 7, 24))
             .gender("Female")
+            .status(StudentStatus.EXISTING_STUDENT)
             .build();
 
     private Student pat = new StudentBuilder()
             .studentId("123").name("pat")
             .studentClass("4th grade").dateOfBirth(new LocalDate(1985, 5, 24))
             .gender("male")
+            .status(StudentStatus.EXISTING_STUDENT)
             .build();
 
     private Student yael = new StudentBuilder()
             .studentId("SK555").name("Yael")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Female").talents(music, sport)
+            .status(StudentStatus.EXISTING_STUDENT)
             .build();
 
     private Student yam = new StudentBuilder()
             .studentId("559").name("Yam")
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Male").talents(music, sport)
+            .status(StudentStatus.EXISTING_STUDENT)
+            .build();
+
+    private Student peter = new StudentBuilder()
+            .studentId("123321").name("Peter")
+            .studentClass("Preschool").dateOfBirth(new LocalDate(1990, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.DROPOUT)
+            .build();
+
+    private Student toy = new StudentBuilder()
+            .studentId("556677").name("Toy")
+            .studentClass("4th grade").dateOfBirth(new LocalDate(1987, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.ALUMNI)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -178,6 +198,16 @@ public class StudentRepositoryTest {
         // Then we should have only see renaud and sahil in the results
         assertThat(students.size(), is(2));
         assertThat(students, CollectionMatchers.hasOnly(renaud, sahil));
+    }
+
+    @Test
+    public void shouldReturnDropoutStudents() {
+        hibernateSession.save(toy, peter);
+
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().studentStatus(StudentStatus.DROPOUT).page(1).build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(peter));
     }
 
     @Test

@@ -17,7 +17,7 @@
       <li>
 
           <p class="indent">
-              <a href="/students">View All</a>
+              <a href="/students">View Students</a>
           </p>
 
            <p class="indent">

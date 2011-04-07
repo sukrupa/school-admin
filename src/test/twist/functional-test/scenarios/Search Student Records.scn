@@ -10,4 +10,4 @@ search Workflow:
 #And I select caste as <Caste>
 #And I select community location as <Community Location>
 #When I hit search button
-#Then  <Name> shows in search results 
+#Then  <Name> shows in search results

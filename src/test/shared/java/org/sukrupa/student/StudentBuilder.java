@@ -25,10 +25,11 @@ public class StudentBuilder {
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
-    private StudentStatus status = StudentStatus.ACTIVE;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private String disciplinary;
     private String performance;
     private  Profile profile = new Profile();
+
     public StudentBuilder name(String name) {
         this.name = name;
         return this;

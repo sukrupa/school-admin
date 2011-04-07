@@ -25,6 +25,7 @@ class StudentsSearchCriteriaGenerator {
     private static final String TALENTS = "talents";
     private static final String RELIGION = "religion";
     private static final String DESCRIPTION = "description";
+    private static final String STATUS = "status";
 
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
@@ -50,6 +51,9 @@ class StudentsSearchCriteriaGenerator {
         criteria.add(conjunction);
 
         addTalentsSearchCriteria(criteria, searchParam.getTalents());
+
+        addStudentStatusSearchCriteria(criteria, StudentStatus.fromString(searchParam.getStatus()));
+
         return criteria;
     }
 
@@ -74,6 +78,11 @@ class StudentsSearchCriteriaGenerator {
         }
         criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     }
+
+    private void addStudentStatusSearchCriteria(Criteria criteria, StudentStatus status) {
+        criteria.add( Restrictions.eq(STATUS, status));
+    }
+
 
     private LocalDate computeBirthDateFromAge(int age) {
         return new LocalDate().minusYears(age);
