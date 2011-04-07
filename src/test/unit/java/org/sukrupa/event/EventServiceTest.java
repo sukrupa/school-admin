@@ -94,6 +94,7 @@ public class EventServiceTest {
         EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().id(1)
                                 .title("Spice Girls")
                                 .date(new Date(12, 12, 2011))
+                                .time("10:10")
                                 .description("Spice Girls 4 Lyf")
                                 .venue("P-81")
                                 .coordinator("Joel Tellez")

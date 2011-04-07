@@ -96,16 +96,20 @@ public class SearchWorkflow {
 		assertEquals(string1, browser.cell(string1).text());					
 	}
 
-	public void thenDoesNotShowInSearchResults(String string1) throws Exception {
-		assertFalse(browser.cell(string1).exists());
+	public void thenDoesNotShowInSearchResults(String studentName) throws Exception {
+		assertFalse(browser.cell(studentName).exists());
 	}
 
-	public void andDoesNotShowInSearchResults(String string1) throws Exception {
-		thenDoesNotShowInSearchResults(string1);
+	public void andDoesNotShowInSearchResults(String studentName) throws Exception {
+		thenDoesNotShowInSearchResults(studentName);
 	}
 
-	public void givenISelectTheName(String string1) throws Exception {
-		browser.textbox("name").setValue(string1);
+	public void givenISelectTheName(String studentName) throws Exception {
+		browser.textbox("name").setValue(studentName);
+	}
+
+	public void andISelectStatusAs(String selectedStatus) throws Exception {
+		browser.select("status").choose(selectedStatus);
 	}
 
 

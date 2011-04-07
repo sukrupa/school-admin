@@ -1,5 +1,9 @@
 <div id="student">
-    <form id="updateStudent" name="updateStudent" action="/students/$student.studentId$" method="post">
+    <form id="updateStudent"
+          name="updateStudent"
+          action="/students/$student.studentId$"
+          enctype="multipart/form-data"
+          method="post">
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -21,7 +25,7 @@
 
                 <div class="updateEntry">
                     <div class="label">Gender</div>
-                    <select name="gender" class="updateValue">
+                    <select name="gender" id="gender" class="updateValue">
                         $formhelper.gendersDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
@@ -110,6 +114,12 @@
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                 </select>
+            </div>
+
+            <div class="studentImage">
+
+                <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
+                <input type="file" name="imageToUpload" />
             </div>
 
 

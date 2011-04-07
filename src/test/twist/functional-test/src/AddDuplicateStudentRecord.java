@@ -1,24 +1,24 @@
 
 // JUnit Assert framework can be used for verification
 
+import static junit.framework.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import org.sukrupa.twist.ScenarioDataUnitOfWork;
 
 import net.sf.sahi.client.Browser;
-import static junit.framework.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
-public class AddStudentRecord {
+public class AddDuplicateStudentRecord {
 
-	private final Browser browser;
+	private Browser browser;
 	private final ScenarioDataUnitOfWork scenarioDataUnitOfWork;
 
-	public AddStudentRecord(Browser browser, ScenarioDataUnitOfWork scenarioDataUnitOfWork) {
+	public AddDuplicateStudentRecord(Browser browser, ScenarioDataUnitOfWork scenarioDataUnitOfWork) {
 		this.browser = browser;
 		this.scenarioDataUnitOfWork = scenarioDataUnitOfWork;
 	}
-	
+
 	public void andIEnterTheStudentId(String studentId) throws Exception {
 		andIEnterTheAs("studentId", studentId);
 		scenarioDataUnitOfWork.addedStudentWithId(studentId);
@@ -68,4 +68,7 @@ public class AddStudentRecord {
 		assertThat(browser.span("errorMessage").near(browser.byId(fieldId)).getText(), is(errorMessage));	
 	}
 
+	public void andTheStudentIdIsShownInTheField(String id) throws Exception {
+		assertThat(browser.textbox("studentId").getValue(), is(id));
+	}
 }

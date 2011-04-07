@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -40,7 +41,7 @@ public class StudentRepository {
 	}
 
     public Student findByStudentId(String studentId) {
-		return (Student) query("from Student where studentId = ?").setParameter(0, studentId).uniqueResult();
+		return (Student) query("from Student where studentId = ?").setParameter(0, StringUtils.upperCase(studentId)).uniqueResult();
 	}
 
 	public Set<Student> findByStudentIds(String... studentIds) {
