@@ -5,11 +5,35 @@ Add Student Record:
 #And I enter the student id "SK2010082011"
 #And I enter the "name" as "Yael"
 #And I enter the "dateOfBirth" as "06-03-1982"
+#And I select the "gender" as "Female"
 #And I click "Register"
 #Then I should see the "Edit Student: Yael" page
 
-Cancel Button:
+Add Student Record:
 #When I navigate to "/students/create"
 #When I click on the "cancel" button
 #I should see the title "List of Students"
 
+
+Add Student Record:
+#When I navigate to "/students/create"
+#And I click "Register"
+#Then I should see the error message "Missing Student ID. Please re-enter." for the "studentId" field
+#Then I should see the error message "Missing Student Name. Please re-enter." for the "name" field
+#Then I should see the error message "Please enter a valid date format." for the "dateOfBirth" field
+#Then I should see the error message "Please select a gender." for the "gender" field
+
+Add Duplicate Student Record, Add Student Record, Event Edit Mandatory Fields:
+#And I enter the student id "SK2010082012"
+#And I enter the "name" as "Balaji"
+#And I enter the "dateOfBirth" as "06-03-1982"
+#And I select the "gender" as "Male"
+#And I click "Register"
+#When I navigate to "/students/create"
+#And I enter the student id "SK2010082012"
+#And I enter the "name" as "Balaji"
+#And I enter the "dateOfBirth" as "06-03-1982"
+#And I select the "gender" as "Male"
+#And I click "Register"
+#Then I should see the error message "Student with the same ID already exists." for the "studentId" field
+#And the student id "SK2010082012" is shown in the field

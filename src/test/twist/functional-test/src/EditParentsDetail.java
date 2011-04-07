@@ -1,0 +1,35 @@
+
+// JUnit Assert framework can be used for verification
+
+import static junit.framework.Assert.*;
+import net.sf.sahi.client.Browser;
+
+public class EditParentsDetail {
+
+	private Browser browser;
+
+	public EditParentsDetail(Browser browser) {
+		this.browser = browser;
+	}
+
+	public void verifyThatFieldForTheIsOnThePage(String fieldName, String fatherField) throws Exception {
+		assertTrue(browser.textbox(fieldName).near(browser.div(fatherField)).exists());
+	}
+
+	public void enterInTheFieldForThe(String value, String fieldLabel, String caregiver) throws Exception {
+//		browser.textbox().near(browser.div(fieldLabel).in(browser.byId(caregiver + "Details"))).setValue(value);	
+	}
+
+	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
+		assertEquals("Student:", browser.title() );
+	}
+
+	public void verifyThatTheFieldNameInIs(String fieldName, String divName, String fieldValue) throws Exception {
+		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldName)).in(browser.div(divName)).getText());
+	}
+
+	public void enterInThe(String value, String fieldName) throws Exception {
+		browser.textbox(fieldName).setValue(value);
+	}
+
+}

@@ -55,18 +55,6 @@
                 <div class="value">$student.communityLocation$</div>
             </div>
 
-
-
-            <div class="entry">
-                <div class="label">Father's Name</div>
-                <div class="value">$student.father$</div>
-            </div>
-
-            <div class="entry">
-                <div class="label">Mother's Name</div>
-                <div class="value">$student.mother$</div>
-            </div>
-
             <div class="entry">
                  <div class="label inline-block">Background</div>
                  $if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
@@ -103,6 +91,31 @@
 
         <div class="notes">
             $studentNotesDisplay()$
+        </div>
+
+        <div class="parentDetails">
+            <div id="fatherDetails">
+                <div class="labelHead">Father</div>
+                <div class="entry">
+                    <div class="label">Name</div>
+                    <div class="value">$student.father.name$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Education</div>
+                    <div class="value">$student.father.education$</div>
+                </div>
+            </div>
+            <div id="motherDetails">
+                <div class="labelHead">Mother</div>
+                <div class="entry">
+                    <div class="label">Name</div>
+                    <div class="value">$student.mother.name$</div>
+                </div>
+            </div>
+            <div id="guardianDetails">
+                                    Guardian
+            </div>
+            <div style="clear:both"></div>
         </div>
 
         <div id="update">

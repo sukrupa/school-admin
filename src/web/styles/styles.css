@@ -43,15 +43,16 @@ body
     width: 903px;
     min-height: 140px;
     background-color: #254965;
-	-moz-border-radius-topright: 5px; 
-    -webkit-border-top-right-radius: 5px;
-    border-top-radius: 5px;
+
     font-family:sans-serif;
     font-weight:bold;
     font-size:18px;
-    
+
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -webkit-border-top-left-radius: 5px;
+    border-top-radius: 5px;
     border-top-left-radius: 5px;
     
     border-bottom: solid;
@@ -308,7 +309,7 @@ text-decoration: none;
 
 .updateStatusValue {
     float: left;
-    width: 120px;
+    width: 140px;
 }
 #update {
     clear: both;
@@ -560,13 +561,53 @@ width: 100px;
     padding: 10px 0px 10px 0px;
 }
 
-#changeImageLink{
-    display:block;
-}
-
-.studentImage{
+img.studentImage{
     height: 175px;
     margin-bottom: 55px;
     width: 160px;
     border: solid 1px;
+}
+
+#updateStudent .studentImage{
+    height: 175px;
+    width: 160px;
+    margin-bottom: 2px;
+    margin-left: 40px;
+    margin-top: 11px;
+    float:left;
+}
+
+#updateStudent .studentImage input {
+    display:none;
+}
+
+#updateStudent .studentImage img {
+    border: solid 1px;
+}
+
+
+.informationMessage {
+    margin : 20px;
+    border : 4px solid #CC6666;
+    background : white;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-radius: 5px;
+}
+
+.informationMessage p {
+    margin :10px;
+    font-size : 2em;
+    text-align : center;
+    color : #990000;
+}
+
+.buttonBar {
+    margin : 20px;
+    text-align : center;
+}
+
+.buttonBar input {
+    font-size : 2em;
 }

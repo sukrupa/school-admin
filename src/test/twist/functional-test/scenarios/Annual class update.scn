@@ -1,0 +1,7 @@
+Tags:in-progress
+Preconditions:Navigate to annual update page,Log in,Log out afterwards
+Annual Update Workflow:
+#Given I am on the Annual class update page
+#Then there should be an information message
+#When I click the update students button
+#Then I should be taken to the success page

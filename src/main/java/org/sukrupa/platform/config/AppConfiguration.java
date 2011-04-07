@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ViewResolver;
@@ -28,6 +30,7 @@ import static org.springframework.beans.factory.config.PropertyPlaceholderConfig
 public class AppConfiguration {
 
     private static final String ENVIRONMENT_KEY = "environment";
+    private static final long ONE_MB = 1048576;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -37,6 +40,16 @@ public class AppConfiguration {
         viewResolver.setSuffix(".st");
         return viewResolver;
     }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+
+        commonsMultipartResolver.setMaxUploadSize(ONE_MB);
+
+        return commonsMultipartResolver;
+    }
+
 
     @Bean
     public HandlerMapping handlerMapping(OpenSessionInViewInterceptor interceptor) {

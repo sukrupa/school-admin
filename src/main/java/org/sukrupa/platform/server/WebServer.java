@@ -6,32 +6,26 @@ import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.security.authentication.FormAuthenticator;
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
-import org.eclipse.jetty.server.ssl.SslSocketConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.util.resource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.web.FrontController;
 import org.sukrupa.platform.web.ImageController;
 
 
-import javax.servlet.Servlet;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Arrays;
 
 
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 @Component
 public class WebServer {
@@ -134,16 +128,16 @@ public class WebServer {
         constraint.setRoles(new String[]{"SukrupaSchoolAdmin"});
         constraint.setAuthenticate(true);
 
-        ConstraintMapping events = createConstaintMapping(constraint, "/events/*");
-        ConstraintMapping students = createConstaintMapping(constraint, "/students/*");
+        ConstraintMapping events = mapConstraintTo(constraint, "/events/*");
+        ConstraintMapping students = mapConstraintTo(constraint, "/students/*");
 
 
-        securityHandler.setConstraintMappings(Arrays.asList(events, students));
+        securityHandler.setConstraintMappings(asList(events, students));
 
         servletHandler.setSecurityHandler(securityHandler);
     }
 
-    private ConstraintMapping createConstaintMapping(Constraint constraint, String path) {
+    private static ConstraintMapping mapConstraintTo(Constraint constraint, String path) {
         ConstraintMapping cm = new ConstraintMapping();
         cm.setPathSpec(path);
         cm.setConstraint(constraint);

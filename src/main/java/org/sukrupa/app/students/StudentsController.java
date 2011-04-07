@@ -48,16 +48,6 @@ public class StudentsController {
         return "students/list";
     }
 
-    @RequestMapping(value="moveupaclass", method= GET)
-    public String moveUpAClassPage(){
-        return "students/moveUpAClass";
-    }
-
-    @RequestMapping(value="moveupaclass", method= POST)
-    public String moveAllStudentsUpAClass(){
-        return "students/moveUpAClassSuccess";
-    }
-
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getReferenceData());
@@ -99,10 +89,10 @@ public class StudentsController {
                 model.put("statusType", "default");
             else {
                 switch (student.getStatus()) {
-                    case ACTIVE:
+                    case EXISTING_STUDENT:
                         model.put("statusType", "existing");
                         break;
-                    case INACTIVE:
+                    case DROPOUT:
                         model.put("statusType", "dropout");
                         break;
                     default:
@@ -131,24 +121,23 @@ public class StudentsController {
             model.put("student", studentParam);
             model.put("errors", errors);
 
-            addErrorToFieldIfNecessary("name", model, errors);
-            addErrorToFieldIfNecessary("dateOfBirth", model, errors);
-            addErrorToFieldIfNecessary("studentId", model, errors);
+            addErrorToFields(model, errors);
             model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
             return "students/create";
         }
     }
 
+
+
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentProfileForm studentParam,
+            @ModelAttribute("updateStudent") StudentProfileForm studentProfileForm,
             Map<String, Object> model) {
 
-        Student updatedStudent = studentService.update(studentParam);
+        Student updatedStudent = studentService.update(studentProfileForm);
 
         if (updatedStudent != null) {
-            model.put("student", updatedStudent);
             model.put("studentUpdatedSuccesfully", true);
             return format("redirect:/students/%s", id);
         } else {
@@ -167,13 +156,11 @@ public class StudentsController {
         return errors.getErrorCount() == 0;
     }
 
-    private void addErrorToFieldIfNecessary(String name, Map<String, Object> model, Errors errors) {
-        FieldError nameError = errors.getFieldError(name);
-        model.put(format("%sError", name), no(nameError) ? null : nameError.getDefaultMessage());
+    private void addErrorToFields(Map<String, Object> model, Errors errors) {
+        for (FieldError error : errors.getFieldErrors()) {
+            model.put(format("%sError", error.getField()), error.getDefaultMessage());
+        }
 
     }
 
-    private boolean no(FieldError nameError) {
-        return nameError == null;
-    }
 }

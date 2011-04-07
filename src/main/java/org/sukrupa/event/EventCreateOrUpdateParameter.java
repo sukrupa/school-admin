@@ -103,13 +103,14 @@ public class EventCreateOrUpdateParameter {
         this.notes = notes;
     }
 
-    public String getAttendeesString() {
+    public String getAttendees() {
         return attendees;
 //        return Joiner.on(", ").join(attendees);
     }
 
     public Set<String> getStudentIdsOfAttendees() {
 //        return attendees;
+        attendees = attendees.replace(" ","");
 	    return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 

@@ -1,12 +1,8 @@
 package org.sukrupa.student;
 
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 public enum StudentStatus {
-    NOT_SET(0, ""), INACTIVE(1, "Dropout"), ACTIVE(2, "Existing Student"), ALUMNI(3, "Alumni");
+    EXISTING_STUDENT(0, "Existing Student"), DROPOUT(1, "Dropout"), ALUMNI(2, "Alumni");
 
     private String name;
     private int id;
@@ -23,11 +19,11 @@ public enum StudentStatus {
       {
           if(valueIn.equals("Existing Student"))
           {
-              returnValue = StudentStatus.ACTIVE;
+              returnValue = StudentStatus.EXISTING_STUDENT;
           }
           else if(valueIn.equals("Dropout"))
           {
-              returnValue = StudentStatus.INACTIVE;
+              returnValue = StudentStatus.DROPOUT;
           }
           else if(valueIn.equals("Alumni"))
           {

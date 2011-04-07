@@ -59,26 +59,31 @@ public class EventsController {
             @ModelAttribute("editEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter,
             Map<String, Object> model)
     {
-        Event updatedEvent = service.update(eventCreateOrUpdateParameter);
-        if (updatedEvent != null) {
-            model.put("event", updatedEvent);
-            return format("redirect:/events/%s", eventId);
+        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+
+        if (!invalidAttendees.isEmpty()) {
+            model.put("event", service.getEvent(Integer.parseInt(eventId)));
+            model.put("invalidAttendees",invalidAttendees);
+            return "events/edit";
+
         } else {
-            model.put("message", "Error updating event");
-            return format("redirect:/events/%s/edit", eventId);
+            service.update(eventCreateOrUpdateParameter);
+            return format("redirect:/events/%s", eventId);
         }
     }
 
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
+
         Event event = Event.createFrom(eventCreateOrUpdateParameter);
-        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
 
-
+        Set<String> studentIdsOfAttendees = eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
+
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", eventCreateOrUpdateParameter);
+			model.put("event", event);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
