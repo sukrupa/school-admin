@@ -583,6 +583,8 @@ img.studentImage{
 
 #updateStudent .studentImage img {
     border: solid 1px;
+    width: 160px;
+    height: 175px;
 }
 
 
