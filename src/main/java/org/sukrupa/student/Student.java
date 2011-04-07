@@ -280,11 +280,13 @@ public class Student {
             this.father = new Caregiver();
             this.father.setName(studentUpdateParameters.getFather().getName());
             this.father.setEducation(studentUpdateParameters.getFather().getEducation());
+            this.father.setContact(studentUpdateParameters.getFather().getContact());
         }
 
         if (studentUpdateParameters.getFather() != null) {
             this.mother = new Caregiver();
             this.mother.setName(studentUpdateParameters.getMother().getName());
+            this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
         }
 
         setBackground(studentUpdateParameters.getBackground());

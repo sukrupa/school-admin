@@ -136,12 +136,20 @@
                         <div class="label">Education</div>
                         <input type="text" name="father.education" value="$student.father.education$" class="updateValue"></input>
                     </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="father.contact" value="$student.father.contact$" class="updateValue"></input>
+                    </div>
                 </div>
                 <div id="motherDetails">
                     <div class="labelHead">Mother</div>
                     <div class="updateEntry">
                         <div class="label">Name</div>
                         <input type="text" name="mother.name" value="$student.mother.name$" class="updateValue"></input>
+                    </div>
+                     <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="mother.education" value="$student.mother.education$" class="updateValue"></input>
                     </div>
                 </div>
             </div>

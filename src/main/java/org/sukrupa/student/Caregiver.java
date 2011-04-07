@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.sukrupa.platform.DoNotRemove;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,9 +21,13 @@ public class Caregiver {
     private String name;
     private String education;
 
-    public Caregiver(String name, String education) {
+    @Column(name = "CONTACT_NUMBER")
+    private String contact;
+
+    public Caregiver(String name, String education, String contact) {
         this.name = name;
         this.education = education;
+        this.contact = contact;
     }
 
     public String getName() {
@@ -39,5 +44,13 @@ public class Caregiver {
 
     public String getEducation() {
         return education;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
