@@ -9,7 +9,7 @@
 
     <target name="sukrupa-server:start" depends="db:start" >
         <echo message="Running sukrupa server with Main Class [${sukrupa.app.class.name}] ..."/>
-        <java classname="${sukrupa.app.class.name}" fork="yes" dir="${module.dir}">
+        <java classname="${sukrupa.app.class.name}" fork="true" dir="${module.dir}">
             <jvmarg value="-Xms128m"/>
             <jvmarg value="-Xmx768m"/>
             <sysproperty key="environment" value="build"/>

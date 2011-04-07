@@ -48,13 +48,18 @@ public class StudentTest {
     @Test
     public void shouldHaveDefaultImageLink() {
         String defaultLink = "placeholderImage";
-        assertThat(student("pat",null).getImageLink(),is(defaultLink));
+        assertThat(student("pat", null).getImageLink(), is(defaultLink));
     }
 
     @Test
     public void shouldReturnImageLinkIfHasImage() {
-        assertThat(studentWithImage("Balaji","HappyBalaji").getImageLink(),is("HappyBalaji"));
+        assertThat(studentWithImage("Balaji", "HappyBalaji").getImageLink(), is("HappyBalaji"));
     }
+
+    //load image from class path
+    //take input stream
+    //create outputstream
+    //save to hard disk
 
     @Test
     public void shouldBe5YearsOld() {
@@ -92,17 +97,16 @@ public class StudentTest {
         Note firstNote = new Note("note1");
         Note secondNote = new Note("note2");
         Student suhas = new StudentBuilder().notes(firstNote, secondNote).build();
-        
+
         assertThat(suhas.getNotes(), hasItems(firstNote, secondNote));
     }
 
     @Test
-    public void shouldPromoteStudent(){
+    public void shouldPromoteStudent() {
         assertEquals("2 Std", promoteStudent("1 Std").getStudentClass());
         assertEquals("3 Std", promoteStudent("2 Std").getStudentClass());
         assertEquals("4 Std", promoteStudent("3 Std").getStudentClass());
         assertEquals("10 Std", promoteStudent("9 Std").getStudentClass());
-
         assertEquals("UKG",promoteStudent("LKG").getStudentClass());
         assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
         assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
@@ -179,7 +183,6 @@ public class StudentTest {
     private Student studentWithImage(String name, String imageLink) {
         return new StudentBuilder().name(name).imageLink(imageLink).build();
     }
-
 
 
 }

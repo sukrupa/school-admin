@@ -66,11 +66,11 @@ public class StudentProfileForm {
         return getDateOfBirth();
     }
 
-    public CommonsMultipartFile getFileData() {
+    public CommonsMultipartFile getImageToUpload() {
         return imageToUpload;
     }
 
-    public void setFileData(CommonsMultipartFile imageToUpload) {
+    public void setImageToUpload(CommonsMultipartFile imageToUpload) {
         this.imageToUpload = imageToUpload;
     }
 
