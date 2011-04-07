@@ -125,8 +125,8 @@ public class StudentRepositoryTest {
         Talent actingTalent = new TalentBuilder().description("Acting").build();
         Talent singingTalent = new TalentBuilder().description("Singing").build();
         Talent sportsTalent = new TalentBuilder().description("Sports").build();
-        Caregiver father = new Caregiver("someFather");
-        Caregiver mother = new Caregiver("someMother");
+        Caregiver father = new Caregiver("someFather","someEducation");
+        Caregiver mother = new Caregiver("someMother","someEducation");
         hibernateSession.save(actingTalent, singingTalent, sportsTalent);
 
         studentRepository.put(new StudentBuilder()
