@@ -29,7 +29,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="test" level="project" />
+    <orderEntry type="library" scope="TEST" name="test" level="project" />
     <orderEntry type="library" exported="" name="main" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="JRuby SDK 1.5.5-p249 facet library" level="application" />
   </component>

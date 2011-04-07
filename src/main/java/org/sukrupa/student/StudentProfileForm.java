@@ -28,6 +28,10 @@ public class StudentProfileForm {
 
     private CommonsMultipartFile imageToUpload;
 
+    @DoNotRemove
+    public StudentProfileForm() {
+    }
+
     public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background, String fatherEducation) {
         this.studentId = studentId;
         this.name = name;
@@ -48,10 +52,6 @@ public class StudentProfileForm {
         this.fatherEducation = fatherEducation;
     }
 
-    @DoNotRemove
-    public StudentProfileForm() {
-    }
-
     public String getStudentId() {
         return studentId;
     }
@@ -68,11 +68,11 @@ public class StudentProfileForm {
         return getDateOfBirth();
     }
 
-    public CommonsMultipartFile getFileData() {
+    public CommonsMultipartFile getImageToUpload() {
         return imageToUpload;
     }
 
-    public void setFileData(CommonsMultipartFile imageToUpload) {
+    public void setImageToUpload(CommonsMultipartFile imageToUpload) {
         this.imageToUpload = imageToUpload;
     }
 
