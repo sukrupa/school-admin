@@ -136,9 +136,10 @@ public class WebServer {
 
         ConstraintMapping events = createConstaintMapping(constraint, "/events/*");
         ConstraintMapping students = createConstaintMapping(constraint, "/students/*");
+        ConstraintMapping admin = createConstaintMapping(constraint, "/admin/*");
 
 
-        securityHandler.setConstraintMappings(Arrays.asList(events, students));
+        securityHandler.setConstraintMappings(Arrays.asList(events, students, admin));
 
         servletHandler.setSecurityHandler(securityHandler);
     }

@@ -1,5 +1,5 @@
-Tags:in-progress
-Preconditions:Log in,Log out afterwards,Navigate to admin page
+Tags:
+Preconditions:navigate to admin page,log in,log out afterwards
 Admin Page Workflow:
 #Given I am on the admin page
 #When I click the perform annual class update link

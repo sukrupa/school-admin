@@ -5,3 +5,11 @@ Annual Update Workflow:
 #Then there should be an information message
 #When I click the update students button
 #Then I should be taken to the success page
+#When I go to student list
+#And I visit the profile of "Chandana"
+#Then it should have the status "existing"
+#And it should have the class "2 Std"
+#When I go to student list
+#And I visit the profile of "Haripriya"
+#Then it should have the status "existing"
+#And it should have the class "10 Std"
