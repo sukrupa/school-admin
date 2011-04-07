@@ -97,7 +97,7 @@ public class StudentRepositoryTest {
             .studentId("556677").name("Toy")
             .studentClass("4th grade").dateOfBirth(new LocalDate(1987, 10, 1))
             .gender("Male").talents(music, sport)
-            .status(StudentStatus.NOT_SET)
+            .status(StudentStatus.ALUMNI)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();

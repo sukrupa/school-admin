@@ -147,7 +147,7 @@
             </td>
             <td>
                 <select name="status">
-                   $rest(formhelper.statuses):{
+                   $formhelper.statuses:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>
