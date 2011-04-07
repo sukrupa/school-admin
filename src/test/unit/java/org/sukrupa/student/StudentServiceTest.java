@@ -186,6 +186,7 @@ public class StudentServiceTest {
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.EXISTING_STUDENT).build();
+
         when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
