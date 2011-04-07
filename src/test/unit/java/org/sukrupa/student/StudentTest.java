@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import static junit.framework.Assert.assertEquals;
@@ -113,6 +114,23 @@ public class StudentTest {
     public void shouldHaveStudentIDAsUppercase() {
         Student student = new StudentBuilder().studentId("sk123").build();
         assertThat(student.getStudentId(), is("SK123"));
+    }
+
+    @Test
+    public void shouldUpdateStudent()
+    {
+        Student student = new StudentBuilder().build();
+
+        StudentProfileForm studentProfileForm = new StudentProfileForm();
+        studentProfileForm.setFather("someFather");
+        studentProfileForm.setMother("someMother");
+        studentProfileForm.setDateOfBirth("01-02-2005");
+        studentProfileForm.setStatus("Existing Student");
+        student.updateFrom( studentProfileForm, Collections.EMPTY_SET );
+
+        assertThat(student.getFather().getName(), is("someFather"));
+        assertThat(student.getMother().getName(), is("someMother"));
+
     }
 
     private Student promoteStudent(String studentClass) {

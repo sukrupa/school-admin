@@ -34,6 +34,6 @@ public class EditStudent {
 	}
 
 	public void click(String label) throws Exception {
-		browser.submit(label);
+		browser.button(label).click();
 	}
 }

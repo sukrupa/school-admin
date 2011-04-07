@@ -17,11 +17,15 @@ public class EditParentsDetail {
 	}
 
 	public void enterInTheFieldForThe(String caregiverName, String fieldName, String caregiver) throws Exception {
-		browser.textbox(fieldName).setValue(caregiverName);	
+		browser.textbox(fieldName).near(browser.div(caregiver)).setValue(caregiverName);	
 	}
 
-	public void verifyThatFieldIs(String fieldName, String fieldValue) throws Exception {
-		assertEquals(fieldValue, browser.textbox(fieldName).getText());
+	public void verifyThatFieldIs(String fieldLabel, String fieldValue) throws Exception {
+		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldLabel)).getText());
+	}
+
+	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
+		assertEquals("Student:", browser.title() );
 	}
 
 }

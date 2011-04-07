@@ -126,14 +126,17 @@
 
             <div id="parentDetails">
                 <h2>Parent Details</h2>
-                <div class="updateEntry">
-                    <div class="label">Father's Name</div>
-                    <input type="text" name="father" value="$student.father$" class="updateValue"></input>
+                <div id="fatherDetails">
+                    <div class="updateEntry">
+                        <div class="label">Father's Name</div>
+                        <input type="text" name="father" value="$student.father.name$" class="updateValue"></input>
+                    </div>
                 </div>
-
-                <div class="updateEntry">
-                    <div class="label">Mother's Name</div>
-                    <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
+                <div id="motherDetails">
+                    <div class="updateEntry">
+                        <div class="label">Mother's Name</div>
+                        <input type="text" name="mother" value="$student.mother.name$" class="updateValue"></input>
+                    </div>
                 </div>
             </div>
         </div>

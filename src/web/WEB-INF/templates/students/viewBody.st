@@ -59,12 +59,12 @@
 
             <div class="entry">
                 <div class="label">Father's Name</div>
-                <div class="value">$student.father$</div>
+                <div class="value">$student.father.name$</div>
             </div>
 
             <div class="entry">
                 <div class="label">Mother's Name</div>
-                <div class="value">$student.mother$</div>
+                <div class="value">$student.mother.name$</div>
             </div>
 
             <div class="entry">
