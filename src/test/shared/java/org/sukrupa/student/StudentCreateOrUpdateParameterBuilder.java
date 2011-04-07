@@ -19,7 +19,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String father;
     private String mother;
     private Set<String> talents;
-    private StudentStatus status = StudentStatus.NOT_SET;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private String disciplinary;
     private String performance;
     private String background;

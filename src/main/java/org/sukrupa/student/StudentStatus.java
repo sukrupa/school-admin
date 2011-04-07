@@ -2,7 +2,7 @@ package org.sukrupa.student;
 
 
 public enum StudentStatus {
-    NOT_SET(0, ""), DROPOUT(1, "Dropout"), EXISTING_STUDENT(2, "Existing Student"), ALUMNI(3, "Alumni");
+    EXISTING_STUDENT(0, "Existing Student"), DROPOUT(1, "Dropout"), ALUMNI(2, "Alumni");
 
     private String name;
     private int id;
