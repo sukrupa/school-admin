@@ -21,8 +21,7 @@ public class StudentService {
     private SystemEventLogRepository systemEventLogRepository;
 
     @DoNotRemove
-    StudentService(SystemEventLogRepository systemEventLogRepository) {
-        this.systemEventLogRepository = systemEventLogRepository;
+    StudentService() {
     }
 
     @Autowired
@@ -87,7 +86,7 @@ public class StudentService {
 
     public void promoteStudentsToNextClass() {
         SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find("annual class update");
-        if (annualClassUpdateEventLog != null && happenedThisYear(annualClassUpdateEventLog)) {
+        if (annualClassUpdateEventLog == null || !happenedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
 
             for (Student student : students) {
@@ -99,6 +98,6 @@ public class StudentService {
     }
 
     private boolean happenedThisYear(SystemEventLog annualClassUpdateEventLog) {
-        return annualClassUpdateEventLog.lastHappened().year() != new LocalDate().year();
+        return annualClassUpdateEventLog.lastHappened().getValue(0) == Date.now().year();
     }
 }

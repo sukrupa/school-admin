@@ -119,7 +119,7 @@ public class StudentTest {
 
     @Test
     public void shouldNotPromoteIfDropout(){
-       Student dropoutStudent = new StudentBuilder().studentClass("5 Std").status(StudentStatus.INACTIVE).build();
+       Student dropoutStudent = new StudentBuilder().studentClass("5 Std").status(StudentStatus.DROPOUT).build();
 
        dropoutStudent.promote();
        assertEquals("5 Std", dropoutStudent.getStudentClass());

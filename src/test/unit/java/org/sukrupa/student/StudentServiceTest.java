@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.sukrupa.platform.date.DateManipulation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.hasNote;
@@ -56,7 +58,7 @@ public class StudentServiceTest {
     public void setUp() throws Exception {
         initMocks(this);
         service = new StudentService(studentRepository, talentRepository, null, studentFactory, systemEventLogRepository);
-        freezeDateToMidnightOn_31_12_2010();
+        freezeDateToMidnightOn(30,12,2011);
     }
 
     @After
@@ -122,7 +124,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void shouldNotLetUsPromoteStudentsTwice() {
+    public void shouldNotLetUsPromoteStudentsTwiceInOneYear() {
         // given
         Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
 
@@ -141,6 +143,24 @@ public class StudentServiceTest {
         assertEquals("3 Std", Sahil.getStudentClass());
     }
 
+     @Test
+    public void shouldNotLetUsPromoteStudentsIfItWasDoneThisYear() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+
+        assertEquals("2 Std", Sahil.getStudentClass());
+    }
+
+
     @Test
     public void shouldLetUsPromoteStudentsIfItWasDoneLastDoneLastYear() {
         // given
@@ -154,8 +174,6 @@ public class StudentServiceTest {
         when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
 
         service.promoteStudentsToNextClass();
-
-        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
 
         assertEquals("3 Std", Sahil.getStudentClass());
     }

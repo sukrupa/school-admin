@@ -279,7 +279,7 @@ public class Student {
 
 
     public void promote() {
-        if(this.status != StudentStatus.INACTIVE && this.status != StudentStatus.ALUMNI) {
+        if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
             StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
             StudentClass classAfterPromotion = classBeforePromotion.next();
             this.studentClass = classAfterPromotion.displayName();
