@@ -30,4 +30,6 @@ public class AdminControllerTest {
 
         verify(studentService).promoteStudentsToNextClass();
     }
+
+
 }

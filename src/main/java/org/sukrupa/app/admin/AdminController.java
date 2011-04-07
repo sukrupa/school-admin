@@ -33,6 +33,7 @@ public class AdminController {
     public String performAnnualUpdate(){
         studentService.promoteStudentsToNextClass();
         return "redirect:annualupdate/success";
+
     }
 
     @RequestMapping(value = "annualupdate/success",  method=GET)

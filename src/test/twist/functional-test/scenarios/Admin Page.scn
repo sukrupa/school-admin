@@ -1,4 +1,4 @@
-Tags:in progress
+Tags:in-progress
 Preconditions:Log in,Log out afterwards,Navigate to admin page
 Admin Page Workflow:
 #Given I am on the admin page
