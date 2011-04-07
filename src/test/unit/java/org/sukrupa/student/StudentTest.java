@@ -106,8 +106,31 @@ public class StudentTest {
         assertEquals("UKG",promoteStudent("LKG").getStudentClass());
         assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
         assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
-        assertEquals("Graduated",promoteStudent("10 Std").getStudentClass());
-        assertEquals("Graduated",promoteStudent("Graduated").getStudentClass());
+    }
+
+    @Test
+    public void shouldPromoteAStudentOutOfTheSchool() {
+        Student tenthStandardStudent = new StudentBuilder().studentClass("10 Std").build();
+
+        tenthStandardStudent.promote();
+
+        assertEquals(StudentStatus.ALUMNI, tenthStandardStudent.getStatus());
+        assertEquals("10 Std", tenthStandardStudent.getStudentClass());
+    }
+
+    @Test
+    public void shouldNotPromoteIfDropout(){
+       Student dropoutStudent = new StudentBuilder().studentClass("5 Std").status(StudentStatus.DROPOUT).build();
+
+       dropoutStudent.promote();
+       assertEquals("5 Std", dropoutStudent.getStudentClass());
+    }
+
+    @Test
+    public void shouldNotChangeAlumni(){
+        Student alumnus = new StudentBuilder().status(StudentStatus.ALUMNI).build();
+        alumnus.promote();
+        assertEquals(alumnus.getStatus(), StudentStatus.ALUMNI);
     }
 
     @Test

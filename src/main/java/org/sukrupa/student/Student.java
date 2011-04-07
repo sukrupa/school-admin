@@ -293,24 +293,15 @@ public class Student {
 
 
     public void promote() {
+        if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
+            StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
+            StudentClass classAfterPromotion = classBeforePromotion.next();
+            this.studentClass = classAfterPromotion.displayName();
 
-        if(this.studentClass.equals("Graduated")){
-           this.studentClass = this.studentClass;
-        }else if(this.studentClass.equals("UKG")){
-          this.studentClass = "1 Std";
-       }else if(this.studentClass.equals("LKG")) {
-                  this.studentClass = "UKG";
-       }else if(this.studentClass.equals("Preschool")){
-           this.studentClass = "LKG";
-       }else if(this.studentClass.equals("10 Std")){
-           this.studentClass = "Graduated";
-       }
-       else{
-            int studentClassInt = Integer.parseInt(this.studentClass.substring(0,1));
-            studentClassInt++;
-            this.studentClass = this.studentClass.replace(this.studentClass.substring(0,1), Integer.toString(studentClassInt));
+            if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
+                this.status =  StudentStatus.ALUMNI;
+            }
         }
-
     }
 
 

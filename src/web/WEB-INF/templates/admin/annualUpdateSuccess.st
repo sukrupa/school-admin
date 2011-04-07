@@ -1,0 +1,1 @@
+$layout(body=admin/annualUpdateSuccessBody(), title="Updated all students successfully")$

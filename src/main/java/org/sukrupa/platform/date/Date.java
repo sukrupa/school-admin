@@ -98,4 +98,7 @@ public class Date implements Serializable {
     }
 
 
+    public int year() {
+        return jodaTime.getYear();
+    }
 }
