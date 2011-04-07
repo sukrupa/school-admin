@@ -34,9 +34,13 @@ public class Student {
 
     private String caste;
 
-    private String mother;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mother_id", referencedColumnName = "id")
+    private Caregiver mother;
 
-    private String father;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "father_id", referencedColumnName = "id")
+    private Caregiver father;
 
     @Column(name = "SUB_CASTE")
     private String subCaste;
@@ -89,7 +93,7 @@ public class Student {
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
+                   Caregiver father, Caregiver mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
                    StudentStatus status, String disciplinary, String performance, Profile profile) {
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -179,11 +183,11 @@ public class Student {
         return studentClass;
     }
 
-    public String getMother() {
+    public Caregiver getMother() {
         return mother;
     }
 
-    public String getFather() {
+    public Caregiver getFather() {
         return father;
     }
 
@@ -266,37 +270,37 @@ public class Student {
 		this.caste = studentUpdateParameters.getCaste();
 		this.subCaste = studentUpdateParameters.getSubCaste();
 		this.communityLocation = studentUpdateParameters.getCommunityLocation();
-		this.father = studentUpdateParameters.getFather();
-		this.mother = studentUpdateParameters.getMother();
         this.performance = studentUpdateParameters.getPerformance();
         this.disciplinary = studentUpdateParameters.getDisciplinary();
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+
+        if (studentUpdateParameters.getFather() != null) {
+            this.father = new Caregiver();
+            this.father.setName(studentUpdateParameters.getFather());
+        }
+
+        if (studentUpdateParameters.getFather() != null) {
+            this.mother = new Caregiver();
+            this.mother.setName(studentUpdateParameters.getMother());
+        }
+
         setBackground(studentUpdateParameters.getBackground());
 	}
 
 
 
     public void promote() {
+        if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
+            StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
+            StudentClass classAfterPromotion = classBeforePromotion.next();
+            this.studentClass = classAfterPromotion.displayName();
 
-        if(this.studentClass.equals("Graduated")){
-           this.studentClass = this.studentClass;
-        }else if(this.studentClass.equals("UKG")){
-          this.studentClass = "1 Std";
-       }else if(this.studentClass.equals("LKG")) {
-                  this.studentClass = "UKG";
-       }else if(this.studentClass.equals("Preschool")){
-           this.studentClass = "LKG";
-       }else if(this.studentClass.equals("10 Std")){
-           this.studentClass = "Graduated";
-       }
-       else{
-            int studentClassInt = Integer.parseInt(this.studentClass.substring(0,1));
-            studentClassInt++;
-            this.studentClass = this.studentClass.replace(this.studentClass.substring(0,1), Integer.toString(studentClassInt));
+            if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
+                this.status =  StudentStatus.ALUMNI;
+            }
         }
-
     }
 
 
@@ -342,13 +346,13 @@ public class Student {
         }
 
         @Override
-        public String getMother() {
-            return "";
+        public Caregiver getMother() {
+            return null;
         }
 
         @Override
-        public String getFather() {
-            return "";
+        public Caregiver getFather() {
+            return null;
         }
 
         @Override

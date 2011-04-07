@@ -33,6 +33,10 @@ public class EditStudent {
 		assertEquals(string1,browser.textarea("edit-disciplinary").text());
 	}
 
+	public void click(String label) throws Exception {
+		browser.button(label).click();
+	}
+
 	public void verifyThatStatusIs(String status) throws Exception {
 		assertEquals(status,browser.byId("status").selectedText());
 	}

@@ -15,4 +15,5 @@ $students/studentForm()$
  <div id="noteTooLongMessage" class="errorMessages"></div>
 
 $studentNotes()$
+
 </div>
