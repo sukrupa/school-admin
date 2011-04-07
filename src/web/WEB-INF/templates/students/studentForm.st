@@ -77,19 +77,7 @@
                     </select>
                 </div>
 
-
-
                 <div class="updateEntry">
-                    <div class="label">Father's Name</div>
-                    <input type="text" name="father" value="$student.father$" class="updateValue"></input>
-                </div>
-
-                <div class="updateEntry">
-                    <div class="label">Mother's Name</div>
-                    <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
-                </div>
-
-                 <div class="updateEntry">
                     <div class="label-header">Background</div>
                     <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
                 </div>
@@ -133,6 +121,19 @@
                         </input>
                     </div>
                     }$
+                </div>
+            </div>
+
+            <div id="parentDetails">
+                <h2>Parent Details</h2>
+                <div class="updateEntry">
+                    <div class="label">Father's Name</div>
+                    <input type="text" name="father" value="$student.father$" class="updateValue"></input>
+                </div>
+
+                <div class="updateEntry">
+                    <div class="label">Mother's Name</div>
+                    <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
                 </div>
             </div>
         </div>

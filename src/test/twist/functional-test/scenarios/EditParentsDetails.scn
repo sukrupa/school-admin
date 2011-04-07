@@ -1,0 +1,10 @@
+Tags:in-progress
+Preconditions:Navigte to Student Profile ,Log In,	Log out afterwards
+Edit Parents Detail, Edit Student:
+#Click on "Bhavani" student record
+#Click on Edit Button
+#Enter "My father" in the "father" field for the "father"
+#Enter "My mother" in the "mother" field for the "mother"
+#Click "Save"
+#Verify that "father" field is "My father"
+#Verify that "mother" field is "My mother"
