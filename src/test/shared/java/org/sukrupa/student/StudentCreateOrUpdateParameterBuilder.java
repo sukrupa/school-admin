@@ -23,6 +23,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String disciplinary;
     private String performance;
     private String background;
+    private String fatherEducation;
 
     public StudentCreateOrUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -93,6 +94,11 @@ public class StudentCreateOrUpdateParameterBuilder {
         return this;
     }
 
+    public StudentCreateOrUpdateParameterBuilder fatherEducation(String fatherEducation) {
+        this.fatherEducation = fatherEducation;
+        return this;
+    }
+
     public StudentCreateOrUpdateParameterBuilder mother(String mother) {
         this.mother = mother;
         return this;
@@ -104,7 +110,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     }
 
     public StudentProfileForm build() {
-        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance, background);
+        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance, background, fatherEducation);
     }
 
 

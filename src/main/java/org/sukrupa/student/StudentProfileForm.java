@@ -24,6 +24,7 @@ public class StudentProfileForm {
     private String disciplinary;
     private String performance;
     private String background;
+    private String fatherEducation;
 
     private CommonsMultipartFile imageToUpload;
 
@@ -31,7 +32,7 @@ public class StudentProfileForm {
     public StudentProfileForm() {
     }
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background, String fatherEducation) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -48,6 +49,7 @@ public class StudentProfileForm {
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.background = background;
+        this.fatherEducation = fatherEducation;
     }
 
     public String getStudentId() {
@@ -188,5 +190,13 @@ public class StudentProfileForm {
 
     public String getBackground() {
         return this.background;
+    }
+
+    public String getFatherEducation() {
+        return fatherEducation;
+    }
+
+    public void setFatherEducation(String fatherEducation) {
+        this.fatherEducation = fatherEducation;
     }
 }

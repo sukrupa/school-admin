@@ -279,6 +279,7 @@ public class Student {
         if (studentUpdateParameters.getFather() != null) {
             this.father = new Caregiver();
             this.father.setName(studentUpdateParameters.getFather());
+            this.father.setEducation(studentUpdateParameters.getFatherEducation());
         }
 
         if (studentUpdateParameters.getFather() != null) {

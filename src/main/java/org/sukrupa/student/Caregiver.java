@@ -18,9 +18,11 @@ public class Caregiver {
     }
 
     private String name;
+    private String education;
 
-    public Caregiver(String name) {
+    public Caregiver(String name, String education) {
         this.name = name;
+        this.education = education;
     }
 
     public String getName() {
@@ -29,5 +31,13 @@ public class Caregiver {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getEducation() {
+        return education;
     }
 }

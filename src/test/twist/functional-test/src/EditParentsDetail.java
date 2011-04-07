@@ -20,12 +20,12 @@ public class EditParentsDetail {
 		browser.textbox(fieldName).near(browser.div(caregiver)).setValue(caregiverName);	
 	}
 
-	public void verifyThatFieldIs(String fieldLabel, String fieldValue) throws Exception {
-		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldLabel)).getText());
-	}
-
 	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
 		assertEquals("Student:", browser.title() );
+	}
+
+	public void verifyThatTheFieldNameInIs(String fieldName, String divName, String fieldValue) throws Exception {
+		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldName)).in(browser.div(divName)).getText());
 	}
 
 }

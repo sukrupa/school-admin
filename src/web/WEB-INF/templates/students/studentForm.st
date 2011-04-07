@@ -96,7 +96,7 @@
             </div>
 
             <div class="editStatus">
-                <div class="statusLabel">Student Status</div>
+                <div class="statusLabel">Student Status<span class="mandatory">*</span></div>
                 <select name="status" id="status" class="updateStatusValue">
                     $formhelper.statusesDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
@@ -130,6 +130,10 @@
                     <div class="updateEntry">
                         <div class="label">Father's Name</div>
                         <input type="text" name="father" value="$student.father.name$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="fatherEducation" value="$student.father.education$" class="updateValue"></input>
                     </div>
                 </div>
                 <div id="motherDetails">

@@ -5,7 +5,9 @@ Edit Parents Detail, Edit Student:
 #Click on Edit Button
 #Enter "My father" in the "father" field for the "fatherDetails"
 #Enter "My mother" in the "mother" field for the "motherDetails"
+#Enter "Education" in the "fatherEducation" field for the "fatherDetails"
 #Click "Save"
 #Verift that we are in the view student page
-#Verify that "Father's Name" field is "My father"
-#Verify that "Mother's Name" field is "My mother"
+#Verify that the field name "Name" in "fatherDetails" is "My father"
+#Verify that the field name "Education" in "fatherDetails" is "Education"
+#Verify that the field name "Name" in "motherDetails" is "My mother"
