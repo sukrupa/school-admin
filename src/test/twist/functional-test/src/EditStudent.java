@@ -40,4 +40,9 @@ public class EditStudent {
 	public void verifyThatStatusIs(String status) throws Exception {
 		assertEquals(status,browser.byId("status").selectedText());
 	}
+
+	public void verifyThatSponsoredIs(String sponsored) throws Exception {
+		assertEquals(sponsored,browser.byId("sponsored").selectedText());
+
+	}
 }

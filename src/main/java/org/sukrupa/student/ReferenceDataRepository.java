@@ -25,7 +25,9 @@ public class ReferenceDataRepository {
     private final int AGES_TO = 20;
     private final int AGES_FROM = 2;
     private final List<String> STATUSES = Arrays.asList("Existing Student", "Dropout", "Alumni");
-    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES);
+//    private final List<String> SPONSORED = Arrays.asList("No", "Yes");
+    private final boolean SPONSORED = false;
+    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, SPONSORED);
 
 
     public ReferenceData getReferenceData() {
