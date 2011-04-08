@@ -1,0 +1,1 @@
+ALTER TABLE Student ADD COLUMN guardian_id int foreign key references Caregiver(id);
