@@ -48,5 +48,14 @@ public class SystemEventLogRepositoryTest {
         assertThat(systemEventLog, is(annualUpdate));
     }
 
+    @Test
+    public void shouldCreateLogs(){
+        SystemEventLog newLog = new SystemEventLog("new log",new LocalDate(2011,01,01));
+        repository.put(newLog);
+        assertThat(repository.find("new log"),is(newLog));
+
+    }
+
+
 
 }

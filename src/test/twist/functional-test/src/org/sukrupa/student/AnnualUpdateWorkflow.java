@@ -57,4 +57,8 @@ public class AnnualUpdateWorkflow {
 		browser.navigateTo("http://localhost:8080/students/?name=&ageFrom=*&ageTo=*&studentClass=*&gender=*&religion=*&caste=*&communityLocation=*&status=Dropout");
 	}
 
+	public void andIShouldSeeADateOfLastUpdate() throws Exception {
+	
+	}
+
 }
