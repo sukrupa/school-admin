@@ -218,7 +218,7 @@ public class Student {
 
     public String getImageLink() {
         if (imageLink==null){
-            return PLACEHOLDER_IMAGE;
+            return studentId;
         } else {
         return imageLink;
         }
