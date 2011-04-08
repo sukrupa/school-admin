@@ -148,8 +148,15 @@
                              }$
                         </select>
                     </div>
-
-                </div>
+                    <div class="updateEntry">
+                        <div class="label">Marital Status</div>
+                        <select name="father.maritalStatus">
+                             $formhelper.maritalStatusesDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                     </div>
+                </div> <!-- end father -->
                 <div id="motherDetails">
                     <div class="labelHead">Mother</div>
                     <div class="updateEntry">
@@ -164,14 +171,24 @@
                         <div class="label">Contact</div>
                         <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
                     </div>
-                <div class="updateEntry">
+                    <div class="updateEntry">
                         <div class="label">Occupation</div>
                         <select name="mother.occupation">
                              $formhelper.occupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
                         </select>
-                        </div>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Marital Status</div>
+                        <select name="mother.maritalStatus">
+                             $formhelper.maritalStatusesDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+                 </div> <!-- end mother -->
+
                 </div>
             </div>
         </div>

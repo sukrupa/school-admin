@@ -29,7 +29,7 @@ public class EditParentsDetail {
 		assertEquals(value, browser.byId(id).getText());
 	}
 
-	public void chooseInTheOccupationListOf(String occupation, String fieldName) throws Exception {
+	public void chooseInTheListOf(String occupation, String fieldName) throws Exception {
 		browser.select(fieldName).choose(occupation);
 	}
 

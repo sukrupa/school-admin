@@ -14,3 +14,7 @@
     <div class="label">Occupation</div>
     <div class="value" id="$label$Occupation">$caregiver.occupation$</div>
 </div>
+<div class="entry">
+    <div class="label">Marital Status</div>
+    <div class="value" id="$label$MaritalStatus">$caregiver.maritalStatus$</div>
+</div>

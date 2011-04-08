@@ -48,7 +48,7 @@ public class StudentEditFormHelper {
     }
 
     public List<DropDownElement> getOccupationsDropDownList() {
-        if (student.getFather() == null) {
+        if (student.getFather() == null || student.getMother() == null) {
             List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
             for (String value : referenceData.getOccupations()) {
                 dropDownElements.add(new DropDownElement(value, false));
@@ -56,6 +56,18 @@ public class StudentEditFormHelper {
             return dropDownElements;
         } else {
             return createDropDownList(referenceData.getOccupations(), student.getFather().getOccupation());
+        }
+    }
+
+    public List<DropDownElement> getMaritalStatusesDropDownList() {
+        if (student.getFather() == null || student.getMother() == null) {
+            List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
+            for (String value : referenceData.getMaritalStatuses()) {
+                dropDownElements.add(new DropDownElement(value, false));
+            }
+            return dropDownElements;
+        } else {
+            return createDropDownList(referenceData.getMaritalStatuses(), student.getFather().getMaritalStatus());
         }
     }
 

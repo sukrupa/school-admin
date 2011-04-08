@@ -282,6 +282,7 @@ public class Student {
             this.father.setEducation(studentUpdateParameters.getFather().getEducation());
             this.father.setContact(studentUpdateParameters.getFather().getContact());
             this.father.setOccupation(studentUpdateParameters.getFather().getOccupation());
+            this.father.setMaritalStatus(studentUpdateParameters.getFather().getMaritalStatus());
         }
 
         if (studentUpdateParameters.getMother() != null) {
@@ -290,6 +291,7 @@ public class Student {
             this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
             this.mother.setContact(studentUpdateParameters.getMother().getContact());
             this.mother.setOccupation(studentUpdateParameters.getMother().getOccupation());
+            this.mother.setMaritalStatus(studentUpdateParameters.getMother().getMaritalStatus());
         }
 
         setBackground(studentUpdateParameters.getBackground());
