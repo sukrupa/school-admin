@@ -3,7 +3,7 @@ findSukrupaServerProcess() {
     PID=""
     case $(uname) in
       Darwin | Linux)
-        PID=$(ps aux | grep java | grep org.sukrupa | grep -v ant-launcher.jar | awk '{ print $2 }')
+        PID=$(ps aux | grep java | grep school-admin | grep -v org.hsqldb.server.Server | grep -v ant-launcher.jar | awk '{ print $2 }')
         ;;
       *)
        echo "Unrecognised OS, supported OS's are MacOSX, Linux & SunOS (Solaris)"
