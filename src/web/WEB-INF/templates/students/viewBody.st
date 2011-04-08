@@ -93,13 +93,13 @@
 
             <img src="/application/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
 
-             <div id="sponsored">
-                <div class="sponsoredLabel">Sponsored?</div>
-                 $if(it.sponsored)$
-                 <input type="checkbox" checked></input>
+             <div class="entry">
+                <div class="label">Sponsored?</div>
+                <div>  $if(student.sponsored)$
+                 <input type="checkbox" checked disabled></input>
                  $else$
-                 <input type="checkbox"></input>
-                 $endif$
+                 <input type="checkbox" disabled></input>
+                 $endif$</div>
             </div>
 
 

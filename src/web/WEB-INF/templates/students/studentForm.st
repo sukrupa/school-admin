@@ -112,7 +112,7 @@
 
              <div class="editStatus">
                 <div class="sponsoredLabel">Sponsored?</div>
-                <input type="checkbox" name="sponsored" id="sponsored" class="updateSponsoredValue" value="$student.sponsored$" checked=$student.sponsored$>
+                <input type="checkbox" name="sponsored" id="sponsored" class="updateSponsoredValue" value="true" $if (student.sponsored)$ checked $endif$>
             </div>
 
             <div class="talentsList">

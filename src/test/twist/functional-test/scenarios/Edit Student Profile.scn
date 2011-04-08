@@ -3,8 +3,13 @@ Preconditions:Navigte to Student Profile,Log in,Log out afterwards
 Edit Student:
 #Click on "Bhavani" student record
 #Click on Edit Button
+#Click on sponsored checkbox 
+#And save the record
+#Go to students page
+#Click on "Bhavani" student record
+#Click on Edit Button
 #Verify that background is "Born in India"
 #Verify that performance is "A+"
 #Verify that disciplinary is "Excellent"
 #Verify that status is "Existing Student"
-#Verify that sponsored is "No"
+#Verify that sponsored is checked

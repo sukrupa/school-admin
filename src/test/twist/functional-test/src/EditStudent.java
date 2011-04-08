@@ -41,8 +41,21 @@ public class EditStudent {
 		assertEquals(status,browser.byId("status").selectedText());
 	}
 
-	public void verifyThatSponsoredIs(String sponsored) throws Exception {
-		assertEquals(sponsored,browser.byId("sponsored").selectedText());
+	public void verifyThatSponsoredIsChecked() throws Exception {
+		assertEquals(true, browser.byId("sponsored").checked());
 
+	}
+
+	public void clickOnSponsoredCheckbox() throws Exception {
+		browser.checkbox("sponsored").click();
+	
+	}
+
+	public void andSaveTheRecord() throws Exception {
+		browser.button("save").click();
+	}
+
+	public void goToStudentsPage() throws Exception {
+		browser.navigateTo("http://localhost:8080/students");
 	}
 }
