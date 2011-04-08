@@ -281,13 +281,15 @@ public class Student {
             this.father.setName(studentUpdateParameters.getFather().getName());
             this.father.setEducation(studentUpdateParameters.getFather().getEducation());
             this.father.setContact(studentUpdateParameters.getFather().getContact());
+            this.father.setOccupation(studentUpdateParameters.getFather().getOccupation());
         }
 
-        if (studentUpdateParameters.getFather() != null) {
+        if (studentUpdateParameters.getMother() != null) {
             this.mother = new Caregiver();
             this.mother.setName(studentUpdateParameters.getMother().getName());
             this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
             this.mother.setContact(studentUpdateParameters.getMother().getContact());
+            this.mother.setOccupation(studentUpdateParameters.getMother().getOccupation());
         }
 
         setBackground(studentUpdateParameters.getBackground());

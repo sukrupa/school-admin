@@ -9,6 +9,7 @@ Edit Parents Detail, Edit Student:
 #Enter "Mother Education" in the "mother.education"
 #Enter "123456" in the "father.contact"
 #Enter "1234567" in the "mother.contact"
+#Choose "Bartender" in the occupation list of "father.occupation"
 #Click "Save"
 #Verift that we are in the view student page
 #Verify that the field name "fatherName" is "My father"
@@ -17,3 +18,4 @@ Edit Parents Detail, Edit Student:
 #Verify that the field name "motherEducation" is "Mother Education"
 #Verify that the field name "fatherContact" is "123456"
 #Verify that the field name "motherContact" is "1234567"
+#Verify that the field name "fatherOccupation" is "Bartender"

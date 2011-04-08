@@ -140,6 +140,15 @@
                         <div class="label">Contact</div>
                         <input type="text" name="father.contact" value="$student.father.contact$" class="updateValue"></input>
                     </div>
+                    <div class="updateEntry">
+                        <div class="label">Occupation</div>
+                        <select name="father.occupation">
+                             $formhelper.occupationsDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+
                 </div>
                 <div id="motherDetails">
                     <div class="labelHead">Mother</div>
@@ -155,6 +164,14 @@
                         <div class="label">Contact</div>
                         <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
                     </div>
+                <div class="updateEntry">
+                        <div class="label">Occupation</div>
+                        <select name="mother.occupation">
+                             $formhelper.occupationsDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                        </div>
                 </div>
             </div>
         </div>

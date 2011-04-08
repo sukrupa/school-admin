@@ -14,6 +14,7 @@ public class Caregiver {
     @GeneratedValue
     private long id;
 
+
     @DoNotRemove
     Caregiver() {
     }
@@ -21,14 +22,10 @@ public class Caregiver {
     private String name;
     private String education;
 
+    private String occupation = "";
+
     @Column(name = "CONTACT_NUMBER")
     private String contact;
-
-    public Caregiver(String name, String education, String contact) {
-        this.name = name;
-        this.education = education;
-        this.contact = contact;
-    }
 
     public String getName() {
         return name;
@@ -52,5 +49,13 @@ public class Caregiver {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 }

@@ -47,6 +47,18 @@ public class StudentEditFormHelper {
         return createDropDownList(referenceData.getStatuses(), student.getStatus().getName());
     }
 
+    public List<DropDownElement> getOccupationsDropDownList() {
+        if (student.getFather() == null) {
+            List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
+            for (String value : referenceData.getOccupations()) {
+                dropDownElements.add(new DropDownElement(value, false));
+            }
+            return dropDownElements;
+        } else {
+            return createDropDownList(referenceData.getOccupations(), student.getFather().getOccupation());
+        }
+    }
+
     private List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {
         List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
         for (String value : values) {
