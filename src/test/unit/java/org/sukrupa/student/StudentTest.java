@@ -150,8 +150,14 @@ public class StudentTest {
         Student student = new StudentBuilder().build();
 
         StudentProfileForm studentProfileForm = new StudentProfileForm();
-        studentProfileForm.setFather("someFather");
-        studentProfileForm.setMother("someMother");
+        Caregiver father = new Caregiver();
+        father.setName("someFather");
+
+        Caregiver mother = new Caregiver();
+        mother.setName("someMother");
+
+        studentProfileForm.setFather(father);
+        studentProfileForm.setMother(mother);
         studentProfileForm.setDateOfBirth("01-02-2005");
         studentProfileForm.setStatus("Existing Student");
         student.updateFrom( studentProfileForm, Collections.EMPTY_SET );

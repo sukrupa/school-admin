@@ -96,21 +96,11 @@
         <div class="parentDetails">
             <div id="fatherDetails">
                 <div class="labelHead">Father</div>
-                <div class="entry">
-                    <div class="label">Name</div>
-                    <div class="value">$student.father.name$</div>
-                </div>
-                <div class="entry">
-                    <div class="label">Education</div>
-                    <div class="value">$student.father.education$</div>
-                </div>
+                $students/caregiver(caregiver=student.father,label="father")$
             </div>
             <div id="motherDetails">
                 <div class="labelHead">Mother</div>
-                <div class="entry">
-                    <div class="label">Name</div>
-                    <div class="value">$student.mother.name$</div>
-                </div>
+                $students/caregiver(caregiver=student.mother,label="mother")$
             </div>
             <div id="guardianDetails">
                                     Guardian

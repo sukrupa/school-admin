@@ -16,23 +16,18 @@ public class StudentProfileForm {
     private String caste;
     private String subCaste;
     private String communityLocation;
-    private String father;
-    private String mother;
+    private Caregiver father = new Caregiver();
+    private Caregiver mother = new Caregiver();
     private Set<String> talents;
 
     private String status;
     private String disciplinary;
     private String performance;
     private String background;
-    private String fatherEducation;
 
     private CommonsMultipartFile imageToUpload;
 
-    @DoNotRemove
-    public StudentProfileForm() {
-    }
-
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background, String fatherEducation) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Set<String> talents, String status, String disciplinary, String performance, String background) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -49,7 +44,10 @@ public class StudentProfileForm {
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.background = background;
-        this.fatherEducation = fatherEducation;
+    }
+
+    @DoNotRemove
+    public StudentProfileForm() {
     }
 
     public String getStudentId() {
@@ -100,11 +98,11 @@ public class StudentProfileForm {
         return communityLocation;
     }
 
-    public String getFather() {
+    public Caregiver getFather() {
         return father;
     }
 
-    public String getMother() {
+    public Caregiver getMother() {
         return mother;
     }
 
@@ -156,11 +154,11 @@ public class StudentProfileForm {
         this.communityLocation = communityLocation;
     }
 
-    public void setFather(String father) {
+    public void setFather(Caregiver father) {
         this.father = father;
     }
 
-    public void setMother(String mother) {
+    public void setMother(Caregiver mother) {
         this.mother = mother;
     }
 
@@ -190,13 +188,5 @@ public class StudentProfileForm {
 
     public String getBackground() {
         return this.background;
-    }
-
-    public String getFatherEducation() {
-        return fatherEducation;
-    }
-
-    public void setFatherEducation(String fatherEducation) {
-        this.fatherEducation = fatherEducation;
     }
 }
