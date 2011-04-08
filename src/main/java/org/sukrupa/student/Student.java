@@ -277,26 +277,25 @@ public class Student {
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
 
         if (studentUpdateParameters.getFather() != null) {
-            this.father = new Caregiver();
-            this.father.setName(studentUpdateParameters.getFather().getName());
-            this.father.setEducation(studentUpdateParameters.getFather().getEducation());
-            this.father.setContact(studentUpdateParameters.getFather().getContact());
-            this.father.setOccupation(studentUpdateParameters.getFather().getOccupation());
-            this.father.setMaritalStatus(studentUpdateParameters.getFather().getMaritalStatus());
+            this.father = setAll(studentUpdateParameters.getFather(), this.father);
         }
 
         if (studentUpdateParameters.getMother() != null) {
-            this.mother = new Caregiver();
-            this.mother.setName(studentUpdateParameters.getMother().getName());
-            this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
-            this.mother.setContact(studentUpdateParameters.getMother().getContact());
-            this.mother.setOccupation(studentUpdateParameters.getMother().getOccupation());
-            this.mother.setMaritalStatus(studentUpdateParameters.getMother().getMaritalStatus());
+            this.mother = setAll(studentUpdateParameters.getMother(), this.mother);
         }
 
         setBackground(studentUpdateParameters.getBackground());
 	}
 
+    private Caregiver setAll(Caregiver getCaregiver, Caregiver caregiverIn) {
+        caregiverIn = new Caregiver();
+        caregiverIn.setName(getCaregiver.getName());
+        caregiverIn.setEducation(getCaregiver.getEducation());
+        caregiverIn.setContact(getCaregiver.getContact());
+        caregiverIn.setOccupation(getCaregiver.getOccupation());
+        caregiverIn.setMaritalStatus(getCaregiver.getMaritalStatus());
+        return caregiverIn;
+    }
 
 
     public void promote() {
