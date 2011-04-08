@@ -226,7 +226,7 @@ public class Student {
 
     public String getImageLink() {
         if (imageLink==null){
-            return PLACEHOLDER_IMAGE;
+            return studentId;
         } else {
         return imageLink;
         }
@@ -287,12 +287,16 @@ public class Student {
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = new Caregiver();
-            this.father.setName(studentUpdateParameters.getFather());
+            this.father.setName(studentUpdateParameters.getFather().getName());
+            this.father.setEducation(studentUpdateParameters.getFather().getEducation());
+            this.father.setContact(studentUpdateParameters.getFather().getContact());
         }
 
         if (studentUpdateParameters.getFather() != null) {
             this.mother = new Caregiver();
-            this.mother.setName(studentUpdateParameters.getMother());
+            this.mother.setName(studentUpdateParameters.getMother().getName());
+            this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
+            this.mother.setContact(studentUpdateParameters.getMother().getContact());
         }
 
         setBackground(studentUpdateParameters.getBackground());

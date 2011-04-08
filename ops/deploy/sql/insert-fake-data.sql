@@ -1,6 +1,6 @@
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE")
-VALUES (1 , 'Chandru', 'Hindu', 'SC', 'AD', 'Bhuvaneshwari Slum','12345', 'Male', '1994-02-12', '10 Std',1)
+VALUES (1 , 'Chandru', 'Hindu', 'SC', 'AD', 'Bhuvaneshwari Slum','12345', 'Male', '1994-02-12', '9 Std',1)
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS" , "STUDENT_PROFILE")
 VALUES (2 , 'Haripriya', 'Hindu', 'ST', '', 'Buvaneshwari Slum','34545', 'Female', '1997-03-20', '9 Std',2)

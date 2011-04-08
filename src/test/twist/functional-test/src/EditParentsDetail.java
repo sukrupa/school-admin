@@ -1,7 +1,8 @@
 
 // JUnit Assert framework can be used for verification
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import net.sf.sahi.client.Browser;
 
 public class EditParentsDetail {
@@ -16,16 +17,16 @@ public class EditParentsDetail {
 		assertTrue(browser.textbox(fieldName).near(browser.div(fatherField)).exists());
 	}
 
-	public void enterInTheFieldForThe(String caregiverName, String fieldName, String caregiver) throws Exception {
-		browser.textbox(fieldName).near(browser.div(caregiver)).setValue(caregiverName);	
-	}
-
-	public void verifyThatFieldIs(String fieldLabel, String fieldValue) throws Exception {
-		assertEquals(fieldValue, browser.div("value").near(browser.div(fieldLabel)).getText());
-	}
-
 	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
 		assertEquals("Student:", browser.title() );
+	}
+
+	public void enterInThe(String value, String fieldName) throws Exception {
+		browser.textbox(fieldName).setValue(value);
+	}
+
+	public void verifyThatTheFieldNameIs(String id, String value) throws Exception {
+		assertEquals(value, browser.byId(id).getText());
 	}
 
 }

@@ -1,1 +1,1 @@
-$layout(title="Admin")$
+$layout(body=admin/adminPageBody(), title="Admin")$
