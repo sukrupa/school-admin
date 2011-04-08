@@ -1,6 +1,6 @@
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE")
-VALUES (1 , 'Chandru', 'Hindu', 'SC', 'AD', 'Bhuvaneshwari Slum','12345', 'Male', '1994-02-12', '10 Std',1)
+VALUES (1 , 'Chandru', 'Hindu', 'SC', 'AD', 'Bhuvaneshwari Slum','12345', 'Male', '1994-02-12', '9 Std',1)
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS" , "STUDENT_PROFILE")
 VALUES (2 , 'Haripriya', 'Hindu', 'ST', '', 'Buvaneshwari Slum','34545', 'Female', '1997-03-20', '9 Std',2)
@@ -19,6 +19,15 @@ VALUES (6 , 'Armugam', 'Hindu', 'SC', '', 'Cholanaykanahalli','23462', 'Male', '
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS", "STUDENT_DISCIPLINARY", "STUDENT_PERFORMANCE","STUDENT_PROFILE")
 VALUES (7 , 'Bhavani', 'Hindu', 'SC', '', 'Bhuvaneshwari Slum','SK20090080', 'Female', '2004-02-22', 'UKG', 'Excellent', 'A+',7)
+INSERT INTO "PUBLIC"."STUDENT"
+( "ID", "NAME", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STATUS")
+VALUES (8 , 'Balaji', 'Diamond District','12345678', 'Male', '2001-02-22', '10 Std', 2)
+INSERT INTO "PUBLIC"."STUDENT"
+( "ID", "NAME", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS")
+VALUES (9 , 'Peter', 'Diamond District','91767258', 'Male', '2001-02-12', '10 Std')
+INSERT INTO "PUBLIC"."STUDENT"
+( "ID", "NAME", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STATUS")
+VALUES (10 , 'Joel', 'Diamond District','1111', 'Male', '2001-02-12', '3 Std',1)
 
 INSERT INTO "PUBLIC"."TALENT" VALUES ( 1, 'Acting' );
 INSERT INTO "PUBLIC"."TALENT" VALUES ( 2, 'Arts & Crafts' );

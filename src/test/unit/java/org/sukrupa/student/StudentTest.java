@@ -46,14 +46,15 @@ public class StudentTest {
     }
 
     @Test
-    public void shouldHaveDefaultImageLink() {
-        String defaultLink = "placeholderImage";
-        assertThat(student("pat", null).getImageLink(), is(defaultLink));
+    public void shouldReturnStudentIDIfImageLinkIsNull() {
+        Student studentWithNoImageLink = studentWithImage("Balaji",null,"BALAJI");
+        String defaultLink = "BALAJI";
+        assertThat(studentWithNoImageLink.getImageLink(),is(defaultLink));
     }
 
     @Test
     public void shouldReturnImageLinkIfHasImage() {
-        assertThat(studentWithImage("Balaji", "HappyBalaji").getImageLink(), is("HappyBalaji"));
+        assertThat(studentWithImage("Balaji","HappyBalaji", "Balaji").getImageLink(),is("HappyBalaji"));
     }
 
     //load image from class path
@@ -180,8 +181,8 @@ public class StudentTest {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).talents(new HashSet(Arrays.asList(talents))).build();
     }
 
-    private Student studentWithImage(String name, String imageLink) {
-        return new StudentBuilder().name(name).imageLink(imageLink).build();
+    private Student studentWithImage(String name, String imageLink, String Id) {
+        return new StudentBuilder().studentId(Id).name(name).imageLink(imageLink).build();
     }
 
 

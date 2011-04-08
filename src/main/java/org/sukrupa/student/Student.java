@@ -218,7 +218,7 @@ public class Student {
 
     public String getImageLink() {
         if (imageLink==null){
-            return PLACEHOLDER_IMAGE;
+            return studentId;
         } else {
         return imageLink;
         }
@@ -300,11 +300,13 @@ public class Student {
     public void promote() {
         if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
             StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
-            StudentClass classAfterPromotion = classBeforePromotion.next();
-            this.studentClass = classAfterPromotion.displayName();
+            if(classBeforePromotion != null){
+                StudentClass classAfterPromotion = classBeforePromotion.next();
+                this.studentClass = classAfterPromotion.displayName();
 
-            if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
-                this.status =  StudentStatus.ALUMNI;
+                if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
+                    this.status =  StudentStatus.ALUMNI;
+                }
             }
         }
     }
