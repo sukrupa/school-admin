@@ -94,6 +94,7 @@
         </div>
 
         <div class="parentDetails">
+            <h2>Parent Details</h2>
             <div id="fatherDetails">
                 <div class="labelHead">Father</div>
                 $students/caregiver(caregiver=student.father,label="father")$
@@ -102,6 +103,7 @@
                 <div class="labelHead">Mother</div>
                 $students/caregiver(caregiver=student.mother,label="mother")$
             </div>
+            <div style="clear:both"></div>
             <div id="guardianDetails">
                 <div class="labelHead">Guardian</div>
                 <div class="entry">
@@ -121,7 +123,6 @@
                     <div class="value" id="guardianOccupation">$student.guardian.occupation$</div>
                 </div>
             </div>
-            <div style="clear:both"></div>
         </div>
 
         <div id="update">

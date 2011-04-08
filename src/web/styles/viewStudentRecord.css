@@ -1,6 +1,7 @@
 .parentDetails
 {
     clear:both;
+    margin-top: 46px;
 }
 
 #fatherDetails
@@ -13,6 +14,8 @@
 {
     clear: right;
     font-weight:bold;
+    font-size: 1.1em;
+    margin-bottom: 16px;
 }
 
 #fatherDetails .label
@@ -34,6 +37,7 @@
 #guardianDetails
 {
     width:350px;
+    margin-top: 20px;
 }
 
 #guardianDetails .label
