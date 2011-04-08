@@ -95,9 +95,9 @@ public class StudentsController {
                     case DROPOUT:
                         model.put("statusType", "dropout");
                         break;
-//                    case ALUMNI:
-//                        model.put("statusType", "alumni");
-//                        break;
+                    case ALUMNI:
+                        model.put("statusType", "alumni");
+                        break;
                     default:
                         model.put("statusType", "default");
                         break;

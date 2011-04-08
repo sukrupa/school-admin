@@ -53,4 +53,8 @@ public class AnnualUpdateWorkflow {
 		browser.navigateTo("http://localhost:8080/students/?name=&ageFrom=*&ageTo=*&studentClass=*&gender=*&religion=*&caste=*&communityLocation=*&status=Alumni");
 	}
 
+	public void whenIGoToDropoutStudentList() throws Exception {
+		browser.navigateTo("http://localhost:8080/students/?name=&ageFrom=*&ageTo=*&studentClass=*&gender=*&religion=*&caste=*&communityLocation=*&status=Dropout");
+	}
+
 }
