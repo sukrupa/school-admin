@@ -26,7 +26,7 @@ public class ReferenceDataRepository {
     private final int AGES_FROM = 2;
     private final List<String> STATUSES = Arrays.asList("Existing Student", "Dropout", "Alumni");
 
-    private final List<String> OCCUPATIONS = Arrays.asList("Assitant Captain", "Auto Driver", "Baker", "Bartender", "Barman",
+    private final List<String> OCCUPATIONS = Arrays.asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bartender", "Barman",
             "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
             "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
             "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant","Office Assistant",

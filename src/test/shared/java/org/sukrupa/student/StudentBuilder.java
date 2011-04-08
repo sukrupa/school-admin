@@ -21,6 +21,7 @@ public class StudentBuilder {
     private String gender;
     private Caregiver father;
     private Caregiver mother;
+    private Caregiver guardian;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
@@ -139,8 +140,13 @@ public class StudentBuilder {
         return this;
     }
 
+    public StudentBuilder guardian(Caregiver guardian) {
+        this.guardian = guardian;
+        return this;
+    }
+
     public Student build() {
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
     }
 
     public StudentBuilder imageLink(String imageLink) {

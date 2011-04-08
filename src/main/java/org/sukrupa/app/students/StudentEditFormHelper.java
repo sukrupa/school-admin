@@ -47,28 +47,49 @@ public class StudentEditFormHelper {
         return createDropDownList(referenceData.getStatuses(), student.getStatus().getName());
     }
 
-    public List<DropDownElement> getOccupationsDropDownList() {
-        if (student.getFather() == null || student.getMother() == null) {
-            List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
-            for (String value : referenceData.getOccupations()) {
-                dropDownElements.add(new DropDownElement(value, false));
-            }
-            return dropDownElements;
+    public List<DropDownElement> getFatherOccupationsDropDownList() {
+        if (student.getFather() == null) {
+            return createDropdownList(referenceData.getOccupations());
         } else {
             return createDropDownList(referenceData.getOccupations(), student.getFather().getOccupation());
         }
     }
 
-    public List<DropDownElement> getMaritalStatusesDropDownList() {
-        if (student.getFather() == null || student.getMother() == null) {
-            List<DropDownElement> dropDownElements = new ArrayList<DropDownElement>();
-            for (String value : referenceData.getMaritalStatuses()) {
-                dropDownElements.add(new DropDownElement(value, false));
-            }
-            return dropDownElements;
+    public List<DropDownElement> getMotherOccupationsDropDownList() {
+        if (student.getMother() == null) {
+            return createDropdownList(referenceData.getOccupations());
+        } else {
+            return createDropDownList(referenceData.getOccupations(), student.getMother().getOccupation());
+        }
+    }
+
+    public List<DropDownElement> getGuardianOccupationsDropDownList() {
+        if ( student.getGuardian() == null) {
+            return createDropdownList(referenceData.getOccupations());
+        } else {
+            return createDropDownList(referenceData.getOccupations(), student.getGuardian().getOccupation());
+        }
+    }
+
+    public List<DropDownElement> getFatherMaritalStatusesDropDownList() {
+        if (student.getFather() == null ) {
+            return createDropdownList(referenceData.getMaritalStatuses());
         } else {
             return createDropDownList(referenceData.getMaritalStatuses(), student.getFather().getMaritalStatus());
         }
+    }
+
+    public List<DropDownElement> getMotherMaritalStatusesDropDownList() {
+        if ( student.getMother() == null ) {
+            return createDropdownList(referenceData.getMaritalStatuses());
+        } else {
+            return createDropDownList(referenceData.getMaritalStatuses(), student.getMother().getMaritalStatus());
+        }
+    }
+
+    private List<DropDownElement> createDropdownList(List<String> values)
+    {
+        return createDropDownList(values, "");
     }
 
     private List<DropDownElement> createDropDownList(List<String> values, String selectedValue) {

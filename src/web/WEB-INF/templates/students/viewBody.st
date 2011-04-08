@@ -103,7 +103,23 @@
                 $students/caregiver(caregiver=student.mother,label="mother")$
             </div>
             <div id="guardianDetails">
-                                    Guardian
+                <div class="labelHead">Guardian</div>
+                <div class="entry">
+                    <div class="label">Name</div>
+                    <div class="value" id="guardianName" >$student.guardian.name$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Education</div>
+                    <div class="value" id="guardianEducation">$student.guardian.education$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Contact</div>
+                    <div class="value" id="guardianContact">$student.guardian.contact$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Occupation</div>
+                    <div class="value" id="guardianOccupation">$student.guardian.occupation$</div>
+                </div>
             </div>
             <div style="clear:both"></div>
         </div>
