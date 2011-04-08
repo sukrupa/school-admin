@@ -89,7 +89,7 @@ class StudentsSearchCriteriaGenerator {
     }
 
     private Criteria addOrderCriteria(Criteria criteria) {
-        return criteria.addOrder(Order.asc(GENDER).ignoreCase()).addOrder(Order.asc(NAME).ignoreCase());
+        return criteria.addOrder(Order.asc(NAME).ignoreCase());
     }
 
     private Conjunction createConjunction(String name, String studentClass, String gender, String caste, String communityLocation, String religion) {
