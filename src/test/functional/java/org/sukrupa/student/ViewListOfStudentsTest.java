@@ -30,7 +30,7 @@ public class ViewListOfStudentsTest extends FunctionalTestBase {
     }
 
     @Test
-    public void shouldDisplayListOfAllStudentsOrderedByGenderAndName() {
+    public void shouldDisplayListOfAllStudentsOrderedByName() {
         Talent running = new Talent("running");
         Talent jumping = new Talent("jumping");
         Talent flying = new Talent("flying");
@@ -44,9 +44,9 @@ public class ViewListOfStudentsTest extends FunctionalTestBase {
         List<StudentRow> students = new ListOfStudentsPage(driver).getStudents();
 
         assertThat(students, hasSize(3));
-        assertThat(students.get(0), matches(rebecca));
-        assertThat(students.get(1), matches(alex));
-        assertThat(students.get(2), matches(bob));
+        assertThat(students.get(0), matches(alex));
+        assertThat(students.get(1), matches(bob));
+        assertThat(students.get(2), matches(rebecca));
     }
 
     public void save(Object... students) {
