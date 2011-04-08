@@ -46,6 +46,7 @@ stopSukrupaServer() {
         echo "Sukrupa Server stopped"
     fi
 }
-
+JAVA_PROCESSES=$(ps aux | grep java | awk '{ print $1 "\t" $2 "\t" $9 "\t" $10 "\t" $11 "\t" $13 }')
+echo -e "Running processes:\n$JAVA_PROCESSES"
 stopSukrupaServer
 stopSukrupaServerClassname
