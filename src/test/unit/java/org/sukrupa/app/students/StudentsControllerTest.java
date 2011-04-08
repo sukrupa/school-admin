@@ -130,6 +130,18 @@ public class StudentsControllerTest {
 
         controller.view("id", false, model);
 
+        assertThat((String) model.get("statusType"), is("alumni"));
+    }
+
+    @Test
+    public void shouldReturnDefaultIfStatusIsNotDefinedOnViewStudent() throws Exception {
+        Map<String, Object> model = new HashMap<String, Object>();
+        Student student = mock(Student.class);
+        when(service.load("id")).thenReturn(student);
+        when(student.getStatus()).thenReturn(null);
+
+        controller.view("id", false, model);
+
         assertThat((String) model.get("statusType"), is("default"));
     }
 

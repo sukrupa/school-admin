@@ -132,7 +132,7 @@ public class WebServer {
         ConstraintMapping students = mapConstraintTo(constraint, "/students/*");
         ConstraintMapping admin = mapConstraintTo(constraint, "/admin/*");
 
-        securityHandler.setConstraintMappings(asList(events, students));
+        securityHandler.setConstraintMappings(asList(events, students, admin));
 
         servletHandler.setSecurityHandler(securityHandler);
     }
