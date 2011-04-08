@@ -24,7 +24,7 @@ findSukrupaServerProcessStaging() {
 }
 
 stopSukrupaServerStaging() {
-    findSukrupaServerProcess
+    findSukrupaServerProcessStaging
     if [ -z $PID ]; then
         echo "No running server found, nothing to stop."
     else
