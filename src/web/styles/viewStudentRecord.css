@@ -1,0 +1,31 @@
+.parentDetails
+{
+    clear:both;
+}
+
+#fatherDetails
+{
+    float:left;
+    width:350px;
+}
+
+.labelHead
+{
+    clear: right;
+}
+
+#fatherDetails .label
+{
+    width: 100px;
+}
+
+#motherDetails
+{
+    float: right;
+    width:350px;
+}
+
+#motherDetails .label
+{
+    width: 100px;
+}

@@ -23,7 +23,7 @@
             <tr class="student">
                 <td class="studentId">$it.studentId$</td>
                 <td class="name"><a href="/students/$it.studentId$">$it.name$</a></td>
-                <td class="father">$it.father$</td>
+                <td class="father">$it.father.name$</td>
                 <td class="gender">$it.gender$</td>
                 <td class="age">$it.age$</td>
                 <td class="talents">$it.talentsForDisplay$</td>

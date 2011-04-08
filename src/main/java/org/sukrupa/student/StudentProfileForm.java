@@ -16,8 +16,8 @@ public class StudentProfileForm {
     private String caste;
     private String subCaste;
     private String communityLocation;
-    private String father;
-    private String mother;
+    private Caregiver father = new Caregiver();
+    private Caregiver mother = new Caregiver();
     private Set<String> talents;
 
     private String status;
@@ -27,7 +27,7 @@ public class StudentProfileForm {
 
     private CommonsMultipartFile imageToUpload;
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, String father, String mother, Set<String> talents, String status, String disciplinary, String performance, String background) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Set<String> talents, String status, String disciplinary, String performance, String background) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -66,11 +66,11 @@ public class StudentProfileForm {
         return getDateOfBirth();
     }
 
-    public CommonsMultipartFile getFileData() {
+    public CommonsMultipartFile getImageToUpload() {
         return imageToUpload;
     }
 
-    public void setFileData(CommonsMultipartFile imageToUpload) {
+    public void setImageToUpload(CommonsMultipartFile imageToUpload) {
         this.imageToUpload = imageToUpload;
     }
 
@@ -98,11 +98,11 @@ public class StudentProfileForm {
         return communityLocation;
     }
 
-    public String getFather() {
+    public Caregiver getFather() {
         return father;
     }
 
-    public String getMother() {
+    public Caregiver getMother() {
         return mother;
     }
 
@@ -154,11 +154,11 @@ public class StudentProfileForm {
         this.communityLocation = communityLocation;
     }
 
-    public void setFather(String father) {
+    public void setFather(Caregiver father) {
         this.father = father;
     }
 
-    public void setMother(String mother) {
+    public void setMother(Caregiver mother) {
         this.mother = mother;
     }
 

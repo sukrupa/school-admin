@@ -18,7 +18,7 @@ stopSukrupaServer() {
         echo "No running server found, nothing to stop."
     else
         echo "Killing process with PID [${PID}]"
-        kill $PID
+        kill -9 $PID
         echo
         echo "Sukrupa Server stopped"
     fi
