@@ -11,7 +11,7 @@ findSukrupaServerProcess() {
     esac
 }
 
-findSukrupaServerProcessStaging() {
+findSukrupaServerProcessByClassname() {
     PID=""
     case $(uname) in
       Darwin | Linux)
@@ -23,10 +23,10 @@ findSukrupaServerProcessStaging() {
     esac
 }
 
-stopSukrupaServerStaging() {
-    findSukrupaServerProcessStaging
+stopSukrupaServerClassname() {
+    findSukrupaServerProcessByClassname
     if [ -z $PID ]; then
-        echo "No running server found, nothing to stop."
+        echo "No running server found with name 'school-admin', nothing to stop."
     else
         echo "Killing process with PID [${PID}]"
         kill -9 $PID
@@ -38,7 +38,7 @@ stopSukrupaServerStaging() {
 stopSukrupaServer() {
     findSukrupaServerProcess
     if [ -z $PID ]; then
-        echo "No running server found, nothing to stop."
+        echo "No running server by classname found, nothing to stop."
     else
         echo "Killing process with PID [${PID}]"
         kill -9 $PID
@@ -48,4 +48,4 @@ stopSukrupaServer() {
 }
 
 stopSukrupaServer
-stopSukrupaServerStaging
+stopSukrupaServerClassname
