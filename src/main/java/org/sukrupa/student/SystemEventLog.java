@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.date.Date;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -51,5 +52,11 @@ public class SystemEventLog {
         int result = event != null ? event.hashCode() : 0;
         result = 31 * result + (dateHappened != null ? dateHappened.hashCode() : 0);
         return result;
+    }
+
+    public void newEntry(LocalDate newDate) {
+        if (dateHappened.compareTo(newDate)== -1) {
+            this.dateHappened = newDate;
+        }
     }
 }
