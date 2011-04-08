@@ -1,4 +1,4 @@
-Tags:in-progress
+Tags:
 Preconditions:Navigate to annual update page,Log in,Log out afterwards
 Annual Update Workflow:
 #Given I am on the Annual class update page
@@ -13,3 +13,15 @@ Annual Update Workflow:
 #And I visit the profile of "Haripriya"
 #Then it should have the status "existing"
 #And it should have the class "10 Std"
+#When I go to alumni student list
+#And I visit the profile of "Balaji"
+#Then it should have the status "alumni"
+#And it should have the class "10 Std"
+#When I go to alumni student list
+#And I visit the profile of "Peter"
+#Then it should have the status "alumni"
+#And it should have the class "10 Std"
+#When I go to dropout student list
+#And I visit the profile of "Joel"
+#And it should have the class "3 Std"
+#Then it should have the status "dropout"
