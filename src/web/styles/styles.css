@@ -1,3 +1,9 @@
+/* FEATURE TOGGLES */
+
+.disabledFeature {
+    display:block;
+}
+
 
 body
 {
@@ -309,7 +315,7 @@ text-decoration: none;
 
 .updateStatusValue {
     float: left;
-    width: 120px;
+    width: 140px;
 }
 #update {
     clear: both;
@@ -583,6 +589,8 @@ img.studentImage{
 
 #updateStudent .studentImage img {
     border: solid 1px;
+    width: 160px;
+    height: 175px;
 }
 
 

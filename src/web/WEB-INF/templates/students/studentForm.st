@@ -77,19 +77,7 @@
                     </select>
                 </div>
 
-
-
                 <div class="updateEntry">
-                    <div class="label">Father's Name</div>
-                    <input type="text" name="father" value="$student.father$" class="updateValue"></input>
-                </div>
-
-                <div class="updateEntry">
-                    <div class="label">Mother's Name</div>
-                    <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
-                </div>
-
-                 <div class="updateEntry">
                     <div class="label-header">Background</div>
                     <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
                 </div>
@@ -133,6 +121,97 @@
                         </input>
                     </div>
                     }$
+                </div>
+            </div>
+
+            <div id="parentDetails">
+                <h2>Parent Details</h2>
+                <div id="fatherDetails">
+                    <div class="labelHead">Father</div>
+                    <div class="updateEntry">
+                        <div class="label">Name</div>
+                        <input type="text" name="father.name" value="$student.father.name$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="father.education" value="$student.father.education$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="father.contact" value="$student.father.contact$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Occupation</div>
+                        <select name="father.occupation">
+                             $formhelper.fatherOccupationsDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Marital Status</div>
+                        <select name="father.maritalStatus">
+                             $formhelper.fatherMaritalStatusesDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                     </div>
+                </div> <!-- end father -->
+                <div id="motherDetails">
+                    <div class="labelHead">Mother</div>
+                    <div class="updateEntry">
+                        <div class="label">Name</div>
+                        <input type="text" name="mother.name" value="$student.mother.name$" class="updateValue"></input>
+                    </div>
+                     <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="mother.education" value="$student.mother.education$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Occupation</div>
+                        <select name="mother.occupation">
+                             $formhelper.motherOccupationsDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Marital Status</div>
+                        <select name="mother.maritalStatus">
+                             $formhelper.motherMaritalStatusesDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+                 </div> <!-- end mother -->
+                 <div id="guardianDetails">
+                    <div class="labelHead">Guardian</div>
+                    <div class="updateEntry">
+                        <div class="label">Name</div>
+                        <input type="text" name="guardian.name" value="$student.guardian.name$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="guardian.education" value="$student.guardian.education$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="guardian.contact" value="$student.guardian.contact$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Occupation</div>
+                        <select name="guardian.occupation">
+                             $formhelper.guardianOccupationsDropDownList:{
+                                <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                             }$
+                        </select>
+                    </div>
+
+                </div> <!-- end guardian -->
                 </div>
             </div>
         </div>

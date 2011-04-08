@@ -141,13 +141,13 @@
                 </select>
             </td>
 
-           <tr>
+           <tr class="disabledFeature">
             <td>
                 <span>Status</span>
             </td>
             <td>
                 <select name="status">
-                   $rest(formhelper.statuses):{
+                   $formhelper.statuses:{
                     <option value="$it$">$it$</option>
                     }$
                 </select>

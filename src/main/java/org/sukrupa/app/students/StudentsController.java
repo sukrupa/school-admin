@@ -48,21 +48,6 @@ public class StudentsController {
         return "students/list";
     }
 
-    @RequestMapping(value="annualupdate", method= GET)
-    public String annualUpdateBody(){
-        return "students/annualUpdate";
-    }
-
-    @RequestMapping(value="annualupdate", method= POST)
-    public String performAnnualUpdate(){
-        return "redirect:annualupdate/success";
-    }
-
-    @RequestMapping(value = "annualupdate/success",  method=GET)
-    public String annualUpdateSuccess() {
-        return "students/annualUpdateSuccess";
-    }
-
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getReferenceData());
@@ -109,6 +94,9 @@ public class StudentsController {
                         break;
                     case DROPOUT:
                         model.put("statusType", "dropout");
+                        break;
+                    case ALUMNI:
+                        model.put("statusType", "alumni");
                         break;
                     default:
                         model.put("statusType", "default");

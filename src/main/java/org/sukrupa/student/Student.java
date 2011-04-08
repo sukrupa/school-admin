@@ -34,9 +34,17 @@ public class Student {
 
     private String caste;
 
-    private String mother;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mother_id", referencedColumnName = "id")
+    private Caregiver mother = new Caregiver();
 
-    private String father;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "father_id", referencedColumnName = "id")
+    private Caregiver father;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardian_id", referencedColumnName = "id")
+    private Caregiver guardian;
 
     @Column(name = "SUB_CASTE")
     private String subCaste;
@@ -81,7 +89,7 @@ public class Student {
     public static final Student EMPTY_STUDENT = new EmptyStudent();
 
     @Enumerated(EnumType.ORDINAL)
-    private StudentStatus status = StudentStatus.NOT_SET;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     @DoNotRemove
     public Student() {
@@ -89,7 +97,7 @@ public class Student {
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   String father, String mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
+                   Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
                    StudentStatus status, String disciplinary, String performance, Profile profile) {
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -101,13 +109,14 @@ public class Student {
         this.studentClass = studentClass;
         this.father = father;
         this.mother = mother;
+        this.guardian = guardian;
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
         this.notes = notes;
         this.imageLink = imageLink;
 
         if(status == null) {
-            status = StudentStatus.NOT_SET;
+            status = StudentStatus.EXISTING_STUDENT;
         }
 
         this.status = status;
@@ -179,12 +188,16 @@ public class Student {
         return studentClass;
     }
 
-    public String getMother() {
+    public Caregiver getMother() {
         return mother;
     }
 
-    public String getFather() {
+    public Caregiver getFather() {
         return father;
+    }
+
+    public Caregiver getGuardian() {
+        return guardian;
     }
 
     public LocalDate getDateOfBirth() {
@@ -214,7 +227,7 @@ public class Student {
 
     public String getImageLink() {
         if (imageLink==null){
-            return PLACEHOLDER_IMAGE;
+            return studentId;
         } else {
         return imageLink;
         }
@@ -266,39 +279,51 @@ public class Student {
 		this.caste = studentUpdateParameters.getCaste();
 		this.subCaste = studentUpdateParameters.getSubCaste();
 		this.communityLocation = studentUpdateParameters.getCommunityLocation();
-		this.father = studentUpdateParameters.getFather();
-		this.mother = studentUpdateParameters.getMother();
         this.performance = studentUpdateParameters.getPerformance();
         this.disciplinary = studentUpdateParameters.getDisciplinary();
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+
+        if (studentUpdateParameters.getFather() != null) {
+            this.father = setAll(studentUpdateParameters.getFather(), this.father);
+        }
+
+        if (studentUpdateParameters.getMother() != null) {
+            this.mother = setAll(studentUpdateParameters.getMother(), this.mother);
+        }
+
+        if (studentUpdateParameters.getGuardian() != null) {
+            this.guardian = setAll(studentUpdateParameters.getGuardian(), this.guardian);
+        }
+
         setBackground(studentUpdateParameters.getBackground());
 	}
 
+    private Caregiver setAll(Caregiver getCaregiver, Caregiver caregiverIn) {
+        caregiverIn = new Caregiver();
+        caregiverIn.setName(getCaregiver.getName());
+        caregiverIn.setEducation(getCaregiver.getEducation());
+        caregiverIn.setContact(getCaregiver.getContact());
+        caregiverIn.setOccupation(getCaregiver.getOccupation());
+        caregiverIn.setMaritalStatus(getCaregiver.getMaritalStatus());
+        return caregiverIn;
+    }
 
 
     public void promote() {
+        if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
+            StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
+            if(classBeforePromotion != null){
+                StudentClass classAfterPromotion = classBeforePromotion.next();
+                this.studentClass = classAfterPromotion.displayName();
 
-        if(this.studentClass.equals("Graduated")){
-           this.studentClass = this.studentClass;
-        }else if(this.studentClass.equals("UKG")){
-          this.studentClass = "1 Std";
-       }else if(this.studentClass.equals("LKG")) {
-                  this.studentClass = "UKG";
-       }else if(this.studentClass.equals("Preschool")){
-           this.studentClass = "LKG";
-       }else if(this.studentClass.equals("10 Std")){
-           this.studentClass = "Graduated";
-       }
-       else{
-            int studentClassInt = Integer.parseInt(this.studentClass.substring(0,1));
-            studentClassInt++;
-            this.studentClass = this.studentClass.replace(this.studentClass.substring(0,1), Integer.toString(studentClassInt));
+                if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
+                    this.status =  StudentStatus.ALUMNI;
+                }
+            }
         }
-
     }
-
 
     private static class EmptyStudent extends Student {
         @Override
@@ -342,13 +367,18 @@ public class Student {
         }
 
         @Override
-        public String getMother() {
-            return "";
+        public Caregiver getMother() {
+            return null;
         }
 
         @Override
-        public String getFather() {
-            return "";
+        public Caregiver getFather() {
+            return null;
+        }
+
+        @Override
+        public Caregiver getGuardian() {
+            return null;
         }
 
         @Override

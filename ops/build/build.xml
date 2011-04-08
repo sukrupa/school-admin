@@ -124,6 +124,7 @@
             depends="compile:test:twist"
             description="Run only the functional (twist) tests - you need to have built the project first">
 
+
         <run-against-server startServerTarget="sukrupa-server:start-for-twist"
                             stopServerTarget="sukrupa-server:stop-for-twist"
                             checkServerUpTarget="sukrupa-server:check-is-running">

@@ -19,8 +19,9 @@ public class StudentBuilder {
     private Set<Talent> talents = new HashSet<Talent>();
     private String studentId;
     private String gender;
-    private String father;
-    private String mother;
+    private Caregiver father;
+    private Caregiver mother;
+    private Caregiver guardian;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
@@ -29,6 +30,7 @@ public class StudentBuilder {
     private String disciplinary;
     private String performance;
     private  Profile profile = new Profile();
+
     public StudentBuilder name(String name) {
         this.name = name;
         return this;
@@ -128,18 +130,23 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder father(String father) {
+    public StudentBuilder father(Caregiver father) {
         this.father = father;
         return this;
     }
 
-    public StudentBuilder mother(String mother) {
+    public StudentBuilder mother(Caregiver mother) {
         this.mother = mother;
         return this;
     }
 
+    public StudentBuilder guardian(Caregiver guardian) {
+        this.guardian = guardian;
+        return this;
+    }
+
     public Student build() {
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
     }
 
     public StudentBuilder imageLink(String imageLink) {

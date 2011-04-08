@@ -1,0 +1,46 @@
+.parentDetails
+{
+    clear:both;
+    margin-top: 46px;
+}
+
+#fatherDetails
+{
+    float:left;
+    width:350px;
+}
+
+.labelHead
+{
+    clear: right;
+    font-weight:bold;
+    font-size: 1.1em;
+    margin-bottom: 16px;
+}
+
+#fatherDetails .label
+{
+    width: 100px;
+}
+
+#motherDetails
+{
+    float: right;
+    width:350px;
+}
+
+#motherDetails .label
+{
+    width: 100px;
+}
+
+#guardianDetails
+{
+    width:350px;
+    margin-top: 20px;
+}
+
+#guardianDetails .label
+{
+    width: 100px;
+}

@@ -55,18 +55,6 @@
                 <div class="value">$student.communityLocation$</div>
             </div>
 
-
-
-            <div class="entry">
-                <div class="label">Father's Name</div>
-                <div class="value">$student.father$</div>
-            </div>
-
-            <div class="entry">
-                <div class="label">Mother's Name</div>
-                <div class="value">$student.mother$</div>
-            </div>
-
             <div class="entry">
                  <div class="label inline-block">Background</div>
                  $if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
@@ -103,6 +91,38 @@
 
         <div class="notes">
             $studentNotesDisplay()$
+        </div>
+
+        <div class="parentDetails">
+            <h2>Parent Details</h2>
+            <div id="fatherDetails">
+                <div class="labelHead">Father</div>
+                $students/caregiver(caregiver=student.father,label="father")$
+            </div>
+            <div id="motherDetails">
+                <div class="labelHead">Mother</div>
+                $students/caregiver(caregiver=student.mother,label="mother")$
+            </div>
+            <div style="clear:both"></div>
+            <div id="guardianDetails">
+                <div class="labelHead">Guardian</div>
+                <div class="entry">
+                    <div class="label">Name</div>
+                    <div class="value" id="guardianName" >$student.guardian.name$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Education</div>
+                    <div class="value" id="guardianEducation">$student.guardian.education$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Contact</div>
+                    <div class="value" id="guardianContact">$student.guardian.contact$</div>
+                </div>
+                <div class="entry">
+                    <div class="label">Occupation</div>
+                    <div class="value" id="guardianOccupation">$student.guardian.occupation$</div>
+                </div>
+            </div>
         </div>
 
         <div id="update">

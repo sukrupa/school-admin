@@ -1,9 +1,11 @@
 package org.sukrupa.student;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.date.Date;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class StudentService {
     private ReferenceDataRepository referenceDataRepository;
     private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
+    private SystemEventLogRepository systemEventLogRepository;
 
     @DoNotRemove
     StudentService() {
@@ -23,26 +26,16 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory) {
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
         this.studentFactory = studentFactory;
+        this.systemEventLogRepository = systemEventLogRepository;
     }
 
     public Student load(String studentId) {
         return studentRepository.findByStudentId(studentId);
-    }
-
-    public int promoteStudentsToNextClass() {
-        List<Student> students = studentRepository.findAll();
-
-        for (Student student : students) {
-            student.promote();
-            studentRepository.put(student);
-        }
-
-        return students.size();
     }
 
     public Student create(StudentProfileForm studentProfileForm) {
@@ -62,7 +55,12 @@ public class StudentService {
         }
 
         Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+
+        // do something with the image...
+
+        // student.updateFrom(studentProfileForm, talents, newImageUrl);
         student.updateFrom(studentProfileForm, talents);
+
         return studentRepository.update(student);
     }
 
@@ -91,4 +89,22 @@ public class StudentService {
         return referenceDataRepository.getReferenceData();
     }
 
+    public void promoteStudentsToNextClass() {
+        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find("annual class update");
+        if (annualClassUpdateEventLog == null || !happenedThisYear(annualClassUpdateEventLog)) {
+            List<Student> students = studentRepository.findAll();
+
+            for (Student student : students) {
+                student.promote();
+
+                studentRepository.put(student);
+            }
+
+
+        }
+    }
+
+    private boolean happenedThisYear(SystemEventLog annualClassUpdateEventLog) {
+        return annualClassUpdateEventLog.lastHappened().getValue(0) == Date.now().year();
+    }
 }

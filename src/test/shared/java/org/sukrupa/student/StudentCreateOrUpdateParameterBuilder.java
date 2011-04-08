@@ -16,10 +16,11 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String caste;
     private String subCaste;
     private String area;
-    private String father;
-    private String mother;
+    private Caregiver father;
+    private Caregiver mother;
+    private Caregiver guardian;
     private Set<String> talents;
-    private StudentStatus status = StudentStatus.NOT_SET;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private String disciplinary;
     private String performance;
     private String background;
@@ -88,13 +89,18 @@ public class StudentCreateOrUpdateParameterBuilder {
         return this;
     }
 
-    public StudentCreateOrUpdateParameterBuilder father(String father) {
+    public StudentCreateOrUpdateParameterBuilder father(Caregiver father) {
         this.father = father;
         return this;
     }
 
-    public StudentCreateOrUpdateParameterBuilder mother(String mother) {
+    public StudentCreateOrUpdateParameterBuilder mother(Caregiver mother) {
         this.mother = mother;
+        return this;
+    }
+
+    public StudentCreateOrUpdateParameterBuilder guardian(Caregiver guardian) {
+        this.guardian = guardian;
         return this;
     }
 
@@ -104,7 +110,8 @@ public class StudentCreateOrUpdateParameterBuilder {
     }
 
     public StudentProfileForm build() {
-        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, talents, status.toString(), disciplinary, performance, background);
+        return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, guardian,
+                talents, status.toString(), disciplinary, performance, background);
     }
 
 

@@ -1,0 +1,55 @@
+#parentDetails
+{
+    float: left;
+}
+
+#fatherDetails
+{
+    float: left;
+    width: 350px;
+}
+
+#fatherDetails .labelHead
+{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#fatherDetails .label
+{
+    width: 100px;
+}
+
+#motherDetails
+{
+    width: 350px;
+    float:right;
+}
+
+#motherDetails .labelHead
+{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#motherDetails .label
+{
+    width: 100px;
+}
+
+#guardianDetails
+{
+    width: 350px;
+    float:left;
+}
+
+#guardianDetails .labelHead
+{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#guardianDetails .label
+{
+    width: 100px;
+}

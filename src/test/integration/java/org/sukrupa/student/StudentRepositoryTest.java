@@ -97,7 +97,7 @@ public class StudentRepositoryTest {
             .studentId("556677").name("Toy")
             .studentClass("4th grade").dateOfBirth(new LocalDate(1987, 10, 1))
             .gender("Male").talents(music, sport)
-            .status(StudentStatus.NOT_SET)
+            .status(StudentStatus.ALUMNI)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -125,6 +125,8 @@ public class StudentRepositoryTest {
         Talent actingTalent = new TalentBuilder().description("Acting").build();
         Talent singingTalent = new TalentBuilder().description("Singing").build();
         Talent sportsTalent = new TalentBuilder().description("Sports").build();
+        Caregiver father = new Caregiver();
+        Caregiver mother = new Caregiver();
         hibernateSession.save(actingTalent, singingTalent, sportsTalent);
 
         studentRepository.put(new StudentBuilder()
@@ -134,9 +136,9 @@ public class StudentRepositoryTest {
                 .caste("someCaste")
                 .subCaste("someSubCaste")
                 .dateOfBirth(new LocalDate(2001, 1, 11))
-                .father("someFather")
+                .father(father)
                 .gender("Male")
-                .mother("someMother")
+                .mother(mother)
                 .talents(actingTalent, singingTalent)
                 .build());
 
@@ -148,8 +150,8 @@ public class StudentRepositoryTest {
         assertThat(returnedStudent.getReligion(), is("Hindi"));
         assertThat(returnedStudent.getCaste(), is("someCaste"));
         assertThat(returnedStudent.getDateOfBirth(), is(new LocalDate(2001, 1, 11)));
-        assertThat(returnedStudent.getFather(), is("someFather"));
-        assertThat(returnedStudent.getMother(), is("someMother"));
+        assertThat(returnedStudent.getFather(), is(father));
+        assertThat(returnedStudent.getMother(), is(mother));
         assertThat(returnedStudent.getTalents(), hasOnly(actingTalent, singingTalent));
     }
 
