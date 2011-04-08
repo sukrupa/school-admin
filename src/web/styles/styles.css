@@ -1,3 +1,9 @@
+/* FEATURE TOGGLES */
+
+#parentDetails, .parentDetails, .disabledFeature {
+    display:none;
+}
+
 
 body
 {

@@ -141,7 +141,7 @@
                 </select>
             </td>
 
-           <tr>
+           <tr class="disabledFeature">
             <td>
                 <span>Status</span>
             </td>
