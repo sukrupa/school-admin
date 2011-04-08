@@ -12,11 +12,6 @@ public class StudentProfileTwo {
 		this.browser = browser;
 	}
 
-	public void goBackToStudentProfileList() throws Exception {
-		browser.link("View All").click();
-	
-	}
-
 	public void verifyThatGenderIs(String string1) throws Exception {
 		assertEquals(string1, browser.div(string1).text());
 		browser.div("student").click();
@@ -31,6 +26,10 @@ public class StudentProfileTwo {
 	public void verifyThatBackgroundIs(String string1) throws Exception {
 		assertEquals(string1, browser.div("student-background").text());
 
+	}
+
+	public void goBackTo(String linkText) throws Exception {
+		browser.link(linkText).click();
 	}
 
 }

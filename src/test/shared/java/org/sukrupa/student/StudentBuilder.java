@@ -19,16 +19,17 @@ public class StudentBuilder {
     private Set<Talent> talents = new HashSet<Talent>();
     private String studentId;
     private String gender;
-    private String father;
-    private String mother;
+    private Caregiver father;
+    private Caregiver mother;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
-    private StudentStatus status = StudentStatus.ACTIVE;
+    private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private String disciplinary;
     private String performance;
     private  Profile profile = new Profile();
+
     public StudentBuilder name(String name) {
         this.name = name;
         return this;
@@ -128,12 +129,12 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder father(String father) {
+    public StudentBuilder father(Caregiver father) {
         this.father = father;
         return this;
     }
 
-    public StudentBuilder mother(String mother) {
+    public StudentBuilder mother(Caregiver mother) {
         this.mother = mother;
         return this;
     }

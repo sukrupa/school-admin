@@ -4,12 +4,12 @@ Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"
 #Verify that talent is "Pick & Speak"
-#Verify that status is ""
+#Verify that status is "Existing Student"
 #Verify that disciplinary is "Excellent"
 #Verify that performance is "A+"
 
 Student Profile Two, Student Profile:
-#Go back to Student profile list
+#Go back to "View Students"
 #Click on "Haripriya" student record
 #Verify that name is "Haripriya"
 #Verify that gender is "Female" 

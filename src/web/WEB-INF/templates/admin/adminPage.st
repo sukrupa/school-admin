@@ -1,0 +1,1 @@
+$layout(body=admin/adminPageBody(), title="Admin")$

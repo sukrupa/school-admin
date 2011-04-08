@@ -64,8 +64,8 @@ public class AddStudentRecord {
 		assertEquals(string1,browser.title());
 	}
 
-	public void thenIShouldSeeTheErrorMessageForTheField(String errorMessage, String fieldLabel) throws Exception {
-		assertThat(browser.span("errorMessage").near(browser.textbox(fieldLabel)).getText(), is(errorMessage));	
+	public void thenIShouldSeeTheErrorMessageForTheField(String errorMessage, String fieldId) throws Exception {
+		assertThat(browser.span("errorMessage").near(browser.byId(fieldId)).getText(), is(errorMessage));	
 	}
 
 }

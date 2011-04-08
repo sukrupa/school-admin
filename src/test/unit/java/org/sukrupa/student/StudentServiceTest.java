@@ -8,8 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.sukrupa.platform.date.DateManipulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -21,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.hasNote;
@@ -47,12 +50,15 @@ public class StudentServiceTest {
 
     @Mock
     private StudentFactory studentFactory;
+    @Mock
+    private SystemEventLogRepository systemEventLogRepository;
+
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, null, studentFactory);
-        freezeDateToMidnightOn_31_12_2010();
+        service = new StudentService(studentRepository, talentRepository, null, studentFactory, systemEventLogRepository);
+        freezeDateToMidnightOn(30,12,2011);
     }
 
     @After
@@ -118,18 +124,74 @@ public class StudentServiceTest {
     }
 
     @Test
+    public void shouldNotLetUsPromoteStudentsTwiceInOneYear() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(null).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+        service.promoteStudentsToNextClass();
+
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        assertEquals("3 Std", Sahil.getStudentClass());
+    }
+
+     @Test
+    public void shouldNotLetUsPromoteStudentsIfItWasDoneThisYear() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+
+        assertEquals("2 Std", Sahil.getStudentClass());
+    }
+
+
+    @Test
+    public void shouldLetUsPromoteStudentsIfItWasDoneLastDoneLastYear() {
+        // given
+        Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
+
+        // when
+        when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
+
+        String eventName = "annual class update";
+        SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2010, 03, 20));
+        when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
+
+        service.promoteStudentsToNextClass();
+
+        assertEquals("3 Std", Sahil.getStudentClass());
+    }
+
+    @Test
     public void shouldUpdateStudent() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.NOT_SET).build();
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.EXISTING_STUDENT).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ACTIVE).build();
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.EXISTING_STUDENT).build();
+
         when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -138,7 +200,7 @@ public class StudentServiceTest {
                 .gender("Female")
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
-                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.ACTIVE).build();
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.EXISTING_STUDENT).build();
         Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
@@ -147,7 +209,7 @@ public class StudentServiceTest {
     public void shouldUpdateStudentStatus() {
         Student philOld = new StudentBuilder().studentId("12345")
                 .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
-                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.NOT_SET).build();
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.EXISTING_STUDENT).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
                 .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ALUMNI).build();
@@ -155,7 +217,7 @@ public class StudentServiceTest {
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -172,7 +234,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldFailToUpdateNonexistantStudent() {
-        assertThat(service.update(new StudentUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
+        assertThat(service.update(new StudentCreateOrUpdateParameterBuilder().build()), Matchers.<Object>nullValue());
     }
 
     @Test

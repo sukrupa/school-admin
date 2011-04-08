@@ -11,7 +11,7 @@ public class NavigateToAnnualUpdatePage {
 	}
 
 	public void setUp() throws Exception {
-		browser.navigateTo("http://localhost:8080/students/annualupdate");
+		browser.navigateTo("http://localhost:8080/admin/annualupdate");
 	}
 
 	public void tearDown() throws Exception {

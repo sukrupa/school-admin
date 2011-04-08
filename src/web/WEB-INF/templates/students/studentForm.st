@@ -1,5 +1,9 @@
 <div id="student">
-    <form id="updateStudent" name="updateStudent" action="/students/$student.studentId$" method="post">
+    <form id="updateStudent"
+          name="updateStudent"
+          action="/students/$student.studentId$"
+          enctype="multipart/form-data"
+          method="post">
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -21,7 +25,7 @@
 
                 <div class="updateEntry">
                     <div class="label">Gender</div>
-                    <select name="gender" class="updateValue">
+                    <select name="gender" id="gender" class="updateValue">
                         $formhelper.gendersDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
@@ -73,19 +77,7 @@
                     </select>
                 </div>
 
-
-
                 <div class="updateEntry">
-                    <div class="label">Father's Name</div>
-                    <input type="text" name="father" value="$student.father$" class="updateValue"></input>
-                </div>
-
-                <div class="updateEntry">
-                    <div class="label">Mother's Name</div>
-                    <input type="text" name="mother" value="$student.mother$" class="updateValue"></input>
-                </div>
-
-                 <div class="updateEntry">
                     <div class="label-header">Background</div>
                     <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
                 </div>
@@ -112,6 +104,12 @@
                 </select>
             </div>
 
+            <div class="studentImage">
+
+                <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
+                <input type="file" name="imageToUpload" />
+            </div>
+
 
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>
@@ -123,6 +121,40 @@
                         </input>
                     </div>
                     }$
+                </div>
+            </div>
+
+            <div id="parentDetails">
+                <h2>Parent Details</h2>
+                <div id="fatherDetails">
+                    <div class="labelHead">Father</div>
+                    <div class="updateEntry">
+                        <div class="label">Name</div>
+                        <input type="text" name="father.name" value="$student.father.name$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="father.education" value="$student.father.education$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="father.contact" value="$student.father.contact$" class="updateValue"></input>
+                    </div>
+                </div>
+                <div id="motherDetails">
+                    <div class="labelHead">Mother</div>
+                    <div class="updateEntry">
+                        <div class="label">Name</div>
+                        <input type="text" name="mother.name" value="$student.mother.name$" class="updateValue"></input>
+                    </div>
+                     <div class="updateEntry">
+                        <div class="label">Education</div>
+                        <input type="text" name="mother.education" value="$student.mother.education$" class="updateValue"></input>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Contact</div>
+                        <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
+                    </div>
                 </div>
             </div>
         </div>
