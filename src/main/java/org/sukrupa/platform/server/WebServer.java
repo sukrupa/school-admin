@@ -35,8 +35,6 @@ public class WebServer {
                      @Value("${web.context.path}") String contextPath,
                      @Value("${web.server.realm.file}") String webServerRealmFile,
                      @Value("${web.server.authenticate}") boolean authenticate,
-                     @Value("${web.server.ssl.keystore.password}") String keystorePassword,
-                     @Value("${web.server.ssl.keystore.port}") int sslPort,
                      FrontController frontController,
                      ImageController imageController) throws IOException {
 
