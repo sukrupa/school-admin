@@ -25,8 +25,17 @@ public class ReferenceDataRepository {
     private final int AGES_TO = 20;
     private final int AGES_FROM = 2;
     private final List<String> STATUSES = Arrays.asList("Existing Student", "Dropout", "Alumni");
-    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES);
 
+    private final List<String> OCCUPATIONS = Arrays.asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bartender", "Barman",
+            "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
+            "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
+            "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant","Office Assistant",
+            "Office Boy", "Office Man", "Painter","Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant","Store Keeper",
+            "Tailor", "Teacher", "Truck Driver", "TV Operator","Ward Boy","Welder");
+
+    private final List<String> MARITAL_STATUSES = Arrays.asList(" ","Married", "Single", "Divorced", "Widowed", "Deceased");
+
+    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, OCCUPATIONS, MARITAL_STATUSES);
 
     public ReferenceData getReferenceData() {
         return referenceData;

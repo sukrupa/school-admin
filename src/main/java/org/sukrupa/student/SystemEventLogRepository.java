@@ -27,4 +27,9 @@ public class SystemEventLogRepository {
     private Session session() {
         return sessionFactory.getCurrentSession();
     }
+
+    public void put(SystemEventLog systemEventLog) {
+        session().saveOrUpdate(systemEventLog);
+        session().flush();
+    }
 }

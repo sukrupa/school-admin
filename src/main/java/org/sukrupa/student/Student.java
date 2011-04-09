@@ -36,11 +36,15 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mother_id", referencedColumnName = "id")
-    private Caregiver mother;
+    private Caregiver mother = new Caregiver();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "father_id", referencedColumnName = "id")
     private Caregiver father;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardian_id", referencedColumnName = "id")
+    private Caregiver guardian;
 
     @Column(name = "SUB_CASTE")
     private String subCaste;
@@ -93,7 +97,7 @@ public class Student {
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   Caregiver father, Caregiver mother, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
+                   Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
                    StudentStatus status, String disciplinary, String performance, Profile profile) {
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -105,6 +109,7 @@ public class Student {
         this.studentClass = studentClass;
         this.father = father;
         this.mother = mother;
+        this.guardian = guardian;
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
         this.notes = notes;
@@ -189,6 +194,10 @@ public class Student {
 
     public Caregiver getFather() {
         return father;
+    }
+
+    public Caregiver getGuardian() {
+        return guardian;
     }
 
     public LocalDate getDateOfBirth() {
@@ -277,22 +286,29 @@ public class Student {
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
 
         if (studentUpdateParameters.getFather() != null) {
-            this.father = new Caregiver();
-            this.father.setName(studentUpdateParameters.getFather().getName());
-            this.father.setEducation(studentUpdateParameters.getFather().getEducation());
-            this.father.setContact(studentUpdateParameters.getFather().getContact());
+            this.father = setAll(studentUpdateParameters.getFather(), this.father);
         }
 
-        if (studentUpdateParameters.getFather() != null) {
-            this.mother = new Caregiver();
-            this.mother.setName(studentUpdateParameters.getMother().getName());
-            this.mother.setEducation(studentUpdateParameters.getMother().getEducation());
-            this.mother.setContact(studentUpdateParameters.getMother().getContact());
+        if (studentUpdateParameters.getMother() != null) {
+            this.mother = setAll(studentUpdateParameters.getMother(), this.mother);
+        }
+
+        if (studentUpdateParameters.getGuardian() != null) {
+            this.guardian = setAll(studentUpdateParameters.getGuardian(), this.guardian);
         }
 
         setBackground(studentUpdateParameters.getBackground());
 	}
 
+    private Caregiver setAll(Caregiver getCaregiver, Caregiver caregiverIn) {
+        caregiverIn = new Caregiver();
+        caregiverIn.setName(getCaregiver.getName());
+        caregiverIn.setEducation(getCaregiver.getEducation());
+        caregiverIn.setContact(getCaregiver.getContact());
+        caregiverIn.setOccupation(getCaregiver.getOccupation());
+        caregiverIn.setMaritalStatus(getCaregiver.getMaritalStatus());
+        return caregiverIn;
+    }
 
 
     public void promote() {
@@ -308,7 +324,6 @@ public class Student {
             }
         }
     }
-
 
     private static class EmptyStudent extends Student {
         @Override
@@ -358,6 +373,11 @@ public class Student {
 
         @Override
         public Caregiver getFather() {
+            return null;
+        }
+
+        @Override
+        public Caregiver getGuardian() {
             return null;
         }
 
