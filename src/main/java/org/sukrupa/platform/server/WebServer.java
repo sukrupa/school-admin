@@ -50,17 +50,6 @@ public class WebServer {
         HashLoginService hashLoginService = new HashLoginService("SukrupaSchoolAdmin", webServerRealmFile);
         server.addBean(hashLoginService);
         server.setHandler(handlers());
-//        SslSocketConnector sslConnector = new SslSocketConnector();
-//        sslConnector.setPort(sslPort);
-//
-//        sslConnector.setPassword(keystorePassword);
-//        sslConnector.setKeyPassword(keystorePassword);
-//        sslConnector.setTrustPassword(keystorePassword);
-//
-//
-//        SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
-//        selectChannelConnector.setPort(httpPort);
-//        server.setConnectors( new Connector[]{ sslConnector, selectChannelConnector } );
     }
 
     public void start() {
