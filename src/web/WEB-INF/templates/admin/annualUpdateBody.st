@@ -3,11 +3,14 @@
     <p>This means that for example, students in class LKG will move up to UKG.</p>
 </div>
 <div class='lastUpdate'>
-      <p>The records were last updated on: ---- </p>
+      <p>The records were last updated on: <span id='updateDate'>$if(classUpdateDate)$ $classUpdateDate$ $else$-- - -- - ----$endif$</span></p>
 </div>
-
-<div class="buttonBar">
-    <form action="/admin/annualupdate" method="POST">
-        <input type="submit" name="submit" value="Update students" />
-    </form>
-</div>
+$if(!classAlreadyUpdated)$
+    <div class="buttonBar">
+        <form action="/admin/annualupdate" method="POST">
+            <input type="submit" name="submit" value="Update students" />
+        </form>
+    </div>
+$else$
+    <p> Class has already been updated this year</p>
+$endif$

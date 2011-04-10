@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.student.StudentService;
 
+import java.util.Map;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -25,7 +28,11 @@ public class AdminController {
     }
 
     @RequestMapping(value="annualupdate", method= GET)
-    public String annualUpdateBody(){
+    public String annualUpdateBody( Map<String, Object> model){
+
+        model.put("classUpdateDate",studentService.getLastClassUpdateDate());
+        model.put("classAlreadyUpdated",studentService.classHasBeenUpdatedThisYear());
+
         return "admin/annualUpdate";
     }
 

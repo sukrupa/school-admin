@@ -13,12 +13,12 @@ import java.sql.Timestamp;
 @Table(name = "SYSTEM_EVENT_LOG")
 public class SystemEventLog {
 
-//    @Column()
     @Id
+    @Column(name = "EVENT")
     private String event;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @Column(name = "lastHappened")
+    @Column(name = "LAST_HAPPENED")
     private LocalDate dateHappened;
 
     @DoNotRemove
@@ -54,9 +54,14 @@ public class SystemEventLog {
         return result;
     }
 
-    public void newEntry(LocalDate newDate) {
+    public SystemEventLog newEntry(LocalDate newDate) {
         if (dateHappened.compareTo(newDate)== -1) {
             this.dateHappened = newDate;
         }
+        return this;
+    }
+
+    boolean happenedThisYear() {
+        return dateHappened.getValue(0) == Date.now().year();
     }
 }

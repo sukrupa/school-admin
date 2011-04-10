@@ -14,10 +14,14 @@ public class ReferenceData {
     private List<String> TALENTS;
     private List<String> STATUSES;
     private boolean SPONSORED;
+    private List<String> OCCUPATIONS;
+    private List<String> MARITAL_STATUSES;
     private int AGES_FROM;
     private int AGES_TO;
 
-    public ReferenceData(List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes, List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to, List<String> statusesIn, boolean sponsored) {
+    public ReferenceData(List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes,
+                         List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to,
+                         List<String> statusesIn, boolean sponsored, List<String> occupations, List<String> marital_statues) {
         STUDENT_CLASSES = student_classes;
         GENDERS = genders;
         CASTES = castes;
@@ -29,6 +33,8 @@ public class ReferenceData {
         AGES_TO = ages_to;
         STATUSES = statusesIn;
         SPONSORED = sponsored;
+        OCCUPATIONS = occupations;
+        MARITAL_STATUSES = marital_statues;
     }
 
     public List<String> getStudentClasses() {
@@ -82,4 +88,13 @@ public class ReferenceData {
     public boolean getSponsored() {
         return SPONSORED;
     }
+
+    public List<String> getOccupations() {
+        return OCCUPATIONS;
+    }
+
+    public List<String> getMaritalStatuses() {
+        return MARITAL_STATUSES;
+    }
+
 }

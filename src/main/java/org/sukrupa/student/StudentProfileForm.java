@@ -18,6 +18,7 @@ public class StudentProfileForm {
     private String communityLocation;
     private Caregiver father = new Caregiver();
     private Caregiver mother = new Caregiver();
+    private Caregiver guardian = new Caregiver();
     private Set<String> talents;
     private String status;
     private boolean sponsored;
@@ -26,7 +27,9 @@ public class StudentProfileForm {
     private String background;
     private CommonsMultipartFile imageToUpload;
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Set<String> talents, String status, boolean sponsored, String disciplinary, String performance, String background) {
+
+
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -38,6 +41,7 @@ public class StudentProfileForm {
         this.communityLocation = communityLocation;
         this.father = father;
         this.mother = mother;
+        this.guardian = guardian;
         this.talents = talents;
         this.status = status;
         this.sponsored = sponsored;
@@ -196,5 +200,8 @@ public class StudentProfileForm {
 
     public void setSponsored(boolean sponsored) {
             this.sponsored = sponsored;
+    }
+    public Caregiver getGuardian() {
+        return guardian;
     }
 }
