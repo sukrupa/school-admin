@@ -34,7 +34,7 @@ public class AnnualClassUpdateWorkflow {
 	}
 
 	public void thenIShouldBeTakenToTheSuccessPage() throws Exception {
-		assertThat(browser.title(), is("Updated all students successfully"));
+		assertThat(browser.title(), is("Annual Class Update: Success"));
 	}
 
 	public void whenIGoToStudentList() throws Exception {
@@ -89,7 +89,7 @@ public class AnnualClassUpdateWorkflow {
 	}
 
 	public void thenIShouldBeTakenToTheConfirmationPage() throws Exception {
-		assertThat(browser.title(), is("Annual Class Update Confirmation"));
+		assertThat(browser.title(), is("Annual Class Update: Confirmation"));
 	}
 	
 
@@ -118,7 +118,6 @@ public class AnnualClassUpdateWorkflow {
 	public void whenIClickTheLink(String linkName) throws Exception {
 		browser.link(linkName).click();
 	}
-
 
 }
 
