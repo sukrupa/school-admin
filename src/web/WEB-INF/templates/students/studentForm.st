@@ -110,6 +110,10 @@
                 <input type="file" name="imageToUpload" />
             </div>
 
+             <div class="editStatus">
+                <div class="sponsoredLabel">Sponsored?</div>
+                <input type="checkbox" name="sponsored" id="sponsored" class="updateSponsoredValue" value="true" $if (student.sponsored)$ checked $endif$>
+            </div>
 
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>

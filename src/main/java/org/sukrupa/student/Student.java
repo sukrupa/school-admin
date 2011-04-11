@@ -6,10 +6,12 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
+import org.sukrupa.event.Event;
 import org.sukrupa.platform.DoNotRemove;
 
 import javax.persistence.*;
@@ -74,12 +76,15 @@ public class Student {
     @JoinColumn(name = "student_profile", referencedColumnName = "id")
     private Profile profile;
 
-
     @ManyToMany
     @JoinTable(name = "STUDENT_TALENT",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
+
+    @ManyToMany(mappedBy = "attendees")
+    private Set<Event> events;
+
     @OrderBy("date desc")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "STUDENT_NOTE",
@@ -91,6 +96,9 @@ public class Student {
     @Enumerated(EnumType.ORDINAL)
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
+    @Column(name = "SPONSORED")
+    private boolean sponsored;
+
     @DoNotRemove
     public Student() {
     }
@@ -98,7 +106,8 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
-                   StudentStatus status, String disciplinary, String performance, Profile profile) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events) {
+
         this.studentId = setStudentId(studentId);
         this.name = name;
         this.religion = religion;
@@ -114,12 +123,14 @@ public class Student {
         this.talents = talents;
         this.notes = notes;
         this.imageLink = imageLink;
+        this.events = events;
 
         if(status == null) {
             status = StudentStatus.EXISTING_STUDENT;
         }
 
         this.status = status;
+        this.sponsored = sponsored;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -184,6 +195,10 @@ public class Student {
         return gender;
     }
 
+    public boolean getSponsored() {
+        return sponsored;
+    }
+
     public String getStudentClass() {
         return studentClass;
     }
@@ -212,12 +227,27 @@ public class Student {
         return StringUtils.join(talentDescriptions(), ", ");
     }
 
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public String getEventsForDisplay() {
+        List<String> eventTitles = new ArrayList<String>();
+
+        for (Event event : events) {
+            eventTitles.add(event.getTitle());
+        }
+
+        return StringUtils.join(eventTitles,", ");
+    }
+
     public List<String> talentDescriptions() {
         List<String> talentDescriptions = new ArrayList<String>();
 
         for (Talent talent : talents) {
             talentDescriptions.add(talent.getDescription());
         }
+
         return talentDescriptions;
     }
 
@@ -284,6 +314,7 @@ public class Student {
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+        this.sponsored = studentUpdateParameters.getSponsored();
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);

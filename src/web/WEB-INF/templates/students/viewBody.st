@@ -65,12 +65,15 @@
                  <div class="value inline-block" id="student-performance" name="student-performance">$student.performance$</div>
             </div>
 
-
             <div class="entry">
                  <div class="label inline-block">Disciplinary</div>
                  <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
             </div>
 
+            <div class="entry">
+                 <div class="label inline-block">Events</div>
+                 <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
+            </div>
 
         </div>
         <div id="secondaryInfo">
@@ -80,6 +83,16 @@
             </div>
 
             <img src="/application/images/$student.imageLink$" class="studentImage" id="$student.imageLink$">
+
+             <div class="entry">
+                <div class="label">Sponsored?</div>
+                <div>  $if(student.sponsored)$
+                 <input type="checkbox" checked disabled></input>
+                 $else$
+                 <input type="checkbox" disabled></input>
+                 $endif$</div>
+            </div>
+
 
             <div id="talents">
                 <div class="talentsLabel">Talents</div>
