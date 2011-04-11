@@ -21,11 +21,11 @@ public class AnnualClassUpdateWorkflow {
 		this.browser = browser;
 	}
 
-	public void givenIAmOnTheAnnualClassUpdatePage() throws Exception {
+	public void thenIShouldBeOnTheAnnualClassUpdatePage() throws Exception {
 		assertThat(browser.title(), is("Annual Class Update"));
 	}
 
-	public void thenThereShouldBeAnInformationMessage() throws Exception {
+	public void andThereShouldBeAnInformationMessage() throws Exception {
 		assertThat(browser.div("informationMessage").exists(), is(true));
 	}
 
@@ -86,6 +86,37 @@ public class AnnualClassUpdateWorkflow {
 
 	public void thenIShouldNotSeeTheButtonToUpdate() throws Exception {
 		assertFalse(browser.button("submit").exists());
+	}
+
+	public void thenIShouldBeTakenToTheConfirmationPage() throws Exception {
+		assertThat(browser.title(), is("Annual Class Update Confirmation"));
+	}
+	
+
+
+	public void thenIShouldBeRedirectedToTheAdminPage() throws Exception {
+		assertThat(browser.title(), is("Admin"));
+	}
+
+	public void givenIAmOnTheConfirmationPage() throws Exception {
+		browser.navigateTo("http://localhost:8080/admin/annualupdate/confirmation");
+		thenIShouldBeTakenToTheConfirmationPage();
+	}
+
+	public void whenIClickTheSubmit(String submitName) throws Exception {
+		browser.submit(submitName).click();
+	}
+
+	public void whenIClickTheButton(String buttonName) throws Exception {
+		browser.button(buttonName).click();
+	}
+
+	public void givenIAmOnTheAdminPage() throws Exception {
+		assertThat(browser.title(), is("Admin"));
+	}
+
+	public void whenIClickTheLink(String linkName) throws Exception {
+		browser.link(linkName).click();
 	}
 
 

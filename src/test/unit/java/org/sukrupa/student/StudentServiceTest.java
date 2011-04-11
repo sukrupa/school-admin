@@ -166,7 +166,7 @@ public class StudentServiceTest {
 
 
     @Test
-    public void shouldLetUsPromoteStudentsIfItWasDoneLastDoneLastYear() {
+    public void shouldLetUsPromoteStudentsIfItWasDoneLastYear() {
         // given
         Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
 

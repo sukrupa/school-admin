@@ -1,18 +1,14 @@
 package org.sukrupa.student;
 
-import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.event.Event;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.platform.date.Date;
 
 import java.util.List;
 import java.util.Set;
-
-import static java.lang.String.format;
 
 @Service
 public class StudentService {
@@ -31,7 +27,7 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+        ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
@@ -95,22 +91,22 @@ public class StudentService {
     }
 
     public void promoteStudentsToNextClass() {
-        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+          SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
         if (!hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
-            for (Student student : students) {
-                student.promote();
+                        for (Student student : students) {
+                            student.promote();
 
                 studentRepository.put(student);
             }
 
             LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
 
-            if (annualClassUpdateEventLog == null) {
-                SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE, currentDate);
+            if (annualClassUpdateEventLog==null){
+                SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,currentDate);
                 systemEventLogRepository.put(annualUpdateLog);
 
-            } else {
+            }else{
                 systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(currentDate));
             }
         }
@@ -119,9 +115,9 @@ public class StudentService {
 
     public String getLastClassUpdateDate() {
         SystemEventLog eventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
-        if (null != eventLog && eventLog.lastHappened() != null) {
+        if(null != eventLog && eventLog.lastHappened() != null){
             return eventLog.lastHappened().toString("dd-MM-yyyy");
-        } else {
+        }else{
             return null;
         }
     }
@@ -134,7 +130,7 @@ public class StudentService {
     private boolean hasBeenUpdatedThisYear(SystemEventLog systemEventLog) {
         if (systemEventLog == null) {
             return false;
-        } else {
+        }else{
             return systemEventLog.happenedThisYear();
         }
     }

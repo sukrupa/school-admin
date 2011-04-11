@@ -1,6 +1,0 @@
-Tags:
-Preconditions:navigate to admin page,log in,log out afterwards
-Admin Page Workflow:
-#Given I am on the admin page
-#When I click the perform annual class update link
-#I should be taken to the annual class update page
