@@ -1,5 +1,6 @@
-Tags:
-Preconditions:Navigate to admin page,Log in,Log out afterwards
+Tags:in-progress
+Preconditions:Exploding Student,navigate to admin page,log in,log out afterwards
+h1.
 Annual Class Update Workflow:
 #Given I am on the Admin page
 #When I click the link "Annual Class Update"
@@ -8,9 +9,6 @@ Annual Class Update Workflow:
 #And I should see the date "20-12-2009"
 #When I click the update students button
 #Then I should be taken to the confirmation page
-#When I click the button "No"
-#Then I should be redirected to the admin page
-# Given I am on the confirmation page
 #When I click the submit "Yes"
 #Then I should be taken to the success page
 #When I go to the annual class update page
@@ -36,4 +34,4 @@ Annual Class Update Workflow:
 #And it should have the class "3 Std"
 #Then it should have the status "dropout"
 #When I go to the annual class update page
-#Then I should not see the button to update
+
