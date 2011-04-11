@@ -22,6 +22,8 @@
             depends="db:start:check, db:start:status, db:start:server, db:start:first-time"/>
 
     <target name="db:start:check">
+        <echo message="Checking for file: ${db.dir}/${db.name}.script" />
+        <echo message="Checking for file: ${db.dir}/${db.name}.lck" />
         <available file="${db.dir}/${db.name}.script" property="db.exists"/>
         <available file="${db.dir}/${db.name}.lck" property="db.server.running"/>
     </target>
