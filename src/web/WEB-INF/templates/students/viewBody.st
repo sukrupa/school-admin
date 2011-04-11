@@ -72,7 +72,7 @@
 
             <div class="entry">
                  <div class="label inline-block">Events</div>
-                 <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDiaplay$</div>
+                 <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
             </div>
 
         </div>

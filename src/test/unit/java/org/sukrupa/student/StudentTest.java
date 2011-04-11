@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
-import org.sukrupa.platform.date.Date;
 
 import java.util.*;
 
@@ -210,7 +209,7 @@ public class StudentTest {
         setOfEvents.add(backstreetBoys);
 
         Student student = new StudentBuilder().events(setOfEvents).build();
-        assertThat(student.getEventsForDiaplay(), is("Backstreet Boys, Spice Girls"));
+        assertThat(student.getEventsForDisplay(), is("Backstreet Boys, Spice Girls"));
     }
 
     private Student promoteStudent(String studentClass) {

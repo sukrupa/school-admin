@@ -223,7 +223,7 @@ public class Student {
         return events;
     }
 
-    public String getEventsForDiaplay() {
+    public String getEventsForDisplay() {
         List<String> eventTitles = new ArrayList<String>();
 
         for (Event event : events) {
