@@ -19,6 +19,10 @@ public class StudentEditFormHelper {
         return createCheckBoxList(referenceData.getTalents(), student.talentDescriptions());
     }
 
+//    public List<CheckBoxElement> getSponsoredCheckBox() {
+//        return createCheckBox(referenceData.getTalents(), student.talentDescriptions());
+//    }
+
     public List<DropDownElement> getSubCastesDropDownList() {
         return createDropDownList(referenceData.getSubcastes(), student.getSubCaste());
     }

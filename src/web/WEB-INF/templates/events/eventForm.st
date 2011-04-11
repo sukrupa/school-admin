@@ -37,9 +37,7 @@
     <div class="eventInfoRight">
         <div class="createEntry">
             <div class="label">Description<span class="mandatory">*</span></div>
-            <textarea name="description" id="description" class="createValue" rows="7.5"
-                      cols="30">$event.description$</textarea>
-        </div>
+            <textarea name="description" id="description" class="createValue" rows="7.5"cols="30">$event.description$</textarea></div>
 
 
         <div class="createEntry">

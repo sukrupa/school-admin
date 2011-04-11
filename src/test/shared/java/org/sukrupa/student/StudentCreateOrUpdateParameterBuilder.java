@@ -24,6 +24,8 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String disciplinary;
     private String performance;
     private String background;
+    private boolean sponsored;
+
 
     public StudentCreateOrUpdateParameterBuilder studentId(String studentId) {
         this.studentId = studentId;
@@ -117,6 +119,11 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentCreateOrUpdateParameterBuilder status(StudentStatus statusIn) {
         this.status = statusIn;
+        return this;
+    }
+
+    public StudentCreateOrUpdateParameterBuilder sponsored(boolean sponsored) {
+        this.sponsored = sponsored;
         return this;
     }
 }

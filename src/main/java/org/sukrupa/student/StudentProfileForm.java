@@ -20,13 +20,13 @@ public class StudentProfileForm {
     private Caregiver mother = new Caregiver();
     private Caregiver guardian = new Caregiver();
     private Set<String> talents;
-
     private String status;
+    private boolean sponsored;
     private String disciplinary;
     private String performance;
     private String background;
-
     private CommonsMultipartFile imageToUpload;
+
 
 
     public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background) {
@@ -44,6 +44,7 @@ public class StudentProfileForm {
         this.guardian = guardian;
         this.talents = talents;
         this.status = status;
+        this.sponsored = sponsored;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.background = background;
@@ -193,6 +194,13 @@ public class StudentProfileForm {
         return this.background;
     }
 
+    public boolean getSponsored() {
+        return sponsored;
+    }
+
+    public void setSponsored(boolean sponsored) {
+            this.sponsored = sponsored;
+    }
     public Caregiver getGuardian() {
         return guardian;
     }

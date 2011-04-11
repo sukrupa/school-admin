@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
+import org.springframework.web.util.HtmlUtils;
 import org.sukrupa.platform.DoNotRemove;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
@@ -144,7 +145,8 @@ public class Event {
     }
 
     public String getDescription() {
-        return description;
+        String blah = HtmlUtils.htmlEscape(description);
+        return description.trim();
     }
 
     public String getNotes() {
