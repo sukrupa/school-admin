@@ -5,6 +5,11 @@ Annual Class Update Workflow:
 #Then there should be an information message
 #And I should see the date "20-12-2009"
 #When I click the update students button
+#Then I should be taken to the confirmation page
+#When I click the button "No"
+#Then I should be redirected to the admin page
+# Given I am on the confirmation page
+#When I click the submit "Yes"
 #Then I should be taken to the success page
 #When I go to the annual class update page
 #Then I should see a new date of last update

@@ -88,6 +88,29 @@ public class AnnualClassUpdateWorkflow {
 		assertFalse(browser.button("submit").exists());
 	}
 
+	public void thenIShouldBeTakenToTheConfirmationPage() throws Exception {
+		assertThat(browser.title(), is("Annual Class Update Confirmation"));
+	}
+	
+
+
+	public void thenIShouldBeRedirectedToTheAdminPage() throws Exception {
+		assertThat(browser.title(), is("Admin"));
+	}
+
+	public void givenIAmOnTheConfirmationPage() throws Exception {
+		browser.navigateTo("http://localhost:8080/admin/annualupdate/confirmation");
+		thenIShouldBeTakenToTheConfirmationPage();
+	}
+
+	public void whenIClickTheSubmit(String string1) throws Exception {
+		browser.submit(string1).click();
+	}
+
+	public void whenIClickTheButton(String string1) throws Exception {
+		browser.button(string1).click();
+	}
+
 
 }
 
