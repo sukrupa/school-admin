@@ -21,6 +21,8 @@ import java.util.Set;
 @Proxy(lazy = false)
 public class Event {
 
+    private static final String[] EXCLUDE_THESE_FIELDS_FROM_EQUALS_HASHCODE = new String[]{"id", "attendees"};
+
     @Id
     @GeneratedValue
     @Column(name = "ID")
@@ -46,8 +48,8 @@ public class Event {
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
-            joinColumns = {@JoinColumn(name = "EVENT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")})
+            joinColumns = @JoinColumn(name = "EVENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID"))
     private Set<Student> attendees;
 
     @DoNotRemove
@@ -55,7 +57,8 @@ public class Event {
     }
 
 
-    public Event(String title, Date date, String venue, String coordinator, String description, String notes, Set<Student> attendees) {
+    public Event(String title, Date date, String venue, String coordinator, String description, String notes,
+                 Set<Student> attendees) {
         this.title = title;
         this.date = date;
         this.venue = venue;
@@ -124,15 +127,12 @@ public class Event {
         return attendees;
     }
 
-    @Transient
-    private String[] excludedFields = new String[]{"id"};
-
     public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other, excludedFields);
+        return EqualsBuilder.reflectionEquals(this, other, EXCLUDE_THESE_FIELDS_FROM_EQUALS_HASHCODE);
     }
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, excludedFields);
+        return HashCodeBuilder.reflectionHashCode(this, EXCLUDE_THESE_FIELDS_FROM_EQUALS_HASHCODE);
     }
 
     public String toString() {

@@ -13,6 +13,7 @@ import java.util.Set;
 @Service
 public class StudentService {
 
+    private static final String ANNUAL_CLASS_UPDATE = "annual class update";
     StudentRepository studentRepository;
     private TalentRepository talentRepository;
     private ReferenceDataRepository referenceDataRepository;
@@ -26,7 +27,7 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+        ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
@@ -90,21 +91,47 @@ public class StudentService {
     }
 
     public void promoteStudentsToNextClass() {
-        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find("annual class update");
-        if (annualClassUpdateEventLog == null || !happenedThisYear(annualClassUpdateEventLog)) {
+          SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+        if (!hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
-
-            for (Student student : students) {
-                student.promote();
+                        for (Student student : students) {
+                            student.promote();
 
                 studentRepository.put(student);
             }
 
+            LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
 
+            if (annualClassUpdateEventLog==null){
+                SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,currentDate);
+                systemEventLogRepository.put(annualUpdateLog);
+
+            }else{
+                systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(currentDate));
+            }
         }
     }
 
-    private boolean happenedThisYear(SystemEventLog annualClassUpdateEventLog) {
-        return annualClassUpdateEventLog.lastHappened().getValue(0) == Date.now().year();
+
+    public String getLastClassUpdateDate() {
+        SystemEventLog eventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+        if(null != eventLog && eventLog.lastHappened() != null){
+            return eventLog.lastHappened().toString("dd-MM-yyyy");
+        }else{
+            return null;
+        }
+    }
+
+    public boolean classHasBeenUpdatedThisYear() {
+        SystemEventLog eventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+        return hasBeenUpdatedThisYear(eventLog);
+    }
+
+    private boolean hasBeenUpdatedThisYear(SystemEventLog systemEventLog) {
+        if (systemEventLog == null) {
+            return false;
+        }else{
+            return systemEventLog.happenedThisYear();
+        }
     }
 }

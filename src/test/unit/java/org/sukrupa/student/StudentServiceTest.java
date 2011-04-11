@@ -8,16 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.date.DateManipulation;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,6 +37,7 @@ public class StudentServiceTest {
     private static final String MUSIC = "Music";
     private static final String SPORT = "Sport";
     private static final String COOKING = "Cooking";
+    private static final String ANNUAL_CLASS_UPDATE = "annual class update";
 
     private final Talent music = new Talent(MUSIC);
     private final Talent sport = new Talent(SPORT);
@@ -58,7 +62,7 @@ public class StudentServiceTest {
     public void setUp() throws Exception {
         initMocks(this);
         service = new StudentService(studentRepository, talentRepository, null, studentFactory, systemEventLogRepository);
-        freezeDateToMidnightOn(30,12,2011);
+        freezeDateToMidnightOn(30,12,2011); //This is actually the 29th?
     }
 
     @After
@@ -131,7 +135,7 @@ public class StudentServiceTest {
         // when
         when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
 
-        String eventName = "annual class update";
+        String eventName = ANNUAL_CLASS_UPDATE;
         SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
         when(systemEventLogRepository.find(eventName)).thenReturn(null).thenReturn(lastRunLog);
 
@@ -151,7 +155,7 @@ public class StudentServiceTest {
         // when
         when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
 
-        String eventName = "annual class update";
+        String eventName = ANNUAL_CLASS_UPDATE;
         SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2011, 03, 20));
         when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
 
@@ -162,20 +166,50 @@ public class StudentServiceTest {
 
 
     @Test
-    public void shouldLetUsPromoteStudentsIfItWasDoneLastDoneLastYear() {
+    public void shouldLetUsPromoteStudentsIfItWasDoneLastYear() {
         // given
         Student Sahil = new StudentBuilder().name("sahil").studentClass("2 Std").build();
 
         // when
         when(studentRepository.findAll()).thenReturn(Collections.singletonList(Sahil));
 
-        String eventName = "annual class update";
+        String eventName = ANNUAL_CLASS_UPDATE;
         SystemEventLog lastRunLog = new SystemEventLog(eventName, new LocalDate(2010, 03, 20));
         when(systemEventLogRepository.find(eventName)).thenReturn(lastRunLog);
 
         service.promoteStudentsToNextClass();
 
         assertEquals("3 Std", Sahil.getStudentClass());
+    }
+
+    @Test
+    public void shouldUpdateExistingSystemEventLogWhenPromoting() {
+        SystemEventLog eventLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,new LocalDate(2010,03,20));
+        when(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE)).thenReturn(eventLog);
+        service.promoteStudentsToNextClass();
+        LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
+        assertThat(eventLog.lastHappened(),is(currentDate));
+    }
+
+    @Test
+    public void getLastUpdateDateBeforeAnyUpdateShouldReturnNull(){
+        when(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE)).thenReturn(null);
+        assertNull(service.getLastClassUpdateDate());
+    }
+
+    @Test
+    public void getLastUpdateDateAfterAnUpdateSHouldReturnTheDateOfLastUpdate(){
+        SystemEventLog eventLog = mock(SystemEventLog.class);
+        when(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE)).thenReturn(eventLog);
+        service.getLastClassUpdateDate();
+        verify(eventLog).lastHappened();
+    }
+
+    @Test
+    public void shouldCreateEventLogIfNonExistantWhenPromoting() {
+        when(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE)).thenReturn(null);
+        service.promoteStudentsToNextClass();
+        verify(systemEventLogRepository).put(any(SystemEventLog.class));
     }
 
     @Test
@@ -204,6 +238,8 @@ public class StudentServiceTest {
         Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
+
+
 
     @Test
     public void shouldUpdateStudentStatus() {
