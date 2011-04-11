@@ -1,8 +1,10 @@
 Tags:
-Preconditions:Navigate to annual update page,Log in,Log out afterwards
+Preconditions:Navigate to admin page,Log in,Log out afterwards
 Annual Class Update Workflow:
-#Given I am on the Annual class update page
-#Then there should be an information message
+#Given I am on the Admin page
+#When I click the link "Perform Annual Class Update"
+#Then I should be on the annual class update page
+#And there should be an information message
 #And I should see the date "20-12-2009"
 #When I click the update students button
 #Then I should be taken to the confirmation page

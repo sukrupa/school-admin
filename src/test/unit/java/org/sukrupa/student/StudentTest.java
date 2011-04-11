@@ -132,6 +132,14 @@ public class StudentTest {
     }
 
     @Test
+    public void shouldNotPromoteIfNoClass(){
+       Student noClassStudent = new StudentBuilder().studentClass("").build();
+
+       noClassStudent.promote();
+       assertEquals("", noClassStudent.getStudentClass());
+    }
+
+    @Test
     public void shouldNotChangeAlumni(){
         Student alumnus = new StudentBuilder().status(StudentStatus.ALUMNI).build();
         alumnus.promote();
