@@ -1,1 +1,1 @@
-<a href="/admin/annualupdate">Perform Annual Class Update</a>
+<a href="/admin/annualupdate">Annual Class Update</a>

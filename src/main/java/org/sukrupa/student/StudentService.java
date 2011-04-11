@@ -95,12 +95,13 @@ public class StudentService {
         if (!hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
                         for (Student student : students) {
-                student.promote();
+                            student.promote();
+
 
                 studentRepository.put(student);
             }
 
-            LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
+                LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
 
             if (annualClassUpdateEventLog==null){
                 SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,currentDate);
@@ -109,6 +110,8 @@ public class StudentService {
             }else{
                 systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(currentDate));
             }
+
+            //studentRepository.flushSession();
         }
     }
 
