@@ -234,11 +234,24 @@ public class Student {
     public String getEventsForDisplay() {
         List<String> eventTitles = new ArrayList<String>();
 
-        for (Event event : events) {
+        for (Event event : alphabeticallyOrderedEvents()) {
             eventTitles.add(event.getTitle());
         }
 
         return StringUtils.join(eventTitles,", ");
+    }
+
+    private ArrayList<Event> alphabeticallyOrderedEvents() {
+        ArrayList<Event> eventsAsList = new ArrayList<Event>(events);
+
+        Collections.sort(eventsAsList, new Comparator<Event>() {
+            @Override
+            public int compare(Event first, Event second) {
+                return first.getTitle().compareTo(second.getTitle());
+            }
+        });
+
+        return eventsAsList;
     }
 
     public List<String> talentDescriptions() {
