@@ -303,6 +303,13 @@ text-decoration: none;
     height: 30px;
 }
 
+.sponsoredLabel {
+    width: 112px;
+    float: left;
+    padding-left: 39px;
+    font-weight: bold;
+    height: 30px;
+}
 .value {
     float: left;
     width: 250px;
@@ -317,6 +324,12 @@ text-decoration: none;
     float: left;
     width: 140px;
 }
+
+.updateSponsoredValue {
+    float: left;
+    width: 140px;
+}
+
 #update {
     clear: both;
     margin-top: 50px;

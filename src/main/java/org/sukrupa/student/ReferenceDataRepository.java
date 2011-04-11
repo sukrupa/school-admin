@@ -33,9 +33,10 @@ public class ReferenceDataRepository {
             "Office Boy", "Office Man", "Painter","Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant","Store Keeper",
             "Tailor", "Teacher", "Truck Driver", "TV Operator","Ward Boy","Welder");
 
+    private final boolean SPONSORED = false;
     private final List<String> MARITAL_STATUSES = Arrays.asList(" ","Married", "Single", "Divorced", "Widowed", "Deceased");
 
-    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, OCCUPATIONS, MARITAL_STATUSES);
+    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, SPONSORED, OCCUPATIONS, MARITAL_STATUSES);
 
     public ReferenceData getReferenceData() {
         return referenceData;

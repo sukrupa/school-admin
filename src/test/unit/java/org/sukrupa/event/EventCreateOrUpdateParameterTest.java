@@ -17,4 +17,11 @@ public class EventCreateOrUpdateParameterTest {
         eventCreateOrUpdateParameter.setAttendees("1,2,3");
         assertThat(eventCreateOrUpdateParameter.getStudentIdsOfAttendees(), hasOnly("1","2","3"));
     }
+
+    @Test
+    public void shouldReturnStudentIdOfAttendeesWithoutEnter() {
+        EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
+        eventCreateOrUpdateParameter.setAttendees("34545, 83415, 64262\r\n");
+        assertThat(eventCreateOrUpdateParameter.getStudentIdsOfAttendees(), hasOnly("34545", "83415", "64262"));
+    }
 }

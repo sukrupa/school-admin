@@ -96,6 +96,9 @@ public class Student {
     @Enumerated(EnumType.ORDINAL)
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
+    @Column(name = "SPONSORED")
+    private boolean sponsored;
+
     @DoNotRemove
     public Student() {
     }
@@ -127,6 +130,7 @@ public class Student {
         }
 
         this.status = status;
+        this.sponsored = sponsored;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -189,6 +193,10 @@ public class Student {
 
     public String getGender() {
         return gender;
+    }
+
+    public boolean getSponsored() {
+        return sponsored;
     }
 
     public String getStudentClass() {
@@ -306,6 +314,7 @@ public class Student {
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+        this.sponsored = studentUpdateParameters.getSponsored();
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);
