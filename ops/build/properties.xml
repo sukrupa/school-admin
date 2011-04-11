@@ -56,6 +56,7 @@
 
     <property name="tools.dir" value="${module.dir}/tools"/>
     <property name="tools.ant.dir" value="${tools.dir}/apache-ant-1.8.2"/>
+    <property name="tools.importer.dir" value="${tools.dir}/sukrupa-import"/>
 
     <property name="ops.dir" value="${module.dir}/ops"/>
     <property name="ops.build.dir" value="${ops.dir}/build"/>
