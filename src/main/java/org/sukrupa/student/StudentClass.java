@@ -33,6 +33,7 @@ public enum StudentClass {
     }
 
     public static StudentClass fromDisplayName(String displayName) {
+
         StudentClass displayNameClass = null;
         for(StudentClass studentClass : StudentClass.values()) {
             if(studentClass.displayName.equals(displayName)) {

@@ -19,16 +19,10 @@
           <p class="indent">
               <a href="/students">View Students</a>
           </p>
-<<<<<<< HEAD
-
-          <!--
-=======
-              <!--
->>>>>>> facc9b793e16fd7884f2bcd437d3c6fbc507729d
            <p class="indent">
               <a href="/students/create">Add New Student</a>
           </p>
-          -->
+
 
       </li>
 
