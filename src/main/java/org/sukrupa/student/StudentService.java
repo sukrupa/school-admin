@@ -20,6 +20,7 @@ public class StudentService {
     private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
     private SystemEventLogRepository systemEventLogRepository;
+    private int classUpdateCount;
 
     @DoNotRemove
     StudentService() {
@@ -91,12 +92,16 @@ public class StudentService {
     }
 
     public void promoteStudentsToNextClass() {
-
+           classUpdateCount = 0;
           SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
         if (!hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
                         for (Student student : students) {
+                            if (student.getStatus() == StudentStatus.EXISTING_STUDENT) {
+                                classUpdateCount++;
+                            }
                             student.promote();
+
 
 
 
@@ -137,5 +142,9 @@ public class StudentService {
         }else{
             return systemEventLog.happenedThisYear();
         }
+    }
+
+    public int getClassUpdateCount() {
+        return classUpdateCount;
     }
 }
