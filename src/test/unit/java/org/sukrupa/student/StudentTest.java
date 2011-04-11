@@ -6,10 +6,10 @@ import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sukrupa.event.Event;
+import org.sukrupa.event.EventBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -110,7 +110,7 @@ public class StudentTest {
         assertEquals("10 Std", promoteStudent("9 Std").getStudentClass());
         assertEquals("UKG",promoteStudent("LKG").getStudentClass());
         assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
-        assertEquals("LKG",promoteStudent("Preschool").getStudentClass());
+        assertEquals("LKG", promoteStudent("Preschool").getStudentClass());
     }
 
     @Test
@@ -173,6 +173,51 @@ public class StudentTest {
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
 
+    }
+
+    @Test
+    public void testStudentHasAnEvent(){
+        Event event = new EventBuilder().title("Spice Girls")
+                                        .build();
+
+        Set<Event> setOfEvents = new HashSet<Event>();
+        setOfEvents.add(event);
+
+        Student student = new StudentBuilder().events(setOfEvents).build();
+        assertThat(student.getEvents(), is(setOfEvents));
+    }
+
+    @Test
+    public void testStudentHasEvents(){
+        Event spiceGirls = new EventBuilder().title("Spice Girls")
+                                        .build();
+
+        Event backstreetBoys = new EventBuilder().title("Backstreet Boys")
+                                        .build();
+
+        Set<Event> setOfEvents = new HashSet<Event>();
+        setOfEvents.add(spiceGirls);
+        setOfEvents.add(backstreetBoys);
+
+        Student student = new StudentBuilder().events(setOfEvents).build();
+        assertThat(student.getEvents(), is(setOfEvents));
+    }
+
+    @Test
+    public void testStudentShouldDisplayEventsWithCommaFormat()
+    {
+        Event spiceGirls = new EventBuilder().title("Spice Girls")
+                                        .build();
+
+        Event backstreetBoys = new EventBuilder().title("Backstreet Boys")
+                                        .build();
+
+        Set<Event> setOfEvents = new HashSet<Event>();
+        setOfEvents.add(spiceGirls);
+        setOfEvents.add(backstreetBoys);
+
+        Student student = new StudentBuilder().events(setOfEvents).build();
+        assertThat(student.getEventsForDisplay(), is("Backstreet Boys, Spice Girls"));
     }
 
     private Student promoteStudent(String studentClass) {

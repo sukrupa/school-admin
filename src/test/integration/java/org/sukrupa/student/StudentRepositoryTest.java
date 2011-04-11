@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
 import org.springframework.transaction.annotation.*;
+import org.sukrupa.event.Event;
+import org.sukrupa.event.EventBuilder;
 import org.sukrupa.platform.config.*;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.platform.db.*;
@@ -34,6 +36,9 @@ public class StudentRepositoryTest {
     private final Talent music = new Talent(MUSIC);
     private final Talent sport = new Talent(SPORT);
     private final Talent cooking = new Talent(COOKING);
+
+    private final Event spiceGirls = new EventBuilder().title("Spice Girls").build();
+    private final Event michaelJackson = new EventBuilder().title("Michael Jackson").build();
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -98,6 +103,15 @@ public class StudentRepositoryTest {
             .studentClass("4th grade").dateOfBirth(new LocalDate(1987, 10, 1))
             .gender("Male").talents(music, sport)
             .status(StudentStatus.ALUMNI)
+            .events(spiceGirls)
+            .build();
+
+    private Student joel = new StudentBuilder()
+            .studentId("55667788").name("Joel")
+            .studentClass("1th grade").dateOfBirth(new LocalDate(1980, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.ALUMNI)
+            .events(spiceGirls, michaelJackson)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -116,7 +130,7 @@ public class StudentRepositoryTest {
     @Before
     public void setUp() throws Exception {
         studentRepository = new StudentRepository(sessionFactory, studentsSearchCriteriaGenerator);
-        hibernateSession.save(music, sport, cooking);
+        hibernateSession.save(music, sport, cooking, spiceGirls, michaelJackson);
     }
 
     @Test
@@ -312,7 +326,7 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldReturnTheStudentIfWeMatchIdButNotCase(){
+    public void shouldReturnTheStudentIfWeMatchIdButNotCase() {
         hibernateSession.save(yael);
 
         Student student = studentRepository.findByStudentId("sk555");
@@ -346,8 +360,6 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnAStudentIfWeMatchTheNamePartially() {
-        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
-
         hibernateSession.save(yael);
 
         String searchTerm = "Ya";
@@ -358,8 +370,6 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnAllStudentsIfWeMatchTheNamePartially() {
-        // Student yael = new Student("Ak2700", "Yael", "01-01-2001");
-
         hibernateSession.save(yael);
         hibernateSession.save(yam);
 
@@ -368,6 +378,39 @@ public class StudentRepositoryTest {
 
         assertThat(students, hasItem(yael));
         assertThat(students, hasItem(yam));
+    }
+
+    @Test
+    public void shouldReturnAllStudentWithAnEvent() {
+        studentRepository.put(toy);
+        Student student = studentRepository.findByStudentId(toy.getStudentId());
+        assertThat(student.getEvents(), CollectionMatchers.hasOnly(spiceGirls));
+    }
+
+    @Test
+    public void shouldReturnAllStudentHistoryEvents() {
+        studentRepository.put(joel);
+
+        Student student = studentRepository.findByStudentId(joel.getStudentId());
+
+        assertThat(student.getEvents(), CollectionMatchers.hasOnly(spiceGirls, michaelJackson));
+    }
+
+    /**
+     * We discovered that because of the many to many, when we try to compare events, it is
+     * recursing back to students because it was including the atendees in the equals comparison
+     * which was failing in hibernate
+     */
+    @Test
+    public void shouldBeAbleToCompareTheEventsAStudentHasAttended() {
+        studentRepository.put(joel);
+        studentRepository.put(toy);
+
+        Student student = studentRepository.findByStudentId(joel.getStudentId());
+
+        for (Event event : student.getEvents()) {
+            assertThat(event.equals(event), is(true));
+        }
     }
 
     private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {

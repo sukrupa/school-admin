@@ -292,6 +292,26 @@
       </CLASSES>
       <JAVADOC>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.asm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.servlet-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.core-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.expression-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.aop-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.test-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.context-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.instrument.tomcat-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.struts-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.instrument-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.portlet-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.oxm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.aspects-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.jdbc-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.transaction-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.jms-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.orm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.context.support-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.beans-sources-3.0.5.RELEASE.jar!/" />
       </JAVADOC>
       <SOURCES>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
@@ -322,6 +342,28 @@
         <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-server-7.2.2.v20101205-sources.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/jetty-security-7.2.2.v20101205-sources.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/commons-fileupload-1.2.2-src.zip!/commons-fileupload-1.2.2-src/src/java" />
+        <root url="file://$PROJECT_DIR$/../../lib/source" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.asm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.servlet-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.core-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.expression-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.aop-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.test-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.context-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.instrument.tomcat-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.struts-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.instrument-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.web.portlet-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.oxm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.aspects-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.jdbc-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.transaction-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.jms-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.orm-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.context.support-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.beans-sources-3.0.5.RELEASE.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/hibernate-core-3.6.0.Beta2-sources.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
     </library>
