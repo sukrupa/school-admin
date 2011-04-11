@@ -65,12 +65,15 @@
                  <div class="value inline-block" id="student-performance" name="student-performance">$student.performance$</div>
             </div>
 
-
             <div class="entry">
                  <div class="label inline-block">Disciplinary</div>
                  <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
             </div>
 
+            <div class="entry">
+                 <div class="label inline-block">Events</div>
+                 <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDiaplay$</div>
+            </div>
 
         </div>
         <div id="secondaryInfo">

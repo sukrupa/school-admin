@@ -1,20 +1,27 @@
 package org.sukrupa.student;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.sukrupa.event.Event;
 
 import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
+import static java.lang.String.format;
 
 @Repository
 public class StudentRepository {
+
+    private static final Logger LOG = Logger.getLogger(StudentService.class);
+
 
 	private SessionFactory sessionFactory;
 	private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;

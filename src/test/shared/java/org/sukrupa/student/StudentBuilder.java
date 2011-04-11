@@ -1,8 +1,11 @@
 package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
+import org.sukrupa.event.Event;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
@@ -29,7 +32,8 @@ public class StudentBuilder {
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private String disciplinary;
     private String performance;
-    private  Profile profile = new Profile();
+    private Profile profile = new Profile();
+    private Set<Event> events = new HashSet<Event>();
 
     public StudentBuilder name(String name) {
         this.name = name;
@@ -146,7 +150,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile, events);
     }
 
     public StudentBuilder imageLink(String imageLink) {
@@ -156,6 +160,16 @@ public class StudentBuilder {
 
     public StudentBuilder status(StudentStatus statusIn) {
         this.status = statusIn;
+        return this;
+    }
+
+    public StudentBuilder events(Set<Event> events) {
+        this.events = events;
+        return this;
+    }
+
+    public StudentBuilder events(Event... events) {
+        events(new HashSet<Event>(asList(events)));
         return this;
     }
 }
