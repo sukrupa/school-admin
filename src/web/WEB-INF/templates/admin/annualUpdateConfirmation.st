@@ -1,1 +1,1 @@
-$layout(body=admin/annualUpdateConfirmationBody(), title="Annual Class Update: Confirmation", scripts=["confirmUpdate"])$
+$layout(body=admin/annualUpdateConfirmationBody(), title="Annual Class Update: Confirmation", scripts=["confirmUpdate"], stylesheets="admin")$

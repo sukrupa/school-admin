@@ -1,1 +1,1 @@
-$layout(body=admin/annualUpdateSuccessBody(), title="Annual Class Update: Success")$
+$layout(body=admin/annualUpdateSuccessBody(), title="Annual Class Update: Success", stylesheets="admin")$

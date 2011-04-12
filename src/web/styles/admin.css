@@ -1,0 +1,12 @@
+.adminOptions ul {
+    position: left;
+}
+
+.adminOptions ul li {
+margin-left: 0px;
+    padding-left: 20px;
+}
+
+.annualUpdateBody {
+    padding-left: 20px;
+}

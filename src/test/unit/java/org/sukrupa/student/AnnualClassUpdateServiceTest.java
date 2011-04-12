@@ -24,7 +24,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 
-public class AnnaulClassUpdateServiceTest {
+public class AnnualClassUpdateServiceTest {
 
         private static final String ANNUAL_CLASS_UPDATE = "annual class update";
 
