@@ -20,7 +20,7 @@ import java.util.*;
 @Entity
 public class Student {
 
-	public static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
+    public static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
     private static final String PLACEHOLDER_IMAGE = "placeholderImage";
 
     @Id
@@ -99,8 +99,8 @@ public class Student {
     @Column(name = "SPONSORED")
     private boolean sponsored;
 
-    @Column(name= "FAMILY_STATUS")
-    private String familyStatus ;
+    @Column(name = "FAMILY_STATUS")
+    private String familyStatus;
 
     @DoNotRemove
     public Student() {
@@ -129,7 +129,7 @@ public class Student {
         this.events = events;
         this.familyStatus = familyStatus;
 
-        if(status == null) {
+        if (status == null) {
             status = StudentStatus.EXISTING_STUDENT;
         }
 
@@ -180,16 +180,16 @@ public class Student {
         return familyStatus;
     }
 
-    public String getDisciplinary(){
+    public String getDisciplinary() {
         return disciplinary;
     }
 
-    public String getPerformance(){
+    public String getPerformance() {
         return performance;
     }
 
-    public Profile getProfile(){
-        if(profile == null){
+    public Profile getProfile() {
+        if (profile == null) {
             this.profile = new Profile();
         }
         return profile;
@@ -246,7 +246,7 @@ public class Student {
             eventTitles.add(event.getTitle());
         }
 
-        return StringUtils.join(eventTitles,", ");
+        return StringUtils.join(eventTitles, ", ");
     }
 
     private ArrayList<Event> alphabeticallyOrderedEvents() {
@@ -277,10 +277,10 @@ public class Student {
     }
 
     public String getImageLink() {
-        if (imageLink==null){
+        if (imageLink == null) {
             return studentId;
         } else {
-        return imageLink;
+            return imageLink;
         }
     }
 
@@ -296,7 +296,7 @@ public class Student {
         return notes;
     }
 
-    public void setBackground(String background){
+    public void setBackground(String background) {
         this.getProfile().background(background);
     }
 
@@ -318,22 +318,22 @@ public class Student {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-	public String getDateOfBirthForDisplay() {
-		return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
-	}
+    public String getDateOfBirthForDisplay() {
+        return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
+    }
 
-	public void updateFrom(StudentProfileForm studentUpdateParameters, Set<Talent> newTalents) {
-		this.studentClass = studentUpdateParameters.getStudentClass();
-		this.gender = studentUpdateParameters.getGender();
-		this.name = studentUpdateParameters.getName();
-		this.religion = studentUpdateParameters.getReligion();
-		this.caste = studentUpdateParameters.getCaste();
-		this.subCaste = studentUpdateParameters.getSubCaste();
-		this.communityLocation = studentUpdateParameters.getCommunityLocation();
+    public void updateFrom(StudentProfileForm studentUpdateParameters, Set<Talent> newTalents) {
+        this.studentClass = studentUpdateParameters.getStudentClass();
+        this.gender = studentUpdateParameters.getGender();
+        this.name = studentUpdateParameters.getName();
+        this.religion = studentUpdateParameters.getReligion();
+        this.caste = studentUpdateParameters.getCaste();
+        this.subCaste = studentUpdateParameters.getSubCaste();
+        this.communityLocation = studentUpdateParameters.getCommunityLocation();
         this.performance = studentUpdateParameters.getPerformance();
         this.disciplinary = studentUpdateParameters.getDisciplinary();
-		this.talents = Sets.newHashSet(newTalents);
-		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
+        this.talents = Sets.newHashSet(newTalents);
+        this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsored = studentUpdateParameters.getSponsored();
         this.familyStatus = studentUpdateParameters.getfamilyStatus();
@@ -351,33 +351,35 @@ public class Student {
         }
 
         setBackground(studentUpdateParameters.getBackground());
-	}
+    }
 
     private Caregiver setAll(Caregiver getCaregiver, Caregiver caregiverIn) {
-        caregiverIn = new Caregiver();
+        if (caregiverIn == null) {
+            caregiverIn = new Caregiver();
+        }
         caregiverIn.setName(getCaregiver.getName());
         caregiverIn.setEducation(getCaregiver.getEducation());
         caregiverIn.setContact(getCaregiver.getContact());
         caregiverIn.setOccupation(getCaregiver.getOccupation());
         caregiverIn.setMaritalStatus(getCaregiver.getMaritalStatus());
+
         return caregiverIn;
     }
 
 
     public void promote() {
-        if(this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
+        if (this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
             StudentClass classBeforePromotion = StudentClass.fromDisplayName(this.studentClass);
-            if(classBeforePromotion != null){
+            if (classBeforePromotion != null) {
                 StudentClass classAfterPromotion = classBeforePromotion.next();
                 this.studentClass = classAfterPromotion.displayName();
 
-                if(StudentClass.TEN_STD.equals(classBeforePromotion)) {
-                    this.status =  StudentStatus.ALUMNI;
+                if (StudentClass.TEN_STD.equals(classBeforePromotion)) {
+                    this.status = StudentStatus.ALUMNI;
                 }
             }
         }
     }
-
 
 
     private static class EmptyStudent extends Student {
@@ -457,12 +459,12 @@ public class Student {
         }
 
         @Override
-        public String getDisciplinary(){
+        public String getDisciplinary() {
             return "";
         }
 
         @Override
-        public String getPerformance(){
+        public String getPerformance() {
             return "";
         }
 
