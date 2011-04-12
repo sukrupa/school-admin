@@ -20,7 +20,8 @@
 
     <target name="deploy:save-build-number">
         <echo message="Saving build number: ${env.GO_PIPELINE_LABEL} - ${env.GO_REVISION}"/>
-        <echo file="${web.dir}/build-number.txt">${env.GO_PIPELINE_LABEL} - ${env.GO_REVISION}</echo>
+        <echo file="${web.dir}/build-number.txt">Pipeline Label: ${env.GO_PIPELINE_LABEL}
+Git Revision: ${env.GO_REVISION}</echo>
     </target>
 
 </project>
