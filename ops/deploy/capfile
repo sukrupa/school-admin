@@ -18,7 +18,7 @@ task :staging do
   set :user, "ubuntu"
   set :target_server, "staging.school.sukrupa.org"
   set :deploy_path, "~/sukrupa/school-admin"
-  set :should_recreate_database, false
+  set :should_recreate_database, true
   set :should_recreate_image_folder, true
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-bot.pem" }
 end
