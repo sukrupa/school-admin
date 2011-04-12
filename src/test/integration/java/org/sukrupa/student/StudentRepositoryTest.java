@@ -40,6 +40,13 @@ public class StudentRepositoryTest {
     private final Event spiceGirls = new EventBuilder().title("Spice Girls").build();
     private final Event michaelJackson = new EventBuilder().title("Michael Jackson").build();
 
+    private final Caregiver fabio = new CaregiverBuilder().name("Fabio")
+                            .occupation("Baker")
+                            .maritalStatus("Single")
+                            .education("Awesome")
+                            .contact("123")
+                            .build();
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -112,6 +119,14 @@ public class StudentRepositoryTest {
             .gender("Male").talents(music, sport)
             .status(StudentStatus.ALUMNI)
             .events(spiceGirls, michaelJackson)
+            .build();
+
+    private Student balaji = new StudentBuilder()
+            .studentId("987654").name("Balaji")
+            .studentClass("1th grade").dateOfBirth(new LocalDate(1980, 10, 1))
+            .gender("Male").talents(music, sport)
+            .status(StudentStatus.EXISTING_STUDENT)
+            .father(fabio)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -411,6 +426,17 @@ public class StudentRepositoryTest {
         for (Event event : student.getEvents()) {
             assertThat(event.equals(event), is(true));
         }
+    }
+
+    @Test
+    public void shouldReturnStudentWithCaregiversOccupation() {
+        hibernateSession.save(fabio);
+        studentRepository.put(balaji);
+
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().caregiversOccupation("Baker").page(1).build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(balaji));
     }
 
     private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {

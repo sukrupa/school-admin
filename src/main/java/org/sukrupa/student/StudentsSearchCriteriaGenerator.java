@@ -6,6 +6,7 @@ import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.sukrupa.platform.text.StringManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,10 @@ class StudentsSearchCriteriaGenerator {
     private static final String RELIGION = "religion";
     private static final String DESCRIPTION = "description";
     private static final String STATUS = "status";
+    private static final String OCCUPATION = "occupation";
+    private static final String FATHER = "father";
+    private static final String MOTHER = "mother";
+    private static final String GUARDIAN = "guardian";
 
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
@@ -51,7 +56,7 @@ class StudentsSearchCriteriaGenerator {
         criteria.add(conjunction);
 
         addTalentsSearchCriteria(criteria, searchParam.getTalents());
-
+        addCaregiversOccupationSearchCriteria(criteria, searchParam.getCaregiversOccupation());
         addStudentStatusSearchCriteria(criteria, StudentStatus.fromString(searchParam.getStatus()));
 
         return criteria;
@@ -73,14 +78,36 @@ class StudentsSearchCriteriaGenerator {
         }
 
         List<String> descriptions = new ArrayList<String>();
-        for(Talent talent : talents){
+        for (Talent talent : talents) {
             descriptions.add(talent.getDescription());
         }
         criteria.createCriteria(TALENTS).add(Restrictions.in(DESCRIPTION, descriptions)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     }
 
+    private void addCaregiversOccupationSearchCriteria(Criteria criteria, String caregiversOccupation) {
+        if (!caregiversOccupation.equals("*")) {
+            criteria.createAlias("father","fa");
+            criteria.createAlias("mother","ma");
+            criteria.createAlias("guardian","ga");
+
+            SimpleExpression fatherRestrictions = Restrictions.eq("fa.occupation",caregiversOccupation);
+            SimpleExpression fatherNotDeceased = Restrictions.ne("fa.maritalStatus", "Deceased");
+            LogicalExpression fatherIsAlive = Restrictions.and(fatherRestrictions, fatherNotDeceased);
+
+            SimpleExpression motherRestrictions = Restrictions.eq("ma.occupation", caregiversOccupation);
+            SimpleExpression motherNotDeceased = Restrictions.ne("ma.maritalStatus", "Deceased");
+            LogicalExpression motherIsAlive = Restrictions.and(motherRestrictions, motherNotDeceased);
+
+            SimpleExpression guardianRestrictions = Restrictions.eq("ga.occupation", caregiversOccupation);
+            SimpleExpression guardianNotDeceased = Restrictions.ne("ga.maritalStatus", "Deceased");
+            LogicalExpression guardianIsAlive = Restrictions.and(guardianRestrictions, guardianNotDeceased);
+
+            criteria.add( Restrictions.or( Restrictions.or( fatherIsAlive , motherIsAlive ), guardianIsAlive));
+        }
+    }
+
     private void addStudentStatusSearchCriteria(Criteria criteria, StudentStatus status) {
-        criteria.add( Restrictions.eq(STATUS, status));
+        criteria.add(Restrictions.eq(STATUS, status));
     }
 
 
@@ -112,9 +139,22 @@ class StudentsSearchCriteriaGenerator {
                 disj.add(Restrictions.isNull(field));
                 disj.add(equalToParam);
                 conjunction.add(disj);
-            }
-            else {
+            } else {
                 conjunction.add(equalToParam);
+            }
+        }
+    }
+
+    private void addEqualsRestrictionIfNotWildcardDisjunction(String field, String parameter, Disjunction disjunction) {
+        if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
+            SimpleExpression equalToParam = Restrictions.eq(field, parameter);
+            if (parameter.isEmpty()) {
+                Disjunction disj = Restrictions.disjunction();
+                disj.add(Restrictions.isNull(field));
+                disj.add(equalToParam);
+                disjunction.add(disj);
+            } else {
+                disjunction.add(equalToParam);
             }
         }
     }
@@ -122,14 +162,13 @@ class StudentsSearchCriteriaGenerator {
 
     private void addContainsRestrictionIfNotWildcard(String field, String parameter, Conjunction conjunction) {
         if (!StudentSearchParameter.WILDCARD_CHARACTER.equals(parameter)) {
-            SimpleExpression equalToParam = Restrictions.like(field, parameter+"%").ignoreCase();
+            SimpleExpression equalToParam = Restrictions.like(field, parameter + "%").ignoreCase();
             if (parameter.isEmpty()) {
                 Disjunction disj = Restrictions.disjunction();
                 disj.add(Restrictions.isNull(field));
                 disj.add(equalToParam);
                 conjunction.add(disj);
-            }
-            else {
+            } else {
                 conjunction.add(equalToParam);
             }
         }
