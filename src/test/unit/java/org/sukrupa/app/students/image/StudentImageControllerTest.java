@@ -3,7 +3,7 @@ package org.sukrupa.app.students.image;
 
 import org.junit.Test;
 import org.sukrupa.app.services.FileFactory;
-import org.sukrupa.app.services.ImageLoaderService;
+import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.app.students.StudentImageView;
 import org.sukrupa.platform.config.AppConfiguration;
 
@@ -23,7 +23,7 @@ public class StudentImageControllerTest {
     public StudentImageControllerTest() {
         imageRepositoryLocation = new AppConfiguration().properties().getProperty("app.image.dir");
         imageFactory = mock(FileFactory.class);
-        this.studentImageController = new StudentImageController(new ImageLoaderService(imageFactory,imageRepositoryLocation));
+        this.studentImageController = new StudentImageController(new StudentImageRepository(imageFactory,imageRepositoryLocation));
     }
 
     @Test

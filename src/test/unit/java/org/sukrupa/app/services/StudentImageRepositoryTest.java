@@ -13,15 +13,15 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ImageLoaderServiceTest {
-    private ImageLoaderService imageService;
+public class StudentImageRepositoryTest {
+    private StudentImageRepository studentImageService;
     private FileFactory fileFactory = mock(FileFactory.class);
     private String imageRepositoryLocation;
 
     @Before
     public void setUp(){
         imageRepositoryLocation = new AppConfiguration().properties().getProperty("app.image.dir");
-        imageService = new ImageLoaderService(fileFactory, imageRepositoryLocation);
+        studentImageService = new StudentImageRepository(fileFactory, imageRepositoryLocation);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class ImageLoaderServiceTest {
         File file = mock(File.class);
         when(fileFactory.create(imageRepositoryLocation + "validFile")).thenReturn(file);
 
-        assertEquals(file, imageService.load("validFile"));
+        assertEquals(file, studentImageService.load("validFile"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ImageLoaderServiceTest {
         when(fileFactory.create(imageRepositoryLocation + "invalidFile")).thenThrow(new FileNotFoundException());
         when(fileFactory.create(imageRepositoryLocation + "placeholderImage")).thenReturn(placeholderImage);
 
-        assertEquals(placeholderImage, imageService.load("invalidFile"));
+        assertEquals(placeholderImage, studentImageService.load("invalidFile"));
     }
 
 
