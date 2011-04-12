@@ -26,12 +26,12 @@ import static java.lang.String.format;
 
 @Controller
 @RequestMapping("/application/images")
-public class ImageController{
+public class StudentImageController {
 
     private ImageLoaderService imageLoaderService;
 
     @Autowired
-    public ImageController(ImageLoaderService imageLoaderService){
+    public StudentImageController(ImageLoaderService imageLoaderService){
         this.imageLoaderService = imageLoaderService;
     }
 
