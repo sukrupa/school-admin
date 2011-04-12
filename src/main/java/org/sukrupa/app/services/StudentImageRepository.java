@@ -12,14 +12,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 @Service
-public class ImageLoaderService {
+public class StudentImageRepository {
 
     private static final String PLACEHOLDER_IMAGE = "placeholderImage";
     private FileFactory fileFactory;
     private String imageRepositoryLocation;
 
     @Autowired
-    public ImageLoaderService(FileFactory fileFactory, @Value(value="${app.image.dir}")String imageRepositoryLocation) {
+    public StudentImageRepository(FileFactory fileFactory, @Value(value = "${app.image.dir}") String imageRepositoryLocation) {
         this.fileFactory = fileFactory;
         this.imageRepositoryLocation = imageRepositoryLocation;
     }

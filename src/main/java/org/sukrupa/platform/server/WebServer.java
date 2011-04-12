@@ -13,7 +13,6 @@ import org.sukrupa.platform.web.*;
 
 import java.io.*;
 import java.lang.management.*;
-import java.util.*;
 
 import static java.lang.String.*;
 import static java.util.Arrays.asList;
@@ -35,8 +34,7 @@ public class WebServer {
                      @Value("${web.context.path}") String contextPath,
                      @Value("${web.server.realm.file}") String webServerRealmFile,
                      @Value("${web.server.authenticate}") boolean authenticate,
-                     FrontController frontController,
-                     ImageController imageController) throws IOException {
+                     FrontController frontController) throws IOException {
 
 
         this.webRoot = webRoot;
