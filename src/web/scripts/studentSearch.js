@@ -55,7 +55,20 @@ $(document).ready(function (){
 	$('#clearTalents').click(dualBox.clear);
 
 	saveAgeToOptions();
-	initAgeRangeDropDowns();
+	if ($('#ageFrom').val() == anyValue) {
+		initAgeRangeDropDowns();
+	} else {
+	    var selectedIndex = $('#ageTo')[0].selectedIndex;
+	    $('#ageTo option:first').remove();
+	    var ageFromValue = parseInt($('#ageFrom').val(), 10);
+	    $('#ageTo option').each(function(){
+	        var $this = $(this);
+	        if (parseInt($this.val(), 10) < ageFromValue) {
+	            $this.remove();
+	        }
+	    });
+	    $('#ageTo')[0].selectedIndex = selectedIndex;
+	}
 	$('#ageFrom').change(updateAgeRange);
 });
 
