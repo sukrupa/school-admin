@@ -12,4 +12,10 @@
             <fileset dir="${resources.main.dir}/images"/>
         </copy>
     </target>
+    <target name="img:create" depends="img:check" unless="img:present">
+        <mkdir dir="${app.image.dir}"/>
+        <copy todir="${app.image.dir}">
+            <fileset dir="${resources.main.dir}/images"/>
+        </copy>
+    </target>
 </project>

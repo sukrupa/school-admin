@@ -36,7 +36,7 @@ task :deploy do
   stop_remote_server
   start_remote_server
   update_or_recreate_database
-  update_or_recreate_image_folder
+  create_or_recreate_image_folder
   safety_check
 end
 
@@ -67,8 +67,10 @@ task :update_or_recreate_database do
   end
 end
 
-task :update_or_recreate_image_folder do
+task :create_or_recreate_image_folder do
   if should_recreate_image_folder
+    run "cd #{deploy_path} && sh install/recreate-image-folder.sh"
+  else
     run "cd #{deploy_path} && sh install/create-image-folder.sh"
   end
 end
