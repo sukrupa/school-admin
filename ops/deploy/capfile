@@ -30,10 +30,11 @@ task :production do
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-prod.pem" }
 end
 
-task :test-production do
+task :test_production_on_twu_staging do
   set :user, "twu"
   set :target_server, "twu-staging"
   set :deploy_path, "~/sukrupa/school-admin"
+  set :web_server_port, 8080
   role :target_server, "#{target_server}"
 end
 

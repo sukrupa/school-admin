@@ -1,0 +1,6 @@
+Tags:
+Preconditions:navigate to admin page,log in,log out afterwards
+Add New Talent Workflow:
+#Given I am on the admin page
+#And I click the link "Add New Talent"
+#Then I should be on the Add New Talent Page
