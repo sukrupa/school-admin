@@ -24,7 +24,7 @@ public class ReferenceDataRepository {
 
     private final List<String> FAMILY_STATUSES = Arrays.asList("", "General", "Single", "Destitute", "Orphan");
 
-    private final List<String> OCCUPATIONS = Arrays.asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bartender", "Barman",
+    private final List<String> OCCUPATIONS = Arrays.asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bar Bender", "Barman",
             "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
             "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
             "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant","Office Assistant",
