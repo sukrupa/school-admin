@@ -1,37 +1,32 @@
 package org.sukrupa.app.admin;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.sukrupa.app.students.StudentsController;
-import org.sukrupa.student.StudentService;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.sukrupa.student.AnnualClassUpdateService;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class AdminControllerTest {
+public class AnnualUpdateControllerTest {
 
-    private AdminController controller;
+    private AnnualUpdateController controller;
 
     @Mock
-    private StudentService studentService;
+    private AnnualClassUpdateService annaulClassUpdateService;
 
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new AdminController(studentService);
+        controller = new AnnualUpdateController(annaulClassUpdateService);
     }
 
     @Test
     public void shouldPromoteAllStudents() {
         controller.performAnnualUpdate();
 
-        verify(studentService).promoteStudentsToNextClass();
+        verify(annaulClassUpdateService).promoteStudentsToNextClass();
     }
 
 
