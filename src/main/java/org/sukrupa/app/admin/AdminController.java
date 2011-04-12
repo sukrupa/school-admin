@@ -48,12 +48,14 @@ public class AdminController {
     @RequestMapping(value="annualupdate/confirmation", method= POST)
     public String performAnnualUpdate(){
         studentService.promoteStudentsToNextClass();
+
         return "redirect:/admin/annualupdate/success";
 
     }
 
     @RequestMapping(value = "annualupdate/success",  method=GET)
-    public String annualUpdateSuccess() {
+    public String annualUpdateSuccess(Map<String, Object> model) {
+        model.put("classUpdateCount",studentService.getClassUpdateCount());
         return "admin/annualUpdateSuccess";
     }
 

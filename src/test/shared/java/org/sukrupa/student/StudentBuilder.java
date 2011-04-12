@@ -30,6 +30,7 @@ public class StudentBuilder {
     private Set<Note> notes = new HashSet<Note>();
     private String imageLink;
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
+    private boolean sponsored;
     private String disciplinary;
     private String performance;
     private Profile profile = new Profile();
@@ -150,7 +151,9 @@ public class StudentBuilder {
     }
 
     public Student build() {
+
        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile, events);
+
     }
 
     public StudentBuilder imageLink(String imageLink) {
@@ -160,6 +163,11 @@ public class StudentBuilder {
 
     public StudentBuilder status(StudentStatus statusIn) {
         this.status = statusIn;
+        return this;
+    }
+
+    public StudentBuilder sponsored (boolean sponsored) {
+        this.sponsored = sponsored;
         return this;
     }
 
@@ -173,3 +181,4 @@ public class StudentBuilder {
         return this;
     }
 }
+

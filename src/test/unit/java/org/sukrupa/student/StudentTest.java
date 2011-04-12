@@ -168,10 +168,12 @@ public class StudentTest {
         studentProfileForm.setMother(mother);
         studentProfileForm.setDateOfBirth("01-02-2005");
         studentProfileForm.setStatus("Existing Student");
+        studentProfileForm.setSponsored(true);
         student.updateFrom( studentProfileForm, Collections.EMPTY_SET );
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
+        assertThat(student.getSponsored(), is (true));
 
     }
 

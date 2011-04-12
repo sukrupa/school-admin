@@ -1,14 +1,13 @@
 package org.sukrupa.student;
 
-import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.DoNotRemove;
+import org.joda.time.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
+import org.sukrupa.platform.*;
 import org.sukrupa.platform.date.Date;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -20,14 +19,14 @@ public class StudentService {
     private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
     private SystemEventLogRepository systemEventLogRepository;
+    private int classUpdateCount;
 
-    @DoNotRemove
-    StudentService() {
+    @DoNotRemove StudentService() {
     }
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-        ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
@@ -88,33 +87,39 @@ public class StudentService {
     }
 
     public void promoteStudentsToNextClass() {
-          SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+        classUpdateCount = 0;
+        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
         if (!hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
             List<Student> students = studentRepository.findAll();
-                        for (Student student : students) {
-                            student.promote();
+            for (Student student : students) {
+                if (student.getStatus() == StudentStatus.EXISTING_STUDENT) {
+                    classUpdateCount++;
+                }
+                student.promote();
+
 
                 studentRepository.put(student);
             }
 
             LocalDate currentDate = Date.now().getJodaDateTime().toLocalDate();
 
-            if (annualClassUpdateEventLog==null){
-                SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,currentDate);
+            if (annualClassUpdateEventLog == null) {
+                SystemEventLog annualUpdateLog = new SystemEventLog(ANNUAL_CLASS_UPDATE, currentDate);
                 systemEventLogRepository.put(annualUpdateLog);
 
-            }else{
+            } else {
                 systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(currentDate));
             }
+
         }
     }
 
 
     public String getLastClassUpdateDate() {
         SystemEventLog eventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
-        if(null != eventLog && eventLog.lastHappened() != null){
+        if (null != eventLog && eventLog.lastHappened() != null) {
             return eventLog.lastHappened().toString("dd-MM-yyyy");
-        }else{
+        } else {
             return null;
         }
     }
@@ -127,8 +132,13 @@ public class StudentService {
     private boolean hasBeenUpdatedThisYear(SystemEventLog systemEventLog) {
         if (systemEventLog == null) {
             return false;
-        }else{
+        } else {
             return systemEventLog.happenedThisYear();
         }
     }
+
+    public int getClassUpdateCount() {
+        return classUpdateCount;
+    }
 }
+

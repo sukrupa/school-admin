@@ -96,6 +96,9 @@ public class Student {
     @Enumerated(EnumType.ORDINAL)
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
+    @Column(name = "SPONSORED")
+    private boolean sponsored;
+
     @DoNotRemove
     public Student() {
     }
@@ -127,6 +130,7 @@ public class Student {
         }
 
         this.status = status;
+        this.sponsored = sponsored;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -191,6 +195,10 @@ public class Student {
         return gender;
     }
 
+    public boolean getSponsored() {
+        return sponsored;
+    }
+
     public String getStudentClass() {
         return studentClass;
     }
@@ -226,11 +234,24 @@ public class Student {
     public String getEventsForDisplay() {
         List<String> eventTitles = new ArrayList<String>();
 
-        for (Event event : events) {
+        for (Event event : alphabeticallyOrderedEvents()) {
             eventTitles.add(event.getTitle());
         }
 
         return StringUtils.join(eventTitles,", ");
+    }
+
+    private ArrayList<Event> alphabeticallyOrderedEvents() {
+        ArrayList<Event> eventsAsList = new ArrayList<Event>(events);
+
+        Collections.sort(eventsAsList, new Comparator<Event>() {
+            @Override
+            public int compare(Event first, Event second) {
+                return first.getTitle().compareTo(second.getTitle());
+            }
+        });
+
+        return eventsAsList;
     }
 
     public List<String> talentDescriptions() {
@@ -306,6 +327,7 @@ public class Student {
 		this.talents = Sets.newHashSet(newTalents);
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
+        this.sponsored = studentUpdateParameters.getSponsored();
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);

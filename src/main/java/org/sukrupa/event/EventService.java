@@ -59,8 +59,7 @@ public class EventService {
     public Event update(EventCreateOrUpdateParameter eventParam) {
         Event event = eventRepository.load(eventParam.getId());
 
-        String listOfAttendees = eventParam.getAttendees();
-        String[] arrayOfAttendees = listOfAttendees.split(",");
+        String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});
 
         event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
         return eventRepository.update(event);
