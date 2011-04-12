@@ -46,6 +46,10 @@ public class StudentProfile {
 		assertEquals(string1,browser.textarea("student-background").text());
 
 	}
+	public void verifyThatFamilyStatusIs(String string1) throws Exception {
+		assertEquals(string1,browser.div("family-status").text());
+
+	}
 
 
 

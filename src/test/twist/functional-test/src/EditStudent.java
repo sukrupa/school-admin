@@ -58,4 +58,14 @@ public class EditStudent {
 	public void goToStudentsPage() throws Exception {
 		browser.navigateTo("http://localhost:8080/students");
 	}
+	
+	public void chooseInTheListOf(String option, String fieldName) throws Exception {
+		browser.select(fieldName).choose(option);
+	}
+
+	public void verifyThatIAmInTheStudentViewPage() throws Exception {
+			assertEquals("Student:", browser.title() );
+	}
+
+	
 }

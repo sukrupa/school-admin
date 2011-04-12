@@ -25,6 +25,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String performance;
     private String background;
     private boolean sponsored;
+    private String familyStatus;
 
 
     public StudentCreateOrUpdateParameterBuilder studentId(String studentId) {
@@ -113,7 +114,7 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentProfileForm build() {
         return new StudentProfileForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, guardian,
-                talents, status.toString(), disciplinary, performance, background);
+                talents, status.toString(), disciplinary, performance, background, familyStatus);
     }
 
 
@@ -124,6 +125,11 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentCreateOrUpdateParameterBuilder sponsored(boolean sponsored) {
         this.sponsored = sponsored;
+        return this;
+    }
+
+    public StudentCreateOrUpdateParameterBuilder familyStatus(String familyStatus) {
+        this.familyStatus = familyStatus;
         return this;
     }
 }

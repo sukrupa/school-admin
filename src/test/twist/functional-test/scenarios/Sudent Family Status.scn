@@ -1,0 +1,10 @@
+Tags:
+Preconditions:Navigte to Student Profile,	Log in,Log out afterwards
+Edit Student, Student Profile:
+#Click on "Bhavani" student record
+#Click on Edit Button
+#Choose "Single" in the list of "familyStatus"
+#Click "Save"
+#Verify that I am in the student view page
+#Verify that family status is"Single"
+
