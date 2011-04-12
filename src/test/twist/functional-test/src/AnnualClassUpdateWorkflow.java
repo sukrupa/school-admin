@@ -95,7 +95,7 @@ public class AnnualClassUpdateWorkflow {
 
 
 	public void thenIShouldBeRedirectedToTheAdminPage() throws Exception {
-		assertThat(browser.title(), is("Admin"));
+		assertThat(browser.title(), is("Admin Tools"));
 	}
 
 	public void givenIAmOnTheConfirmationPage() throws Exception {
@@ -112,7 +112,7 @@ public class AnnualClassUpdateWorkflow {
 	}
 
 	public void givenIAmOnTheAdminPage() throws Exception {
-		assertThat(browser.title(), is("Admin"));
+		assertThat(browser.title(), is("Admin Tools"));
 	}
 
 	public void whenIClickTheLink(String linkName) throws Exception {

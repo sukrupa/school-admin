@@ -56,5 +56,19 @@
        
       </div>
 
-        
-       
+      <br/>
+
+      <div class="sideBarHeader">
+      Admin
+      </div>
+
+      <div class="sideBarContent">
+
+      <li>
+      <p class="indent">
+      <a href="/admin">
+      Tools
+      </a>
+      </p>
+      </li>
+      </div>
