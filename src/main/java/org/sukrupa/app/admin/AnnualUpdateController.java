@@ -26,14 +26,14 @@ public class AnnualUpdateController {
         model.put("classUpdateDate", annualClassUpdateService.getLastClassUpdateDate());
         model.put("classAlreadyUpdated", annualClassUpdateService.classHasBeenUpdatedThisYear());
 
-        return "admin/annualUpdate";
+        return "admin/annualupdate/annualUpdate";
     }
 
     @RequestMapping(value="confirmation", method=GET)
     public String annualUpdateConfirmatioNBody(Map<String, Object> model){
         model.put("classUpdateDate", annualClassUpdateService.getLastClassUpdateDate());
         model.put("classAlreadyUpdated", annualClassUpdateService.classHasBeenUpdatedThisYear());
-        return "admin/annualUpdateConfirmation";
+        return "admin/annualupdate/annualUpdateConfirmation";
     }
 
     @RequestMapping(value="confirmation", method= POST)
@@ -45,6 +45,6 @@ public class AnnualUpdateController {
     @RequestMapping(value = "success",  method=GET)
     public String annualUpdateSuccess(Map<String, Object> model) {
         model.put("classUpdateCount", annualClassUpdateService.getClassUpdateCount());
-        return "admin/annualUpdateSuccess";
+        return "admin/annualupdate/annualUpdateSuccess";
     }
 }
