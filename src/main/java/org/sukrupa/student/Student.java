@@ -99,6 +99,9 @@ public class Student {
     @Column(name = "SPONSORED")
     private boolean sponsored;
 
+    @Column(name= "FAMILY_STATUS")
+    private String familyStatus ;
+
     @DoNotRemove
     public Student() {
     }
@@ -106,7 +109,7 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
-                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, String familyStatus) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -124,6 +127,7 @@ public class Student {
         this.notes = notes;
         this.imageLink = imageLink;
         this.events = events;
+        this.familyStatus = familyStatus;
 
         if(status == null) {
             status = StudentStatus.EXISTING_STUDENT;
@@ -170,6 +174,10 @@ public class Student {
 
     public String getCommunityLocation() {
         return communityLocation;
+    }
+
+    public String getFamilyStatus() {
+        return familyStatus;
     }
 
     public String getDisciplinary(){
@@ -328,6 +336,7 @@ public class Student {
 		this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsored = studentUpdateParameters.getSponsored();
+        this.familyStatus = studentUpdateParameters.getfamilyStatus();
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);
@@ -368,6 +377,8 @@ public class Student {
             }
         }
     }
+
+
 
     private static class EmptyStudent extends Student {
         @Override

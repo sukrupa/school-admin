@@ -26,10 +26,10 @@ public class StudentProfileForm {
     private String performance;
     private String background;
     private CommonsMultipartFile imageToUpload;
+    private String familyStatus;
 
 
-
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background) {
+    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -48,6 +48,7 @@ public class StudentProfileForm {
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.background = background;
+        this.familyStatus = familyStatus;
     }
 
     @DoNotRemove
@@ -182,25 +183,33 @@ public class StudentProfileForm {
         this.background = background;
     }
 
-    public String getPerformance() {
-        return performance;
-    }
-
-    public String getDisciplinary() {
-        return disciplinary;
-    }
-
-    public String getBackground() {
-        return this.background;
-    }
-
-    public boolean getSponsored() {
-        return sponsored;
+    public void setFamilyStatus(String familyStatus) {
+        this.familyStatus = familyStatus;
     }
 
     public void setSponsored(boolean sponsored) {
-            this.sponsored = sponsored;
+        this.sponsored = sponsored;
     }
+
+    public String getPerformance() {
+    return performance;
+}
+
+    public String getDisciplinary() {
+    return disciplinary;
+}
+
+    public String getBackground() {
+    return this.background;
+}
+
+    public boolean getSponsored() {
+    return sponsored;
+}
+    public String getfamilyStatus() {
+        return familyStatus;
+    }
+
     public Caregiver getGuardian() {
         return guardian;
     }

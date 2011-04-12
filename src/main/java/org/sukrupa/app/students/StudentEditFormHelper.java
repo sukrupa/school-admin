@@ -35,6 +35,11 @@ public class StudentEditFormHelper {
         return createDropDownList(referenceData.getCommunityLocations(), student.getCommunityLocation());
     }
 
+    public List<DropDownElement> getFamilyStatusesDropDownList() {
+        return createDropDownList(referenceData.getFamilyStatuses(), student.getFamilyStatus());
+    }
+
+
     public List<DropDownElement> getCastesDropDownList() {
         return createDropDownList(referenceData.getCastes(), student.getCaste());
     }

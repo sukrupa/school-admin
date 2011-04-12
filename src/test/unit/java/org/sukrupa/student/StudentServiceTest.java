@@ -8,12 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.sukrupa.platform.date.Date;
-import org.sukrupa.platform.date.DateManipulation;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -27,7 +21,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn;
-import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn_31_12_2010;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.hasNote;
 import static org.sukrupa.student.StudentService.NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
@@ -125,6 +118,7 @@ public class StudentServiceTest {
                 .gender("Female")
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
+                .familyStatus("")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.EXISTING_STUDENT).build();
         Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
@@ -153,6 +147,7 @@ public class StudentServiceTest {
                 .gender("Female")
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
+                .familyStatus("")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT))
                 .status(StudentStatus.ALUMNI).build();
         Student updatedStudent = service.update(updateParameters);

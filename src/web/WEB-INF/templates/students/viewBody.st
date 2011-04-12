@@ -56,6 +56,11 @@
             </div>
 
             <div class="entry">
+                <div class="label">Family Status</div>
+                <div class="value" id="family-status">$student.familyStatus$</div>
+            </div>
+
+            <div class="entry">
                  <div class="label inline-block">Background</div>
                  $if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
             </div>
