@@ -38,6 +38,10 @@
             description="Runs the build as run on ci"
             depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
 
+    <target name="unit-test"
+            description="Clean, compile and only run unit tests"
+            depends="clean, init, compile:all, copy-resources, test:unit"/>
+
     <target name="install:local"
             depends="clean, init, compile:all, copy-resources, package"
             description="Use this when you are working locally to just compile and package and install">
