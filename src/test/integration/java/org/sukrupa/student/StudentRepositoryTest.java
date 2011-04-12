@@ -41,7 +41,7 @@ public class StudentRepositoryTest {
     private final Event michaelJackson = new EventBuilder().title("Michael Jackson").build();
 
     private final Caregiver fabio = new CaregiverBuilder().name("Fabio")
-                            .occupation("Baker")
+                            .occupation("Bus Driver")
                             .maritalStatus("Single")
                             .education("Awesome")
                             .contact("123")
@@ -124,7 +124,7 @@ public class StudentRepositoryTest {
     private Student balaji = new StudentBuilder()
             .studentId("987654").name("Balaji")
             .studentClass("1th grade").dateOfBirth(new LocalDate(1980, 10, 1))
-            .gender("Male").talents(music, sport)
+            .gender("Male")
             .status(StudentStatus.EXISTING_STUDENT)
             .father(fabio)
             .build();
@@ -430,10 +430,9 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnStudentWithCaregiversOccupation() {
-        hibernateSession.save(fabio);
         studentRepository.put(balaji);
 
-        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().caregiversOccupation("Baker").page(1).build(), 0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().caregiversOccupation("Bus Driver").build(), 0, 100);
 
         assertThat(students.size(), is(1));
         assertThat(students, CollectionMatchers.hasOnly(balaji));
