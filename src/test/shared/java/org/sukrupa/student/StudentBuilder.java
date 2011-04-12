@@ -1,11 +1,10 @@
+
 package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
 import org.sukrupa.event.Event;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
@@ -152,7 +151,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile, events);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile, events, "");
 
     }
 
