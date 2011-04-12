@@ -13,9 +13,9 @@ import java.util.Map;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class AdminControllerTest {
+public class AnnualUpdateControllerTest {
 
-    private AdminController controller;
+    private AnnualUpdateController controller;
 
     @Mock
     private StudentService studentService;
@@ -24,7 +24,7 @@ public class AdminControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new AdminController(studentService);
+        controller = new AnnualUpdateController(studentService);
     }
 
     @Test
