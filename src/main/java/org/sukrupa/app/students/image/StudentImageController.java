@@ -25,7 +25,7 @@ import java.io.*;
 import static java.lang.String.format;
 
 @Controller
-@RequestMapping("/application/images")
+@RequestMapping("/students")
 public class StudentImageController {
 
     private ImageLoaderService imageLoaderService;
@@ -35,7 +35,7 @@ public class StudentImageController {
         this.imageLoaderService = imageLoaderService;
     }
 
-    @RequestMapping(value = "{id}")
+    @RequestMapping(value = "{id}/image")
     public View getImage(@PathVariable String id) throws FileNotFoundException{
         return new StudentImageView(imageLoaderService.load(id));
     }
