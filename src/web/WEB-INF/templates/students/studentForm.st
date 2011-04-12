@@ -78,6 +78,16 @@
                 </div>
 
                 <div class="updateEntry">
+                                    <div class="label">Family Status</div>
+                                    <select name="familyStatus" class="updateValue">
+                                        $formhelper.familyStatusesDropDownList:{
+                                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                                        }$
+                                    </select>
+                                </div>
+
+
+                <div class="updateEntry">
                     <div class="label-header">Background</div>
                     <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
                 </div>
