@@ -127,6 +127,8 @@ public class StudentRepositoryTest {
             .gender("Male")
             .status(StudentStatus.EXISTING_STUDENT)
             .father(fabio)
+            .mother(fabio)
+            .guardian(fabio)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();

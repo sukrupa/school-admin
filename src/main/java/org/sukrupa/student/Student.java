@@ -38,7 +38,7 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mother_id", referencedColumnName = "id")
-    private Caregiver mother = new Caregiver();
+    private Caregiver mother;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "father_id", referencedColumnName = "id")

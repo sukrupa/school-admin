@@ -21,9 +21,9 @@ public class StudentBuilder {
     private Set<Talent> talents = new HashSet<Talent>();
     private String studentId;
     private String gender;
-    private Caregiver father = new Caregiver();
-    private Caregiver mother = new Caregiver();
-    private Caregiver guardian = new Caregiver();
+    private Caregiver father;
+    private Caregiver mother;
+    private Caregiver guardian;
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
