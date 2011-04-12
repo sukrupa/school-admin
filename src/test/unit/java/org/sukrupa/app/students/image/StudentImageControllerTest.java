@@ -1,4 +1,4 @@
-package org.sukrupa.platform.web;
+package org.sukrupa.app.students.image;
 
 
 import org.junit.Test;

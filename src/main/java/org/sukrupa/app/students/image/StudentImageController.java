@@ -1,4 +1,4 @@
-package org.sukrupa.platform.web;
+package org.sukrupa.app.students.image;
 
 import com.google.common.io.ByteStreams;
 import org.apache.log4j.Logger;
