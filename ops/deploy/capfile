@@ -30,13 +30,21 @@ task :production do
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-prod.pem" }
 end
 
+task :test_production_on_twu_staging do
+  set :user, "twu"
+  set :target_server, "twu-staging"
+  set :deploy_path, "~/sukrupa/school-admin"
+  set :web_server_port, 8080
+  role :target_server, "#{target_server}"
+end
+
 task :deploy do
   copy_deploy_artifact
   unzip_deploy_artifact
   stop_remote_server
   start_remote_server
   update_or_recreate_database
-  update_or_recreate_image_folder
+  create_or_recreate_image_folder
   safety_check
 end
 
@@ -67,8 +75,10 @@ task :update_or_recreate_database do
   end
 end
 
-task :update_or_recreate_image_folder do
+task :create_or_recreate_image_folder do
   if should_recreate_image_folder
+    run "cd #{deploy_path} && sh install/recreate-image-folder.sh"
+  else
     run "cd #{deploy_path} && sh install/create-image-folder.sh"
   end
 end
@@ -83,7 +93,7 @@ task :recreate_database do
 end
 
 task :insert_real_data do
-  run "cd #{deploy_path} && sh install/ant/bin/ant -Dresources.main.dir=install -Dlib.main.dir=lib -Dsrc.sql.dir=install/dbdeploy/sql -Dsrc.sql.script.dir=install/dbdeploy/sql/script -Dsrc.sql.delta.dir=install/dbdeploy/sql/delta -Dops.deploy.sql.dir=install/dbdeploy/sql/ -buildfile install/build/build.xml db:import-data"
+  run "cd #{deploy_path} && sh install/import-data.sh"
 end
 
 def login_info

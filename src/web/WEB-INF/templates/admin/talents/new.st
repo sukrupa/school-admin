@@ -1,0 +1,1 @@
+$layout(title="Add New Talent", stylesheets="admin")$

@@ -1,1 +1,1 @@
-$layout(body=admin/adminPageBody(), title="Admin")$
+$layout(body=admin/adminPageBody(), title="Admin Tools", stylesheets="admin")$

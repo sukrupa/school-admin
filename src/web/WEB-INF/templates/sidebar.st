@@ -20,11 +20,11 @@
               <a href="/students">View Students</a>
           </p>
 
-              <!--
+
            <p class="indent">
               <a href="/students/create">Add New Student</a>
           </p>
-          -->
+
 
       </li>
 
@@ -56,5 +56,19 @@
        
       </div>
 
-        
-       
+      <br/>
+
+      <div class="sideBarHeader">
+      Admin
+      </div>
+
+      <div class="sideBarContent">
+
+      <li>
+      <p class="indent">
+      <a href="/admin">
+      Tools
+      </a>
+      </p>
+      </li>
+      </div>
