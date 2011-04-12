@@ -15,7 +15,7 @@ public class AddNewTalentWorkflow {
 	}
 
 	public void givenIAmOnTheAdminPage() throws Exception {
-		assertThat(browser.title(), is("Admin"));
+		assertThat(browser.title(), is("Admin Tools"));
 	}
 
 	public void andIClickTheLink(String linkName) throws Exception {
