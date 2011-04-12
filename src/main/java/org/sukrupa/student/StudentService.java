@@ -57,9 +57,6 @@ public class StudentService {
 
         Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
 
-        // do something with the image...
-
-        // student.updateFrom(studentProfileForm, talents, newImageUrl);
         student.updateFrom(studentProfileForm, talents);
 
         return studentRepository.update(student);
