@@ -1,5 +1,6 @@
 Tags:
-Preconditions:Navigate to admin page,Log in,Log out afterwards
+Preconditions:Exploding Student,navigate to admin page,log in,log out afterwards,Existing 2009 Class Update Log
+h1.
 Annual Class Update Workflow:
 #Given I am on the Admin page
 #When I click the link "Annual Class Update"
@@ -37,3 +38,4 @@ Annual Class Update Workflow:
 #Then it should have the status "dropout"
 #When I go to the annual class update page
 #Then I should not see the button to update
+

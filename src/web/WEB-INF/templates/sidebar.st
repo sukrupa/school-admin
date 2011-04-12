@@ -19,10 +19,12 @@
           <p class="indent">
               <a href="/students">View Students</a>
           </p>
+
+              <!--
            <p class="indent">
               <a href="/students/create">Add New Student</a>
           </p>
-
+          -->
 
       </li>
 

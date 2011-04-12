@@ -183,6 +183,25 @@ public class StudentServiceTest {
     }
 
     @Test
+    public void shouldGiveCountOfStudentsUpdated() {
+        List<Student> students = new ArrayList<Student>();
+        Student Peter = new StudentBuilder().name("Peter").studentClass("10 Std").build();
+        students.add(Peter);
+        Student Yael = new StudentBuilder().name("Yael").studentClass("9 Std").build();
+        students.add(Yael);
+        Student Joel = new StudentBuilder().name("Joel").studentClass("10 Std").status(StudentStatus.ALUMNI).build();
+        students.add(Joel);
+        Student Jim = new StudentBuilder().name("Joel").studentClass("10 Std").status(StudentStatus.DROPOUT).build();
+        students.add(Jim);
+
+        when(studentRepository.findAll()).thenReturn(students);
+        when(systemEventLogRepository.find(any(String.class))).thenReturn(null);
+        service.promoteStudentsToNextClass();
+        assertThat(service.getClassUpdateCount(),is(2));
+
+    }
+
+    @Test
     public void shouldUpdateExistingSystemEventLogWhenPromoting() {
         SystemEventLog eventLog = new SystemEventLog(ANNUAL_CLASS_UPDATE,new LocalDate(2010,03,20));
         when(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE)).thenReturn(eventLog);
