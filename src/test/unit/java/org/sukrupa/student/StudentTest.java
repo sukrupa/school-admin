@@ -59,7 +59,7 @@ public class StudentTest {
 
     //load image from class path
     //take input stream
-    //create outputstream
+    //createTalent outputstream
     //save to hard disk
 
     @Test

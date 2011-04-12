@@ -39,4 +39,7 @@ public class TalentRepository {
 		return sessionFactory.getCurrentSession();
 	}
 
+    public void save(Talent newTalent) {
+        //To change body of created methods use File | Settings | File Templates.
+    }
 }

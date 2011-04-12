@@ -4,3 +4,6 @@ Add New Talent Workflow:
 #Given I am on the admin page
 #And I click the link "Add New Talent"
 #Then I should be on the Add New Talent Page
+#If I enter a new talent "fire breathing" 
+#And I click the Add Talent button
+#I should see a confirmation message saying "Fire breathing" talent was added successfully

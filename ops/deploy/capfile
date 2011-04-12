@@ -79,7 +79,7 @@ task :create_or_recreate_image_folder do
   if should_recreate_image_folder
     run "cd #{deploy_path} && sh install/recreate-image-folder.sh"
   else
-    run "cd #{deploy_path} && sh install/create-image-folder.sh"
+    run "cd #{deploy_path} && sh install/createTalent-image-folder.sh"
   end
 end
 

@@ -31,6 +31,7 @@ public class ReferenceDataRepository {
             "Office Boy", "Office Man", "Painter","Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant","Store Keeper",
             "Tailor", "Teacher", "Truck Driver", "TV Operator","Ward Boy","Welder");
     private final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim", "Sikh");
+
     private final List<String> TALENTS = Arrays.asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
             "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private final int AGES_TO = 20;
