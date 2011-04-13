@@ -238,7 +238,7 @@ public class Student {
     public String getEventsForDisplay() {
         List<String> eventTitles = new ArrayList<String>();
 
-        for (Event event : events) {
+        for (Event event : alphabeticallyOrderedEvents()) {
             eventTitles.add(event.getTitle());
         }
 
