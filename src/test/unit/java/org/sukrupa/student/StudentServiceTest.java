@@ -130,7 +130,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldUpdateStudentImageIfTheImageIsPassed(){
-        StudentProfileForm studentProfileForm = mock(StudentProfileForm.class);
+        StudentForm studentProfileForm = mock(StudentForm.class);
         Image image = mock(Image.class);
         Student mockStudent = mock(Student.class);
         when(studentProfileForm.getStudentId()).thenReturn("12345");
@@ -146,7 +146,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldNotUpdateStudentImageIfFormHasNoImage() {
-        StudentProfileForm studentProfileForm = mock(StudentProfileForm.class);
+        StudentForm studentProfileForm = mock(StudentForm.class);
         Image image = mock(Image.class);
         Student mockStudent = mock(Student.class);
 
