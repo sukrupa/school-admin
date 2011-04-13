@@ -1,19 +1,23 @@
 package org.sukrupa.platform.web;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.io.File.separator;
+import static java.util.Arrays.asList;
 
 @Controller
 @RequestMapping("/healthCheck")
@@ -47,15 +51,52 @@ public class HealthCheckController {
         List<HealthCheckTest> healthCheckTests = new ArrayList<HealthCheckTest>();
         healthCheckTests.add(imageDirectory());
         healthCheckTests.add(databaseConnection());
+        model.put("healthCheckTests", healthCheckTests);
 
         List<HealthCheckItem> healthCheckItems = new ArrayList<HealthCheckItem>();
-
-        model.put("healthCheckTests", healthCheckTests);
-        ArrayList<String> buildInfoLines = extractBuildInfo();
-        for (final String line : buildInfoLines) {
+        for (final String line : extractBuildInfo()) {
             healthCheckItems.add(buildInfoLine(line));
         }
 
+        extractDbMigrationsInto(healthCheckItems);
+        extractRunTimeInfoInto(healthCheckItems);
+
+        model.put("healthCheckItems", healthCheckItems);
+
+        final RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        model.put("systemProperties", getSystemProperties(runtimeMXBean));
+        model.put("classPath", runtimeMXBean.getClassPath().split(":"));
+
+        return "healthCheck";
+    }
+
+    private Set<Map.Entry<String, String>> getSystemProperties(RuntimeMXBean runtimeMXBean) {
+        Map<String, String> properties = runtimeMXBean.getSystemProperties();
+        properties.remove("java.class.path");
+        return properties.entrySet();
+    }
+
+    private void extractRunTimeInfoInto(List<HealthCheckItem> healthCheckItems) {
+        final RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        healthCheckItems.add(healthCheckItem(StringUtils.join(runtimeMXBean.getInputArguments(), " "), "Input Arguments"));
+        healthCheckItems.add(healthCheckItem(new Date(runtimeMXBean.getStartTime()).toString(), "Start Time"));
+    }
+
+    private HealthCheckItem healthCheckItem(final String symptom, final String description) {
+        return new HealthCheckItem() {
+            @Override
+            public String getSymptom() {
+                return symptom;
+            }
+
+            @Override
+            public String getDescription() {
+                return description;
+            }
+        };
+    }
+
+    private void extractDbMigrationsInto(List<HealthCheckItem> healthCheckItems) {
         try {
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
@@ -71,11 +112,6 @@ public class HealthCheckController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        model.put("healthCheckItems", healthCheckItems);
-
-        return "healthCheck";
-
     }
 
     private HealthCheckItem buildInfoLine(final String line) {
