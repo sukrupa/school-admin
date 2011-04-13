@@ -1,47 +1,74 @@
 <html>
 <head>
-    <title>Health Check</title>
+    <title>Application Health Check</title>
     <link rel="stylesheet" type="text/css" href="/styles/healthCheck.css">
 </head>
 <body>
-<h2>Application Health Check</h2>
+<h3>Health Check Items</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
 
-$buildInfo:{
-<div style="height: 38px; ">
-    $it$
-</div>
-}$
+        $healthCheckItems: {
+        <tr>
+            <td>$it.description$</td>
+            <td>$it.symptom$</td>
+            <td></td>
+        </tr>
+        }$
 
-<div style="height: 38px;">
-    <div style="float:left; padding-top:10px; width:150px;">
-         Change Set Number:
-    </div>
-    <div style="float:left; padding-top:10px; width: 300px;">
-        $changeSetNumber$
-    </div>
-</div>
+        $healthCheckTests:{
+        <tr>
+            <td>$it.description$</td>
+            <td>$it.symptom$</td>
+            <td>
+                $if(it.healthy)$
+                <img src="images/tick_icon.png" width="30px"/>
+                $else$
+                <img src="images/warning.png" width="30px"/>
+                $endif$
+            </td>
+        </tr>
+        }$
 
-<div>
-    $healthCheckTests:{
+        </tbody>
+    </table>
 
-    <div style="float:left; padding-top:10px; width:150px;">
-        $it.description$:
-        </div>
-    <div style="float:left; padding-top:10px; width: 300px;">
-        $it.symptom$
-    </div>
-    <div>
-        $if(it.healthy)$
-        <img src="images/tick_icon.png" width="2%"/>
-        $else$
-        <img src="images/warning.png" width="2%"/>
-        $endif$
-    </div>
-</div>
+<hr />
 
-}$
+<h3>System properties</h3>
 
+    <table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            $systemProperties:{
+                <tr>
+                    <td>$it.key$</td>
+                    <td>$it.value$</td>
+                </tr>
+            }$
+        </tbody>
+    </table>
+
+<hr />
+
+<h3>Class path</h3>
+
+    <ul>
+        $classPath:{
+            <li>$it$</li>
+        }$
+    </ul>
 </body>
-
-
 </html>
