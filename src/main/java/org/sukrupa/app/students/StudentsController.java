@@ -126,7 +126,7 @@ public class StudentsController {
 
             addErrorToFields(model, errors);
             model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
-            return "students/createTalent";
+            return "students/create";
         }
     }
 
@@ -152,7 +152,7 @@ public class StudentsController {
     @RequestMapping(value = "create", method = GET)
     public String newStudent(HashMap<String, Object> model) {
         model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
-        return "students/createTalent";
+        return "students/create";
     }
 
     private boolean mandatoryFieldsExist(Errors errors) {

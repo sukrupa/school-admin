@@ -1,6 +1,7 @@
 package org.sukrupa.app.admin;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ public class TalentsController {
 
     private TalentsService talentsService;
 
+    @Autowired
     public TalentsController(TalentsService talentsService) {
         this.talentsService = talentsService;
     }

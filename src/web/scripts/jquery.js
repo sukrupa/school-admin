@@ -2144,7 +2144,7 @@ jQuery.event = {
 
 		} else if ( !events ) {
 			if ( !elem.nodeType ) {
-				// On plain objects, createTalent a fn that acts as the holder
+				// On plain objects, create a fn that acts as the holder
 				// of the values to avoid JSON serialization of event data
 				elemData[ eventKey ] = elemData = function(){};
 			}
@@ -7104,7 +7104,7 @@ jQuery.ajaxSettings.xhr = window.ActiveXObject ?
 		return new window.XMLHttpRequest();
 	};
 
-// Test if we can createTalent an xhr object
+// Test if we can create an xhr object
 try {
 	testXHR = jQuery.ajaxSettings.xhr();
 } catch( xhrCreationException ) {}

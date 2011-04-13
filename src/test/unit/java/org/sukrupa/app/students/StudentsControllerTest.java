@@ -60,7 +60,7 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldDirectToNewStudentForm() {
-        assertThat(controller.newStudent(studentModel), is("students/createTalent"));
+        assertThat(controller.newStudent(studentModel), is("students/create"));
     }
 
     @Test

@@ -51,7 +51,7 @@ public class EventsController {
 
 	@RequestMapping(value = "create", method = GET)
 	public String create() {
-		return "events/createTalent";
+		return "events/create";
 	}
 
     @RequestMapping(value = "{eventId}", method = POST)
@@ -84,7 +84,7 @@ public class EventsController {
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
 			model.put("event", event);
-			return "events/createTalent";
+			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
 			return format("redirect:/events/%s", event.getId());
