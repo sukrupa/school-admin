@@ -12,8 +12,17 @@ $buildInfo:{
 </div>
 }$
 
+<div style="height: 38px;">
+    <div style="float:left; padding-top:10px; width:150px;">
+         Change Set Number:
+    </div>
+    <div style="float:left; padding-top:10px; width: 300px;">
+        $changeSetNumber$
+    </div>
+</div>
+
 <div>
-    $healthCheckItems:{
+    $healthCheckTests:{
 
     <div style="float:left; padding-top:10px; width:150px;">
         $it.description$:

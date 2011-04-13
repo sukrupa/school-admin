@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,40 +56,54 @@ public class HealthCheckController {
     }
 
 
-
     @RequestMapping
     public String list(Map<String, Object> model) {
-        List<HealthCheckItem> healthCheckItems = new ArrayList<HealthCheckItem>();
-        healthCheckItems.add(imageDirectory());
-        healthCheckItems.add(databaseConnection());
+        List<HealthCheckTest> healthCheckTests = new ArrayList<HealthCheckTest>();
+        healthCheckTests.add(imageDirectory());
+        healthCheckTests.add(databaseConnection());
 
-        model.put("healthCheckItems", healthCheckItems);
+        model.put("healthCheckTests", healthCheckTests);
+        model.put("buildInfo", extractBuildInfo());
 
-        ArrayList<String> buildInfo = new ArrayList<String>();
-    try
-    {
+        try {
+            Class.forName(dbDriver);
+            Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+            ResultSet result = connection.createStatement().executeQuery("select * from changelog order by change_number desc limit 1");
+            result.next();
+            model.put("changeSetNumber", result.getInt("CHANGE_NUMBER"));
+            model.put("changeSetDescription", result.getInt("DESCRIPTION"));
+            model.put("changeSetDate", result.getInt("COMPLETE_DT"));
 
-      BufferedReader br = new BufferedReader(new FileReader(webRoot + "/build-number.txt"));
-      String line = null;
-      while ( (line = br.readLine()) != null )
-      {
-        buildInfo.add(line);
-      }
-    }
-    catch (FileNotFoundException e)
-    {
-      e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-    }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        model.put("buildInfo", buildInfo);
+
         return "healthCheck";
 
     }
 
-    private HealthCheckItem databaseConnection() {
-        return new HealthCheckItem() {
+    private ArrayList<String> extractBuildInfo() {
+        ArrayList<String> buildInfo = new ArrayList<String>();
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader(webRoot + "/build-number.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                buildInfo.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buildInfo;
+    }
+
+    private HealthCheckTest databaseConnection() {
+        return new HealthCheckTest() {
             @Override
             public String getSymptom() {
                 return dbURL;
@@ -105,7 +121,6 @@ public class HealthCheckController {
                 } catch (Exception e) {
                     return false;
                 }
-
                 try {
                     DriverManager.getConnection(dbURL, dbUser, dbPassword);
                     return true;
@@ -116,8 +131,8 @@ public class HealthCheckController {
         };
     }
 
-    private HealthCheckItem imageDirectory() {
-        return new HealthCheckItem() {
+    private HealthCheckTest imageDirectory() {
+        return new HealthCheckTest() {
             @Override
             public String getSymptom() {
                 return imageDirectory;
@@ -136,8 +151,7 @@ public class HealthCheckController {
     }
 
 
-
-    private interface HealthCheckItem {
+    private interface HealthCheckTest {
         String getSymptom();
         String getDescription();
         boolean isHealthy();
