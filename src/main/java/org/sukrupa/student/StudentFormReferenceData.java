@@ -3,41 +3,40 @@ package org.sukrupa.student;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 public class StudentFormReferenceData {
 
-    private final List<String> STUDENT_CLASSES;
-    private final List<String> GENDERS;
-    private final List<String> CASTES;
-    private final List<String> SUBCASTES;
-    private final List<String> COMMUNITY_LOCATIONS;
-    private final List<String> RELIGIONS;
-    private final List<String> TALENTS;
-    private final List<String> STATUSES;
-    private final boolean SPONSORED;
-    private final List<String> OCCUPATIONS;
-    private final List<String> MARITAL_STATUSES;
-    private final int AGES_FROM;
-    private final int AGES_TO;
-    private final List<String> FAMILY_STATUSES;
+    private static final List<String> STUDENT_CLASSES = asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> GENDERS = asList("", "Male", "Female");
+    private static final List<String> CASTES = asList("", "Achari", "Agnikula", "Arya Vashya", "Baljigru", "Bhramin", "Bohvi", "Chettyar",
+            "Gowdas", "Gownder", "MBC", "Modahaliyar", "Nadar", "Naidu", "Nayak", "Others", "Rajput", "Rathore", "Reddy's", "SC", "Shalai Keta",
+            "Shetty", "ST", "Tigalaru", "Vanniyar", "Vishwa Karma");
+    private static final List<String> SUBCASTES = asList("", "Adi Drawida", "Adi Janaga", "Adi Karnataka", "Bale -Balijigru", "Bale Banjaguru", "BC",
+                    "Bhajanthri", "Ganiga Shetty", "II 'A'", "Kamala Achari", "Kshathriya", "Kumbar Shetty", "Singh", "Tiwari", "Vailu Shetty", "Vakkaliga",
+                    "Val Nayak", "Vaniga Gownder", "Vannikula");
+    private static final List<String> COMMUNITY_LOCATIONS = asList("", "Bhuvaneshwari Slum", "Chamundi Nagar",
+                            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
+                            "Rehmath Nagar", "Residential", "Subramanyanagar");
+    private static final List<String> FAMILY_STATUSES = asList("", "General", "Single", "Destitute", "Orphan");
+    private static final List<String> OCCUPATIONS = asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bar Bender", "Barman",
+                                    "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
+                                    "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
+                                    "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant", "Office Assistant",
+                                    "Office Boy", "Office Man", "Painter", "Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant", "Store Keeper",
+                                    "Tailor", "Teacher", "Truck Driver", "TV Operator", "Ward Boy", "Welder");
+    private static final List<String> RELIGIONS = asList("", "Christian", "Hindu", "Muslim", "Sikh");
+    private static final List<String> TALENTS = asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
+                                            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
+    private static final int AGES_TO = 20;
+    private static final int AGES_FROM = 2;
+    private static final List<String> STATUSES = asList("Existing Student", "Dropout", "Alumni");
+    private static final boolean SPONSORED = false;
+    private static final List<String> MARITAL_STATUSES = asList(" ", "Married", "Single", "Divorced", "Widowed", "Deceased");
 
 
-    public StudentFormReferenceData(List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes,
-                                    List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to,
-                                    List<String> statusesIn, boolean sponsored, List<String> occupations, List<String> marital_statuses, List<String> family_statuses) {
-        STUDENT_CLASSES = student_classes;
-        GENDERS = genders;
-        CASTES = castes;
-        SUBCASTES = subcastes;
-        COMMUNITY_LOCATIONS = community_locations;
-        RELIGIONS = religions;
-        TALENTS = talents;
-        AGES_FROM = ages_from;
-        AGES_TO = ages_to;
-        STATUSES = statusesIn;
-        SPONSORED = sponsored;
-        OCCUPATIONS = occupations;
-        MARITAL_STATUSES = marital_statuses;
-        FAMILY_STATUSES = family_statuses;
+    public StudentFormReferenceData() {
+
     }
 
     public List<String> getStudentClasses() {
