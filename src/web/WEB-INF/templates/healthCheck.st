@@ -12,14 +12,17 @@ $buildInfo:{
 </div>
 }$
 
+$healthCheckItems: {
 <div style="height: 38px;">
     <div style="float:left; padding-top:10px; width:150px;">
-         Change Set Number:
+         $it.description$:
     </div>
     <div style="float:left; padding-top:10px; width: 300px;">
-        $changeSetNumber$
+        $it.symptom$
     </div>
 </div>
+<br style="clear:both;" />
+}$
 
 <div>
     $healthCheckTests:{
@@ -37,9 +40,8 @@ $buildInfo:{
         <img src="images/warning.png" width="2%"/>
         $endif$
     </div>
+    }$
 </div>
-
-}$
 
 </body>
 

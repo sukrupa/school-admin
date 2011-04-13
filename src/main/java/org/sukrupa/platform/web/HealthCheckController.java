@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.swing.event.ChangeEvent;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,6 +63,8 @@ public class HealthCheckController {
         healthCheckTests.add(imageDirectory());
         healthCheckTests.add(databaseConnection());
 
+        List<HealthCheckItem> healthCheckItems = new ArrayList<HealthCheckItem>();
+
         model.put("healthCheckTests", healthCheckTests);
         model.put("buildInfo", extractBuildInfo());
 
@@ -70,9 +73,10 @@ public class HealthCheckController {
             Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
             ResultSet result = connection.createStatement().executeQuery("select * from changelog order by change_number desc limit 1");
             result.next();
-            model.put("changeSetNumber", result.getInt("CHANGE_NUMBER"));
-            model.put("changeSetDescription", result.getInt("DESCRIPTION"));
-            model.put("changeSetDate", result.getInt("COMPLETE_DT"));
+
+            healthCheckItems.add(changeSetNumber(result.getInt("CHANGE_NUMBER")));
+            healthCheckItems.add(changeSetDescription(result.getString("DESCRIPTION")));
+            healthCheckItems.add(changeSetDate(result.getObject("COMPLETE_DT")));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,12 +84,56 @@ public class HealthCheckController {
             e.printStackTrace();
         }
 
+        model.put("healthCheckItems", healthCheckItems);
+
 
         return "healthCheck";
 
     }
 
-    private ArrayList<String> extractBuildInfo() {
+    private HealthCheckItem changeSetDate(final Object date) {
+        return new HealthCheckItem() {
+            @Override
+            public String getSymptom() {
+                return date.toString();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Change Set Date";
+            }
+        };
+    }
+
+    private HealthCheckItem changeSetDescription(final String description) {
+        return new HealthCheckItem() {
+            @Override
+            public String getSymptom() {
+                return description;
+            }
+
+            @Override
+            public String getDescription() {
+                return "Change Set Description";
+            }
+        };
+    }
+
+    private HealthCheckItem changeSetNumber(final int changeSetNumber) {
+        return new HealthCheckItem() {
+            @Override
+            public String getSymptom() {
+                return String.valueOf(changeSetNumber);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Change Set Number";
+            }
+        };
+    }
+
+    private ArrayList<String>  extractBuildInfo() {
         ArrayList<String> buildInfo = new ArrayList<String>();
         try {
 
@@ -150,6 +198,10 @@ public class HealthCheckController {
         };
     }
 
+    private interface HealthCheckItem {
+        String getSymptom();
+        String getDescription();
+    }
 
     private interface HealthCheckTest {
         String getSymptom();
