@@ -50,7 +50,7 @@ public class StudentsController {
 
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
-        model.put("formhelper", studentService.getReferenceData());
+        model.put("formhelper", studentService.getStudentReferenceData());
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)

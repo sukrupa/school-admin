@@ -4,7 +4,6 @@ import org.sukrupa.student.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -24,7 +23,7 @@ public class StudentFormPresenter {
         List<Talent> talents = talentRepository.listAllTalents();
 
         if (talents.isEmpty()) {
-            return createCheckBoxList(studentFormReferenceData.getTalents(), student.talentDescriptions());
+            return createCheckBoxList(studentFormReferenceData.getTalentDescriptions(), student.talentDescriptions());
         }
 
         List<String> talentDescriptions = new ArrayList<String>();

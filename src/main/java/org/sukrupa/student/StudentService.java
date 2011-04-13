@@ -87,8 +87,8 @@ public class StudentService {
     }
 
 
-    public StudentFormReferenceData getReferenceData() {
-        return new StudentFormReferenceData();
+    public StudentReferenceData getStudentReferenceData() {
+        return new StudentReferenceData();
     }
 
     public TalentRepository getTalentRepository() {

@@ -5,7 +5,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class StudentFormReferenceData {
+public class StudentReferenceData {
 
     private static final List<String> STUDENT_CLASSES = asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final List<String> GENDERS = asList("", "Male", "Female");
@@ -35,7 +35,7 @@ public class StudentFormReferenceData {
     private static final List<String> MARITAL_STATUSES = asList(" ", "Married", "Single", "Divorced", "Widowed", "Deceased");
 
 
-    public StudentFormReferenceData() {
+    public StudentReferenceData() {
 
     }
 

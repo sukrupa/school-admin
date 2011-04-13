@@ -63,7 +63,7 @@ public class StudentFormReferenceData {
         return RELIGIONS;
     }
 
-    public List<String> getTalents() {
+    public List<String> getTalentDescriptions() {
         return TALENTS;
     }
 
