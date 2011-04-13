@@ -154,13 +154,17 @@
                         <div class="label">Contact</div>
                         <input type="text" name="father.contact" value="$student.father.contact$" class="updateValue"></input>
                     </div>
-                    <div class="updateEntry">
+                    <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="father.occupation">
                              $formhelper.fatherOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
                         </select>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Salary</div>
+                        <input type="text" name="father.salary" value="$student.father.salary$" class="updateValue"></input>
                     </div>
                     <div class="updateEntry">
                         <div class="label">Marital Status</div>
@@ -185,13 +189,17 @@
                         <div class="label">Contact</div>
                         <input type="text" name="mother.contact" value="$student.mother.contact$" class="updateValue"></input>
                     </div>
-                    <div class="updateEntry">
+                    <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="mother.occupation">
                              $formhelper.motherOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
                         </select>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Salary</div>
+                        <input type="text" name="mother.salary" value="$student.mother.salary$" class="updateValue"></input>
                     </div>
                     <div class="updateEntry">
                         <div class="label">Marital Status</div>
@@ -216,13 +224,17 @@
                         <div class="label">Contact</div>
                         <input type="text" name="guardian.contact" value="$student.guardian.contact$" class="updateValue"></input>
                     </div>
-                    <div class="updateEntry">
+                    <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="guardian.occupation">
                              $formhelper.guardianOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
                         </select>
+                    </div>
+                    <div class="updateEntry">
+                        <div class="label">Salary</div>
+                        <input type="text" name="guardian.salary" value="$student.guardian.salary$" class="updateValue"></input>
                     </div>
 
                 </div> <!-- end guardian -->

@@ -15,6 +15,10 @@
     <div class="value" id="$label$Occupation">$caregiver.occupation$</div>
 </div>
 <div class="entry">
+    <div class="label">Salary</div>
+    <div class="value" id="$label$Salary">$caregiver.salary$</div>
+</div>
+<div class="entry">
     <div class="label">Marital Status</div>
     <div class="value" id="$label$MaritalStatus">$caregiver.maritalStatus$</div>
 </div>

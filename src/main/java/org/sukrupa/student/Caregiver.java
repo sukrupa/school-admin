@@ -18,13 +18,14 @@ public class Caregiver {
     Caregiver() {
     }
 
-    public Caregiver(String name, String education, String occupation, String maritalStatus, String contact)
+    public Caregiver(String name, String education, String occupation, String maritalStatus, String contact, String salary)
     {
         this.name = name;
         this.education = education;
         this.occupation = occupation;
         this.maritalStatus = maritalStatus;
         this.contact = contact;
+        this.salary = salary;
     }
 
     private String name;
@@ -37,6 +38,8 @@ public class Caregiver {
 
     @Column(name = "CONTACT_NUMBER")
     private String contact;
+
+    private String salary;
 
     public String getName() {
         return name;
@@ -76,5 +79,13 @@ public class Caregiver {
 
     public void setMaritalStatus(String maritalStatus) {
         this.maritalStatus = maritalStatus;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 }

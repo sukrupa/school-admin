@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static java.lang.String.format;
+
 public class StudentFormPresenter {
 
     private final StudentFormReferenceData studentFormReferenceData = new StudentFormReferenceData();
@@ -13,12 +15,25 @@ public class StudentFormPresenter {
 
     private TalentRepository talentRepository;
 
-    public StudentFormPresenter(Student student) {
+    public StudentFormPresenter(Student student, TalentRepository talentRepository) {
         this.student = student;
+        this.talentRepository = talentRepository;
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {
-        return createCheckBoxList(studentFormReferenceData.getTalents(), student.talentDescriptions());
+        List<Talent> talents = talentRepository.listAllTalents();
+
+        if (talents.isEmpty()) {
+            return createCheckBoxList(studentFormReferenceData.getTalents(), student.talentDescriptions());
+        }
+
+        List<String> talentDescriptions = new ArrayList<String>();
+
+        for (Talent talent : talents) {
+            talentDescriptions.add(talent.getDescription());
+        }
+
+        return createCheckBoxList(talentDescriptions, student.talentDescriptions());
     }
 
     public List<DropDownElement> getSubCastesDropDownList() {
@@ -114,7 +129,7 @@ public class StudentFormPresenter {
         return checkBoxElements;
     }
 
-    private static class DropDownElement {
+    public static class DropDownElement {
         public boolean isSelected() {
             return selected;
         }
@@ -132,7 +147,15 @@ public class StudentFormPresenter {
         }
     }
 
-    private static class CheckBoxElement {
+    public static class CheckBoxElement {
+        private final String value;
+        private final boolean checked;
+
+        public CheckBoxElement(String value, boolean checked) {
+            this.value = value;
+            this.checked = checked;
+        }
+
         public boolean isChecked() {
             return checked;
         }
@@ -141,12 +164,8 @@ public class StudentFormPresenter {
             return value;
         }
 
-        private final String value;
-        private final boolean checked;
-
-        public CheckBoxElement(String value, boolean checked) {
-            this.value = value;
-            this.checked = checked;
+        public String toString() {
+            return format("[checkBox value=%s, checked=%s]", value, checked);
         }
     }
 

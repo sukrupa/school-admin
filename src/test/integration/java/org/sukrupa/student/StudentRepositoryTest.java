@@ -45,6 +45,18 @@ public class StudentRepositoryTest {
                             .maritalStatus("Single")
                             .education("Awesome")
                             .contact("123")
+                            .salary("RS. 5,000")
+                            .build();
+
+    private final Caregiver mary = new CaregiverBuilder().name("mary")
+                            .maritalStatus("Married")
+                            .salary("RS. 6,000")
+                            .education("Very good")
+                            .build();
+
+    private final Caregiver naruto = new CaregiverBuilder().name("Naruto")
+                            .salary("RS. 7,000")
+                            .education("Ninja")
                             .build();
 
     @Autowired
@@ -127,8 +139,8 @@ public class StudentRepositoryTest {
             .gender("Male")
             .status(StudentStatus.EXISTING_STUDENT)
             .father(fabio)
-            .mother(fabio)
-            .guardian(fabio)
+            .mother(mary)
+            .guardian(naruto)
             .build();
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
@@ -438,6 +450,30 @@ public class StudentRepositoryTest {
 
         assertThat(students.size(), is(1));
         assertThat(students, CollectionMatchers.hasOnly(balaji));
+    }
+
+    @Test
+    public void shouldReturnFathersSalary()
+    {
+        studentRepository.put(balaji);
+        Student student = studentRepository.findByStudentId(balaji.getStudentId());
+        assertThat(student.getFather().getSalary(), is("RS. 5,000"));
+    }
+
+    @Test
+    public void shouldReturnMothersSalary()
+    {
+        studentRepository.put(balaji);
+        Student student = studentRepository.findByStudentId(balaji.getStudentId());
+        assertThat(student.getMother().getSalary(), is("RS. 6,000"));
+    }
+
+    @Test
+    public void shouldReturnGuardiansSalary()
+    {
+        studentRepository.put(balaji);
+        Student student = studentRepository.findByStudentId(balaji.getStudentId());
+        assertThat(student.getGuardian().getSalary(), is("RS. 7,000"));
     }
 
     private StudentSearchParameter searchParametersWithNameAs(String searchTerm) {

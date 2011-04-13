@@ -91,5 +91,8 @@ public class StudentService {
         return new StudentFormReferenceData();
     }
 
+    public TalentRepository getTalentRepository() {
+        return talentRepository;
+    }
 }
 

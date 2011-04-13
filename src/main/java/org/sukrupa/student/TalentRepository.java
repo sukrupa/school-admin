@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sukrupa.platform.collection.CollectionTransformation;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
+import static java.util.Collections.emptyList;
 import static org.sukrupa.platform.collection.CollectionTransformation.genericHashSetFrom;
 
 @Repository
@@ -49,5 +47,9 @@ public class TalentRepository {
     //    session().save(newTalent);
         // WIP #356 - adding new talents
 
+    }
+
+    public List<Talent> listAllTalents() {
+        return emptyList();
     }
 }
