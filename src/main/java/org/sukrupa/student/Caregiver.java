@@ -18,6 +18,15 @@ public class Caregiver {
     Caregiver() {
     }
 
+    public Caregiver(String name, String education, String occupation, String maritalStatus, String contact)
+    {
+        this.name = name;
+        this.education = education;
+        this.occupation = occupation;
+        this.maritalStatus = maritalStatus;
+        this.contact = contact;
+    }
+
     private String name;
     private String education;
 

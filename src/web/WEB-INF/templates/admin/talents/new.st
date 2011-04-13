@@ -1,1 +1,1 @@
-$layout(title="Add New Talent", stylesheets="admin")$
+$layout(body=admin/talents/newBody(), title="Add New Talent", stylesheets=["admin", "addTalent"])$

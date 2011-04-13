@@ -116,7 +116,7 @@
 
             <div class="studentImage">
 
-                <img src="/application/images/$student.imageLink$" id="$student.imageLink$"/>
+                <img src="/students/$student.imageLink$/image" id="$student.imageLink$"/>
                 <input type="file" name="imageToUpload" />
             </div>
 

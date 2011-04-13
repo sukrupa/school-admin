@@ -21,7 +21,7 @@
         <attribute name="type"/>
 
         <sequential>
-            <junit printsummary="true" fork="true"
+            <junit printsummary="true"
                    haltonfailure="false" haltonerror="false" outputtoformatters="false">
                 <classpath refid="classpath.run.test.@{type}"/>
                 <formatter type="xml" usefile="true"/>

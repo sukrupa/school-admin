@@ -18,8 +18,9 @@ public class StudentSearchParameter {
     private List<Talent> talents = new ArrayList<Talent>();
     private String religion = WILDCARD_CHARACTER;
     private String status = "Existing Student";
+    private String caregiversOccupation = WILDCARD_CHARACTER;
 
-    public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, List<Talent> talents, String religion, String status) {
+    public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, List<Talent> talents, String religion, String status, String caregiversOccupation) {
         this.name = name;
         this.studentClass = studentClass;
         this.gender = gender;
@@ -30,6 +31,7 @@ public class StudentSearchParameter {
         this.talents = talents;
         this.religion = religion;
         this.status = status;
+        this.caregiversOccupation = caregiversOccupation;
     }
 
     @DoNotRemove
@@ -115,5 +117,15 @@ public class StudentSearchParameter {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getCaregiversOccupation() {
+        return caregiversOccupation;
+    }
+
+    public void setCaregiversOccupation(String caregiversOccupation) {
+        this.caregiversOccupation = caregiversOccupation;
+    }
+
+
 
 }

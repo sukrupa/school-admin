@@ -11,3 +11,16 @@ search Workflow:
 #And I select community location as <Community Location>
 #When I hit search button
 #Then  <Name> shows in search results
+
+Search Caregivers Occupation Workflow, search Workflow:
+#Given I select the talent ""
+#And I select minimum age as "12"
+#And I select maximum age as "17"
+#And I select class as ""
+#And I select gender as ""
+#And I select religion as ""
+#And I select caste as ""
+#And I select community location as ""
+#And I select caregivers occupation as "Any"
+#When I hit search button
+#Then  "Anok" shows in search results
