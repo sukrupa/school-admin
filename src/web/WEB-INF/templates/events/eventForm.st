@@ -3,28 +3,45 @@
     <div class="eventInfoLeft">
         <div class="createEntry">
             <div class="label">Title<span class="mandatory">*</span></div>
-            <input type="text" name="title" id="title" value="$event.title$" class="createValue"></input>
+            <input type="text" name="title" id="title" value="$event.title$" class="createValue" />
         </div>
 
-        <div class="createEntryDateTime">
+        <div class="createEntry">
             <div class="label dateTime">Date <br/>(dd-mm-yyyy)<span class="mandatory">*</span></div>
-            <input type="text" name="date" id="date" value="$event.date$" class="createValue"></input>
+            <input type="text" name="date" id="date" value="$event.date$" class="createValue" />
         </div>
 
         <div class="createEntryDateTime">
-            <div class="label dateTime">Time <br/>(hh:mm)</div>
-            <input type="text" name="time" id="time" value="$event.time$" class="createValue"></input>
+            <div class="label dateTime">Start Time <br/>(hh:mm)</div>
+            <input type="text" name="startTime" id="startTime" value="$event.startTime$" class="createValue" />
+      <div class="label amPm">
+                <label for="startTimeAm">a.m.</label>
+                <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" />
+                 <label for="startTimePm">p.m.</label>
+                <input type="radio" id="startTimePm" class="amPm" name="startTimeAmPm" value="pm" />
+            </div>
+        </div>
+
+        <div class="createEntryDateTime">
+            <div class="label dateTime">End Time <br/>(hh:mm)</div>
+            <input type="text" name="endTime" id="endTime" value="$event.endTime$" class="createValue" />
+            <div class="label amPm">
+                <label for="endTimeAm">a.m.</label>
+                <input type="radio" id="endTimeAm" class="amPm" name="endTimeAmPm" value="am" />
+                 <label for="endTimePm">p.m.</label>
+                <input type="radio" id="endTimePm" class="amPm" name="endTimeAmPm" value="pm" />
+            </div>
+
         </div>
 
         <div class="createEntry">
             <div class="label">Venue</div>
-            <input type="text" name="venue" id="venue" value="$event.venue$" class="createValue"></input>
+            <input type="text" name="venue" id="venue" value="$event.venue$" class="createValue" />
         </div>
 
         <div class="createEntry">
             <div class="label">Coordinator</div>
-            <input type="text" name="coordinator" id="coordinator" value="$event.coordinator$"
-                   class="createValue"></input>
+            <input type="text" name="coordinator" id="coordinator" value="$event.coordinator$" class="createValue" />
         </div>
 
         <div class="createEntry">

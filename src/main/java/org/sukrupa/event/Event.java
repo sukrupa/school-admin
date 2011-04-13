@@ -76,7 +76,7 @@ public class Event {
     public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
         return new Event(eventCreateOrUpdateParameter.getTitle(),
                 Date.parse(eventCreateOrUpdateParameter.getDate(),
-		        eventCreateOrUpdateParameter.getTime()),
+		        eventCreateOrUpdateParameter.getEndTime()),
                 eventCreateOrUpdateParameter.getVenue(),
                 eventCreateOrUpdateParameter.getCoordinator(),
                 eventCreateOrUpdateParameter.getDescription(),
@@ -117,7 +117,7 @@ public class Event {
     }
 
     private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
-        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getTime());
+        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -171,7 +171,7 @@ public class Event {
 
     public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
-        this.date = Date.parse(eventParam.getDate(),eventParam.getTime());
+        this.date = Date.parse(eventParam.getDate(),eventParam.getEndTime());
         this.venue = eventParam.getVenue();
         this.coordinator = eventParam.getCoordinator();
         this.description = eventParam.getDescription();

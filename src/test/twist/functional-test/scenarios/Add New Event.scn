@@ -9,3 +9,14 @@ Create an event:
 #And I fill in "Attendees" with "64262"
 #And I click "Save"
 #Then I should see the "Event: New event" page
+
+Create an event, Create an event with time:
+#Given i follow the "Create an Event" link
+#When I fill in "Title" with "New event with time"
+#And I fill in "Date" with "13-04-2011"
+#And I fill in "startTime" with the time "12:00 am"
+#And I fill in "endTime" with the time "01:00 pm"
+#And I fill in "Description" with "Event description..."
+#And I fill in "Attendees" with "64262"
+#And I click "Save"
+#Then I should see the "Event: New event with time" page

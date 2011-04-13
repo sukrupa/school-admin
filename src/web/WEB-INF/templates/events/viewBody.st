@@ -17,7 +17,7 @@
     </div>
     $endif$
 
-    $event.time:{ time |
+    $event.endTime:{ time |
     <div class="eventEntry">
         <div class="eventLabel">Time</div>
         <div class="time">$time$</div>

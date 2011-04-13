@@ -2,7 +2,6 @@ package org.sukrupa.event;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
-import com.google.common.base.Joiner;
 
 import java.util.Set;
 
@@ -11,7 +10,7 @@ public class EventCreateOrUpdateParameter {
     private int id;
     private String title;
     private String date;
-    private String time;
+    private String endTime;
     private String venue;
     private String coordinator;
     private String description;
@@ -22,11 +21,11 @@ public class EventCreateOrUpdateParameter {
     public EventCreateOrUpdateParameter() {
     }
 
-    public EventCreateOrUpdateParameter(int id, String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateOrUpdateParameter(int id, String title, String date, String endTime, String venue, String coordinator, String description, String notes, String attendees) {
         this.id = id;
         this.title = title;
         this.date = date;
-        this.time = time;
+        this.endTime = endTime;
         this.venue = venue;
         this.coordinator = coordinator;
         this.description = description;
@@ -59,12 +58,12 @@ public class EventCreateOrUpdateParameter {
         this.date = date;
     }
 
-    public String getTime() {
-        return returnNullIfEmpty(time);
+    public String getEndTime() {
+        return returnNullIfEmpty(endTime);
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getVenue() {

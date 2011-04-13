@@ -7,10 +7,7 @@ import org.junit.Test;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Builders;
 import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
+
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -28,7 +25,6 @@ import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static com.natpryce.makeiteasy.MakeItEasy.an;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static com.natpryce.makeiteasy.MakeItEasy.with;
-import static org.sukrupa.student.Builders.*;
 
 public class EventTest {
 
@@ -84,7 +80,7 @@ public class EventTest {
 		eventCreateOrUpdateParameter.setCoordinator("");
 		eventCreateOrUpdateParameter.setNotes("");
 		eventCreateOrUpdateParameter.setVenue("");
-		eventCreateOrUpdateParameter.setTime("");
+		eventCreateOrUpdateParameter.setEndTime("");
 		eventCreateOrUpdateParameter.setDate("12-12-2001");
 
 		Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
