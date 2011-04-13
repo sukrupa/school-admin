@@ -216,7 +216,7 @@ public class StudentForm {
     }
 
     public boolean hasImage() {
-        return null != imageToUpload;
+        return null != imageToUpload && !imageToUpload.isEmpty();
     }
 
     public Image getImage() {
