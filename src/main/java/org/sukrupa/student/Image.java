@@ -3,7 +3,7 @@ package org.sukrupa.student;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.InputStream;
+import java.io.*;
 
 public class Image {
 
@@ -13,7 +13,7 @@ public class Image {
         this.source = source;
     }
 
-    public InputStream getInputStream() {
-        return null;
+    public InputStream getInputStream() throws IOException {
+        return source.getInputStream();
     }
 }

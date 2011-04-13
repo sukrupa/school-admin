@@ -8,6 +8,7 @@ import org.sukrupa.student.Image;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import static junit.framework.Assert.assertEquals;
@@ -45,11 +46,11 @@ public class StudentImageRepositoryTest {
     }
 
     @Test
-    public void whenPassedAnImageShouldSaveTheImageWithTheSameName(){
+    public void whenPassedAnImageShouldSaveTheImageWithTheSameName() throws IOException {
         Image newImage = mock(Image.class);
         InputStream inputStream = mock(InputStream.class);
         when(newImage.getInputStream()).thenReturn(inputStream);
-        studentImageRepository.save(newImage,"12345");
+        studentImageRepository.save(newImage, "12345");
         verify(fileHandler).save(imageRepositoryLocation,"12345",inputStream);
     }
 

@@ -8,6 +8,7 @@ import org.sukrupa.student.Image;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @Service
 public class StudentImageRepository {
@@ -32,7 +33,12 @@ public class StudentImageRepository {
         return image;
     }
 
-    public void save(Image image, String id) {
+    public boolean save(Image image, String id) {
+        try{
          fileHandler.save(imageRepositoryLocation,id,image.getInputStream());
+        }catch (IOException e){
+            return false;
+        }
+        return true;
     }
 }
