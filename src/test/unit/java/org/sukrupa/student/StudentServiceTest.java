@@ -133,15 +133,16 @@ public class StudentServiceTest {
         StudentForm studentProfileForm = mock(StudentForm.class);
         Image image = mock(Image.class);
         Student mockStudent = mock(Student.class);
+
         when(studentProfileForm.getStudentId()).thenReturn("12345");
         when(mockStudent.getStudentId()).thenReturn("12345");
         when(studentRepository.findByStudentId("12345")).thenReturn(mockStudent);
         when(studentProfileForm.hasImage()).thenReturn(true);
-        when(studentProfileForm.getImage()).thenReturn(image);
+
 
         service.update(studentProfileForm);
 
-        verify(studentImageRepository).save(image, "12345");
+        verify(studentProfileForm).createImage(studentImageRepository);
     }
 
     @Test
