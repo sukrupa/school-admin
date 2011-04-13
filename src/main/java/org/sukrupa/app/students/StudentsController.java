@@ -64,7 +64,7 @@ public class StudentsController {
 
         student.getStudentId();
         model.put("student", student);
-        model.put("formhelper", formHelperFor(student));
+        model.put("formhelper", present(student));
         model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
 
@@ -72,8 +72,8 @@ public class StudentsController {
     }
 
 
-    private StudentFormPresenter formHelperFor(Student theStudent) {
-        return new StudentFormPresenter(theStudent, studentService.getReferenceData());
+    private StudentFormPresenter present(Student student) {
+        return new StudentFormPresenter(student);
     }
 
     @RequestMapping(value = "{id}", method = GET)
@@ -125,7 +125,7 @@ public class StudentsController {
             model.put("errors", errors);
 
             addErrorToFields(model, errors);
-            model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
+            model.put("formhelper", present(Student.EMPTY_STUDENT));
             return "students/create";
         }
     }
@@ -151,7 +151,7 @@ public class StudentsController {
 
     @RequestMapping(value = "create", method = GET)
     public String newStudent(HashMap<String, Object> model) {
-        model.put("formhelper", formHelperFor(Student.EMPTY_STUDENT));
+        model.put("formhelper", present(Student.EMPTY_STUDENT));
         return "students/create";
     }
 

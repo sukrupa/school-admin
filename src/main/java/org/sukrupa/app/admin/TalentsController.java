@@ -27,6 +27,6 @@ public class TalentsController {
 
     public String create(TalentForm talentForm) {
         this.talentsService.createTalent(talentForm) ;
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return null;
     }
 }
