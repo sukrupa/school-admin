@@ -27,7 +27,7 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+                          StudentImageRepository studentImageRepository,StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.studentFactory = studentFactory;
