@@ -353,6 +353,7 @@ public class Student {
         caregiverIn.setEducation(getCaregiver.getEducation());
         caregiverIn.setContact(getCaregiver.getContact());
         caregiverIn.setOccupation(getCaregiver.getOccupation());
+        caregiverIn.setSalary(getCaregiver.getSalary());
         caregiverIn.setMaritalStatus(getCaregiver.getMaritalStatus());
 
         return caregiverIn;

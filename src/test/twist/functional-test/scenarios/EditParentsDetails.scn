@@ -17,6 +17,9 @@ Edit Parents Detail, Edit Student:
 #Choose "Cab Driver" in the list of "guardian.occupation"
 #Choose "Single" in the list of "father.maritalStatus"
 #Choose "Married" in the list of "mother.maritalStatus"
+#Enter "RS. 5,000" in the "father.salary"
+#Enter "RS. 6,000" in the "mother.salary"
+#Enter "RS. 7,000" in the "guardian.salary"
 #Click "Save"
 #Verift that we are in the view student page
 #Verify that the field name "fatherName" is "Peter Murray"
@@ -33,3 +36,6 @@ Edit Parents Detail, Edit Student:
 #Verify that the field name "guardianOccupation" is "Cab Driver"
 #Verify that the field name "fatherMaritalStatus" is "Single"
 #Verify that the field name "motherMaritalStatus" is "Married"
+#Verify that the field name "fatherSalary" is "RS. 5,000"
+#Verify that the field name "motherSalary" is "RS. 6,000"
+#Verify that the field name "guardianSalary" is "RS. 7,000"

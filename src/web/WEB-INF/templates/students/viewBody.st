@@ -140,6 +140,10 @@
                     <div class="label">Occupation</div>
                     <div class="value" id="guardianOccupation">$student.guardian.occupation$</div>
                 </div>
+                <div class="entry">
+                    <div class="label">Salary</div>
+                    <div class="value" id="guardianSalary">$student.guardian.salary$</div>
+                </div>
             </div>
         </div>
 

@@ -9,7 +9,7 @@
     width: 350px;
 }
 
-#fatherDetails .labelHead
+#fatherDetails, #motherDetails, #guardianDetails .labelHead
 {
     font-weight: bold;
     margin-bottom: 20px;
@@ -26,12 +26,6 @@
     float:right;
 }
 
-#motherDetails .labelHead
-{
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
 #motherDetails .label
 {
     width: 100px;
@@ -43,13 +37,14 @@
     float:left;
 }
 
-#guardianDetails .labelHead
-{
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
 #guardianDetails .label
 {
     width: 100px;
+}
+
+.updateEntrySelect
+{
+    clear: both;
+    position:relative;
+    height: 39px;
 }

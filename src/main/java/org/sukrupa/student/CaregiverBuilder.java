@@ -14,6 +14,8 @@ public class CaregiverBuilder {
     private String occupation;
     private String maritalStatus;
     private String contact;
+    private String salary;
+
 
     public CaregiverBuilder name(String name)
     {
@@ -45,8 +47,14 @@ public class CaregiverBuilder {
         return this;
     }
 
+    public CaregiverBuilder salary(String salary)
+    {
+        this.salary = salary;
+        return this;
+    }
+
     public Caregiver build()
     {
-        return new Caregiver(name, education,occupation,maritalStatus,contact);
+        return new Caregiver(name, education,occupation,maritalStatus,contact, salary);
     }
 }
