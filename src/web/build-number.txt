@@ -1,2 +1,2 @@
-Pipeline Label: 2.mark.joel
-Git Revision: 83d4b6cf32f05a7c458e2e3a6bbec39f1df462dd
+Pipeline Label: ${env.GO_PIPELINE_LABEL}
+Git Revision: ${env.GO_REVISION}

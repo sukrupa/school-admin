@@ -2,10 +2,8 @@ package org.sukrupa.student;
 
 import org.springframework.stereotype.Service;
 
-import javax.accessibility.AccessibleStateSet;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ReferenceDataRepository {
@@ -31,6 +29,7 @@ public class ReferenceDataRepository {
             "Office Boy", "Office Man", "Painter","Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant","Store Keeper",
             "Tailor", "Teacher", "Truck Driver", "TV Operator","Ward Boy","Welder");
     private final List<String> RELIGIONS = Arrays.asList("", "Christian", "Hindu", "Muslim", "Sikh");
+
     private final List<String> TALENTS = Arrays.asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
             "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private final int AGES_TO = 20;
@@ -40,9 +39,9 @@ public class ReferenceDataRepository {
     private final boolean SPONSORED = false;
     private final List<String> MARITAL_STATUSES = Arrays.asList(" ","Married", "Single", "Divorced", "Widowed", "Deceased");
 
-    private ReferenceData referenceData = new ReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, SPONSORED, OCCUPATIONS, MARITAL_STATUSES, FAMILY_STATUSES);
+    private StudentFormReferenceData studentFormReferenceData = new StudentFormReferenceData(STUDENT_CLASSES, GENDERS, CASTES, SUBCASTES, COMMUNITY_LOCATIONS, RELIGIONS, TALENTS, AGES_FROM, AGES_TO, STATUSES, SPONSORED, OCCUPATIONS, MARITAL_STATUSES, FAMILY_STATUSES);
 
-    public ReferenceData getReferenceData() {
-        return referenceData;
+    public StudentFormReferenceData getStudentFormReferenceData() {
+        return studentFormReferenceData;
     }
 }

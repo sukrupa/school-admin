@@ -6,7 +6,7 @@ import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
 
-public class StudentProfileForm {
+public class StudentForm {
     private String studentId;
     private String name;
     private String dateOfBirth;
@@ -29,7 +29,7 @@ public class StudentProfileForm {
     private String familyStatus;
 
 
-    public StudentProfileForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus) {
+    public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -42,9 +42,9 @@ public class StudentProfileForm {
         this.father = father;
         this.mother = mother;
         this.guardian = guardian;
+        this.imageToUpload = imageToUpload;
         this.talents = talents;
         this.status = status;
-        this.sponsored = sponsored;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.background = background;
@@ -52,7 +52,7 @@ public class StudentProfileForm {
     }
 
     @DoNotRemove
-    public StudentProfileForm() {
+    public StudentForm() {
     }
 
     public String getStudentId() {

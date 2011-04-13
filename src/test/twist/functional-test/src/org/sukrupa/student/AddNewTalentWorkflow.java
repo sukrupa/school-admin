@@ -27,4 +27,16 @@ public class AddNewTalentWorkflow {
 
 	}
 
+	public void ifIEnterANewTalent(String talentDescription) throws Exception {
+		browser.textbox("description").setValue(talentDescription);
+	}
+
+	public void andIClickTheAddTalentButton() throws Exception {
+		browser.submit("Add Talent").click();
+	}
+
+	public void iShouldSeeAConfirmationMessageSayingTalentWasAddedSuccessfully(String talent) throws Exception {
+		assertThat(browser.div("confirmMessage").getText().contains(talent + "was added successfully!"), is(true));	
+	}
+
 }

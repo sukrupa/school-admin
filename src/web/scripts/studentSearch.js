@@ -1,11 +1,11 @@
 var dualListBox = dualListBox || {};
-var myOptions = new Array();
+var ageToOptions = new Array();
 var anyValue = "*";
 var allTalents;
 
-function changeAgeRange() {
+function updateAgeRange() {
 	var minVal = $('#ageFrom').val();
-	removeAll();
+	removeAllAgeToOptions();
 	if (minVal === anyValue) {
 		addAnyToAgeTo();
 	} else {
@@ -24,41 +24,56 @@ function getAgeToOptions() {
 }
 
 function showAllAgeToOptionsFrom(minVal) {
-	var maxVal = myOptions[myOptions.length - 1];
+	var maxVal = ageToOptions[ageToOptions.length - 1];
 	var ageTo = getAgeToOptions();
 	for (var i = minVal-1; i < maxVal; i++) {
-     	ageTo[ageTo.length] = new Option(myOptions[i], myOptions[i], true, true);
+     	ageTo[ageTo.length] = new Option(ageToOptions[i], ageToOptions[i], true, true);
 	}
 }
 
-function removeAll() {
-	$('#ageTo option').each(function() {
-		$(this).remove();
-	});
+function removeAllAgeToOptions() {
+	$('#ageTo option').remove();
 }
 
-function initDropDowns() {
+function initAgeRangeDropDowns() {
 	$('#ageTo').val(anyValue);
 	$('#ageFrom').val(anyValue);
-	removeAll();
+	removeAllAgeToOptions();
 	addAnyToAgeTo();
 }
 
-function saveOptions() {
+function saveAgeToOptions() {
     $('#ageTo option').each(function() {
-		myOptions[myOptions.length] = $(this).val();
+		ageToOptions[ageToOptions.length] = $(this).val();
 	});
 }
 
+function adjustAgeRangeDropDownsAfterGoingBackInBrowserHistory() {
+    var selectedIndex = $('#ageTo')[0].selectedIndex;
+    $('#ageTo option:first').remove();
+    var ageFromValue = parseInt($('#ageFrom').val(), 10);
+    $('#ageTo option').each(function(){
+        var $this = $(this);
+        if (parseInt($this.val(), 10) < ageFromValue) {
+            $this.remove();
+        }
+    });
+    $('#ageTo')[0].selectedIndex = selectedIndex;
+}
+
 $(document).ready(function (){
-	saveOptions();
-	initDropDowns();
     var dualBox = dualListBox.box($('#availableTalents'),$('#chosenTalents'));
 	$('#addTalent').click(dualBox.add);
 	$('#removeTalent').click(dualBox.remove);
 	$('#clearTalents').click(dualBox.clear);
-	$('#ageFrom').change(changeAgeRange);
 
+	saveAgeToOptions();
+	if ($('#ageFrom').val() == anyValue) {
+		initAgeRangeDropDowns();
+	} else {
+	    adjustAgeRangeDropDownsAfterGoingBackInBrowserHistory();
+	}
+	$('#ageFrom').change(updateAgeRange);
 });
 
 dualListBox.box = function(available,chosen) {

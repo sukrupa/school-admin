@@ -6,3 +6,7 @@ body
     padding: 5px;
     font: 15px tahoma, verdana, arial, helvetica, sans-serif;
 }
+
+th {
+    text-align: left;
+}
