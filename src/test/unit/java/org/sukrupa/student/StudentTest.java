@@ -216,23 +216,6 @@ public class StudentTest {
         assertEquals(student.getImageLink(), "12345");
     }
 
-    @Test
-    public void testStudentShouldDisplayEventsWithCommaFormat()
-    {
-        Event spiceGirls = new EventBuilder().title("Spice Girls")
-                                        .build();
-
-        Event backstreetBoys = new EventBuilder().title("Backstreet Boys")
-                                        .build();
-
-        Set<Event> setOfEvents = new HashSet<Event>();
-        setOfEvents.add(spiceGirls);
-        setOfEvents.add(backstreetBoys);
-
-        Student student = new StudentBuilder().events(setOfEvents).build();
-        assertThat(student.getEventsForDisplay(), is("Backstreet Boys, Spice Girls"));
-    }
-
     private Student promoteStudent(String studentClass) {
         Student student = new StudentBuilder().studentClass(studentClass).build();
         student.promote();
