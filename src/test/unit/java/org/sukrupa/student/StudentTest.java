@@ -149,21 +149,21 @@ public class StudentTest {
     {
         Student student = new StudentBuilder().build();
 
-        StudentProfileForm studentProfileForm = new StudentProfileForm();
+        StudentForm studentForm = new StudentForm();
         Caregiver father = new Caregiver();
         father.setName("someFather");
 
         Caregiver mother = new Caregiver();
         mother.setName("someMother");
 
-        studentProfileForm.setFather(father);
-        studentProfileForm.setMother(mother);
-        studentProfileForm.setDateOfBirth("01-02-2005");
-        studentProfileForm.setStatus("Existing Student");
-        studentProfileForm.setFamilyStatus("Single");
-        studentProfileForm.setSponsored(true);
+        studentForm.setFather(father);
+        studentForm.setMother(mother);
+        studentForm.setDateOfBirth("01-02-2005");
+        studentForm.setStatus("Existing Student");
+        studentForm.setFamilyStatus("Single");
+        studentForm.setSponsored(true);
 
-        student.updateFrom( studentProfileForm, Collections.EMPTY_SET );
+        student.updateFrom(studentForm, Collections.EMPTY_SET );
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
@@ -205,7 +205,7 @@ public class StudentTest {
     public void shouldSetImageLinkToStudentIDIfUpdateParametersHaveAnImage(){
         Student student = new StudentBuilder().studentId("12345").build();
         CommonsMultipartFile image = mock(CommonsMultipartFile.class);
-        StudentProfileForm studentUpdateParameters = new StudentCreateOrUpdateParameterBuilder().imageToUpload(image).build();
+        StudentForm studentUpdateParameters = new StudentCreateOrUpdateParameterBuilder().imageToUpload(image).build();
 
         student.updateFrom(studentUpdateParameters,Collections.<Talent>emptySet());
 

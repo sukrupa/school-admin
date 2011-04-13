@@ -65,11 +65,11 @@ public class StudentsControllerTest {
 
     @Test
     public void shouldCreateANewStudent () {
-        StudentProfileForm studentToCreate = new StudentProfileForm();
+        StudentForm studentToCreate = new StudentForm();
         studentToCreate.setDateOfBirth("11-10-1982");
 
         Student studentThatGetsCreated = new Student("SK111","", "01-01-2001", "Male");
-        when(service.create(any(StudentProfileForm.class))).thenReturn(studentThatGetsCreated);
+        when(service.create(any(StudentForm.class))).thenReturn(studentThatGetsCreated);
 
         String result = controller.create(studentToCreate, null);
 
@@ -80,7 +80,7 @@ public class StudentsControllerTest {
     public void shouldAddNameErrorIfTheUserDoesNotEnterAName() {
         studentValidator.addErrorTo("name");
         Map<String, Object> model = new HashMap<String, Object>();
-        StudentProfileForm userDidNotEnterName = mock(StudentProfileForm.class);
+        StudentForm userDidNotEnterName = mock(StudentForm.class);
 
         controller.create(userDidNotEnterName, model);
 
@@ -91,7 +91,7 @@ public class StudentsControllerTest {
     public void createShouldShowErrorForGenderIfNotSelected() {
         studentValidator.addErrorTo("gender");
         Map<String,Object> model = new HashMap<String, Object>();
-        StudentProfileForm userWithoutGender = mock(StudentProfileForm.class);
+        StudentForm userWithoutGender = mock(StudentForm.class);
 
         controller.create(userWithoutGender, model);
         assertNotNull(model.get("genderError"));

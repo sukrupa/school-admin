@@ -39,27 +39,28 @@ public class StudentService {
         return studentRepository.findByStudentId(studentId);
     }
 
-    public Student create(StudentProfileForm studentProfileForm) {
-        Student student = studentFactory.create(studentProfileForm.getStudentId(),
-                studentProfileForm.getName(),
-                studentProfileForm.getDateOfBirth(),
-                studentProfileForm.getGender());
+    public Student create(StudentForm studentForm) {
+        Student student = studentFactory.create(studentForm.getStudentId(),
+                studentForm.getName(),
+                studentForm.getDateOfBirth(),
+                studentForm.getGender());
 
         studentRepository.put(student);
         return student;
     }
 
-    public Student update(StudentProfileForm studentProfileForm) {
-        Student student = studentRepository.findByStudentId(studentProfileForm.getStudentId());
+    public Student update(StudentForm studentForm) {
+        Student student = studentRepository.findByStudentId(studentForm.getStudentId());
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
 
-        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
-        student.updateFrom(studentProfileForm, talents);
+        Set<Talent> talents = talentRepository.findTalents(studentForm.getTalentDescriptions());
 
-        if(studentProfileForm.hasImage()){
-            studentImageRepository.save(studentProfileForm.getImage(), student.getStudentId());
+        student.updateFrom(studentForm, talents);
+
+        if(studentForm.hasImage()){
+            studentImageRepository.save(studentForm.getImage(), student.getStudentId());
         }
 
         return studentRepository.update(student);
@@ -86,8 +87,8 @@ public class StudentService {
     }
 
 
-    public ReferenceData getReferenceData() {
-        return referenceDataRepository.getReferenceData();
+    public StudentFormReferenceData getReferenceData() {
+        return referenceDataRepository.getStudentFormReferenceData();
     }
 
 }

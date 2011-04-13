@@ -3,27 +3,27 @@ package org.sukrupa.student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReferenceData {
+public class StudentFormReferenceData {
 
-    private List<String> STUDENT_CLASSES;
-    private List<String> GENDERS;
-    private List<String> CASTES;
-    private List<String> SUBCASTES;
-    private List<String> COMMUNITY_LOCATIONS;
-    private List<String> RELIGIONS;
-    private List<String> TALENTS;
-    private List<String> STATUSES;
-    private boolean SPONSORED;
-    private List<String> OCCUPATIONS;
-    private List<String> MARITAL_STATUSES;
-    private int AGES_FROM;
-    private int AGES_TO;
-    private List<String> FAMILY_STATUSES;
+    private final List<String> STUDENT_CLASSES;
+    private final List<String> GENDERS;
+    private final List<String> CASTES;
+    private final List<String> SUBCASTES;
+    private final List<String> COMMUNITY_LOCATIONS;
+    private final List<String> RELIGIONS;
+    private final List<String> TALENTS;
+    private final List<String> STATUSES;
+    private final boolean SPONSORED;
+    private final List<String> OCCUPATIONS;
+    private final List<String> MARITAL_STATUSES;
+    private final int AGES_FROM;
+    private final int AGES_TO;
+    private final List<String> FAMILY_STATUSES;
 
 
-    public ReferenceData(List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes,
-                         List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to,
-                         List<String> statusesIn, boolean sponsored, List<String> occupations, List<String> marital_statuses, List<String> family_statuses) {
+    public StudentFormReferenceData(List<String> student_classes, List<String> genders, List<String> castes, List<String> subcastes,
+                                    List<String> community_locations, List<String> religions, List<String> talents, int ages_from, int ages_to,
+                                    List<String> statusesIn, boolean sponsored, List<String> occupations, List<String> marital_statuses, List<String> family_statuses) {
         STUDENT_CLASSES = student_classes;
         GENDERS = genders;
         CASTES = castes;

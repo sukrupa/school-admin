@@ -113,7 +113,7 @@ public class StudentServiceTest {
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -173,7 +173,7 @@ public class StudentServiceTest {
         when(studentRepository.update(philNew)).thenReturn(philNew);
         when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
-        StudentProfileForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
+        StudentForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
                 .area("Chamundi Nagar")
                 .caste("ST")
                 .subCaste("AK")
@@ -196,7 +196,7 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
-        StudentProfileForm studentParam = new StudentProfileForm();
+        StudentForm studentParam = new StudentForm();
         studentParam.setStudentId("SK20091001");
         studentParam.setName("Yael");
         studentParam.setDateOfBirth("06-03-1982");
