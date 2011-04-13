@@ -214,4 +214,12 @@ public class StudentProfileForm {
     public Caregiver getGuardian() {
         return guardian;
     }
+
+    public boolean hasImage() {
+        return null == imageToUpload;
+    }
+
+    public Image getImage() {
+        return new Image(imageToUpload);
+    }
 }

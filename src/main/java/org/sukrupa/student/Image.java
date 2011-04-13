@@ -1,11 +1,19 @@
 package org.sukrupa.student;
 
-/**
- * Created by IntelliJ IDEA.
- * User: balaji
- * Date: 4/13/11
- * Time: 10:10 AM
- * To change this template use File | Settings | File Templates.
- */
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.InputStream;
+
 public class Image {
+
+    private CommonsMultipartFile source;
+
+    public Image(CommonsMultipartFile source){
+        this.source = source;
+    }
+
+    public InputStream getInputStream() {
+        return null;
+    }
 }

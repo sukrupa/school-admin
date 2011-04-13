@@ -1,11 +1,10 @@
 package org.sukrupa.student;
 
-import org.joda.time.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
+import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.platform.*;
-import org.sukrupa.platform.date.Date;
 
 import java.util.*;
 
@@ -19,6 +18,7 @@ public class StudentService {
     private StudentFactory studentFactory;
     static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
     private SystemEventLogRepository systemEventLogRepository;
+    private StudentImageRepository studentImageRepository;
     private int classUpdateCount;
 
     @DoNotRemove StudentService() {
@@ -26,12 +26,13 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository, StudentImageRepository studentImageRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.referenceDataRepository = referenceDataRepository;
         this.studentFactory = studentFactory;
         this.systemEventLogRepository = systemEventLogRepository;
+        this.studentImageRepository = studentImageRepository;
     }
 
     public Student load(String studentId) {
@@ -55,8 +56,11 @@ public class StudentService {
         }
 
         Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
-
         student.updateFrom(studentProfileForm, talents);
+
+        if(studentProfileForm.hasImage()){
+            studentImageRepository.save(studentProfileForm.getImage(), student.getStudentId());
+        }
 
         return studentRepository.update(student);
     }
@@ -85,5 +89,6 @@ public class StudentService {
     public ReferenceData getReferenceData() {
         return referenceDataRepository.getReferenceData();
     }
+
 }
 
