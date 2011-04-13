@@ -9,6 +9,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +24,7 @@ public class TalentRepository {
 		this.sessionFactory = sessionFactory;
 	}
 
+
 	public Set<Talent> findTalents(Set<String> talentsDecriptions) {
 		if (talentsDecriptions == null) {
 			return Sets.newHashSet();
@@ -32,14 +35,20 @@ public class TalentRepository {
 			disjunction.add(Restrictions.eq("description", description));
 		}
 		Criteria criteria = session().createCriteria(Talent.class).add(disjunction);
-		return new HashSet<Talent>(criteria.list());
-	}
-	
-	private Session session() {
+        return genericHashSetFrom(criteria.list());
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> Set<T> genericHashSetFrom(Collection collection) {
+        return new HashSet<T>(collection);
+    }
+
+    private Session session() {
 		return sessionFactory.getCurrentSession();
 	}
 
     public void save(Talent newTalent) {
-        //To change body of created methods use File | Settings | File Templates.
+        // WIP #356 - adding new talents
+
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.sukrupa.platform.date.Date;
-import org.sukrupa.student.StudentProfileForm;
+import org.sukrupa.student.StudentForm;
 import org.sukrupa.student.StudentRepository;
 
 @Service
@@ -21,13 +21,13 @@ public class StudentValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return StudentProfileForm.class.isAssignableFrom(clazz);
+        return StudentForm.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-        StudentProfileForm studentParam = (StudentProfileForm) target;
+        StudentForm studentParam = (StudentForm) target;
         String dateOfBirthString = studentParam.getDateOfBirth();
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required", "Missing Student Name. Please re-enter.") ;

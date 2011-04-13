@@ -1,11 +1,9 @@
 package org.sukrupa.student;
 
-import org.joda.time.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.sukrupa.platform.*;
-import org.sukrupa.platform.date.Date;
 
 import java.util.*;
 
@@ -38,25 +36,25 @@ public class StudentService {
         return studentRepository.findByStudentId(studentId);
     }
 
-    public Student create(StudentProfileForm studentProfileForm) {
-        Student student = studentFactory.create(studentProfileForm.getStudentId(),
-                studentProfileForm.getName(),
-                studentProfileForm.getDateOfBirth(),
-                studentProfileForm.getGender());
+    public Student create(StudentForm studentForm) {
+        Student student = studentFactory.create(studentForm.getStudentId(),
+                studentForm.getName(),
+                studentForm.getDateOfBirth(),
+                studentForm.getGender());
 
         studentRepository.put(student);
         return student;
     }
 
-    public Student update(StudentProfileForm studentProfileForm) {
-        Student student = studentRepository.findByStudentId(studentProfileForm.getStudentId());
+    public Student update(StudentForm studentForm) {
+        Student student = studentRepository.findByStudentId(studentForm.getStudentId());
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
 
-        Set<Talent> talents = talentRepository.findTalents(studentProfileForm.getTalentDescriptions());
+        Set<Talent> talents = talentRepository.findTalents(studentForm.getTalentDescriptions());
 
-        student.updateFrom(studentProfileForm, talents);
+        student.updateFrom(studentForm, talents);
 
         return studentRepository.update(student);
     }
@@ -82,8 +80,8 @@ public class StudentService {
     }
 
 
-    public ReferenceData getReferenceData() {
-        return referenceDataRepository.getReferenceData();
+    public StudentFormReferenceData getReferenceData() {
+        return referenceDataRepository.getStudentFormReferenceData();
     }
 }
 

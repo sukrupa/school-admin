@@ -72,8 +72,8 @@ public class StudentsController {
     }
 
 
-    private StudentEditFormHelper formHelperFor(Student theStudent) {
-        return new StudentEditFormHelper(theStudent, studentService.getReferenceData());
+    private StudentFormPresenter formHelperFor(Student theStudent) {
+        return new StudentFormPresenter(theStudent, studentService.getReferenceData());
     }
 
     @RequestMapping(value = "{id}", method = GET)
@@ -113,8 +113,8 @@ public class StudentsController {
 
     @RequestMapping(value = "create", method = POST)
     public String create(
-            @ModelAttribute("createStudent") StudentProfileForm studentParam, Map<String, Object> model) {
-        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentProfileForm");
+            @ModelAttribute("createStudent") StudentForm studentParam, Map<String, Object> model) {
+        Errors errors = new BeanPropertyBindingResult(studentParam, "StudentForm");
         studentValidator.validate(studentParam, errors);
 
         if (mandatoryFieldsExist(errors)) {
@@ -135,10 +135,10 @@ public class StudentsController {
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
-            @ModelAttribute("updateStudent") StudentProfileForm studentProfileForm,
+            @ModelAttribute("updateStudent") StudentForm studentForm,
             Map<String, Object> model) {
 
-        Student updatedStudent = studentService.update(studentProfileForm);
+        Student updatedStudent = studentService.update(studentForm);
 
         if (updatedStudent != null) {
             model.put("studentUpdatedSuccesfully", true);
