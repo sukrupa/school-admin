@@ -6,42 +6,40 @@
 <body>
 <h2>Application Health Check</h2>
 
-$buildInfo:{
-<div style="height: 38px; ">
-    $it$
-</div>
-}$
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
 
-$healthCheckItems: {
-<div style="height: 38px;">
-    <div style="float:left; padding-top:10px; width:150px;">
-         $it.description$:
-    </div>
-    <div style="float:left; padding-top:10px; width: 300px;">
-        $it.symptom$
-    </div>
-</div>
-<br style="clear:both;" />
-}$
-
-<div>
-    $healthCheckTests:{
-
-    <div style="float:left; padding-top:10px; width:150px;">
-        $it.description$:
-        </div>
-    <div style="float:left; padding-top:10px; width: 300px;">
-        $it.symptom$
-    </div>
-    <div>
-        $if(it.healthy)$
-        <img src="images/tick_icon.png" width="2%"/>
-        $else$
-        <img src="images/warning.png" width="2%"/>
-        $endif$
-    </div>
+    $healthCheckItems: {
+    <tr>
+        <td>$it.description$</td>
+        <td>$it.symptom$</td>
+        <td></td>
+    </tr>
     }$
-</div>
+
+    $healthCheckTests:{
+    <tr>
+        <td>$it.description$</td>
+        <td>$it.symptom$</td>
+        <td>
+            $if(it.healthy)$
+            <img src="images/tick_icon.png" width="30px"/>
+            $else$
+            <img src="images/warning.png" width="30px"/>
+            $endif$
+        </td>
+    </tr>
+    }$
+
+    </tbody>
+</table>
 
 </body>
 

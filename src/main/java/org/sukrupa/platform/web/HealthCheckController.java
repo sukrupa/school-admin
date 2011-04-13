@@ -66,7 +66,20 @@ public class HealthCheckController {
         List<HealthCheckItem> healthCheckItems = new ArrayList<HealthCheckItem>();
 
         model.put("healthCheckTests", healthCheckTests);
-        model.put("buildInfo", extractBuildInfo());
+        ArrayList<String> buildInfoLines = extractBuildInfo();
+        for (final String line : buildInfoLines) {
+            healthCheckItems.add(new HealthCheckItem() {
+                @Override
+                public String getSymptom() {
+                    return line.split(":")[1];
+                }
+
+                @Override
+                public String getDescription() {
+                    return line.split(":")[0];
+                }
+            });
+        }
 
         try {
             Class.forName(dbDriver);
@@ -147,6 +160,7 @@ public class HealthCheckController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return buildInfo;
     }
 
