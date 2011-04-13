@@ -230,7 +230,7 @@ public class StudentTest {
         setOfEvents.add(backstreetBoys);
 
         Student student = new StudentBuilder().events(setOfEvents).build();
-        assertThat(student.getEventsForDisplay(), is("Backstreet Boys, Spice Girls"));
+        assertThat(student.getEventsForDisplay(), is("Spice Girls, Backstreet Boys"));
     }
 
     private Student promoteStudent(String studentClass) {
