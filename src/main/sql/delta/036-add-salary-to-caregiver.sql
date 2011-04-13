@@ -1,0 +1,1 @@
+ALTER TABLE Caregiver ADD COLUMN Salary varchar(20);
