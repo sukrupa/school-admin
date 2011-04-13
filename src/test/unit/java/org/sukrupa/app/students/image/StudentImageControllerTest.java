@@ -2,7 +2,7 @@ package org.sukrupa.app.students.image;
 
 
 import org.junit.Test;
-import org.sukrupa.app.services.FileFactory;
+import org.sukrupa.app.services.FileHandler;
 import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.app.students.StudentImageView;
 import org.sukrupa.platform.config.AppConfiguration;
@@ -18,18 +18,18 @@ public class StudentImageControllerTest {
 
     private StudentImageController studentImageController;
     private String imageRepositoryLocation;
-    private FileFactory imageFactory;
+    private FileHandler imageHandler;
 
     public StudentImageControllerTest() {
         imageRepositoryLocation = new AppConfiguration().properties().getProperty("app.image.dir");
-        imageFactory = mock(FileFactory.class);
-        this.studentImageController = new StudentImageController(new StudentImageRepository(imageFactory,imageRepositoryLocation));
+        imageHandler = mock(FileHandler.class);
+        this.studentImageController = new StudentImageController(new StudentImageRepository(imageHandler,imageRepositoryLocation));
     }
 
     @Test
     public void testRequestForAnImageMustReturnAnImageView() throws FileNotFoundException {
         File mockImage = mock(File.class);
-        when(imageFactory.create("image")).thenReturn(mockImage);
+        when(imageHandler.create("image")).thenReturn(mockImage);
         assertTrue(studentImageController.getImage("image") instanceof StudentImageView);
     }
 }
