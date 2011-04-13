@@ -13,7 +13,8 @@ public class StudentEventHistory {
 		this.browser.navigateTo("http://localhost:8080/students/34545");
 	}
 
-	public void verifyThatEventHistoryContains(String eventHistory) throws Exception {
+	public void verifyThatEventHistoryContainsEventsOrderedByDate(String eventHistory) throws Exception {
+		
 		assertTrue(browser.div("student-event").text().contains(eventHistory));
 	}
 }

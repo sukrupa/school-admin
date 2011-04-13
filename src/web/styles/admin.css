@@ -1,12 +1,17 @@
 .adminOptions ul {
-    position: left;
+    text-align:left;
 }
 
 .adminOptions ul li {
-margin-left: 0px;
+    margin-left: 0px;
     padding-left: 20px;
 }
 
 .annualUpdateBody {
     padding-left: 20px;
+}
+
+/* Feature toggle for story #356 */
+.adminOptions a[href='/admin/talents/new'] {
+    display:none;
 }

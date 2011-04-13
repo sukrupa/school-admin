@@ -17,6 +17,4 @@ Student Profile Two, Student Profile:
 #Verify that background is "Born in India"
 Student Event History, Student Profile, Edit Student:
 #Verify that name is "Haripriya"
-#Verify that event history contains "Spice Girls"
-#Verify that event history contains "Annual Day"
-#Verify that event history contains "Sports Day"
+#Verify that event history contains events ordered by date "Spice Girls, Sports Day, Annual Day"

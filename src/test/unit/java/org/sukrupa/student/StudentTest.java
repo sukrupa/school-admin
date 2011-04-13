@@ -9,6 +9,10 @@ import org.junit.Test;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
+import org.sukrupa.event.EventCreateOrUpdateParameter;
+import org.sukrupa.platform.date.Date;
+
+//import java.util.*;
 
 import java.util.*;
 
@@ -210,23 +214,6 @@ public class StudentTest {
         student.updateFrom(studentUpdateParameters,Collections.<Talent>emptySet());
 
         assertEquals(student.getImageLink(), "12345");
-    }
-
-    @Test
-    public void testStudentShouldDisplayEventsWithCommaFormat()
-    {
-        Event spiceGirls = new EventBuilder().title("Spice Girls")
-                                        .build();
-
-        Event backstreetBoys = new EventBuilder().title("Backstreet Boys")
-                                        .build();
-
-        Set<Event> setOfEvents = new HashSet<Event>();
-        setOfEvents.add(spiceGirls);
-        setOfEvents.add(backstreetBoys);
-
-        Student student = new StudentBuilder().events(setOfEvents).build();
-        assertThat(student.getEventsForDisplay(), is("Backstreet Boys, Spice Girls"));
     }
 
     private Student promoteStudent(String studentClass) {
