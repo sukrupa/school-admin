@@ -1,0 +1,11 @@
+Tags:
+Preconditions:Navigate to Record an event page,Log In,	Log out afterwards
+
+Create an event:
+#Given i am on the create an event page
+#When I fill in "Title" with "New event"
+#And I fill in "Date" with "13-04-2011"
+#And I fill in "Description" with "Event description..."
+#And I fill in "Attendees" with "64262"
+#And I click "Save"
+#Then I should see the "Event: New event" page

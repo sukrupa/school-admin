@@ -74,7 +74,7 @@ public class EventsController {
     }
 
 	@RequestMapping(value = "save", method = POST)
-	public String save(@ModelAttribute(value = "createEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
+	public String save(@ModelAttribute(value = "createEventForm") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
 
         Event event = Event.createFrom(eventCreateOrUpdateParameter);
 

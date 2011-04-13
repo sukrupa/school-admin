@@ -73,6 +73,7 @@ public class AppConfiguration {
     @Bean
     public HandlerExceptionResolver handlerExceptionResolver() {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        resolver.setWarnLogCategory("DEBUG");
         resolver.setDefaultErrorView("error");
         return resolver;
     }
