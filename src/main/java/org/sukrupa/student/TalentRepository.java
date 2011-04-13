@@ -46,6 +46,7 @@ public class TalentRepository {
 	}
 
     public void save(Talent newTalent) {
+    //    session().save(newTalent);
         // WIP #356 - adding new talents
 
     }
