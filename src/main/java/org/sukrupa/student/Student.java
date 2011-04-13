@@ -58,9 +58,6 @@ public class Student {
     @Column(name = "STUDENT_CLASS")
     private String studentClass;
 
-    @Column(name = "IMAGE_LINK")
-    private String imageLink;
-
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
@@ -107,7 +104,7 @@ public class Student {
 
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
-                   Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes, String imageLink,
+                   Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
                    StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, String familyStatus) {
 
         this.studentId = setStudentId(studentId);
@@ -124,7 +121,6 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
         this.talents = talents;
         this.notes = notes;
-        this.imageLink = imageLink;
         this.events = events;
         this.familyStatus = familyStatus;
 
@@ -276,11 +272,7 @@ public class Student {
     }
 
     public String getImageLink() {
-        if (imageLink == null) {
-            return studentId;
-        } else {
-            return imageLink;
-        }
+        return studentId;
     }
 
     protected LocalDate getCurrentDate() {

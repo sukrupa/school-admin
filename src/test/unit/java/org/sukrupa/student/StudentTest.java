@@ -6,6 +6,7 @@ import org.joda.time.LocalDate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
 
@@ -15,6 +16,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.mock;
 
 public class StudentTest {
 
@@ -46,21 +48,11 @@ public class StudentTest {
     }
 
     @Test
-    public void shouldReturnStudentIDIfImageLinkIsNull() {
-        Student studentWithNoImageLink = studentWithImage("Balaji",null,"BALAJI");
+    public void shouldReturnStudentIDForImageLink() {
+        Student student = new StudentBuilder().studentId("Balaji").build();
         String defaultLink = "BALAJI";
-        assertThat(studentWithNoImageLink.getImageLink(),is(defaultLink));
+        assertThat(student.getImageLink(),is(defaultLink));
     }
-
-    @Test
-    public void shouldReturnImageLinkIfHasImage() {
-        assertThat(studentWithImage("Balaji","HappyBalaji", "Balaji").getImageLink(),is("HappyBalaji"));
-    }
-
-    //load image from class path
-    //take input stream
-    //create outputstream
-    //save to hard disk
 
     @Test
     public void shouldBe5YearsOld() {
@@ -210,6 +202,17 @@ public class StudentTest {
     }
 
     @Test
+    public void shouldSetImageLinkToStudentIDIfUpdateParametersHaveAnImage(){
+        Student student = new StudentBuilder().studentId("12345").build();
+        CommonsMultipartFile image = mock(CommonsMultipartFile.class);
+        StudentForm studentUpdateParameters = new StudentCreateOrUpdateParameterBuilder().imageToUpload(image).build();
+
+        student.updateFrom(studentUpdateParameters,Collections.<Talent>emptySet());
+
+        assertEquals(student.getImageLink(), "12345");
+    }
+
+    @Test
     public void testStudentShouldDisplayEventsWithCommaFormat()
     {
         Event spiceGirls = new EventBuilder().title("Spice Girls")
@@ -238,10 +241,6 @@ public class StudentTest {
 
     private Student student(String name, LocalDate dateOfBirth, Talent... talents) {
         return new StudentBuilder().name(name).dateOfBirth(dateOfBirth).talents(new HashSet(Arrays.asList(talents))).build();
-    }
-
-    private Student studentWithImage(String name, String imageLink, String Id) {
-        return new StudentBuilder().studentId(Id).name(name).imageLink(imageLink).build();
     }
 
 

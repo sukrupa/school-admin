@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.platform.date.Date;
 
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
 public class StudentCreateOrUpdateParameterBuilder {
     private String studentId;
     private String name;
-    private String dateOfBirth = DateTimeFormat.forPattern("dd/MM/YYYY").print(new LocalDate());
+    private String dateOfBirth = DateTimeFormat.forPattern("dd-MM-YYYY").print(new LocalDate());
     private String gender;
     private String studentClass;
     private String religion;
@@ -26,6 +27,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String background;
     private boolean sponsored;
     private String familyStatus;
+    private CommonsMultipartFile imageToUpload;
 
 
     public StudentCreateOrUpdateParameterBuilder studentId(String studentId) {
@@ -37,6 +39,12 @@ public class StudentCreateOrUpdateParameterBuilder {
         this.name = name;
         return this;
     }
+
+    public StudentCreateOrUpdateParameterBuilder imageToUpload(CommonsMultipartFile imageToUpload) {
+        this.imageToUpload = imageToUpload;
+        return this;
+    }
+
 
     public StudentCreateOrUpdateParameterBuilder dateOfBirth(Date date) {
         return dateOfBirth(date.toString());
@@ -114,7 +122,7 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentForm build() {
         return new StudentForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, guardian,
-                talents, status.toString(), disciplinary, performance, background, familyStatus);
+                talents, status.toString(), disciplinary, performance, background, familyStatus, imageToUpload);
     }
 
 

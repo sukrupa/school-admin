@@ -27,7 +27,6 @@ public class StudentBuilder {
     private String studentClass;
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
-    private String imageLink;
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private boolean sponsored;
     private String disciplinary;
@@ -151,13 +150,8 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, imageLink, this.status, disciplinary, performance, profile, events, "");
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, "");
 
-    }
-
-    public StudentBuilder imageLink(String imageLink) {
-        this.imageLink = imageLink;
-        return this;
     }
 
     public StudentBuilder status(StudentStatus statusIn) {
