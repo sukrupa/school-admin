@@ -12,6 +12,7 @@ import org.sukrupa.platform.collection.CollectionTransformation;
 
 import java.util.*;
 
+import static java.util.Collections.emptyList;
 import static org.sukrupa.platform.collection.CollectionTransformation.genericHashSetFrom;
 
 @Repository
@@ -49,6 +50,6 @@ public class TalentRepository {
     }
 
     public List<Talent> listAllTalents() {
-        return null;
+        return emptyList();
     }
 }

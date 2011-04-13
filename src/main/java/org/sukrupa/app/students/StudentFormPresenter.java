@@ -22,6 +22,11 @@ public class StudentFormPresenter {
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {
         List<Talent> talents = talentRepository.listAllTalents();
+
+        if (talents.isEmpty()) {
+            return createCheckBoxList(studentFormReferenceData.getTalents(), student.talentDescriptions());
+        }
+
         List<String> talentDescriptions = new ArrayList<String>();
 
         for (Talent talent : talents) {

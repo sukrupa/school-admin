@@ -43,15 +43,15 @@ public class StudentFormPresenterTest {
         assertThat(checkBoxElements, hasOnlyCheckBoxesWithValues("talent1", "talent2", "talent3"));
     }
 
-    private static Student studentWithNoTalent() {
+    public static Student studentWithNoTalent() {
         return new StudentBuilder().build();
     }
 
-    private static Talent talent(String talentDescription) {
+    public static Talent talent(String talentDescription) {
         return new TalentBuilder().description(talentDescription).build();
     }
 
-    private static Matcher<List<CheckBoxElement>> hasOnlyCheckBoxesWithValues(final String... expectedValues) {
+    public static Matcher<List<CheckBoxElement>> hasOnlyCheckBoxesWithValues(final String... expectedValues) {
         return new TypeSafeMatcher<List<CheckBoxElement>>() {
 
             @Override
