@@ -1,11 +1,11 @@
 package org.sukrupa.platform.web;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.swing.event.ChangeEvent;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,42 +20,27 @@ import java.util.Map;
 public class HealthCheckController {
 
     private String imageDirectory;
-    private String dbURL;
+    private String dbUrl;
     private String dbDriver;
     private String dbUser;
     private String dbPassword;
     private String webRoot;
 
-    @Value("${app.image.dir}")
-    public void setImageDirectory(String imageDirectory) {
+    @Autowired
+    public HealthCheckController(@Value("${app.image.dir}") String imageDirectory,
+                                 @Value("${jdbc.url}") String dbUrl,
+                                 @Value("${jdbc.driver}") String dbDriver,
+                                 @Value("${jdbc.user}") String dbUser,
+                                 @Value("${jdbc.password}") String dbPassword,
+                                 @Value("${web.root.dir}") String webRoot) {
+
         this.imageDirectory = imageDirectory;
-    }
-
-    @Value("${jdbc.url}")
-    public void setDBURL(String dbURL) {
-        this.dbURL = dbURL;
-    }
-
-    @Value("${jdbc.driver}")
-    public void setDBDriver(String dbDriver) {
+        this.dbUrl = dbUrl;
         this.dbDriver = dbDriver;
-    }
-
-    @Value("${jdbc.user}")
-    public void setDBUser(String dbUser) {
         this.dbUser = dbUser;
-    }
-
-    @Value("${jdbc.password}")
-    public void setDBPassword(String dbPassword) {
         this.dbPassword = dbPassword;
-    }
-
-    @Value("${web.root.dir}")
-    public void setWebRoot(String webRoot) {
         this.webRoot = webRoot;
     }
-
 
     @RequestMapping
     public String list(Map<String, Object> model) {
@@ -68,22 +53,12 @@ public class HealthCheckController {
         model.put("healthCheckTests", healthCheckTests);
         ArrayList<String> buildInfoLines = extractBuildInfo();
         for (final String line : buildInfoLines) {
-            healthCheckItems.add(new HealthCheckItem() {
-                @Override
-                public String getSymptom() {
-                    return line.split(":")[1];
-                }
-
-                @Override
-                public String getDescription() {
-                    return line.split(":")[0];
-                }
-            });
+            healthCheckItems.add(buildInfoLine(line));
         }
 
         try {
             Class.forName(dbDriver);
-            Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             ResultSet result = connection.createStatement().executeQuery("select * from changelog order by change_number desc limit 1");
             result.next();
 
@@ -99,9 +74,22 @@ public class HealthCheckController {
 
         model.put("healthCheckItems", healthCheckItems);
 
-
         return "healthCheck";
 
+    }
+
+    private HealthCheckItem buildInfoLine(final String line) {
+        return new HealthCheckItem() {
+            @Override
+            public String getSymptom() {
+                return line.split(":")[1];
+            }
+
+            @Override
+            public String getDescription() {
+                return line.split(":")[0];
+            }
+        };
     }
 
     private HealthCheckItem changeSetDate(final Object date) {
@@ -168,7 +156,7 @@ public class HealthCheckController {
         return new HealthCheckTest() {
             @Override
             public String getSymptom() {
-                return dbURL;
+                return dbUrl;
             }
 
             @Override
@@ -184,7 +172,7 @@ public class HealthCheckController {
                     return false;
                 }
                 try {
-                    DriverManager.getConnection(dbURL, dbUser, dbPassword);
+                    DriverManager.getConnection(dbUrl, dbUser, dbPassword);
                     return true;
                 } catch (SQLException e) {
                     return false;
