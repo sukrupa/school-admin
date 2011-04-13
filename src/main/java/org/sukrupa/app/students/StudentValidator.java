@@ -34,14 +34,24 @@ public class StudentValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "studentId", "studentId.required", "Missing Student ID. Please re-enter.") ;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "gender.required", "Please select a gender.") ;
 
-        if (!dateOfBirthString.matches("\\d\\d-\\d\\d-\\d\\d\\d\\d")) {
+        if (!dateOfBirthString.matches("\\d\\d-\\d\\d-\\d\\d\\d\\d"))
+        {
             errors.rejectValue("dateOfBirth","dateOfBirth.required","Please enter a valid date format.");
-        } else {
+        }
+        else
+            {
             Date dateOfBirth = Date.parse(dateOfBirthString,"");
-            if (!dateOfBirth.isInThePast()) {
+
+                if(dateOfBirth.year() < 1){
+              errors.rejectValue("dateOfBirth","dateOfBirth.required","Please enter a valid birth year.");
+            }
+
+                else if (!dateOfBirth.isInThePast()) {
+
                 errors.rejectValue("dateOfBirth","dateOfBirth.required","Please use a date in the past.");
             }
         }
+
 
         if(null != studentRepository.findByStudentId(studentParam.getStudentId())){
             errors.rejectValue("studentId", "studentID.duplicate", "Student with the same ID already exists.");
