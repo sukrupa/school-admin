@@ -20,7 +20,7 @@ public class CollectionMatchers {
             }
 
             public void describeTo(Description description) {
-                description.appendText(Arrays.toString(items));
+                description.appendValueList("<<", ", ", ">>", items);
             }
         };
     }

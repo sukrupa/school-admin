@@ -83,5 +83,9 @@ public class StudentService {
     public StudentFormReferenceData getReferenceData() {
         return new StudentFormReferenceData();
     }
+
+    public TalentRepository getTalentRepository() {
+        return talentRepository;
+    }
 }
 

@@ -73,7 +73,7 @@ public class StudentsController {
 
 
     private StudentFormPresenter present(Student student) {
-        return new StudentFormPresenter(student);
+        return new StudentFormPresenter(student, studentService.getTalentRepository());
     }
 
     @RequestMapping(value = "{id}", method = GET)
