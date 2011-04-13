@@ -82,6 +82,7 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
 
+    @OrderBy("date desc")
     @ManyToMany(mappedBy = "attendees")
     private Set<Event> events;
 
@@ -242,7 +243,7 @@ public class Student {
     public String getEventsForDisplay() {
         List<String> eventTitles = new ArrayList<String>();
 
-        for (Event event : alphabeticallyOrderedEvents()) {
+        for (Event event : events) {
             eventTitles.add(event.getTitle());
         }
 

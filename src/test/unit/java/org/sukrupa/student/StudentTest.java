@@ -8,6 +8,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
+import org.sukrupa.event.EventCreateOrUpdateParameter;
+import org.sukrupa.platform.date.Date;
+
+//import java.util.*;
 
 import java.util.*;
 
