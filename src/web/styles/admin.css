@@ -15,3 +15,8 @@
 .adminOptions a[href='/admin/talents/new'] {
     display:none;
 }
+
+#body
+{
+    min-height:297px;
+}
