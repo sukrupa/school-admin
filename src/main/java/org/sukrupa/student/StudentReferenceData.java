@@ -1,9 +1,11 @@
 package org.sukrupa.student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 
 public class StudentReferenceData {
 
@@ -69,8 +71,7 @@ public class StudentReferenceData {
     }
 
     public List<String> getTalentDescriptions() {
-        List<Talent> talents = talentRepository.listAllTalents();
-
+        List<Talent> talents = getTalentsFromRepository();
         if (talents.isEmpty()) {
             return TALENTS_DESCRIPTIONS;
         }
@@ -118,4 +119,11 @@ public class StudentReferenceData {
     public List<String> getFamilyStatuses() {
         return FAMILY_STATUSES;
     }
+
+    private List<Talent> getTalentsFromRepository() {
+        return (talentRepository == null)
+                ? Collections.<Talent>emptyList()
+                : talentRepository.listAllTalents();
+    }
+
 }
