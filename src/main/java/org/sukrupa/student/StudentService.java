@@ -12,24 +12,24 @@ import java.util.*;
 public class StudentService {
 
     private static final String ANNUAL_CLASS_UPDATE = "annual class update";
-    StudentRepository studentRepository;
+    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15; // protected because the tests use it, seems a bit dodgy.
+
+    private StudentRepository studentRepository;
     private TalentRepository talentRepository;
-    private ReferenceDataRepository referenceDataRepository;
     private StudentFactory studentFactory;
-    static final int NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE = 15;
     private SystemEventLogRepository systemEventLogRepository;
     private StudentImageRepository studentImageRepository;
     private int classUpdateCount;
 
-    @DoNotRemove StudentService() {
+    @DoNotRemove
+    public StudentService() {
     }
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          ReferenceDataRepository referenceDataRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository, StudentImageRepository studentImageRepository) {
+                          StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
-        this.referenceDataRepository = referenceDataRepository;
         this.studentFactory = studentFactory;
         this.systemEventLogRepository = systemEventLogRepository;
         this.studentImageRepository = studentImageRepository;
@@ -88,7 +88,7 @@ public class StudentService {
 
 
     public StudentFormReferenceData getReferenceData() {
-        return referenceDataRepository.getStudentFormReferenceData();
+        return new StudentFormReferenceData();
     }
 
 }

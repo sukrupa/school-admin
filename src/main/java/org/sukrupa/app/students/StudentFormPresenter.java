@@ -1,19 +1,20 @@
 package org.sukrupa.app.students;
 
-import org.sukrupa.student.StudentFormReferenceData;
-import org.sukrupa.student.Student;
+import org.sukrupa.student.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class StudentFormPresenter {
 
-    private final StudentFormReferenceData studentFormReferenceData;
-    private Student student;
+    private final StudentFormReferenceData studentFormReferenceData = new StudentFormReferenceData();
+    private final Student student;
 
-    public StudentFormPresenter(Student student, StudentFormReferenceData studentFormReferenceData) {
+    private TalentRepository talentRepository;
+
+    public StudentFormPresenter(Student student) {
         this.student = student;
-        this.studentFormReferenceData = studentFormReferenceData;
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {

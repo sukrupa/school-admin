@@ -1,4 +1,4 @@
-package org.sukrupa.student;
+package org.sukrupa.app.students;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -58,7 +58,7 @@ public class StudentServiceTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, null, studentFactory, systemEventLogRepository, studentImageRepository);
+        service = new StudentService(studentRepository, talentRepository, studentFactory, systemEventLogRepository);
         freezeDateToMidnightOn(30,12,2011); //This is actually the 29th?
     }
 
