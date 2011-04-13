@@ -3,6 +3,7 @@ package org.sukrupa.student;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
+import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.platform.*;
 
 import java.util.*;
@@ -17,6 +18,7 @@ public class StudentService {
     private TalentRepository talentRepository;
     private StudentFactory studentFactory;
     private SystemEventLogRepository systemEventLogRepository;
+    private StudentImageRepository studentImageRepository;
     private int classUpdateCount;
 
     @DoNotRemove
@@ -25,11 +27,12 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+                          StudentImageRepository studentImageRepository,StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
         this.studentFactory = studentFactory;
         this.systemEventLogRepository = systemEventLogRepository;
+        this.studentImageRepository = studentImageRepository;
     }
 
     public Student load(String studentId) {
@@ -55,6 +58,10 @@ public class StudentService {
         Set<Talent> talents = talentRepository.findTalents(studentForm.getTalentDescriptions());
 
         student.updateFrom(studentForm, talents);
+
+        if(studentForm.hasImage()){
+            studentImageRepository.save(studentForm.getImage(), student.getStudentId());
+        }
 
         return studentRepository.update(student);
     }

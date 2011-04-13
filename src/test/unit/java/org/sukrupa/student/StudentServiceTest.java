@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.sukrupa.app.services.StudentImageRepository;
 
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,9 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.date.DateManipulation.freezeDateToMidnightOn;
 import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
@@ -43,6 +42,10 @@ public class StudentServiceTest {
     @Mock
     private TalentRepository talentRepository;
 
+    @Mock
+    private StudentImageRepository studentImageRepository;
+
+
     private StudentService service;
 
     @Mock
@@ -51,10 +54,11 @@ public class StudentServiceTest {
     private SystemEventLogRepository systemEventLogRepository;
 
 
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, studentFactory, systemEventLogRepository);
+        service = new StudentService(studentRepository, talentRepository, studentImageRepository, studentFactory, systemEventLogRepository);
         freezeDateToMidnightOn(30,12,2011); //This is actually the 29th?
     }
 
@@ -122,6 +126,37 @@ public class StudentServiceTest {
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.EXISTING_STUDENT).build();
         Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
+    }
+
+    @Test
+    public void shouldUpdateStudentImageIfTheImageIsPassed(){
+        StudentForm studentProfileForm = mock(StudentForm.class);
+        Image image = mock(Image.class);
+        Student mockStudent = mock(Student.class);
+        when(studentProfileForm.getStudentId()).thenReturn("12345");
+        when(mockStudent.getStudentId()).thenReturn("12345");
+        when(studentRepository.findByStudentId("12345")).thenReturn(mockStudent);
+        when(studentProfileForm.hasImage()).thenReturn(true);
+        when(studentProfileForm.getImage()).thenReturn(image);
+
+        service.update(studentProfileForm);
+
+        verify(studentImageRepository).save(image, "12345");
+    }
+
+    @Test
+    public void shouldNotUpdateStudentImageIfFormHasNoImage() {
+        StudentForm studentProfileForm = mock(StudentForm.class);
+        Image image = mock(Image.class);
+        Student mockStudent = mock(Student.class);
+
+        when(studentProfileForm.getStudentId()).thenReturn("12345");
+        when(studentRepository.findByStudentId("12345")).thenReturn(mockStudent);
+        when(studentProfileForm.hasImage()).thenReturn(false);
+
+        service.update(studentProfileForm);
+
+        verify(studentImageRepository, never()).save(null, "12345");
     }
 
 
