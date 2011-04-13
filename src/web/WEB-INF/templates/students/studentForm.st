@@ -117,7 +117,7 @@
             <div class="studentImage">
 
                 <img src="/students/$student.imageLink$/image" id="$student.imageLink$"/>
-                <input type="file" name="imageToUpload" />
+                <input size="15" type="file" name="imageToUpload" />
             </div>
 
              <div class="editStatus">

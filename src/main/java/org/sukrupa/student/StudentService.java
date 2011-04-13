@@ -60,7 +60,7 @@ public class StudentService {
         student.updateFrom(studentForm, talents);
 
         if(studentForm.hasImage()){
-            studentImageRepository.save(studentForm.getImage(), student.getStudentId());
+            studentForm.createImage(studentImageRepository);
         }
 
         return studentRepository.update(student);

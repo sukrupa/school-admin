@@ -2,6 +2,7 @@ package org.sukrupa.student;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.platform.DoNotRemove;
 
 import java.util.Set;
@@ -220,5 +221,9 @@ public class StudentForm {
 
     public Image getImage() {
         return new Image(imageToUpload);
+    }
+
+    public void createImage(StudentImageRepository studentImageRepository) {
+        studentImageRepository.save(getImage(), studentId);
     }
 }
