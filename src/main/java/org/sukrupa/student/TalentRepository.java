@@ -8,11 +8,14 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.sukrupa.platform.collection.CollectionTransformation;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.sukrupa.platform.collection.CollectionTransformation.genericHashSetFrom;
 
 @Repository
 public class TalentRepository {
@@ -36,11 +39,6 @@ public class TalentRepository {
 		}
 		Criteria criteria = session().createCriteria(Talent.class).add(disjunction);
         return genericHashSetFrom(criteria.list());
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <T> Set<T> genericHashSetFrom(Collection collection) {
-        return new HashSet<T>(collection);
     }
 
     private Session session() {
