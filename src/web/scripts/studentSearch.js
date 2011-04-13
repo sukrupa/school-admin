@@ -48,6 +48,19 @@ function saveAgeToOptions() {
 	});
 }
 
+function adjustAgeRangeDropDownsAfterGoingBackInBrowserHistory() {
+    var selectedIndex = $('#ageTo')[0].selectedIndex;
+    $('#ageTo option:first').remove();
+    var ageFromValue = parseInt($('#ageFrom').val(), 10);
+    $('#ageTo option').each(function(){
+        var $this = $(this);
+        if (parseInt($this.val(), 10) < ageFromValue) {
+            $this.remove();
+        }
+    });
+    $('#ageTo')[0].selectedIndex = selectedIndex;
+}
+
 $(document).ready(function (){
     var dualBox = dualListBox.box($('#availableTalents'),$('#chosenTalents'));
 	$('#addTalent').click(dualBox.add);
@@ -58,16 +71,7 @@ $(document).ready(function (){
 	if ($('#ageFrom').val() == anyValue) {
 		initAgeRangeDropDowns();
 	} else {
-	    var selectedIndex = $('#ageTo')[0].selectedIndex;
-	    $('#ageTo option:first').remove();
-	    var ageFromValue = parseInt($('#ageFrom').val(), 10);
-	    $('#ageTo option').each(function(){
-	        var $this = $(this);
-	        if (parseInt($this.val(), 10) < ageFromValue) {
-	            $this.remove();
-	        }
-	    });
-	    $('#ageTo')[0].selectedIndex = selectedIndex;
+	    adjustAgeRangeDropDownsAfterGoingBackInBrowserHistory();
 	}
 	$('#ageFrom').change(updateAgeRange);
 });
