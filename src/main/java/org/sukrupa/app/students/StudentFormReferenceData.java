@@ -36,7 +36,6 @@ public class StudentFormReferenceData {
 
 
     public StudentFormReferenceData() {
-
     }
 
     public List<String> getStudentClasses() {

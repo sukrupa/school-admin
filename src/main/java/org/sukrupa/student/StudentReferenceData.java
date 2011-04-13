@@ -13,30 +13,35 @@ public class StudentReferenceData {
             "Gowdas", "Gownder", "MBC", "Modahaliyar", "Nadar", "Naidu", "Nayak", "Others", "Rajput", "Rathore", "Reddy's", "SC", "Shalai Keta",
             "Shetty", "ST", "Tigalaru", "Vanniyar", "Vishwa Karma");
     private static final List<String> SUBCASTES = asList("", "Adi Drawida", "Adi Janaga", "Adi Karnataka", "Bale -Balijigru", "Bale Banjaguru", "BC",
-                    "Bhajanthri", "Ganiga Shetty", "II 'A'", "Kamala Achari", "Kshathriya", "Kumbar Shetty", "Singh", "Tiwari", "Vailu Shetty", "Vakkaliga",
-                    "Val Nayak", "Vaniga Gownder", "Vannikula");
+            "Bhajanthri", "Ganiga Shetty", "II 'A'", "Kamala Achari", "Kshathriya", "Kumbar Shetty", "Singh", "Tiwari", "Vailu Shetty", "Vakkaliga",
+            "Val Nayak", "Vaniga Gownder", "Vannikula");
     private static final List<String> COMMUNITY_LOCATIONS = asList("", "Bhuvaneshwari Slum", "Chamundi Nagar",
-                            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
-                            "Rehmath Nagar", "Residential", "Subramanyanagar");
+            "Cholanayakanhalli", "Ganganagar", "Guddadahalli", "Hebbal", "Kanakanagar", "Kunthigrama", "Nagenahalli",
+            "Rehmath Nagar", "Residential", "Subramanyanagar");
     private static final List<String> FAMILY_STATUSES = asList("", "General", "Single", "Destitute", "Orphan");
     private static final List<String> OCCUPATIONS = asList(" ", "Assitant Captain", "Auto Driver", "Baker", "Bar Bender", "Barman",
-                                    "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
-                                    "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
-                                    "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant", "Office Assistant",
-                                    "Office Boy", "Office Man", "Painter", "Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant", "Store Keeper",
-                                    "Tailor", "Teacher", "Truck Driver", "TV Operator", "Ward Boy", "Welder");
+            "Bus Driver", "Cab Driver", "Cable TV Worker", "Candle Maker", "Carpenter", "Construction Worker", "Cook", "Coolie",
+            "Domestic Worker", "Driver", "Driving School Faculty", "Electrician", "Embroidery Worker", "Factory Worker", "Farmer", "Flower Vendor",
+            "Gardener", "Groundnut Vendor", "Head Constable", "House Keeper", "Iron Shop Worker", "Maid", "Nursing Assistant", "Office Assistant",
+            "Office Boy", "Office Man", "Painter", "Recycle Shop Owner", "Saree Vendor", "Security Guard", "Server in Restaurant", "Store Keeper",
+            "Tailor", "Teacher", "Truck Driver", "TV Operator", "Ward Boy", "Welder");
     private static final List<String> RELIGIONS = asList("", "Christian", "Hindu", "Muslim", "Sikh");
-    private static final List<String> TALENTS = asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
-                                            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
+    private static final List<String> TALENTS_DESCRIPTIONS = asList("Acting", "Arts & Crafts", "Creative Writing", "Dancing", "Mimicry",
+            "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
     private static final List<String> STATUSES = asList("Existing Student", "Dropout", "Alumni");
     private static final boolean SPONSORED = false;
     private static final List<String> MARITAL_STATUSES = asList(" ", "Married", "Single", "Divorced", "Widowed", "Deceased");
+    private TalentRepository talentRepository;
 
 
     public StudentReferenceData() {
 
+    }
+
+    public StudentReferenceData(TalentRepository talentRepository) {
+        this.talentRepository = talentRepository;
     }
 
     public List<String> getStudentClasses() {
@@ -63,8 +68,19 @@ public class StudentReferenceData {
         return RELIGIONS;
     }
 
-    public List<String> getTalents() {
-        return TALENTS;
+    public List<String> getTalentDescriptions() {
+        List<Talent> talents = talentRepository.listAllTalents();
+
+        if (talents.isEmpty()) {
+            return TALENTS_DESCRIPTIONS;
+        }
+
+        List<String> talentDescriptions = new ArrayList<String>();
+        for (Talent talent : talents) {
+            talentDescriptions.add(talent.getDescription());
+        }
+
+        return talentDescriptions;
     }
 
     public List<String> getAges() {

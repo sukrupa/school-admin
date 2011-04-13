@@ -7,6 +7,10 @@ public class TalentBuilder {
 
     private String description;
 
+    public static Talent talent(String talentDescription) {
+        return new TalentBuilder().description(talentDescription).build();
+    }
+
     public TalentBuilder description(String description) {
         this.description = description;
         return this;

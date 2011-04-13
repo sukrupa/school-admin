@@ -34,6 +34,10 @@ public class StudentBuilder {
     private Profile profile = new Profile();
     private Set<Event> events = new HashSet<Event>();
 
+    public static Student studentWithNoTalent() {
+        return new StudentBuilder().build();
+    }
+
     public StudentBuilder name(String name) {
         this.name = name;
         return this;

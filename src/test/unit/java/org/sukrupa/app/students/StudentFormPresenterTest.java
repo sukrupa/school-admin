@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.sukrupa.student.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -19,7 +18,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.app.students.StudentFormPresenter.CheckBoxElement;
-import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
+import static org.sukrupa.student.StudentBuilder.studentWithNoTalent;
+import static org.sukrupa.student.TalentBuilder.talent;
 
 public class StudentFormPresenterTest {
 
@@ -41,14 +41,6 @@ public class StudentFormPresenterTest {
         List<CheckBoxElement> checkBoxElements = studentFormPresenter.getTalentsCheckBoxList();
 
         assertThat(checkBoxElements, hasOnlyCheckBoxesWithValues("talent1", "talent2", "talent3"));
-    }
-
-    public static Student studentWithNoTalent() {
-        return new StudentBuilder().build();
-    }
-
-    public static Talent talent(String talentDescription) {
-        return new TalentBuilder().description(talentDescription).build();
     }
 
     public static Matcher<List<CheckBoxElement>> hasOnlyCheckBoxesWithValues(final String... expectedValues) {
