@@ -92,11 +92,13 @@ public class EventTest {
 	}
 
     @Test
-    public void shouldCreateEndDateWithAmOrPmApplied() {
+    public void shouldCreateStartAndEndDatesWithAmOrPmApplied() {
         EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
         eventCreateOrUpdateParameter.setCoordinator("Joel");
 		eventCreateOrUpdateParameter.setNotes("Cool");
 		eventCreateOrUpdateParameter.setVenue("TW");
+        eventCreateOrUpdateParameter.setStartTime("05:00");
+        eventCreateOrUpdateParameter.setStartTimeAmPm("am");
         eventCreateOrUpdateParameter.setEndTime("01:00");
         eventCreateOrUpdateParameter.setEndTimeAmPm("pm");
         eventCreateOrUpdateParameter.setDate("12-12-2001");
@@ -105,11 +107,9 @@ public class EventTest {
 
         assertThat(event.getEndTime(), is("01:00"));
         assertThat(event.isEndTimePm(), is(true));
+
+        assertThat(event.getStartTime(), is("05:00"));
+        assertThat(event.isStartTimePm(), is(false));
     }
 
-    @Test
-	public void shouldNotDisplayTimeIfMidnight() {
-        Event event = make(an(Event, with(date, new Date(31, 01, 2011, 00, 00))));
-        assertThat(event.getEndTime(), nullValue());
-    }
 }

@@ -23,13 +23,13 @@ public class DateTest {
     @Test
     public void shouldReturnTime() {
         assertThat(new Date(9, 2, 2011, 13, 14).getTime(), is("01:14"));
-        assertThat(new Date(9, 2, 2011, 00, 00).getTime(), is("00:00"));
+        assertThat(new Date(9, 2, 2011, 01, 00).getTime(), is("01:00"));
     }
 
     @Test
     public void shouldParseDateAndTime() {
         assertThat(Date.parse("10-08-2011", "01:12", "pm"), is(new Date(10, 8, 2011, 13, 12)));
-        assertThat(Date.parse("10-08-2011", "00:00", "am"), is(new Date(10, 8, 2011)));
+        assertThat(Date.parse("10-08-2011", "01:00", "am"), is(new Date(10, 8, 2011, 01, 00)));
     }
 
     @Test

@@ -16,8 +16,8 @@ import static org.joda.time.format.DateTimeFormat.forPattern;
 public class Date implements Serializable {
 
     private static final String DATE_FORMAT = "dd-MM-YYYY";
-    private static final String TIME_FORMAT = "KK:mm";
-    private static final String DATE_TIME_FORMAT = "dd-MM-YYYY KK:mm a";
+    private static final String TIME_FORMAT = "hh:mm";
+    private static final String DATE_TIME_FORMAT = "dd-MM-YYYY hh:mm a";
 
     private DateTime jodaTime;
 
@@ -76,7 +76,7 @@ public class Date implements Serializable {
     }
 
     private static Date parseDate(String date) {
-        return parse(date, "00:00", "am");
+        return parse(date, "12:00", "am");
     }
 
     private static Date parseDateAndTime(String date, String time) {

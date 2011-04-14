@@ -54,13 +54,17 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "STUDENT_ID"))
     private Set<Student> attendees;
 
+    @Type(type = "org.sukrupa.platform.date.PersistentDate")
+    @Column(name = "START_DATE")
+    private Date startDate;
+
     @DoNotRemove
     public Event() {
     }
 
 
     public Event(String title, Date endDate, String venue, String coordinator, String description, String notes,
-                 Set<Student> attendees) {
+                 Set<Student> attendees, Date startDate) {
         this.title = title;
         this.endDate = endDate;
         this.venue = venue;
@@ -68,10 +72,11 @@ public class Event {
         this.description = description;
         this.notes = notes;
         this.attendees = attendees;
+        this.startDate = startDate;
     }
 
-    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes) {
-        this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>());
+    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes, Date startDate) {
+        this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>(), startDate);
     }
 
     public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
@@ -80,7 +85,8 @@ public class Event {
                 eventCreateOrUpdateParameter.getVenue(),
                 eventCreateOrUpdateParameter.getCoordinator(),
                 eventCreateOrUpdateParameter.getDescription(),
-                eventCreateOrUpdateParameter.getNotes());
+                eventCreateOrUpdateParameter.getNotes(),
+                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getStartTime(), eventCreateOrUpdateParameter.getStartTimeAmPm()));
     }
 
     public static Event from(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
@@ -113,12 +119,12 @@ public class Event {
     }
 
     public String getEndTime() {
-        return endDate.getTime().equals("00:00") ? null: endDate.getTime();
+        return getEndTimeWithAmPm().equals("12:00 AM") ? null: endDate.getTime();
     }
 
     public String getEndTimeWithAmPm() {
         String amPm = endDate.isInTheAfternoon() ? "PM" : "AM";
-        return endDate.getTime().equals("00:00") ? null: String.format("%s %s", endDate.getTime(), amPm);
+        return String.format("%s %s", endDate.getTime(), amPm);
     }
 
     private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
@@ -182,9 +188,23 @@ public class Event {
         this.description = eventParam.getDescription();
         this.notes = eventParam.getNotes();
         this.attendees = attendees;
+        this.startDate = Date.parse(eventParam.getDate(),eventParam.getStartTime(),eventParam.getStartTimeAmPm());
     }
 
     public boolean isEndTimePm() {
         return endDate.isInTheAfternoon();
+    }
+
+    public String getStartTime() {
+        return getStartTimeWithAmPm().equals("12:00 AM") ? null: startDate.getTime();
+    }
+
+    public String getStartTimeWithAmPm() {
+        String amPm = startDate.isInTheAfternoon() ? "PM" : "AM";
+        return String.format("%s %s", startDate.getTime(), amPm);
+    }
+
+    public boolean isStartTimePm() {
+        return startDate.isInTheAfternoon();
     }
 }
