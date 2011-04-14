@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum StudentStatus {
@@ -49,7 +50,7 @@ public enum StudentStatus {
     }
 
     public static List<String> getNamesList() {
-        List<String> result = null;
+        List<String> result = new ArrayList<String>();
         for (StudentStatus studentStatus : StudentStatus.values()) {
             result.add(studentStatus.toString());
         }
