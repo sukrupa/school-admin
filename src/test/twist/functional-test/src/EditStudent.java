@@ -67,5 +67,10 @@ public class EditStudent {
 			assertEquals("Student:", browser.title() );
 	}
 
+	public void verifyThatTheNewTalentIsInTheListOfTalents(String newTalent)
+			throws Exception {
+			assertEquals(newTalent, browser.div("talent").text());
+	}
+
 	
 }

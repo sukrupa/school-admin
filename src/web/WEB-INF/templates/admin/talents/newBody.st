@@ -7,7 +7,7 @@
         <div id="confirmMessage">"$talent.description$ updated successfully.</div>
     </div>
     $endif$
-    <form>
+    <form id="createTalent" name="createTalent" action="/admin/talents/new" method="post">
         <div class="updateEntry">
             <div class="label">Talent Description<span class="mandatory">*</span></div>
             <div class="textSpace">
@@ -16,7 +16,7 @@
         </div>
 
         <div id="update">
-            <input type="submit" id="register" value="Add Talent"/>
+            <input type="submit" id="addNewTalent" value="Add Talent"/>
         </div>
     </form>
 </div>

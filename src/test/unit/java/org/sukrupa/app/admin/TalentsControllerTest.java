@@ -17,7 +17,7 @@ public class TalentsControllerTest {
         TalentsController controller = new TalentsController(talentsService);
         controller.create(talentForm);
 
-        verify(talentsService).createTalent(talentForm);
+        verify(talentsService).create(talentForm);
     }
 
 

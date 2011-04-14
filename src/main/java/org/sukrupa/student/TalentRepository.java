@@ -48,7 +48,7 @@ public class TalentRepository {
 		return sessionFactory.getCurrentSession();
 	}
 
-    public void save(Talent newTalent) {
+    public void put(Talent newTalent) {
         session().save(newTalent);
 
     }
