@@ -45,7 +45,7 @@ public class Event {
     private String notes;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
-    private Date date;
+    private  Date date;
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
@@ -112,7 +112,7 @@ public class Event {
         return date.getDay();
     }
 
-    public String getTime() {
+    public String getEndTime() {
         return date.getTime().equals("00:00") ? null: date.getTime();
     }
 

@@ -93,6 +93,6 @@ public class EventTest {
     @Test
 	public void shouldNotDisplayTimeIfMidnight() {
         Event event = make(an(Event, with(date, new Date(31, 01, 2011, 00, 00))));
-        assertThat(event.getTime(), nullValue());
+        assertThat(event.getEndTime(), nullValue());
     }
 }

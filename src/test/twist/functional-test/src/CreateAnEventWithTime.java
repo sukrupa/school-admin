@@ -1,7 +1,7 @@
 
 // JUnit Assert framework can be used for verification
 
-import com.sun.xml.internal.ws.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import net.sf.sahi.client.Browser;
 

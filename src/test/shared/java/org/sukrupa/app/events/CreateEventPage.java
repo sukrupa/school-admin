@@ -29,7 +29,7 @@ public class CreateEventPage {
     }
 
     public CreateEventPage time(String time) {
-        fillInText("time", time);
+        fillInText("endTime", time);
         return this;
     }
 
