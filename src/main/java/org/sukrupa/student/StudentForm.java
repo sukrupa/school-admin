@@ -5,7 +5,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.platform.DoNotRemove;
 
+import java.util.List;
 import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 public class StudentForm {
     private String studentId;
@@ -28,6 +31,7 @@ public class StudentForm {
     private String background;
     private CommonsMultipartFile imageToUpload;
     private String familyStatus;
+    private final List<String> validImageTypes = asList("image/jpg","image/jpeg","image/png","image/gif");
 
 
     public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload) {
@@ -225,5 +229,9 @@ public class StudentForm {
 
     public void createImage(StudentImageRepository studentImageRepository) {
         studentImageRepository.save(getImage(), studentId);
+    }
+
+    public boolean isImageValid(){
+        return validImageTypes.contains(imageToUpload.getContentType());
     }
 }
