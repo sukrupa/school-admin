@@ -9,102 +9,88 @@ import static java.lang.String.format;
 
 public class StudentFormPresenter {
 
-    private final StudentFormReferenceData studentFormReferenceData = new StudentFormReferenceData();
     private final Student student;
+    private final StudentReferenceData studentReferenceData;
 
-    private TalentRepository talentRepository;
-
-    public StudentFormPresenter(Student student, TalentRepository talentRepository) {
+    public StudentFormPresenter(Student student, StudentReferenceData studentReferenceData) {
         this.student = student;
-        this.talentRepository = talentRepository;
+        this.studentReferenceData = studentReferenceData;
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {
-        List<Talent> talents = talentRepository.listAllTalents();
-
-        if (talents.isEmpty()) {
-            return createCheckBoxList(studentFormReferenceData.getTalentDescriptions(), student.talentDescriptions());
-        }
-
-        List<String> talentDescriptions = new ArrayList<String>();
-
-        for (Talent talent : talents) {
-            talentDescriptions.add(talent.getDescription());
-        }
-
-        return createCheckBoxList(talentDescriptions, student.talentDescriptions());
+        return createCheckBoxList(studentReferenceData.getTalentDescriptions(), student.talentDescriptions());
     }
 
     public List<DropDownElement> getSubCastesDropDownList() {
-        return createDropDownList(studentFormReferenceData.getSubcastes(), student.getSubCaste());
+        return createDropDownList(studentReferenceData.getSubcastes(), student.getSubCaste());
     }
 
     public List<DropDownElement> getReligionsDropDownList() {
-        return createDropDownList(studentFormReferenceData.getReligions(), student.getReligion());
+        return createDropDownList(studentReferenceData.getReligions(), student.getReligion());
     }
 
     public List<DropDownElement> getCommunityLocationsDropDownList() {
-        return createDropDownList(studentFormReferenceData.getCommunityLocations(), student.getCommunityLocation());
+        return createDropDownList(studentReferenceData.getCommunityLocations(), student.getCommunityLocation());
     }
 
     public List<DropDownElement> getFamilyStatusesDropDownList() {
-        return createDropDownList(studentFormReferenceData.getFamilyStatuses(), student.getFamilyStatus());
+        return createDropDownList(studentReferenceData.getFamilyStatuses(), student.getFamilyStatus());
     }
 
 
     public List<DropDownElement> getCastesDropDownList() {
-        return createDropDownList(studentFormReferenceData.getCastes(), student.getCaste());
+        return createDropDownList(studentReferenceData.getCastes(), student.getCaste());
     }
 
     public List<DropDownElement> getGendersDropDownList() {
-        return createDropDownList(studentFormReferenceData.getGenders(), student.getGender());
+        return createDropDownList(studentReferenceData.getGenders(), student.getGender());
     }
 
     public List<DropDownElement> getClassesDropDownList() {
-        return createDropDownList(studentFormReferenceData.getStudentClasses(), student.getStudentClass());
+        return createDropDownList(studentReferenceData.getStudentClasses(), student.getStudentClass());
     }
 
     public List<DropDownElement> getStatusesDropDownList() {
-        return createDropDownList(studentFormReferenceData.getStatuses(), student.getStatus().getName());
+        return createDropDownList(studentReferenceData.getStatuses(), student.getStatus().getName());
     }
 
     public List<DropDownElement> getFatherOccupationsDropDownList() {
         if (student.getFather() == null) {
-            return createDropdownList(studentFormReferenceData.getOccupations());
+            return createDropdownList(studentReferenceData.getOccupations());
         } else {
-            return createDropDownList(studentFormReferenceData.getOccupations(), student.getFather().getOccupation());
+            return createDropDownList(studentReferenceData.getOccupations(), student.getFather().getOccupation());
         }
     }
 
     public List<DropDownElement> getMotherOccupationsDropDownList() {
         if (student.getMother() == null) {
-            return createDropdownList(studentFormReferenceData.getOccupations());
+            return createDropdownList(studentReferenceData.getOccupations());
         } else {
-            return createDropDownList(studentFormReferenceData.getOccupations(), student.getMother().getOccupation());
+            return createDropDownList(studentReferenceData.getOccupations(), student.getMother().getOccupation());
         }
     }
 
     public List<DropDownElement> getGuardianOccupationsDropDownList() {
         if (student.getGuardian() == null) {
-            return createDropdownList(studentFormReferenceData.getOccupations());
+            return createDropdownList(studentReferenceData.getOccupations());
         } else {
-            return createDropDownList(studentFormReferenceData.getOccupations(), student.getGuardian().getOccupation());
+            return createDropDownList(studentReferenceData.getOccupations(), student.getGuardian().getOccupation());
         }
     }
 
     public List<DropDownElement> getFatherMaritalStatusesDropDownList() {
         if (student.getFather() == null) {
-            return createDropdownList(studentFormReferenceData.getMaritalStatuses());
+            return createDropdownList(studentReferenceData.getMaritalStatuses());
         } else {
-            return createDropDownList(studentFormReferenceData.getMaritalStatuses(), student.getFather().getMaritalStatus());
+            return createDropDownList(studentReferenceData.getMaritalStatuses(), student.getFather().getMaritalStatus());
         }
     }
 
     public List<DropDownElement> getMotherMaritalStatusesDropDownList() {
         if (student.getMother() == null) {
-            return createDropdownList(studentFormReferenceData.getMaritalStatuses());
+            return createDropdownList(studentReferenceData.getMaritalStatuses());
         } else {
-            return createDropDownList(studentFormReferenceData.getMaritalStatuses(), student.getMother().getMaritalStatus());
+            return createDropDownList(studentReferenceData.getMaritalStatuses(), student.getMother().getMaritalStatus());
         }
     }
 

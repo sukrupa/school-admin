@@ -19,7 +19,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 import static org.sukrupa.student.TalentBuilder.talent;
 
-public class StudentFormReferenceDataTest {
+public class StudentReferenceDataTest {
 
     @Mock
     TalentRepository talentRepository;
@@ -60,5 +60,6 @@ public class StudentFormReferenceDataTest {
 
         assertThat(talentDescriptions.size(), is(12));
     }
+
 
 }

@@ -32,7 +32,8 @@ public class StudentFormPresenterTest {
 
     @Test
     public void shouldUseTalentRepositoryToListTalents(){
-        StudentFormPresenter studentFormPresenter = new StudentFormPresenter(studentWithNoTalent(), talentRepository);
+        StudentReferenceData studentReferenceData = new StudentReferenceData(talentRepository);
+        StudentFormPresenter studentFormPresenter = new StudentFormPresenter(studentWithNoTalent(), studentReferenceData);
 
         when(talentRepository.listAllTalents()).thenReturn(asList(talent("talent1"),
                                                                   talent("talent2"),
