@@ -15,25 +15,13 @@ public enum StudentStatus {
         this.name = name;
     }
 
-    public static StudentStatus fromString(String valueIn)
-    {
-         StudentStatus returnValue = null;
-      for (StudentStatus value: StudentStatus.values() )
-      {
-          if(valueIn.equals("Existing Student"))
-          {
-              returnValue = StudentStatus.EXISTING_STUDENT;
-          }
-          else if(valueIn.equals("Dropout"))
-          {
-              returnValue = StudentStatus.DROPOUT;
-          }
-          else if(valueIn.equals("Alumni"))
-          {
-              returnValue = StudentStatus.ALUMNI;
-          }
-      }
-        return returnValue;
+    public static StudentStatus fromString(String valueIn) {
+        for (StudentStatus status : StudentStatus.values()) {
+            if (valueIn.equals(status.toString())){
+                return status;
+            }
+        }
+        return null;
     }
 
     public int getId() {
