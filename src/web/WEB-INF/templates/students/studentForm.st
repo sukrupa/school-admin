@@ -78,13 +78,13 @@
                 </div>
 
                 <div class="updateEntry">
-                                    <div class="label">Family Status</div>
-                                    <select name="familyStatus" class="updateValue">
-                                        $formhelper.familyStatusesDropDownList:{
-                                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
-                                        }$
-                                    </select>
-                                </div>
+                <div class="label">Family Status</div>
+                    <select name="familyStatus" class="updateValue">
+                        $formhelper.familyStatusesDropDownList:{
+                        <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
+                        }$
+                    </select>
+                </div>
 
 
                 <div class="updateEntry">

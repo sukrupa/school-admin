@@ -112,5 +112,13 @@ public class SearchWorkflow {
 		browser.select("status").choose(selectedStatus);
 	}
 
+	public void andISelectFamilyStatusAs(String string1) throws Exception {
+		if (!string1.isEmpty()) 
+		{
+			browser.select("familyStatus").choose(string1);
+		}
+	
+	}
+
 
 }
