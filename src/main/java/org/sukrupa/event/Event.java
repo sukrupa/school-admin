@@ -45,7 +45,8 @@ public class Event {
     private String notes;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
-    private  Date date;
+    @Column(name = "END_DATE")
+    private  Date endDate;
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
@@ -58,10 +59,10 @@ public class Event {
     }
 
 
-    public Event(String title, Date date, String venue, String coordinator, String description, String notes,
+    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes,
                  Set<Student> attendees) {
         this.title = title;
-        this.date = date;
+        this.endDate = endDate;
         this.venue = venue;
         this.coordinator = coordinator;
         this.description = description;
@@ -69,14 +70,13 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public Event(String title, Date date, String venue, String coordinator, String description, String notes) {
-        this(title, date, venue, coordinator, description, notes, new HashSet<Student>());
+    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes) {
+        this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>());
     }
 
     public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
         return new Event(eventCreateOrUpdateParameter.getTitle(),
-                Date.parse(eventCreateOrUpdateParameter.getDate(),
-		        eventCreateOrUpdateParameter.getEndTime()),
+                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime(), eventCreateOrUpdateParameter.getEndTimeAmPm()),
                 eventCreateOrUpdateParameter.getVenue(),
                 eventCreateOrUpdateParameter.getCoordinator(),
                 eventCreateOrUpdateParameter.getDescription(),
@@ -105,15 +105,20 @@ public class Event {
     }
 
     public Date getDate() {
-        return date;
+        return endDate;
     }
 
     public String getDay() {
-        return date.getDay();
+        return endDate.getDay();
     }
 
     public String getEndTime() {
-        return date.getTime().equals("00:00") ? null: date.getTime();
+        return endDate.getTime().equals("00:00") ? null: endDate.getTime();
+    }
+
+    public String getEndTimeWithAmPm() {
+        String amPm = endDate.isInTheAfternoon() ? "PM" : "AM";
+        return endDate.getTime().equals("00:00") ? null: String.format("%s %s", endDate.getTime(), amPm);
     }
 
     private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
@@ -171,11 +176,15 @@ public class Event {
 
     public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
-        this.date = Date.parse(eventParam.getDate(),eventParam.getEndTime());
+        this.endDate = Date.parse(eventParam.getDate(),eventParam.getEndTime(),eventParam.getEndTimeAmPm());
         this.venue = eventParam.getVenue();
         this.coordinator = eventParam.getCoordinator();
         this.description = eventParam.getDescription();
         this.notes = eventParam.getNotes();
         this.attendees = attendees;
+    }
+
+    public boolean isEndTimePm() {
+        return endDate.isInTheAfternoon();
     }
 }

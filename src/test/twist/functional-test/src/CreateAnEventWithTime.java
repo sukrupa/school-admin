@@ -3,6 +3,7 @@
 
 import org.apache.commons.lang.StringUtils;
 
+import static junit.framework.Assert.*;
 import net.sf.sahi.client.Browser;
 
 public class CreateAnEventWithTime {
@@ -17,10 +18,14 @@ public class CreateAnEventWithTime {
 		String[] splitTime = time.split(" ");
 		
 		browser.textbox(fieldLabel).setValue(splitTime[0]);
-		browser.radio(fieldLabel + StringUtils.capitalize(splitTime[1]));
+		browser.radio(fieldLabel + StringUtils.capitalize(splitTime[1])).click();
 	}
 
 	public void givenIFollowTheLink(String linkText) throws Exception {
 		browser.link(linkText).click();
+	}
+
+	public void andIShouldSeeTheIs(String label, String expectedValue) throws Exception {
+		assertEquals(expectedValue, browser.div(label).text());
 	}
 }

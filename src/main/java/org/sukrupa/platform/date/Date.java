@@ -16,8 +16,8 @@ import static org.joda.time.format.DateTimeFormat.forPattern;
 public class Date implements Serializable {
 
     private static final String DATE_FORMAT = "dd-MM-YYYY";
-    private static final String TIME_FORMAT = "HH:mm";
-    private static final String DATE_TIME_FORMAT = "dd-MM-YYYY HH:mm";
+    private static final String TIME_FORMAT = "KK:mm";
+    private static final String DATE_TIME_FORMAT = "dd-MM-YYYY KK:mm a";
 
     private DateTime jodaTime;
 
@@ -49,6 +49,15 @@ public class Date implements Serializable {
         return isBlank(time) ? parseDate(date) : parseDateAndTime(date, time);
     }
 
+    public static Date parse(String date, String time, String amPm) {
+        return isBlank(time) ? parseDate(date) : parseDateAndTime(date, time, isBlank(amPm) ? "am" : amPm);
+    }
+
+    private static Date parseDateAndTime(String date, String time, String amPm) {
+        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(date + " " + time + " " + amPm);
+        return new Date(jodaTime1);
+    }
+
     private static String buildDateTimeText(String date, String time) {
         return date.trim() + " " + time.trim();
     }
@@ -67,11 +76,12 @@ public class Date implements Serializable {
     }
 
     private static Date parseDate(String date) {
-        return parse(date, "00:00");
+        return parse(date, "00:00", "am");
     }
 
     private static Date parseDateAndTime(String date, String time) {
-        return new Date(forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time)));
+        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time));
+        return new Date(jodaTime1);
     }
 
     @Override
@@ -100,5 +110,10 @@ public class Date implements Serializable {
 
     public int year() {
         return jodaTime.getYear();
+    }
+
+
+    public boolean isInTheAfternoon() {
+        return jodaTime.getHourOfDay() >= 12;
     }
 }

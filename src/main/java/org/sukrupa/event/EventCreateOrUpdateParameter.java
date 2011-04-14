@@ -16,6 +16,7 @@ public class EventCreateOrUpdateParameter {
     private String description;
     private String notes;
     private String attendees;
+    private String endTimeAmPm;
 
 
     public EventCreateOrUpdateParameter() {
@@ -117,4 +118,11 @@ public class EventCreateOrUpdateParameter {
         this.attendees = attendees;
     }
 
+    public void setEndTimeAmPm(String amPm) {
+        this.endTimeAmPm = amPm;
+    }
+
+    public String getEndTimeAmPm() {
+        return endTimeAmPm;
+    }
 }

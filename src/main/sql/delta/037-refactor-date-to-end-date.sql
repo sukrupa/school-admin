@@ -1,0 +1,1 @@
+ALTER TABLE EVENT ALTER COLUMN date RENAME to end_date;

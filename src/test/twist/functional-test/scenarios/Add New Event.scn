@@ -20,3 +20,4 @@ Create an event, Create an event with time:
 #And I fill in "Attendees" with "64262"
 #And I click "Save"
 #Then I should see the "Event: New event with time" page
+#And I should see the "endTime" is "01:00 PM"

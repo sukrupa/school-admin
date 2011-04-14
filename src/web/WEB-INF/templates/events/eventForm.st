@@ -27,9 +27,9 @@
             <input type="text" name="endTime" id="endTime" value="$event.endTime$" class="createValue" />
             <div class="label amPm">
                 <label for="endTimeAm">a.m.</label>
-                <input type="radio" id="endTimeAm" class="amPm" name="endTimeAmPm" value="am" />
+                <input type="radio" id="endTimeAm" class="amPm" name="endTimeAmPm" value="am" $if (!event.endTimePm)$ checked $endif$ />
                  <label for="endTimePm">p.m.</label>
-                <input type="radio" id="endTimePm" class="amPm" name="endTimeAmPm" value="pm" />
+                <input type="radio" id="endTimePm" class="amPm" name="endTimeAmPm" value="pm" $if (event.endTimePm)$ checked $endif$  />
             </div>
 
         </div>

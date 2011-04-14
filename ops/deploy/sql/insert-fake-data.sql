@@ -106,22 +106,22 @@ VALUES (3,7);
 
 
 INSERT INTO "PUBLIC"."EVENT"
-("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","DATE")
+("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","END_DATE")
 VALUES
 (1,'Annual Day', 'Bangalore 2','Rebecca Sliter','This is a event description. It is a test.','This is a note','2011-02-20 00:00:00');
 
 INSERT INTO "PUBLIC"."EVENT"
-("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","DATE")
+("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","END_DATE")
 VALUES
 (2,'Sports Day', 'Bangalore agra','Suhas Vishwanath','This is a event description. It is a test.','This is a note','2011-03-25 00:00:00');
 
 INSERT INTO "PUBLIC"."EVENT"
-("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","DATE")
+("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","END_DATE")
 VALUES
 (3,'Independence Day', 'Bangalore agra','Shefali','This is a event description. It is a test.','This is a note','2011-02-27 00:00:00');
 
 INSERT INTO "PUBLIC"."EVENT"
-("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","DATE")
+("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","END_DATE")
 VALUES
 (4,'Spice Girls', 'P-81 Diamond District','Joel Tellez','This is a event description. It is a test.','This is a note','2011-04-05 00:00:00');
 

@@ -80,8 +80,9 @@ public class EventTest {
 		eventCreateOrUpdateParameter.setCoordinator("");
 		eventCreateOrUpdateParameter.setNotes("");
 		eventCreateOrUpdateParameter.setVenue("");
-		eventCreateOrUpdateParameter.setEndTime("");
+		eventCreateOrUpdateParameter.setEndTime("10:00");
 		eventCreateOrUpdateParameter.setDate("12-12-2001");
+        eventCreateOrUpdateParameter.setEndTimeAmPm("am");
 
 		Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
 
@@ -89,6 +90,22 @@ public class EventTest {
 		assertThat(event.getVenue(), nullValue());
 		assertThat(event.getCoordinator(), nullValue());
 	}
+
+    @Test
+    public void shouldCreateEndDateWithAmOrPmApplied() {
+        EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
+        eventCreateOrUpdateParameter.setCoordinator("Joel");
+		eventCreateOrUpdateParameter.setNotes("Cool");
+		eventCreateOrUpdateParameter.setVenue("TW");
+        eventCreateOrUpdateParameter.setEndTime("01:00");
+        eventCreateOrUpdateParameter.setEndTimeAmPm("pm");
+        eventCreateOrUpdateParameter.setDate("12-12-2001");
+
+        Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
+
+        assertThat(event.getEndTime(), is("01:00"));
+        assertThat(event.isEndTimePm(), is(true));
+    }
 
     @Test
 	public void shouldNotDisplayTimeIfMidnight() {
