@@ -588,19 +588,20 @@ img.studentImage{
 }
 
 #updateStudent .studentImage{
-    height: 215px;
-    width: 160px;
+    float: left;
+    height: 225px;
     margin-bottom: 2px;
     margin-left: 40px;
     margin-top: 11px;
-    float:left;
+    text-align: center;
+    width: 224px;
 }
 
 #updateStudent .studentImage img {
     border: solid 1px;
     width: 160px;
     height: 175px;
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 .informationMessage {

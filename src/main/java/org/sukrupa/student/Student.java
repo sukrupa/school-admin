@@ -96,8 +96,9 @@ public class Student {
     @Column(name = "SPONSORED")
     private boolean sponsored;
 
-    @Column(name = "FAMILY_STATUS")
-    private String familyStatus;
+    @Enumerated (EnumType.ORDINAL)
+    @Column (name = "FAMILY_STATUS_ENUMS")
+    private StudentFamilyStatus familyStatus = null;
 
     @DoNotRemove
     public Student() {
@@ -106,7 +107,7 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
-                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, String familyStatus) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -172,7 +173,7 @@ public class Student {
         return communityLocation;
     }
 
-    public String getFamilyStatus() {
+    public StudentFamilyStatus getFamilyStatus() {
         return familyStatus;
     }
 
@@ -328,7 +329,7 @@ public class Student {
         this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsored = studentUpdateParameters.getSponsored();
-        this.familyStatus = studentUpdateParameters.getfamilyStatus();
+        this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);

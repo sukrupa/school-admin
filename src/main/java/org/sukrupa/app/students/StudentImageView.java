@@ -2,6 +2,7 @@ package org.sukrupa.app.students;
 
 
 import org.springframework.web.servlet.View;
+import org.sukrupa.student.Image;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
 
+import static org.apache.commons.io.IOUtils.copy;
+
 public class StudentImageView implements View{
 
-    private final File imageFile;
+    private Image image;
 
-    public StudentImageView(File imageFile){
-        this.imageFile = imageFile;
+    public StudentImageView(Image image){
+        this.image = image;
     }
 
     @Override
@@ -24,12 +27,9 @@ public class StudentImageView implements View{
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        DataInputStream imageStream = new DataInputStream(new FileInputStream(imageFile));
-        byte[] imageAsBytes = new byte[imageStream.available()];
-        imageStream.read(imageAsBytes);
         ServletOutputStream stdOut = response.getOutputStream();
         response.setStatus(HttpServletResponse.SC_OK);
-        stdOut.write(imageAsBytes);
+        copy(image.getInputStream(),stdOut);
         stdOut.flush();
         stdOut.close();
     }

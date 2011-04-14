@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,14 +139,26 @@ public class StudentsController {
             @ModelAttribute("updateStudent") StudentForm studentForm,
             Map<String, Object> model) {
 
-        Student updatedStudent = studentService.update(studentForm);
+        Student student = studentService.load(id);
 
-        if (updatedStudent != null) {
-            model.put("studentUpdatedSuccesfully", true);
-            return format("redirect:/students/%s", id);
-        } else {
+        Errors errors = new BeanPropertyBindingResult(studentForm, "StudentForm");
+        studentValidator.validateImage(studentForm, errors);
+
+
+        if(mandatoryFieldsExist(errors)){
+            Student updatedStudent = studentService.update(studentForm);
+            if (updatedStudent != null) {
+                model.put("studentUpdatedSuccesfully", true);
+                return format("redirect:/students/%s", id);
+            } else {
+                model.put("message", "Error updating student");
+                return format("redirect:/students/%s/edit", id);
+            }
+        }else{
+            model.put("errors", errors);
+            addErrorToFields(model, errors);
             model.put("message", "Error updating student");
-            return format("redirect:/students/%s/edit", id);
+            return edit(id,"",false,model);
         }
     }
 

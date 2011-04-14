@@ -34,4 +34,14 @@ public enum StudentFamilyStatus {
     public String toString() {
         return this.name;
     }
+
+    public static StudentFamilyStatus fromString(String familyStatus) {
+        for (StudentFamilyStatus status : StudentFamilyStatus.values()) {
+            if (status.toString().equals(familyStatus)) {
+                return status;
+            }
+
+        }
+        return null;
+    }
 }
