@@ -60,11 +60,14 @@ public class StudentValidator implements Validator {
 
     public void validateImage(Object target, Errors errors) {
         StudentForm studentParam = (StudentForm) target;
+        if(!studentParam.hasImage()){
+            return;
+        }
         try {
             if (!studentParam.isImageValid()) {
-                errors.rejectValue("imageToUpload", "imageToUpload.large", "File size should not exceed 1 MB");
-            }else if(studentParam.getImage().getInputStream().available() > ONE_MB){
                 errors.rejectValue("imageToUpload", "imageToUpload.type", "Unsupported File Type");
+            }else if(studentParam.getImage().getInputStream().available() > ONE_MB){
+                errors.rejectValue("imageToUpload", "imageToUpload.large", "File size should not exceed 1 MB");
             }
         } catch (IOException e) {
             errors.rejectValue("imageToUpload", "imageToUpload.exception", "Error Uploading the file");
