@@ -32,7 +32,6 @@ public class StudentReferenceData {
             "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
-    private static final List<String> STATUSES = asList("Existing Student", "Dropout", "Alumni");
     private static final boolean SPONSORED = false;
     private static final List<String> MARITAL_STATUSES = asList(" ", "Married", "Single", "Divorced", "Widowed", "Deceased");
     private TalentRepository talentRepository;
@@ -101,7 +100,7 @@ public class StudentReferenceData {
     }
 
     public List<String> getStatuses() {
-        return STATUSES;
+        return StudentStatus.getNamesList();
     }
 
     public boolean getSponsored() {
