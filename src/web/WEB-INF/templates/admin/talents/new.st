@@ -1,1 +1,1 @@
-$layout(body=admin/talents/newBody(), title="Add New Talent", stylesheets=["admin", "addTalent"])$
+$layout(body=admin/talents/newBody(), title="Add New Talent", scripts=["fadeout"], stylesheets=["admin", "addTalent"])$

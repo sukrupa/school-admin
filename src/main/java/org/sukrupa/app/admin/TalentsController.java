@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.sukrupa.app.admin.talents.TalentForm;
 import org.sukrupa.app.admin.talents.TalentsService;
+import org.sukrupa.app.students.TalentValidator;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.Talent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -26,10 +28,17 @@ public class TalentsController {
 
 
     private TalentsService talentsService;
+    private TalentValidator talentValidator;
 
     @Autowired
-    public TalentsController(TalentsService talentsService) {
+    public TalentsController(TalentsService talentsService, TalentValidator talentValidatorIn) {
         this.talentsService = talentsService;
+        this.talentValidator = talentValidatorIn;
+    }
+
+    @RequestMapping
+    public String list(Map<String, Object> model, TalentForm talentParam){
+        return "admin/talents/new";
     }
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
@@ -37,26 +46,26 @@ public class TalentsController {
         return "admin/talents/new";
     }
 
+
+
     @RequestMapping(value="new", method = RequestMethod.POST)
     public String saveNewTalent(
 
     @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
               Errors errors = new BeanPropertyBindingResult(talentParam, "TalentForm");
+              //talentValidator.validate(talentParam, errors);
               if(mandatoryFieldsExist(errors)){
                   Talent talent = talentsService.create(talentParam);
+                  model.put("talentAddedSuccesfully", true);
+                  model.put("talentDescription", talentParam.getDescription());
               }
               else{
                   model.put("errors",errors);
                   addErrorToFields(model, errors);
               }
-
            return "admin/talents/new";
-
     }
-
-
     @RequestMapping()
-
     public String create(TalentForm talentForm) {
         this.talentsService.create(talentForm) ;
         return null;

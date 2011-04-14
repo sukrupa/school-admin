@@ -4,7 +4,7 @@
     <div id="successDiv">
         <img id="successImage" src="/images/success.png" alt="Success"/>
 
-        <div id="confirmMessage">"$talent.description$ updated successfully.</div>
+        <div id="confirmMessage">$talentDescription$ added successfully.</div>
     </div>
     $endif$
     <form id="createTalent" name="createTalent" action="/admin/talents/new" method="post">
