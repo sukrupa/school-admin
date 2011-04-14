@@ -34,7 +34,8 @@ public class StudentFormPresenter {
     }
 
     public List<DropDownElement> getFamilyStatusesDropDownList() {
-        return createDropDownList(studentReferenceData.getFamilyStatuses(), student.getFamilyStatus());
+        String status = student.getFamilyStatus() == null ? "" : student.getFamilyStatus().toString();
+        return createDropDownList(studentReferenceData.getFamilyStatuses(), status);
     }
 
 

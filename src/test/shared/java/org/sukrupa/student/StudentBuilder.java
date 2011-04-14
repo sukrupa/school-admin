@@ -154,7 +154,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, "");
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, null);
 
     }
 

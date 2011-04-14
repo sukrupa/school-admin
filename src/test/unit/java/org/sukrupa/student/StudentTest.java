@@ -172,7 +172,7 @@ public class StudentTest {
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
         assertThat(student.getSponsored(), is (true));
-        assertThat(student.getFamilyStatus(), is("Single"));
+        assertThat(student.getFamilyStatus(), is(StudentFamilyStatus.SINGLE));
 
     }
 
