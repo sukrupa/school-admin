@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#createEvent').submit(function () {
+    $("form[name=createEventForm]").submit(function () {
         if (validateFields()) {
             return true;
         } else {

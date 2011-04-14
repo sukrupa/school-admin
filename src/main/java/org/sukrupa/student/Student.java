@@ -78,7 +78,7 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
 
-    @OrderBy("date desc")
+    @OrderBy("endDate desc")
     @ManyToMany(mappedBy = "attendees")
     private Set<Event> events;
 

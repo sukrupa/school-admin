@@ -2,7 +2,6 @@ package org.sukrupa.event;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
-import com.google.common.base.Joiner;
 
 import java.util.Set;
 
@@ -11,27 +10,32 @@ public class EventCreateOrUpdateParameter {
     private int id;
     private String title;
     private String date;
-    private String time;
     private String venue;
     private String coordinator;
     private String description;
     private String notes;
     private String attendees;
+    
+    private String endTime;
+    private String endTimeAmPm;
+    private String startTime;
+    private String startTimeAmPm;
 
 
     public EventCreateOrUpdateParameter() {
     }
 
-    public EventCreateOrUpdateParameter(int id, String title, String date, String time, String venue, String coordinator, String description, String notes, String attendees) {
+    public EventCreateOrUpdateParameter(int id, String title, String date, String endTime, String venue, String coordinator, String description, String notes, String attendees, String startTime) {
         this.id = id;
         this.title = title;
         this.date = date;
-        this.time = time;
+        this.endTime = endTime;
         this.venue = venue;
         this.coordinator = coordinator;
         this.description = description;
         this.notes = notes;
         this.attendees = attendees;
+        this.startTime = startTime;
 //        this.attendees = Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
@@ -59,12 +63,12 @@ public class EventCreateOrUpdateParameter {
         this.date = date;
     }
 
-    public String getTime() {
-        return returnNullIfEmpty(time);
+    public String getEndTime() {
+        return returnNullIfEmpty(endTime);
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getVenue() {
@@ -118,4 +122,27 @@ public class EventCreateOrUpdateParameter {
         this.attendees = attendees;
     }
 
+    public void setEndTimeAmPm(String amPm) {
+        this.endTimeAmPm = amPm;
+    }
+
+    public String getEndTimeAmPm() {
+        return endTimeAmPm;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setStartTimeAmPm(String startTimeAmPm) {
+        this.startTimeAmPm = startTimeAmPm;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getStartTimeAmPm() {
+        return startTimeAmPm;
+    }
 }

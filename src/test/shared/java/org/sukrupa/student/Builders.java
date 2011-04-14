@@ -18,7 +18,7 @@ public class Builders {
     public static final Property<Event, String> description = newProperty();
     public static final Property<Event, String> notes = newProperty();
     public static final Property<Event, Set<Student>> attendees = newProperty();
-
+    public static final Property<Event, Date> startDate = newProperty();
     
     public static final Instantiator<Event> Event = new Instantiator<Event>() {
         @Override
@@ -29,7 +29,8 @@ public class Builders {
                              lookup.valueOf(coordinator, "dummy.coordinator"),
                              lookup.valueOf(description, "dummy.description"),
                              lookup.valueOf(notes, "dummy.notes"),
-                             lookup.valueOf(attendees, new HashSet<Student>()));
+                             lookup.valueOf(attendees, new HashSet<Student>()),
+                             lookup.valueOf(startDate, Date.now()));
         }
     };
 

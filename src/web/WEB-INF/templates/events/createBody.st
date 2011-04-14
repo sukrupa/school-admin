@@ -1,6 +1,6 @@
 <div id="event">
 
-	<form id="createEvent" name="createEvent" action="save" method="post">
+	<form name="createEventForm" action="save" method="post">
 
         $events/eventForm()$
 

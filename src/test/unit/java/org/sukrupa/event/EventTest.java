@@ -7,10 +7,7 @@ import org.junit.Test;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Builders;
 import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
-import static org.sukrupa.student.Builders.*;
+
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
 
@@ -28,7 +25,6 @@ import static org.sukrupa.platform.date.DateManipulation.unfreezeTime;
 import static com.natpryce.makeiteasy.MakeItEasy.an;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static com.natpryce.makeiteasy.MakeItEasy.with;
-import static org.sukrupa.student.Builders.*;
 
 public class EventTest {
 
@@ -84,8 +80,9 @@ public class EventTest {
 		eventCreateOrUpdateParameter.setCoordinator("");
 		eventCreateOrUpdateParameter.setNotes("");
 		eventCreateOrUpdateParameter.setVenue("");
-		eventCreateOrUpdateParameter.setTime("");
+		eventCreateOrUpdateParameter.setEndTime("10:00");
 		eventCreateOrUpdateParameter.setDate("12-12-2001");
+        eventCreateOrUpdateParameter.setEndTimeAmPm("am");
 
 		Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
 
@@ -95,8 +92,24 @@ public class EventTest {
 	}
 
     @Test
-	public void shouldNotDisplayTimeIfMidnight() {
-        Event event = make(an(Event, with(date, new Date(31, 01, 2011, 00, 00))));
-        assertThat(event.getTime(), nullValue());
+    public void shouldCreateStartAndEndDatesWithAmOrPmApplied() {
+        EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
+        eventCreateOrUpdateParameter.setCoordinator("Joel");
+		eventCreateOrUpdateParameter.setNotes("Cool");
+		eventCreateOrUpdateParameter.setVenue("TW");
+        eventCreateOrUpdateParameter.setStartTime("05:00");
+        eventCreateOrUpdateParameter.setStartTimeAmPm("am");
+        eventCreateOrUpdateParameter.setEndTime("01:00");
+        eventCreateOrUpdateParameter.setEndTimeAmPm("pm");
+        eventCreateOrUpdateParameter.setDate("12-12-2001");
+
+        Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
+
+        assertThat(event.getEndTime(), is("01:00"));
+        assertThat(event.isEndTimePm(), is(true));
+
+        assertThat(event.getStartTime(), is("05:00"));
+        assertThat(event.isStartTimePm(), is(false));
     }
+
 }

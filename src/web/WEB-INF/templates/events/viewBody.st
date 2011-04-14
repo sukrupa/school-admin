@@ -17,10 +17,17 @@
     </div>
     $endif$
 
-    $event.time:{ time |
+    $event.startTimeWithAmPm:{ time |
     <div class="eventEntry">
-        <div class="eventLabel">Time</div>
-        <div class="time">$time$</div>
+        <div class="eventLabel">Start Time</div>
+        <div class="startTime">$time$</div>
+    </div>
+    }$
+
+    $event.endTimeWithAmPm:{ time |
+    <div class="eventEntry">
+        <div class="eventLabel">End Time</div>
+        <div class="endTime">$time$</div>
     </div>
     }$
 
