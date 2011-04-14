@@ -18,7 +18,14 @@ public class StudentFormPresenter {
     }
 
     public List<CheckBoxElement> getTalentsCheckBoxList() {
-        return createCheckBoxList(studentReferenceData.getTalentDescriptions(), student.talentDescriptions());
+        ArrayList<String> descriptions = new ArrayList<String>();
+
+        for(Talent description : studentReferenceData.getTalentsFromRepository())
+        {
+                descriptions.add(description.getDescription());
+        }
+
+        return createCheckBoxList(descriptions, student.talentDescriptions());
     }
 
     public List<DropDownElement> getSubCastesDropDownList() {

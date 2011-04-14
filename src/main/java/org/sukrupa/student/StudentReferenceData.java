@@ -120,10 +120,10 @@ public class StudentReferenceData {
         return FAMILY_STATUSES;
     }
 
-    private List<Talent> getTalentsFromRepository() {
+    public List<Talent> getTalentsFromRepository() {
         return (talentRepository == null)
                 ? Collections.<Talent>emptyList()
-                : talentRepository.listAllTalents();
+                : talentRepository.findAllTalents();
     }
 
 }
