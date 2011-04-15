@@ -67,7 +67,11 @@ class StudentsSearchCriteriaGenerator {
 
     private void addStudentFamilyStatusSearchCriteria(Criteria criteria, String studentFamilyStatus) {
         if (!studentFamilyStatus.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
-            criteria.add(Restrictions.eq(FAMILY_STATUS, StudentFamilyStatus.fromString(studentFamilyStatus)));
+            if (studentFamilyStatus.isEmpty()) {
+                criteria.add(Restrictions.isNull(FAMILY_STATUS));
+            } else {
+                criteria.add(Restrictions.eq(FAMILY_STATUS, StudentFamilyStatus.fromString(studentFamilyStatus)));
+            }
         }
     }
 

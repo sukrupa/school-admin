@@ -303,12 +303,14 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    @Ignore("Frank - WIP")
     public void shouldReturnStudentsWithNoFamilyStatus() throws Exception {
        hibernateSession.save(jimbo, pat, sahil, renaud);
        List<Student> students = studentRepository.findBySearchParameter(
                new StudentSearchParameterBuilder().studentFamilyStatus("").build(),0, 100);
        assertThat(students.size(), is(3));
+        assertThat(students.contains(jimbo), is(true));
+        assertThat(students.contains(sahil), is(true));
+        assertThat(students.contains(renaud), is(true));
     }
     
 
