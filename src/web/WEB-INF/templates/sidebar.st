@@ -49,7 +49,7 @@
       <li>
       <p class="indent">
       <a href="/events/create">
-      Record Event
+      Create an Event
       </a>
       </p>
       </li>

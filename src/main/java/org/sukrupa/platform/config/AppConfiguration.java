@@ -30,7 +30,6 @@ import static org.springframework.beans.factory.config.PropertyPlaceholderConfig
 public class AppConfiguration {
 
     private static final String ENVIRONMENT_KEY = "environment";
-    private static final long ONE_MB = 1048576;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -44,8 +43,6 @@ public class AppConfiguration {
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-
-        commonsMultipartResolver.setMaxUploadSize(ONE_MB);
 
         return commonsMultipartResolver;
     }
@@ -76,6 +73,7 @@ public class AppConfiguration {
     @Bean
     public HandlerExceptionResolver handlerExceptionResolver() {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        resolver.setWarnLogCategory("DEBUG");
         resolver.setDefaultErrorView("error");
         return resolver;
     }

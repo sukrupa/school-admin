@@ -33,7 +33,7 @@ public class StudentImageRepositoryTest {
         File file = mock(File.class);
         when(fileHandler.create(imageRepositoryLocation + "validFile")).thenReturn(file);
 
-        assertEquals(file, studentImageRepository.load("validFile"));
+        assertEquals(new Image(file), studentImageRepository.load("validFile"));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class StudentImageRepositoryTest {
         when(fileHandler.create(imageRepositoryLocation + "invalidFile")).thenThrow(new FileNotFoundException());
         when(fileHandler.create(imageRepositoryLocation + "placeholderImage")).thenReturn(placeholderImage);
 
-        assertEquals(placeholderImage, studentImageRepository.load("invalidFile"));
+        assertEquals(new Image(placeholderImage), studentImageRepository.load("invalidFile"));
     }
 
     @Test
@@ -51,7 +51,6 @@ public class StudentImageRepositoryTest {
         InputStream inputStream = mock(InputStream.class);
         when(newImage.getInputStream()).thenReturn(inputStream);
         studentImageRepository.save(newImage, "12345");
-        verify(fileHandler).save(imageRepositoryLocation,"12345",inputStream);
+        verify(fileHandler).save(imageRepositoryLocation, "12345", inputStream);
     }
-
 }

@@ -45,7 +45,8 @@ public class Event {
     private String notes;
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
-    private Date date;
+    @Column(name = "END_DATE")
+    private  Date endDate;
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
@@ -53,34 +54,39 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "STUDENT_ID"))
     private Set<Student> attendees;
 
+    @Type(type = "org.sukrupa.platform.date.PersistentDate")
+    @Column(name = "START_DATE")
+    private Date startDate;
+
     @DoNotRemove
     public Event() {
     }
 
 
-    public Event(String title, Date date, String venue, String coordinator, String description, String notes,
-                 Set<Student> attendees) {
+    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes,
+                 Set<Student> attendees, Date startDate) {
         this.title = title;
-        this.date = date;
+        this.endDate = endDate;
         this.venue = venue;
         this.coordinator = coordinator;
         this.description = description;
         this.notes = notes;
         this.attendees = attendees;
+        this.startDate = startDate;
     }
 
-    public Event(String title, Date date, String venue, String coordinator, String description, String notes) {
-        this(title, date, venue, coordinator, description, notes, new HashSet<Student>());
+    public Event(String title, Date endDate, String venue, String coordinator, String description, String notes, Date startDate) {
+        this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>(), startDate);
     }
 
     public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
         return new Event(eventCreateOrUpdateParameter.getTitle(),
-                Date.parse(eventCreateOrUpdateParameter.getDate(),
-		        eventCreateOrUpdateParameter.getTime()),
+                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime(), eventCreateOrUpdateParameter.getEndTimeAmPm()),
                 eventCreateOrUpdateParameter.getVenue(),
                 eventCreateOrUpdateParameter.getCoordinator(),
                 eventCreateOrUpdateParameter.getDescription(),
-                eventCreateOrUpdateParameter.getNotes());
+                eventCreateOrUpdateParameter.getNotes(),
+                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getStartTime(), eventCreateOrUpdateParameter.getStartTimeAmPm()));
     }
 
     public static Event from(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
@@ -105,19 +111,24 @@ public class Event {
     }
 
     public Date getDate() {
-        return date;
+        return endDate;
     }
 
     public String getDay() {
-        return date.getDay();
+        return endDate.getDay();
     }
 
-    public String getTime() {
-        return date.getTime().equals("00:00") ? null: date.getTime();
+    public String getEndTime() {
+        return getEndTimeWithAmPm().equals("12:00 AM") ? null: endDate.getTime();
+    }
+
+    public String getEndTimeWithAmPm() {
+        String amPm = endDate.isInTheAfternoon() ? "PM" : "AM";
+        return String.format("%s %s", endDate.getTime(), amPm);
     }
 
     private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
-        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getTime());
+        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -171,11 +182,29 @@ public class Event {
 
     public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
-        this.date = Date.parse(eventParam.getDate(),eventParam.getTime());
+        this.endDate = Date.parse(eventParam.getDate(),eventParam.getEndTime(),eventParam.getEndTimeAmPm());
         this.venue = eventParam.getVenue();
         this.coordinator = eventParam.getCoordinator();
         this.description = eventParam.getDescription();
         this.notes = eventParam.getNotes();
         this.attendees = attendees;
+        this.startDate = Date.parse(eventParam.getDate(),eventParam.getStartTime(),eventParam.getStartTimeAmPm());
+    }
+
+    public boolean isEndTimePm() {
+        return endDate.isInTheAfternoon();
+    }
+
+    public String getStartTime() {
+        return getStartTimeWithAmPm().equals("12:00 AM") ? null: startDate.getTime();
+    }
+
+    public String getStartTimeWithAmPm() {
+        String amPm = startDate.isInTheAfternoon() ? "PM" : "AM";
+        return String.format("%s %s", startDate.getTime(), amPm);
+    }
+
+    public boolean isStartTimePm() {
+        return startDate.isInTheAfternoon();
     }
 }

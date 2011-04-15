@@ -23,16 +23,6 @@ public class StudentImageRepository {
         this.imageRepositoryLocation = imageRepositoryLocation;
     }
 
-    public File load(String fileName) throws FileNotFoundException {
-        File image;
-        try {
-            image = fileHandler.create(imageRepositoryLocation + fileName);
-        } catch (FileNotFoundException e) {
-            image = fileHandler.create(imageRepositoryLocation + PLACEHOLDER_IMAGE);
-        }
-        return image;
-    }
-
     public boolean save(Image image, String id) {
         try{
          fileHandler.save(imageRepositoryLocation,id,image.getInputStream());
@@ -40,5 +30,15 @@ public class StudentImageRepository {
             return false;
         }
         return true;
+    }
+
+    public Image load(String fileName) throws FileNotFoundException {
+        File image;
+        try {
+            image = fileHandler.create(imageRepositoryLocation + fileName);
+        } catch (FileNotFoundException e) {
+            image = fileHandler.create(imageRepositoryLocation + PLACEHOLDER_IMAGE);
+        }
+        return new Image(image);
     }
 }

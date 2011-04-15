@@ -154,6 +154,20 @@
                 </select>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <span> Family Status</span>
+            </td>
+            <td>
+                <select name="familyStatus">
+                   $formhelper.familyStatuses:{
+                    <option value="$it$">$it$</option>
+                    }$
+                </select>
+            </td>
+        </tr>
+
         <tr>
             <td>
                 <span>Caregiver's Occupation</span>

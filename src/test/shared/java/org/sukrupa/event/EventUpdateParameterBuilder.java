@@ -25,6 +25,7 @@ public class EventUpdateParameterBuilder {
     private String description;
     private Set<Student> attendees;
     private String time;
+    private String startTime;
 
     public EventUpdateParameterBuilder id(int id)
     {
@@ -42,6 +43,10 @@ public class EventUpdateParameterBuilder {
         return this;
     }
 
+    public EventUpdateParameterBuilder startTime(String startTime) {
+        this.startTime = startTime;
+        return this;
+    }
       public EventUpdateParameterBuilder venue(String venue) {
           this.venue = venue;
           return this;
@@ -78,7 +83,7 @@ public class EventUpdateParameterBuilder {
       }
 
       public EventCreateOrUpdateParameter build() {
-          return new EventCreateOrUpdateParameter(id, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds());
+          return new EventCreateOrUpdateParameter(id, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds(), startTime);
       }
 
     private String attendeesIds() {
