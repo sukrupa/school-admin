@@ -1,5 +1,8 @@
 package org.sukrupa.student;
 
+import org.hibernate.SessionFactory;
+
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,19 +72,24 @@ public class StudentReferenceData {
         return RELIGIONS;
     }
 
-    public List<String> getTalentDescriptions() {
-        List<Talent> talents = getTalentsFromRepository();
-        if (talents.isEmpty()) {
-            return TALENTS_DESCRIPTIONS;
-        }
 
-        List<String> talentDescriptions = new ArrayList<String>();
+    public List<String> getTalentDescriptions()
+    {
+        List<Talent> talents = getTalentsFromRepository();
+        if(talents.isEmpty())
+        {
+            talents = Collections.emptyList();
+        }
+         List<String> talentDescriptions = new ArrayList<String>();
+
         for (Talent talent : talents) {
             talentDescriptions.add(talent.getDescription());
         }
 
         return talentDescriptions;
+
     }
+
 
     public List<String> getAges() {
         List<String> ages = new ArrayList<String>();

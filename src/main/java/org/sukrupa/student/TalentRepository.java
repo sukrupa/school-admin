@@ -41,7 +41,7 @@ public class TalentRepository {
     }
 
     public List<Talent> findAllTalents(){
-        return query("from Talent").list();
+        return query("from Talent order by description").list();
     }
 
     private Session session() {
