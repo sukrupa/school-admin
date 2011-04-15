@@ -25,9 +25,8 @@ public class TalentsService {
         this.talentFactory = talentFactory;
     }
 
-    public Talent create(TalentForm talentForm) {
+    public void create(TalentForm talentForm) {
        Talent newTalent = talentFactory.create(talentForm.getDescription());
        talentRepository.put(newTalent);
-        return newTalent;
     }
 }

@@ -35,8 +35,4 @@ public class AddNewTalentWorkflow {
 		browser.submit("Add Talent").click();
 	}
 
-	public void iShouldSeeAConfirmationMessageSayingTalentWasAddedSuccessfully(String talent) throws Exception {
-		assertThat(browser.div("confirmMessage").getText().contains(talent + "was added successfully!"), is(true));	
-	}
-
 }

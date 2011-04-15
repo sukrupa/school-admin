@@ -54,7 +54,7 @@ public class TalentsController {
     @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
               String trimmedDescription = talentParam.getDescription().trim();
               if(!trimmedDescription.isEmpty()){
-                  Talent talent = talentsService.create(talentParam);
+                  talentsService.create(talentParam);
                   model.put("talentAddedSuccesfully", true);
                   model.put("talentDescription", talentParam.getDescription());
               }
