@@ -165,13 +165,13 @@ public class StudentTest {
         studentForm.setDateOfBirth("01-02-2005");
         studentForm.setStatus("Existing Student");
         studentForm.setFamilyStatus("Single");
-        studentForm.setSponsored(true);
+        studentForm.setSponsored("Peter Murray");
 
         student.updateFrom(studentForm, Collections.EMPTY_SET );
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
-        assertThat(student.getSponsored(), is (true));
+        assertThat(student.getSponsored(), is ("Peter Murray"));
         assertThat(student.getFamilyStatus(), is(StudentFamilyStatus.SINGLE));
 
     }

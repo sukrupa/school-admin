@@ -25,7 +25,7 @@ public class StudentForm {
     private Caregiver guardian = new Caregiver();
     private Set<String> talents;
     private String status;
-    private boolean sponsored;
+    private String sponsored;
     private String disciplinary;
     private String performance;
     private String background;
@@ -192,7 +192,7 @@ public class StudentForm {
         this.familyStatus = familyStatus;
     }
 
-    public void setSponsored(boolean sponsored) {
+    public void setSponsored(String sponsored) {
         this.sponsored = sponsored;
     }
 
@@ -208,7 +208,7 @@ public class StudentForm {
     return this.background;
 }
 
-    public boolean getSponsored() {
+    public String getSponsored() {
     return sponsored;
 }
     public String getfamilyStatus() {

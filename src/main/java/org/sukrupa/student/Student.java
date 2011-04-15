@@ -94,7 +94,7 @@ public class Student {
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     @Column(name = "SPONSORED")
-    private boolean sponsored;
+    private String sponsored;
 
     @Enumerated (EnumType.ORDINAL)
     @Column (name = "FAMILY_STATUS_ENUMS")
@@ -200,7 +200,7 @@ public class Student {
         return gender;
     }
 
-    public boolean getSponsored() {
+    public String getSponsored() {
         return sponsored;
     }
 

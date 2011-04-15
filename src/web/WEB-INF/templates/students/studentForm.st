@@ -122,8 +122,9 @@
             </div>
 
              <div class="editStatus">
-                <div class="sponsoredLabel">Sponsored?</div>
-                <input type="checkbox" name="sponsored" id="sponsored" class="updateSponsoredValue" value="true" $if (student.sponsored)$ checked $endif$>
+                <div class="sponsoredLabel">Sponsor</div>
+                <input type="text" name="sponsored" id="sponsored" value="$student.sponsored$" class="updateValue"></input>
+
             </div>
 
             <div class="talentsList">
