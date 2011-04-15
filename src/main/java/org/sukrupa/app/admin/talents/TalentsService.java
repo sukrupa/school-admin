@@ -2,7 +2,7 @@ package org.sukrupa.app.admin.talents;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.student.Talent;
 import org.sukrupa.student.TalentFactory;
 import org.sukrupa.student.TalentRepository;
@@ -15,7 +15,7 @@ public class TalentsService {
     private TalentRepository talentRepository;
     private TalentFactory talentFactory;
 
-    @DoNotRemove
+    @RequiredByFramework
     public TalentsService(){
     }
 

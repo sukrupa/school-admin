@@ -2,9 +2,7 @@ package org.sukrupa.student;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +18,7 @@ public class Talent {
 	private long id;
 	private String description;
 
-	@DoNotRemove
+	@RequiredByFramework
     Talent() {}
 
 	public Talent(String description) {

@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class StudentSearchParameter {
         this.familyStatus = familyStatus;
     }
 
-    @DoNotRemove
+    @RequiredByFramework
     public StudentSearchParameter() {
     }
 

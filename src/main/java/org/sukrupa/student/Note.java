@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.platform.date.Date;
 
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Note {
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
     private Date date;
 
-    @DoNotRemove
+    @RequiredByFramework
     Note() {
     }
 
