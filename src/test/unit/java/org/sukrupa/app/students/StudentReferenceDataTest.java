@@ -33,7 +33,7 @@ public class StudentReferenceDataTest {
     @Test
     public void shouldGetTheTalentsFromTheRepository() {
         StudentReferenceData studentReferenceData = new StudentReferenceData(talentRepository);
-        when(talentRepository.listAllTalents()).thenReturn(asList(talent("talent1"),
+        when(talentRepository.findAllTalents()).thenReturn(asList(talent("talent1"),
                                                                   talent("talent2"),
                                                                   talent("talent3")));
 

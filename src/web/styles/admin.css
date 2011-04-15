@@ -13,7 +13,7 @@
 
 /* Feature toggle for story #356 */
 .adminOptions a[href='/admin/talents/new'] {
-    display:none;
+    display:body;
 }
 
 #body

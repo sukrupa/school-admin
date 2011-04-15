@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigte to Student Profile,Log In,	Log out afterwards
+Preconditions:Navigte to list of students,Log In,	Log out afterwards
 Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"

@@ -16,6 +16,7 @@ public class EventBuilder {
     private String notes = "dummy.notes";
     private Set<Student> attendees = new HashSet<Student>();
     private Date date = Date.now();
+    private Date startDate = Date.now();
 
     public EventBuilder title(String title) {
         this.title = title;
@@ -57,8 +58,13 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder startDate(Date startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
     public Event build() {
-        return new Event(title, date, venue, coordinator, description, notes, attendees);
+        return new Event(title, date, venue, coordinator, description, notes, attendees, startDate);
     }
 
 

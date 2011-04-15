@@ -117,12 +117,14 @@
             <div class="studentImage">
 
                 <img src="/students/$student.imageLink$/image" id="$student.imageLink$"/>
-                <input size="15" type="file" name="imageToUpload" />
+                <input size="15" type="file" name="imageToUpload" id="imageToUpload"/>
+                <span class="errorMessage">$imageToUploadError$</span>
             </div>
 
              <div class="editStatus">
-                <div class="sponsoredLabel">Sponsored?</div>
-                <input type="checkbox" name="sponsored" id="sponsored" class="updateSponsoredValue" value="true" $if (student.sponsored)$ checked $endif$>
+                <div class="sponsoredLabel">Sponsor</div>
+                <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsored$" ></input></div>
+
             </div>
 
             <div class="talentsList">
@@ -247,7 +249,8 @@
             <input type="button" id="cancel" value="Cancel" />
         </div>
 
-        <div id="errorMessages"></div>
+        <div id="errorMessages">
+        </div>
 
     </form>
 </div>

@@ -4,10 +4,10 @@
     <div id="successDiv">
         <img id="successImage" src="/images/success.png" alt="Success"/>
 
-        <div id="confirmMessage">"$talent.description$ updated successfully.</div>
+        <div id="confirmMessage">$talentDescription$ added successfully.</div>
     </div>
     $endif$
-    <form>
+    <form id="createTalent" name="createTalent" action="/admin/talents/new" method="post">
         <div class="updateEntry">
             <div class="label">Talent Description<span class="mandatory">*</span></div>
             <div class="textSpace">
@@ -16,7 +16,17 @@
         </div>
 
         <div id="update">
-            <input type="submit" id="register" value="Add Talent"/>
+            <input type="submit" id="addNewTalent" value="Add Talent"/>
         </div>
+
+        <div id="createEventErrors">
+		<div id="errorMessages">
+			$if (talentInvalid)$
+			Invalid Talent
+			$endif$
+		</div>
+	</div>
+
+	</div>
     </form>
 </div>

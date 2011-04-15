@@ -32,7 +32,7 @@ public class ViewEventPage {
     }
 
     public String getTime() {
-        return textFor("time");
+        return textFor("endTime");
     }
 
     public String getDescription() {

@@ -2,6 +2,7 @@
 // JUnit Assert framework can be used for verification
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import net.sf.sahi.client.Browser;
 
 public class EditStudent {
@@ -65,6 +66,11 @@ public class EditStudent {
 
 	public void verifyThatIAmInTheStudentViewPage() throws Exception {
 			assertEquals("Student:", browser.title() );
+	}
+
+	public void verifyThatTheNewTalentIsInTheListOfTalents(String newTalent)
+			throws Exception {
+			assertTrue(browser.div("talentsCheckBoxes").containsText(newTalent));
 	}
 
 	

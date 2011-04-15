@@ -1,11 +1,8 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Caregiver {
@@ -14,12 +11,10 @@ public class Caregiver {
     @GeneratedValue
     private long id;
 
-    @DoNotRemove
-    Caregiver() {
+    @DoNotRemove Caregiver() {
     }
 
-    public Caregiver(String name, String education, String occupation, String maritalStatus, String contact, String salary)
-    {
+    public Caregiver(String name, String education, String occupation, String maritalStatus, String contact, String salary) {
         this.name = name;
         this.education = education;
         this.occupation = occupation;
@@ -33,7 +28,7 @@ public class Caregiver {
 
     private String occupation;
 
-    @Column( name = "MARITAL_STATUS")
+    @Column(name = "MARITAL_STATUS")
     private String maritalStatus;
 
     @Column(name = "CONTACT_NUMBER")

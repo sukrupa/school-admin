@@ -78,7 +78,7 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "talent_id"))
     private Set<Talent> talents;
 
-    @OrderBy("date desc")
+    @OrderBy("endDate desc")
     @ManyToMany(mappedBy = "attendees")
     private Set<Event> events;
 
@@ -94,7 +94,7 @@ public class Student {
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     @Column(name = "SPONSORED")
-    private boolean sponsored;
+    private String sponsored;
 
     @Enumerated (EnumType.ORDINAL)
     @Column (name = "FAMILY_STATUS_ENUMS")
@@ -200,7 +200,7 @@ public class Student {
         return gender;
     }
 
-    public boolean getSponsored() {
+    public String getSponsored() {
         return sponsored;
     }
 

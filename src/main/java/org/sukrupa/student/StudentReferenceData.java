@@ -121,10 +121,10 @@ public class StudentReferenceData {
         return statusList;
     }
 
-    private List<Talent> getTalentsFromRepository() {
+    public List<Talent> getTalentsFromRepository() {
         return (talentRepository == null)
                 ? Collections.<Talent>emptyList()
-                : talentRepository.listAllTalents();
+                : talentRepository.findAllTalents();
     }
 
 }

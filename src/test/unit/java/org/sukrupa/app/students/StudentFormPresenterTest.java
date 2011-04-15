@@ -35,7 +35,7 @@ public class StudentFormPresenterTest {
         StudentReferenceData studentReferenceData = new StudentReferenceData(talentRepository);
         StudentFormPresenter studentFormPresenter = new StudentFormPresenter(studentWithNoTalent(), studentReferenceData);
 
-        when(talentRepository.listAllTalents()).thenReturn(asList(talent("talent1"),
+        when(talentRepository.findAllTalents()).thenReturn(asList(talent("talent1"),
                                                                   talent("talent2"),
                                                                   talent("talent3")));
 

@@ -304,7 +304,7 @@ text-decoration: none;
 }
 
 .sponsoredLabel {
-    width: 112px;
+    width: 80px;
     float: left;
     padding-left: 39px;
     font-weight: bold;
@@ -524,6 +524,12 @@ width: 100px;
     width: 70px;
 }
 
+
+#endTimeAm, #endTimePm, #startTimeAm, #startTimePm {
+    width: 13px;
+}
+
+
 .eventAddress {
     width:100%;
     float: left;
@@ -589,18 +595,19 @@ img.studentImage{
 
 #updateStudent .studentImage{
     height: 215px;
-    width: 160px;
+    width: 13.438em;
+    float: left;
     margin-bottom: 2px;
     margin-left: 40px;
     margin-top: 11px;
-    float:left;
+    text-align: center;
 }
 
 #updateStudent .studentImage img {
     border: solid 1px;
     width: 160px;
     height: 175px;
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 .informationMessage {

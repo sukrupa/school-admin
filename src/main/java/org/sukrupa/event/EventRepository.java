@@ -29,7 +29,7 @@ public class EventRepository {
     }
 
     public List<Event> list() {
-        return session().createCriteria(Event.class).addOrder(Order.desc("date")).list();
+        return session().createCriteria(Event.class).addOrder(Order.desc("endDate")).list();
     }
 
     public Event load(Integer eventId) {

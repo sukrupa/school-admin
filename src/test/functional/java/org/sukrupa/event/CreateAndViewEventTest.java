@@ -127,7 +127,7 @@ public class CreateAndViewEventTest extends FunctionalTestBase {
                 .navigateTo()
                 .title("a funky event")
                 .date("31-08-2011")
-                .time("14:00")
+                .time("02:00")
                 .venue("palace grounds")
                 .description("bla bla bla")
                 .coordinator("karthik")
@@ -142,7 +142,7 @@ public class CreateAndViewEventTest extends FunctionalTestBase {
         assertThat(viewEventPage.getTitle(), is("a funky event"));
         assertThat(viewEventPage.getDate(), is("31-08-2011"));
         assertThat(viewEventPage.getDay(), is("Wednesday"));
-        assertThat(viewEventPage.getTime(), is("14:00"));
+        assertThat(viewEventPage.getTime(), is("02:00 AM"));
         assertThat(viewEventPage.getVenue(), is("palace grounds"));
         assertThat(viewEventPage.getDescription(), is("bla bla bla"));
         assertThat(viewEventPage.getNotes(), is("bring food!"));
