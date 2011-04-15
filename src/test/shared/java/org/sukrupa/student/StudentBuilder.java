@@ -28,6 +28,7 @@ public class StudentBuilder {
     private LocalDate dateOfBirth = new LocalDate();
     private Set<Note> notes = new HashSet<Note>();
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
+    private StudentFamilyStatus familyStatus = null;
     private boolean sponsored;
     private String disciplinary;
     private String performance;
@@ -154,7 +155,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, null);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus);
 
     }
 
@@ -175,6 +176,11 @@ public class StudentBuilder {
 
     public StudentBuilder events(Event... events) {
         events(new HashSet<Event>(asList(events)));
+        return this;
+    }
+
+    public StudentBuilder familyStatus(StudentFamilyStatus familyStatus) {
+        this.familyStatus = familyStatus;
         return this;
     }
 }

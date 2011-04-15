@@ -1,1 +1,8 @@
-Talent,Min Age,Max Age,Name,Class,Gender,Religion,Caste,Community Location,Family Status,12,17,Anok,,Male,,,,Mimicry,12,20,Anok,,,,,,SingleActing,3,7,Chandana,,,,,,,,,Chandana,,,,Shetty,,Sports,,,Chandru,,,,,Bhuvaneshwari Slum,,5,8,Chandana,,,,Shetty,,Pick & Speak,,,Bhavani,,,,,,
+Talent,Min Age,Max Age,Name,Class,Gender,Religion,Caste,Community Location,Family Status
+,12,17,Anok,,Male,,,,
+Mimicry,12,20,Anok,,,,,,Single
+Acting,3,7,Chandana,,,,,,
+,,,Chandana,,,,Shetty,,General
+Sports,,,Chandru,,,,,Bhuvaneshwari Slum,
+,5,8,Chandana,,,,Shetty,,
+Pick & Speak,,,Bhavani,,,,,,
