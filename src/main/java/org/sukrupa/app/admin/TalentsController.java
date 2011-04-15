@@ -52,16 +52,14 @@ public class TalentsController {
     public String saveNewTalent(
 
     @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
-              Errors errors = new BeanPropertyBindingResult(talentParam, "TalentForm");
-              //talentValidator.validate(talentParam, errors);
-              if(mandatoryFieldsExist(errors)){
+              String trimmedDescription = talentParam.getDescription().trim();
+              if(!trimmedDescription.isEmpty()){
                   Talent talent = talentsService.create(talentParam);
                   model.put("talentAddedSuccesfully", true);
                   model.put("talentDescription", talentParam.getDescription());
               }
               else{
-                  model.put("errors",errors);
-                  addErrorToFields(model, errors);
+                  model.put("talentInvalid",true);
               }
            return "admin/talents/new";
     }

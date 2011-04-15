@@ -18,5 +18,15 @@
         <div id="update">
             <input type="submit" id="addNewTalent" value="Add Talent"/>
         </div>
+
+        <div id="createEventErrors">
+		<div id="errorMessages">
+			$if (talentInvalid)$
+			Invalid Talent
+			$endif$
+		</div>
+	</div>
+
+	</div>
     </form>
 </div>
