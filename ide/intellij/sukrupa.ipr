@@ -370,6 +370,7 @@
     <library name="test">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/../../lib/test" />
+        <root url="jar://$PROJECT_DIR$/../../tools/cuke4duke/cuke4duke-0.4.3.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>

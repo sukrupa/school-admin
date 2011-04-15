@@ -7,6 +7,7 @@
     <import file="image-targets.xml"/>
     <import file="macros.xml"/>
     <import file="sukrupa-server.xml"/>
+    <import file="cucumber.xml"/>
 
     <target name="clean">
         <delete dir="${target.dir}"/>
@@ -18,11 +19,13 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
-        <mkdir dir="${target.test.functional.dir}"/>        
+        <mkdir dir="${target.test.functional.dir}"/>
+        <mkdir dir="${target.test.cucumber.java.dir}"/>
         <mkdir dir="${target.test.twist.fixtures.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.twist.dir}"/>
+        <mkdir dir="${target.reports.cucumber.dir}"/>
         <mkdir dir="${target.main.dir}"/>
     </target>
 
@@ -53,7 +56,7 @@
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional, compile:test:twist"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional, compile:test:twist, compile:test:cucumber"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -89,6 +92,11 @@
             </fileset>
             <fileset dir="${src.test.twist.conf.dir}"/>
         </copy>
+    </target>
+
+    <target name="compile:test:cucumber">
+        <compile srcdir="${src.test.cucumber.java.dir}" destdir="${target.test.cucumber.java.dir}"
+                 classpathref="classpath.compilation.test.cucumber"/>
     </target>
 
     <target name="copy-resources">
@@ -148,6 +156,23 @@
         <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
     </target>
 
+    <target name="test:cucumber"
+            description="Run Cucumber">
+
+        <run-against-server startServerTarget="sukrupa-server:start-for-twist"
+                            stopServerTarget="sukrupa-server:stop-for-twist"
+                            checkServerUpTarget="sukrupa-server:check-is-running">
+            <execute>
+                <antcall target="execute-cucumber"/>
+            </execute>
+        </run-against-server>
+
+        <available file="${target.test.cucumber.failed.file}" property="cucumber.features.failed"/>
+        <echo message="Result of cuke tests was: ${cucumber.features.failed}"/>
+
+        <echo message="Cuke report @ ${target.reports.cucumber.html}"/>
+        <fail if="cucumber.features.failed" message="Some cuke tests failed!!"/>
+    </target>
 
     <target name="package" depends="create.module.jar">
         <zip destfile="${target.dir}/${module.deployable.name}">

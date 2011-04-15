@@ -1,0 +1,39 @@
+<project name="cucumber">
+    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
+    <import file="macros.xml"/>
+
+    <taskdef name="if" classname="ise.antelope.tasks.IfTask"/>    
+
+    <target name="execute-cucumber">
+        <delete file="${target.test.cucumber.failed.file}"/>
+
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <echo message="Executing Cucumber tests from ${src.test.cucumber.features.dir} ..."/>
+
+        <taskdef classname="cuke4duke.ant.CucumberTask"
+                 classpathref="classpath.run.cucumber.features"
+                 name="cucumber"/>
+
+        <cucumber args="--verbose --require ${target.test.cucumber.java.dir} --color --format pretty --format html --out ${target.reports.cucumber.html} ${src.test.cucumber.features.dir}"
+                  resultproperty="cucumber.features.failed"
+                  objectFactory="pico"
+                  classpathref="classpath.run.cucumber.features"
+                  failonerror="false">
+        </cucumber>
+
+        <echo message="Result: ${cucumber.features.failed}" />
+        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+
+        <if name="cucumber.features.failed" value="1">
+            <antcall target="report-cucumber-status"/>
+        </if>
+
+    </target>
+
+     <target name="report-cucumber-status" if="cucumber.features.failed">
+        <propertyfile file="${target.test.cucumber.failed.file}">
+            <entry key="cucumber.features.failed" value="${cucumber.features.failed}"/>
+        </propertyfile>
+    </target>
+</project>
