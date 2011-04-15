@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.date.Date;
-import org.sukrupa.student.Builders;
 
 import static junit.framework.Assert.assertEquals;
 import static org.sukrupa.student.Builders.*;
@@ -91,7 +90,7 @@ public class EventServiceTest {
         newAttendees.add(pat);
         newAttendees.add(jim);
 
-        EventCreateOrUpdateParameter updateParameter = new EventUpdateParameterBuilder().id(1)
+        EventForm updateParameter = new EventUpdateParameterBuilder().id(1)
                                 .title("Spice Girls")
                                 .date(new Date(12, 12, 2011))
                                 .time("10:10")

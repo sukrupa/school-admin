@@ -14,6 +14,7 @@
         <div class="createEntryDateTime">
             <div class="label dateTime">Start Time <br/>(hh:mm)</div>
             <input type="text" name="startTime" id="startTime" value="$event.startTime$" class="createValue" />
+
       <div class="label amPm">
                 <label for="startTimeAm">a.m.</label>
                 <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" $if (!event.startTimePm)$ checked $endif$ />
@@ -33,6 +34,8 @@
             </div>
 
         </div>
+        <div class="errorMessage">$startTimeError$</div>
+         <div class="errorMessage">$endTimeError$</div>
 
         <div class="createEntry">
             <div class="label">Venue</div>
@@ -62,5 +65,6 @@
             <textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$event.notes$</textarea>
         </div>
     </div>
+
 
 </div>

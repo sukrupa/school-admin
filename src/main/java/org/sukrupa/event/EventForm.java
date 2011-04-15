@@ -2,11 +2,17 @@ package org.sukrupa.event;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import java.util.Set;
 
-public class EventCreateOrUpdateParameter {
+import static org.apache.commons.lang.StringUtils.isBlank;
 
+public class EventForm implements Validator {
+
+    private static final String VALID_TIME_FORMAT = "(|\\d\\d?:\\d\\d)";
     private int id;
     private String title;
     private String date;
@@ -15,17 +21,17 @@ public class EventCreateOrUpdateParameter {
     private String description;
     private String notes;
     private String attendees;
-    
+
     private String endTime;
     private String endTimeAmPm;
     private String startTime;
     private String startTimeAmPm;
 
 
-    public EventCreateOrUpdateParameter() {
+    public EventForm() {
     }
 
-    public EventCreateOrUpdateParameter(int id, String title, String date, String endTime, String venue, String coordinator, String description, String notes, String attendees, String startTime) {
+    public EventForm(int id, String title, String date, String endTime, String venue, String coordinator, String description, String notes, String attendees, String startTime) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -36,7 +42,6 @@ public class EventCreateOrUpdateParameter {
         this.notes = notes;
         this.attendees = attendees;
         this.startTime = startTime;
-//        this.attendees = Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
     public int getId() {
@@ -99,11 +104,11 @@ public class EventCreateOrUpdateParameter {
         return returnNullIfEmpty(notes);
     }
 
-	private String returnNullIfEmpty(String value) {
-		return (value.isEmpty()) ? null : value;
-	}
+    private String returnNullIfEmpty(String value) {
+        return (value.isEmpty()) ? null : value;
+    }
 
-	public void setNotes(String notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 
@@ -114,8 +119,8 @@ public class EventCreateOrUpdateParameter {
 
     public Set<String> getStudentIdsOfAttendees() {
 //        return attendees;
-        attendees = attendees.replace(" ","").replace("\n", "").replace("\r", "");
-	    return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
+        attendees = attendees.replace(" ", "").replace("\n", "").replace("\r", "");
+        return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }
 
     public void setAttendees(String attendees) {
@@ -144,5 +149,43 @@ public class EventCreateOrUpdateParameter {
 
     public String getStartTimeAmPm() {
         return startTimeAmPm;
+    }
+
+    public boolean isInvalid(Errors errors) {
+        validate(this, errors);
+        return errors.hasErrors();
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return EventForm.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EventForm eventForm = (EventForm) target;
+
+        validateTimeField(errors, eventForm.startTime, "startTime");
+        validateTimeField(errors, eventForm.endTime, "endTime");
+    }
+
+    private void validateTimeField(Errors errors, String field, String fieldName) {
+        boolean validTimeFormat = field.matches(VALID_TIME_FORMAT);
+        if (!validTimeFormat) {
+            errors.rejectValue(fieldName, "", invalidTimeErrorMessage(fieldName));
+        }
+
+        if (validTimeFormat && !isBlank(field)) {
+            int hours = Integer.parseInt(field.split(":")[0]);
+            if ((hours > 12) || (hours < 1)) {
+                errors.rejectValue(fieldName, "", invalidTimeErrorMessage(fieldName));
+            }
+        }
+    }
+
+    public String invalidTimeErrorMessage(String fieldName) {
+        String[] strings = StringUtils.splitByCharacterTypeCamelCase(fieldName);
+        strings[1]= strings[1].toLowerCase();
+        return String.format("Please enter %s in the following format using the 12 hour clock: 00:00", StringUtils.join(strings, " "));
     }
 }

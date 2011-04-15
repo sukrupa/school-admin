@@ -79,23 +79,23 @@ public class Event {
         this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>(), startDate);
     }
 
-    public static Event createFrom(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
-        return new Event(eventCreateOrUpdateParameter.getTitle(),
-                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime(), eventCreateOrUpdateParameter.getEndTimeAmPm()),
-                eventCreateOrUpdateParameter.getVenue(),
-                eventCreateOrUpdateParameter.getCoordinator(),
-                eventCreateOrUpdateParameter.getDescription(),
-                eventCreateOrUpdateParameter.getNotes(),
-                Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getStartTime(), eventCreateOrUpdateParameter.getStartTimeAmPm()));
+    public static Event createFrom(EventForm eventForm) {
+        return new Event(eventForm.getTitle(),
+                Date.parse(eventForm.getDate(), eventForm.getEndTime(), eventForm.getEndTimeAmPm()),
+                eventForm.getVenue(),
+                eventForm.getCoordinator(),
+                eventForm.getDescription(),
+                eventForm.getNotes(),
+                Date.parse(eventForm.getDate(), eventForm.getStartTime(), eventForm.getStartTimeAmPm()));
     }
 
-    public static Event from(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
-        String venue = nullIfEmpty(eventCreateOrUpdateParameter.getVenue());
-        String coordinator = nullIfEmpty(eventCreateOrUpdateParameter.getCoordinator());
-        String notes = nullIfEmpty(eventCreateOrUpdateParameter.getNotes());
+    public static Event from(EventForm eventForm) {
+        String venue = nullIfEmpty(eventForm.getVenue());
+        String coordinator = nullIfEmpty(eventForm.getCoordinator());
+        String notes = nullIfEmpty(eventForm.getNotes());
 
-        return new Event(eventCreateOrUpdateParameter.getTitle(), parseDateTime(eventCreateOrUpdateParameter),
-                venue, coordinator, eventCreateOrUpdateParameter.getDescription(), notes, null);
+        return new Event(eventForm.getTitle(), parseDateTime(eventForm),
+                venue, coordinator, eventForm.getDescription(), notes, null);
     }
 
     private static String nullIfEmpty(String value) {
@@ -119,7 +119,7 @@ public class Event {
     }
 
     public String getEndTime() {
-        return getEndTimeWithAmPm().equals("12:00 AM") ? null: endDate.getTime();
+        return endDate.getTime();
     }
 
     public String getEndTimeWithAmPm() {
@@ -127,8 +127,8 @@ public class Event {
         return String.format("%s %s", endDate.getTime(), amPm);
     }
 
-    private static Date parseDateTime(EventCreateOrUpdateParameter eventCreateOrUpdateParameter) {
-        return Date.parse(eventCreateOrUpdateParameter.getDate(), eventCreateOrUpdateParameter.getEndTime());
+    private static Date parseDateTime(EventForm eventForm) {
+        return Date.parse(eventForm.getDate(), eventForm.getEndTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -180,7 +180,7 @@ public class Event {
 		return coordinator;
 	}
 
-    public void updateFrom(EventCreateOrUpdateParameter eventParam, Set<Student> attendees) {
+    public void updateFrom(EventForm eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
         this.endDate = Date.parse(eventParam.getDate(),eventParam.getEndTime(),eventParam.getEndTimeAmPm());
         this.venue = eventParam.getVenue();
@@ -196,7 +196,7 @@ public class Event {
     }
 
     public String getStartTime() {
-        return getStartTimeWithAmPm().equals("12:00 AM") ? null: startDate.getTime();
+        return startDate.getTime();
     }
 
     public String getStartTimeWithAmPm() {

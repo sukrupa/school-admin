@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Builders;
 import static org.sukrupa.student.Builders.*;
 
@@ -76,15 +75,15 @@ public class EventTest {
 
 	@Test
 	public void shouldCreateEventWithNullValuesForNonMandatoryFields() {
-		EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
-		eventCreateOrUpdateParameter.setCoordinator("");
-		eventCreateOrUpdateParameter.setNotes("");
-		eventCreateOrUpdateParameter.setVenue("");
-		eventCreateOrUpdateParameter.setEndTime("10:00");
-		eventCreateOrUpdateParameter.setDate("12-12-2001");
-        eventCreateOrUpdateParameter.setEndTimeAmPm("am");
+		EventForm eventForm = new EventForm();
+		eventForm.setCoordinator("");
+		eventForm.setNotes("");
+		eventForm.setVenue("");
+		eventForm.setEndTime("10:00");
+		eventForm.setDate("12-12-2001");
+        eventForm.setEndTimeAmPm("am");
 
-		Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
+		Event event = org.sukrupa.event.Event.createFrom(eventForm);
 
 		assertThat(event.getNotes(), nullValue());
 		assertThat(event.getVenue(), nullValue());
@@ -93,17 +92,17 @@ public class EventTest {
 
     @Test
     public void shouldCreateStartAndEndDatesWithAmOrPmApplied() {
-        EventCreateOrUpdateParameter eventCreateOrUpdateParameter = new EventCreateOrUpdateParameter();
-        eventCreateOrUpdateParameter.setCoordinator("Joel");
-		eventCreateOrUpdateParameter.setNotes("Cool");
-		eventCreateOrUpdateParameter.setVenue("TW");
-        eventCreateOrUpdateParameter.setStartTime("05:00");
-        eventCreateOrUpdateParameter.setStartTimeAmPm("am");
-        eventCreateOrUpdateParameter.setEndTime("01:00");
-        eventCreateOrUpdateParameter.setEndTimeAmPm("pm");
-        eventCreateOrUpdateParameter.setDate("12-12-2001");
+        EventForm eventForm = new EventForm();
+        eventForm.setCoordinator("Joel");
+		eventForm.setNotes("Cool");
+		eventForm.setVenue("TW");
+        eventForm.setStartTime("05:00");
+        eventForm.setStartTimeAmPm("am");
+        eventForm.setEndTime("01:00");
+        eventForm.setEndTimeAmPm("pm");
+        eventForm.setDate("12-12-2001");
 
-        Event event = org.sukrupa.event.Event.createFrom(eventCreateOrUpdateParameter);
+        Event event = org.sukrupa.event.Event.createFrom(eventForm);
 
         assertThat(event.getEndTime(), is("01:00"));
         assertThat(event.isEndTimePm(), is(true));
