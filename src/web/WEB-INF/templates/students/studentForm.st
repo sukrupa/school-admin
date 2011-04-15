@@ -123,7 +123,7 @@
 
              <div class="editStatus">
                 <div class="sponsoredLabel">Sponsor</div>
-                <input type="text" name="sponsored" id="sponsored" value="$student.sponsored$" class="updateValue"></input>
+                <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsored$" ></input></div>
 
             </div>
 
