@@ -594,13 +594,13 @@ img.studentImage{
 }
 
 #updateStudent .studentImage{
+    height: 215px;
+    width: 13.438em;
     float: left;
-    height: 225px;
     margin-bottom: 2px;
     margin-left: 40px;
     margin-top: 11px;
     text-align: center;
-    width: 224px;
 }
 
 #updateStudent .studentImage img {
