@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigte to Student Profile,Log In,	Log out afterwards
+Preconditions:Navigte to list of students,Log In,	Log out afterwards
 Metadata:ScenarioType=Auto
 Student Record With No Photo:
 #Click on "Haripriya" student record

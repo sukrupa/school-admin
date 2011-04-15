@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigte to Student Profile,Log in,Log out afterwards
+Preconditions:Navigte to list of students,Log in,Log out afterwards
 Edit Student, Edit Parents Detail:
 #Click on "Bhavani" student record
 #Click on Edit Button
@@ -14,3 +14,8 @@ Edit Student, Edit Parents Detail:
 #Verify that disciplinary is "Excellent"
 #Verify that status is "Existing Student"
 #Verify that the field name "sponsored" is "Peter Murray"
+
+Add note to student:
+#When I Add the note "This is a new note"
+#Then a success message should appear
+#And the note "This is a new note" should be in the list of notes

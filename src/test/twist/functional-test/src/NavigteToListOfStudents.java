@@ -1,11 +1,11 @@
 
 import net.sf.sahi.client.Browser;
 
-public class NavigteToStudentProfile {
+public class NavigteToListOfStudents {
 
 	private Browser browser;
 
-	public NavigteToStudentProfile(Browser browser) {
+	public NavigteToListOfStudents(Browser browser) {
 		this.browser = browser;
 	}
 
