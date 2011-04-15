@@ -46,7 +46,7 @@ public class Event {
 
     @Type(type = "org.sukrupa.platform.date.PersistentDate")
     @Column(name = "END_DATE")
-    private  Date endDate;
+    private Date endDate;
 
     @ManyToMany
     @JoinTable(name = "EVENT_ATTENDEES",
@@ -168,6 +168,15 @@ public class Event {
         return StringUtils.join(getAttendeeNames(), ", ");
     }
 
+    public String getAttendeesIdsForDisplay() {
+        List<String> attendeeIds = new ArrayList<String>();
+        for (Student attendee : attendees) {
+            attendeeIds.add(attendee.getStudentId());
+        }
+
+        return StringUtils.join(attendeeIds, ", ");
+    }
+
     private List<String> getAttendeeNames() {
         List<String> attendeeNameList = new ArrayList<String>();
         for (Student attendee : attendees) {
@@ -176,19 +185,19 @@ public class Event {
         return attendeeNameList;
     }
 
-	public String getCoordinator() {
-		return coordinator;
-	}
+    public String getCoordinator() {
+        return coordinator;
+    }
 
     public void updateFrom(EventForm eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
-        this.endDate = Date.parse(eventParam.getDate(),eventParam.getEndTime(),eventParam.getEndTimeAmPm());
+        this.endDate = Date.parse(eventParam.getDate(), eventParam.getEndTime(), eventParam.getEndTimeAmPm());
         this.venue = eventParam.getVenue();
         this.coordinator = eventParam.getCoordinator();
         this.description = eventParam.getDescription();
         this.notes = eventParam.getNotes();
         this.attendees = attendees;
-        this.startDate = Date.parse(eventParam.getDate(),eventParam.getStartTime(),eventParam.getStartTimeAmPm());
+        this.startDate = Date.parse(eventParam.getDate(), eventParam.getStartTime(), eventParam.getStartTimeAmPm());
     }
 
     public boolean isEndTimePm() {

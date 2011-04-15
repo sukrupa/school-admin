@@ -114,11 +114,13 @@ public class EventForm implements Validator {
 
     public String getAttendees() {
         return attendees;
-//        return Joiner.on(", ").join(attendees);
+    }
+
+    public String getAttendeesIdsForDisplay() {
+        return getAttendees();
     }
 
     public Set<String> getStudentIdsOfAttendees() {
-//        return attendees;
         attendees = attendees.replace(" ", "").replace("\n", "").replace("\r", "");
         return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
     }

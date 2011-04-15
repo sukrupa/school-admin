@@ -58,11 +58,20 @@ public class EventsController {
             @ModelAttribute("editEvent") EventForm eventForm,
             Map<String, Object> model)
     {
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+
+        if (eventForm.isInvalid(errors)){
+            model.put("errors", errors);
+            model.put("event", eventForm);
+            addErrorToFields(model,errors);
+            return "events/edit";
+        }
+
         Set<String> studentIdsOfAttendees =   eventForm.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
         if (!invalidAttendees.isEmpty()) {
-            model.put("event", service.getEvent(Integer.parseInt(eventId)));
+            model.put("event", eventForm);
             model.put("invalidAttendees",invalidAttendees);
             return "events/edit";
 
@@ -91,7 +100,7 @@ public class EventsController {
 
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", event);
+			model.put("event", eventForm);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
