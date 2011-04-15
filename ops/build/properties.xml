@@ -11,7 +11,7 @@
     <property name="src.test.shared.dir" value="${src.test.dir}/shared/java"/>
     <property name="src.test.unit.dir" value="${src.test.dir}/unit/java"/>
     <property name="src.test.integration.dir" value="${src.test.dir}/integration/java"/>
-    <property name="src.test.functional.dir" value="${src.test.dir}/functional/java"/>
+
     <property name="src.test.twist.fixtures.dir" value="${src.test.dir}/twist/functional-test"/>
     <property name="src.test.twist.src.dir" value="${src.test.twist.fixtures.dir}/src"/>
     <property name="src.test.twist.conf.dir" value="${src.test.twist.fixtures.dir}/twist-conf"/>
@@ -36,7 +36,6 @@
     <property name="target.test.shared.dir" value="${target.test.dir}/shared"/>
     <property name="target.test.unit.dir" value="${target.test.dir}/unit"/>
     <property name="target.test.integration.dir" value="${target.test.dir}/integration"/>
-    <property name="target.test.functional.dir" value="${target.test.dir}/functional"/>
 
     <property name="target.test.twist.dir" value="${target.test.dir}/twist/"/>
     <property name="target.test.twist.fixtures.dir" value="${target.test.twist.dir}/functional-test"/>
