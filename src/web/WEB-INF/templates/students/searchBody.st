@@ -182,6 +182,21 @@
                 </select>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <span>Sponsored?</span>
+            </td>
+            <td>
+                <select name="sponsored">
+                   <option value="*">Any</option>
+                   $formhelper.sponsored:{
+                        <option value="$it$">$it$</option>
+                   }$
+                </select>
+            </td>
+        </tr>
+
         <tr>
             <td><input type="submit" value="Search"/></td>
             <td></td>

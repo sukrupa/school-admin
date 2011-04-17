@@ -6,8 +6,6 @@ import org.hibernate.criterion.*;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.platform.text.StringManipulation;
-import sun.font.FontManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +31,7 @@ class StudentsSearchCriteriaGenerator {
     private static final String MOTHER = "mother";
     private static final String GUARDIAN = "guardian";
     private static final String FAMILY_STATUS = "familyStatus";
+    private static final String SPONSORED = "sponsored";
 
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
@@ -61,8 +60,20 @@ class StudentsSearchCriteriaGenerator {
         addCaregiversOccupationSearchCriteria(criteria, searchParam.getCaregiversOccupation());
         addStudentStatusSearchCriteria(criteria, StudentStatus.fromString(searchParam.getStatus()));
         addStudentFamilyStatusSearchCriteria(criteria, searchParam.getFamilyStatus());
+        addSponsoredSearchCriteria(criteria, searchParam.getSponsored());
 
         return criteria;
+    }
+
+    private void addSponsoredSearchCriteria(Criteria criteria, String sponsored) {
+        if (!sponsored.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
+            if(sponsored.equals("Yes")){
+                criteria.add(Restrictions.isNotNull(SPONSORED));
+            }
+            else {
+                criteria.add(Restrictions.isNull(SPONSORED));
+            }
+        }
     }
 
     private void addStudentFamilyStatusSearchCriteria(Criteria criteria, String studentFamilyStatus) {

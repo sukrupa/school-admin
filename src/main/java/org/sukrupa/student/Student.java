@@ -107,7 +107,7 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
-                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus, String sponsored) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;

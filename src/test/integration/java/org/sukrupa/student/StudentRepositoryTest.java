@@ -146,6 +146,14 @@ public class StudentRepositoryTest {
             .guardian(naruto)
             .build();
 
+    private Student mark = new StudentBuilder()
+            .studentId("636363").name("Mark")
+            .studentClass("1th grade").dateOfBirth(new LocalDate(1911, 11, 1))
+            .gender("Male")
+            .sponsored("SomeSponsor")
+            .build();
+
+
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
 
@@ -472,6 +480,23 @@ public class StudentRepositoryTest {
         studentRepository.put(balaji);
 
         List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().caregiversOccupation("Bus Driver").build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(balaji));
+    }
+
+    @Test
+    public void shouldReturnStudentWithSponsoredStatus() {
+        studentRepository.put(mark);
+        studentRepository.put(balaji);
+
+        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("Yes").build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(mark));
+
+
+        students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("No").build(), 0, 100);
 
         assertThat(students.size(), is(1));
         assertThat(students, CollectionMatchers.hasOnly(balaji));

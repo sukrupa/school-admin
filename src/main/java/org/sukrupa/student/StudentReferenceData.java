@@ -32,7 +32,7 @@ public class StudentReferenceData {
             "Musical Instrument", "Pick & Speak", "Public Speaking", "Reading", "Singing", "Sports", "Story Telling");
     private static final int AGES_TO = 20;
     private static final int AGES_FROM = 2;
-    private static final boolean SPONSORED = false;
+    private static final List<String> SPONSORED = asList("Yes","No");
     private static final List<String> MARITAL_STATUSES = asList(" ", "Married", "Single", "Divorced", "Widowed", "Deceased");
     private TalentRepository talentRepository;
 
@@ -103,7 +103,7 @@ public class StudentReferenceData {
         return StudentStatus.getNamesList();
     }
 
-    public boolean getSponsored() {
+    public List<String> getSponsored() {
         return SPONSORED;
     }
 
