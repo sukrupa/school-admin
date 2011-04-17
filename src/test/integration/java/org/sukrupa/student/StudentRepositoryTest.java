@@ -490,16 +490,22 @@ public class StudentRepositoryTest {
         studentRepository.put(mark);
         studentRepository.put(balaji);
 
-        List<Student> students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("Yes").build(), 0, 100);
+        List<Student> students;
+
+        students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("Yes").build(), 0, 100);
 
         assertThat(students.size(), is(1));
         assertThat(students, CollectionMatchers.hasOnly(mark));
-
 
         students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("No").build(), 0, 100);
 
         assertThat(students.size(), is(1));
         assertThat(students, CollectionMatchers.hasOnly(balaji));
+
+        students = studentRepository.findBySearchParameter(new StudentSearchParameterBuilder().sponsored("Yes").sponsor("").build(), 0, 100);
+
+        assertThat(students.size(), is(1));
+        assertThat(students, CollectionMatchers.hasOnly(mark));
     }
 
     @Test

@@ -21,11 +21,12 @@ public class StudentSearchParameter {
     private String caregiversOccupation = WILDCARD_CHARACTER;
     private String familyStatus = WILDCARD_CHARACTER;
     private String sponsored = WILDCARD_CHARACTER;
+    private String sponsorName = "";
 
 
     public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation,
                                   String ageFrom, String ageTo, List<Talent> talents, String religion, String status,
-                                  String caregiversOccupation, String familyStatus, String sponsored) {
+                                  String caregiversOccupation, String familyStatus, String sponsored, String sponsorName) {
         this.name = name;
         this.studentClass = studentClass;
         this.gender = gender;
@@ -39,6 +40,7 @@ public class StudentSearchParameter {
         this.caregiversOccupation = caregiversOccupation;
         this.familyStatus = familyStatus;
         this.sponsored = sponsored;
+        this.sponsorName = sponsorName;
     }
 
     @RequiredByFramework
@@ -147,5 +149,13 @@ public class StudentSearchParameter {
 
     public void setSponsored(String sponsored) {
         this.sponsored = sponsored;
+    }
+
+    public String getSponsorName() {
+        return sponsorName;
+    }
+
+    public void setSponsorName(String sponsorName) {
+        this.sponsorName = sponsorName;
     }
 }
