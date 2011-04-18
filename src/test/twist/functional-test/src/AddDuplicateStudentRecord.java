@@ -5,7 +5,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import org.sukrupa.twist.ScenarioDataUnitOfWork;
+import org.sukrupa.automation.ScenarioDataUnitOfWork;
 
 import net.sf.sahi.client.Browser;
 

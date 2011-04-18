@@ -1,15 +1,11 @@
 package org.sukrupa.automation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+import org.sukrupa.event.*;
+import org.sukrupa.student.*;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentRepository;
-import org.sukrupa.student.StudentsSearchCriteriaGenerator;
+import java.util.*;
 
 public class ScenarioDataUnitOfWork {
 
@@ -24,15 +20,18 @@ public class ScenarioDataUnitOfWork {
 	}
 
 	private static SessionFactory initialiseSessionFactory() {	
-		return new Configuration()				
-				.addPackage("org.sukrupa.event")
-				.addPackage("org.sukrupa.student")
+		return new Configuration()
 				.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver")
 				.setProperty("hibernate.connection.url", "jdbc:hsqldb:hsql://localhost/sukrupa")
 				.setProperty("hibernate.connection.username", "sa")
 				.setProperty("hibernate.connection.password", "")
 				.setProperty("hibernate.current_session_context_class", "thread") // required so you can do getCurrentSession()
-				.configure()
+				.addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Caregiver.class)
+                .addAnnotatedClass(Profile.class)
+                .addAnnotatedClass(Talent.class)
+                .addAnnotatedClass(Note.class)
+                .addAnnotatedClass(Event.class)
 				.buildSessionFactory();
 
 	}
@@ -48,17 +47,20 @@ public class ScenarioDataUnitOfWork {
 
 	public void removeAllCreatedObjects() {
 		Session session = hibernateSessionFactory.getCurrentSession();
-		session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 
-		Collection<Student> createdStudents = studentRepository
-				.findByStudentIds(createdStudentIds.toArray(new String[] {}));
-
-		for (Student student : createdStudents) {
-			session.delete(student);
+		try {
+			Collection<Student> createdStudents = studentRepository.findByStudentIds(createdStudentIds.toArray(new String[] {}));
+	
+			for (Student student : createdStudents) {
+				session.delete(student);
+			}
+	
+			session.flush();
+			tx.commit();				
+		} catch(Exception e) {
+			tx.rollback();
 		}
-
-		session.flush();
-		session.close();
 
 		createdStudentIds.clear();
 	}

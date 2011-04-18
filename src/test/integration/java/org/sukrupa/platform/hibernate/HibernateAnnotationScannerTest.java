@@ -1,6 +1,5 @@
 package org.sukrupa.platform.hibernate;
 
-import org.eclipse.jdt.internal.codeassist.complete.*;
 import org.hibernate.cfg.*;
 import org.junit.*;
 
@@ -14,7 +13,7 @@ public class HibernateAnnotationScannerTest {
     public void shouldAddAllClassesInAPackageToTheHibernateConfig() {
         Configuration configuration = mock(Configuration.class);
 
-        PackageScanningConfiguration scanner = new PackageScanningConfiguration(configuration);
+        HibernateAnnotationScanner scanner = new HibernateAnnotationScanner(configuration);
 
         scanner.scanPackageForAnnotatedClasses("org.sukrupa.platform.hibernate");
 
