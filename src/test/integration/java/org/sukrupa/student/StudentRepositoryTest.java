@@ -41,23 +41,23 @@ public class StudentRepositoryTest {
     private final Event michaelJackson = new EventBuilder().title("Michael Jackson").build();
 
     private final Caregiver fabio = new CaregiverBuilder().name("Fabio")
-                            .occupation("Bus Driver")
-                            .maritalStatus("Single")
-                            .education("Awesome")
-                            .contact("123")
-                            .salary("RS. 5,000")
-                            .build();
+            .occupation("Bus Driver")
+            .maritalStatus("Single")
+            .education("Awesome")
+            .contact("123")
+            .salary("RS. 5,000")
+            .build();
 
     private final Caregiver mary = new CaregiverBuilder().name("mary")
-                            .maritalStatus("Married")
-                            .salary("RS. 6,000")
-                            .education("Very good")
-                            .build();
+            .maritalStatus("Married")
+            .salary("RS. 6,000")
+            .education("Very good")
+            .build();
 
     private final Caregiver naruto = new CaregiverBuilder().name("Naruto")
-                            .salary("RS. 7,000")
-                            .education("Ninja")
-                            .build();
+            .salary("RS. 7,000")
+            .education("Ninja")
+            .build();
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -301,10 +301,10 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnStudentsWithFamilyStatusSingle() {
-       hibernateSession.save(yael,yam,pat);
+        hibernateSession.save(yael, yam, pat);
 
-       List<Student> students = studentRepository.findBySearchParameter(
-               new StudentSearchParameterBuilder().studentFamilyStatus(StudentFamilyStatus.SINGLE.toString()).build(),0, 100);
+        List<Student> students = studentRepository.findBySearchParameter(
+                new StudentSearchParameterBuilder().studentFamilyStatus(StudentFamilyStatus.SINGLE.toString()).build(), 0, 100);
         assertThat(students.size(), is(2));
         assertThat(students.contains(yam), is(true));
         assertThat(students.contains(pat), is(true));
@@ -312,15 +312,16 @@ public class StudentRepositoryTest {
 
     @Test
     public void shouldReturnStudentsWithNoFamilyStatus() throws Exception {
-       hibernateSession.save(jimbo, pat, sahil, renaud);
-       List<Student> students = studentRepository.findBySearchParameter(
-               new StudentSearchParameterBuilder().studentFamilyStatus("").build(),0, 100);
-       assertThat(students.size(), is(3));
+        hibernateSession.save(jimbo, pat, sahil, renaud);
+        List<Student> students = studentRepository.findBySearchParameter(
+                new StudentSearchParameterBuilder().studentFamilyStatus("").build(), 0, 100);
+
+        assertThat(students.size(), is(3));
         assertThat(students.contains(jimbo), is(true));
         assertThat(students.contains(sahil), is(true));
         assertThat(students.contains(renaud), is(true));
     }
-    
+
 
     @Test
     public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {
@@ -509,24 +510,21 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void shouldReturnFathersSalary()
-    {
+    public void shouldReturnFathersSalary() {
         studentRepository.put(balaji);
         Student student = studentRepository.findByStudentId(balaji.getStudentId());
         assertThat(student.getFather().getSalary(), is("RS. 5,000"));
     }
 
     @Test
-    public void shouldReturnMothersSalary()
-    {
+    public void shouldReturnMothersSalary() {
         studentRepository.put(balaji);
         Student student = studentRepository.findByStudentId(balaji.getStudentId());
         assertThat(student.getMother().getSalary(), is("RS. 6,000"));
     }
 
     @Test
-    public void shouldReturnGuardiansSalary()
-    {
+    public void shouldReturnGuardiansSalary() {
         studentRepository.put(balaji);
         Student student = studentRepository.findByStudentId(balaji.getStudentId());
         assertThat(student.getGuardian().getSalary(), is("RS. 7,000"));

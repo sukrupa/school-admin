@@ -4,17 +4,18 @@ import org.sukrupa.twist.ScenarioDataUnitOfWork;
 
 public class RemoveAddedStudents {
 
-	private final ScenarioDataUnitOfWork scenarioDataUnitOfWork;
+    private final ScenarioDataUnitOfWork scenarioDataUnitOfWork;
 
-	public RemoveAddedStudents(ScenarioDataUnitOfWork scenarioDataUnitOfWork) {
-		this.scenarioDataUnitOfWork = scenarioDataUnitOfWork;
-	}
+    public RemoveAddedStudents(ScenarioDataUnitOfWork scenarioDataUnitOfWork) {
+	this.scenarioDataUnitOfWork = scenarioDataUnitOfWork;
+    }
 
-	public void setUp() throws Exception {
-	}
+    public void setUp() throws Exception {
+    }
 
-	public void tearDown() throws Exception {
-		scenarioDataUnitOfWork.removeAllCreatedObjects();
-	}
+    public void tearDown() throws Exception {
+	// WIP Jim And Peter
+	//scenarioDataUnitOfWork.removeAllCreatedObjects();
+    }
 
 }
