@@ -7,6 +7,8 @@ import static junit.framework.Assert.assertEquals;
 public class StudentClassTest {
     @Test
     public void shouldPromoteStudent(){
+
+        assertEquals(StudentClass.PRESCHOOL, StudentClass.DAYCARE.next());
         assertEquals(StudentClass.LKG, StudentClass.PRESCHOOL.next());
         assertEquals(StudentClass.UKG, StudentClass.LKG.next());
         assertEquals(StudentClass.ONE_STD, StudentClass.UKG.next());
@@ -28,6 +30,7 @@ public class StudentClassTest {
 
     @Test
     public void shouldCreateAStudentClassFromDisplayName() {
+        assertEquals(StudentClass.DAYCARE, StudentClass.fromDisplayName("Daycare"));
         assertEquals(StudentClass.LKG, StudentClass.fromDisplayName("LKG"));
         assertEquals(StudentClass.UKG, StudentClass.fromDisplayName("UKG"));
         assertEquals(StudentClass.ONE_STD, StudentClass.fromDisplayName("1 Std"));
