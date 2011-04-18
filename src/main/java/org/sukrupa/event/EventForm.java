@@ -179,7 +179,8 @@ public class EventForm implements Validator {
 
         if (validTimeFormat && !isBlank(field)) {
             int hours = Integer.parseInt(field.split(":")[0]);
-            if ((hours > 12) || (hours < 1)) {
+            int minutes = Integer.parseInt(field.split(":")[1]);
+            if ((hours > 12) || (hours < 1) || (minutes > 59) || (minutes < 0)) {
                 errors.rejectValue(fieldName, "", invalidTimeErrorMessage(fieldName));
             }
         }
