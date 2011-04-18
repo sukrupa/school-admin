@@ -29,8 +29,8 @@ public class DateTest {
 
     @Test
     public void shouldParseDateAndTime() {
-        assertThat(Date.parse("10-08-2011", "01:12", "pm"), is(new Date(10, 8, 2011, 13, 12)));
-        assertThat(Date.parse("10-08-2011", "01:00", "am"), is(new Date(10, 8, 2011, 01, 00)));
+        assertThat(Date.parse("10-08-2011", new Time("01:12", "pm")), is(new Date(10, 8, 2011, 13, 12)));
+        assertThat(Date.parse("10-08-2011", new Time("01:00", "am")), is(new Date(10, 8, 2011, 01, 00)));
     }
 
     @Test
@@ -54,20 +54,14 @@ public class DateTest {
 
     @Test
     public void shouldCreateADateWithThe12HourClock() {
-        assertThat(Date.parse("01-01-2009", "01:00", "pm").getTime(), is("01:00"));
-        assertThat(Date.parse("01-01-2009", "01:00", "am").getTime(), is("01:00"));
+        assertThat(Date.parse("01-01-2009", new Time("01:00", "pm")).getTime(), is("01:00"));
+        assertThat(Date.parse("01-01-2009", new Time("01:00", "am")).getTime(), is("01:00"));
     }
 
     @Test
     public void shouldDetermineIfADateIsInTheAfternoon() {
         assertThat(new Date(1,1,1, 14,0,0,0).isInTheAfternoon(), is(true));
         assertThat(new Date(1,1,1, 11,0,0,0).isInTheAfternoon(), is(false));
-    }
-
-    @Test
-    public void shouldCreateDateFromOurTimeClass() {
-        assertThat(Date.parse("01-01-2001", new Time("11:00", "am")), is(new Date(1,1,2001,11,0)));
-        assertThat(Date.parse("01-01-2001", new Time("11:00", "pm")), is(new Date(1,1,2001,23,0)));
     }
 
 }

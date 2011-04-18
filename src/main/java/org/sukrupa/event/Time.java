@@ -17,6 +17,9 @@ public class Time {
     }
 
     public String twelveHourClock() {
+        if (!isBlank(amPm)) {
         return time + " " + amPm;
+        }
+        return time + " am";
     }
 }
