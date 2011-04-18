@@ -9,7 +9,7 @@ import static java.util.Collections.emptyList;
 
 public class StudentReferenceData {
 
-    private static final List<String> STUDENT_CLASSES = asList("Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
+    private static final List<String> STUDENT_CLASSES = asList("Daycare", "Preschool", "LKG", "UKG", "1 Std", "2 Std", "3 Std", "4 Std", "5 Std", "6 Std", "7 Std", "8 Std", "9 Std", "10 Std");
     private static final String EMPTY_OPTION = "";
     private static final List<String> GENDERS = asList(EMPTY_OPTION, "Male", "Female");
     private static final List<String> CASTES = asList(EMPTY_OPTION, "Achari", "Agnikula", "Arya Vashya", "Baljigru", "Bhramin", "Bohvi", "Chettyar",
