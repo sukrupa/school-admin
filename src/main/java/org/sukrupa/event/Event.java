@@ -163,13 +163,13 @@ public class Event {
 
     public void updateFrom(EventForm eventParam, Set<Student> attendees) {
         this.title = eventParam.getTitle();
-        this.endDate = Date.parse(eventParam.getDate(), eventParam.getEndTime(), eventParam.getEndTimeAmPm());
+        this.endDate = Date.parse(eventParam.getDate(), new Time (eventParam.getEndTime(), eventParam.getEndTimeAmPm()));
         this.venue = eventParam.getVenue();
         this.coordinator = eventParam.getCoordinator();
         this.description = eventParam.getDescription();
         this.notes = eventParam.getNotes();
         this.attendees = attendees;
-        this.startDate = Date.parse(eventParam.getDate(), eventParam.getStartTime(), eventParam.getStartTimeAmPm());
+        this.startDate = Date.parse(eventParam.getDate(), new Time (eventParam.getStartTime(), eventParam.getStartTimeAmPm()));
     }
 
     public boolean isEndTimePm() {
