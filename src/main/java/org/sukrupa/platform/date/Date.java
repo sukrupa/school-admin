@@ -81,7 +81,7 @@ public class Date implements Serializable {
     }
 
     private static Date parseDate(String date) {
-        return parse(date, new Time ("12:00", "am"));
+        return parse(date, Time.DEFAULT);
     }
 
     @Override

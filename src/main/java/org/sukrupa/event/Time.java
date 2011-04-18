@@ -6,6 +6,7 @@ public class Time {
 
     private String time;
     private String amPm;
+    public static final Time DEFAULT = new Time ("12:00", "am");
 
     public Time (String time, String amPm) {
         this.time = time;
