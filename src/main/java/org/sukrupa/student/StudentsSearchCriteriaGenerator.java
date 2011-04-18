@@ -69,14 +69,14 @@ class StudentsSearchCriteriaGenerator {
         if (!sponsored.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
             if(sponsored.equals("Yes")){
                 if(sponsorName.equals("")){
-                    criteria.add(Restrictions.isNotNull(SPONSOR));
+                    criteria.add(Restrictions.and(Restrictions.isNotNull(SPONSOR),Restrictions.ne(SPONSOR,sponsorName)));
                 }
                 else {
                     criteria.add(Restrictions.eq(SPONSOR, sponsorName));
                 }
             }
             else {
-                criteria.add(Restrictions.isNull(SPONSOR));
+                criteria.add(Restrictions.or(Restrictions.isNull(SPONSOR),Restrictions.eq(SPONSOR,"")));
             }
         }
     }

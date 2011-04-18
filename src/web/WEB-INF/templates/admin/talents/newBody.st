@@ -24,6 +24,9 @@
 			$if (talentInvalid)$
 			Invalid Talent
 			$endif$
+            $if (talentDuplicated)$
+			Talent already exists. Please enter a new talent.
+			$endif$
 		</div>
 	</div>
 

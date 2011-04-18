@@ -1,5 +1,6 @@
 package org.sukrupa.app.students;
 
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -33,33 +34,17 @@ public class StudentReferenceDataTest {
     @Test
     public void shouldGetTheTalentsFromTheRepository() {
         StudentReferenceData studentReferenceData = new StudentReferenceData(talentRepository);
-        when(talentRepository.findAllTalents()).thenReturn(asList(talent("talent1"),
-                                                                  talent("talent2"),
-                                                                  talent("talent3")));
+        List<Talent> talents = asList(talent("talent1"),
+                talent("talent2"),
+                talent("talent3"));
+
+        when(talentRepository.findAllTalents()).thenReturn(talents);
+        when(talentRepository.returnTalentDescriptionsInList(talents)).thenReturn(asList("talent1", "talent2", "talent3"));
 
         List<String> talentDescriptions = studentReferenceData.getTalentDescriptions();
 
         assertThat(talentDescriptions, hasOnly("talent1", "talent2", "talent3"));
+
     }
-
-    @Test
-    public void shouldReturnStaticTalentsIfNothingInTheRepository() {
-        StudentReferenceData studentReferenceData = new StudentReferenceData(talentRepository);
-        when(talentRepository.listAllTalents()).thenReturn(Collections.<Talent>emptyList());
-
-        List<String> talentDescriptions = studentReferenceData.getTalentDescriptions();
-
-        assertThat(talentDescriptions.size(), is(12));
-    }
-
-    @Test
-    public void shouldWorkWithoutATalentRepository() {
-        StudentReferenceData studentReferenceData = new StudentReferenceData();
-
-        List<String> talentDescriptions = studentReferenceData.getTalentDescriptions();
-
-        assertThat(talentDescriptions.size(), is(12));
-    }
-
 
 }

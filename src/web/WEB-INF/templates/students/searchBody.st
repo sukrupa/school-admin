@@ -19,7 +19,8 @@
                     <tr>
                     <td>
                         <select multiple size="6" style="width:150px"  id="availableTalents">
-                            $formhelper.talentDescriptions:{
+                            $formhelper.
+                            talentDescriptions:{
                             <option value="$it$">$it$</option>
                             }$
                         </select>
