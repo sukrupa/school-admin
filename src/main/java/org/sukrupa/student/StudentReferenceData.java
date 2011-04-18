@@ -80,13 +80,9 @@ public class StudentReferenceData {
         {
             talents = Collections.emptyList();
         }
-         List<String> talentDescriptions = new ArrayList<String>();
 
-        for (Talent talent : talents) {
-            talentDescriptions.add(talent.getDescription());
-        }
 
-        return talentDescriptions;
+        return (talentRepository.returnTalentDescriptionsInList(talents));
 
     }
 

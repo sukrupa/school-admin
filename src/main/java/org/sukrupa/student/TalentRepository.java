@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 import com.google.common.collect.Sets;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sukrupa.platform.collection.CollectionTransformation;
 
+import java.security.PublicKey;
 import java.util.*;
 
 import static java.util.Collections.emptyList;
@@ -44,6 +46,18 @@ public class TalentRepository {
         return query("from Talent order by description").list();
     }
 
+    public List<String> returnTalentDescriptionsInList(List<Talent> talentsIn)
+    {
+        List<String> talentDescriptions = new ArrayList<String>();
+
+        for (Talent talent : talentsIn) {
+            talentDescriptions.add(talent.getDescription());
+        }
+
+        return talentDescriptions;
+    }
+
+
     private Session session() {
 		return sessionFactory.getCurrentSession();
 	}
@@ -60,4 +74,6 @@ public class TalentRepository {
     private Query query(String hql) {
 		return session().createQuery(hql);
 	}
+
+
 }
