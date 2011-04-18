@@ -1,6 +1,5 @@
 
 function validateFields() {
-    var valid = true;
     var errorMessage = "";
     var dateStr = $.trim($('#date').val());
     var timeStr = $.trim($('#time').val());
@@ -9,13 +8,7 @@ function validateFields() {
 	var dateValid = validateDate(dateStr);
 	var timeValid = validateTime(timeStr);
 
-	if (dateStr !== "" && timeValid && dateValid) {
-		if (!isBeforeCurrentDate(dateStr, timeStr)) {
-			valid = false;
-		}
-	} else {
-		valid = false;
-	}
+    var valid = dateStr !== "" && timeValid && dateValid;
 
     if (!validateMandatoryFields($('#title').val(), $('#description').val(), dateStr, $('#attendees').val())) {
         valid = false;
@@ -38,17 +31,6 @@ function validateMandatoryFields(title, description, date, attendees) {
         return false;
 	}
 	return true;
-}
-
-function isBeforeCurrentDate(dateStr, timeStr) {
-	if (timeStr === "") {
-		timeStr = "00:00";
-	}
-    if (!new DateValidator().validate(dateStr, timeStr, new Date())) {
-        addErrorMessage("You can only record past events.<br/>");
-        return false;
-    }
-    return true;
 }
 
 function validateDate(dateStr) {
