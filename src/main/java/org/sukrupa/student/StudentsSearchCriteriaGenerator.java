@@ -31,7 +31,7 @@ class StudentsSearchCriteriaGenerator {
     private static final String MOTHER = "mother";
     private static final String GUARDIAN = "guardian";
     private static final String FAMILY_STATUS = "familyStatus";
-    private static final String SPONSOR = "sponsored";
+    private static final String SPONSOR = "sponsor";
 
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
