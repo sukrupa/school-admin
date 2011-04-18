@@ -11,11 +11,11 @@ import java.util.Properties;
 
 public class SahiFacade {
     private static Properties props;
+    private static Browser browser;
 
-    private Browser browser;
-    private String browserName;
+    //private String browserName;
 
-    public Browser getBrowser() {
+    public static Browser browser() {
         if (browser == null) {
             // Sets up configuration for proxy. Sets Controller to java mode.
             Configuration.initJava(getProperty("sahi-base"), getProperty("sahi-userdata"));
@@ -47,11 +47,11 @@ public class SahiFacade {
         return propertyValue;
     }
 
-    @After
-    public void closeBrowser() {
+    public static void closeBrowser() {
         if (browser != null) {
             browser.close();
             browser.kill();
+            browser = null;
         }
     }
 }
