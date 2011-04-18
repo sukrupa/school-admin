@@ -47,12 +47,16 @@ public class EventForm implements Validator {
 
     public Event createEvent() {
         return new Event(getTitle(),
-                Date.parse(getDate(), getEndTime(), getEndTimeAmPm()),
+                Date.parse(getDate(), getTime()),
                 getVenue(),
                 getCoordinator(),
                 getDescription(),
                 getNotes(),
                 Date.parse(getDate(), getStartTime(), getStartTimeAmPm()));
+    }
+
+    private Time getTime() {
+        return new Time (getEndTime(), getEndTimeAmPm());
     }
 
     public int getId() {

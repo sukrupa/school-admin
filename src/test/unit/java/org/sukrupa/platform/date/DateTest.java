@@ -2,6 +2,7 @@ package org.sukrupa.platform.date;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
+import org.sukrupa.event.Time;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -61,6 +62,12 @@ public class DateTest {
     public void shouldDetermineIfADateIsInTheAfternoon() {
         assertThat(new Date(1,1,1, 14,0,0,0).isInTheAfternoon(), is(true));
         assertThat(new Date(1,1,1, 11,0,0,0).isInTheAfternoon(), is(false));
+    }
+
+    @Test
+    public void shouldCreateDateFromOurTimeClass() {
+        assertThat(Date.parse("01-01-2001", new Time("11:00", "am")), is(new Date(1,1,2001,11,0)));
+        assertThat(Date.parse("01-01-2001", new Time("11:00", "pm")), is(new Date(1,1,2001,23,0)));
     }
 
 }
