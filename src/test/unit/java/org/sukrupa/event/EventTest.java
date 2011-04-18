@@ -83,7 +83,7 @@ public class EventTest {
 		eventForm.setDate("12-12-2001");
         eventForm.setEndTimeAmPm("am");
 
-		Event event = org.sukrupa.event.Event.createFrom(eventForm);
+		Event event = eventForm.createEvent();
 
 		assertThat(event.getNotes(), nullValue());
 		assertThat(event.getVenue(), nullValue());
@@ -102,7 +102,7 @@ public class EventTest {
         eventForm.setEndTimeAmPm("pm");
         eventForm.setDate("12-12-2001");
 
-        Event event = org.sukrupa.event.Event.createFrom(eventForm);
+        Event event = eventForm.createEvent();
 
         assertThat(event.getEndTime(), is("01:00"));
         assertThat(event.isEndTimePm(), is(true));

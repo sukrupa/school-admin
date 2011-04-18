@@ -49,7 +49,7 @@
 
         <div class="createEntry">
             <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{$it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
+            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
 
         </div>
     </div>

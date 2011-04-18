@@ -79,16 +79,6 @@ public class Event {
         this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>(), startDate);
     }
 
-    public static Event createFrom(EventForm eventForm) {
-        return new Event(eventForm.getTitle(),
-                Date.parse(eventForm.getDate(), eventForm.getEndTime(), eventForm.getEndTimeAmPm()),
-                eventForm.getVenue(),
-                eventForm.getCoordinator(),
-                eventForm.getDescription(),
-                eventForm.getNotes(),
-                Date.parse(eventForm.getDate(), eventForm.getStartTime(), eventForm.getStartTimeAmPm()));
-    }
-
     public Integer getId() {
         return id;
     }

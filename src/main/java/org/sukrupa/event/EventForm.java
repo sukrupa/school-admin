@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import org.sukrupa.platform.date.Date;
 
 import java.util.Set;
 
@@ -42,6 +43,16 @@ public class EventForm implements Validator {
         this.notes = notes;
         this.attendees = attendees;
         this.startTime = startTime;
+    }
+
+    public Event createEvent() {
+        return new Event(getTitle(),
+                Date.parse(getDate(), getEndTime(), getEndTimeAmPm()),
+                getVenue(),
+                getCoordinator(),
+                getDescription(),
+                getNotes(),
+                Date.parse(getDate(), getStartTime(), getStartTimeAmPm()));
     }
 
     public int getId() {

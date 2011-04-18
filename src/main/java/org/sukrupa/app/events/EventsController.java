@@ -93,7 +93,7 @@ public class EventsController {
             return "events/create";
         }
 
-        Event event = Event.createFrom(eventForm);
+        Event event = eventForm.createEvent();
 
         Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
