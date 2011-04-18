@@ -3,7 +3,7 @@ Preconditions:Navigte to list of students,Log In,	Log out afterwards
 Student Profile:
 #Click on "Bhavani" student record
 #Verify that name is "Bhavani"
-#Verify that talent is "Pick & Speak"
+#Verify that talent is "Musical Instrument"
 #Verify that status is "Existing Student"
 #Verify that disciplinary is "Excellent"
 #Verify that performance is "A+"
