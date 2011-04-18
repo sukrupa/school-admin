@@ -21,11 +21,11 @@
 
         <div id="createEventErrors">
 		<div id="errorMessages">
-			$if (talentInvalid)$
-			Invalid Talent
-			$endif$
-            $if (talentDuplicated)$
+			$if (talentDuplicated)$
 			Talent already exists. Please enter a new talent.
+			$endif$
+            $if (talentInvalid)$
+			Please enter talent name in talent field.
 			$endif$
 		</div>
 	</div>

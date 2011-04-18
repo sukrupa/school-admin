@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-class StudentsSearchCriteriaGenerator {
+public class StudentsSearchCriteriaGenerator {
     private static final String ID = "id";
     private final SessionFactory sessionFactory;
 

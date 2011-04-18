@@ -40,46 +40,38 @@ public class TalentsController {
     }
 
     @RequestMapping
-    public String list(Map<String, Object> model, TalentForm talentParam){
+    public String list(Map<String, Object> model, TalentForm talentParam) {
         return "admin/talents/new";
     }
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
-    public String newTalent(){
+    public String newTalent() {
         return "admin/talents/new";
     }
 
 
-
-    @RequestMapping(value="new", method = RequestMethod.POST)
+    @RequestMapping(value = "new", method = RequestMethod.POST)
     public String saveNewTalent(
-
-    @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
-              String trimmedDescription = talentParam.getDescription().trim();
-              trimmedDescription = trimmedDescription.toLowerCase();
-              trimmedDescription = StringUtils.capitalize(trimmedDescription);
-              if(!trimmedDescription.isEmpty())
-              {
-                  List<String> talentsInDatabase = talentRepository.returnTalentDescriptionsInList(talentRepository.findAllTalents());
-                  if(!talentsInDatabase.contains(trimmedDescription))
-                  {
-                          talentsService.create(talentParam);
-                          model.put("talentAddedSuccesfully", true);
-                          model.put("talentDescription", trimmedDescription);
-                  }
-                  else
-                  {
-                      model.put("talentDuplicated", true);
-                  }
-              }
-              else{
-                  model.put("talentInvalid", true);
-              }
-           return "admin/talents/new";
+        @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model) {
+        String trimmedDescription = talentParam.getDescription();
+        if (!trimmedDescription.isEmpty()) {
+            List<String> talentsInDatabase = talentRepository.returnTalentDescriptionsInList(talentRepository.findAllTalents());
+            if (!talentsInDatabase.contains(trimmedDescription)) {
+                talentsService.create(talentParam);
+                model.put("talentAddedSuccesfully", true);
+                model.put("talentDescription", trimmedDescription);
+            } else {
+                model.put("talentDuplicated", true);
+            }
+        } else {
+            model.put("talentInvalid", true);
+        }
+        return "admin/talents/new";
     }
+
     @RequestMapping()
     public String create(TalentForm talentForm) {
-        this.talentsService.create(talentForm) ;
+        this.talentsService.create(talentForm);
         return null;
     }
 }
