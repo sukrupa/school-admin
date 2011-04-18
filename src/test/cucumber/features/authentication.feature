@@ -1,4 +1,4 @@
-Feature: Login
+Feature: Authentication
 
   Scenario: Successful login
     Given I am on Sukrupa Page
@@ -21,3 +21,8 @@ Feature: Login
     And I fill in the password with "password"
     And I click "Login" button
     Then I should see "Invalid username and password"
+
+  Scenario: Logging off
+    Given I am logged in
+    When I click "Logout" link
+    Then I should see "You are logged out."

@@ -8,7 +8,7 @@ import org.sukrupa.cucumber.SahiFacade;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class BasicWebSteps {
+public class AuthenticationSteps {
     private SahiFacade sahiFacade = new SahiFacade();
     private Browser browser;
 
@@ -24,7 +24,7 @@ public class BasicWebSteps {
     }
 
     @When("^I click \"([^\"]*)\" button$")
-    public void click(String buttonText){
+    public void clickButton(String buttonText){
         browser.submit(buttonText).click();
     }
 
@@ -36,6 +36,19 @@ public class BasicWebSteps {
     @Then("^I should see \"([^\"]*)\"$")
     public void shouldSee(String text) {
         assertTrue(browser.containsText(browser.div("page"), text));
+    }
+
+    @Given("^I am logged in")
+    public void login(){
+        navigateTo();
+        fillInTheUsernameWith("admin");
+        fillInThePasswordWith("password");
+        clickButton("Login");
+    }
+
+    @When("^I click \"([^\"]*)\" link$")
+    public void clickLink(String text){
+        browser.link(text).click();
     }
 
     @After
