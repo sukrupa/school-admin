@@ -11,7 +11,8 @@ public class Caregiver {
     @GeneratedValue
     private long id;
 
-    @DoNotRemove Caregiver() {
+    @RequiredByFramework
+    Caregiver() {
     }
 
     public Caregiver(String name, String education, String occupation, String maritalStatus, String contact, String salary) {

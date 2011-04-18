@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.springframework.web.util.HtmlUtils;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 
@@ -58,7 +58,7 @@ public class Event {
     @Column(name = "START_DATE")
     private Date startDate;
 
-    @DoNotRemove
+    @RequiredByFramework
     public Event() {
     }
 

@@ -2,12 +2,10 @@ package org.sukrupa.student;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.platform.date.Date;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "SYSTEM_EVENT_LOG")
@@ -21,7 +19,7 @@ public class SystemEventLog {
     @Column(name = "LAST_HAPPENED")
     private LocalDate dateHappened;
 
-    @DoNotRemove
+    @RequiredByFramework
     public SystemEventLog() {}
 
 
