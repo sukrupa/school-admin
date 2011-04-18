@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentRepository;
 
@@ -22,7 +22,7 @@ public class EventService {
 
 	private static final Logger LOG = Logger.getLogger(EventService.class);
 
-    @DoNotRemove
+    @RequiredByFramework
     EventService() {
     }
 
@@ -56,7 +56,7 @@ public class EventService {
 		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
 	}
 
-    public Event update(EventCreateOrUpdateParameter eventParam) {
+    public Event update(EventForm eventParam) {
         Event event = eventRepository.load(eventParam.getId());
 
         String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});

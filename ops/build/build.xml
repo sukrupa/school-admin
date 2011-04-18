@@ -39,17 +39,17 @@
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, test:twist"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:twist"/>
 
     <target name="all-without-functional" description="Does everything except run the functional tests"
             depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:twist"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, test:functional, deploy:save-build-number, package"/>
+            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, deploy:save-build-number, package"/>
 
     <target name="unit-test"
             description="Clean, compile and only run unit tests"
@@ -63,7 +63,7 @@
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:functional, compile:test:twist, compile:test:cucumber"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:twist, compile:test:cucumber"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -83,11 +83,6 @@
     <target name="compile:test:integration">
         <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                  classpathref="classpath.compilation.test.integration"/>
-    </target>
-
-    <target name="compile:test:functional">
-        <compile srcdir="${src.test.functional.dir}" destdir="${target.test.functional.dir}"
-                 classpathref="classpath.compilation.test.functional"/>
     </target>
 
     <target name="compile:test:twist">
@@ -130,17 +125,6 @@
         <test type="integration"/>
     </target>
 
-    <target name="test:functional" >
-        <run-against-server startServerTarget="sukrupa-server:start"
-                            checkServerUpTarget="sukrupa-server:check-is-running"
-                            stopServerTarget="sukrupa-server:stop">
-            <execute>
-                <test-without-failing type="functional"/>
-            </execute>
-        </run-against-server>
-
-        <fail if="test.functional.failed" message="Some functional tests failed"/>
-    </target>
 
     <target name="test:twist"
             depends="compile:test:twist"

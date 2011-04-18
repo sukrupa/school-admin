@@ -21,11 +21,6 @@
         <pathelement location="${target.test.shared.dir}"/>
     </path>
 
-    <path id="classpath.compilation.test.functional">
-        <path refid="classpath.compilation.test.shared"/>
-        <pathelement location="${target.test.shared.dir}"/>
-    </path>
-
     <path id="classpath.compilation.test.twist">
         <path refid="classpath.compilation.test.shared"/>
         <pathelement location="${target.test.shared.dir}"/>
@@ -54,12 +49,6 @@
     <path id="classpath.run.test.integration">
         <path refid="classpath.compilation.test.integration"/>
         <pathelement location="${target.test.integration.dir}"/>
-        <pathelement location="${target.test.shared.dir}"/>
-    </path>
-
-    <path id="classpath.run.test.functional">
-        <path refid="classpath.compilation.test.functional"/>
-        <pathelement location="${target.test.functional.dir}"/>
         <pathelement location="${target.test.shared.dir}"/>
     </path>
 

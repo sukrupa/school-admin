@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
-import org.sukrupa.event.EventCreateOrUpdateParameter;
-import org.sukrupa.platform.date.Date;
 
 //import java.util.*;
 
@@ -165,13 +163,13 @@ public class StudentTest {
         studentForm.setDateOfBirth("01-02-2005");
         studentForm.setStatus("Existing Student");
         studentForm.setFamilyStatus("Single");
-        studentForm.setSponsored(true);
+        studentForm.setSponsored("Peter Murray");
 
         student.updateFrom(studentForm, Collections.EMPTY_SET );
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
-        assertThat(student.getSponsored(), is (true));
+        assertThat(student.getSponsor(), is ("Peter Murray"));
         assertThat(student.getFamilyStatus(), is(StudentFamilyStatus.SINGLE));
 
     }

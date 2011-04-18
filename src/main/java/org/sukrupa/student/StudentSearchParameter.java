@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 
 import java.util.*;
 
@@ -19,8 +19,14 @@ public class StudentSearchParameter {
     private String religion = WILDCARD_CHARACTER;
     private String status = "Existing Student";
     private String caregiversOccupation = WILDCARD_CHARACTER;
+    private String familyStatus = WILDCARD_CHARACTER;
+    private String sponsored = WILDCARD_CHARACTER;
+    private String sponsorName = "";
 
-    public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation, String ageFrom, String ageTo, List<Talent> talents, String religion, String status, String caregiversOccupation) {
+
+    public StudentSearchParameter(String name, String studentClass, String gender, String caste, String communityLocation,
+                                  String ageFrom, String ageTo, List<Talent> talents, String religion, String status,
+                                  String caregiversOccupation, String familyStatus, String sponsored, String sponsorName) {
         this.name = name;
         this.studentClass = studentClass;
         this.gender = gender;
@@ -32,9 +38,12 @@ public class StudentSearchParameter {
         this.religion = religion;
         this.status = status;
         this.caregiversOccupation = caregiversOccupation;
+        this.familyStatus = familyStatus;
+        this.sponsored = sponsored;
+        this.sponsorName = sponsorName;
     }
 
-    @DoNotRemove
+    @RequiredByFramework
     public StudentSearchParameter() {
     }
 
@@ -126,6 +135,27 @@ public class StudentSearchParameter {
         this.caregiversOccupation = caregiversOccupation;
     }
 
+    public String getFamilyStatus() {
+        return familyStatus;
+    }
 
+    public void setFamilyStatus(String familyStatus) {
+        this.familyStatus = familyStatus;
+    }
 
+    public String getSponsored() {
+        return sponsored;
+    }
+
+    public void setSponsored(String sponsored) {
+        this.sponsored = sponsored;
+    }
+
+    public String getSponsorName() {
+        return sponsorName;
+    }
+
+    public void setSponsorName(String sponsorName) {
+        this.sponsorName = sponsorName;
+    }
 }

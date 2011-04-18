@@ -1,5 +1,5 @@
 Tags:
-Preconditions:Navigte to Student Profile ,Log In,	Log out afterwards
+Preconditions:Navigte to list of students,Log In,	Log out afterwards
 Edit Parents Detail, Edit Student:
 #Click on "Bhavani" student record
 #Click on Edit Button

@@ -2,6 +2,7 @@ package org.sukrupa.platform.date;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
+import org.sukrupa.event.Time;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -28,8 +29,8 @@ public class DateTest {
 
     @Test
     public void shouldParseDateAndTime() {
-        assertThat(Date.parse("10-08-2011", "01:12", "pm"), is(new Date(10, 8, 2011, 13, 12)));
-        assertThat(Date.parse("10-08-2011", "01:00", "am"), is(new Date(10, 8, 2011, 01, 00)));
+        assertThat(Date.parse("10-08-2011", new Time("01:12", "pm")), is(new Date(10, 8, 2011, 13, 12)));
+        assertThat(Date.parse("10-08-2011", new Time("01:00", "am")), is(new Date(10, 8, 2011, 01, 00)));
     }
 
     @Test
@@ -53,8 +54,8 @@ public class DateTest {
 
     @Test
     public void shouldCreateADateWithThe12HourClock() {
-        assertThat(Date.parse("01-01-2009", "01:00", "pm").getTime(), is("01:00"));
-        assertThat(Date.parse("01-01-2009", "01:00", "am").getTime(), is("01:00"));
+        assertThat(Date.parse("01-01-2009", new Time("01:00", "pm")).getTime(), is("01:00"));
+        assertThat(Date.parse("01-01-2009", new Time("01:00", "am")).getTime(), is("01:00"));
     }
 
     @Test

@@ -21,7 +21,7 @@ public class StudentService {
     private StudentImageRepository studentImageRepository;
     private int classUpdateCount;
 
-    @DoNotRemove
+    @RequiredByFramework
     public StudentService() {
     }
 
@@ -88,7 +88,7 @@ public class StudentService {
 
 
     public StudentReferenceData getStudentReferenceData() {
-        return new StudentReferenceData();
+        return new StudentReferenceData(getTalentRepository());
     }
 
     public TalentRepository getTalentRepository() {

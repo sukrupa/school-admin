@@ -1,7 +1,6 @@
 package org.sukrupa.app.admin.talents;
 
-import org.sukrupa.platform.DoNotRemove;
-import org.sukrupa.student.Talent;
+import org.sukrupa.platform.RequiredByFramework;
 
 public class TalentForm {
 
@@ -11,7 +10,7 @@ public class TalentForm {
         this.description = descriptionIn;
     }
 
-    @DoNotRemove
+    @RequiredByFramework
     public TalentForm(){
     }
 

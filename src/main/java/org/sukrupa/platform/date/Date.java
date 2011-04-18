@@ -3,9 +3,9 @@ package org.sukrupa.platform.date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.DateTimeComparator;
+import org.sukrupa.event.Time;
 
 import java.io.Serializable;
 
@@ -49,12 +49,17 @@ public class Date implements Serializable {
         return isBlank(time) ? parseDate(date) : parseDateAndTime(date, time);
     }
 
-    public static Date parse(String date, String time, String amPm) {
-        return isBlank(time) ? parseDate(date) : parseDateAndTime(date, time, isBlank(amPm) ? "am" : amPm);
+    public static Date parse(String date, Time time) {
+        return time.exists() ? parseDateAndTime(date, time) : parseDate(date);
     }
 
-    private static Date parseDateAndTime(String date, String time, String amPm) {
-        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(date + " " + time + " " + amPm);
+    private static Date parseDateAndTime(String date, Time time) {
+        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(date + " " + time.twelveHourClock());
+        return new Date(jodaTime1);
+    }
+
+    private static Date parseDateAndTime(String date, String time) {
+        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time));
         return new Date(jodaTime1);
     }
 
@@ -76,12 +81,7 @@ public class Date implements Serializable {
     }
 
     private static Date parseDate(String date) {
-        return parse(date, "12:00", "am");
-    }
-
-    private static Date parseDateAndTime(String date, String time) {
-        DateTime jodaTime1 = forPattern(DATE_TIME_FORMAT).withZone(UTC).parseDateTime(buildDateTimeText(date, time));
-        return new Date(jodaTime1);
+        return parse(date, new Time ("12:00", "am"));
     }
 
     @Override
@@ -107,13 +107,14 @@ public class Date implements Serializable {
         }
     }
 
-
     public int year() {
         return jodaTime.getYear();
     }
 
-
     public boolean isInTheAfternoon() {
         return jodaTime.getHourOfDay() >= 12;
     }
+
+
+
 }

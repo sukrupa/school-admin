@@ -1,6 +1,7 @@
 package org.sukrupa.app.admin;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -14,8 +15,10 @@ import org.sukrupa.app.admin.talents.TalentsService;
 import org.sukrupa.app.students.TalentValidator;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.Talent;
+import org.sukrupa.student.TalentRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -28,12 +31,12 @@ public class TalentsController {
 
 
     private TalentsService talentsService;
-    private TalentValidator talentValidator;
+    private TalentRepository talentRepository;
 
     @Autowired
-    public TalentsController(TalentsService talentsService, TalentValidator talentValidatorIn) {
+    public TalentsController(TalentsService talentsService, TalentRepository talentRepositoryIn) {
         this.talentsService = talentsService;
-        this.talentValidator = talentValidatorIn;
+        this.talentRepository = talentRepositoryIn;
     }
 
     @RequestMapping
@@ -53,13 +56,24 @@ public class TalentsController {
 
     @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
               String trimmedDescription = talentParam.getDescription().trim();
-              if(!trimmedDescription.isEmpty()){
-                  talentsService.create(talentParam);
-                  model.put("talentAddedSuccesfully", true);
-                  model.put("talentDescription", talentParam.getDescription());
+              trimmedDescription = trimmedDescription.toLowerCase();
+              trimmedDescription = StringUtils.capitalize(trimmedDescription);
+              if(!trimmedDescription.isEmpty())
+              {
+                  List<String> talentsInDatabase = talentRepository.returnTalentDescriptionsInList(talentRepository.findAllTalents());
+                  if(!talentsInDatabase.contains(trimmedDescription))
+                  {
+                          talentsService.create(talentParam);
+                          model.put("talentAddedSuccesfully", true);
+                          model.put("talentDescription", trimmedDescription);
+                  }
+                  else
+                  {
+                      model.put("talentDuplicated", true);
+                  }
               }
               else{
-                  model.put("talentInvalid",true);
+                  model.put("talentInvalid", true);
               }
            return "admin/talents/new";
     }
@@ -67,16 +81,5 @@ public class TalentsController {
     public String create(TalentForm talentForm) {
         this.talentsService.create(talentForm) ;
         return null;
-    }
-
-    private boolean mandatoryFieldsExist(Errors errors) {
-        return errors.getErrorCount() == 0;
-    }
-
-    private void addErrorToFields(Map<String, Object> model, Errors errors) {
-        for (FieldError error : errors.getFieldErrors()) {
-            model.put(format("%sError", error.getField()), error.getDefaultMessage());
-        }
-
     }
 }

@@ -39,11 +39,13 @@
     }$
 
     <div class="eventEntry">
+        <div class="eventLabel">Description</div>
         <div id="eventDescription" class="eventDescription">$event.description$</div>
     </div>
 
     $event.notes:{ notes |
     <div class="eventEntry">
+        <div class="eventLabel">Notes</div>
         <div class="eventNotes">$notes$</div>
     </div>
     }$
