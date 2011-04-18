@@ -162,6 +162,7 @@
             </td>
             <td>
                 <select name="familyStatus">
+                   <option value="*">Any</option>
                    $formhelper.familyStatuses:{
                     <option value="$it$">$it$</option>
                     }$

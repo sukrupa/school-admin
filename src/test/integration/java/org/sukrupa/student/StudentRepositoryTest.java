@@ -94,6 +94,7 @@ public class StudentRepositoryTest {
             .studentClass("4th grade").dateOfBirth(new LocalDate(1985, 5, 24))
             .gender("male")
             .status(StudentStatus.EXISTING_STUDENT)
+            .familyStatus(StudentFamilyStatus.SINGLE)
             .build();
 
     private Student yael = new StudentBuilder()
@@ -101,6 +102,7 @@ public class StudentRepositoryTest {
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Female").talents(music, sport)
             .status(StudentStatus.EXISTING_STUDENT)
+            .familyStatus(StudentFamilyStatus.GENERAL)
             .build();
 
     private Student yam = new StudentBuilder()
@@ -108,6 +110,7 @@ public class StudentRepositoryTest {
             .studentClass("Nursery").dateOfBirth(new LocalDate(1995, 10, 1))
             .gender("Male").talents(music, sport)
             .status(StudentStatus.EXISTING_STUDENT)
+            .familyStatus(StudentFamilyStatus.SINGLE)
             .build();
 
     private Student peter = new StudentBuilder()
@@ -288,6 +291,28 @@ public class StudentRepositoryTest {
         assertThat(students.size(), is(2));
     }
 
+    @Test
+    public void shouldReturnStudentsWithFamilyStatusSingle() {
+       hibernateSession.save(yael,yam,pat);
+
+       List<Student> students = studentRepository.findBySearchParameter(
+               new StudentSearchParameterBuilder().studentFamilyStatus(StudentFamilyStatus.SINGLE.toString()).build(),0, 100);
+        assertThat(students.size(), is(2));
+        assertThat(students.contains(yam), is(true));
+        assertThat(students.contains(pat), is(true));
+    }
+
+    @Test
+    public void shouldReturnStudentsWithNoFamilyStatus() throws Exception {
+       hibernateSession.save(jimbo, pat, sahil, renaud);
+       List<Student> students = studentRepository.findBySearchParameter(
+               new StudentSearchParameterBuilder().studentFamilyStatus("").build(),0, 100);
+       assertThat(students.size(), is(3));
+        assertThat(students.contains(jimbo), is(true));
+        assertThat(students.contains(sahil), is(true));
+        assertThat(students.contains(renaud), is(true));
+    }
+    
 
     @Test
     public void shouldReturnUniqueResultsWhenSearchingMultipleTalents() {

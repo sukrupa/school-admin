@@ -21,7 +21,7 @@ public class StudentService {
     private StudentImageRepository studentImageRepository;
     private int classUpdateCount;
 
-    @DoNotRemove
+    @RequiredByFramework
     public StudentService() {
     }
 

@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sukrupa.platform.text.StringManipulation;
+import sun.font.FontManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ class StudentsSearchCriteriaGenerator {
     private static final String FATHER = "father";
     private static final String MOTHER = "mother";
     private static final String GUARDIAN = "guardian";
+    private static final String FAMILY_STATUS = "familyStatus";
 
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
@@ -58,8 +60,19 @@ class StudentsSearchCriteriaGenerator {
         addTalentsSearchCriteria(criteria, searchParam.getTalents());
         addCaregiversOccupationSearchCriteria(criteria, searchParam.getCaregiversOccupation());
         addStudentStatusSearchCriteria(criteria, StudentStatus.fromString(searchParam.getStatus()));
+        addStudentFamilyStatusSearchCriteria(criteria, searchParam.getFamilyStatus());
 
         return criteria;
+    }
+
+    private void addStudentFamilyStatusSearchCriteria(Criteria criteria, String studentFamilyStatus) {
+        if (!studentFamilyStatus.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
+            if (studentFamilyStatus.isEmpty()) {
+                criteria.add(Restrictions.isNull(FAMILY_STATUS));
+            } else {
+                criteria.add(Restrictions.eq(FAMILY_STATUS, StudentFamilyStatus.fromString(studentFamilyStatus)));
+            }
+        }
     }
 
     private void addAgeCriteria(int ageFrom, int ageTo, Conjunction conjunction) {
@@ -109,7 +122,6 @@ class StudentsSearchCriteriaGenerator {
     private void addStudentStatusSearchCriteria(Criteria criteria, StudentStatus status) {
         criteria.add(Restrictions.eq(STATUS, status));
     }
-
 
     private LocalDate computeBirthDateFromAge(int age) {
         return new LocalDate().minusYears(age);

@@ -3,7 +3,7 @@ package org.sukrupa.student;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.platform.date.Date;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class AnnualClassUpdateService {
     private SystemEventLogRepository systemEventLogRepository;
     private int classUpdateCount;
 
-    @DoNotRemove
+    @RequiredByFramework
     AnnualClassUpdateService() {
     }
 

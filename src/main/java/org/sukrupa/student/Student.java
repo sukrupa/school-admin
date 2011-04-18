@@ -11,7 +11,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
 import org.sukrupa.event.Event;
-import org.sukrupa.platform.DoNotRemove;
+import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.*;
 import java.util.*;
@@ -94,13 +94,13 @@ public class Student {
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
     @Column(name = "SPONSORED")
-    private boolean sponsored;
+    private String sponsored;
 
     @Enumerated (EnumType.ORDINAL)
     @Column (name = "FAMILY_STATUS_ENUMS")
     private StudentFamilyStatus familyStatus = null;
 
-    @DoNotRemove
+    @RequiredByFramework
     public Student() {
     }
 
@@ -200,7 +200,7 @@ public class Student {
         return gender;
     }
 
-    public boolean getSponsored() {
+    public String getSponsored() {
         return sponsored;
     }
 
