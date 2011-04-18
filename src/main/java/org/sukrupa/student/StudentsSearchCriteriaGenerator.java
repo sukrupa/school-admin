@@ -128,10 +128,8 @@ class StudentsSearchCriteriaGenerator {
             LogicalExpression motherIsAlive = Restrictions.and(motherRestrictions, motherNotDeceased);
 
             SimpleExpression guardianRestrictions = Restrictions.eq("ga.occupation", caregiversOccupation);
-            SimpleExpression guardianNotDeceased = Restrictions.ne("ga.maritalStatus", "Deceased");
-            LogicalExpression guardianIsAlive = Restrictions.and(guardianRestrictions, guardianNotDeceased);
 
-            criteria.add( Restrictions.or( Restrictions.or( fatherIsAlive , motherIsAlive ), guardianIsAlive));
+            criteria.add( Restrictions.or( Restrictions.or( fatherIsAlive , motherIsAlive ), guardianRestrictions));
         }
     }
 
