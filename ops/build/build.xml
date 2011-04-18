@@ -8,6 +8,7 @@
     <import file="macros.xml"/>
     <import file="sukrupa-server.xml"/>
     <import file="cucumber.xml"/>
+    <import file="sahi.xml"/>
 
     <target name="clean">
         <delete dir="${target.dir}"/>
@@ -27,6 +28,12 @@
         <mkdir dir="${target.reports.twist.dir}"/>
         <mkdir dir="${target.reports.cucumber.dir}"/>
         <mkdir dir="${target.main.dir}"/>
+        <antcall target="config:sahi"/>
+    </target>
+
+    <target name="config:sahi">
+        <filter token="appdir" value="${module.dir}" />
+        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties" filtering="true"/>
     </target>
 
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
@@ -159,17 +166,18 @@
     <target name="test:cucumber"
             description="Run Cucumber">
 
-        <run-against-server startServerTarget="sukrupa-server:start-for-twist"
-                            stopServerTarget="sukrupa-server:stop-for-twist"
-                            checkServerUpTarget="sukrupa-server:check-is-running">
+        <run-against-sahi-and-web-server startWebServerTarget="sukrupa-server:start-for-cucumber"
+                                         stopWebServerTarget="sukrupa-server:stop-for-cucumber"
+                                         checkWebServerUpTarget="sukrupa-server:check-is-running"
+                                         startSahiServerTarget="sahi-server:start"
+                                         stopSahiServerTarget="sahi-server:stop"
+                                         checkSahiServerUpTarget="sahi-server:check-is-running">
             <execute>
                 <antcall target="execute-cucumber"/>
             </execute>
-        </run-against-server>
+        </run-against-sahi-and-web-server>
 
         <available file="${target.test.cucumber.failed.file}" property="cucumber.features.failed"/>
-        <echo message="Result of cuke tests was: ${cucumber.features.failed}"/>
-
         <echo message="Cuke report @ ${target.reports.cucumber.html}"/>
         <fail if="cucumber.features.failed" message="Some cuke tests failed!!"/>
     </target>

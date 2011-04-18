@@ -1,0 +1,22 @@
+<project name="sahi" basedir="../..">
+
+    <import file="properties.xml"/>
+    <import file="classpaths.xml"/>
+    <import file="macros.xml"/>
+    <import file="sukrupa-server.xml"/>
+
+    <target name="sukrupa-server:start-for-cucumber" depends="db:start, db:insert-fake-data, sukrupa-server:start"  />
+    <target name="sukrupa-server:stop-for-cucumber" depends="db:recreate, sukrupa-server:stop" />
+
+    <target name="sahi-server:check-is-running">
+        <wait.for.server host="localhost" port="${sahi.port}" server-name="Sahi Server"/>
+    </target>
+
+    <target name="sahi-server:start">
+        <exec executable="${sahi.bin.dir}/sahi-start.sh"/>
+    </target>
+
+    <target name="sahi-server:stop">
+        <exec executable="${sahi.bin.dir}/sahi-stop.sh"/>
+    </target>
+</project>

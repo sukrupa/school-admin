@@ -23,9 +23,8 @@
         <exec executable="${ops.deploy.dir}/stop-server.sh"/>
     </target>
 
-
     <target name="sukrupa-server:check-is-running">
-        <wait.for.server host="localhost" port="${web.http.port}"/>
+        <wait.for.server host="localhost" port="${web.http.port}" server-name="Sukrupa Server"/>
     </target>
 
     <target name="demo:server-test">

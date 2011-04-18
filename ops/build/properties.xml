@@ -23,6 +23,7 @@
     <property name="src.test.cucumber.java.dir" value="${src.test.cucumber.dir}/java"/>
 
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
+    <property name="resources.test.dir" value="${src.test.dir}/resources"/>
 
     <property name="web.root" value="web"/>
     <property name="web.dir" value="${src.dir}/${web.root}"/>
@@ -87,6 +88,11 @@
 
     <property name="twist-config" value="${src.test.twist.fixtures.dir}/twist-conf"/>
     <property name="jruby.home" value="${tools.dir}/cuke4duke/.jruby"/>
+
+    <property name="sahi.dir" value="${tools.dir}/sahi"/>
+    <property name="sahi.bin.dir" value="${sahi.dir}/bin"/>
+    <property name="sahi.port" value="9999"/>
+
 
     <loadproperties srcFile="${resources.main.dir}/app.properties"/>
 </project>
