@@ -91,7 +91,7 @@
 
              <div class="entry">
                 <div class="label">Sponsor</div>
-                <div class="value" id="sponsored">$student.sponsored$</div>
+                <div class="value" id="sponsor">$student.sponsor$</div>
             </div>
 
 

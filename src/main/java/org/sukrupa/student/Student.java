@@ -93,8 +93,8 @@ public class Student {
     @Enumerated(EnumType.ORDINAL)
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
 
-    @Column(name = "SPONSORED")
-    private String sponsored;
+    @Column(name = "SPONSOR")
+    private String sponsor;
 
     @Enumerated (EnumType.ORDINAL)
     @Column (name = "FAMILY_STATUS_ENUMS")
@@ -107,7 +107,7 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
-                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus, String sponsor) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -131,7 +131,7 @@ public class Student {
         }
 
         this.status = status;
-        this.sponsored = sponsored;
+        this.sponsor = sponsor;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -200,8 +200,8 @@ public class Student {
         return gender;
     }
 
-    public String getSponsored() {
-        return sponsored;
+    public String getSponsor() {
+        return sponsor;
     }
 
     public String getStudentClass() {
@@ -328,7 +328,7 @@ public class Student {
         this.talents = Sets.newHashSet(newTalents);
         this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
-        this.sponsored = studentUpdateParameters.getSponsored();
+        this.sponsor = studentUpdateParameters.getSponsored();
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
         if (studentUpdateParameters.getFather() != null) {

@@ -184,3 +184,15 @@ dualListBox.box = function(available,chosen) {
 
     return self;
 }
+
+function updateSponsor()
+{
+  selectedValue = document.getElementById("sponsored").value;
+  sponsorName = document.getElementById("sponsorName");
+  if (selectedValue === "Yes") {
+    sponsorName.removeAttribute("disabled");
+  }
+  else {
+    sponsorName.setAttribute("disabled","disabled");
+  }
+}
