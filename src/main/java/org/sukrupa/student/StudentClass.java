@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 public enum StudentClass {
+    DAYCARE("Daycare", "PRESCHOOL"),
     PRESCHOOL("Preschool", "LKG"),
     LKG("LKG", "UKG"),
     UKG("UKG", "ONE_STD"),

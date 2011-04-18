@@ -79,29 +79,6 @@ public class Event {
         this(title, endDate, venue, coordinator, description, notes, new HashSet<Student>(), startDate);
     }
 
-    public static Event createFrom(EventForm eventForm) {
-        return new Event(eventForm.getTitle(),
-                Date.parse(eventForm.getDate(), eventForm.getEndTime(), eventForm.getEndTimeAmPm()),
-                eventForm.getVenue(),
-                eventForm.getCoordinator(),
-                eventForm.getDescription(),
-                eventForm.getNotes(),
-                Date.parse(eventForm.getDate(), eventForm.getStartTime(), eventForm.getStartTimeAmPm()));
-    }
-
-    public static Event from(EventForm eventForm) {
-        String venue = nullIfEmpty(eventForm.getVenue());
-        String coordinator = nullIfEmpty(eventForm.getCoordinator());
-        String notes = nullIfEmpty(eventForm.getNotes());
-
-        return new Event(eventForm.getTitle(), parseDateTime(eventForm),
-                venue, coordinator, eventForm.getDescription(), notes, null);
-    }
-
-    private static String nullIfEmpty(String value) {
-        return (value.isEmpty()) ? null : value;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -125,10 +102,6 @@ public class Event {
     public String getEndTimeWithAmPm() {
         String amPm = endDate.isInTheAfternoon() ? "PM" : "AM";
         return String.format("%s %s", endDate.getTime(), amPm);
-    }
-
-    private static Date parseDateTime(EventForm eventForm) {
-        return Date.parse(eventForm.getDate(), eventForm.getEndTime());
     }
 
     public void addAttendees(Set<Student> attendees) {
@@ -156,7 +129,6 @@ public class Event {
     }
 
     public String getDescription() {
-        String blah = HtmlUtils.htmlEscape(description);
         return description.trim();
     }
 
