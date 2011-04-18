@@ -56,7 +56,7 @@ public class EventService {
 		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
 	}
 
-    public Event update(EventCreateOrUpdateParameter eventParam) {
+    public Event update(EventForm eventParam) {
         Event event = eventRepository.load(eventParam.getId());
 
         String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});

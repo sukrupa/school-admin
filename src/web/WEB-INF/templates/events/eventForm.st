@@ -14,6 +14,7 @@
         <div class="createEntryDateTime">
             <div class="label dateTime">Start Time <br/>(hh:mm)</div>
             <input type="text" name="startTime" id="startTime" value="$event.startTime$" class="createValue" />
+
       <div class="label amPm">
                 <label for="startTimeAm">a.m.</label>
                 <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" $if (!event.startTimePm)$ checked $endif$ />
@@ -33,6 +34,8 @@
             </div>
 
         </div>
+        <div class="errorMessage">$startTimeError$</div>
+         <div class="errorMessage">$endTimeError$</div>
 
         <div class="createEntry">
             <div class="label">Venue</div>
@@ -46,7 +49,7 @@
 
         <div class="createEntry">
             <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendees)$$trunc(event.attendees):{$it.studentId$,}$$last(event.attendees).studentId$$endif$</textarea>
+            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{$it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
 
         </div>
     </div>
@@ -62,5 +65,6 @@
             <textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$event.notes$</textarea>
         </div>
     </div>
+
 
 </div>

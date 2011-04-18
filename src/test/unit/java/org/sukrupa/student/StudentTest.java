@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventBuilder;
-import org.sukrupa.event.EventCreateOrUpdateParameter;
-import org.sukrupa.platform.date.Date;
 
 //import java.util.*;
 
@@ -171,7 +169,7 @@ public class StudentTest {
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
-        assertThat(student.getSponsored(), is ("Peter Murray"));
+        assertThat(student.getSponsor(), is ("Peter Murray"));
         assertThat(student.getFamilyStatus(), is(StudentFamilyStatus.SINGLE));
 
     }

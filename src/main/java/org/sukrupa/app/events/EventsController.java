@@ -1,18 +1,17 @@
 package org.sukrupa.app.events;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.event.Event;
-import org.sukrupa.event.EventCreateOrUpdateParameter;
+import org.sukrupa.event.EventForm;
 import org.sukrupa.event.EventService;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,39 +55,64 @@ public class EventsController {
 
     @RequestMapping(value = "{eventId}", method = POST)
     public String update(@PathVariable String eventId,
-            @ModelAttribute("editEvent") EventCreateOrUpdateParameter eventCreateOrUpdateParameter,
+            @ModelAttribute("editEvent") EventForm eventForm,
             Map<String, Object> model)
     {
-        Set<String> studentIdsOfAttendees =   eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+
+        if (eventForm.isInvalid(errors)){
+            model.put("errors", errors);
+            model.put("event", eventForm);
+            addErrorToFields(model,errors);
+            return "events/edit";
+        }
+
+        Set<String> studentIdsOfAttendees =   eventForm.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
         if (!invalidAttendees.isEmpty()) {
-            model.put("event", service.getEvent(Integer.parseInt(eventId)));
+            model.put("event", eventForm);
             model.put("invalidAttendees",invalidAttendees);
             return "events/edit";
 
         } else {
-            service.update(eventCreateOrUpdateParameter);
+            service.update(eventForm);
             return format("redirect:/events/%s", eventId);
         }
     }
 
 	@RequestMapping(value = "save", method = POST)
-	public String save(@ModelAttribute(value = "createEventForm") EventCreateOrUpdateParameter eventCreateOrUpdateParameter, Map<String, Object> model) {
+	public String save(@ModelAttribute(value = "createEventForm") EventForm eventForm, Map<String, Object> model) {
 
-        Event event = Event.createFrom(eventCreateOrUpdateParameter);
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 
-        Set<String> studentIdsOfAttendees = eventCreateOrUpdateParameter.getStudentIdsOfAttendees();
+        if (eventForm.isInvalid(errors)){
+            model.put("errors", errors);
+            model.put("event", eventForm);
+            addErrorToFields(model,errors);
+            return "events/create";
+        }
+
+        Event event = Event.createFrom(eventForm);
+
+        Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
 		if (!invalidAttendees.isEmpty()) {
 			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", event);
+			model.put("event", eventForm);
 			return "events/create";
 		} else {
 			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
 			return format("redirect:/events/%s", event.getId());
 		}
 	}
+
+    private void addErrorToFields(Map<String, Object> model, Errors errors) {
+          for (FieldError error : errors.getFieldErrors()) {
+              model.put(format("%sError", error.getField()), error.getDefaultMessage());
+          }
+
+      }
 
 }
