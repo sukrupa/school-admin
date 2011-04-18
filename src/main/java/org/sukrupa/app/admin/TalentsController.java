@@ -1,6 +1,7 @@
 package org.sukrupa.app.admin;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -55,14 +56,16 @@ public class TalentsController {
 
     @ModelAttribute("createTalent") TalentForm talentParam, Map<String, Object> model){
               String trimmedDescription = talentParam.getDescription().trim();
+              trimmedDescription = trimmedDescription.toLowerCase();
+              trimmedDescription = StringUtils.capitalize(trimmedDescription);
               if(!trimmedDescription.isEmpty())
               {
                   List<String> talentsInDatabase = talentRepository.returnTalentDescriptionsInList(talentRepository.findAllTalents());
-                  if(!talentsInDatabase.contains(talentParam.getDescription()))
+                  if(!talentsInDatabase.contains(trimmedDescription))
                   {
-                      talentsService.create(talentParam);
-                      model.put("talentAddedSuccesfully", true);
-                      model.put("talentDescription", talentParam.getDescription());
+                          talentsService.create(talentParam);
+                          model.put("talentAddedSuccesfully", true);
+                          model.put("talentDescription", trimmedDescription);
                   }
                   else
                   {
