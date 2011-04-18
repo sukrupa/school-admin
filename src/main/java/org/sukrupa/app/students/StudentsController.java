@@ -14,6 +14,7 @@ import org.sukrupa.student.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -40,11 +41,17 @@ public class StudentsController {
 
         StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
 
+        List<String> validCriteria = searchParam.getValidCriteria();
+
         if (students.getStudents().isEmpty()) {
+            model.put("searchCriteria", validCriteria);
             return "students/listEmpty";
         }
 
         model.put("page", students);
+
+        model.put("searchCriteria", validCriteria);
+
 
         return "students/list";
     }

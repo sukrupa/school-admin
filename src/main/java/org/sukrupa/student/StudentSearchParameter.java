@@ -1,8 +1,12 @@
 package org.sukrupa.student;
 
+import com.sun.jmx.snmp.SnmpScopedPduPacket;
+import org.apache.commons.lang.StringUtils;
 import org.sukrupa.platform.RequiredByFramework;
 
 import java.util.*;
+
+import static org.sukrupa.platform.text.StringManipulation.join;
 
 public class StudentSearchParameter {
 
@@ -157,5 +161,63 @@ public class StudentSearchParameter {
 
     public void setSponsorName(String sponsorName) {
         this.sponsorName = sponsorName;
+    }
+
+    public List<String> getValidCriteria()
+    {
+        List<String> validCriteria = new ArrayList<String>();
+
+        Map<String, String> criteria = createCriteriaMap();
+
+        for(Map.Entry<String, String> pair : criteria.entrySet()) {
+            if(isValidCriteria(pair.getValue())) {
+                validCriteria.add(String.format("%s: %s", pair.getKey(), pair.getValue()));
+            }
+        }
+
+        return validCriteria;
+    }
+
+    public Map<String, String> createCriteriaMap() {
+        Map<String, String> criteria = new HashMap<String, String>();
+
+        if(!name.isEmpty())
+            criteria.put("NAME", this.name);
+
+        criteria.put("AGE FROM", this.ageFrom);
+        criteria.put("AGE TO", this.ageTo);
+        criteria.put("CLASS", this.studentClass);
+        criteria.put("GENDER", this.gender);
+        criteria.put("RELIGION", this.religion);
+        criteria.put("CASTE", this.caste);
+        criteria.put("COMMUNITY", this.communityLocation);
+        criteria.put("STATUS", this.status);
+        criteria.put("FAMILY STATUS", this.familyStatus);
+        criteria.put("CAREGIVERS OCCUPATION", this.caregiversOccupation);
+        criteria.put("SPONSORED", this.sponsored);
+
+        if(!sponsorName.isEmpty())
+            criteria.put("SPONSOR", this.sponsorName);
+
+
+
+        String talentList = StringUtils.join(getDescriptions(), ", ");
+
+        if(!talentList.isEmpty())
+            criteria.put("TALENTS", talentList);
+
+        return criteria;
+    }
+
+    public List<String> getDescriptions() {
+        List<String> descriptions = new ArrayList<String>();
+        for(Talent talent : this.talents) {
+            descriptions.add(talent.getDescription());
+        }
+        return descriptions;
+    }
+
+    public boolean isValidCriteria(String criteria) {
+        return !StudentSearchParameter.WILDCARD_CHARACTER.equals(criteria);
     }
 }

@@ -1,7 +1,11 @@
 <div id="studentListPages">
-
+   <div id="searchCriteria" class="searchCriteria">
+       Search results for:
+       $searchCriteria:{
+            <td>$it$;</td>
+       }$
+   </div>
     <div class="page">
-
         <table class="listTable">
             <thead class="header">
             <tr>
