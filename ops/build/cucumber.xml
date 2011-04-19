@@ -8,6 +8,7 @@
     <target name="install-gems">
     	<taskdef name="gem" classname="cuke4duke.ant.GemTask" classpathref="classpath.compilation.test.cucumber"/>
     	<gem args="install cuke4duke --version 0.4.3"/>
+        <gem args="install gherkin"/>
     </target>
 
 
