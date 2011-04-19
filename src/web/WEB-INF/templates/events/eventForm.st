@@ -11,15 +11,16 @@
             <input type="text" name="date" id="date" value="$event.date$" class="createValue" />
         </div>
 
+        <div class="createEntry">
         <div class="createEntryDateTime">
             <div class="label dateTime">Start Time <br/>(hh:mm)</div>
             <input type="text" name="startTime" id="startTime" value="$event.startTime$" class="createValue" />
 
       <div class="label amPm">
-                <label for="startTimeAm">a.m.</label>
                 <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" $if (!event.startTimePm)$ checked $endif$ />
-                 <label for="startTimePm">p.m.</label>
+          <label for="startTimeAm">a.m.</label>
                 <input type="radio" id="startTimePm" class="amPm" name="startTimeAmPm" value="pm" $if (event.startTimePm)$ checked $endif$  />
+          <label for="startTimePm">p.m.</label>
             </div>
         </div>
 
@@ -27,15 +28,25 @@
             <div class="label dateTime">End Time <br/>(hh:mm)</div>
             <input type="text" name="endTime" id="endTime" value="$event.endTime$" class="createValue" />
             <div class="label amPm">
-                <label for="endTimeAm">a.m.</label>
+
                 <input type="radio" id="endTimeAm" class="amPm" name="endTimeAmPm" value="am" $if (!event.endTimePm)$ checked $endif$ />
-                 <label for="endTimePm">p.m.</label>
+                <label for="endTimeAm">a.m.</label>
+
                 <input type="radio" id="endTimePm" class="amPm" name="endTimeAmPm" value="pm" $if (event.endTimePm)$ checked $endif$  />
+                <label for="endTimePm">p.m.</label>
             </div>
 
         </div>
-        <div class="errorMessage">$startTimeError$</div>
-         <div class="errorMessage">$endTimeError$</div>
+            <br style="clear:both;" />
+            </div>
+
+        $startTimeError:{ error |
+            <div class="errorMessage">$error$</div>
+        }$
+
+        $endTimeError:{ error |
+            <div class="errorMessage">$error$</div>
+        }$
 
         <div class="createEntry">
             <div class="label">Venue</div>
