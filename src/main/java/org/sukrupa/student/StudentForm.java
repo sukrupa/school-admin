@@ -30,7 +30,7 @@ public class StudentForm {
     private String background;
     private CommonsMultipartFile imageToUpload;
     private String familyStatus;
-    private final List<String> validImageTypes = asList("image/jpg","image/jpeg","image/png","image/gif");
+    private final List<String> validImageTypes = asList("image/jpg","image/jpeg","image/png","image/gif","image/pjpeg");
 
 
     public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload) {
