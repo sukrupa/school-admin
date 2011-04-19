@@ -1,10 +1,9 @@
 <div id="studentListPages">
    <div id="searchCriteria" class="searchCriteria">
        Search results for:
-       $trunc(searchCriteria):{
-            <td>$it$;</td>
+       $searchCriteria:{
+            <td>$it$ |</td>
        }$
-       <td>$last(searchCriteria)$</td>
    </div>
     <div class="page">
         <table class="listTable">

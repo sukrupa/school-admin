@@ -184,6 +184,11 @@ public class StudentSearchParameter {
         if(!name.isEmpty())
             criteria.put("NAME", this.name);
 
+        String talentList = StringUtils.join(getDescriptions(), ", ");
+
+        if(!talentList.isEmpty())
+            criteria.put("TALENTS", talentList);
+
         criteria.put("AGE FROM", this.ageFrom);
         criteria.put("AGE TO", this.ageTo);
         criteria.put("CLASS", this.studentClass);
@@ -201,10 +206,7 @@ public class StudentSearchParameter {
 
 
 
-        String talentList = StringUtils.join(getDescriptions(), ", ");
 
-        if(!talentList.isEmpty())
-            criteria.put("TALENTS", talentList);
 
         return criteria;
     }
