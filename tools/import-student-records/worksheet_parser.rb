@@ -133,10 +133,10 @@ class WorksheetParser
               if mother_data
                 mother = Caregiver.new(mother_data)
               end
-      if father_data
-       father = Caregiver.new(father_data) 
+              if father_data
+                father = Caregiver.new(father_data) 
        
-     end
+              end
 
        #  guardian = Cargiver.new()
        
@@ -156,7 +156,7 @@ class WorksheetParser
            :student_class => @student_class
          }
          student = Student.new(student_data)
-         @students_and_talents_array << [student, talents,father]
+         @students_and_talents_array << [student, talents,[father,mother]]
        end
        
 	   end
