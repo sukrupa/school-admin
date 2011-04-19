@@ -2,7 +2,7 @@
 // JUnit Assert framework can be used for verification
 
 
-import org.sukrupa.twist.ScenarioDataUnitOfWork;
+import org.sukrupa.automation.ScenarioDataUnitOfWork;
 
 import net.sf.sahi.client.Browser;
 import static junit.framework.Assert.*;
