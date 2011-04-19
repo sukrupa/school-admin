@@ -18,6 +18,8 @@ class WorksheetParser
   GENDER_HEADING ='Gender'
   DATE_OF_BIRTH_HEADING = 'DOB'
   TALENT_HEADING = 'Special Talent in Child'
+  FATHER_OCCUPATION = "Father's Occupation"
+  MOTHER_OCCUPATION = "Mother's Occupation"
   
   def initialize(worksheet)
     @worksheet = worksheet
@@ -57,7 +59,7 @@ class WorksheetParser
   end
 	
 	
-	def parse
+	def parse	  
 	   @this_sheets_starting_corner.upto(@worksheet.last_row) do |row_number|
 	     
 	     religion = read_cell_value(row_number,RELIGION_HEADING)
@@ -72,6 +74,9 @@ class WorksheetParser
        talents_string = read_cell_value(row_number,TALENT_HEADING)
        talents = Talent.new(talents_string)
        
+       # father_occupation = read_cell_value(row_number, FATHER_OCCUPATION)
+       #     mother_occupation = read_cell_value(row_number, MOTHER_OCCUPATION)
+       
        
        
        if (!name.nil? or  !student_id.nil?)
@@ -84,7 +89,9 @@ class WorksheetParser
            :name => name,
            :date_of_birth => date_of_birth,
            :gender => gender,
-           :student_class => @student_class
+           :student_class => @student_class, 
+           # :father_occupation => father_occupation,
+           #            :mother_occupation => mother_occupation
          }
          student = Student.new(student_data)
          @students_and_talents_array << [student, talents]
@@ -92,6 +99,12 @@ class WorksheetParser
        
 	   end
 	   @students_and_talents_array
+	   
+	   # @students_and_talents_array.map(&:first).reduce([]) do |total, student|
+	   #        total << student.father_occupation
+	   #        total << student.mother_occupation
+	   #    end.reject(&:nil?).reject { |o| o   == "Nil" }.uniq
+	   
 	end
 	
 
@@ -99,10 +112,13 @@ class WorksheetParser
 	  column_number = @column_headings[column_heading]
 	  cell_value = @worksheet.cell(row_number,column_number)
 	  
-	  if (cell_value == '-')
+	  if (cell_value == '-' || cell_value == 0)
 	    return nil
 	  end
-	  
+	  if column_heading == DATE_OF_BIRTH_HEADING
+	    return cell_value.to_s
+    else
+      
     if (@worksheet.celltype(row_number,column_number) == :float)
  	      return Integer(cell_value)
     elsif (@worksheet.celltype(row_number,column_number) == :string)
@@ -111,6 +127,8 @@ class WorksheetParser
         return cell_value.to_s
     end
     return cell_value
+    
+  end
 	end
 	
   
