@@ -165,7 +165,7 @@ public class StudentTest {
         studentForm.setFamilyStatus("Single");
         studentForm.setSponsored("Peter Murray");
 
-        student.updateFrom(studentForm, Collections.EMPTY_SET );
+        student.updateStudent(studentForm, Collections.EMPTY_SET);
 
         assertThat(student.getFather().getName(), is("someFather"));
         assertThat(student.getMother().getName(), is("someMother"));
@@ -209,7 +209,7 @@ public class StudentTest {
         CommonsMultipartFile image = mock(CommonsMultipartFile.class);
         StudentForm studentUpdateParameters = new StudentCreateOrUpdateParameterBuilder().imageToUpload(image).build();
 
-        student.updateFrom(studentUpdateParameters,Collections.<Talent>emptySet());
+        student.updateStudent(studentUpdateParameters, Collections.<Talent>emptySet());
 
         assertEquals(student.getImageLink(), "12345");
     }

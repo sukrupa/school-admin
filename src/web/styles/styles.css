@@ -595,12 +595,14 @@ width: 100px;
 img.studentImage{
     height: 175px;
     margin-bottom: 55px;
-    width: 160px;
+    width:
+
+    160px;
     border: solid 1px;
 }
 
 #updateStudent .studentImage{
-    height: 215px;
+    height: 17em;
     width: 13.438em;
     float: left;
     margin-bottom: 2px;

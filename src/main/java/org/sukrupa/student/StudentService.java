@@ -51,19 +51,24 @@ public class StudentService {
 
     public Student update(StudentForm studentForm) {
         Student student = studentRepository.findByStudentId(studentForm.getStudentId());
+
         if (student == null) { //TODO is this test needed? NOT if studentRepository throws an exception when it doesnt find a student - go have a look at it, write a test that fails then remove this if statment.
             return null;
         }
 
-        Set<Talent> talents = talentRepository.findTalents(studentForm.getTalentDescriptions());
-
-        student.updateFrom(studentForm, talents);
+        setFormDataOnStudent(studentForm, student);
 
         if(studentForm.hasImage()){
             studentForm.createImage(studentImageRepository);
         }
 
         return studentRepository.update(student);
+    }
+
+    public void setFormDataOnStudent(StudentForm studentForm, Student student) {
+        Set<Talent> talents = talentRepository.findTalents(studentForm.getTalentDescriptions());
+
+        student.updateStudent(studentForm, talents);
     }
 
 
