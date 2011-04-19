@@ -8,6 +8,7 @@
     <property name="src.dir" value="${module.dir}/src"/>
     <property name="src.main.dir" value="${src.dir}/main/java"/>
     <property name="src.test.dir" value="${src.dir}/test"/>
+
     <property name="src.test.shared.dir" value="${src.test.dir}/shared/java"/>
     <property name="src.test.unit.dir" value="${src.test.dir}/unit/java"/>
     <property name="src.test.integration.dir" value="${src.test.dir}/integration/java"/>
@@ -16,7 +17,12 @@
     <property name="src.test.twist.src.dir" value="${src.test.twist.fixtures.dir}/src"/>
     <property name="src.test.twist.conf.dir" value="${src.test.twist.fixtures.dir}/twist-conf"/>
 
+    <property name="src.test.cucumber.dir" value="${src.test.dir}/cucumber"/>
+    <property name="src.test.cucumber.features.dir" value="${src.test.cucumber.dir}/features"/>
+    <property name="src.test.cucumber.java.dir" value="${src.test.cucumber.dir}/java"/>
+
     <property name="resources.main.dir" value="${src.dir}/main/resources"/>
+    <property name="resources.test.dir" value="${src.test.dir}/resources"/>
 
     <property name="web.root" value="web"/>
     <property name="web.dir" value="${src.dir}/${web.root}"/>
@@ -44,9 +50,17 @@
     <property name="target.sahi.browser.profiles"
               value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
 
+    <property name="target.test.cucumber.dir" value="${target.test.dir}/cucumber/"/>
+    <property name="target.test.cucumber.java.dir" value="${target.test.cucumber.dir}/"/>
+    <property name="target.test.cucumber.sukrupa-code.dir" value="${target.test.cucumber.dir}/sukrupa-code"/>
+    <property name="target.test.cucumber.failed.file" value="${target.test.cucumber.dir}/cucumber.features.failed"/>
+    <property name="target.test.cucumber.sahi.browser.profiles"
+              value="${target.test.twist.fixtures.dir}/sahi/userdata/browser/ff/profiles/"/>
+
     <property name="target.reports.dir" value="${target.dir}/reports"/>
-    
     <property name="target.reports.twist.dir" value="${target.reports.dir}/html/"/>
+    <property name="target.reports.cucumber.dir" value="${target.reports.dir}/cucumber"/>
+    <property name="target.reports.cucumber.html" value="${target.reports.cucumber.dir}/cucumber.html"/>
 
     <property name="deploy.lib.dir" value="${deploy.dir}/lib"/>
     <property name="deploy.staging.server" value="10.7.4.74"/>
@@ -71,7 +85,12 @@
     <property name="ops.scripts.dir" value="${ops.dir}/scripts"/>
 
     <property name="twist-config" value="${src.test.twist.fixtures.dir}/twist-conf"/>
-    
+    <property name="jruby.home" value="${tools.dir}/cuke4duke/.jruby"/>
+
+    <property name="sahi.dir" value="${tools.dir}/sahi"/>
+    <property name="sahi.bin.dir" value="${sahi.dir}/bin"/>
+    <property name="sahi.port" value="9999"/>
+
 
     <loadproperties srcFile="${resources.main.dir}/app.properties"/>
 </project>

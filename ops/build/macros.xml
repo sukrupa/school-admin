@@ -1,4 +1,4 @@
-<project name="macros">
+    <project name="macros">
     <macrodef name="compile">
         <attribute name="srcdir"/>
         <attribute name="destdir"/>
@@ -69,12 +69,60 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="run-against-sahi-and-web-server">
+        <attribute name="startWebServerTarget"/>
+        <attribute name="stopWebServerTarget"/>
+        <attribute name="checkWebServerUpTarget"/>
+
+        <attribute name="startSahiServerTarget"/>
+        <attribute name="stopSahiServerTarget"/>
+        <attribute name="checkSahiServerUpTarget"/>
+
+        <attribute name="cleanupTarget" default="nothing-to-cleanup"/>
+
+        <element name="execute"/>
+
+        <sequential>
+            <local name="targetToExecute"/>
+            <local name="startServerTarget"/>
+            <local name="stopServerTarget"/>
+            <local name="cleanupTarget"/>
+            <local name="serverPort"/>
+
+            <sequential>
+                <antcall target="@{stopWebServerTarget}"/>
+                <antcall target="@{stopSahiServerTarget}"/>
+            </sequential>
+            <parallel>
+                <sequential>
+                    <echo message="Starting Server using target [@{startWebServerTarget}] ..."/>
+                    <antcall target="@{startWebServerTarget}"/>
+                </sequential>
+                <sequential>
+                    <echo message="Starting Sahi Server using target [@{startSahiServerTarget}] ..."/>
+                    <antcall target="@{startSahiServerTarget}"/>
+                </sequential>
+                <sequential>
+                    <antcall target="@{checkWebServerUpTarget}"/>
+                    <antcall target="@{checkSahiServerUpTarget}"/>
+
+                    <execute/>
+
+                    <antcall target="@{stopWebServerTarget}"/>
+                    <antcall target="@{stopSahiServerTarget}"/>
+                    <antcall target="@{cleanupTarget}"/>
+                </sequential>
+            </parallel>
+        </sequential>
+    </macrodef>
+
     <macrodef name="wait.for.server">
         <attribute name="maxwait" default="30"/>
         <attribute name="host"/>
         <attribute name="port"/>
+        <attribute name="server-name"/>
         <sequential>
-            <echo message="Waiting for Sukrupa Server Application: @{host}"/>
+            <echo message="Waiting for @{server-name} Application: @{host}"/>
             <waitfor maxwait="@{maxwait}" maxwaitunit="second" timeoutproperty="app.did.not.start">
                 <socket server="@{host}" port="@{port}"/>
             </waitfor>

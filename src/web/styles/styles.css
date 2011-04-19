@@ -126,6 +126,7 @@ body
     font: 120%  tahoma, arial, helvetica; 
     border-left:solid;
     border-color:#254965;
+
 }
 
 #basicBody {
@@ -508,8 +509,12 @@ li
 .createEntryDateTime {
     float:left;
     position:relative;
+    padding: 16px 0px 10px 0px;
     width: 50%;
-    padding: 2px 0px 10px 0px;
+}
+
+.label.amPm {
+    width: 114px;
 }
 
 .createEntry {
@@ -579,11 +584,12 @@ width: 100px;
 #errorMessages  {
 	margin-top: 10px;
     color: red;
+
 }
 
 .errorMessage {
     color: red;
-    padding: 10px 0px 10px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 img.studentImage{

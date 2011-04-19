@@ -7,6 +7,8 @@
     <import file="image-targets.xml"/>
     <import file="macros.xml"/>
     <import file="sukrupa-server.xml"/>
+    <import file="cucumber.xml"/>
+    <import file="sahi.xml"/>
 
     <target name="clean">
         <delete dir="${target.dir}"/>
@@ -18,11 +20,19 @@
         <mkdir dir="${target.test.shared.dir}"/>
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
+        <mkdir dir="${target.test.cucumber.java.dir}"/>
         <mkdir dir="${target.test.twist.fixtures.dir}"/>
         <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.twist.dir}"/>
+        <mkdir dir="${target.reports.cucumber.dir}"/>
         <mkdir dir="${target.main.dir}"/>
+        <antcall target="config:sahi"/>
+    </target>
+
+    <target name="config:sahi">
+        <filter token="appdir" value="${module.dir}" />
+        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties" filtering="true"/>
     </target>
 
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
@@ -52,7 +62,7 @@
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:twist"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:twist, compile:test:cucumber"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -83,6 +93,11 @@
             </fileset>
             <fileset dir="${src.test.twist.conf.dir}"/>
         </copy>
+    </target>
+
+    <target name="compile:test:cucumber">
+        <compile srcdir="${src.test.cucumber.java.dir}" destdir="${target.test.cucumber.java.dir}"
+                 classpathref="classpath.compilation.test.cucumber"/>
     </target>
 
     <target name="copy-resources">
@@ -131,6 +146,25 @@
         <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
     </target>
 
+    <target name="test:cucumber"
+            depends="clean, init, compile:all"
+            description="Run Cucumber">
+
+        <run-against-sahi-and-web-server startWebServerTarget="sukrupa-server:start-for-cucumber"
+                                         stopWebServerTarget="sukrupa-server:stop-for-cucumber"
+                                         checkWebServerUpTarget="sukrupa-server:check-is-running"
+                                         startSahiServerTarget="sahi-server:start"
+                                         stopSahiServerTarget="sahi-server:stop"
+                                         checkSahiServerUpTarget="sahi-server:check-is-running">
+            <execute>
+                <antcall target="execute-cucumber"/>
+            </execute>
+        </run-against-sahi-and-web-server>
+
+        <available file="${target.test.cucumber.failed.file}" property="cucumber.features.failed"/>
+        <echo message="Cuke report @ ${target.reports.cucumber.html}"/>
+        <fail if="cucumber.features.failed" message="Some cuke tests failed!!"/>
+    </target>
 
     <target name="package" depends="create.module.jar">
         <zip destfile="${target.dir}/${module.deployable.name}">
@@ -158,6 +192,7 @@
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/lib" prefix="install/ant/lib">
                 <include name="**/ant.jar"/>
+                <include name="**/antelopetasks-3.2.10.jar"/>
                 <include name="**/ant-launcher.jar"/>
                 <include name="**/dbdeploy*.jar"/>
                 <include name="**/hsql*.jar"/>

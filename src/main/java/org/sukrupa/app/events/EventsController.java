@@ -110,9 +110,20 @@ public class EventsController {
 
     private void addErrorToFields(Map<String, Object> model, Errors errors) {
           for (FieldError error : errors.getFieldErrors()) {
-              model.put(format("%sError", error.getField()), error.getDefaultMessage());
+              model.put(format("%sError", error.getField()), new UnencodedString(error.getDefaultMessage()));
           }
 
       }
 
+    private class UnencodedString {
+        private String value;
+
+        public UnencodedString(String value) {
+            this.value = value;
+        }
+
+        public String toString() {
+            return value;
+        }
+    }
 }

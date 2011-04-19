@@ -1,0 +1,6 @@
+sahi-base=@appdir@/tools/sahi
+sahi-userdata=@appdir@/tools/sahi/userdata
+
+browser-process=firefox
+browser-path=/usr/bin/start-firefox.sh
+browser-options=-profile @appdir@/tools/sahi/userdata/browser/ff/profiles/sahi0 -no-remote

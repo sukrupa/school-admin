@@ -30,6 +30,11 @@
         </fileset>
     </path>
 
+    <path id="classpath.compilation.test.cucumber">
+        <path refid="classpath.compilation.test.twist"/>
+        <fileset dir="${tools.dir}/cuke4duke" includes="*.jar"/>
+    </path>
+
     <path id="classpath.run">
         <path refid="classpath.compilation"/>
         <pathelement location="${resources.main.dir}"/>
@@ -60,8 +65,15 @@
         <fileset dir="${ant.library.dir}" includes="*.jar"/>
     </path>
 
+    <path id="classpath.run.cucumber.features">
+        <path refid="classpath.compilation.test.cucumber"/>
+    </path>
 
     <path id="classpath.sukrupa.server.run">
         <path refid="classpath.run"/>
+    </path>
+
+    <path id="jruby.classpath">
+         <fileset dir="${tools.dir}/cuke4duke" includes="*.jar"/>
     </path>
 </project>
