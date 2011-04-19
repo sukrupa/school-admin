@@ -231,6 +231,11 @@ public class StudentForm {
     }
 
     public boolean isImageValid(){
-        return validImageTypes.contains(imageToUpload.getContentType());
+        for(String imageType : validImageTypes){
+            if(imageToUpload.getContentType().equalsIgnoreCase(imageType)){
+                return true;
+            }
+        }
+        return false;
     }
 }
