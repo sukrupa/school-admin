@@ -89,7 +89,7 @@ public class EventFormTest {
     public void yaelSkillsFormattingTheErrorMessage() {
         String message = new EventForm().invalidTimeErrorMessage("startTime");
 
-        assertThat(message, is("Please enter start time in the following format using the 12 hour clock: 00:00"));
+        assertThat(message, is("Please enter <strong>start time</strong> in the 00:00 format using the 12 hour clock."));
     }
 
     private EventForm createEventFormWithStartTime(String startTime) {
