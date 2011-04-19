@@ -5,7 +5,13 @@
 
     <taskdef name="if" classname="ise.antelope.tasks.IfTask"/>    
 
-    <target name="execute-cucumber">
+    <target name="install-gems">
+    	<taskdef name="gem" classname="cuke4duke.ant.GemTask" classpathref="classpath.compilation.test.cucumber"/>
+    	<gem args="install cuke4duke --version 0.4.3"/>
+    </target>
+
+
+    <target name="execute-cucumber" depends="install-gems">
         <delete file="${target.test.cucumber.failed.file}"/>
 
         <exec executable="${ops.local.dir}/kill-firefox.sh"/>
