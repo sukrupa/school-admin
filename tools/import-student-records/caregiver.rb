@@ -1,16 +1,12 @@
 require 'rubygems'
 
-class Student
+class Caregiver
 
-  attr_reader :community_location, :student_id, :father, :mother, :name, :date_of_birth, :gender, :religion, :student_class, :caste, :sub_caste, :sponsor, :family_status
+  attr_reader :name, :occupation, :education, :salary, :marital_status
   
   def initialize args
     args.each do |k,v|
-      if k == :date_of_birth
-        instance_variable_set("@#{k}", format_date(v)) unless (v.nil? or v.empty?)
-        else
         instance_variable_set("@#{k}", v) unless (v.nil? or v.empty?)
-      end
     end
   end
   

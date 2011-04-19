@@ -10,16 +10,35 @@ class WorksheetParser
 
   LEGENDS_CORNER = "Sl.No"
   NAME_HEADING = 'Name of the Student'
+  CASTE_HEADING = 'Caste'
+  SUBCASTE_HEADING = 'Subcaste'
   RELIGION_HEADING = 'Religion'
   COMMUNITY_LOCATION_HEADING = 'Community Location'
   STUDENT_ID_HEADING = "Student's ID"
-  FATHER_HEADING = "Father's Name"
-  MOTHER_HEADING = "Mother's Name"
+  FAMILY_STATUS_HEADING = "Family Status"
   GENDER_HEADING ='Gender'
   DATE_OF_BIRTH_HEADING = 'DOB'
+  SPONSOR_HEADING = 'Sponsor'
   TALENT_HEADING = 'Special Talent in Child'
+  
+  FATHER_HEADING = "Father's Name"
   FATHER_OCCUPATION = "Father's Occupation"
+  FATHER_EDUCATION = "Father's Education"
+  FATHER_SALARY = "Father's Salary"
+  FATHER_MARITAL_STATUS = "Father's Marital Status"
+
+  MOTHER_HEADING = "Mother's Name"
   MOTHER_OCCUPATION = "Mother's Occupation"
+  MOTHER_EDUCATION = "Mother's Education"
+  MOTHER_SALARY = "Mother's Salary"
+  MOTHER_MARITAL_STATUS = "Mother's Marital Status"
+  
+  GUARDIAN_HEADING = "Guardian's Name"
+  GUARDIAN_OCCUPATION = "Guardian's Occupation"
+  GUARDIAN_EDUCATION = "Guardian's Education"
+  GUARDIAN_SALARY = "Guardian's Salary"
+  
+  CONTACT_NUMBER_HEADING = "Contact No."
   
   def initialize(worksheet)
     @worksheet = worksheet
@@ -65,36 +84,79 @@ class WorksheetParser
 	     religion = read_cell_value(row_number,RELIGION_HEADING)
        community_location = read_cell_value(row_number,COMMUNITY_LOCATION_HEADING)
        student_id = read_cell_value(row_number,STUDENT_ID_HEADING)
-       father = read_cell_value(row_number,FATHER_HEADING)
-       mother = read_cell_value(row_number,MOTHER_HEADING)
        name = read_cell_value(row_number,NAME_HEADING)
        date_of_birth = read_cell_value(row_number,DATE_OF_BIRTH_HEADING)
-       gender = read_cell_value(row_number,GENDER_HEADING)
+       gender = read_cell_value(row_number,GENDER_HEADING) 
+       caste = read_cell_value(row_number,CASTE_HEADING)
+       sub_caste = read_cell_value(row_number,SUBCASTE_HEADING)
+       family_status =  read_cell_value(row_number,FAMILY_STATUS_HEADING)
+       sponsor = read_cell_value(row_number,SPONSOR_HEADING)
        
        talents_string = read_cell_value(row_number,TALENT_HEADING)
        talents = Talent.new(talents_string)
+
+       father_name = read_cell_value(row_number,FATHER_HEADING)
+       father_occupation = read_cell_value(row_number, FATHER_OCCUPATION)
+       father_education = read_cell_value(row_number,FATHER_EDUCATION)
+       father_salary = read_cell_value(row_number,FATHER_SALARY)
+       father_marital_status = read_cell_value(row_number,FATHER_MARITAL_STATUS)
+
+       mother_name = read_cell_value(row_number,MOTHER_HEADING)      
+             mother_occupation = read_cell_value(row_number, MOTHER_OCCUPATION)   
+             mother_education = read_cell_value(row_number,MOTHER_EDUCATION) 
+             mother_salary = read_cell_value(row_number,MOTHER_SALARY)
+             mother_marital_status = read_cell_value(row_number,MOTHER_MARITAL_STATUS)
        
-       # father_occupation = read_cell_value(row_number, FATHER_OCCUPATION)
-       #     mother_occupation = read_cell_value(row_number, MOTHER_OCCUPATION)
+       #       guardian = read_cell_value(row_number,GUARDIAN_HEADING)      
+       #        guardian_occupation = read_cell_value(row_number, GUARDIAN_OCCUPATION)   
+       #        guardian_education = read_cell_value(row_number,GUARDIAN_EDUCATION) 
+       #        guardian_salary = read_cell_value(row_number,GUARDIAN_SALARY)
+
+
+
+              father_data = {
+                :name => father_name,
+                :occupation => father_occupation,
+                :education => father_education,
+                :salary => father_salary,
+                :marital_status => father_marital_status
+              }
+              
+              mother_data = {
+                :name => mother_name,
+                :occupation => mother_occupation,
+                :education => mother_education,
+                :salary => mother_salary,
+                :marital_status => mother_marital_status
+              }
+              
+              if mother_data
+                mother = Caregiver.new(mother_data)
+              end
+      if father_data
+       father = Caregiver.new(father_data) 
        
+     end
+
+       #  guardian = Cargiver.new()
        
        
        if (!name.nil? or  !student_id.nil?)
          student_data = {
            :religion => religion,
+           :caste => caste,
+           :sub_caste => sub_caste,
+           :family_status => family_status,
+           :sponsor => sponsor,
            :community_location => community_location,
            :student_id => student_id,
-           :father => father,
-           :mother => mother,
            :name => name,
            :date_of_birth => date_of_birth,
            :gender => gender,
-           :student_class => @student_class, 
-           # :father_occupation => father_occupation,
-           #            :mother_occupation => mother_occupation
+           :student_class => @student_class
          }
          student = Student.new(student_data)
-         @students_and_talents_array << [student, talents]
+         @students_and_talents_array << [student, talents,father]
        end
        
 	   end

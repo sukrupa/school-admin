@@ -2,6 +2,7 @@ require 'rubygems'
 require 'roo'
 require 'workbook_parser'
 require 'student'
+require 'caregiver'
 require 'sql_generator'
 
 TARGET_SQL_FILE = '../../ops/deploy/sql/real_student_data.sql'
