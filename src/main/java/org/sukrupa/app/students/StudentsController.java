@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,16 +66,16 @@ public class StudentsController {
                        @RequestParam(required = false) boolean noteAddedSuccesfully,
                        Map<String, Object> model) {
 
-
         Student student = studentService.load(id);
+        setStudentData(student, noteUpdateStatus, noteAddedSuccesfully, model);
+        return "students/edit";
+    }
 
-        student.getStudentId();
+    private void setStudentData(Student student, String noteUpdateStatus, boolean noteAddedSuccesfully, Map<String, Object> model) {
         model.put("student", student);
         model.put("formhelper", present(student));
         model.put("noteUpdateStatus", noteUpdateStatus);
         model.put("noteAddedSuccesfully", noteAddedSuccesfully);
-
-        return "students/edit";
     }
 
 
@@ -165,7 +164,9 @@ public class StudentsController {
             model.put("errors", errors);
             addErrorToFields(model, errors);
             model.put("message", "Error updating student");
-            return edit(id,"",false,model);
+            studentService.setFormDataOnStudent(studentForm, student);
+            setStudentData(student,"",false,model);
+            return "students/edit";
         }
     }
 

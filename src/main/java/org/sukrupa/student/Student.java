@@ -20,7 +20,6 @@ import java.util.*;
 public class Student {
 
     public static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
-    private static final String PLACEHOLDER_IMAGE = "placeholderImage";
 
     @Id
     @GeneratedValue
@@ -315,7 +314,12 @@ public class Student {
         return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
     }
 
-    public void updateFrom(StudentForm studentUpdateParameters, Set<Talent> newTalents) {
+    public void updateStudent(StudentForm studentUpdateParameters, Set<Talent> newTalents) {
+        this.talents = Sets.newHashSet(newTalents);
+        updateStudentWithFormData(studentUpdateParameters);
+    }
+
+    public void updateStudentWithFormData(StudentForm studentUpdateParameters) {
         this.studentClass = studentUpdateParameters.getStudentClass();
         this.gender = studentUpdateParameters.getGender();
         this.name = studentUpdateParameters.getName();
@@ -325,7 +329,6 @@ public class Student {
         this.communityLocation = studentUpdateParameters.getCommunityLocation();
         this.performance = studentUpdateParameters.getPerformance();
         this.disciplinary = studentUpdateParameters.getDisciplinary();
-        this.talents = Sets.newHashSet(newTalents);
         this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsor = studentUpdateParameters.getSponsored();
