@@ -1,7 +1,7 @@
 <div>
        Search results for:
        $searchCriteria:{
-            <td>$it$;</td>
+            <td>$it$ |</td>
        }$
 </div>
 <div class="errorMessage">
