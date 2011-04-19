@@ -1,6 +1,6 @@
 package org.sukrupa.student;
 
-import org.sukrupa.twist.ScenarioDataUnitOfWork;
+import org.sukrupa.automation.ScenarioDataUnitOfWork;
 
 public class RemoveAddedStudents {
 

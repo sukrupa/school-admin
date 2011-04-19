@@ -4,7 +4,7 @@ Add New Talent Workflow:
 #Given I am on the admin page
 #And I click the link "Add New Talent"
 #Then I should be on the Add New Talent Page
-#If I enter a new talent "Fire Breathing" 
+#If I enter a new talent "Fire breathing" 
 #And I click the Add Talent button
 
 
@@ -12,4 +12,4 @@ Add New Talent Workflow:
 School Admin Navigation, Edit Student:
 #Given I am on the student profile for student with Id  "SK20090080"
 #Click on Edit Button
-#Verify that the new talent "Fire Breathing" is in the list of talents
+#Verify that the new talent "Fire breathing" is in the list of talents

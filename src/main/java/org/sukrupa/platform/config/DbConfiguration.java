@@ -19,8 +19,8 @@ import java.util.Properties;
 @ImportResource("classpath:transaction-config.xml")
 public class DbConfiguration {
 
-	@Value("${base.package}")
-	private String basePackageName;
+    @Value("${base.package}")
+    private String basePackageName;
 
     @Value("${jdbc.url}")
     private String jdbcUrl;
@@ -39,35 +39,35 @@ public class DbConfiguration {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        return new HibernateTransactionManager(sessionFactory());
+	return new HibernateTransactionManager(sessionFactory());
     }
 
     @Bean
     public SessionFactory sessionFactory() {
-        return sessionFactoryFrom(dataSource());
+	return sessionFactoryFrom(dataSource());
     }
 
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDefaultAutoCommit(true);
-        dataSource.setDriverClassName(jdbcDriver);
-        dataSource.setUrl(jdbcUrl);
-        dataSource.setUsername(jdbcUser);
-        dataSource.setPassword(jdbcPassword);
-        return dataSource;
+	BasicDataSource dataSource = new BasicDataSource();
+	dataSource.setDefaultAutoCommit(true);
+	dataSource.setDriverClassName(jdbcDriver);
+	dataSource.setUrl(jdbcUrl);
+	dataSource.setUsername(jdbcUser);
+	dataSource.setPassword(jdbcPassword);
+	return dataSource;
     }
 
-    private SessionFactory sessionFactoryFrom(DataSource dataSource) {
-        try {
-            AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
-            sessionFactory.setDataSource(dataSource);
-            sessionFactory.setPackagesToScan(new String[]{basePackageName});
-            sessionFactory.setHibernateProperties(properties);
-            sessionFactory.afterPropertiesSet();
-            return sessionFactory.getObject();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public SessionFactory sessionFactoryFrom(DataSource dataSource) {
+	try {
+	    AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
+	    sessionFactory.setDataSource(dataSource);
+	    sessionFactory.setPackagesToScan(new String[] { basePackageName });
+	    sessionFactory.setHibernateProperties(properties);
+	    sessionFactory.afterPropertiesSet();
+	    return sessionFactory.getObject();
+	} catch (Exception e) {
+	    throw new RuntimeException(e);
+	}
     }
 }

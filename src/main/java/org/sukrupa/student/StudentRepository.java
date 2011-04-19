@@ -23,45 +23,45 @@ public class StudentRepository {
     private static final Logger LOG = Logger.getLogger(StudentService.class);
 
 
-	private SessionFactory sessionFactory;
-	private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
+    private SessionFactory sessionFactory;
+    private StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator;
 
-	@Autowired
-	public StudentRepository(SessionFactory sessionFactory,StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator) {
-		this.sessionFactory = sessionFactory;
+    @Autowired
+    public StudentRepository(SessionFactory sessionFactory, StudentsSearchCriteriaGenerator studentsSearchCriteriaGenerator) {
+        this.sessionFactory = sessionFactory;
         this.studentsSearchCriteriaGenerator = studentsSearchCriteriaGenerator;
     }
 
-	public void put(Student student) {
-		session().saveOrUpdate(student);
-		//session().flush();
-	}
+    public void put(Student student) {
+        session().saveOrUpdate(student);
+        //session().flush();
+    }
 
-	public Student update(Student student) {
-		session().save(student);
-		session().flush();
-		return student;
-	}
+    public Student update(Student student) {
+        session().save(student);
+        session().flush();
+        return student;
+    }
 
     public List<Student> findAll() {
-		return query("from Student").list();
-	}
+        return query("from Student").list();
+    }
 
     public Student findByStudentId(String studentId) {
-		return (Student) query("from Student where studentId = ?").setParameter(0, StringUtils.upperCase(studentId)).uniqueResult();
-	}
+        return (Student) query("from Student where studentId = ?").setParameter(0, StringUtils.upperCase(studentId)).uniqueResult();
+    }
 
-	public Set<Student> findByStudentIds(String... studentIds) {
-		return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
-	}
+    public Set<Student> findByStudentIds(String... studentIds) {
+        return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
+    }
 
-	private Query query(String hql) {
-		return session().createQuery(hql);
-	}
+    private Query query(String hql) {
+        return session().createQuery(hql);
+    }
 
-	private Session session() {
-		return sessionFactory.getCurrentSession();
-	}
+    private Session session() {
+        return sessionFactory.getCurrentSession();
+    }
 
     public List<Student> findBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(searchParam);
@@ -71,7 +71,7 @@ public class StudentRepository {
     }
 
     int getCountBasedOn(StudentSearchParameter searchParam) {
-		Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
+        Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
         return Integer.parseInt(countCriteria.uniqueResult().toString());
     }
 }

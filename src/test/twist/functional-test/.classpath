@@ -8,5 +8,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sukrupa-code"/>
 	<classpathentry kind="lib" path="/sukrupa-code/lib/test/hamcrest-all-1.2.jar"/>
 	<classpathentry kind="lib" path="/sukrupa-code/lib/test/junit-dep-4.8.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
+	<classpathentry kind="lib" path="/sukrupa-code/lib/main/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="/sukrupa-code/lib/main/hibernate3.jar" sourcepath="/sukrupa-code/lib/source/hibernate-core-3.6.0.Beta2-sources.jar"/>
+	<classpathentry kind="lib" path="/sukrupa-code/lib/main/hsqldb.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

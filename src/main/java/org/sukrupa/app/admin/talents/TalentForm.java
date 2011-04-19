@@ -1,5 +1,6 @@
 package org.sukrupa.app.admin.talents;
 
+import org.apache.commons.lang.StringUtils;
 import org.sukrupa.platform.RequiredByFramework;
 
 public class TalentForm {
@@ -15,7 +16,9 @@ public class TalentForm {
     }
 
     public String getDescription(){
-        return description;
+        description = description.toLowerCase();
+        description = StringUtils.capitalize(description);
+        return description.trim();
     }
 
     public void setDescription(String descriptionIn){
