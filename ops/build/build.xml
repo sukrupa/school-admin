@@ -147,7 +147,7 @@
     </target>
 
     <target name="test:cucumber"
-            depends="clean init compile:all"
+            depends="clean, init, compile:all"
             description="Run Cucumber">
 
         <run-against-sahi-and-web-server startWebServerTarget="sukrupa-server:start-for-cucumber"
