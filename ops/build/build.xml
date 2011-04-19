@@ -192,6 +192,7 @@
             </zipfileset>
             <zipfileset dir="${tools.ant.dir}/lib" prefix="install/ant/lib">
                 <include name="**/ant.jar"/>
+                <include name="**/antelopetasks-3.2.10.jar"/>
                 <include name="**/ant-launcher.jar"/>
                 <include name="**/dbdeploy*.jar"/>
                 <include name="**/hsql*.jar"/>
