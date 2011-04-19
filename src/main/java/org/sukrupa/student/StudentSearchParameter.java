@@ -179,10 +179,15 @@ public class StudentSearchParameter {
     }
 
     public Map<String, String> createCriteriaMap() {
-        Map<String, String> criteria = new HashMap<String, String>();
+        Map<String, String> criteria = new LinkedHashMap<String, String>();
 
         if(!name.isEmpty())
             criteria.put("NAME", this.name);
+
+        String talentList = StringUtils.join(getDescriptions(), ", ");
+
+        if(!talentList.isEmpty())
+            criteria.put("TALENTS", talentList);
 
         criteria.put("AGE FROM", this.ageFrom);
         criteria.put("AGE TO", this.ageTo);
@@ -201,10 +206,7 @@ public class StudentSearchParameter {
 
 
 
-        String talentList = StringUtils.join(getDescriptions(), ", ");
 
-        if(!talentList.isEmpty())
-            criteria.put("TALENTS", talentList);
 
         return criteria;
     }
