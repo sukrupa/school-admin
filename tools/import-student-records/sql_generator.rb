@@ -14,16 +14,16 @@ class SQLGenerator
         caregivers = student_and_talents[2]
         sql_statements << "INSERT INTO student (#{student.attribute_names.join(',')}) VALUES (#{values_for student});"
         cg_map = {1 => 'father',2=>'mother'}
-                  i=1
-        caregivers.each do |caregiver|
+
+        caregivers.each_with_index do |caregiver,i|
 
         if !caregiver.attribute_names.empty?
                   
           sql_statements <<   "MERGE INTO CAREGIVER USING (VALUES(#{values_for caregiver})) ON (name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}')
                               WHEN NOT MATCHED THEN INSERT(#{caregiver.attribute_names.join(',')}) VALUES (#{values_for caregiver});"
-          sql_statements <<    "UPDATE student SET #{cg_map[i]}_id = (SELECT id FROM CAREGIVER WHERE name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}') WHERE STUDENT_ID = '#{student.student_id}';"
+          sql_statements <<    "UPDATE student SET #{cg_map[i+1]}_id = (SELECT id FROM CAREGIVER WHERE name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}') WHERE STUDENT_ID = '#{student.student_id}';"
         end
-          i = i+1
+        
       end
         talents.talents.each do |talent|
           sql_statements << "INSERT INTO student_talent (student_id,talent_id)
