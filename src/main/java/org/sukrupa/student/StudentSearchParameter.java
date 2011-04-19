@@ -179,7 +179,7 @@ public class StudentSearchParameter {
     }
 
     public Map<String, String> createCriteriaMap() {
-        Map<String, String> criteria = new HashMap<String, String>();
+        Map<String, String> criteria = new LinkedHashMap<String, String>();
 
         if(!name.isEmpty())
             criteria.put("NAME", this.name);
