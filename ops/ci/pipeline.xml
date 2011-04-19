@@ -62,6 +62,23 @@ qXj/aUNmTt9h/3EALIyBTKcspAAlYxy1FhC4uqK3ig==</license>
           </job>
         </jobs>
       </stage>
+      <stage name="cucumber">
+        <jobs>
+          <job name="cucumber">
+            <tasks>
+              <exec command="./build">
+                <arg value="test:cucumber" />
+              </exec>
+            </tasks>
+            <tabs>
+              <tab name="Cucumber" path="reports/html/index.html" />
+            </tabs>
+            <artifacts>
+              <test src="target/reports" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
       <stage name="sonar">
         <jobs>
           <job name="sonar">
