@@ -5,7 +5,7 @@ require 'student'
 require 'caregiver'
 require 'sql_generator'
   
-TARGET_SQL_FILE = '../../ops/deploy/sql/insert-fake-data.sql'
+TARGET_SQL_FILE = '../../ops/deploy/sql/data_import.sql'
 
 workbook = Excelx.new(ARGV[0])
 students_and_talents_array = WorkbookParser.new.parse(workbook)
