@@ -7,6 +7,7 @@ require 'sql_generator'
   
 TARGET_SQL_FILE = '../../ops/deploy/sql/data_import.sql'
 
+
 workbook = Excelx.new(ARGV[0])
 students_and_talents_array = WorkbookParser.new.parse(workbook)
 sql_statements = SQLGenerator.new.generate_sql students_and_talents_array

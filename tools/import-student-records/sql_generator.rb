@@ -19,15 +19,13 @@ class SQLGenerator
 
         if !caregiver.attribute_names.empty?
                   
-          sql_statements <<   "MERGE INTO CAREGIVER USING (VALUES(#{values_for caregiver})) ON (name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}')
-                              WHEN NOT MATCHED THEN INSERT(#{caregiver.attribute_names.join(',')}) VALUES (#{values_for caregiver});"
+          sql_statements <<   "MERGE INTO CAREGIVER USING (VALUES(#{values_for caregiver})) ON (name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}') WHEN NOT MATCHED THEN INSERT(#{caregiver.attribute_names.join(',')}) VALUES (#{values_for caregiver});"
           sql_statements <<    "UPDATE student SET #{cg_map[i+1]}_id = (SELECT id FROM CAREGIVER WHERE name = '#{caregiver.name}' AND occupation = '#{caregiver.occupation}') WHERE STUDENT_ID = '#{student.student_id}';"
         end
         
       end
         talents.talents.each do |talent|
-          sql_statements << "INSERT INTO student_talent (student_id,talent_id)
-          SELECT student.id,talent.id FROM STUDENT,TALENT WHERE student.student_id = '#{student.student_id}' AND (talent.description = '#{talent}');"
+          sql_statements << "INSERT INTO student_talent (student_id,talent_id) SELECT student.id,talent.id FROM STUDENT,TALENT WHERE student.student_id = '#{student.student_id}' AND (talent.description = '#{talent}');"
         end
 
       end
