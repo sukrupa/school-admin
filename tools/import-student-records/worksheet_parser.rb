@@ -93,6 +93,8 @@ class WorksheetParser
        sponsor = read_cell_value(row_number,SPONSOR_HEADING)
        academic_performance = read_cell_value(row_number,ACADEMIC_HEADING)
        
+       contact_number = read_cell_value(row_number,CONTACT_NUMBER_HEADING)
+       
        talents_string = read_cell_value(row_number,TALENT_HEADING)
    
        father_name = read_cell_value(row_number,FATHER_HEADING)
@@ -115,6 +117,7 @@ class WorksheetParser
            talents = Talent.new(talents_string)
 
 
+
               father_data = {
                 :name => father_name,
                 :occupation => father_occupation,
@@ -122,6 +125,7 @@ class WorksheetParser
                 :salary => father_salary,
                 :marital_status => father_marital_status
               }
+        
               
               mother_data = {
                 :name => mother_name,
@@ -130,6 +134,15 @@ class WorksheetParser
                 :salary => mother_salary,
                 :marital_status => mother_marital_status
               }
+              
+                           if contact_number
+                             contact_numbers = contact_number.split("/")
+                             
+                             father_data['contact_number'] = contact_numbers[0]
+                             if contact_numbers.size>1 
+                                   mother_data['contact_number'] = contact_numbers[1]
+                             end
+                           end           
               
               if mother_data
                 mother = Caregiver.new(mother_data)
@@ -175,9 +188,12 @@ class WorksheetParser
 	  if (cell_value == '-' || cell_value == 0 || cell_value == "'-")
 	    return nil
 	  end
-	  if column_heading == DATE_OF_BIRTH_HEADING
+	  if column_heading == DATE_OF_BIRTH_HEADING || column_heading == CONTACT_NUMBER_HEADING
 	    return cell_value.to_s
+	    
     else
+      
+
       
     if (@worksheet.celltype(row_number,column_number) == :float)
  	      return Integer(cell_value)
