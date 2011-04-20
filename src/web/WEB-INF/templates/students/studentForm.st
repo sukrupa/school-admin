@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="updateEntry">
-                    <div class="label">Gender</div>
+                    <div class="label">Gender<span class="mandatory">*</span></div>
                     <select name="gender" id="gender" class="updateValue">
                         $formhelper.gendersDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
