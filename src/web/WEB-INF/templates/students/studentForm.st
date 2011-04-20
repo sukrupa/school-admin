@@ -159,6 +159,7 @@
                     <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="father.occupation">
+                            <option value=""></option>
                              $formhelper.fatherOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
@@ -194,6 +195,7 @@
                     <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="mother.occupation">
+                            <option value=""></option>
                              $formhelper.motherOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
@@ -229,6 +231,7 @@
                     <div class="updateEntrySelect">
                         <div class="label">Occupation</div>
                         <select name="guardian.occupation">
+                            <option value=""></option>
                              $formhelper.guardianOccupationsDropDownList:{
                                 <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                              }$
