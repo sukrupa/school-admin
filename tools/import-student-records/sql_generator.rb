@@ -35,7 +35,12 @@ class SQLGenerator
   end
 
   def values_for(student)
-    student.attribute_values.map { |value| "'#{value}'" }.join(',')
+    student.attribute_values.map do |value| 
+         value.gsub!(/'/,"''")
+      "'#{value}'"
+     end.join(',')
+       
+       
   end
   
 end

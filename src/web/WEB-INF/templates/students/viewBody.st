@@ -90,8 +90,12 @@
             <img src="/students/$student.imageLink$/image" class="studentImage" id="$student.imageLink$">
 
              <div class="entry">
+                 $if(sponsored)$
                 <div class="label">Sponsor</div>
                 <div class="value" id="sponsor">$student.sponsor$</div>
+                 $else$
+                 <div class="label">Not Sponsored</div>
+                $endif$
             </div>
 
 

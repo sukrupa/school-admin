@@ -90,6 +90,7 @@ public class StudentsController {
         Student student = studentService.load(id);
         if (student != null) {
             model.put("student", student);
+            model.put("sponsored",(student.getSponsor()));
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
 
             if (student.getStatus() == null)

@@ -20,7 +20,7 @@ class WorksheetParser
   DATE_OF_BIRTH_HEADING = 'DOB'
   SPONSOR_HEADING = 'Sponsor'
   TALENT_HEADING = 'Special Talent in Child'
-  
+  ACADEMIC_HEADING = 'Academic Performance of the Child'
   FATHER_HEADING = "Father's Name"
   FATHER_OCCUPATION = "Father's Occupation"
   FATHER_EDUCATION = "Father's Education"
@@ -91,10 +91,10 @@ class WorksheetParser
        sub_caste = read_cell_value(row_number,SUBCASTE_HEADING)
        family_status =  read_cell_value(row_number,FAMILY_STATUS_HEADING)
        sponsor = read_cell_value(row_number,SPONSOR_HEADING)
+       academic_performance = read_cell_value(row_number,ACADEMIC_HEADING)
        
        talents_string = read_cell_value(row_number,TALENT_HEADING)
-       talents = Talent.new(talents_string)
-
+   
        father_name = read_cell_value(row_number,FATHER_HEADING)
        father_occupation = read_cell_value(row_number, FATHER_OCCUPATION)
        father_education = read_cell_value(row_number,FATHER_EDUCATION)
@@ -112,6 +112,7 @@ class WorksheetParser
        #        guardian_education = read_cell_value(row_number,GUARDIAN_EDUCATION) 
        #        guardian_salary = read_cell_value(row_number,GUARDIAN_SALARY)
 
+           talents = Talent.new(talents_string)
 
 
               father_data = {
@@ -153,7 +154,8 @@ class WorksheetParser
            :name => name,
            :date_of_birth => date_of_birth,
            :gender => gender,
-           :student_class => @student_class
+           :student_class => @student_class,
+           :student_performance => academic_performance
          }
          student = Student.new(student_data)
          @students_and_talents_array << [student, talents,[father,mother]]
@@ -162,10 +164,6 @@ class WorksheetParser
 	   end
 	   @students_and_talents_array
 	   
-	   # @students_and_talents_array.map(&:first).reduce([]) do |total, student|
-	   #        total << student.father_occupation
-	   #        total << student.mother_occupation
-	   #    end.reject(&:nil?).reject { |o| o   == "Nil" }.uniq
 	   
 	end
 	
@@ -174,7 +172,7 @@ class WorksheetParser
 	  column_number = @column_headings[column_heading]
 	  cell_value = @worksheet.cell(row_number,column_number)
 	  
-	  if (cell_value == '-' || cell_value == 0)
+	  if (cell_value == '-' || cell_value == 0 || cell_value == "'-")
 	    return nil
 	  end
 	  if column_heading == DATE_OF_BIRTH_HEADING
