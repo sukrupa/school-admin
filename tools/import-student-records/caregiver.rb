@@ -2,7 +2,7 @@ require 'rubygems'
 
 class Caregiver
 
-  attr_reader :name, :occupation, :education, :salary, :marital_status
+  attr_reader :name, :occupation, :education, :salary, :marital_status, :contact_number
   
   def initialize args
     args.each do |k,v|

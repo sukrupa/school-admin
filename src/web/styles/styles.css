@@ -1,3 +1,7 @@
+
+
+
+
 /* FEATURE TOGGLES */
 
 .disabledFeature {
@@ -609,6 +613,10 @@ img.studentImage{
     margin-left: 40px;
     margin-top: 11px;
     text-align: center;
+}
+
+#updateStudent .studentImage .errorMessage{
+    margin-left:-0.688em;
 }
 
 #updateStudent .studentImage img {
