@@ -17,12 +17,17 @@
     width: 250px;
 }
 
+#secondaryInfo {
+float: right;
+}
 #secondaryInfo .entry .label {
     width: 130px;
 }
 
 #secondaryInfo .entry .value {
     width: 100px;
+    position: relative;
+    right: 20px;
 }
 
 .entry .value.existing {
