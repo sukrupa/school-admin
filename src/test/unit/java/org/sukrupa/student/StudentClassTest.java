@@ -8,8 +8,8 @@ public class StudentClassTest {
     @Test
     public void shouldPromoteStudent(){
 
-        assertEquals(StudentClass.PRESCHOOL, StudentClass.DAYCARE.next());
-        assertEquals(StudentClass.LKG, StudentClass.PRESCHOOL.next());
+        assertEquals(StudentClass.NURSERY, StudentClass.DAY_CARE.next());
+        assertEquals(StudentClass.LKG, StudentClass.NURSERY.next());
         assertEquals(StudentClass.UKG, StudentClass.LKG.next());
         assertEquals(StudentClass.ONE_STD, StudentClass.UKG.next());
         assertEquals(StudentClass.TWO_STD, StudentClass.ONE_STD.next());
@@ -30,7 +30,8 @@ public class StudentClassTest {
 
     @Test
     public void shouldCreateAStudentClassFromDisplayName() {
-        assertEquals(StudentClass.DAYCARE, StudentClass.fromDisplayName("Daycare"));
+        assertEquals(StudentClass.DAY_CARE, StudentClass.fromDisplayName("Day Care"));
+        assertEquals(StudentClass.NURSERY, StudentClass.fromDisplayName("Nursery"));
         assertEquals(StudentClass.LKG, StudentClass.fromDisplayName("LKG"));
         assertEquals(StudentClass.UKG, StudentClass.fromDisplayName("UKG"));
         assertEquals(StudentClass.ONE_STD, StudentClass.fromDisplayName("1 Std"));

@@ -104,7 +104,7 @@ public class StudentTest {
         assertEquals("10 Std", promoteStudent("9 Std").getStudentClass());
         assertEquals("UKG",promoteStudent("LKG").getStudentClass());
         assertEquals("1 Std",promoteStudent("UKG").getStudentClass());
-        assertEquals("LKG", promoteStudent("Preschool").getStudentClass());
+        assertEquals("LKG", promoteStudent("Nursery").getStudentClass());
     }
 
     @Test
