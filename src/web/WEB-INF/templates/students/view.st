@@ -1,1 +1,1 @@
-$layout(body=students/viewBody(), titleLine2={$student.name$}, title="Student:", scripts="fadeout", stylesheets=["studentRecord","viewStudentRecord"])$
+$layout(body=students/viewBody(), titleLine2={$student.name$}, title="Student Record:", scripts="fadeout", stylesheets=["studentRecord","viewStudentRecord"])$

@@ -17,10 +17,6 @@ public class EditParentsDetail {
 		assertTrue(browser.textbox(fieldName).near(browser.div(fatherField)).exists());
 	}
 
-	public void veriftThatWeAreInTheViewStudentPage() throws Exception {
-		assertEquals("Student:", browser.title() );
-	}
-
 	public void enterInThe(String value, String fieldName) throws Exception {
 		browser.textbox(fieldName).setValue(value);
 	}
@@ -31,6 +27,10 @@ public class EditParentsDetail {
 
 	public void chooseInTheListOf(String occupation, String fieldName) throws Exception {
 		browser.select(fieldName).choose(occupation);
+	}
+
+	public void verifyThatWeAreInTheViewStudentRecordPage() throws Exception {
+		assertEquals("Student Record:", browser.title() );
 	}
 
 }
