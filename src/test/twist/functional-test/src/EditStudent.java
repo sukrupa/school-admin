@@ -64,8 +64,8 @@ public class EditStudent {
 		browser.select(fieldName).choose(option);
 	}
 
-	public void verifyThatIAmInTheStudentViewPage() throws Exception {
-			assertEquals("Student:", browser.title() );
+	public void verifyThatIAmInTheStudentRecordViewPage() throws Exception {
+			assertEquals("Student Record:", browser.title() );
 	}
 
 	public void verifyThatTheNewTalentIsInTheListOfTalents(String newTalent)

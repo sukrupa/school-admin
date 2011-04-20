@@ -21,7 +21,7 @@ Edit Parents Detail, Edit Student:
 #Enter "RS. 6,000" in the "mother.salary"
 #Enter "RS. 7,000" in the "guardian.salary"
 #Click "Save"
-#Verift that we are in the view student page
+#Verify that we are in the view student record page
 #Verify that the field name "fatherName" is "Peter Murray"
 #Verify that the field name "fatherEducation" is "Not too much"
 #Verify that the field name "motherName" is "My mother"

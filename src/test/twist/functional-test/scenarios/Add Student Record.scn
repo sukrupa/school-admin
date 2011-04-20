@@ -7,7 +7,7 @@ Add Student Record:
 #And I enter the "dateOfBirth" as "06-03-1982"
 #And I select the "gender" as "Female"
 #And I click "Register"
-#Then I should see the "Edit Student: Yael" page
+#Then I should see the "Edit Student Record: Yael" page
 
 Add Student Record:
 #When I navigate to "/students/create"
