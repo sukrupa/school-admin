@@ -177,7 +177,7 @@
             <td>
                 <select name="caregiversOccupation">
                    <option value="*">Any</option>
-                   $rest(formhelper.occupations):{
+                   $formhelper.occupations:{
                         <option value="$it$">$it$</option>
                    }$
                 </select>
