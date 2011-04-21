@@ -3,6 +3,9 @@
 
     <target name="img:check">
     <condition property="img.present">
+            <available file="${app.image.dir}" type="dir"/>
+    </condition>
+    <condition property="img.not.present">
         <not>
             <available file="${app.image.dir}" type="dir"/>
         </not>
@@ -18,7 +21,7 @@
             <fileset dir="${resources.main.dir}/images"/>
         </copy>
     </target>
-    <target name="img:create" depends="img:check" unless="img.present">
+    <target name="img:create" depends="img:check" if="img.present">
         <mkdir dir="${app.image.dir}"/>
         <copy todir="${app.image.dir}">
             <fileset dir="${resources.main.dir}/images"/>
