@@ -1,8 +1,14 @@
 <project name="image-targets">
     <import file="properties.xml"/>
+
     <target name="img:check">
-        <available file="${app.image.dir}" type="dir" property="img.present"/>
+    <condition property="img.present">
+        <not>
+            <available file="${app.image.dir}" type="dir"/>
+        </not>
+    </condition>
     </target>
+
     <target name="img:clean" depends="img:check" if="img.present">
         <delete dir="${app.image.dir}"/>
     </target>
