@@ -3,11 +3,11 @@
 
     <target name="img:check">
     <condition property="img.present">
-            <available file="${app.image.dir}" type="dir"/>
+            <available file="${app.image.dir}"/>
     </condition>
     <condition property="img.not.present">
         <not>
-            <available file="${app.image.dir}" type="dir"/>
+            <available file="${app.image.dir}"/>
         </not>
     </condition>
     </target>
