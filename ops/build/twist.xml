@@ -14,6 +14,7 @@
 
         <copy file="src/twist.template.properties" toFile="src/twist.properties" overwrite="true">
             <filterset begintoken="@" endtoken="@">
+                <filter token="PROJECT_DIRECTORY" value="${module.dir}"/>
                 <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
             </filterset>
         </copy>

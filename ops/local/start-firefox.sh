@@ -20,5 +20,5 @@ FIREFOX=$(discoverFirefoxCommand)
 
 echo "Going to launch firefox with [$FIREFOX]"
 
-$FIREFOX $* &
+"$FIREFOX" "$@" &
 exit $?
