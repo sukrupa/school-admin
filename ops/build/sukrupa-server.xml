@@ -20,7 +20,9 @@
     </target>
 
     <target name="sukrupa-server:stop">
-        <exec executable="${ops.deploy.dir}/stop-server.sh"/>
+        <exec executable="bash">
+            <arg file="${ops.deploy.dir}/stop-server.sh"/>
+         </exec>
     </target>
 
     <target name="sukrupa-server:check-is-running">
