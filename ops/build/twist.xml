@@ -12,6 +12,12 @@
                  classpathref="classpath.run.twist.scenarios"
                  name="twist.runner"/>
 
+        <copy file="src/twist.template.properties" toFile="src/twist.properties" overwrite="true">
+            <filterset begintoken="@" endtoken="@">
+                <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
+            </filterset>
+        </copy>
+
         <twist.runner
                 scenarioDir="${src.test.twist.fixtures.dir}/scenarios"
                 reportsDir="${target.reports.dir}"
