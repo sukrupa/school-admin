@@ -5,16 +5,23 @@
     <target name="execute-twist">
         <delete file="${target.test.twist.failed.file}" />
 
-        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <exec executable="bash">
+            <arg file="${ops.local.dir}/kill-firefox.sh"/>
+        </exec>
         <echo message="Executing Twist tests from ${src.test.twist.fixtures.dir}."/>
 
         <taskdef classname="com.thoughtworks.twist.core.execution.ant.ExecuteScenariosTask"
                  classpathref="classpath.run.twist.scenarios"
                  name="twist.runner"/>
 
+        <condition property="browser.executable"
+                   value="C:/Program Files (x86)/Mozilla Firefox/Firefox.exe"
+                   else="${module.dir}/ops/local/start-firefox.sh">
+            <os family="windows"/>
+        </condition>
         <copy file="src/twist.template.properties" toFile="src/twist.properties" overwrite="true">
             <filterset begintoken="@" endtoken="@">
-                <filter token="PROJECT_DIRECTORY" value="${module.dir}"/>
+                <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
                 <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
             </filterset>
         </copy>
@@ -30,7 +37,9 @@
             <fileset dir="${src.test.twist.fixtures.dir}/scenarios" includes="*"/>
         </twist.runner>
 
-        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <exec executable="bash">
+            <arg file="${ops.local.dir}/kill-firefox.sh"/>
+        </exec>
 
         <antcall target="report-status" />
     </target>

@@ -1,5 +1,6 @@
 <project name="properties">
-    <property name="module.dir" value="${basedir}"/>
+    <path id="basedir" path="${basedir}"/>
+    <pathconvert property="module.dir" refid="basedir" targetos="unix"/>
 
     <property name="module.deployable.name" value="school-admin.zip"/>
     <property name="module.jar.name" value="school-admin.jar"/>
