@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 findSukrupaServerProcess() {
     PID=$(cat ~/.webserver.pid)
 }
@@ -34,7 +36,11 @@ stopSukrupaServer() {
         echo "No running server by PID file ~/.webserver.pid found, nothing to stop."
     else
         echo "Killing process with PID [${PID}]"
-        kill -9 $PID
+        if [ "$OS" == "Windows_NT" ]; then
+            taskkill //F //PID $PID
+        else
+            kill -9 $PID
+        fi
         rm ~/.webserver.pid
 
         echo
