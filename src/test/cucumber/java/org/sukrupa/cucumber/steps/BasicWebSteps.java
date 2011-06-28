@@ -59,9 +59,9 @@ public class BasicWebSteps {
     }
 
 
-    @When("^I fill in the \"([^\"]*)\" text box with \"([^\"]*)\"$")
-    public void fillInTheTextBoxWith(String textBox, String value) {
-        browser().textbox(textBox).setValue(value);
+    @When("^I fill in the \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void fillInTheTextfieldWith(String field, String fieldContent){
+        browser().textbox(field).setValue(fieldContent);
     }
 
     @Then("^student \"([^\"]*)\" is displayed$")
