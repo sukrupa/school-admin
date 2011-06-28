@@ -8,11 +8,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-public class SearchStudentsByTalentsSteps extends BasicWebSteps{
+public class SearchStudentsSteps extends BasicWebSteps{
 
     @When("^I select the talent \"([^\"]*)\"$")
     public void selectTalent(String talent) {
         browser().select("availableTalents").choose(talent);
 	    browser().button("addTalent").click();
     }
+
+
 }
