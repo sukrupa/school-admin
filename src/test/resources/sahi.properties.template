@@ -1,6 +1,6 @@
 sahi-base=@APPDIR@/tools/sahi
 sahi-userdata=@APPDIR@/tools/sahi/userdata
 
-browser-process=firefox
+browser-process=@BROWSER_PROCESS@
 browser-path=@BROWSER_EXECUTABLE@
 browser-options=-profile @APPDIR@/tools/sahi/userdata/browser/ff/profiles/sahi0 -no-remote

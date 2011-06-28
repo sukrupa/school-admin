@@ -35,6 +35,7 @@
             <filterset begintoken="@" endtoken="@">
                 <filter token="APPDIR" value="${module.dir}"/>
                 <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
+                <filter token="BROWSER_PROCESS" value="${browser.process}"/>
             </filterset>
         </copy>
     </target>
