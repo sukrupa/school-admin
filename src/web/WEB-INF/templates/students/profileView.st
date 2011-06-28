@@ -1,0 +1,1 @@
+$layout(body=students/profileViewBody(), titleLine2={$student.name$}, title="Profile View:", scripts="fadeout", stylesheets=["studentRecord","viewStudentRecord"])$
