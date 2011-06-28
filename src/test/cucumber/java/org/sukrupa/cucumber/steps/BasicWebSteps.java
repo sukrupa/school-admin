@@ -40,6 +40,11 @@ public class BasicWebSteps {
         assertFalse(browser().containsText(browser().div("page"), text));
     }
 
+    @When("^I fill in the \"([^\"]*)\" text box with \"([^\"]*)\"$")
+    public void fillInTheTextBoxWith(String textBox, String value) {
+        browser().textbox(textBox).setValue(value);
+    }
+
     @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();
