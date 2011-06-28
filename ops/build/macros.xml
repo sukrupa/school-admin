@@ -134,5 +134,14 @@
 
     <target name="nothing-to-cleanup"/>
 
+    <macrodef name="run">
+        <attribute name="script"/>
+        <sequential>
+            <condition property="script.extension" value="bat" else="sh">
+                <os family="windows"/>
+            </condition>
+            <exec executable="@{script}.${script.extension}"/>
+         </sequential>
+    </macrodef>
 
 </project>

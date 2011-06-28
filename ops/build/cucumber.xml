@@ -12,10 +12,13 @@
     </target>
 
 
-    <target name="execute-cucumber" depends="install-gems">
+    <target name="execute-cucumber">
         <delete file="${target.test.cucumber.failed.file}"/>
 
-        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+        <exec executable="bash">
+             <arg file="${ops.local.dir}/kill-firefox.sh"/>
+         </exec>
+
         <echo message="Executing Cucumber tests from ${src.test.cucumber.features.dir} ..."/>
 
         <taskdef classname="cuke4duke.ant.CucumberTask"
@@ -30,7 +33,10 @@
         </cucumber>
 
         <echo message="Result: ${cucumber.features.failed}" />
-        <exec executable="${ops.local.dir}/kill-firefox.sh"/>
+
+        <exec executable="bash">
+             <arg file="${ops.local.dir}/kill-firefox.sh"/>
+         </exec>
 
         <if name="cucumber.features.failed" value="1">
             <antcall target="report-cucumber-status"/>

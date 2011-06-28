@@ -1,0 +1,1 @@
+wmic PROCESS where (name="java.exe" and commandline like "%%sahi%%") terminate

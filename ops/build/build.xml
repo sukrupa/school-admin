@@ -31,8 +31,12 @@
     </target>
 
     <target name="config:sahi">
-        <filter token="appdir" value="${module.dir}" />
-        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties" filtering="true"/>
+        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties">
+            <filterset begintoken="@" endtoken="@">
+                <filter token="APPDIR" value="${module.dir}"/>
+                <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
+            </filterset>
+        </copy>
     </target>
 
     <target name="dev" depends="clean, init, compile:all, copy-resources"/>
@@ -87,21 +91,9 @@
     <target name="compile:test:twist">
         <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
                  classpathref="classpath.compilation.test.twist"/>
-        <condition property="browser.executable"
-                   value="${module.dir}/ops/local/start-firefox.sh">
-            <not>
-                <os family="windows"/>
-            </not>
-        </condition>
-        <condition property="browser.executable"
-                   value="C:/Program Files/Mozilla Firefox/Firefox.exe">
-            <os family="windows" arch="x86"/>
-        </condition>
-        <condition property="browser.executable"
-                   value="C:/Program Files (x86)/Mozilla Firefox/Firefox.exe">
-            <os family="windows"/>
-        </condition>
-        <copy file="src/test/twist/functional-test/src/twist.template.properties" toFile="src/test/twist/functional-test/src/twist.properties" overwrite="true">
+
+        <copy file="src/test/twist/functional-test/src/twist.template.properties"
+              toFile="src/test/twist/functional-test/src/twist.properties" overwrite="true">
             <filterset begintoken="@" endtoken="@">
                 <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
                 <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
@@ -135,7 +127,9 @@
         <exec executable="${ops.local.dir}/run-js-tests.sh" resultproperty="js.test.fail.code"/>
         <exec executable="${ops.local.dir}/kill-firefox.sh"/>
         <condition property="js.test.failed">
-            <not><equals arg1="${js.test.fail.code}" arg2="0"/></not>
+            <not>
+                <equals arg1="${js.test.fail.code}" arg2="0"/>
+            </not>
         </condition>
         <fail if="js.test.failed" message="Javascript unit tests failed"/>
     </target>
@@ -206,7 +200,7 @@
             <zipfileset dir="${ops.build.dir}" prefix="install/build">
                 <include name="*.xml"/>
             </zipfileset>
-            <zipfileset dir="${tools.importer.dir}" prefix="install/importer" />
+            <zipfileset dir="${tools.importer.dir}" prefix="install/importer"/>
             <zipfileset dir="${tools.ant.dir}/bin" prefix="install/ant/bin">
                 <include name="ant"/>
             </zipfileset>
@@ -221,7 +215,7 @@
     </target>
 
     <target name="create.module.jar">
-        <jar basedir="${target.main.dir}" jarfile="${target.module.jar}" excludes="jetty-realms.properties" />
+        <jar basedir="${target.main.dir}" jarfile="${target.module.jar}" excludes="jetty-realms.properties"/>
     </target>
 
 </project>
