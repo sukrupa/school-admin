@@ -35,4 +35,9 @@ public class SearchStudentsSteps extends BasicWebSteps{
     public void selectClass(String schoolClass) {
         browser().select("studentClass").choose(schoolClass);
     }
+
+    @When("^I select the \"([^\"]*)\" gender$")
+    public void selectGender(String gender) {
+        browser().select("gender").choose(gender);
+    }
 }
