@@ -1,3 +1,6 @@
+
+
+
       <div class="sideBarHeader">Search </div>
 	
 	  <div class="sideBarContent">
@@ -68,12 +71,22 @@
       </div>
 
       <div class="sideBarContent">
-
-      <li>
-      <p class="indent">
-      <a href="/admin">
-      Tools
-      </a>
-      </p>
-      </li>
+          <li>
+              <p class="indent">
+                  <a href="/admin">
+                    Tools
+                  </a>
+              </p>
+          </li>
       </div>
+          <br/>
+
+    <div class="sideBarHeader">Needs</div>
+      <div class="sideBarContent">
+              <ul>
+                    <li>
+                      <p class="indent"><a href="/needs/list">Big Needs</a></p>
+                    </li>
+              </ul>
+      </div>
+

@@ -118,6 +118,11 @@ body
 }
 
 
+#sidebar ul{
+    padding: 0;
+    margin: 0;
+}
+
 #sidebar a {
     color:#254965;
 }
