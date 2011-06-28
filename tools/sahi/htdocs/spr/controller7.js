@@ -592,6 +592,12 @@ function demoAction(el) {
 		setDebugValue("// Single line comment"); 
 	} else if (el.value == "comment2") {
 		setDebugValue("/* Multiline \n Comment */");
+	} else if (el.value == "svon") {
+		setDebugValue("_setStrictVisibilityCheck(true);");
+		evaluateExpr();
+	} else if (el.value == "svoff") {
+		setDebugValue("_setStrictVisibilityCheck(false);");
+		evaluateExpr();
 	} else {
 		setDebugValue(el.value + "(" + $("accessor").value + ");");
 		evaluateExpr();
@@ -631,7 +637,7 @@ function setDebugValue(s) {
     $("taDebug").value = s;
 }
 function append() {
-    sahiSendToServer('/_s_/dyn/Recorder_record?step=' + fixedEncodeURIComponent($("taDebug").value));
+    sahiSendToServer('/_s_/dyn/Recorder_record?step=' + fixedEncodeURIComponent(getText()));
 }
 
 function addSahi(s) {

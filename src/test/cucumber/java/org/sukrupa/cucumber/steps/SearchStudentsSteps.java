@@ -16,5 +16,28 @@ public class SearchStudentsSteps extends BasicWebSteps{
 	    browser().button("addTalent").click();
     }
 
+    @When("^I fill in the name with \"([^\"]*)\"$")
+    public void fillInTheTextBoxWith(String value) {
+        browser().textbox("name").setValue(value);
+    }
 
+    @When("^I select a minimum age of \"([^\"]*)\"$")
+    public void selectMinimumAge(String age) {
+        browser().select("ageFrom").choose(age);
+    }
+
+    @When("^I select a maximum age of \"([^\"]*)\"$")
+    public void selectMaximumAge(String age) {
+        browser().select("ageTo").choose(age);
+    }
+
+    @When("^I select the \"([^\"]*)\" class$")
+    public void selectClass(String schoolClass) {
+        browser().select("studentClass").choose(schoolClass);
+    }
+
+    @When("^I select the \"([^\"]*)\" gender$")
+    public void selectGender(String gender) {
+        browser().select("gender").choose(gender);
+    }
 }

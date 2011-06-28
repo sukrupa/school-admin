@@ -25,6 +25,7 @@ set.sah
 spandiv.sah
 popup_title_name_mix.sah
 readfile.sah
+readURL.sah
 trycatch.sah
 modal.sah showModal.htm
 save_as.sah http://sahi.co.in/demo/
@@ -59,3 +60,9 @@ browser.sah
 evalOnRhino.sah
 under.sah
 clickCombo.sah
+collect.sah
+sencha_combobox.sah
+strict_visible.sah
+close_window.sah
+dragDrop.sah
+dragDropXY.sah
