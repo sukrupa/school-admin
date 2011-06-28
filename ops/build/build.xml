@@ -87,6 +87,26 @@
     <target name="compile:test:twist">
         <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
                  classpathref="classpath.compilation.test.twist"/>
+        <condition property="browser.executable"
+                   value="${module.dir}/ops/local/start-firefox.sh">
+            <not>
+                <os family="windows"/>
+            </not>
+        </condition>
+        <condition property="browser.executable"
+                   value="C:/Program Files/Mozilla Firefox/Firefox.exe">
+            <os family="windows" arch="x86"/>
+        </condition>
+        <condition property="browser.executable"
+                   value="C:/Program Files (x86)/Mozilla Firefox/Firefox.exe">
+            <os family="windows"/>
+        </condition>
+        <copy file="src/test/twist/functional-test/src/twist.template.properties" toFile="src/test/twist/functional-test/src/twist.properties" overwrite="true">
+            <filterset begintoken="@" endtoken="@">
+                <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
+                <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
+            </filterset>
+        </copy>
         <copy todir="${target.test.twist.fixtures.dir}">
             <fileset dir="${src.test.twist.src.dir}">
                 <exclude name="**/*.java"/>
