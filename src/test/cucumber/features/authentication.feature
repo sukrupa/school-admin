@@ -5,7 +5,9 @@ Feature: Authentication Log In
     When I fill in the username with "admin"
     And I fill in the password with "password"
     And I click "Login" submit button
-    Then I should see a student list
+    Then I should see "Student ID"
+    And I should see "Name"
+    And I should see "Father's Name"
     And I should see "Search Students"
 
   Scenario: Invalid password
