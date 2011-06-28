@@ -406,6 +406,11 @@
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/../../lib/test/hamcrest-all-1.2.jar!/" />
       </SOURCES>
+<<<<<<< HEAD
+=======
+      <jarDirectory url="file://$cuke4duke$" recursive="false" />
+      <jarDirectory url="file://$cuke4duke$" recursive="false" />
+>>>>>>> Abhi,Shikhar (Story: 551) Created a link for Generate Profile View and a new page for Public profile of student
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
     </library>
   </component>

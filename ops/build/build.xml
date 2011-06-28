@@ -31,7 +31,7 @@
     </target>
 
     <target name="config:sahi">
-        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties">
+        <copy file="${resources.test.dir}/sahi.properties.template" tofile="${resources.test.dir}/sahi.properties" overwrite="true">
             <filterset begintoken="@" endtoken="@">
                 <filter token="APPDIR" value="${module.dir}"/>
                 <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>

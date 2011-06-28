@@ -79,6 +79,7 @@ public class StudentsController {
     public void searchStudentsBySponsor() {
     }
 
+
     @RequestMapping(value = "{id}/edit", method = GET)
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,
@@ -194,6 +195,16 @@ public class StudentsController {
         model.put("formhelper", present(Student.EMPTY_STUDENT));
         return "students/create";
     }
+
+
+@RequestMapping(value = "{id}/profileView", method = GET)
+    public String publicStudentProfile(@PathVariable String id,HashMap<String, Object> model) {
+        model.put("student", studentService.load(id));
+        return "students/profileView";
+    }
+
+
+
 
     private boolean mandatoryFieldsExist(Errors errors) {
         return errors.getErrorCount() == 0;

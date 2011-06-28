@@ -1,3 +1,6 @@
+<div id="Generate View">
+
+</div>
 <div id="student">
 
     $if (studentUpdatedSuccesfully)$
@@ -80,9 +83,12 @@
                  <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
             </div>
 
+
         </div>
         <div id="secondaryInfo">
+              <a href= "/students/profileView">Generate Profile View</a>
             <div class="entry">
+
                 <div class="label">Student Status</div>
                 <div class="value $statusType$">$student.status$</div>
             </div>

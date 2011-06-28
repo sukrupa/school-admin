@@ -21,7 +21,6 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -29,6 +28,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasEntry;
 
 public class StudentsControllerTest {
 
@@ -109,7 +109,16 @@ public class StudentsControllerTest {
     }
 
     @Test
-    public void shouldCreateANewStudent() {
+    public void shouldDirectToPublicStudentProfilePage() {
+        Student student = mock(Student.class);
+        when(service.load("123")).thenReturn(student);
+
+        assertThat(controller.publicStudentProfile("123",studentModel), is("students/profileView"));
+        assertThat(studentModel, hasEntry("student", student));
+    }
+
+    @Test
+    public void shouldCreateANewStudent () {
         StudentForm studentToCreate = new StudentForm();
         studentToCreate.setDateOfBirth("11-10-1982");
 
