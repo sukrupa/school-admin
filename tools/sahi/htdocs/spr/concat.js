@@ -3048,7 +3048,7 @@ Sahi.prototype.findInArray = function (ar, el) {
 };
 Sahi.prototype._isIE = function () {return this.navigator.appName == "Microsoft Internet Explorer";}
 Sahi.prototype._isFF3 = function () {return /Firefox\/3|Iceweasel\/3|Shiretoko\/3/.test(this.navigator.userAgent);};
-Sahi.prototype._isFF4 = function () {return /Firefox\/4|Iceweasel\/4|Shiretoko\/4/.test(this.navigator.userAgent);};
+Sahi.prototype._isFF4 = function () {return /Firefox\/4|Iceweasel\/4|Shiretoko\/4|Firefox\/5|Iceweasel\/5|Shiretoko\/5/.test(this.navigator.userAgent);};
 Sahi.prototype._isFF = function () {return /Firefox|Iceweasel|Shiretoko/.test(this.navigator.userAgent);};
 Sahi.prototype._isChrome = function () {return /Chrome/.test(this.navigator.userAgent);};
 Sahi.prototype._isSafari = function () {return /Safari/.test(this.navigator.userAgent);};

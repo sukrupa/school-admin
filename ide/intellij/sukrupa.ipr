@@ -376,6 +376,7 @@
         <root url="jar://$PROJECT_DIR$/../../lib/test/hamcrest-all-1.2.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../tools/cuke4duke" recursive="false" />
     </library>
   </component>
 </project>
