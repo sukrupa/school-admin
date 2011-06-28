@@ -112,6 +112,11 @@ body
     font: 14px Tahoma, serif;
     border-right:solid;
 }
+#sidebar ul{
+   padding: 0;
+    margin: 0;
+}
+
 
 #sidebar a {
     color:#254965;
@@ -209,9 +214,9 @@ div.note
 .page table
 {
     border-collapse: collapse;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
-    width:auto;
+    width:15;
 
 }
 

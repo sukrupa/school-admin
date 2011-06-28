@@ -72,7 +72,7 @@ public class StudentsSearchCriteriaGenerator {
                     criteria.add(Restrictions.and(Restrictions.isNotNull(SPONSOR),Restrictions.ne(SPONSOR,sponsorName)));
                 }
                 else {
-                    criteria.add(Restrictions.eq(SPONSOR, sponsorName));
+                    criteria.add(Restrictions.like(SPONSOR,"%" + sponsorName + "%").ignoreCase());
                 }
             }
             else {

@@ -42,6 +42,9 @@ public class StudentsController {
 
         List<String> validCriteria = searchParam.getValidCriteria();
 
+        if(searchParam.getSponsorName()!=null && validCriteria.size()==3 && students.getStudents().isEmpty())
+            return "students/listStudentsBySponsorEmpty";
+
         if (students.getStudents().isEmpty()) {
             model.put("searchCriteria", validCriteria);
             return "students/listEmpty";
@@ -51,12 +54,18 @@ public class StudentsController {
 
         model.put("searchCriteria", validCriteria);
 
+        if(searchParam.getSponsorName()!=null && validCriteria.size()==3)
+            return "students/listStudentsBySponsor";
 
         return "students/list";
     }
 
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
+        model.put("formhelper", studentService.getStudentReferenceData());
+    }
+    @RequestMapping("searchStudentsBySponsor")
+    public void searchStudentsBySponsor(Map<String, Object> model) {
         model.put("formhelper", studentService.getStudentReferenceData());
     }
 

@@ -2,9 +2,14 @@
 	
 	  <div class="sideBarContent">
 	  <li>
-	  <p class="indent">
-	  <a href="/students/search">Search Students</a></p>
+	  <ul>
+	    <p class="indent">
+	        <a href="/students/search">Search Students</a></p>
+	    <p class="indent">
+	        <a href="/students/searchStudentsBySponsor">Search Students by Sponsor</a></p>
+	  </ul>
 	  </li>
+
 	  </div>
       <br/>
 	  
