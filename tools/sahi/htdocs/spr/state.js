@@ -42,6 +42,11 @@ try {
     _sahi.setWaitForXHRReadyStates("$waitReadyStates");
     _sahi.escapeUnicode = $escapeUnicode;
     _sahi.commonDomain = "$commonDomain";
+    _sahi.ignorableIdsPattern = new RegExp('$ignorableIdsPattern');
+    _sahi.chromeExplicitCheckboxRadioToggle = $chromeExplicitCheckboxRadioToggle;
+    _sahi.strictVisibilityCheck = $strictVisibilityCheck;
+    _sahi.isSingleSession = $isSingleSession;
+    // Pro start
 } catch(e) {
 }
 __sahiDebug__("state.js: end");

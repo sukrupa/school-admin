@@ -32,7 +32,7 @@ Sahi.prototype.getSahiScriptStackTrace = function(isBreadCrumb){
 						s = " >> " + fnName + s;
 					} else {
 						var lineNo = parseInt(usefulPart.substring(0, usefulPart.indexOf(" ")));
-						if (lineNo != NaN) s += "at " + fnName + " (" + ScriptRunner.getScript().getLineDebugInfo(lineNo-1).replace("&n=", ":") + ")\n" ;
+						if (""+lineNo != "NaN") s += "at " + fnName + " (" + ScriptRunner.getScript().getLineDebugInfo(lineNo-1).replace("&n=", ":") + ")\n" ;
 					}
 			}
 		}
@@ -394,6 +394,9 @@ Sahi.prototype._readFile = function (filePath) {
 	filePath = this._resolvePath(filePath);
     return "" + Packages.net.sf.sahi.util.Utils.readFileAsString(filePath);
 };
+Sahi.prototype._readURL = function (url) {
+    return "" + Packages.net.sf.sahi.util.Utils.getString(net.sf.sahi.util.Utils.readURL(url)); 
+};
 Sahi.prototype._writeFile = function (str, filePath, overwrite) {
 	filePath = this._resolvePath(filePath);
 	overwrite = (overwrite == true);
@@ -689,6 +692,19 @@ Sahi.prototype._userDataDir = function(){
 Sahi.prototype._userDataPath = function(relPath){
 	return "" +  net.sf.sahi.config.Configuration.getAbsoluteUserPath(relPath);
 }
+Sahi.prototype._collect = function (apiType, id, inEl) {
+	var count = this._count.apply(this, arguments);
+	var els = [];
+	for (var j=0; j<count; j++){
+		var s = '"' + id + "[" + j + "]\"";
+		for (var i=2; i<arguments.length; i++){
+			s += ", ";
+			s += s_v(arguments[i]);
+		}
+		els.push(new Stub("_sahi." + apiType + "(" + s + ")"));		
+	}
+	return els;
+}
 /* Unit test style start */
 _sahi.global = this; 
 
@@ -785,8 +801,8 @@ Sahi.prototype.makeFetchAPIs = function(){
 	            "_containsHTML", "_getText", "_getCellText", "_getSelectedText", 
 	            "_lastAlert", "_lastPrompt", "_lastConfirm", "_style", "_cookie", 
 	            "_position", "_rteHTML", "_rteText", "_isVisible", 
-	            "_contains", "_title", "_exists", "_isIE", "_isFF", "_isFF3", "_isChrome", "_isSafari",
-	            "_lastDownloadedFileName", "_prompt", "_confirm"];
+	            "_contains", "_title", "_exists", "_isIE", "_isIE9", "_isFF", "_isFF3", "_isFF4", "_isChrome", "_isSafari", "_isOpera",
+	            "_lastDownloadedFileName", "_prompt", "_confirm", "_count"];
 	for (var i=0; i<apis.length; i++){
 		var api = apis[i];
 		Sahi.prototype[api] = this.fetchFn(api);
