@@ -7,13 +7,12 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class OnAddNewTalentPage extends BasicWebSteps {
 
-    private final String homePage = "http://localhost:8080/students/";
-
     @Before("@OnAddNewTalentPage")
     public void addNewTalentPage(){
-        browser().navigateTo(homePage);
-        browser().link("Tools").click();
-        browser().link("Add New Talent").click();
+        browser().navigateTo(BasicWebSteps.HOME_PAGE + "admin/talents/new");
+        //MAKE BELOW WORK!!!!
+        //browser().link("Tools").click();
+        //browser().link("Add New Talent").click();
     }
 
 
