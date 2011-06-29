@@ -4,8 +4,6 @@ import cuke4duke.annotation.After;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
-import net.sf.sahi.client.BrowserCondition;
-import net.sf.sahi.client.ExecutionException;
 import org.sukrupa.cucumber.SahiFacade;
 
 
@@ -21,13 +19,18 @@ public class BasicWebSteps {
     public static final String HOME_PAGE = "http://localhost:8080/";
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
-    public void enterAsThe(String objectInput, String objectName ){
-        browser().byId(objectName).setValue(objectInput);
+    public void enterAsThe(String objectInput, String objectID){
+        browser().byId(objectID).setValue(objectInput);
     }
 
     @When("^I click \"([^\"]*)\"$")
-    public void click(String objectName ){
-        browser().byId(objectName).click();
+    public void click(String objectID){
+        browser().byId(objectID).click();
+    }
+
+    @When("^I chose \"([^\"]*)\" from \"([^\"]*)\"$")
+    public void choseFrom(String choice , String ObjectID){
+        browser().byId(ObjectID).choose(choice);
     }
 
     @When("^I click \"([^\"]*)\" button$")
