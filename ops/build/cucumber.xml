@@ -11,7 +11,6 @@
     	<gem args="install cuke4duke --version 0.4.4 --ignore-dependencies"/>
     </target>
 
-
     <target name="execute-cucumber">
         <delete file="${target.test.cucumber.failed.file}"/>
 
@@ -25,7 +24,8 @@
                  classpathref="classpath.run.cucumber.features"
                  name="cucumber"/>
 
-        <cucumber args="--verbose --require ${target.test.cucumber.java.dir} --color --format pretty --format html --out ${target.reports.cucumber.html} ${src.test.cucumber.features.dir}"
+        <property name="cucumber.feature" value=""/>
+        <cucumber args="--verbose --require ${target.test.cucumber.java.dir} --color --format pretty --format html --out ${target.reports.cucumber.html} ${src.test.cucumber.features.dir}/${cucumber.feature}"
                   resultproperty="cucumber.features.failed"
                   objectFactory="pico"
                   classpathref="classpath.run.cucumber.features"
