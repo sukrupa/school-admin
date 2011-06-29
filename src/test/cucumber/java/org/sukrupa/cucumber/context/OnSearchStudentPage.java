@@ -13,5 +13,6 @@ public class OnSearchStudentPage extends BasicWebSteps{
     public void searchStudentsPage(){
         browser().navigateTo(getConfigProperty("homepage")+"students/search");
     }
-    
+
+
 }
