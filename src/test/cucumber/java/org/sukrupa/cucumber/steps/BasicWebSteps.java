@@ -1,6 +1,7 @@
 package org.sukrupa.cucumber.steps;
 
 import cuke4duke.annotation.After;
+import cuke4duke.annotation.I18n;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
@@ -16,6 +17,13 @@ public class BasicWebSteps {
 
     private static final String TOP_LEVEL_DIV = "page";
     public static final String HOME_PAGE = "http://localhost:8080/";
+
+
+
+    @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\" ")
+    public void checkText(String objectInput, String objectName ){
+
+    }
 
     @When("^I click \"([^\"]*)\" button$")
     public void clickButton(String buttonText) {
