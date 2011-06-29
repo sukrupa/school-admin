@@ -27,7 +27,7 @@ public class BasicWebSteps {
         browser().byId(objectID).click();
     }
 
-    @When("^I chose \"([^\"]*)\" from \"([^\"]*)\"$")
+    @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice , String ObjectID){
         browser().byId(ObjectID).choose(choice);
     }
