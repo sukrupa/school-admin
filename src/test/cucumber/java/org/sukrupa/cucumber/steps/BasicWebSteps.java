@@ -9,6 +9,7 @@ import net.sf.sahi.client.BrowserCondition;
 import net.sf.sahi.client.ExecutionException;
 import org.sukrupa.cucumber.SahiFacade;
 
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
@@ -21,7 +22,8 @@ public class BasicWebSteps {
 
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\" ")
-    public void checkText(String objectInput, String objectName ){
+    public void enterTextIntoGenericField(String objectInput, String objectName ){
+
 
     }
 
