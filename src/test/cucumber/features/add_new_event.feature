@@ -2,24 +2,34 @@
 Feature: Add New Event
     @OnCreateEventPage
     Scenario:  Create an event
+        When I enter "Dancing" as the "title"
+        And I enter "13-04-2011" as the "date"
+        And I enter "Event description" as the "description"
+        And I enter "64262" as the "attendees"
+        And I submit the "save" form
+        Then "Event: Dancing" should be displayed
 
-      #  When I enter "Dancing" as the "title"
-      # And I fill in the "date" text box with "13-04-2011"
-      #  And I fill in the "description" text box with "Event description..."
-      #  And I fill in the "attendees" text box with "64262"
-      #  And I submit the "save" form
-      #  Then I should see "Event: New event"
+    @OnCreateEventPage
+    Scenario: Create an event with all options
+        When I enter "MMA" as the "title"
+        And I enter "13-4-2011" as the "date"
+        And I enter "Event description..." as the "description"
+        And I enter "01:30" as the "startTime"
+        And I enter "03:30" as the "endTime"
+        And I click "endTimePm"
+        And I enter "Colloseum" as the "venue"
+        And I enter "Santa" as the "coordinator"
+        And I enter "BYOB" as the "notes"
+        And I enter "64262" as the "attendees"
+        And I submit the "Save" form
+        Then "Event: MMA" should be displayed
+        And "13-04-2011" should be displayed
+        And "Event description..." should be displayed
+        And "1:30 AM" should be displayed
+        And "03:30 PM" should be displayed
+        And "Colloseum" should be displayed
+        #And "Santa" should be displayed
+        And "BYOB" should be displayed
+        And "Anok" should be displayed
 
-    #Scenario: Create an event with timings
-    #    When I fill in the "title" text box with "New event"
-    #    And I fill in the "date" text box with "13-04-2011"
-    #    And I fill in the "description" text box  with "Event description..."
-    #    And I fill in the "startTime" text box with "01:30"
-    #    And I fill in the "endTime" text box with "03:30"
-    #    And I fill in the "attendees" text box with "64262"
-    #    And I submit the "Save" form
-    #    Then I should see the "Event: New event" page
-    #    And I should see the "start Time" is "1:30 AM"
-    #    And I should see the "end Time" is "03:30 PM"
-
-   # Scenario: Clear create new event form contents
+    #Scenario: Clear create new event form contents
