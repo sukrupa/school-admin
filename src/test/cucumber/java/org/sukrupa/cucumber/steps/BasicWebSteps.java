@@ -10,6 +10,8 @@ import net.sf.sahi.client.ExecutionException;
 import org.sukrupa.cucumber.SahiFacade;
 
 
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
@@ -64,6 +66,7 @@ public class BasicWebSteps {
         browser().textbox(field).setValue(fieldContent);
     }
 
+
     @Then("^student \"([^\"]*)\" is displayed$")
     public void studentIsDisplayed(String text) {
         Browser browser = browser();
@@ -73,6 +76,11 @@ public class BasicWebSteps {
     @Then("^student \"([^\"]*)\" is not displayed$")
     public void studentIsNotDisplayed(String text) {
         assertFalse(browser().containsText(browser().div("page"), text));
+    }
+
+    @Then("^\"([^\"]*)\" should be displayed in \"([^\"]*)\"$")
+    public void shouldBeDisplayedInField(String text, String field){
+        assertTrue(browser().select(field).getText().contains(text));
     }
 
     @After
