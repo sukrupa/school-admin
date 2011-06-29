@@ -83,6 +83,26 @@ public class BasicWebSteps {
         assertTrue(browser().select(field).getText().contains(text));
     }
 
+    @Then("^the \"([^\"]*)\" page is displayed")
+    public  void  thePageIsDisplayed(String pageName){
+        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), pageName));
+    }
+
+    @When("^I \"([^\"]*)\" in the sidebar")
+    public void clickLinkInSidebar(String text){
+        browser().link(text).click();
+    }
+
+    @When("^I enter \"([^\"]*)\" as \"([^\"]*)\"")
+    public void enterIntoTheTextBox(String text,String textBoxName){
+        browser().textbox(textBoxName).setValue(text);
+    }
+
+    @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
+    public void selectFromDropDown (String value, String dropDownName){
+           browser().select(dropDownName).choose(value);
+    }
+
     @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();
