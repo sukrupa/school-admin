@@ -24,6 +24,11 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
+    @When("^I submit the \"([^\"]*)\" form$")
+    public void submitTheForm(String buttonText){
+        browser().submit(buttonText).click();
+    }
+
     @Then("^I should see \"([^\"]*)\"$")
     public void shouldSee(String text) {
         Browser browser = browser();

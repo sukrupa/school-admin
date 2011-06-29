@@ -25,4 +25,9 @@ public class AuthenticationSteps extends Login{
     public void fillInThePasswordWith(String password) {
         super.fillInThePasswordWith(password);
     }
+
+    @When("^I logout")
+    public void logout(){
+        browser().link("Logout").click();
+    }
 }
