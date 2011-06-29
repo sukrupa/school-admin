@@ -20,10 +20,14 @@ public class BasicWebSteps {
     private static final String TOP_LEVEL_DIV = "page";
     public static final String HOME_PAGE = "http://localhost:8080/";
 
-    @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\" ")
-    public void enterTextIntoGenericField(String objectInput, String objectName ){
+    @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
+    public void enterAsThe(String objectInput, String objectName ){
+        browser().byId(objectName).setValue(objectInput);
+    }
 
-
+    @When("^I click \"([^\"]*)\"$")
+    public void click(String objectName ){
+        browser().byId(objectName).click();
     }
 
     @When("^I click \"([^\"]*)\" button$")
