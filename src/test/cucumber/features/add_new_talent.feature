@@ -3,8 +3,8 @@ Feature: Add new talent
 
     @OnAddNewTalentPage
     Scenario: Add new talent
-       When I fill in the "description" with "firebreathing"
-       And I click "Add Talent" button
+       When I add a new talent "firebreathing"
+       And I click "Add Talent" submit button
        Then "added successfully" should be displayed
 
     @OnSearchStudentPage
