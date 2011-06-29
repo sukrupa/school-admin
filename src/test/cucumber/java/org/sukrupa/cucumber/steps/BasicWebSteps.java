@@ -7,10 +7,9 @@ import net.sf.sahi.client.Browser;
 import org.sukrupa.cucumber.SahiFacade;
 
 
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.*;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class BasicWebSteps {
@@ -31,6 +30,18 @@ public class BasicWebSteps {
     @When("^I chose \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice , String ObjectID){
         browser().byId(ObjectID).choose(choice);
+    }
+
+    @Then("^\"([^\"]*)\" should contain \"([^\"]*)\"$")
+    public void shouldContain(String ObjectID , String objectValueToMatch){
+        String objectValue = browser().byId(ObjectID).getValue();
+        assertThat(objectValue, containsString(objectValueToMatch));
+    }
+
+    @Then("^\"([^\"]*)\" should not contain \"([^\"]*)\"$")
+    public void shouldNotContain(String ObjectID , String objectValueToMatch){
+        String objectValue = browser().byId(ObjectID).getValue();
+        assertThat(objectValue, not(containsString(objectValueToMatch)));
     }
 
     @When("^I click \"([^\"]*)\" button$")
