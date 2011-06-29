@@ -2,7 +2,11 @@
 set -e
 
 findSukrupaServerProcess() {
-    PID=$(cat ~/.webserver.pid)
+    if [ -e ~/.webserver.pid ]; then
+        PID=$(cat ~/.webserver.pid)
+    else
+        PID=
+    fi
 }
 
 findSukrupaServerProcessByClassname() {
