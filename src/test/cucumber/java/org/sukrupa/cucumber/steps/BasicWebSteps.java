@@ -1,7 +1,7 @@
 package org.sukrupa.cucumber.steps;
 
+import com.sun.source.tree.AssertTree;
 import cuke4duke.annotation.After;
-import cuke4duke.annotation.I18n;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
@@ -21,6 +21,7 @@ public class BasicWebSteps {
     private static final String TOP_LEVEL_DIV = "page";
     public static final String HOME_PAGE = "http://localhost:8080/";
 
+<<<<<<< HEAD
 
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\" ")
@@ -29,6 +30,8 @@ public class BasicWebSteps {
 
     }
 
+=======
+>>>>>>> Nishi and Aravind : Added 'error message is displayed' function into BasicWebSteps
     @When("^I click \"([^\"]*)\" button$")
     public void clickButton(String buttonText) {
         browser().button(buttonText).click();
@@ -101,7 +104,15 @@ public class BasicWebSteps {
     @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
     public void selectFromDropDown (String value, String dropDownName){
            browser().select(dropDownName).choose(value);
+
     }
+
+    @Then("^the error message \"([^\"]*)\" is displayed")
+    public void displayErrorMessage(String errorMessage){
+        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
+
+    }
+
 
     @After
     public void closeBrowser() {
