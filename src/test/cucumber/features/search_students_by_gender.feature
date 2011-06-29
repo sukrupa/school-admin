@@ -6,6 +6,6 @@ Feature: Search students by class
   When I select the "Male" gender
   And I click "Search" submit button
 
-   Then I should see "Peter"
-    And I should see "Anok"
-    And I should not see "Haripriya"
+   Then "Peter" should be displayed
+    And "Anok" should be displayed
+    And "Haripriya" should not be displayed

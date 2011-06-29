@@ -7,7 +7,7 @@ Feature: Search students by age
     And I select a maximum age of "15"
     And I click "Search" submit button
 
-    Then I should see "Peter"
-    And I should see "Anok"
-    And I should see "Haripriya"
-    And I should not see "Abhishek"
+    Then "Peter" should be displayed
+    And "Anok" should be displayed
+    And "Haripriya" should be displayed
+    And "Abhishek" should not be displayed

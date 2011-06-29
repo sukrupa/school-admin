@@ -2,29 +2,28 @@ Feature: Authentication Log In
 
   Scenario: Successful login
     Given I am on Sukrupa Page
-    When I fill in the username with "admin"
-    And I fill in the password with "password"
+    When I enter the username "admin"
+    And I enter the password "password"
     And I submit the "Login" form
-    Then I should see "Student ID"
-    And I should see "Name"
-    And I should see "Father's Name"
-    And I should see "Search Students"
+    Then "List of Students" should be displayed
+    And "Logout" should be displayed
+
 
   Scenario: Invalid password
     Given I am on Sukrupa Page
-    When I fill in the username with "admin"
-    And I fill in the password with "password123"
+    When I enter the username "admin"
+    And I enter the password "password123"
     And I submit the "Login" form
-    Then I should see "Invalid username and password"
+    Then "Invalid username and password" should be displayed
 
   Scenario: Invalid username
     Given I am on Sukrupa Page
-    When I fill in the username with "username123"
-    And I fill in the password with "password"
+    When I enter the username "username123"
+    And I enter the password "password"
     And I submit the "Login" form
-    Then I should see "Invalid username and password"
+    Then "Invalid username and password" should be displayed
 
   @Login
   Scenario: Logging off
     When I logout
-    Then I should see "You are logged out."
+    Then "You are logged out." should be displayed

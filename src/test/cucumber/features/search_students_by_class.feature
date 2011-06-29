@@ -6,7 +6,7 @@ Feature: Search students by class
     When I select the "10 Std" class
     And I click "Search" submit button
 
-    Then I should see "Peter"
-    And I should not see "Anok"
-    And I should not see "Haripriya"
-    And I should not see "Abhishek"
+    Then "Peter" should be displayed
+    And "Anok" should not be displayed
+    And "Haripriya" should not be displayed
+    And "Abhishek" should not be displayed

@@ -16,12 +16,12 @@ public class AuthenticationSteps extends Login{
         super.navigateTo();
     }
 
-    @When("^I fill in the username with \"([^\"]*)\"$")
+    @When("^I enter the username \"([^\"]*)\"$")
     public void fillInTheUsernameWith(String username) {
        super.fillInTheUsernameWith(username);
     }
 
-    @When("^I fill in the password with \"([^\"]*)\"$")
+    @When("^I enter the password \"([^\"]*)\"$")
     public void fillInThePasswordWith(String password) {
         super.fillInThePasswordWith(password);
     }
