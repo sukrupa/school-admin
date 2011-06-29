@@ -15,6 +15,7 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class BasicWebSteps {
 
     private static final String TOP_LEVEL_DIV = "page";
+    public static final String HOME_PAGE = "http://localhost:8080/";
 
     @When("^I click \"([^\"]*)\" button$")
     public void clickButton(String buttonText) {
