@@ -7,6 +7,7 @@ Feature: Add new talent
        And I click "Add Talent" submit button
        Then I should see "added successfully"
 
-    @OnStudentIDAbhishekProfilePage
-    Scenario: Check new talent exists on StudentID 16346 edit page
+    @OnSearchStudentPage
+    Scenario: Check that new talent exists in talent field
+
 
