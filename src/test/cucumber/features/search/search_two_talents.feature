@@ -1,13 +1,15 @@
 @Login
-Feature: Search Student Records
-  Scenario: Search Student Record By Giving Minimum and Maximum Age
+Feature: Search Student with Two Talents
 
-  Given I am on the Student Search page
-  When I select the age from "8" to "9"
-  And I click "Search" submit button
+  Scenario: Two Talents Selected
 
-  Then "Armugam" should be displayed
-  And "Abhishek" should be displayed
-  And "Bhavani" should not be displayed
-  And "Chandana" should not be displayed
-  And "Peter" should not be displayed
+    Given I am on the Student Search page
+    When I select the talent "Sports"
+    And I select the talent "Acting"
+    And I click "Search" submit button
+
+    Then "Chandana" should be displayed
+    And "Abhishek" should be displayed
+    And "Armugam" should be displayed
+    And "Chandru" should be displayed
+    And "Anok" should not be displayed
