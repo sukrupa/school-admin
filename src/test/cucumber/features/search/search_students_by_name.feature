@@ -4,7 +4,7 @@ Feature: Search students by name
   @OnSearchStudentPage
   Scenario: Search for "Anok"
     When I fill in the name with "Anok"
-    And I click the "Search" submit button
+    And I click "Search" submit button
 
-    Then I should see "Anok"
-    And I should not see "Abhishek"
+    Then "Anok" should be displayed
+    And "Abhishek" should not be displayed

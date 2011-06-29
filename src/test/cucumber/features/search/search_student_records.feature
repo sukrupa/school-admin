@@ -4,10 +4,10 @@ Feature: Search Student Records
 
   Given I am on the Student Search page
   When I select the age from "8" to "9"
-  And I click the "Search" submit button
+  And I click "Search" submit button
 
-  Then student "Armugam" is displayed
-  And student "Abhishek" is displayed
-  And student "Bhavani" is not displayed
-  And student "Chandana" is not displayed
-  And student "Peter" is not displayed
+  Then "Armugam" should be displayed
+  And "Abhishek" should be displayed
+  And "Bhavani" should not be displayed
+  And "Chandana" should not be displayed
+  And "Peter" should not be displayed
