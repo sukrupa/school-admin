@@ -9,7 +9,7 @@ public class CucumberFacade {
 
     private static Properties props;
 
-        public static String getProperty(String propertyName) {
+        public static String getConfigProperty(String propertyName) {
         if (props == null) {
             try {
                 props = new Properties();

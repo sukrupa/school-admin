@@ -5,13 +5,10 @@ import cuke4duke.annotation.Before;
 import cuke4duke.annotation.I18n.EN.Given;
 import org.sukrupa.cucumber.steps.BasicWebSteps;
 
+import static org.sukrupa.cucumber.CucumberFacade.getConfigProperty;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class Login extends BasicWebSteps{
-
-    public void navigateTo() {
-        browser().navigateTo("http://localhost:8080/students");
-    }
 
     public void fillInTheUsernameWith(String username) {
         browser().textbox("j_username").setValue(username);
@@ -23,7 +20,7 @@ public class Login extends BasicWebSteps{
 
     @Before("@Login")
     public void login(){
-        navigateTo();
+        browser().navigateTo(getConfigProperty("homepage"));
         fillInTheUsernameWith("admin");
         fillInThePasswordWith("password");
         clickSubmitButton("Login");

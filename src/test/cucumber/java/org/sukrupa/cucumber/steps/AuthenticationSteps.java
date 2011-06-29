@@ -7,13 +7,14 @@ import org.sukrupa.cucumber.context.Login;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.sukrupa.cucumber.CucumberFacade.getConfigProperty;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class AuthenticationSteps extends Login{
 
     @Given("I am on Sukrupa Page")
     public void navigateTo() {
-        super.navigateTo();
+        browser().navigateTo(getConfigProperty("homepage"));
     }
 
     @When("^I enter the username \"([^\"]*)\"$")
