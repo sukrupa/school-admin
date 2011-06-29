@@ -66,14 +66,12 @@
 
     <target name="runfftests">
         <sahi suite="../userdata/scripts/demo/demo.suite"
-              browser="C:\Program Files\Mozilla Firefox\firefox.exe"
+              browserType="firefox"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-              browseroption="-profile ${userdata.dir}/browser/ff/profiles/sahi$threadNo -no-remote"
-        	  browserProcessName="firefox.exe"
               threads="6">
             <report type="html"/>
             <!--<report type="junit" logdir="${userdata.dir}/temp/junit"/>-->
@@ -83,14 +81,12 @@
 
     <target name="runffsingle">
         <sahi suite="scripts/demo/sahi_demo.sah"
-              browser="C:\Program Files\Mozilla Firefox\firefox.exe"
+			  browserType="firefox"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-              browseroption="-profile $userDir/browser/ff/profiles/sahi$threadNo -no-remote"
-        	  browserProcessName="firefox.exe"
               threads="3">
             <report type="html" logdir="logs/playback/mydir"/>
         </sahi>
@@ -98,36 +94,30 @@
     </target>
 
     <target name="runietests">
-        <antcall target="proxyon"/>
         <sahi suite="../userdata/scripts/demo/demo.suite"
-              browser="C:\\Program Files\\Internet Explorer\\iexplore.exe"
+              browserType="ie"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-        	  browseroption="-noframemerging"
-	      	  browserProcessName="iexplore.exe"
               threads="6"
                 >
             <report type="html"/>
         	<!--<report type="junit" logdir="${userdata.dir}/temp/junit"/>-->
         </sahi>
-        <antcall target="proxyoff"/>
         <antcall target="failsahi"/>
     </target>
 
     <target name="runchrometests">
     	<!-- Use full path in browser if XP-->
         <sahi suite="../userdata/scripts/demo/demo.suite"
-              browser="${env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe"
+        	  browserType="chrome"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-	      	  browserProcessName="chrome.exe"
-        	  browseroption="--user-data-dir=$userDir\browser\chrome\profiles\sahi$threadNo --proxy-server=localhost:9999 --disable-popup-blocking"
               threads="10"
                 >
             <report type="html"/>
@@ -137,40 +127,34 @@
     </target>
 
     <target name="runsafaritests">
-        <antcall target="proxyon"/>
         <sahi suite="../userdata/scripts/demo/demo.suite"
-              browser="C:\\Program Files\\Safari\Safari.exe"
+              browserType="safari"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-	      	  browserProcessName="Safari.exe"
               threads="1"
                 >
             <report type="html"/>
         	<!--<report type="junit" logdir="${userdata.dir}/temp/junit"/>-->
         </sahi>
-        <antcall target="proxyoff"/>
         <antcall target="failsahi"/>
     </target>
 
     <target name="runoperatests">
-        <antcall target="proxyon"/>
         <sahi suite="../userdata/scripts/demo/demo.suite"
-              browser="C:\\Program Files\\Opera\\opera.exe"
+              browserType="opera"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-	      	  browserProcessName="opera.exe"
               threads="1"
                 >
             <report type="html"/>
             <report type="junit" logdir="${userdata.dir}/temp/junit"/>
         </sahi>
-        <antcall target="proxyoff"/>
         <antcall target="failsahi"/>
     </target>
 
@@ -209,7 +193,9 @@
 
 
     <target name="sahireport" description="show report">
-        <exec command="C:\\Program Files\\Internet Explorer\\iexplore.exe ${userdata.dir}/logs/playback/"/>
+        <exec executable="C:\\Program Files\\Internet Explorer\\iexplore.exe">
+        	<arg value="${userdata.dir}/logs/playback/index.htm"/>
+        </exec>
     </target>
 
     <target name="start" description="starts proxy">
@@ -229,27 +215,14 @@
         <sahi stop="true" sahihost="localhost" sahiport="9999"/>
     </target>
 
-    <target name="proxyon">
-        <exec executable="tools/toggle_IE_proxy.exe">
-            <arg value="enable"/>
-        </exec>
-    </target>
-    <target name="proxyoff">
-        <exec executable="tools/toggle_IE_proxy.exe">
-            <arg value="disable"/>
-        </exec>
-    </target>
-
     <target name="testglobal">
         <sahi suite="../userdata/scripts/demo/globalvar.suite"
-              browser="C:\Program Files\Mozilla Firefox\firefox.exe"
+              browserType="firefox"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-              browseroption="-profile $userDir/browser/ff/profiles/sahi$threadNo"
-        	  browserProcessName="firefox.exe"
               threads="1">
             <report type="html"/>
             <report type="junit" logdir="${userdata.dir}/temp/junit"/>
@@ -260,14 +233,12 @@
 
     <target name="shouldfail">
         <sahi suite="../userdata/scripts/demo/shouldfail/fail.suite"
-              browser="C:\Program Files\Mozilla Firefox\firefox.exe"
+              browserType="firefox"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-              browseroption="-profile $userDir/browser/ff/profiles/sahi$threadNo -no-remote"
-        	  browserProcessName="firefox.exe"
               threads="3">
             <report type="html"/>
             <report type="junit" logdir="${userdata.dir}/temp/junit"/>
@@ -276,35 +247,35 @@
     </target>
 
     <target name="shouldfailie">
-        <antcall target="proxyon"/>
         <sahi suite="../userdata/scripts/demo/shouldfail/fail.suite"
-              browser="C:\\Program Files\\Internet Explorer\\iexplore.exe"
+              browserType="ie"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-        	  browseroption="-noframemerging"
-        	  browserProcessName="iexplore.exe"
               threads="3">
             <report type="html"/>
             <report type="junit" logdir="${userdata.dir}/temp/junit"/>
         </sahi>
-        <antcall target="proxyoff"/>
         <antcall target="failsahi"/>
     </target>
 
-
+	<target name="del_ie_temp">
+		<delete quiet="true" includeemptydirs="true">
+			<fileset dir="${env.LOCALAPPDATA}/Microsoft/Windows/Temporary Internet Files" includes="**/*">
+			</fileset>
+		</delete>
+	</target>
+	
     <target name="fail_missing">
         <sahi suite="../userdata/scripts/demo/shouldfail/fail_missing.suite"
-              browser="C:\Program Files\Mozilla Firefox\firefox.exe"
+              browserType="firefox"
               baseurl="http://${urlbase}/demo/"
               sahihost="localhost"
               sahiport="9999"
               failureproperty="sahi.failed"
               haltonfailure="false"
-              browseroption="-profile ${userdata.dir}/browser/ff/profiles/sahi$threadNo -no-remote"
-        	  browserProcessName="firefox.exe"
               threads="3">
             <report type="html"/>
             <report type="junit" logdir="${userdata.dir}/temp/junit"/>

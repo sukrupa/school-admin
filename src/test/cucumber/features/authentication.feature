@@ -1,12 +1,14 @@
-Feature: Authentication
+Feature: Authentication Log In
 
   Scenario: Successful login
     Given I am on Sukrupa Page
     When I fill in the username with "admin"
     And I fill in the password with "password"
     And I click "Login" submit button
-    Then I should see "Anok"
-    And I should see "Abhishek"
+    Then I should see "Student ID"
+    And I should see "Name"
+    And I should see "Father's Name"
+    And I should see "Search Students"
 
   Scenario: Invalid password
     Given I am on Sukrupa Page

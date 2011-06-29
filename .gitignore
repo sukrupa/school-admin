@@ -28,3 +28,5 @@ src/test/twist/functional-test/src/twist.properties
 src/test/resources/sahi.properties
 
 *.swp
+
+tools/sahi/userdata/config/browser_types.xml

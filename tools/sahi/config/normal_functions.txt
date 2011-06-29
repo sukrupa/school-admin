@@ -79,8 +79,10 @@ _title
 _exists
 
 _isIE
+_isIE9
 _isFF
 _isFF3
+_isFF4
 _isChrome
 _isSafari
 _isOpera
@@ -93,6 +95,7 @@ _savedRandom
 _getGlobal
 _getDB
 _readFile
+_readURL
 _print
 _printCalled
 _lastDownloadedFileName
@@ -132,3 +135,18 @@ _execute
 _prompt
 _confirm
 _resolvePath
+_datebox
+_datetimebox
+_datetimelocalbox
+_emailbox
+_monthbox
+_numberbox
+_rangebox
+_searchbox
+_telbox
+_timebox
+_urlbox
+_weekbox
+_count
+_collect
+_canvas

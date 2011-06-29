@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
+    <defaultAnt name="Apache Ant version 1.8.2" />
     <buildFile url="file://$PROJECT_DIR$/../../ops/build/build.xml">
-      <additionalClassPath>
-        <entry path="file://$PROJECT_DIR$/../../tools/apache-ant-1.8.2/lib/dbdeploy-ant-3.0M2.jar" />
-        <entry path="file://$PROJECT_DIR$/../../tools/apache-ant-1.8.2/lib/hsqldb.jar" />
-        <entry dir="file://$PROJECT_DIR$/../../lib/test" />
-        <entry dir="file://$PROJECT_DIR$/../../lib/twist" />
-      </additionalClassPath>
+      <additionalClassPath />
       <antReference projectDefault="true" />
       <customJdkName value="" />
       <maximumHeapSize value="128" />
@@ -31,6 +26,9 @@
       <maximumStackSize value="2" />
       <properties />
     </buildFile>
+  </component>
+  <component name="ClearCaseSharedConfig">
+    <option name="myUseUcmModel" value="true" />
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -370,14 +368,15 @@
     <library name="test">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/../../lib/test" />
-        <root url="jar://$PROJECT_DIR$/../../tools/cuke4duke/cuke4duke-0.4.3.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/twist/sahi.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../tools/cuke4duke/cuke4duke-0.4.4.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/../../lib/test/hamcrest-all-1.2.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../tools/cuke4duke" recursive="false" />
     </library>
   </component>
 </project>

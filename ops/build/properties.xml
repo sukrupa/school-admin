@@ -1,5 +1,6 @@
 <project name="properties">
-    <property name="module.dir" value="${basedir}"/>
+    <path id="basedir" path="${basedir}"/>
+    <pathconvert property="module.dir" refid="basedir" targetos="unix"/>
 
     <property name="module.deployable.name" value="school-admin.zip"/>
     <property name="module.jar.name" value="school-admin.jar"/>
@@ -91,6 +92,25 @@
     <property name="sahi.bin.dir" value="${sahi.dir}/bin"/>
     <property name="sahi.port" value="9999"/>
 
+    <condition property="browser.executable"
+               value="${module.dir}/ops/local/start-firefox.sh">
+        <not>
+            <os family="windows"/>
+        </not>
+    </condition>
+    <condition property="browser.executable"
+               value="C:/Program Files/Mozilla Firefox/Firefox.exe">
+        <os family="windows" arch="x86"/>
+    </condition>
+    <condition property="browser.executable"
+               value="C:/Program Files (x86)/Mozilla Firefox/Firefox.exe">
+        <os family="windows"/>
+    </condition>
+    <condition property="browser.process"
+               value="firefox.exe"
+               else="firefox">
+        <os family="windows"/>
+    </condition>
 
     <loadproperties srcFile="${resources.main.dir}/app.properties"/>
 </project>
