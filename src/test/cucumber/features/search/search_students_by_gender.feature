@@ -3,7 +3,7 @@ Feature: Search students by class
 
   @OnSearchStudentPage
   Scenario: Search for male students
-  When I select the "Male" gender
+  When I select gender as "Male"
   And I click "Search" submit button
 
    Then "Peter" should be displayed

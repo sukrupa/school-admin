@@ -3,8 +3,8 @@ Feature: Search students by age
 
   @OnSearchStudentPage
   Scenario: Search for students between 10 and 15 years of age
-    When I select a minimum age of "10"
-    And I select a maximum age of "15"
+    When I select the age from "10"
+    And I select the age to "15"
     And I click "Search" submit button
 
     Then "Peter" should be displayed

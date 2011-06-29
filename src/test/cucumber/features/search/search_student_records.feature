@@ -1,10 +1,15 @@
 @Login
-Feature: Search students by name
+Feature: Search Student Records
+  Scenario: Search Student Record By Giving Minimum and Maximum Age
 
-  @OnSearchStudentPage
-  Scenario: Search for "Anok"
-    When I fill in the name with "Anok"
-    And I click "Search" submit button
+  Given I am on the Student Search page
 
-    Then "Anok" should be displayed
-    And "Abhishek" should not be displayed
+  When I select the age from "8"
+  And I select the age to "9"
+  And I submit the "Search" form
+
+  Then I should see "Armugam"
+  And I should see "Abhishek"
+  And I should not see "Bhavani"
+  And I should not see "Chandana"
+  And I should not see "Peter"
