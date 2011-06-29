@@ -1,5 +1,7 @@
 package org.sukrupa.app.students;
 
+import org.apache.commons.lang.ObjectUtils;
+import org.hibernate.type.YesNoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -42,9 +44,6 @@ public class StudentsController {
 
         List<String> validCriteria = searchParam.getValidCriteria();
 
-        if(searchParam.getSponsorName()!=null && validCriteria.size()==3 && students.getStudents().isEmpty())
-            return "students/listStudentsBySponsorEmpty";
-
         if (students.getStudents().isEmpty()) {
             model.put("searchCriteria", validCriteria);
             return "students/listEmpty";
@@ -54,12 +53,30 @@ public class StudentsController {
 
         model.put("searchCriteria", validCriteria);
 
-        if(searchParam.getSponsorName()!=null && validCriteria.size()==3)
-            return "students/listStudentsBySponsor";
-
         return "students/list";
     }
+    @RequestMapping("listForSearchStudentsBySponsor")
+    public String listForStudentsBySponsor(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
+                       @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                       Map<String, Object> model, HttpServletRequest request) {
 
+        StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
+
+        List<String> validCriteria = searchParam.getValidCriteria();
+
+
+
+               if (students.getStudents().isEmpty()) {
+            model.put("searchCriteria", validCriteria);
+            return "students/listStudentsBySponsorEmpty";
+        }
+
+        model.put("page", students);
+
+        model.put("searchCriteria", validCriteria);
+
+        return "students/listStudentsBySponsor";
+    }
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getStudentReferenceData());

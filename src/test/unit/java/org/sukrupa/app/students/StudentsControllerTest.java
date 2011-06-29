@@ -62,6 +62,10 @@ public class StudentsControllerTest {
     public void shouldDirectToNewStudentForm() {
         assertThat(controller.newStudent(studentModel), is("students/create"));
     }
+//    @Test
+//    public void shouldDirectToSearchStudentBySponsorForm() {
+//        assertThat(controller.(studentModel), is("students/searchStudentsBySponsor"));
+//    }
 
     @Test
     public void shouldCreateANewStudent () {

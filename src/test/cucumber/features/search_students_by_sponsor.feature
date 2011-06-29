@@ -29,11 +29,6 @@ Feature: Search students by sponsor
       Then I should see "Anok"
       And I should not see "Bhavani"
 
-
-
-
-
-
     @OnSearchStudentsBySponsorPage
     Scenario: Search for null entry where sponsors exist
 

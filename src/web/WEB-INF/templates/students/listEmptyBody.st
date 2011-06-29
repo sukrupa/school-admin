@@ -5,5 +5,5 @@
        }$
 </div>
 <div class="errorMessage">
-    No students found
+    No Students found
 </div>

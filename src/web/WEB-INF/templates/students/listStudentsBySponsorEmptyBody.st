@@ -5,5 +5,5 @@
        }$
 </div>
 <div class="errorMessage">
-    No sponsors found
+    No Sponsors found
 </div>
