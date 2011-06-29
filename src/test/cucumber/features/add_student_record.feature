@@ -27,3 +27,14 @@ Feature: Add student record
      Then the error message "Missing Student Name. Please re-enter." is displayed
      Then the error message "Please enter a valid date format." is displayed
      Then the error message "Please select a gender." is displayed
+
+@OnRegisterAStudentPage
+   Scenario: Display error message when New student with existing ID is entered for registration
+    When I enter "SK2010082011" as "studentId"
+     And I enter "Yael" as "name"
+     And I enter "06-03-1982" as "dateOfBirth"
+     And I select "Female" as "gender"
+     And I click "Register" submit button
+     Then the error message "Student with the same ID already exists." is displayed
+
+
