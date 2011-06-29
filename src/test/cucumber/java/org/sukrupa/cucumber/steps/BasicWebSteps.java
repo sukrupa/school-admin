@@ -22,6 +22,7 @@ public class BasicWebSteps {
     public static final String HOME_PAGE = "http://localhost:8080/";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\" ")
@@ -32,6 +33,9 @@ public class BasicWebSteps {
 
 =======
 >>>>>>> Nishi and Aravind : Added 'error message is displayed' function into BasicWebSteps
+=======
+
+>>>>>>> Nishi and Aravind : Added dropdown, link and textbox in BasicWebSteps
     @When("^I click \"([^\"]*)\" button$")
     public void clickButton(String buttonText) {
         browser().button(buttonText).click();
