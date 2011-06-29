@@ -1,6 +1,5 @@
 package org.sukrupa.cucumber.steps;
 
-import com.sun.source.tree.AssertTree;
 import cuke4duke.annotation.After;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
@@ -107,7 +106,6 @@ public class BasicWebSteps {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
 
     }
-
 
     @After
     public void closeBrowser() {
