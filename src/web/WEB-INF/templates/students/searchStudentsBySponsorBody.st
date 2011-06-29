@@ -1,5 +1,5 @@
 
-<form id="searchStudentsBySponsorForm" name="searchParam" action="." method="get" >
+<form id="searchStudentsBySponsorForm" name="searchParam" action="listForSearchStudentsBySponsor" method="get" >
     <table>
 
         <tr>
