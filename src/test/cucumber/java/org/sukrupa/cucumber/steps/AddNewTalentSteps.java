@@ -1,0 +1,11 @@
+package org.sukrupa.cucumber.steps;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Thoughtworks
+ * Date: 6/29/11
+ * Time: 4:19 AM
+ * To change this template use File | Settings | File Templates.
+ */
+public class AddNewTalentSteps {
+}
