@@ -8,14 +8,4 @@ import sun.tools.tree.SuperExpression;
 public class CreateEventSteps extends BasicWebSteps {
 
 
-
-
-
-    @I18n.EN_AU.When("I fill in the Title with \"([^\"]*)\"$")
-    public void fillInTitle(String title){
-
-
-
-    }
-
 }
