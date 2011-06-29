@@ -368,9 +368,7 @@ public class StudentRepositoryTest {
     public void shouldReturnAllStudents() {
         hibernateSession.save(pat);
         hibernateSession.save(sahil);
-
         List<Student> students = studentRepository.findAll();
-
         assertThat(students, CollectionMatchers.hasOnly(pat, sahil));
 
     }
