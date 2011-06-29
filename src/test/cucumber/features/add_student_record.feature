@@ -12,7 +12,7 @@ Feature: Add student record
      And I enter "Yael" as "name"
      And I enter "06-03-1982" as "dateOfBirth"
      And I select "Female" as "gender"
-     And I click "Register" button
+     And I click "Register" submit button
      Then the "Edit Student Record: Yael" page is displayed
 
 @OnRegisterAStudentPage
@@ -20,3 +20,10 @@ Feature: Add student record
      When I click "Cancel" button
      Then the "List of Students" page is displayed
 
+@OnRegisterAStudentPage
+     Scenario: Display error messages when fields are incomplete
+     When I click "Register" submit button
+     Then the error message "Missing Student ID. Please re-enter." is displayed
+     Then the error message "Missing Student Name. Please re-enter." is displayed
+     Then the error message "Please enter a valid date format." is displayed
+     Then the error message "Please select a gender." is displayed
