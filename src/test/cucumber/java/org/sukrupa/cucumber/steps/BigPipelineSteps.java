@@ -13,21 +13,9 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class BigPipelineSteps extends Login{
     private static final String TOP_LEVEL_DIV = "page";
 
-    @Given("I am on Sukrupa Page")
+    @Given("^I am on the \"Big Needs\" Page$")
     public void navigateTo() {
-        super.navigateTo();
+         browser().link("Big Needs").click();
     }
-
-    @When("^I click \"([^\"]*)\" link$")
-    public void clickLink(String text){
-        browser().link(text).click();
-    }
-
-     @Then("^I am taken to \"([^\"]*)\" page$")
-     public void shouldSee(String text) {
-        Browser browser = browser();
-        assertTrue(browser.containsText(browser.div(TOP_LEVEL_DIV), text));
-    }
-
 
 }
