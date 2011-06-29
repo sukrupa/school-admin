@@ -30,14 +30,24 @@ Feature: Search students by sponsor
       And I should not see "Bhavani"
 
     @OnSearchStudentsBySponsorPage
-    Scenario: Search for null entry where sponsors exist
+     Scenario: Search for null entry where sponsors exist
+     When I fill in sponsorname with ""
+     And I click "Search" button
+     Then I should see "Armugam"
+     Then I should see "Abhishek"
+     Then I should see "Anok"
 
     @OnSearchStudentsBySponsorPage
-    Scenario: Search for null entry where sponsors do not exist
+     Scenario: Search for null entry where sponsors do not exist
+     When I fill in sponsorname with ""
+     And I click "Search" button
+     Then I should see "No Sponsors Found"
 
     @OnSearchStudentsBySponsorPage
-    Scenario: Search for non-existent sponsor
-
-
+     Scenario: Search for non-existent sponsor
+     When I fill in sponsorname with "Jlo"
+     And I click "Search" button
+     Then I should see "Armugam"
+     Then I should see "No Sponsors Found"
 
 
