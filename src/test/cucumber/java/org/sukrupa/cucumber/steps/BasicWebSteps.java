@@ -64,6 +64,17 @@ public class BasicWebSteps {
         browser().textbox(textBox).setValue(value);
     }
 
+    @Then("^student \"([^\"]*)\" is displayed$")
+    public void studentIsDisplayed(String text) {
+        Browser browser = browser();
+        assertTrue(browser.containsText(browser.div(TOP_LEVEL_DIV), text));
+    }
+
+    @Then("^student \"([^\"]*)\" is not displayed$")
+    public void studentIsNotDisplayed(String text) {
+        assertFalse(browser().containsText(browser().div("page"), text));
+    }
+
     @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();

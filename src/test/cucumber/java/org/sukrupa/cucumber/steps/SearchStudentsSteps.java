@@ -28,14 +28,10 @@ public class SearchStudentsSteps extends BasicWebSteps{
         browser().textbox("name").setValue(value);
     }
 
-    @When("^I select the age from \"([^\"]*)\"$")
-    public void selectMinimumAge(String age) {
-        browser().select("ageFrom").choose(age);
-    }
-
-    @When("^I select the age to \"([^\"]*)\"$")
-    public void selectMaximumAge(String age) {
-        browser().select("ageTo").choose(age);
+    @When("^I select the age from \"([^\"]*)\" to \"([^\"]*)\"$")
+    public void selectAge(String ageFrom, String ageTo) {
+        browser().select("ageFrom").choose(ageFrom);
+        browser().select("ageTo").choose(ageTo);
     }
 
     @When("^I select class as \"([^\"]*)\"$")
