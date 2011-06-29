@@ -5,6 +5,7 @@ import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
 import org.sukrupa.cucumber.SahiFacade;
+import java.util.Properties;
 
 
 import static org.hamcrest.Matchers.containsString;
@@ -15,7 +16,6 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class BasicWebSteps {
 
     private static final String TOP_LEVEL_DIV = "page";
-    public static final String HOME_PAGE = "http://localhost:8080/";
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
     public void enterAsThe(String objectInput, String objectID){
