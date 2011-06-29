@@ -18,7 +18,6 @@ Feature: Add New Event
         And I enter "03:30" as the "endTime"
         And I click "endTimePm"
         And I enter "Colloseum" as the "venue"
-        And I enter "Santa" as the "coordinator"
         And I enter "BYOB" as the "notes"
         And I enter "64262" as the "attendees"
         And I submit the "Save" form
@@ -28,8 +27,11 @@ Feature: Add New Event
         And "1:30 AM" should be displayed
         And "03:30 PM" should be displayed
         And "Colloseum" should be displayed
-        #And "Santa" should be displayed
         And "BYOB" should be displayed
         And "Anok" should be displayed
 
     #Scenario: Clear create new event form contents
+
+    #Scenario: Enter blank event should give and error
+
+    #Scenario: Feilds with invlaid input showld give errors
