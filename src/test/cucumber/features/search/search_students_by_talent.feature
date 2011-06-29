@@ -3,7 +3,7 @@ Feature: Search students by talent
 
   @OnSearchStudentPage
   Scenario: No Talents Selected
-    When I click "Search" submit button
+    When I click the "Search" submit button
 
     # These students have mutually exclusive talents
     Then "Anok" should be displayed
@@ -15,7 +15,7 @@ Feature: Search students by talent
   @OnSearchStudentPage
   Scenario: One Talent Selected
     When I select the talent "Sports"
-    When I click "Search" submit button
+    When I click the "Search" submit button
 
     Then "Armugam" should be displayed
     And "Anok" should not be displayed
