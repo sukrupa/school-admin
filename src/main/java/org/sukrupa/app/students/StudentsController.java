@@ -55,35 +55,29 @@ public class StudentsController {
 
         return "students/list";
     }
+
     @RequestMapping("listForSearchStudentsBySponsor")
     public String listForStudentsBySponsor(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
-                       @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-                       Map<String, Object> model, HttpServletRequest request) {
+                                           @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                                           Map<String, Object> model, HttpServletRequest request) {
+        model.put("searchCriteria", searchParam.getValidCriteria());
 
         StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
-
-        List<String> validCriteria = searchParam.getValidCriteria();
-
-
-
-               if (students.getStudents().isEmpty()) {
-            model.put("searchCriteria", validCriteria);
+        if (students.getStudents().isEmpty()) {
             return "students/listStudentsBySponsorEmpty";
         }
-
         model.put("page", students);
-
-        model.put("searchCriteria", validCriteria);
-
         return "students/listStudentsBySponsor";
     }
+
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getStudentReferenceData());
     }
+
     @RequestMapping("searchStudentsBySponsor")
     public void searchStudentsBySponsor(Map<String, Object> model) {
-        model.put("formhelper", studentService.getStudentReferenceData());
+        //model.put("formhelper", studentService.getStudentReferenceData());
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
@@ -116,7 +110,7 @@ public class StudentsController {
         Student student = studentService.load(id);
         if (student != null) {
             model.put("student", student);
-            model.put("sponsored",(student.getSponsor()));
+            model.put("sponsored", (student.getSponsor()));
             model.put("studentUpdatedSuccesfully", studentUpdatedSuccesfully);
 
             if (student.getStatus() == null)
@@ -165,7 +159,6 @@ public class StudentsController {
     }
 
 
-
     @RequestMapping(value = "{id}", method = POST)
     public String update(
             @PathVariable String id,
@@ -178,7 +171,7 @@ public class StudentsController {
         studentValidator.validateImage(studentForm, errors);
 
 
-        if(mandatoryFieldsExist(errors)){
+        if (mandatoryFieldsExist(errors)) {
             Student updatedStudent = studentService.update(studentForm);
             if (updatedStudent != null) {
                 model.put("studentUpdatedSuccesfully", true);
@@ -187,12 +180,12 @@ public class StudentsController {
                 model.put("message", "Error updating student");
                 return format("redirect:/students/%s/edit", id);
             }
-        }else{
+        } else {
             model.put("errors", errors);
             addErrorToFields(model, errors);
             model.put("message", "Error updating student");
             studentService.setFormDataOnStudent(studentForm, student);
-            setStudentData(student,"",false,model);
+            setStudentData(student, "", false, model);
             return "students/edit";
         }
     }
