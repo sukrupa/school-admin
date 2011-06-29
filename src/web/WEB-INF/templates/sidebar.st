@@ -85,7 +85,7 @@
       <div class="sideBarContent">
               <ul>
                     <li>
-                      <p class="indent"><a href="/needs/list">Big Needs</a></p>
+                      <p class="indent"><a href="/bigneeds">Big Needs</a></p>
                     </li>
               </ul>
       </div>

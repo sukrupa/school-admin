@@ -10,24 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/needs")
-public class NeedsController {
+@RequestMapping("/bigneeds")
+public class BigNeedsController {
     private BigNeedService bigNeedService;
 
     @Autowired
-    public NeedsController(BigNeedService bigNeedService) {
+    public BigNeedsController(BigNeedService bigNeedService) {
         this.bigNeedService = bigNeedService;
     }
 
-    @RequestMapping("bigNeeds")
-    public void bigNeeds(){
-
+    @RequestMapping
+    public String list(Map <String, Object> model) {
+        return "bigneeds/list";
     }
 
-     @RequestMapping("/list")
-    public void list(Map<String, List<BigNeed>> model)
-    {
-        //model.put("needs", bigNeedService.list());
-    }
 
 }
