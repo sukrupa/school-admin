@@ -1,50 +1,56 @@
 @Login
 Feature: Edit parent details
 
-    @OnViewStudentPage
-    Scenario: Select student to edit parent details
+
+    Scenario Outline: Select student to edit parent details
        When I select "Bhavani" to edit
-       And I fill in the "father.name" with "FatherName"
-       And I fill in the "mother.name" with "MotherName"
-       And I fill in the "father.education" with "FatherEducation"
-       And I fill in the "mother.education" with "MotherEducation"
-       And I fill in the "guardian.name" with "GuardianName"
-       And I fill in the "guardian.education" with "GuardianEducation"
-       And I fill in the "father.contact" with "FatherContact"
-       And I fill in the "mother.contact" with "MotherContact"
-       And I fill in the "guardian.contact" with "GuradianContact"
-       And I fill in the "father.salary" with "FatherSalary"
-       And I fill in the "mother.salary" with "MotherSalary"
-       And I fill in the "guardian.salary" with "GuardianSalary"
-       And I select "FatherOccupation" as "father.occupation"
-       And I select "MotherOccupation" as "mother.occupation"
-       And I select "FatherMaritalStatus" as "father.maritalStatus"
-       And I select "MotherMaritalStatus" as "mother.maritalStatus"
+       And I enter "father" name as "<FatherName>"
+       And I enter "mother" name as "<MotherName>"
+       And I enter "guardian" name as "<GuardianName>"
+       And I enter "father" education as "<FatherEducation>"
+       And I enter "mother" education as "<MotherEducation>"
+       And I enter "guardian" education as "<GuardianEducation>"
+       And I enter "father" contact as "<FatherContact>"
+       And I enter "mother" contact as "<MotherContact>"
+       And I enter "guardian" contact as "<GuradianContact>"
+       And I enter "father" salary as "<FatherSalary>"
+       And I enter "mother" salary as "<MotherSalary>"
+       And I enter "guardian" salary as "<GuardianSalary>"
+       And I select "<FatherOccupation>" as "father" occupation
+       And I select "<MotherOccupation>" as "mother" occupation
+       And I select "<FatherMaritalStatus>" as "father" maritalStatus
+       And I select "<MotherMaritalStatus>" as "mother" maritalStatus
        And I click "save" button
        Then "updated successfully" should be displayed
 
-       |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
-       |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
 
-    @OnViewStudentPage
-    Scenario: Verify that the parent details are updated
+      Examples:
+        |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
+        |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
+
+Scenario Outline: Verify that the parent details are updated
         When I select "Bhavani"
-        Then "Peter Murray" should be displayed
-        Then "My Mother" should be displayed
-        Then "My Guardian" should be displayed
-        Then "Not Much" should be displayed
-        Then "Mother Education" should be displayed
-        Then "Guardian Education" should be displayed
-        Then "123456" should be displayed
-        Then "1234567" should be displayed
-        Then "12345678" should be displayed
-        Then "5000" should be displayed
-        Then "6000" should be displayed
-        Then "7000" should be displayed
-        Then "Coolie" should be displayed
-        Then "House Keeper" should be displayed
-        Then "Single" should be displayed
-        Then "Married" should be displayed
+        Then "<FatherName>" should be displayed
+        Then "<MotherName>" should be displayed
+        Then "<GuardianName>" should be displayed
+        Then "<FatherEducation>" should be displayed
+        Then "<MotherEducation>" should be displayed
+        Then "<GuardianEducation>" should be displayed
+        Then "<FatherContact>" should be displayed
+        Then "<MotherContact>" should be displayed
+        Then "<GuradianContact>" should be displayed
+        Then "<FatherSalary>" should be displayed
+        Then "<MotherSalary>" should be displayed
+        Then "<GuardianSalary>" should be displayed
+        Then "<FatherOccupation>" should be displayed
+        Then "<MotherOccupation>" should be displayed
+        Then "<FatherMaritalStatus>" should be displayed
+        Then "<MotherMaritalStatus>" should be displayed
+
+      Examples:
+        |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
+        |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
+
 
 
 

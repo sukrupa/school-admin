@@ -24,6 +24,36 @@ public class EditStudentSteps {
         browser().link(studentName).click();
     }
 
+    @When("^I enter \"([^\"]*)\" name as \"([^\"]*)\"$")
+    public void fillInTheNamefieldWith(String name, String fieldContent){
+        browser().textbox(name+".name").setValue(fieldContent);
+    }
+
+    @When("^I enter \"([^\"]*)\" education as \"([^\"]*)\"$")
+    public void fillInTheEducationfieldWith(String name, String fieldContent){
+        browser().textbox(name+".education").setValue(fieldContent);
+    }
+
+    @When("^I enter \"([^\"]*)\" salary as \"([^\"]*)\"$")
+    public void fillInTheSalaryfieldWith(String name, String fieldContent){
+        browser().textbox(name+".salary").setValue(fieldContent);
+    }
+
+    @When("^I enter \"([^\"]*)\" contact as \"([^\"]*)\"$")
+    public void fillInTheContactfieldWith(String name, String fieldContent){
+        browser().textbox(name+".contact").setValue(fieldContent);
+    }
+
+    @When("^I select \"([^\"]*)\" as \"([^\"]*)\" occupation$")
+    public void selectTheOccupationAs(String fieldContent, String name){
+        browser().select(name+".occupation").choose(fieldContent);
+    }
+
+    @When("^I select \"([^\"]*)\" as \"([^\"]*)\" maritalStatus")
+    public void selectTheMaritalStatusAs(String fieldContent, String name){
+        browser().select(name+".maritalStatus").choose(fieldContent);
+    }
+
     /*@When("^I select father occupation as \"([^\"]*)\"$")
     public void selectFatherOccupation(String studentName){
         browser().select("father.occupation")
