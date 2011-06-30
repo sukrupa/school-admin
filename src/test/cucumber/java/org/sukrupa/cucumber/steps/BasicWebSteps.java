@@ -22,8 +22,14 @@ public class BasicWebSteps {
         browser().byId(objectID).setValue(objectInput);
     }
 
+
     @When("^I select \"([^\"]*)\"$")
     public void click(String objectID){
+        browser().byId(objectID).click();
+    }
+
+    @When("^I  \"([^\"]*)\"$")
+    public void clearForm(String objectID){
         browser().byId(objectID).click();
     }
 

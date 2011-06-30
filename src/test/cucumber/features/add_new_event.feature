@@ -30,23 +30,27 @@ Feature: Add New Event
         And "BYOB" should be displayed
         And "Anok" should be displayed
 
-  #  @OnCreateEventPage
- #   Scenario: Clear create new event form contents
-#        When I enter "MMA" as the "title"
- #       And I enter "13-4-2011" as the "date"
-#       And I enter "Event description..." as the "description"
-#        And I enter "01:30" as the "startTime"
-#        And I enter "03:30" as the "endTime"
-#        And I click "endTimePm"
-#        And I enter "Colloseum" as the "venue"
-#        And I enter "BYOB" as the "notes"
-#        And I enter "64262" as the "attendees"
-#        And I  "clear"
-#        Then
-#        When I enter "MMA" as the "title"
-#        Then "title" should contain "MMA"
-#        When I click "clear"
-#        Then "title" should not contain "MMA"
+      @OnCreateEventPage
+      Scenario: Clear create new event form contents
+        When I enter "MMA" as the "title"
+        And I enter "13-4-2011" as the "date"
+        And I enter "Event description..." as the "description"
+        And I enter "01:30" as the "startTime"
+        And I enter "03:30" as the "endTime"
+        And I select "endTimePm"
+        And I enter "Colloseum" as the "venue"
+        And I enter "BYOB" as the "notes"
+        And I enter "64262" as the "attendees"
+        And I "clear"
+        Then "title" should contain ""
+        And "date" should contain ""
+        And "description" should contain ""
+        And "startTime" should contain ""
+        And "endTime" should contain ""
+        And "venue" should contain ""
+        And "notes" should contain ""
+        And "attendees" should contain ""
+
 
 
     #Scenario: Enter blank event should give and error
