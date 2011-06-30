@@ -124,6 +124,7 @@ public class BasicWebSteps {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
 
     }
+    
 
     @When("^I \"([^\"]*)\" the form")
     public  void submitForm(String submitButtonName){
