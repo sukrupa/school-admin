@@ -16,6 +16,7 @@ public class SearchStudentsSteps extends BasicWebSteps {
     @Given("I am on the Student Search page")
     public void navigateTo() {
         browser().navigateTo(getConfigProperty("homepage")+"students/search");
+        browser().byId("studentSearch").click();
     }
 
     @When("^I select the talent \"([^\"]*)\"$")
