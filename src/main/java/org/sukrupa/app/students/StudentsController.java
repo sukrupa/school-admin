@@ -197,14 +197,11 @@ public class StudentsController {
     }
 
 
-@RequestMapping(value = "{id}/profileView", method = GET)
+    @RequestMapping(value = "{id}/profileView", method = GET)
     public String publicStudentProfile(@PathVariable String id,HashMap<String, Object> model) {
         model.put("student", studentService.load(id));
         return "students/profileView";
     }
-
-
-
 
     private boolean mandatoryFieldsExist(Errors errors) {
         return errors.getErrorCount() == 0;

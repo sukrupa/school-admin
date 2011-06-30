@@ -25,6 +25,12 @@
                 <div class="value">$student.dateOfBirthForDisplay$</div>
             </div>
 
+            <div class="entry">
+                <div class="label">Gender</div>
+                <div class="value">$student.gender$</div>
+            </div>
+
+
 
 
 
@@ -32,10 +38,18 @@
                  <div class="label inline-block">Background</div>
                  $if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
             </div>
+
+             <div class="entry">
+                 <div class="label inline-block">Disciplinary</div>
+                 <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
+            </div>
+            
+
             <h4> Comments </h4>
         <div id="comments">
-                <textarea name="comments" id="comments"> </textarea>
+                <textarea name="comments" id="comments" cols="40" rows="10"> </textarea>
                 </div>
+
 
 
         </div>
