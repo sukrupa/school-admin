@@ -96,5 +96,11 @@ Feature: Add New Event
         And I enter "64262" as the "attendees"
         And I enter "may 26 2011" as the "date"
         And I submit the "Save" form
-        Then the error message "Please fill in all required fields." is displayed
+        Then the error message "Invalid date" is displayed
 
+        When I enter "Rachel's party" as the "title"
+        And I enter "It's freaking awesome" as the "description"
+        And I enter "Roberto" as the "attendees"
+        And I enter "22-9-2011" as the "date"
+        And I submit the "Save" form
+        Then the error message "Invalid student IDs: Roberto" is displayed
