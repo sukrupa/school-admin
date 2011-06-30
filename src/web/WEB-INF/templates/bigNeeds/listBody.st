@@ -16,13 +16,15 @@
                     <td><input type="button" name="add" value="Add" /></td>
                 </form>
             </tr>
-
+            $needs:{
             <tr>
-                <td>$bigNeedList.itemName$</td>
-                <td>$bigNeedList.cost$</td>
+                <td>$it.item$</td>
+                <td>$it.cost$</td>
                 <td><input type="button" name="edit" value="Edit" /></td>
                 <td><input type="button" name="del" value="Delete" /></td>
             </tr>
+
+            }$
 
             </tbody>
         </table>

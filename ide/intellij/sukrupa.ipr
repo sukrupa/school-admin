@@ -401,20 +401,12 @@
         <root url="file://$PROJECT_DIR$/../../lib/test" />
         <root url="jar://$PROJECT_DIR$/../../tools/cuke4duke/cuke4duke-0.4.3.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/twist/sahi.jar!/" />
-<<<<<<< HEAD
-=======
-        <root url="jar://$cuke4duke$/cuke4duke-0.4.4.jar!/" />
->>>>>>> Kishore/Vini: Story 543 Added Big Need table sql script, added BigNeedRepository class
       </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/../../lib/test/hamcrest-all-1.2.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/test" recursive="false" />
-<<<<<<< HEAD
-=======
-      <jarDirectory url="file://$cuke4duke$" recursive="false" />
->>>>>>> Kishore/Vini: Story 543 Added Big Need table sql script, added BigNeedRepository class
     </library>
   </component>
 </project>

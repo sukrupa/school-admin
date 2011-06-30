@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
 
 public class BigNeedsControllerTest {
 
@@ -22,10 +21,5 @@ public class BigNeedsControllerTest {
         assertThat(controller.list(model), is("bigneeds/list"));
     }
 
-    @Test
-       public  void shouldCheckListIsNotEmpty(){
-        controller.list(model);
-        assertFalse(model.isEmpty());
-       }
 
 }
