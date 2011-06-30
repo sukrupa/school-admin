@@ -8,18 +8,19 @@ import org.sukrupa.cucumber.context.OnAddNewTalentPage;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.sukrupa.cucumber.CucumberFacade.getConfigProperty;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 
 public class EditStudentSteps {
-    @When("^I select \"([^\"]*)\" to edit$")
-    public void gotoEditStudentPage(String studentName){
-        browser().link(studentName).click();
-        browser().submit("Edit").click();
 
+    @When("^I edit student record of \"([^\"]*)\"$")
+    public void gotoEditStudentPage(String studentName){
+        browser().navigateTo(getConfigProperty("homepage")+"students/SK20090080");
+        browser().submit("Edit").click();
     }
 
-     @When("^I select \"([^\"]*)\"$")
+    @When("^I select the student record of \"([^\"]*)\"$")
     public void viewStudent(String studentName){
         browser().link(studentName).click();
     }

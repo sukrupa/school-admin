@@ -3,7 +3,7 @@ Feature: Edit parent details
 
 
     Scenario Outline: Select student to edit parent details
-       When I select "Bhavani" to edit
+       When I edit student record of "Bhavani"
        And I enter "father" name as "<FatherName>"
        And I enter "mother" name as "<MotherName>"
        And I enter "guardian" name as "<GuardianName>"
@@ -29,7 +29,7 @@ Feature: Edit parent details
         |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
 
 Scenario Outline: Verify that the parent details are updated
-        When I select "Bhavani"
+        When I select the student record of "Bhavani"
         Then "<FatherName>" should be displayed
         Then "<MotherName>" should be displayed
         Then "<GuardianName>" should be displayed
