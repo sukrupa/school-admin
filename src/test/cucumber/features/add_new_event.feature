@@ -52,7 +52,15 @@ Feature: Add New Event
         And "attendees" should contain ""
 
 
+    @OnCreateEventPage
+    Scenario: Create event without mandatory fields
+        When I enter "" as the "title"
+        And I enter "" as the "description"
+        And I enter "" as the "attendees"
+        And I submit the "Save" form
+        Then the error message "Please fill in all required fields." is displayed
 
-    #Scenario: Enter blank event should give and error
+
+
 
     #Scenario: Feilds with invlaid input showld give errors
