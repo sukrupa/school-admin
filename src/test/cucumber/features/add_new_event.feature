@@ -16,7 +16,7 @@ Feature: Add New Event
         And I enter "Event description..." as the "description"
         And I enter "01:30" as the "startTime"
         And I enter "03:30" as the "endTime"
-        And I click "endTimePm"
+        And I select "endTimePm"
         And I enter "Colloseum" as the "venue"
         And I enter "BYOB" as the "notes"
         And I enter "64262" as the "attendees"
@@ -30,23 +30,23 @@ Feature: Add New Event
         And "BYOB" should be displayed
         And "Anok" should be displayed
 
-    @OnCreateEventPage
-    Scenario: Clear create new event form contents
+  #  @OnCreateEventPage
+ #   Scenario: Clear create new event form contents
 #        When I enter "MMA" as the "title"
-#        And I enter "13-4-2011" as the "date"
-#        And I enter "Event description..." as the "description"
+ #       And I enter "13-4-2011" as the "date"
+#       And I enter "Event description..." as the "description"
 #        And I enter "01:30" as the "startTime"
 #        And I enter "03:30" as the "endTime"
 #        And I click "endTimePm"
 #        And I enter "Colloseum" as the "venue"
 #        And I enter "BYOB" as the "notes"
 #        And I enter "64262" as the "attendees"
-#        And I click "clear"
+#        And I  "clear"
 #        Then
-        When I enter "MMA" as the "title"
-        Then "title" should contain "MMA"
-        When I click "clear"
-        Then "title" should not contain "MMA"
+#        When I enter "MMA" as the "title"
+#        Then "title" should contain "MMA"
+#        When I click "clear"
+#        Then "title" should not contain "MMA"
 
 
     #Scenario: Enter blank event should give and error
