@@ -14,14 +14,14 @@ Feature: Authentication Log In
     When I enter the username "admin"
     And I enter the password "password123"
     And I submit the "Login" form
-    Then "Invalid username and password" should be displayed
+    Then the error message "Invalid username and password" is displayed
 
   Scenario: Invalid username
     Given I am on Sukrupa Page
     When I enter the username "username123"
     And I enter the password "password"
     And I submit the "Login" form
-    Then "Invalid username and password" should be displayed
+    Then the error message "Invalid username and password" is displayed
 
   @Login
   Scenario: Logging off
