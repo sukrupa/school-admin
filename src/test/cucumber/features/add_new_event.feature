@@ -57,9 +57,16 @@ Feature: Add New Event
         When I enter "" as the "title"
         And I enter "" as the "description"
         And I enter "" as the "attendees"
+        And I enter "" as the "date"
         And I submit the "Save" form
         Then the error message "Please fill in all required fields." is displayed
 
+        When I enter "" as the "title"
+        And I enter "It's freaking awesome" as the "description"
+        And I enter "64262" as the "attendees"
+        And I enter "22-08-2011" as the "date"
+        And I submit the "Save" form
+        Then the error message "Please fill in all required fields." is displayed
 
 
 
