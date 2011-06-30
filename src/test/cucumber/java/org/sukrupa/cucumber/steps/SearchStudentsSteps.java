@@ -8,13 +8,14 @@ import java.net.HttpCookie;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.sukrupa.cucumber.CucumberFacade.getConfigProperty;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class SearchStudentsSteps extends BasicWebSteps {
 
     @Given("I am on the Student Search page")
     public void navigateTo() {
-        browser().navigateTo("http://localhost:8080/students/search");
+        browser().navigateTo(getConfigProperty("homepage")+"students/search");
     }
 
     @When("^I select the talent \"([^\"]*)\"$")
