@@ -4,20 +4,27 @@ Feature: Edit parent details
     @OnViewStudentPage
     Scenario: Select student to edit parent details
        When I select "Bhavani" to edit
-       And I fill in the "father.name" with "Peter Murray"
-       And I fill in the "mother.name" with "My Mother"
-       And I fill in the "father.education" with "Not Much"
-       And I fill in the "mother.education" with "Mother Education"
-       And I fill in the "guardian.name" with "My Guardian"
-       And I fill in the "guardian.education" with "Guardian Education"
-       And I fill in the "father.contact" with "123456"
-       And I fill in the "mother.contact" with "1234567"
-       And I fill in the "guardian.contact" with "12345678"
-       And I fill in the "father.salary" with "5000"
-       And I fill in the "mother.salary" with "6000"
-       And I fill in the "guardian.salary" with "7000"
+       And I fill in the "father.name" with "FatherName"
+       And I fill in the "mother.name" with "MotherName"
+       And I fill in the "father.education" with "FatherEducation"
+       And I fill in the "mother.education" with "MotherEducation"
+       And I fill in the "guardian.name" with "GuardianName"
+       And I fill in the "guardian.education" with "GuardianEducation"
+       And I fill in the "father.contact" with "FatherContact"
+       And I fill in the "mother.contact" with "MotherContact"
+       And I fill in the "guardian.contact" with "GuradianContact"
+       And I fill in the "father.salary" with "FatherSalary"
+       And I fill in the "mother.salary" with "MotherSalary"
+       And I fill in the "guardian.salary" with "GuardianSalary"
+       And I select "FatherOccupation" as "father.occupation"
+       And I select "MotherOccupation" as "mother.occupation"
+       And I select "FatherMaritalStatus" as "father.maritalStatus"
+       And I select "MotherMaritalStatus" as "mother.maritalStatus"
        And I click "save" button
        Then "updated successfully" should be displayed
+
+       |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
+       |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
 
     @OnViewStudentPage
     Scenario: Verify that the parent details are updated
@@ -34,6 +41,11 @@ Feature: Edit parent details
         Then "5000" should be displayed
         Then "6000" should be displayed
         Then "7000" should be displayed
+        Then "Coolie" should be displayed
+        Then "House Keeper" should be displayed
+        Then "Single" should be displayed
+        Then "Married" should be displayed
+
 
 
 
