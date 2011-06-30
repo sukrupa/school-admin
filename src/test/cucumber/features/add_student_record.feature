@@ -12,7 +12,7 @@ Feature: Add student record
      And I enter "Yael" as "name"
      And I enter "06-03-1982" as "dateOfBirth"
      And I select "Female" as "gender"
-     And I click "Register" submit button
+     And I "Register" the form
      Then the "Edit Student Record: Yael" page is displayed
 
 @OnRegisterAStudentPage
@@ -22,7 +22,7 @@ Feature: Add student record
 
 @OnRegisterAStudentPage
      Scenario: Display error messages when fields are incomplete
-     When I click "Register" submit button
+     When I "Register" the form
      Then the error message "Missing Student ID. Please re-enter." is displayed
      Then the error message "Missing Student Name. Please re-enter." is displayed
      Then the error message "Please enter a valid date format." is displayed
@@ -34,7 +34,7 @@ Feature: Add student record
      And I enter "Yael" as "name"
      And I enter "06-03-1982" as "dateOfBirth"
      And I select "Female" as "gender"
-     And I click "Register" submit button
+     And I "Register" the form
      Then the "Edit Student Record: Yael" page is displayed
 
      When I "Add New Student" in the sidebar
@@ -42,7 +42,7 @@ Feature: Add student record
      And I enter "Jack" as "name"
      And I enter "12-12-1290" as "dateOfBirth"
      And I select "Male" as "gender"
-     And I click "Register" submit button
+     And I "Register" the form
      Then the error message "Student with the same ID already exists." is displayed
 
 

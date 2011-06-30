@@ -125,6 +125,11 @@ public class BasicWebSteps {
 
     }
 
+    @When("^I \"([^\"]*)\" the form")
+    public  void submitForm(String submitButtonName){
+         browser().submit(submitButtonName).click();
+    }
+
     @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();
