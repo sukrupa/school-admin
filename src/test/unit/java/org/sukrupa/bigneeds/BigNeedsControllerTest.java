@@ -1,6 +1,7 @@
 package org.sukrupa.bigneeds;
 
 import org.apache.jasper.tagplugins.jstl.When;
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,13 @@ public class BigNeedsControllerTest {
         List<BigNeed> bigNeedList = (List<BigNeed>) model.get("bigNeedList");
         assertThat(bigNeedList.contains(schoolBusBigNeed), is(true));
         assertThat(bigNeedList.contains(waterPurifierBigNeed), is(true));
+    }
+
+    @Test
+    public void shouldCreateABigNeed(){
+        BigNeed sampleBigNeed = new BigNeed("Sample", 60000);
+        controller.create(sampleBigNeed, model);
+        assertThat((String)model.get("message"),is("Added Successfully"));
     }
 
 }

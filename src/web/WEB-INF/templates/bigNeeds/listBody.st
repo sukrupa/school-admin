@@ -10,10 +10,10 @@
             </thead>
             <tbody>
             <tr>
-                <form name="bigNeeds" method="post" action=".">
-                    <td><input type="text" name="item" /></td>
+                <form name="createBigNeed" method="post" action="/bigneeds/create">
+                    <td><input type="text" name="itemName" /></td>
                     <td><input type="text" name="cost" /></td>
-                    <td><input type="button" name="add" value="Add" /></td>
+                    <td><input type="submit" name="add" value="Add" /></td>
                 </form>
             </tr>
 
