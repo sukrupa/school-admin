@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.bigneeds.BigNeed;
+import org.sukrupa.bigneeds.BigNeedFormData;
 import org.sukrupa.bigneeds.BigNeedRepository;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +32,9 @@ public class BigNeedsController {
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create( @ModelAttribute("createBigNeed")BigNeed bigNeed, Map<String, Object> model) {
-        bigNeedRepository.put(bigNeed);
-        model.put("message", "Added Successfully");
+    public String create( @ModelAttribute("createBigNeed") BigNeedFormData bigNeed, Map<String, Object> model) {
+       model.put("message", "Added Successfully");
+       bigNeedRepository.put(bigNeed.createBigNeed());
        return list(model);
     }
 

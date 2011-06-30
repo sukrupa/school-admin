@@ -11,8 +11,8 @@
             <tbody>
             <tr>
                 <form name="createBigNeed" method="post" action="/bigneeds/create">
-                    <td><input type="text" name="itemName" /></td>
-                    <td><input type="text" name="cost" /></td>
+                    <td><input type="text" id="itemName" name="itemName" /></td>
+                    <td><input type="text" id="costString" name="costString" /></td>
                     <td><input type="submit" name="add" value="Add" /></td>
                 </form>
             </tr>
@@ -29,6 +29,7 @@
             }$
             </tbody>
         </table>
+        <div id="msg">$message$ $bigneed.itemName$</div>
     </div>
 
 </div>

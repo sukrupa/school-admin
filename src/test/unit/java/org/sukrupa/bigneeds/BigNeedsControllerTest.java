@@ -63,7 +63,7 @@ public class BigNeedsControllerTest {
 
     @Test
     public void shouldCreateABigNeed(){
-        BigNeed sampleBigNeed = new BigNeed("Sample", 60000);
+        BigNeedFormData sampleBigNeed = new BigNeedFormData("Sample", "60000");
         controller.create(sampleBigNeed, model);
         assertThat((String)model.get("message"),is("Added Successfully"));
     }

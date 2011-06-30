@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,16 +14,12 @@ public class BigNeedRepository {
 
     private SessionFactory sessionFactory;
 
-
     @Autowired
     public BigNeedRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public Integer getCount() {
-        return 0;
-    }
-
+    
     public void put(BigNeed bigNeed) {
         session().saveOrUpdate(bigNeed);
     }

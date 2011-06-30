@@ -50,11 +50,6 @@ public class BigNeedRepositoryTest {
         assertThat(bigNeedList.isEmpty(), is(false));
     }
 
-    @Test
-    public void shouldHaveCountZero() {
-        assertThat(bigNeedRepository.getCount(), is(0));
-    }
-
     @Before
     public void setUp(){
         bigNeedRepository = new BigNeedRepository(sessionFactory);
