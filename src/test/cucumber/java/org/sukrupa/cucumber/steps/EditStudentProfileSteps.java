@@ -14,12 +14,12 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class EditStudentProfileSteps extends BasicWebSteps{
 
 
-     @When("^I choose \"([^\"]*)\" from student list$")
+    @When("^I choose \"([^\"]*)\" from student list$")
     public void chooseNameFromStudentList(String name){
         browser().link(name).click();
     }
 
-      @When("^I enter \"([^\"]*)\" as the Sponsor$")
+    @When("^I enter \"([^\"]*)\" as the Sponsor$")
     public void enterIntoTheSponsorTextBox(String text){
         browser().textbox("sponsored").setValue(text);
     }
@@ -35,19 +35,29 @@ public class EditStudentProfileSteps extends BasicWebSteps{
         assertTrue(browser().containsText(browser().div("student-performance"), text));
     }
 
-
-      @Then("^\"([^\"]*)\" is displayed under Disciplinary$")
+    @Then("^\"([^\"]*)\" is displayed under Disciplinary$")
     public  void  isDisplayedUnderDisciplinary(String text){
         assertTrue(browser().containsText(browser().div("student-disciplinary"), text));
     }
 
-
-     @Then("^\"([^\"]*)\" is displayed under Student Status$")
+    @Then("^\"([^\"]*)\" is displayed under Student Status$")
     public  void  isDisplayedUnderStudentStatus(String text){
         assertTrue(browser().containsText(browser().div("secondaryInfo"), text));
     }
 
+    @When("^I enter \"([^\"]*)\" as Notes$")
+    public void enterIntoTheTextArea(String text){
+        enterAsThe(text,"new-note");
+    }
 
+    @When("^I \"([^\"]*)\" to the form$")
+    public  void submitToTheForm(String submitButtonName){
+        submitForm(submitButtonName);
+    }
 
+    @Then("^\"([^\"]*)\" should be displayed in the list of notes$")
+    public  void  displayInTheListOfNotes(String text){
+       shouldBeDisplayed(text);
+    }
 
 }
