@@ -19,11 +19,13 @@ public class SearchStudentsSteps extends BasicWebSteps {
 
     @When("^I select the talent \"([^\"]*)\"$")
     public void selectTalent(String talent) {
-        browser().select("availableTalents").choose(talent);
-	    browser().button("addTalent").click();
+        if (!talent.isEmpty()) {
+            browser().select("availableTalents").choose(talent);
+	        browser().button("addTalent").click();
+        }
     }
 
-    @When("^I fill in the name with \"([^\"]*)\"$")
+    @When("^I enter name \"([^\"]*)\"$")
     public void fillInTheTextBoxWith(String value) {
         browser().textbox("name").setValue(value);
     }
@@ -43,4 +45,25 @@ public class SearchStudentsSteps extends BasicWebSteps {
     public void selectGender(String gender) {
         browser().select("gender").choose(gender);
     }
+
+    @When("^I select religion as \"([^\"]*)\"$")
+    public void selectReligion(String religion) {
+        browser().select("religion").choose(religion);
+    }
+
+    @When("^I select caste as \"([^\"]*)\"$")
+    public void selectCaste(String caste) {
+        browser().select("caste").choose(caste);
+    }
+
+    @When("^I select community location as \"([^\"]*)\"$")
+    public void selectCommunityLocation(String communityLocatione) {
+        browser().select("communityLocation").choose(communityLocatione);
+    }
+
+    @When("^I select family status as \"([^\"]*)\"$")
+    public void selectFamilyStatus(String familyStatus) {
+        browser().select("familyStatus").choose(familyStatus);
+    }
+
 }
