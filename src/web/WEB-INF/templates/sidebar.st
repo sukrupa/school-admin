@@ -9,7 +9,7 @@
 	    <p class="indent">
 	        <a href="/students/search">Search Students</a></p>
 	    <p class="indent">
-	        <a href="/students/searchStudentsBySponsor">Search Students by Sponsor</a></p>
+	        <a href="/students/searchbysponsor">Search Students by Sponsor</a></p>
 	  </ul>
 	  </li>
 

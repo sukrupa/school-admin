@@ -80,7 +80,7 @@ public class StudentsControllerTest {
         StudentListPage students = mock(StudentListPage.class);
         List<String> validCriteria = asList("someCriteria");
         Student student = mock(Student.class);
-//
+
         when(searchParam.getValidCriteria()).thenReturn(validCriteria);
         when(request.getQueryString()).thenReturn("TestQueryString");
         when(service.getPage(searchParam, 23, "TestQueryString")).thenReturn(students);
@@ -88,7 +88,7 @@ public class StudentsControllerTest {
 
         String view = controller.listForStudentsBySponsor(23, searchParam, studentModel, request);
 
-        assertThat(view, is("students/listStudentsBySponsor"));
+        assertThat(view, is("students/listsponsorsearch"));
         assertThat(studentModel.get("page"), is((Object) students));
         assertThat(studentModel.get("searchCriteria"), is((Object) validCriteria));
     }
@@ -104,7 +104,7 @@ public class StudentsControllerTest {
 
         String view = controller.listForStudentsBySponsor(23, searchParam, studentModel, request);
 
-        assertThat(view, is("students/listStudentsBySponsorEmpty"));
+        assertThat(view, is("students/listsponsorempty"));
         assertThat(studentModel, hasKey("searchCriteria"));
     }
 
