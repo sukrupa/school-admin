@@ -76,8 +76,7 @@ public class StudentsController {
     }
 
     @RequestMapping("searchbysponsor")
-    public void searchStudentsBySponsor(Map<String, Object> model) {
-        //model.put("formhelper", studentService.getStudentReferenceData());
+    public void searchStudentsBySponsor() {
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
