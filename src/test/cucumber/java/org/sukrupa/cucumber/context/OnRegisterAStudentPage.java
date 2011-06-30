@@ -10,10 +10,7 @@ public class OnRegisterAStudentPage extends Login{
     @Before("@OnRegisterAStudentPage")
     public void registerAStudentPage(){
         browser().navigateTo(getConfigProperty("homepage") + "students/create");
-       // super.login();
-       //super.clickLink("Add New Student");
-      // browser().link("Add New Student").click();
-       // browser().click("Add New Student");
+
     }
 
 }

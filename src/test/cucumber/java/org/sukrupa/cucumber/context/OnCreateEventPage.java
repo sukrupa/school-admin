@@ -11,8 +11,6 @@ public class OnCreateEventPage extends BasicWebSteps{
     @Before("@OnCreateEventPage")
     public void OnCreateEventPage(){
         browser().navigateTo(getConfigProperty("homepage") + "events/create");
-        // MAKE LINE BELOW WORK!!!!!
-        //browser().link("Create an Event").click();
     }
     
 }

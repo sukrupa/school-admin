@@ -11,13 +11,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 6/29/11
- * Time: 6:36 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class StudentFamilyStatusSteps extends OnStudentBhavaniProfileEditPage {
 
     @When("^I choose family status \"([^\"]*)\"$")
