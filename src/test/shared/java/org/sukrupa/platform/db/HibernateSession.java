@@ -94,8 +94,8 @@ public class HibernateSession {
         return new JdbcTemplate(dataSource);
     }
 
-
     private void track(Object[] objects) {
         trackedObjects = ArrayUtils.addAll(trackedObjects, objects);
     }
+
 }

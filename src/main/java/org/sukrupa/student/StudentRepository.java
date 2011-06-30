@@ -3,13 +3,11 @@ package org.sukrupa.student;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sukrupa.event.Event;
 
 import java.util.List;
 import java.util.Set;
@@ -55,9 +53,9 @@ public class StudentRepository {
         return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
     }
 
-    private Query query(String hql) {
-        return session().createQuery(hql);
-    }
+      private Query query(String hibernateQueryLanguage) {
+          return session().createQuery(hibernateQueryLanguage);
+      }
 
     private Session session() {
         return sessionFactory.getCurrentSession();
