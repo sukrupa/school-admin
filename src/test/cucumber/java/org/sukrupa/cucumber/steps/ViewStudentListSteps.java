@@ -1,11 +1,12 @@
 package org.sukrupa.cucumber.steps;
+import cuke4duke.annotation.I18n.EN.Then;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 7/1/11
- * Time: 2:20 AM
- * To change this template use File | Settings | File Templates.
- */
-public class ViewStudentListSteps {
+
+
+public class ViewStudentListSteps extends EditAndViewStudentProfile{
+
+    @Then("^\"([^\"]*)\" is displayed in the list of students$")
+    public  void  isDisplayedInListOfStudents(String text){
+        isDisplayedUnderDivId(text,"studentListPages");
+    }
 }
