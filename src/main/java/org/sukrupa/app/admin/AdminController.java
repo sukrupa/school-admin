@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.student.StudentService;
 
 import java.sql.Savepoint;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -17,7 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class AdminController {
 
     private StudentService studentService;
-
+    Map<String, Object> model=new HashMap<String, Object>();
     @Autowired
     public AdminController(StudentService studentService) {
         this.studentService = studentService;
@@ -27,4 +28,14 @@ public class AdminController {
     public String list(){
         return "admin/adminPage";
     }
+
+    @RequestMapping("/monthlyreports")
+    public String monthlyReports(){
+        model.put("student",)
+        return "admin/monthlyreportsPage";
+    }
 }
+
+
+
+

@@ -1,0 +1,1 @@
+$layout(body=admin/monthlyreportsPageBody(), title="Monthly Reports", stylesheets="admin")$
