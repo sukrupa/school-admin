@@ -5,19 +5,13 @@ import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 6/30/11
- * Time: 12:44 PM
- * To change this template use File | Settings | File Templates.
- */
-public class EditStudentProfileSteps extends BasicWebSteps{
 
+public class EditStudentProfileSteps extends BasicWebSteps{
 
 
      @When("^I choose \"([^\"]*)\" from student list$")
@@ -25,15 +19,35 @@ public class EditStudentProfileSteps extends BasicWebSteps{
         browser().link(name).click();
     }
 
-      @When("^I enter \"([^\"]*)\" as the Sponsor")
+      @When("^I enter \"([^\"]*)\" as the Sponsor$")
     public void enterIntoTheSponsorTextBox(String text){
         browser().textbox("sponsored").setValue(text);
     }
 
-    @Then("^\"([^\"]*)\" should be displayed in Sponsor")
-    public void shouldBeDisplayedInSponsorTextBox(String text){
-         String objectValue = browser().byId("sponsored").getValue();
-        assertThat(objectValue, containsString(text));
+    @Then("^\"([^\"]*)\" is displayed under Sponsor$")
+    public  void  isDisplayedUnderSponsor(String text){
+        assertTrue(browser().containsText(browser().div("sponsor"), text));
     }
+
+
+    @Then("^\"([^\"]*)\" is displayed under Academic Performance$")
+    public  void  isDisplayedUnderAcademicPerformance(String text){
+        assertTrue(browser().containsText(browser().div("student-performance"), text));
+    }
+
+
+      @Then("^\"([^\"]*)\" is displayed under Disciplinary$")
+    public  void  isDisplayedUnderDisciplinary(String text){
+        assertTrue(browser().containsText(browser().div("student-disciplinary"), text));
+    }
+
+
+     @Then("^\"([^\"]*)\" is displayed under Student Status$")
+    public  void  isDisplayedUnderStudentStatus(String text){
+        assertTrue(browser().containsText(browser().div("secondaryInfo"), text));
+    }
+
+
+
 
 }

@@ -7,4 +7,13 @@ Feature: Edit student profile
      And I "Edit" the form
     And I enter "Peter Murray" as the Sponsor
     And I click "Save" button
-    Then  "Peter Murray" should be displayed in Sponsor
+    Then the "Student Record: Bhavani" page is displayed
+    And "Peter Murray" is displayed under Sponsor
+
+       When I "View Students" in the sidebar
+       And I choose "Bhavani" from student list
+       Then "A+" is displayed under Academic Performance
+       And "Excellent" is displayed under Disciplinary
+       And "Existing Student" is displayed under Student Status
+       And "Peter Murray" is displayed under Sponsor
+
