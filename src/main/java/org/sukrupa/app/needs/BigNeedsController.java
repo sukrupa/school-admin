@@ -27,7 +27,7 @@ public class BigNeedsController {
     public String list(Map<String, Object> model) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
         model.put("bigNeedList", bigNeedList);
-        return "bigneeds/list";
+        return "bigNeeds/list";
     }
 
     @RequestMapping(value = "create", method = POST)

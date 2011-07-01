@@ -38,7 +38,7 @@ public class BigNeedsControllerTest {
 
     @Test
     public void shouldDisplayBigNeedsPage() {
-        assertThat(controller.list(model), is("bigneeds/list"));
+        assertThat(controller.list(model), is("bigNeeds/list"));
     }
 
     @Test
