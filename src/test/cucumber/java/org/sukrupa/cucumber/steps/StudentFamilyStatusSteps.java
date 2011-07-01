@@ -1,6 +1,5 @@
 package org.sukrupa.cucumber.steps;
 
-import org.sukrupa.cucumber.context.OnStudentBhavaniProfileEditPage;
 import cuke4duke.annotation.Before;
 import cuke4duke.annotation.I18n.EN.*;
 import cuke4duke.annotation.Pending;
@@ -12,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 
-public class StudentFamilyStatusSteps extends OnStudentBhavaniProfileEditPage {
+public class StudentFamilyStatusSteps  {
 
     @When("^I choose family status \"([^\"]*)\"$")
     public void chooseFamilyStatus(String status){
