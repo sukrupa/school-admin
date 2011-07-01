@@ -59,7 +59,7 @@ public class EditAndViewStudentProfile extends BasicWebSteps{
 
       @Then("^\"([^\"]*)\" is displayed under Name$")
     public  void  isDisplayedUnderName(String text){
-
+          isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
      @Then("^\"([^\"]*)\" is displayed under Gender$")
