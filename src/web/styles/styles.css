@@ -17,7 +17,7 @@ body
     padding: 5px;
     font: 11px tahoma, verdana, arial, helvetica, sans-serif;
     background: #24333D;
-    
+
     
 }
 
@@ -131,10 +131,7 @@ body
     min-height:297px;
     padding-left:15px;
     padding-top: 10px;
-    font: 120%  tahoma, arial, helvetica; 
-    border-left:solid;
-    border-color:#254965;
-
+    font: 120%  tahoma, arial, helvetica;
 }
 
 #basicBody {
@@ -144,7 +141,6 @@ body
     padding-left:15px;
     padding-top: 10px;
     font: 120%  tahoma, arial, helvetica;
-
 }
 
 .pageheader img {
@@ -170,8 +166,6 @@ body
     -moz-border-radius-bottomleft: 5px;
     -webkit-border-bottom-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    
-  
 }
 
 .clear 

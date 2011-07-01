@@ -10,7 +10,7 @@
             <thead class="header">
             <tr>
                 <td>Sponsor Name</td>
-                <td>Name</td>
+                <td>Student Name</td>
 
             </tr>
             </thead>
