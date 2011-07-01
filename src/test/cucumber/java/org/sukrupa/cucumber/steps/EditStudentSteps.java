@@ -16,7 +16,7 @@ public class EditStudentSteps {
 
     @When("^I edit student record of \"([^\"]*)\"$")
     public void gotoEditStudentPage(String studentName){
-        browser().navigateTo(getConfigProperty("homepage")+"students/SK20090080");
+        browser().link(studentName).click();
         browser().submit("Edit").click();
     }
 
@@ -55,8 +55,4 @@ public class EditStudentSteps {
         browser().select(name+".maritalStatus").choose(fieldContent);
     }
 
-    /*@When("^I select father occupation as \"([^\"]*)\"$")
-    public void selectFatherOccupation(String studentName){
-        browser().select("father.occupation")
-    }*/
 }

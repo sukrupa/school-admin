@@ -31,21 +31,21 @@ Feature: Edit parent details
 Scenario Outline: Verify that the parent details are updated
         When I select the student record of "Bhavani"
         Then "<FatherName>" should be displayed
-        Then "<MotherName>" should be displayed
-        Then "<GuardianName>" should be displayed
-        Then "<FatherEducation>" should be displayed
-        Then "<MotherEducation>" should be displayed
-        Then "<GuardianEducation>" should be displayed
-        Then "<FatherContact>" should be displayed
-        Then "<MotherContact>" should be displayed
-        Then "<GuradianContact>" should be displayed
-        Then "<FatherSalary>" should be displayed
-        Then "<MotherSalary>" should be displayed
-        Then "<GuardianSalary>" should be displayed
-        Then "<FatherOccupation>" should be displayed
-        Then "<MotherOccupation>" should be displayed
-        Then "<FatherMaritalStatus>" should be displayed
-        Then "<MotherMaritalStatus>" should be displayed
+        And "<MotherName>" should be displayed
+        And "<GuardianName>" should be displayed
+        And "<FatherEducation>" should be displayed
+        And "<MotherEducation>" should be displayed
+        And "<GuardianEducation>" should be displayed
+        And "<FatherContact>" should be displayed
+        And "<MotherContact>" should be displayed
+        And "<GuradianContact>" should be displayed
+        And "<FatherSalary>" should be displayed
+        And "<MotherSalary>" should be displayed
+        And "<GuardianSalary>" should be displayed
+        And "<FatherOccupation>" should be displayed
+        And "<MotherOccupation>" should be displayed
+        And "<FatherMaritalStatus>" should be displayed
+        And "<MotherMaritalStatus>" should be displayed
 
       Examples:
         |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
