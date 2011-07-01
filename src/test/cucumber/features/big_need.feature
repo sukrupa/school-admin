@@ -5,7 +5,7 @@ Feature: Add, Edit and Delete Items in Big Needs
    Given I am on the Big Needs page
    Then "Big Needs" should be displayed
 
-#Roopa and Anita decided to hold off for this duriing development and implementing it when QAing.
+#We need to fix this before we are allowed to move it to QA
   #Scenario: Big Needs List is Displayed
    #  Given I am on the "Big Needs" Page
    #  Then "Item" should be displayed
@@ -13,7 +13,7 @@ Feature: Add, Edit and Delete Items in Big Needs
    #  And "Power Generator" should be displayed
    #  And "50000" should be displayed
 
-  # Scenario: Add item to Big Need List
+  # Scenario: Add item to Big Need list
         # Given I am on the "Big Needs" Page
         # When I enter "Refridgerator" as the "itemName"
         # And I enter "20000" as the "Cost"
@@ -21,3 +21,4 @@ Feature: Add, Edit and Delete Items in Big Needs
         # Then "Refridgerator" should be displayed
         # And "20000" should be displayed
 
+#Scenario: Edit item in the Big Need list
