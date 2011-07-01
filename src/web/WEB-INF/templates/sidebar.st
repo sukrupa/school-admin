@@ -60,6 +60,11 @@
                 <a id="admin" href="/admin"> Tools </a>
             </p>
         </li>
+        <li>
+             <p class="indent">
+                 <a href="/admin/monthlyreports?sponsored=Yes"> Monthly Reports </a>
+             </p>
+        </li>
     </ul>
 </div>
 

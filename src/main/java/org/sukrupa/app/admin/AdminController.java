@@ -1,12 +1,19 @@
 package org.sukrupa.app.admin;
 
+import org.hibernate.SessionFactory;
+import org.hsqldb.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.sukrupa.student.StudentService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.sukrupa.event.Event;
+import org.sukrupa.student.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Savepoint;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -18,7 +25,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class AdminController {
 
     private StudentService studentService;
-    Map<String, Object> model=new HashMap<String, Object>();
     @Autowired
     public AdminController(StudentService studentService) {
         this.studentService = studentService;
@@ -30,8 +36,16 @@ public class AdminController {
     }
 
     @RequestMapping("/monthlyreports")
-    public String monthlyReports(){
-        model.put("student",)
+    public String monthlyReports(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
+                                           @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                                           Map<String, Object> model, HttpServletRequest request){
+
+        model.put("searchCriteria", searchParam.getValidCriteria());
+
+        StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
+
+        model.put("page", students);
+
         return "admin/monthlyreportsPage";
     }
 }

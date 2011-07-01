@@ -15,7 +15,7 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class BasicWebSteps {
 
-    private static final String TOP_LEVEL_DIV = "page";
+    protected static final String TOP_LEVEL_DIV = "page";
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
     public void enterAsThe(String objectInput, String objectID){

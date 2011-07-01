@@ -1,6 +1,7 @@
 <div class="adminOptions">
   <div class="page">
-        <table class="listTable">
+
+      <table class="listTable">
             <thead class="header">
             <tr>
                 <td>Student Name</td>
@@ -10,8 +11,14 @@
             </tr>
             </thead>
             <tbody>
+              $page.students:{
+            <tr class="student">
+                <td class="sponsor">$it.name$</td>
+                <td class="name">$it.sponsor$</td>
+                <td></td>
 
-           
+            </tr>
+            }$
             </tbody>
         </table>
     </div>
