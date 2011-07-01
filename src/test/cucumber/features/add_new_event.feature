@@ -90,7 +90,7 @@ Feature: Add New Event
         Then the error message "Please fill in all required fields." is displayed
 
     @OnCreateEventPage
-    Scenario: Fields with invlaid input should give error message
+    Scenario: Fields with invalid input should give error message
         When I enter "Rachel's party" as the "title"
         And I enter "It's freaking awesome" as the "description"
         And I enter "64262" as the "attendees"
@@ -100,7 +100,8 @@ Feature: Add New Event
 
         When I enter "Rachel's party" as the "title"
         And I enter "It's freaking awesome" as the "description"
-        And I enter "Roberto" as the "attendees"
-        And I enter "22-9-2011" as the "date"
+        And I enter "64262" as the "attendees"
+        And I enter "roberto" as the "date"
         And I submit the "Save" form
-        Then the error message "Invalid student IDs: Roberto" is displayed
+        Then the error message "Invalid date" is displayed
+

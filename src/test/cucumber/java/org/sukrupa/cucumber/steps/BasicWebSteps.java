@@ -4,11 +4,8 @@ import cuke4duke.annotation.After;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
-import net.sf.sahi.client.BrowserCondition;
 import org.sukrupa.cucumber.SahiFacade;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
-
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -23,7 +20,6 @@ public class BasicWebSteps {
     public void enterAsThe(String objectInput, String objectID){
         browser().byId(objectID).setValue(objectInput);
     }
-
 
     @When("^I select \"([^\"]*)\"$")
     public void click(String objectID){
@@ -77,18 +73,15 @@ public class BasicWebSteps {
         assertFalse(browser().containsText(browser().div(TOP_LEVEL_DIV), text));
     }
 
-
     @When("^I click \"([^\"]*)\" link$")
     public void clickLink(String text) {
         browser().link(text).click();
     }
 
-
     @When("^I fill in the \"([^\"]*)\" with \"([^\"]*)\"$")
     public void fillInTheTextfieldWith(String field, String fieldContent){
         browser().textbox(field).setValue(fieldContent);
     }
-
 
     @Then("^student \"([^\"]*)\" is displayed$")
     public void studentIsDisplayed(String text) {
@@ -124,20 +117,11 @@ public class BasicWebSteps {
     @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
     public void selectFromDropDown (String value, String dropDownName){
            browser().select(dropDownName).choose(value);
-
     }
 
     @Then("^the error message \"([^\"]*)\" is displayed")
     public void displayErrorMessage(String errorMessage){
-
-       // BrowserCondition condition = new BrowserCondition(browser()){
-         //      public boolean test() {
-                     //  return TOP_LEVEL_DIV.equals(browser().div(TOP_LEVEL_DIV));
-           //    }};
-       //browser().waitFor(condition, 5000);
-
        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
-
     }
     
 
