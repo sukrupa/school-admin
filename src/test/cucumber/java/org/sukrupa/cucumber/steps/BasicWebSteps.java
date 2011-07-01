@@ -128,6 +128,11 @@ public class BasicWebSteps {
          browser().submit(submitButtonName).click();
     }
 
+    @Then("^image \"([^\"]*)\" is displayed")
+    public void checkIfImageIsDisplayed(String imageId){
+        assertTrue(browser().image(imageId).exists());
+    }
+
     @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();

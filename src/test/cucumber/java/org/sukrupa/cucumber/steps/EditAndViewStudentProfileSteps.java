@@ -6,7 +6,7 @@ import net.sf.sahi.client.Browser;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-public class EditAndViewStudentProfile extends BasicWebSteps{
+public class EditAndViewStudentProfileSteps extends BasicWebSteps{
 
     public void isDisplayedUnderDivId(String text, String divIdName){
          assertTrue(browser().containsText(browser().div(divIdName), text));
@@ -100,6 +100,16 @@ public class EditAndViewStudentProfile extends BasicWebSteps{
     @When("^I select \"([^\"]*)\" as the Student Status")
     public  void  selectStudentStatus(String text){
        choseFrom(text,"status");
+    }
+
+    @When("^I select \"([^\"]*)\" as the Family Status")
+    public  void  selectFamilyStatus(String text){
+       choseFrom(text,"familystatus");
+    }
+
+     @Then("^\"([^\"]*)\" is displayed under Family Status$")
+    public  void  isDisplayedUnderFamilyStatus(String text){
+        isDisplayedUnderDivId(text,"family-status");
     }
 
 }

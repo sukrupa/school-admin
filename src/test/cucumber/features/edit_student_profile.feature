@@ -37,3 +37,13 @@ Feature: Edit student profile
      Then "Student record updated successfully" should be displayed
      And the "Student Record: Bhavani" page is displayed
      And "Existing Student" is displayed under Student Status
+
+@OnListOfStudentsPage
+     Scenario:Verify edit of family status success
+     When I choose "Bhavani" from student list
+     And I "Edit" the form
+     And I select "Single" as the Family Status
+     And I click "Save" button
+     Then "Student record updated successfully" should be displayed
+     And the "Student Record: Bhavani" page is displayed
+     And "Single" is displayed under Family Status

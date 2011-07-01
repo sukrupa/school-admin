@@ -80,7 +80,7 @@
 
                 <div class="updateEntry">
                 <div class="label">Family Status</div>
-                    <select name="familyStatus" class="updateValue">
+                    <select name="familyStatus" class="updateValue" id="familystatus">
                         $formhelper.familyStatusesDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
