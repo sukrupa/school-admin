@@ -90,20 +90,20 @@
 
                 <div class="updateEntry">
                     <div class="label-header">Background</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "hard"
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "soft"
                             onKeyDown = "limitText(this.form.background,500);">$student.profile.background$</textarea>
                 </div>
 
                 <div class="updateEntry">
                     <div class="label-header">Academic Performance</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "hard"
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "soft"
                             onKeyDown = "limitText(this.form.performance,500);">$student.performance$</textarea>
                 </div>
 
 
                 <div class="updateEntry">
                     <div class="label-header">Disciplinary</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "hard"
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "soft"
                             onKeyDown = "limitText(this.form.disciplinary,500);">$student.disciplinary$</textarea>
                 </div>
 

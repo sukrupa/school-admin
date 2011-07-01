@@ -5,7 +5,8 @@ Feature: Generate public profile view
         @OnStudentMasterProfilePage
         Scenario: select 'Generate profile view' link
         When I click "Generate Profile View" link
-        Then "Name" should be displayed
+        Then the "Profile View" page is displayed
+        And "Name" should be displayed
         And "Date of Birth" should be displayed
         And "Gender" should be displayed
         And "Background" should be displayed

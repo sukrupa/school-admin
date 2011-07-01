@@ -64,23 +64,19 @@
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Background</div>
-                 $if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
+                 <div class="label inline-block">Background</div>$if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Academic Performance</div>
-                 <div class="value inline-block" id="student-performance" name="student-performance">$student.performance$</div>
+                 <div class="label inline-block">Academic Performance</div><div class="value inline-block" id="student-performance" name="student-performance">$student.performance$</div>
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Disciplinary</div>
-                 <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
+                 <div class="label inline-block">Disciplinary</div><div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Events</div>
-                 <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
+                 <div class="label inline-block">Events</div><div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
             </div>
 
 

@@ -66,7 +66,9 @@ function validateFields() {
 }
 
 function limitText(limitField, charLimit) {
-    limitField.value = limitField.value.substring(0, charLimit);
+    if(limitField.value.length > charLimit){
+        limitField.value = limitField.value.substring(0, charLimit);
+    }
 	
 }
 
