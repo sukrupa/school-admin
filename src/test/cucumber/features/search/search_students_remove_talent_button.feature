@@ -1,7 +1,7 @@
 @Login
-Feature: search students add talent button
+Feature: search students Remove talent button
 
-    Scenario: Add acting to student search criteria
+    Scenario: Remove acting from selected talents of student
         Given I am on the Student Search page
         When I select "Acting" from "availableTalents"
         And I click "addTalent"
