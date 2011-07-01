@@ -12,7 +12,7 @@
             <tr>
                 <form name="createBigNeed" method="post" action="/bigneeds/create">
                     <td><input type="text" id="itemName" name="itemName" /></td>
-                    <td><input type="text" id="costString" name="costString" /></td>
+                    <td><input type="text" id="cost" name="cost" /></td>
                     <td><input type="submit" name="add" value="Add" /></td>
                 </form>
             </tr>

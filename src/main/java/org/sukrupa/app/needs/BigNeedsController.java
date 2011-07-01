@@ -19,22 +19,22 @@ public class BigNeedsController {
     private BigNeedRepository bigNeedRepository;
 
     @Autowired
-    public BigNeedsController(BigNeedRepository bigNeedRepository){
+    public BigNeedsController(BigNeedRepository bigNeedRepository) {
         this.bigNeedRepository = bigNeedRepository;
     }
 
     @RequestMapping
-    public String list(Map <String, Object> model) {
+    public String list(Map<String, Object> model) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
-        model.put("bigNeedList",bigNeedList);
+        model.put("bigNeedList", bigNeedList);
         return "bigneeds/list";
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam String itemName, @RequestParam("costString") String cost, Map<String, Object> model) {
-       model.put("message", "Added Successfully");
-       bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
-       return list(model);
+    public String create(@RequestParam String itemName, @RequestParam String cost, Map<String, Object> model) {
+        model.put("message", "Added Successfully");
+        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
+        return list(model);
     }
 
 }

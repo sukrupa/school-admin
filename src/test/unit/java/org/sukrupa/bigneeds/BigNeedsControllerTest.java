@@ -31,21 +31,21 @@ public class BigNeedsControllerTest {
     private BigNeedRepository bigNeedRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         initMocks(this);
         controller = new BigNeedsController(bigNeedRepository);
     }
 
     @Test
-    public  void shouldDisplayBigNeedsPage(){
+    public void shouldDisplayBigNeedsPage() {
         assertThat(controller.list(model), is("bigneeds/list"));
     }
 
     @Test
-    public void shouldRetrieveBigNeedListToModel(){
+    public void shouldRetrieveBigNeedListToModel() {
         BigNeed schoolBusBigNeed = new BigNeed("School Bus", 200000);
         BigNeed waterPurifierBigNeed = new BigNeed("Water Purifier", 5000);
-        List<BigNeed> ourList = new ArrayList<BigNeed>() ;
+        List<BigNeed> ourList = new ArrayList<BigNeed>();
         ourList.add(schoolBusBigNeed);
         ourList.add(waterPurifierBigNeed);
         when(bigNeedRepository.getList()).thenReturn(ourList);
@@ -56,12 +56,12 @@ public class BigNeedsControllerTest {
     }
 
     @Test
-    public void shouldCreateABigNeed(){
+    public void shouldCreateABigNeed() {
         ArgumentCaptor<BigNeed> bigNeedCaptor = ArgumentCaptor.forClass(BigNeed.class);
 
         controller.create("sample", "60000", model);
 
-        assertThat((String)model.get("message"),is("Added Successfully"));
+        assertThat((String) model.get("message"), is("Added Successfully"));
         verify(bigNeedRepository).put(bigNeedCaptor.capture());
         assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
         assertThat(bigNeedCaptor.getValue().getCost(), is(60000));
