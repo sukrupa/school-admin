@@ -1,9 +1,0 @@
-Tags: in-progress, example
-Preconditions:Navigate to Search Page,Log In,	Log out afterwards
-h1.
-remove Workflow:
-#Given I select the talent "Sports"
-#And I select the talent "Acting"
-#When I remove "Sports" from the selected talents list
-#Then "Sports" should not appear in the selected talents list 
-
