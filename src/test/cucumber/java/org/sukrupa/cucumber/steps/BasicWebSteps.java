@@ -4,8 +4,10 @@ import cuke4duke.annotation.After;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
+import net.sf.sahi.client.BrowserCondition;
 import org.sukrupa.cucumber.SahiFacade;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
 
 import static org.hamcrest.Matchers.containsString;
@@ -127,7 +129,14 @@ public class BasicWebSteps {
 
     @Then("^the error message \"([^\"]*)\" is displayed")
     public void displayErrorMessage(String errorMessage){
-        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
+
+       // BrowserCondition condition = new BrowserCondition(browser()){
+         //      public boolean test() {
+                     //  return TOP_LEVEL_DIV.equals(browser().div(TOP_LEVEL_DIV));
+           //    }};
+       //browser().waitFor(condition, 5000);
+
+       assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
 
     }
     
