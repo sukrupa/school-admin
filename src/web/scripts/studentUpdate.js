@@ -30,6 +30,8 @@ $(document).ready(function () {
         return true;
     });
 
+
+
 });
 
 
@@ -62,3 +64,9 @@ function validateFields() {
 
     return valid;
 }
+
+function limitText(limitField, charLimit) {
+    limitField.value = limitField.value.substring(0, charLimit);
+	
+}
+

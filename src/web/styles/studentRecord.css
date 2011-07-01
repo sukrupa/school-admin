@@ -7,7 +7,13 @@
     float:none;
     display: inline-block;
     vertical-align: top;
+    position: relative;
+    width: 150px;
+    min-height: 50px;
+    overflow: visible;
 }
+
+
 
 #basicInfo .entry .label {
     width: 190px;
@@ -20,8 +26,14 @@
 #secondaryInfo {
     float: right;
 }
+
+#secondaryInfo .publicProfileView {
+    display: block;
+    margin-bottom: 1em;
+}
+
 #secondaryInfo .entry .label {
-    padding-top: 10px;
+ 
     width: 130px;
 }
 
@@ -33,7 +45,7 @@
 }
 
 .entry .value.existing {
-    padding-top: 10px;
+
     color: green;
 
 }

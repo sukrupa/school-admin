@@ -4,6 +4,7 @@
           action="/students/$student.studentId$"
           enctype="multipart/form-data"
           method="post">
+            <script type = "text/javascript" src="../../../scripts/studentUpdate.js"></script>
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -15,7 +16,7 @@
 
                 <div class="updateEntry">
                     <div class="label">Name<span class="mandatory">*</span></div>
-                    <input type="text" id="name" name="name" value="$student.name$" class="updateValue"></input>
+                    <input type="text" id="name" name="name" value="$student.name$" +class="updateValue"></input>
                 </div>
 
                 <div class="updateEntry">
@@ -89,18 +90,21 @@
 
                 <div class="updateEntry">
                     <div class="label-header">Background</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background">$student.profile.background$</textarea>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "hard"
+                            onKeyDown = "limitText(this.form.background,500);">$student.profile.background$</textarea>
                 </div>
 
                 <div class="updateEntry">
                     <div class="label-header">Academic Performance</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance">$student.performance$</textarea>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "hard"
+                            onKeyDown = "limitText(this.form.performance,500);">$student.performance$</textarea>
                 </div>
 
 
                 <div class="updateEntry">
                     <div class="label-header">Disciplinary</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary">$student.disciplinary$</textarea>
+                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "hard"
+                            onKeyDown = "limitText(this.form.disciplinary,500);">$student.disciplinary$</textarea>
                 </div>
 
             </div>

@@ -86,7 +86,9 @@
 
         </div>
         <div id="secondaryInfo">
-              <a href= "/students/$student.studentId$/profileView">Generate Profile View</a>
+              <div class = "publicProfileView">
+                  <a href = "/students/$student.studentId$/profileView">Generate Profile View</a>
+              </div>
             <div class="entry">
 
                 <div class="label">Student Status</div>

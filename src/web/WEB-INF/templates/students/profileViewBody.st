@@ -43,7 +43,7 @@
                  <div class="label inline-block">Disciplinary</div>
                  <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
             </div>
-            
+
 
             <h4> Comments </h4>
         <div id="comments">
@@ -58,7 +58,7 @@
             <div class="entry">
 
                 <div class="label">Student Status</div>
-                <div class="value $statusType$">$student.status$</div>
+                <div class="value existing $statusType$">$student.status$</div>
             </div>
 
             <img src="/students/$student.imageLink$/image" class="studentImage" id="$student.imageLink$">
