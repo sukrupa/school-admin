@@ -4,6 +4,7 @@ import cuke4duke.annotation.After;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
+import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.SahiFacade;
 import java.util.Properties;
 
@@ -65,7 +66,9 @@ public class BasicWebSteps {
 
     @Then("^\"([^\"]*)\" should be displayed$")
     public void shouldBeDisplayed(String text) {
-        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), text));
+        ElementStub pageDiv = browser().div(TOP_LEVEL_DIV);
+        assertTrue(pageDiv.exists());
+        assertTrue(browser().containsText(pageDiv, text));
     }
 
     @Then("^\"([^\"]*)\" should not be displayed$")
