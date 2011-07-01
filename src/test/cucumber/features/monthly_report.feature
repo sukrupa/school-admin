@@ -24,6 +24,6 @@ Scenario: Students Name, Sponsor Name and email are displayed on Monthly Reports
 Scenario: Monthly Reports table is populated with correct data
 
     Given I am on the Monthly Reports Page
-    Then student "Anok" should be displayed with sponsor "Tim"
+    Then student "Anok" should be displayed with sponsor "Tim" and email_Id "Tim@gmail.com"
 
 

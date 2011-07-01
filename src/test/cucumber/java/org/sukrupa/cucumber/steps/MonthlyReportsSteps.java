@@ -21,11 +21,11 @@ public class MonthlyReportsSteps extends BasicWebSteps {
         browser().link("Monthly Reports").click();
     }
 
-    @Then("^student \"([^\"]*)\" should be displayed with sponsor \"([^\"]*)\"$")
-    public void studentAnokShouldBeDisplayedWithSponsorTim_(String student, String sponsor) {
+    @Then("^student \"([^\"]*)\" should be displayed with sponsor \"([^\"]*)\" and email_id \"([^\"]*)\"$")
+    public void studentAnokShouldBeDisplayedWithSponsorTim_(String student, String sponsor, String sponsor_email) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), student));
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), sponsor));
-
+         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), sponsor_email));
 
     }
 

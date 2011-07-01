@@ -30,6 +30,7 @@ public class StudentBuilder {
     private StudentStatus status = StudentStatus.EXISTING_STUDENT;
     private StudentFamilyStatus familyStatus = null;
     private String sponsored;
+    private String sponsor_email;
     private String disciplinary;
     private String performance;
     private Profile profile = new Profile();
@@ -155,7 +156,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored,sponsor_email);
 
     }
 

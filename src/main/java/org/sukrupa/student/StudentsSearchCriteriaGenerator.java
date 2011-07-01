@@ -32,7 +32,7 @@ public class StudentsSearchCriteriaGenerator {
     private static final String GUARDIAN = "guardian";
     private static final String FAMILY_STATUS = "familyStatus";
     private static final String SPONSOR = "sponsor";
-
+    private static final String SPONSOR_EMAIL="sponsor_email";
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

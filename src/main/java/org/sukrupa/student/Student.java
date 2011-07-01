@@ -94,7 +94,8 @@ public class Student {
 
     @Column(name = "SPONSOR")
     private String sponsor;
-
+    @Column(name="sponsor_email")
+    private String sponsor_email;
     @Enumerated (EnumType.ORDINAL)
     @Column (name = "FAMILY_STATUS_ENUMS")
     private StudentFamilyStatus familyStatus = null;
@@ -106,7 +107,8 @@ public class Student {
     public Student(String studentId, String name, String religion, String caste, String subCaste,
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
-                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events, StudentFamilyStatus familyStatus, String sponsor) {
+                   StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events,
+                   StudentFamilyStatus familyStatus, String sponsor, String sponsor_email) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -125,12 +127,14 @@ public class Student {
         this.events = events;
         this.familyStatus = familyStatus;
 
+
         if (status == null) {
             status = StudentStatus.EXISTING_STUDENT;
         }
 
         this.status = status;
         this.sponsor = sponsor;
+        this.sponsor_email=sponsor_email;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -201,6 +205,10 @@ public class Student {
 
     public String getSponsor() {
         return sponsor;
+    }
+
+    public String getSponsor_email(){
+        return sponsor_email;
     }
 
     public String getStudentClass() {

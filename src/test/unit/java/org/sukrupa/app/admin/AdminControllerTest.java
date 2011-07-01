@@ -37,7 +37,7 @@ public class AdminControllerTest {
     }
 
      @Test
-    public void shouldDisplayResultsWhenSearchingBySponsor() {
+    public void shouldDisplayMonthlyReportListOfSponsor() {
         StudentSearchParameter searchParam = mock(StudentSearchParameter.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
         StudentListPage students = mock(StudentListPage.class);

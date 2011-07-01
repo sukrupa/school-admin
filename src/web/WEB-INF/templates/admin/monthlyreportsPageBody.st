@@ -3,10 +3,10 @@
 
       <table class="listTable">
             <thead class="header">
-            <tr>
-                <td>Student Name</td>
-                <td>Sponsor Name</td>
-                <td>Sponsor's Email</td>
+            <tr class="student">
+                <td class="sponsor">Student Name</td>
+                <td class="name">Sponsor Name</td>
+                <td class="email">Sponsor's Email</td>
 
             </tr>
             </thead>
@@ -15,7 +15,8 @@
             <tr class="student">
                 <td class="sponsor">$it.name$</td>
                 <td class="name">$it.sponsor$</td>
-                <td></td>
+                <td class="email">$it.sponsor_email$
+                </td>
 
             </tr>
             }$

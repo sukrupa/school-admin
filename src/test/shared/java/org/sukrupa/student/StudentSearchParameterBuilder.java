@@ -21,6 +21,7 @@ public class StudentSearchParameterBuilder {
     private String familyStatus = StudentSearchParameter.WILDCARD_CHARACTER;
     private String sponsored = StudentSearchParameter.WILDCARD_CHARACTER;
     private String sponsorName = "";
+    private String sponsor_email="";
 
     public StudentSearchParameterBuilder name(String name) {
         this.name = name;
@@ -75,7 +76,10 @@ public class StudentSearchParameterBuilder {
     }
 
     public StudentSearchParameter build() {
-        return new StudentSearchParameter(name, studentClass, gender, caste, area, ageFrom, ageTo, talents, religion, status.toString(), caregiversOccupation, familyStatus, sponsored, sponsorName);
+
+        return new StudentSearchParameter(name, studentClass,
+                gender, caste, area, ageFrom, ageTo, talents, religion, status.toString(),
+                caregiversOccupation, familyStatus, sponsored, sponsorName, sponsor_email);
     }
 
     public StudentSearchParameterBuilder page(int page) {
