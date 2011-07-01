@@ -1,20 +1,13 @@
 package org.sukrupa.bigneeds;
 
-import org.apache.jasper.tagplugins.jstl.When;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
+import org.eclipse.jetty.io.View;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.Mockito;
 import org.sukrupa.app.needs.BigNeedsController;
-import org.sukrupa.bigneeds.BigNeed;
-import org.sukrupa.bigneeds.BigNeedRepository;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +16,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -63,9 +57,14 @@ public class BigNeedsControllerTest {
 
     @Test
     public void shouldCreateABigNeed(){
-        BigNeedFormData sampleBigNeed = new BigNeedFormData("Sample", "60000");
-        controller.create(sampleBigNeed, model);
+        ArgumentCaptor<BigNeed> bigNeedCaptor = ArgumentCaptor.forClass(BigNeed.class);
+
+        controller.create("sample", "60000", model);
+
         assertThat((String)model.get("message"),is("Added Successfully"));
+        verify(bigNeedRepository).put(bigNeedCaptor.capture());
+        assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
+        assertThat(bigNeedCaptor.getValue().getCost(), is(60000));
     }
 
 }

@@ -2,10 +2,9 @@ package org.sukrupa.app.needs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.bigneeds.BigNeed;
-import org.sukrupa.bigneeds.BigNeedFormData;
 import org.sukrupa.bigneeds.BigNeedRepository;
 
 import java.util.List;
@@ -32,9 +31,9 @@ public class BigNeedsController {
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create( @ModelAttribute("createBigNeed") BigNeedFormData bigNeed, Map<String, Object> model) {
+    public String create(@RequestParam String itemName, @RequestParam("costString") String cost, Map<String, Object> model) {
        model.put("message", "Added Successfully");
-       bigNeedRepository.put(bigNeed.createBigNeed());
+       bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
        return list(model);
     }
 
