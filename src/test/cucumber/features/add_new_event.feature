@@ -1,13 +1,18 @@
 @Login
 Feature: Add New Event
     @OnCreateEventPage
-    Scenario:  Create an event
+    Scenario:  Create an event with mandatory fields
         When I enter "Dancing" as the "title"
         And I enter "13-04-2011" as the "date"
         And I enter "Event description" as the "description"
         And I enter "64262" as the "attendees"
         And I submit the "save" form
         Then "Event: Dancing" should be displayed
+        And "Dancing" should be displayed
+        And "13-04-2011" should be displayed
+        And "Wednesday" should be displayed
+        And "Event description" should be displayed
+        And "Anok" should be displayed
 
     @OnCreateEventPage
     Scenario: Create an event with all options
@@ -22,16 +27,18 @@ Feature: Add New Event
         And I enter "64262" as the "attendees"
         And I submit the "Save" form
         Then "Event: MMA" should be displayed
+        And "MMA" should be displayed
         And "13-04-2011" should be displayed
-        And "Event description..." should be displayed
+        And "Wednesday" should be displayed
         And "1:30 AM" should be displayed
         And "03:30 PM" should be displayed
         And "Colloseum" should be displayed
+        And "Event description..." should be displayed
         And "BYOB" should be displayed
         And "Anok" should be displayed
 
-      @OnCreateEventPage
-      Scenario: Clear create new event form contents
+    @OnCreateEventPage
+    Scenario: Clear create new event form contents
         When I enter "MMA" as the "title"
         And I enter "13-4-2011" as the "date"
         And I enter "Event description..." as the "description"
@@ -41,16 +48,15 @@ Feature: Add New Event
         And I enter "Colloseum" as the "venue"
         And I enter "BYOB" as the "notes"
         And I enter "64262" as the "attendees"
-        And I "clear"
+        And I select "clear"
         Then "title" should contain ""
         And "date" should contain ""
-        And "description" should contain ""
         And "startTime" should contain ""
         And "endTime" should contain ""
         And "venue" should contain ""
-        And "notes" should contain ""
         And "attendees" should contain ""
-
+        And "description" should contain ""
+        And "notes" should contain ""
 
     @OnCreateEventPage
     Scenario: Create event without mandatory fields
