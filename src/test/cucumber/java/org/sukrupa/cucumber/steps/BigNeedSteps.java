@@ -10,10 +10,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-public class BigPipelineSteps extends Login{
+public class BigNeedSteps extends Login{
     private static final String TOP_LEVEL_DIV = "page";
 
-    @Given("^I am on the \"Big Needs\" Page$")
+    @Given("^I am on the Big Needs page$")
     public void navigateTo() {
          browser().link("Big Needs").click();
     }
