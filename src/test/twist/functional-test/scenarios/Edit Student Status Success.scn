@@ -1,7 +1,0 @@
-Tags:
-Preconditions:NavigteToEditBhavanisProfile,LogIn,Log out afterwards
-h1.
-Edit Status From Not Set to Existing Student:
-#When I select student status as "Existing Student"
-#And I click Save
-#Then the student status should be "Existing Student"

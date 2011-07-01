@@ -97,4 +97,9 @@ public class EditAndViewStudentProfile extends BasicWebSteps{
        shouldBeDisplayed(text);
     }
 
+    @When("^I select \"([^\"]*)\" as the Student Status")
+    public  void  selectStudentStatus(String text){
+       choseFrom(text,"status");
+    }
+
 }
