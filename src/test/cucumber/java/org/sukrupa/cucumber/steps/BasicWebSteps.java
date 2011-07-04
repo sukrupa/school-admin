@@ -133,11 +133,6 @@ public class BasicWebSteps {
         browser().submit(submitButtonName).click();
     }
 
-    @After
-    public void closeBrowser() {
-        SahiFacade.closeBrowser();
-    }
-
     @Given("^I am on the ([^\"]*) page$")
     public void navigateToAdminPages(String pageName) {
         navigateTo(pageName);
@@ -152,5 +147,9 @@ public class BasicWebSteps {
         browser().link(pageName).click();
     }
 
+    @After
+    public void closeBrowser() {
+        SahiFacade.closeBrowser();
+    }
 
 }

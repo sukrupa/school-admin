@@ -13,12 +13,6 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class SearchStudentsSteps extends BasicWebSteps {
 
-    @Given("I am on the Student Search page")
-    public void navigateTo() {
-        browser().navigateTo(getConfigProperty("homepage")+"students/search");
-        browser().byId("studentSearch").click();
-    }
-
     @When("^I select the talent \"([^\"]*)\"$")
     public void selectTalent(String talent) {
         if (!talent.isEmpty()) {
