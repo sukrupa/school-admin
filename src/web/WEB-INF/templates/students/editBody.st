@@ -1,12 +1,5 @@
 <div>
-
-    $if (noteAddedSuccesfully)$
-        <div id="successDiv">
-            <img id="successImage" src="/images/success.png" alt="Success" />
-            <div id ="confirmMessage">$noteUpdateStatus$</div>
-        </div>
-    $endif$
-
+$successMessage(condition=noteAddedSuccesfully, message=noteUpdateStatus)$
 $students/studentForm()$
 
  <hr/>
