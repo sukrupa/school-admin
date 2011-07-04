@@ -27,6 +27,13 @@ public class BigNeedSteps extends Login {
         assertFalse(itemWithCostExists(itemName, cost));
     }
 
+    @When("^I delete the \"([^\"]+)\"")
+    public void deleteItem(String itemName){
+        ElementStub deleteButton = browser().submit("Delete").in(browser().cell(itemName).parentNode());
+        assertTrue(deleteButton.exists(true));
+        deleteButton.click();
+    }
+
     private boolean itemWithCostExists(String itemName, String cost) {
         ElementStub nameCellWithCorrectName = browser().cell(itemName).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));

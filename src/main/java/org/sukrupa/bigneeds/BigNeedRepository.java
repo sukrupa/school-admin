@@ -39,4 +39,12 @@ public class BigNeedRepository {
     public List<BigNeed> getList() {
          return (List<BigNeed>) query("from BigNeed").list();
     }
+
+    public BigNeed getBigNeed(long id) {
+        return (BigNeed) session().get(BigNeed.class,id);
+    }
+
+    public void delete(BigNeed bigNeed) {
+        session().delete(bigNeed);
+    }
 }

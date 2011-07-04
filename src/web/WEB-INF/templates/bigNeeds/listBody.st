@@ -22,7 +22,11 @@
                 <td>$it.itemName$</td>
                 <td>$it.cost$</td>
                 <td><input type="button" name="edit" value="Edit" /></td>
-                <td><input type="button" name="del" value="Delete" /></td>
+                <td>
+                    <form action="/bigneeds/$it.id$/delete" method="post">
+                        <input type="submit" name="del" value="Delete" />
+                    </form>
+                </td>
             </tr>
 
 

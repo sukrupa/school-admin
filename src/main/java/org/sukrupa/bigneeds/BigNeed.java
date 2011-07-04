@@ -13,7 +13,7 @@ public class BigNeed {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name = "ITEM_NAME")
     private String itemName;

@@ -4,19 +4,17 @@ import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.HibernateSession;
-import org.sukrupa.student.StudentRepository;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -32,7 +30,7 @@ public class BigNeedRepositoryTest {
     private BigNeedRepository bigNeedRepository;
 
     @Test
-    public void shouldSaveABigNeed(){
+    public void shouldSaveABigNeed() {
         BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000);
         bigNeedRepository.put(powerGeneratorBigNeed);
         BigNeed retrievedBigNeed = bigNeedRepository.findByName("Power Generator");
@@ -46,12 +44,28 @@ public class BigNeedRepositoryTest {
         BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000);
         bigNeedRepository.put(computerBigNeed);
         bigNeedRepository.put(airConditionerBigNeed);
-        List<BigNeed> bigNeedList =  bigNeedRepository.getList();
+        List<BigNeed> bigNeedList = bigNeedRepository.getList();
         assertThat(bigNeedList.isEmpty(), is(false));
     }
 
+    @Test
+    public void shouldDeleteBigNeed() {
+        BigNeed banana = new BigNeed("Banana", 25000);
+        bigNeedRepository.put(banana);
+        bigNeedRepository.delete(banana);
+        assertThat(bigNeedRepository.getList(), not(hasItem(banana)));
+    }
+
+    @Test
+    public void shouldGetBigNeedById() {
+        BigNeed example = new BigNeed("example", 10000);
+        bigNeedRepository.put(example);
+        long id = example.getId();
+        assertThat(bigNeedRepository.getBigNeed(id), is(example));
+    }
+
     @Before
-    public void setUp(){
+    public void setUp() {
         bigNeedRepository = new BigNeedRepository(sessionFactory);
     }
 }
