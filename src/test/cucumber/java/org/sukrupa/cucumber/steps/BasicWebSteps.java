@@ -149,8 +149,5 @@ public class BasicWebSteps {
         SahiFacade.closeBrowser();
     }
 
-    @When("^I navigate to ([^\"]*)$")
-    public void iNavigateTo(String pageName) {
-        navigateTo(pageName);
-    }
+
 }
