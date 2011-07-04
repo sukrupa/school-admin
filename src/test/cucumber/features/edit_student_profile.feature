@@ -9,7 +9,7 @@ Feature: Edit student profile
      And I click "Save" button
      Then "Student record updated successfully" should be displayed
 
-     And the "Student Record: Bhavani" page is displayed
+     And the Student Record: Bhavani page is displayed
      And "Peter Murray" is displayed under Sponsor
 
      When I "View Students" in the sidebar
@@ -35,7 +35,7 @@ Feature: Edit student profile
      And I select "Existing Student" as the Student Status
      And I click "Save" button
      Then "Student record updated successfully" should be displayed
-     And the "Student Record: Bhavani" page is displayed
+     And the Student Record: Bhavani page is displayed
      And "Existing Student" is displayed under Student Status
 
 @OnListOfStudentsPage
@@ -45,5 +45,5 @@ Feature: Edit student profile
      And I select "Single" as the Family Status
      And I click "Save" button
      Then "Student record updated successfully" should be displayed
-     And the "Student Record: Bhavani" page is displayed
+     And the Student Record: Bhavani page is displayed
      And "Single" is displayed under Family Status

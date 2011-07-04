@@ -4,7 +4,7 @@ Feature: Add student record
 @OnListOfStudentsPage
      Scenario: Go to Register a Student page
      When I "Add New Student" in the sidebar
-     Then the "Register a student" page is displayed
+     Then the Register a student page is displayed
 
      Scenario: Add new student details
      Given I am on the Add New Student page
@@ -13,12 +13,12 @@ Feature: Add student record
      And I enter "06-03-1982" as "dateOfBirth"
      And I select "Female" as "gender"
      And I "Register" the form
-     Then the "Edit Student Record: Yael" page is displayed
+     Then the Edit Student Record: Yael page is displayed
 
      Scenario: Return from register a student page without adding a new student
      Given I am on the Add New Student page
      When I click "Cancel" button
-     Then the "List of Students" page is displayed
+     Then the List of Students page is displayed
 
      Scenario: Display error messages when fields are incomplete
      Given I am on the Add New Student page
@@ -35,7 +35,7 @@ Feature: Add student record
      And I enter "06-03-1982" as "dateOfBirth"
      And I select "Female" as "gender"
      And I "Register" the form
-     Then the "Edit Student Record: Yael" page is displayed
+     Then the Edit Student Record: Yael page is displayed
 
      When I "Add New Student" in the sidebar
      And I enter "SK2010082022" as "studentId"
