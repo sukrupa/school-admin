@@ -1,8 +1,8 @@
 @Login
 Feature: Generate public profile view
 
-@OnListOfStudentsPage
         Scenario: select 'Generate profile view' link
+        Given I am on the View Students page
         When I choose "Bhavani" from student list
         When I click "Generate Profile View" link
         Then the Profile View page is displayed

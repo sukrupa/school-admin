@@ -1,8 +1,8 @@
 @Login
 Feature: Edit student profile
 
-@OnListOfStudentsPage
      Scenario: Add/Edit sponsor, and verify other student details are unchanged
+     Given I am on the View Students page
      When I choose "Bhavani" from student list
      And I "Edit" the form
      And I enter "Peter Murray" as the Sponsor
@@ -19,8 +19,8 @@ Feature: Edit student profile
      And "Existing Student" is displayed under Student Status
      And "Peter Murray" is displayed under Sponsor
 
-@OnListOfStudentsPage
      Scenario:Adding a note to student profile
+     Given I am on the View Students page
      When I choose "Bhavani" from student list
      And I "Edit" the form
      And I enter "This is a note" as Notes
@@ -28,8 +28,8 @@ Feature: Edit student profile
      Then "Note Added Successfully" should be displayed
      And "This is a note" should be displayed in the list of notes
 
-@OnListOfStudentsPage
      Scenario: Edit student's status successfully
+     Given I am on the View Students page
      When I choose "Bhavani" from student list
      And I "Edit" the form
      And I select "Existing Student" as the Student Status
@@ -38,8 +38,8 @@ Feature: Edit student profile
      And the Student Record: Bhavani page is displayed
      And "Existing Student" is displayed under Student Status
 
-@OnListOfStudentsPage
      Scenario:Verify edit of family status success
+     Given I am on the View Students page
      When I choose "Bhavani" from student list
      And I "Edit" the form
      And I select "Single" as the Family Status

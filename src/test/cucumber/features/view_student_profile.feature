@@ -1,8 +1,8 @@
 @Login
 Feature: View student records
 
-@OnListOfStudentsPage
      Scenario: View a student profile
+     Given I am on the View Students page
      When I choose "Bhavani" from student list
      Then "Bhavani" is displayed under Name
      And "A+" is displayed under Academic Performance
@@ -19,8 +19,8 @@ Feature: View student records
      And "Born in India" is displayed under Background
      And "Spice Girls, Sports Day, Annual Day" is displayed under Events
 
-@OnListOfStudentsPage
     Scenario: View student's photo on the profile
+    Given I am on the View Students page
     When I choose "Bhavani" from student list
      Then an image for "Bhavani" with student ID "SK20090080" is displayed
 

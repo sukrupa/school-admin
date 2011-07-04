@@ -1,8 +1,8 @@
 @Login
 Feature: Add student record
 
-@OnListOfStudentsPage
      Scenario: Go to Register a Student page
+     Given I am on the View Students page
      When I "Add New Student" in the sidebar
      Then the Register a student page is displayed
 
