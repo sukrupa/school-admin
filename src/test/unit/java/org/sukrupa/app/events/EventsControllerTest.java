@@ -1,5 +1,9 @@
 package org.sukrupa.app.events;
 
+import org.apache.james.mime4j.io.LimitedInputStream;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
+import org.hibernate.mapping.Array;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,7 +23,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class EventsControllerTest {
@@ -36,11 +43,23 @@ public class EventsControllerTest {
                                                     .dateOfBirth(new LocalDate(1987,12,12))
                                                     .studentId("123")
                                                     .build();
-    private Event completeEvent = new EventBuilder().title("Spice Girls")
-                                                    .attendees(attendee1)
+    private Student attendee2 = new StudentBuilder().name("Hephzibah")
+                                                     .dateOfBirth(new LocalDate(1989,9,12))
+                                                     .studentId("231")
+                                                     .build();
+
+    private Event eventOne = new EventBuilder().title("Spice Girls")
+                                                    .attendees(attendee1,attendee2)
                                                     .date(new Date(1,12,2011))
                                                     .description("Wahoo Spice Girls")
                                                     .build();
+    private Event eventTwo = new EventBuilder().title("Aravind's Event")
+                                                    .attendees(attendee1)
+                                                    .date(new Date(4,07,2011))
+                                                    .description("Testing Aravind's event")
+                                                    .build();
+
+
 
     @Before
     public void setUp() throws Exception {
@@ -51,6 +70,19 @@ public class EventsControllerTest {
     @Test
     public void shouldDisplayEventsPage() {
         assertThat(controller.list(eventModel), is("events/list"));
+    }
+    @Test
+    public void retrieveEventListToModel()
+    {
+        List<Event> ourEventList = new ArrayList<Event>();
+        ourEventList.add(eventOne);
+        ourEventList.add(eventTwo);
+        when(service.list()).thenReturn(ourEventList);
+        controller.list(eventModel);
+        List<Event> eventList = (List<Event>) eventModel.get("events");
+        assertThat(eventList.contains(eventOne), CoreMatchers.is(true));
+        assertThat(eventList.contains(eventTwo), CoreMatchers.is(true));
+
     }
 
     @Test
@@ -63,6 +95,26 @@ public class EventsControllerTest {
     public void shouldEditANewEvent(){
         assertThat(controller.edit(eventform.getId(),model), is("events/edit"));
     }
+
+    @Test
+    public void shouldReturnEventForTheId()
+    {
+        when(service.getEvent(4)).thenReturn(eventOne);
+        assertThat(controller.view(4, model), is("events/view"));
+        verify(service).getEvent(4);
+        assertThat(model.get("event").getTitle(),is("Spice Girls"));
+
+    }
+
+    @Test
+    public void shouldEditEventById()
+    {
+        when(service.getEvent(4)).thenReturn(eventOne);
+        assertThat(controller.edit(4,model),is("events/edit"));
+        verify(service).getEvent(4);
+        assertThat(model.get("event").getDate().year(),is(2011));
+    }
+
 
 
 }
