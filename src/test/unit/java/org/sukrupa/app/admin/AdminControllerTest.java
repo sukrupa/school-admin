@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.app.students.StudentsController;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentListPage;
-import org.sukrupa.student.StudentSearchParameter;
-import org.sukrupa.student.StudentService;
+import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -53,11 +50,8 @@ public class AdminControllerTest {
 
         assertThat(view, is("admin/monthlyreportsPage"));
         assertThat(studentModel.get("page"), is((Object) students));
-       
+
     }
 
-    @Test
-    public void checkRandomWord(){
-        
-    }
+
 }

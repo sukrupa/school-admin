@@ -1,7 +1,9 @@
 package org.sukrupa.cucumber.steps;
 
 import cuke4duke.annotation.After;
-import cuke4duke.annotation.I18n.EN.*;
+import cuke4duke.annotation.I18n.EN.Given;
+import cuke4duke.annotation.I18n.EN.Then;
+import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.SahiFacade;
@@ -147,4 +149,8 @@ public class BasicWebSteps {
         SahiFacade.closeBrowser();
     }
 
+    @When("^I navigate to ([^\"]*)$")
+    public void iNavigateTo(String pageName) {
+        navigateTo(pageName);
+    }
 }
