@@ -9,6 +9,7 @@ import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.SahiFacade;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 import static org.sukrupa.cucumber.SahiFacade.browser;
@@ -27,12 +28,10 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
-
     @When("^I  \"([^\"]*)\"$")
     public void clearForm(String objectID) {
         browser().byId(objectID).click();
     }
-
 
     @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice, String ObjectID) {
@@ -43,6 +42,12 @@ public class BasicWebSteps {
     public void shouldContain(String ObjectID, String objectValueToMatch) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, containsString(objectValueToMatch));
+    }
+
+    @Then("^\"([^\"]*)\" is blank")
+    public void shouldbeBlank(String ObjectID) {
+        String objectValue = browser().byId(ObjectID).getValue();
+        assertThat(objectValue, is(""));
     }
 
     @Then("^\"([^\"]*)\" should not contain \"([^\"]*)\"$")
@@ -126,7 +131,6 @@ public class BasicWebSteps {
     public void displayErrorMessage(String errorMessage) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), errorMessage));
     }
-
 
     @When("^I \"([^\"]*)\" the form")
     public void submitForm(String submitButtonName) {
