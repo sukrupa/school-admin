@@ -59,12 +59,7 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
-    @When("^I submit the \"([^\"]*)\" form$")
-    public void submitTheForm(String buttonText) {
-        browser().submit(buttonText).click();
-    }
-
-    @Then("^\"([^\"]*)\" should be displayed$")
+    @Then("^([^\"]*) should be displayed$")
     public void shouldBeDisplayed(String text) {
         ElementStub pageDiv = browser().div(TOP_LEVEL_DIV);
         assertTrue(pageDiv.exists());
@@ -122,7 +117,7 @@ public class BasicWebSteps {
         browser().select(dropDownName).choose(value);
     }
 
-    @Then("^the error message \"([^\"]*)\" is displayed")
+    @Then("^the message \"([^\"]*)\" should be displayed")
     public void displayErrorMessage(String errorMessage) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), errorMessage));
     }
