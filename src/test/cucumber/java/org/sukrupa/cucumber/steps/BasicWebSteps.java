@@ -6,7 +6,6 @@ import cuke4duke.annotation.I18n.EN.When;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.SahiFacade;
-import java.util.Properties;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -18,28 +17,35 @@ public class BasicWebSteps {
     protected static final String TOP_LEVEL_DIV = "page";
 
     @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
-    public void enterAsThe(String objectInput, String objectID){
+    public void enterAsThe(String objectInput, String objectID) {
         browser().byId(objectID).setValue(objectInput);
     }
 
     @When("^I select \"([^\"]*)\"$")
-    public void click(String objectID){
+    public void click(String objectID) {
         browser().byId(objectID).click();
     }
 
+
+    @When("^I  \"([^\"]*)\"$")
+    public void clearForm(String objectID) {
+        browser().byId(objectID).click();
+    }
+
+
     @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
-    public void choseFrom(String choice , String ObjectID){
+    public void choseFrom(String choice, String ObjectID) {
         browser().byId(ObjectID).choose(choice);
     }
 
     @Then("^\"([^\"]*)\" should contain \"([^\"]*)\"$")
-    public void shouldContain(String ObjectID , String objectValueToMatch){
+    public void shouldContain(String ObjectID, String objectValueToMatch) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, containsString(objectValueToMatch));
     }
 
     @Then("^\"([^\"]*)\" should not contain \"([^\"]*)\"$")
-    public void shouldNotContain(String ObjectID , String objectValueToMatch){
+    public void shouldNotContain(String ObjectID, String objectValueToMatch) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, not(containsString(objectValueToMatch)));
     }
@@ -77,7 +83,7 @@ public class BasicWebSteps {
     }
 
     @When("^I fill in the \"([^\"]*)\" with \"([^\"]*)\"$")
-    public void fillInTheTextfieldWith(String field, String fieldContent){
+    public void fillInTheTextfieldWith(String field, String fieldContent) {
         browser().textbox(field).setValue(fieldContent);
     }
 
@@ -93,44 +99,39 @@ public class BasicWebSteps {
     }
 
     @Then("^\"([^\"]*)\" should be displayed in \"([^\"]*)\"$")
-    public void shouldBeDisplayedInField(String text, String field){
+    public void shouldBeDisplayedInField(String text, String field) {
         assertTrue(browser().select(field).getText().contains(text));
     }
 
     @Then("^the \"([^\"]*)\" page is displayed")
-    public  void  thePageIsDisplayed(String pageName){
+    public void thePageIsDisplayed(String pageName) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), pageName));
     }
 
     @When("^I \"([^\"]*)\" in the sidebar")
-    public void clickLinkInSidebar(String text){
+    public void clickLinkInSidebar(String text) {
         browser().link(text).click();
     }
 
     @When("^I enter \"([^\"]*)\" as \"([^\"]*)\"")
-    public void enterIntoTheTextBox(String text,String textBoxName){
+    public void enterIntoTheTextBox(String text, String textBoxName) {
         browser().textbox(textBoxName).setValue(text);
     }
 
     @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
-    public void selectFromDropDown (String value, String dropDownName){
-           browser().select(dropDownName).choose(value);
+    public void selectFromDropDown(String value, String dropDownName) {
+        browser().select(dropDownName).choose(value);
     }
 
     @Then("^the error message \"([^\"]*)\" is displayed")
-    public void displayErrorMessage(String errorMessage){
-       assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV),errorMessage));
+    public void displayErrorMessage(String errorMessage) {
+        assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), errorMessage));
     }
-    
+
 
     @When("^I \"([^\"]*)\" the form")
-    public  void submitForm(String submitButtonName){
-         browser().submit(submitButtonName).click();
-    }
-
-    @Then("^image \"([^\"]*)\" is displayed")
-    public void checkIfImageIsDisplayed(String imageId){
-        assertTrue(browser().image(imageId).exists());
+    public void submitForm(String submitButtonName) {
+        browser().submit(submitButtonName).click();
     }
 
     @After

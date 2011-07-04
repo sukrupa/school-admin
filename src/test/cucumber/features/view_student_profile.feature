@@ -19,6 +19,14 @@ Feature: View student records
      And "Born in India" is displayed under Background
      And "Spice Girls, Sports Day, Annual Day" is displayed under Events
 
+@OnListOfStudentsPage
+    Scenario: View student's photo on the profile
+    When I choose "Bhavani" from student list
+     Then an image for "Bhavani" with student ID "SK20090080" is displayed
+
+    When I "View Students" in the sidebar
+    When I choose "Anok" from student list
+    Then an image for "Anok" with student ID "64262" is displayed
 
 
 

@@ -29,7 +29,7 @@ Feature: Edit student profile
      And "This is a note" should be displayed in the list of notes
 
 @OnListOfStudentsPage
-     Scenario:Verify edit of student status success
+     Scenario: Edit student's status successfully
      When I choose "Bhavani" from student list
      And I "Edit" the form
      And I select "Existing Student" as the Student Status

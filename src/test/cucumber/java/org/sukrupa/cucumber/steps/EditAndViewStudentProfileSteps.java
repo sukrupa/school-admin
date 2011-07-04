@@ -112,4 +112,17 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
         isDisplayedUnderDivId(text,"family-status");
     }
 
+//    @Then("^image \"([^\"]*)\" is displayed")
+//    public void checkIfImageIsDisplayed(String imageId){
+//        assertTrue(browser().image(imageId).exists());
+//    }
+
+    @Then("^an image for \"([^\"]*)\" with student ID \"([^\"]*)\" is displayed")
+   public void checkIfImageIsDisplayed(String personName, String personId){
+       assertTrue(browser().image(personId).exists());
+        assertTrue(browser().containsText(browser().div("basicInfo"),personName));
+
+   }
+
+
 }
