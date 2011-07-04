@@ -1,8 +1,8 @@
 @Login
 Feature: Search students by talent
 
-  @OnSearchStudentPage
   Scenario: No Talents Selected
+    Given I am on the Search Students page
     When I click "Search" submit button
 
     # These students have mutually exclusive talents
@@ -12,16 +12,16 @@ Feature: Search students by talent
     # This student has no talents
     And "Haripriya" should be displayed
 
-  @OnSearchStudentPage
   Scenario: One Talent Selected
+    Given I am on the Search Students page
     When I select the talent "Sports"
     When I click "Search" submit button
 
     Then "Armugam" should be displayed
     And "Anok" should not be displayed
 
-  @OnSearchStudentPage
   Scenario: More than One Talent Selected
+    Given I am on the Search Students page
     When I select the talent "Sports"
     And I select the talent "Acting"
     And I select the talent "Arts & Crafts"
