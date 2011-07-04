@@ -1,8 +1,7 @@
 package org.sukrupa.cucumber.steps;
 
 import cuke4duke.annotation.After;
-import cuke4duke.annotation.I18n.EN.Then;
-import cuke4duke.annotation.I18n.EN.When;
+import cuke4duke.annotation.I18n.EN.*;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.SahiFacade;
@@ -138,4 +137,20 @@ public class BasicWebSteps {
     public void closeBrowser() {
         SahiFacade.closeBrowser();
     }
+
+    @Given("^I am on the ([^\"]*) page$")
+    public void navigateToAdminPages(String pageName) {
+        navigateTo(pageName);
+    }
+
+    @When("^I navigate to the ([^\"]*) page$")
+    public void navigateToPage(String pageName) {
+        navigateTo(pageName);
+    }
+
+    private void navigateTo(String pageName) {
+        browser().link(pageName).click();
+    }
+
+
 }
