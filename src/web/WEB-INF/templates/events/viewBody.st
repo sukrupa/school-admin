@@ -38,6 +38,13 @@
     </div>
     }$
 
+    $event.coordinator:{ coordinator |
+    <div class="eventEntry">
+        <div class="eventLabel">Coordinator</div>
+        <div class="coordinator">$coordinator$</div>
+    </div>
+    }$
+
     <div class="eventEntry">
         <div class="eventLabel">Description</div>
         <div id="eventDescription" class="eventDescription">$event.description$</div>
