@@ -1,14 +1,10 @@
 @Login
-Feature: Add, Edit and Delete Items in Big Needs
+Feature: Add, Edit and Delete Big Needs
 
-  Scenario: Page Big Needs exists
-   Given I am on the Big Needs page
-   Then "Big Needs" should be displayed
-
-#We need to fix this before we are allowed to move it to QA
   Scenario: Big Needs List is Displayed
     Given I am on the Big Needs page
-    Then "Item" should be displayed
+    Then "Big Needs" should be displayed
+    And "Item" should be displayed
     And "Cost" should be displayed
     And "Power Generator" should be displayed
     And "50000" should be displayed
