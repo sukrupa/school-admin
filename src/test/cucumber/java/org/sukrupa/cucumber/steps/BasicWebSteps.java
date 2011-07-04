@@ -15,14 +15,14 @@ public class BasicWebSteps {
 
     protected static final String TOP_LEVEL_DIV = "page";
 
-    @When("^I enter \"([^\"]*)\" as the \"([^\"]*)\"$")
+    @When("^I enter ([^\"]*) as the ([^\"]*)$")
     public void enterAsThe(String objectInput, String objectID) {
         browser().byId(objectID).setValue(objectInput);
     }
 
-    @When("^I select \"([^\"]*)\"$")
-    public void click(String objectID) {
-        browser().byId(objectID).click();
+    @When("^I select ([^\"]*)$")
+    public void click(String buttonText) {
+        browser().submit(buttonText).click();
     }
 
 

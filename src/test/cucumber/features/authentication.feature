@@ -4,7 +4,7 @@ Feature: Authentication Log In
     Given I am on Sukrupa Page
     When I enter the username "admin"
     And I enter the password "password"
-    And I submit the "Login" form
+    And I select Login
     Then "List of Students" should be displayed
     And "Logout" should be displayed
 
