@@ -15,7 +15,10 @@ $(document).ready(function () {
 function resetFields() {
     $('#title').val("");
     $('#date').val("");
-    $('#time').val("");
+    $('#startTime').val("");
+    $('#endTime').val("");
+    $('#startTimeAm:radio').attr('checked', true);
+    $('#endTimeAm:radio').attr('checked', true);
     $('#venue').val("");
     $('#description').val("");
     $('#coordinator').val("");
