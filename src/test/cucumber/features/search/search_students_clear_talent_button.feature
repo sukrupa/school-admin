@@ -2,7 +2,7 @@
 Feature: search students clear talent button
 
     Scenario: Clear acting and dancing from selected talents for student
-        Given I am on the Student Search page
+        Given I am on the Search Students page
         When I select "Acting" from "availableTalents"
         And I click "addTalent" button
         When I select "Dancing" from "availableTalents"

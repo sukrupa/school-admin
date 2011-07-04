@@ -3,7 +3,7 @@ Feature: Search Student with Two Talents
 
   Scenario: Two Talents Selected
 
-    Given I am on the Student Search page
+    Given I am on the Search Students page
     When I select the talent "Sports"
     And I select the talent "Acting"
     And I click "Search" submit button

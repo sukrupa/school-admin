@@ -16,11 +16,6 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class BigNeedSteps extends Login {
     private static final String TOP_LEVEL_DIV = "page";
 
-    @Given("^I am on the Big Needs page$")
-    public void navigateTo() {
-        browser().navigateTo(getConfigProperty("homepage"));
-        browser().link("Big Needs").click();
-    }
 
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed")
     public void itemWithCostShouldBeDisplayed(String itemName, String cost) {
