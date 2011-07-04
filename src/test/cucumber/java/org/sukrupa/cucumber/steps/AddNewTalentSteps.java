@@ -13,10 +13,6 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class AddNewTalentSteps extends OnAddNewTalentPage {
 
-    @When("^I add a new talent \"([^\"]*)\"$")
-    public void addNewTalent(String talentName){
-        browser().textbox("description").setValue(talentName);
-    }
 
 
 

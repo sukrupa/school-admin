@@ -1,13 +1,17 @@
 @Login
 Feature: Add new talent
 
-    @OnAddNewTalentPage
-    Scenario: Add new talent
-       When I add a new talent "firebreathing"
-       And I click "Add Talent" submit button
-       Then "added successfully" should be displayed
+    Scenario: Add new talent to list of existing talents
+        Given I am on the Tools page
+        When I navigate to the Add New Talent page
+        And I enter talent description as firebreathing
+        And I add the talent
+        Then "Firebreathing added successfully" should be displayed
+        
 
-    @OnSearchStudentPage
-    Scenario: Check that new talent exists in talent field
-        Then "Firebreathing" should be displayed in "availableTalents"
 
+
+
+
+
+   
