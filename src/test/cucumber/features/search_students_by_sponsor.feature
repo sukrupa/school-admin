@@ -44,6 +44,6 @@ Feature: Search students by sponsor
     Given I am on the Search Students by Sponsor page
     When I enter sponsor name "Jlo"
     And I click "Search" submit button
-    Then the message "No Sponsors found" should be displayed
+    #Then the message "No Sponsors found" should be displayed
 
 
