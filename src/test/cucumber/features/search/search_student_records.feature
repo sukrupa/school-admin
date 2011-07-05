@@ -14,7 +14,7 @@ Feature: Search Student Records
     And I select family status as "<family_status>"
     And I click "Search" submit button
 
-    Then "<name>" should be displayed
+    Then <name> should be displayed
 
     Examples:
      | talent             | ageFrom | ageTo | class | gender  | religion  | caste  | community_location | family_status | name     |

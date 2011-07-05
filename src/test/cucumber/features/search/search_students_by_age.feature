@@ -6,7 +6,7 @@ Feature: Search students by age
     When I select the age from "10" to "15"
     And I click "Search" submit button
 
-    Then "Peter" should be displayed
-    And "Anok" should be displayed
-    And "Haripriya" should be displayed
+    Then Peter should be displayed
+    And Anok should be displayed
+    And Haripriya should be displayed
     And "Abhishek" should not be displayed

@@ -8,8 +8,8 @@ Feature: Search Student with Two Talents
     And I select the talent "Acting"
     And I click "Search" submit button
 
-    Then "Chandana" should be displayed
-    And "Abhishek" should be displayed
-    And "Armugam" should be displayed
-    And "Chandru" should be displayed
+    Then Chandana should be displayed
+    And Abhishek should be displayed
+    And Armugam should be displayed
+    And Chandru should be displayed
     And "Anok" should not be displayed

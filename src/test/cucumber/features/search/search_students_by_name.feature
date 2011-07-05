@@ -7,7 +7,7 @@ Feature: Search students by name
     When I enter name  "An"
     And I click "Search" submit button
 
-    Then "Anok" should be displayed
+    Then Anok should be displayed
     And "Chandru" should not be displayed
 
 
@@ -16,5 +16,5 @@ Feature: Search students by name
     When I enter name "Anok"
     And I click "Search" submit button
 
-    Then "Anok" should be displayed
+    Then Anok should be displayed
     And "Haripriya" should not be displayed
