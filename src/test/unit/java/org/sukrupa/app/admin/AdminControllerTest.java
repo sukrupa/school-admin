@@ -34,19 +34,20 @@ public class AdminControllerTest {
     }
 
      @Test
-    public void shouldDisplayMonthlyReportListOfSponsor() {
+    public void shouldDisplayMonthlyReportListOfSponsors() {
         StudentSearchParameter searchParam = mock(StudentSearchParameter.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
         StudentListPage students = mock(StudentListPage.class);
         List<String> validCriteria = asList("someCriteria");
         Student student = mock(Student.class);
+        int pageNumber = 23;
 
         when(searchParam.getValidCriteria()).thenReturn(validCriteria);
         when(request.getQueryString()).thenReturn("TestQueryString");
-        when(service.getPage(searchParam, 23, "TestQueryString")).thenReturn(students);
+        when(service.getPage(searchParam, pageNumber, "TestQueryString")).thenReturn(students);
         when(students.getStudents()).thenReturn(asList(student));
 
-        String view = controller.monthlyReports(23, searchParam, studentModel, request);
+        String view = controller.monthlyReports(pageNumber, searchParam, studentModel, request);
 
         assertThat(view, is("admin/monthlyreportsPage"));
         assertThat(studentModel.get("page"), is((Object) students));

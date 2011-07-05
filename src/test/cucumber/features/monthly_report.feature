@@ -1,7 +1,6 @@
 @Login
 Feature: Monthly report
 
-
 Scenario: Navigate to monthly reports page
     When I navigate to the Monthly Reports page
     Then the Monthly Reports page is displayed
