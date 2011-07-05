@@ -14,8 +14,8 @@ Feature: Add New Event
         And Event description should be displayed
         And Anok should be displayed
 
-@OnCreateEventPage
     Scenario: Create an event with all options
+        Given I am on the Create an Event page
         When I enter "MMA" as the "title"
         And I enter "13-4-2011" as the "date"
         And I enter "Event description..." as the "description"
@@ -39,8 +39,8 @@ Feature: Add New Event
         And "BYOB" should be displayed
         And "Anok" should be displayed
 
-    @OnCreateEventPage
     Scenario: Clear create new event form contents
+        Given I am on the Create an Event page
         When I enter "MMA" as the "title"
         And I enter "13-4-2011" as the "date"
         And I enter "Event description..." as the "description"
@@ -60,8 +60,7 @@ Feature: Add New Event
         And "description" is blank
         And "notes" is blank
 
-    @OnCreateEventPage
-    Scenario: Create event without mandatory fields
+        Given I am on the Create an Event page
         When I enter "" as the "title"
         And I enter "" as the "description"
         And I enter "" as the "attendees"
@@ -97,8 +96,8 @@ Feature: Add New Event
         And I submit the "Save" form
         Then the error message "Please fill in all required fields." is displayed
 
-    @OnCreateEventPage
     Scenario: Fields with invalid input should give error message
+        Given I am on the Create an Event page
         When I enter "Rachel's party" as the "title"
         And I enter "It's freaking awesome" as the "description"
         And I enter "64262" as the "attendees"
