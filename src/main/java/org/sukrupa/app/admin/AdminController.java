@@ -48,6 +48,11 @@ public class AdminController {
 
         return "admin/monthlyreportsPage";
     }
+
+    @RequestMapping("/sendnewsletter")
+    public String sendNewsletter() {
+        return "admin/sendnewsletterPage";
+    }
 }
 
 

@@ -65,6 +65,11 @@
                  <a href="/admin/monthlyreports?sponsored=Yes"> Monthly Reports </a>
              </p>
         </li>
+        <li>
+             <p class="indent">
+                 <a href="/admin/sendnewsletter"> Send Newsletter </a>
+             </p>
+        </li>
     </ul>
 </div>
 

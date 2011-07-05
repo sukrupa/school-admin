@@ -1,0 +1,1 @@
+$layout(body=admin/sendnewsletterPageBody(), title="Send Newsletter", stylesheets="admin")$
