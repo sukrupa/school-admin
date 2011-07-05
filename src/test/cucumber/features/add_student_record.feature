@@ -23,10 +23,10 @@ Feature: Add student record
      Scenario: Display error messages when fields are incomplete
      Given I am on the Add New Student page
      When I "Register" the form
-     Then the message "Missing Student ID. Please re-enter." should be displayed
-     Then the message "Missing Student Name. Please re-enter." should be displayed
-     Then the message "Please enter a valid date format." should be displayed
-     Then the message "Please select a gender." should be displayed
+     Then the message "Missing Student ID. Please re-enter." is displayed
+     Then the message "Missing Student Name. Please re-enter." is displayed
+     Then the message "Please enter a valid date format." is displayed
+     Then the message "Please select a gender." is displayed
 
    Scenario: Display error message when New student with existing ID is entered for registration
     Given I am on the Add New Student page
@@ -43,6 +43,6 @@ Feature: Add student record
      And I enter "12-12-1290" as "dateOfBirth"
      And I select "Male" as "gender"
      And I "Register" the form
-     Then the message "Student with the same ID already exists." should be displayed
+     Then the message "Student with the same ID already exists." is displayed
 
 
