@@ -1,14 +1,20 @@
 package org.sukrupa.student;
 
 import com.google.common.collect.Sets;
+import org.apache.xpath.Arg;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.sukrupa.app.services.StudentImageRepository;
+
+import java.util.List;
 
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -37,19 +43,15 @@ public class StudentServiceTest {
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
-    @Mock
-    private StudentRepository studentRepository;
-    @Mock
-    private TalentRepository talentRepository;
-
-    @Mock
-    private StudentImageRepository studentImageRepository;
-
 
     private StudentService service;
 
     @Mock
-    private StudentFactory studentFactory;
+    private StudentRepository studentRepository;
+    @Mock
+    private TalentRepository talentRepository;
+    @Mock
+    private StudentImageRepository studentImageRepository;
     @Mock
     private SystemEventLogRepository systemEventLogRepository;
 
@@ -58,7 +60,7 @@ public class StudentServiceTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        service = new StudentService(studentRepository, talentRepository, studentImageRepository, studentFactory, systemEventLogRepository);
+        service = new StudentService(studentRepository, talentRepository, studentImageRepository, systemEventLogRepository);
         freezeDateToMidnightOn(30,12,2011); //This is actually the 29th?
     }
 
@@ -197,23 +199,17 @@ public class StudentServiceTest {
 
     @Test
     public void shouldCreateStudent() {
-        StudentForm studentParam = new StudentForm();
-        studentParam.setStudentId("SK20091001");
-        studentParam.setName("Yael");
-        studentParam.setDateOfBirth("06-03-1982");
-        studentParam.setGender("Female");
+        StudentForm studentInputInformation = new StudentForm();
+        studentInputInformation.setStudentId("SK20091001");
+        studentInputInformation.setName("Yael");
+        studentInputInformation.setDateOfBirth("06-03-1982");
+        studentInputInformation.setGender("Female");
 
-        Student expectedStudent = mock(Student.class);
-        when(studentFactory.create(studentParam.getStudentId(),
-                studentParam.getName(),
-                studentParam.getDateOfBirth(),
-                studentParam.getGender())).thenReturn(expectedStudent);
+        Student expectedStudent = new Student("SK20091001","Yael", "06-03-1982", "Female");
 
-        Student student = service.create(studentParam);
+        Student actualStudent = service.create(studentInputInformation);
 
         verify(studentRepository).put(expectedStudent);
-        assertEquals(expectedStudent, student);
+        assertEquals(expectedStudent, actualStudent);
     }
-
-
 }

@@ -32,7 +32,6 @@ public class StudentRepository {
 
     public void put(Student student) {
         session().saveOrUpdate(student);
-        //session().flush();
     }
 
     public Student update(Student student) {

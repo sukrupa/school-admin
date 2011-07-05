@@ -16,10 +16,8 @@ public class StudentService {
 
     private StudentRepository studentRepository;
     private TalentRepository talentRepository;
-    private StudentFactory studentFactory;
     private SystemEventLogRepository systemEventLogRepository;
     private StudentImageRepository studentImageRepository;
-    private int classUpdateCount;
 
     @RequiredByFramework
     public StudentService() {
@@ -27,10 +25,9 @@ public class StudentService {
 
     @Autowired
     public StudentService(StudentRepository studentRepository, TalentRepository talentRepository,
-                          StudentImageRepository studentImageRepository, StudentFactory studentFactory, SystemEventLogRepository systemEventLogRepository) {
+                          StudentImageRepository studentImageRepository, SystemEventLogRepository systemEventLogRepository) {
         this.studentRepository = studentRepository;
         this.talentRepository = talentRepository;
-        this.studentFactory = studentFactory;
         this.systemEventLogRepository = systemEventLogRepository;
         this.studentImageRepository = studentImageRepository;
     }
@@ -40,10 +37,7 @@ public class StudentService {
     }
 
     public Student create(StudentForm studentForm) {
-        Student student = studentFactory.create(studentForm.getStudentId(),
-                studentForm.getName(),
-                studentForm.getDateOfBirth(),
-                studentForm.getGender());
+        Student student = new Student(studentForm.getStudentId(), studentForm.getName(), studentForm.getDateOfBirth(), studentForm.getGender());
 
         studentRepository.put(student);
         return student;
