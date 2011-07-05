@@ -28,23 +28,18 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
-    @When("^I  \"([^\"]*)\"$")
-    public void clearForm(String objectID) {
-        browser().byId(objectID).click();
-    }
-
     @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice, String ObjectID) {
         browser().byId(ObjectID).choose(choice);
     }
 
-    @Then("^\"([^\"]*)\" should contain \"([^\"]*)\"$")
+    @Then("^([^\"]*) should contain ([^\"]*)$")
     public void shouldContain(String ObjectID, String objectValueToMatch) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, containsString(objectValueToMatch));
     }
 
-    @Then("^\"([^\"]*)\" is blank")
+    @Then("^([^\"]*) is blank")
     public void shouldbeBlank(String ObjectID) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, is(""));
@@ -127,7 +122,7 @@ public class BasicWebSteps {
         browser().select(dropDownName).choose(value);
     }
 
-    @Then("^the message \"([^\"]*)\" should be displayed")
+    @Then("^the message \"([^\"]*)\" is displayed$")
     public void displayErrorMessage(String errorMessage) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), errorMessage));
     }
