@@ -306,6 +306,15 @@
     <option name="showOnlyWarnings" value="false" />
   </component>
   <component name="libraryTable">
+    <library name="JSON">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/../../lib/source/JSON" />
+        <root url="file://$PROJECT_DIR$/../../lib/source/JSON" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/source/JSON" recursive="false" />
+    </library>
     <library name="main">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/../../lib/main" />
@@ -384,8 +393,15 @@
         <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.context.support-sources-3.0.5.RELEASE.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/org.springframework.beans-sources-3.0.5.RELEASE.jar!/" />
         <root url="jar://$PROJECT_DIR$/../../lib/source/hibernate-core-3.6.0.Beta2-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/commons-lang.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/commons-collections.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/commons-beanutils-1.7.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/json-lib-2.2.2-jdk15.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/ezmorph.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../lib/source/JSON/commons-logging-1.1.1.jar!/" />
       </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../../lib/main" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../lib/source/JSON" recursive="false" />
     </library>
     <library name="test">
       <CLASSES>
