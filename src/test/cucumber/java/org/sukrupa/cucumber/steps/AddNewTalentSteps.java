@@ -13,6 +13,10 @@ public class AddNewTalentSteps {
         browser().byId("description").setValue(talentName);
     }
 
+    @When("^I add the talent$")
+    public void iAddTheTalent() {
+        browser().submit("Add Talent").click();
+    }
 
 
 }

@@ -6,7 +6,7 @@ Feature: Add new talent
         When I navigate to the Add New Talent page
         And I enter talent description as firebreathing
         And I add the talent
-        Then the message Firebreathing added successfully should be displayed
+        Then the message "Firebreathing added successfully" should be displayed
         
 
 
