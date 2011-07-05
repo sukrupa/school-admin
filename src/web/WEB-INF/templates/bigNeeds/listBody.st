@@ -3,8 +3,8 @@
         <table border="0">
             <thead class="header">
             <tr>
-                <td>Item</td>
-                <td>Cost</td>
+                <td><label for="itemName">Item</label></td>
+                <td><label for="cost">Cost</label></td>
                 <td>Actions</td>
             </tr>
             </thead>

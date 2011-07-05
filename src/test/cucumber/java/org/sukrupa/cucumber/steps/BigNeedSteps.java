@@ -1,16 +1,12 @@
 package org.sukrupa.cucumber.steps;
 
-import cuke4duke.annotation.Before;
 import cuke4duke.annotation.I18n.EN.*;
-import cuke4duke.annotation.Pending;
-import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.context.Login;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.sukrupa.cucumber.CucumberFacade.getConfigProperty;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class BigNeedSteps extends Login {
@@ -18,13 +14,18 @@ public class BigNeedSteps extends Login {
 
 
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed")
-    public void itemWithCostShouldBeDisplayed(String itemName, String cost) {
-        assertTrue(itemWithCostExists(itemName, cost));
+    public void itemWithCostShouldBeDisplayed(String name, String cost) {
+        assertTrue(itemWithCostExists(name, cost));
     }
 
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should not be displayed")
-    public void itemWithCostShouldNotBeDisplayed(String itemName, String cost) {
-        assertFalse(itemWithCostExists(itemName, cost));
+    public void itemWithCostShouldNotBeDisplayed(String name, String cost) {
+        assertFalse(itemWithCostExists(name, cost));
+    }
+
+    @Then("^a \"([^\"]+)\" should not be displayed")
+    public void itemShouldNotBeDisplayed(String name) {
+        assertFalse(browser().cell(name).under(browser().cell("Name")).exists(true));
     }
 
     @When("^I delete the \"([^\"]+)\"")
@@ -34,10 +35,10 @@ public class BigNeedSteps extends Login {
         deleteButton.click();
     }
 
-    private boolean itemWithCostExists(String itemName, String cost) {
-        ElementStub nameCellWithCorrectName = browser().cell(itemName).under(browser().cell("Item"));
+    private boolean itemWithCostExists(String name, String cost) {
+        ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
-        ElementStub rowContainingBothNameAndCost = browser().cell(cost).in(browser().cell(itemName).parentNode());
+        ElementStub rowContainingBothNameAndCost = browser().cell(cost).in(browser().cell(name).parentNode());
         return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && rowContainingBothNameAndCost.exists(true);
     }
 }

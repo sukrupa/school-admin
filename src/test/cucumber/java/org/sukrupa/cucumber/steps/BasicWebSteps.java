@@ -108,6 +108,7 @@ public class BasicWebSteps {
     public void pageIsDisplayed(String pageName) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), pageName));
     }
+
     @When("^I \"([^\"]*)\" in the sidebar")
     public void clickLinkInSidebar(String text) {
         browser().link(text).click();
@@ -115,6 +116,9 @@ public class BasicWebSteps {
 
     @When("^I enter \"([^\"]*)\" as \"([^\"]*)\"")
     public void enterIntoTheTextBox(String text, String textBoxName) {
+        if (browser().label(textBoxName).exists(true)) {
+            textBoxName = browser().label(textBoxName).fetch("htmlFor");
+        }
         browser().textbox(textBoxName).setValue(text);
     }
 
