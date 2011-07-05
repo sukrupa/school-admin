@@ -13,7 +13,7 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class EditStudentSteps {
 
-    @When("^I edit student record of \"([^\"]*)\"$")
+    @When("^I edit student record of ([^\"]*)$")
     public void gotoEditStudentPage(String studentName){
         browser().link(studentName).click();
         browser().submit("Edit").click();
@@ -24,34 +24,40 @@ public class EditStudentSteps {
         browser().link(studentName).click();
     }
 
-    @When("^I enter \"([^\"]*)\" name as \"([^\"]*)\"$")
+    @When("^I enter ([^\"]*) name as ([^\"]*)$")
     public void fillInTheNamefieldWith(String name, String fieldContent){
         browser().textbox(name+".name").setValue(fieldContent);
     }
 
-    @When("^I enter \"([^\"]*)\" education as \"([^\"]*)\"$")
+    @When("^I enter ([^\"]*) education as ([^\"]*)$")
     public void fillInTheEducationfieldWith(String name, String fieldContent){
         browser().textbox(name+".education").setValue(fieldContent);
     }
 
-    @When("^I enter \"([^\"]*)\" salary as \"([^\"]*)\"$")
+    @When("^I enter ([^\"]*) salary as ([^\"]*)$")
     public void fillInTheSalaryfieldWith(String name, String fieldContent){
         browser().textbox(name+".salary").setValue(fieldContent);
     }
 
-    @When("^I enter \"([^\"]*)\" contact as \"([^\"]*)\"$")
+    @When("^I enter ([^\"]*) contact as ([^\"]*)$")
     public void fillInTheContactfieldWith(String name, String fieldContent){
         browser().textbox(name+".contact").setValue(fieldContent);
     }
 
-    @When("^I select \"([^\"]*)\" as \"([^\"]*)\" occupation$")
-    public void selectTheOccupationAs(String fieldContent, String name){
+    @When("^I select ([^\"]*) occupation as \"([^\"]*)\"$")
+    public void selectTheOccupationAs(String name, String fieldContent){
         browser().select(name+".occupation").choose(fieldContent);
     }
 
-    @When("^I select \"([^\"]*)\" as \"([^\"]*)\" maritalStatus")
-    public void selectTheMaritalStatusAs(String fieldContent, String name){
+    @When("^I select ([^\"]*) maritalStatus as \"([^\"]*)\"$")
+    public void selectTheMaritalStatusAs(String name, String fieldContent){
         browser().select(name+".maritalStatus").choose(fieldContent);
     }
+
+    @When("^I save the changes$")
+    public void iSaveTheChanges() {
+        browser().byId("save").click();
+    }
+
 
 }
