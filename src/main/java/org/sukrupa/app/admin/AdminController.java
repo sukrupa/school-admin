@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.sukrupa.app.services.EmailService;
 import org.sukrupa.event.Event;
 import org.sukrupa.student.*;
 
@@ -25,10 +26,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class AdminController {
 
     private StudentService studentService;
+    private EmailService emailService;
+
     @Autowired
-    public AdminController(StudentService studentService) {
+    public AdminController(StudentService studentService, EmailService emailService) {
         this.studentService = studentService;
+        this.emailService = emailService;
     }
+
 
     @RequestMapping()
     public String list(){
@@ -52,6 +57,12 @@ public class AdminController {
     @RequestMapping("/sendnewsletter")
     public String sendNewsletter() {
         return "admin/sendnewsletterPage";
+    }
+
+    @RequestMapping(value = "sendemail", method = GET)
+    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) {
+        emailService.sendEmail(to, subject);
+
     }
 }
 
