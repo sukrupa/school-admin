@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.text.MessageFormat.format;
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
@@ -80,88 +81,142 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayEventsPage() {
-        assertThat(controller.list(eventModel), is("events/list"));
+        //Act
+        String list = controller.list(eventModel);
+
+        //Assert
+        assertThat("Displays the Events page",list, is("events/list"));
     }
 
     @Test
-    public void retrieveEventListToModel() {
+    public void shouldAddEventsToListOfEvents() {
+
+        //Arrange
         List<Event> ourEventList = new ArrayList<Event>();
         ourEventList.add(eventOne);
         ourEventList.add(eventTwo);
         when(service.list()).thenReturn(ourEventList);
+
+        //Act
         controller.list(eventModel);
-        List<Event> eventList = (List<Event>) eventModel.get("events");
-        assertThat(eventList.contains(eventOne), CoreMatchers.is(true));
-        assertThat(eventList.contains(eventTwo), CoreMatchers.is(true));
+        List<Event> eventList = eventModel.get("events");
+
+        //Assert
+        assertTrue("Returns True if eventList contains eventOne",eventList.contains(eventOne));
+        assertTrue("Returns True if eventList contains eventTwo",eventList.contains(eventTwo));
 
     }
 
     @Test
     public void shouldCreateANewEvent() {
-        assertThat(controller.create(), is("events/create"));
+        //Act
+        String actual = controller.create();
+
+        //Assert
+        assertThat("Redirects to the Create Event Page",actual, is("events/create"));
 
     }
 
     @Test
     public void shouldEditANewEvent() {
-        assertThat(controller.edit(eventForm.getId(), model), is("events/edit"));
+        //Act
+        String edit = controller.edit(eventForm.getId(), model);
+
+        //Assert
+        assertThat("Redirect to edit Event Page",edit, is("events/edit"));
     }
 
     @Test
-    public void shouldReturnEventForTheId() {
+    public void shouldDisplayAssosciatedEventGivenTheEventId() {
+
+        //Arrange
         when(service.getEvent(4)).thenReturn(eventOne);
-        assertThat(controller.view(4, model), is("events/view"));
+
+        //Act
+        String view = controller.view(4, model);
+
+        //Assert
+        assertThat("Displays the Event Page for the given Event Id",view, is("events/view"));
         verify(service).getEvent(4);
-        assertThat(model.get("event").getTitle(), is("Spice Girls"));
+        assertThat("Checks whether the model has the concerned event by comparing title",model.get("event").getTitle(), is("Spice Girls"));
 
     }
 
     @Test
-    public void shouldEditEventById() {
+    public void shouldRedirectToEditEventPageForTheConcernedEventId() {
+
+        //Arrange
         when(service.getEvent(4)).thenReturn(eventOne);
-        assertThat(controller.edit(4, model), is("events/edit"));
+
+        //Act
+        String edit = controller.edit(4, model);
+
+        //Assert
+        assertThat("Redirect to the concerned Edit Page based on the Ids",edit, is("events/edit"));
         verify(service).getEvent(4);
-        assertThat(model.get("event").getDate().year(), is(2011));
+        assertThat("Checks whether the model has the concerned event by comparing Date",model.get("event").getDate().year(), is(2011));
     }
 
     @Test
-    public void shouldReturnToEditPageForInvalidEventForm() {
+    public void shouldRedirectBackToEditPageFoInvalidEventForm() {
+        //Arrange
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
         when(eventForm.isInvalid(errors)).thenReturn(true);
-        assertThat(controller.update("4", eventForm, objectModel), is("events/edit"));
+
+        //Act
+        String update = controller.update("4", eventForm, objectModel);
+
+        //Assert
+        assertThat("Redirect back to edit when event form contains errors",update, is("events/edit"));
     }
 
     @Test
-    public void shouldReturnToEditPageForInvalidAttendees() {
+    public void shouldRedirectToBackEditPageForInvalidAttendees() {
+
+       //Arrange
         HashSet<String> idList = new HashSet<String>();
         idList.add("111");
         idList.add("123");
         Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
         when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-        assertThat(controller.update("4", eventForm, objectModel), is("events/edit"));
 
+        //Act
+        String update = controller.update("4", eventForm, objectModel);
 
+        //Assert
+        assertThat("Redirect back to edit when there are invalid Attendees",update, is("events/edit"));
 
     }
 
     @Test
-    public void shouldRedirectToID() {
-        assertThat(controller.update("4", eventForm, objectModel), is("redirect:/events/4"));
+    public void shouldRedirectToEventsPageAfterSuccesfullyUpdating() {
+        //Act
+        String update = controller.update("4", eventForm, objectModel);
+
+        //Assert
+        assertThat("Redirect to the concerned Event Page based on Ids After Successful Update",update,is("redirect:/events/4"));
         verify(service).update(eventForm);
     }
 
     @Test
-    public void shouldReturntoCreatePageForErrorWhenSaving() {
+    public void shouldRedirectBackToCreatePageForErrorWhenSaving() {
+        //Arrange
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
         when(eventForm.isInvalid(errors)).thenReturn(true);
-        assertThat(controller.save(eventForm, objectModel), is("events/create"));
+
+        //Act
+        String save = controller.save(eventForm, objectModel);
+
+        //Assert
+        assertThat("Redirect back to save when event form contains errors", save, is("events/create"));
 
 
     }
 
     @Test
-    public void shouldReturnToCreatePageForInvalidAttendeesWhenSaved() {
+    public void shouldRedirectBackToCreatePageForInvalidAttendeesWhenSaved() {
+        //Arrange
         HashSet<String> idList = new HashSet<String>();
         idList.add("111");
         idList.add("123");
@@ -169,12 +224,19 @@ public class EventsControllerTest {
         Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
         when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-        assertThat(controller.save(eventForm, objectModel), is("events/create"));
+
+        //Act
+        String save = controller.save(eventForm, objectModel);
+
+        //Assert
+        assertThat("Redirect back to save when there are invalid attendees",save, is("events/create"));
 
     }
 
     @Test
-    public void shouldRedirectIDWhenSaved() {
+    public void shouldRedirectToEventsPageAfterSuccesfullySaving() {
+
+        //Arrange
         when(eventForm.isInvalid(errors)).thenReturn(false);
         when(eventForm.createEvent()).thenReturn(event);
         when(event.getId()).thenReturn(4);
@@ -185,9 +247,20 @@ public class EventsControllerTest {
         Set<String> invalidAttendees = new HashSet<String>();
         invalidAttendees.clear();
         when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(invalidAttendees);
-        assertThat(controller.save(eventForm, objectModel), is("redirect:/events/4"));
+
+        //Act
+        String save = controller.save(eventForm, objectModel);
+
+        //Assert
+        assertThat("Redirect to the concerned Event Page based on Ids After Successful Save",save, is("redirect:/events/4"));
         verify(eventForm).createEvent();
         verify(service).save(event, studentIdsOfAttendees.toArray(new String[]{}));
+
+
+
+
+
+
 
     }
 
