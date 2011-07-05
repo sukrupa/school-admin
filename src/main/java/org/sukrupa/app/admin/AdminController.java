@@ -59,7 +59,7 @@ public class AdminController {
         return "admin/sendnewsletterPage";
     }
 
-    @RequestMapping(value = "sendemail", method = GET)
+    @RequestMapping(value = "sendemail", method = POST)
     public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) {
         emailService.sendEmail(to, subject);
 
