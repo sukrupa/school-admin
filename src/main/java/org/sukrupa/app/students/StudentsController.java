@@ -79,7 +79,6 @@ public class StudentsController {
     public void searchStudentsBySponsor() {
     }
 
-
     @RequestMapping(value = "{id}/edit", method = GET)
     public String edit(@PathVariable String id,
                        @RequestParam(required = false, defaultValue = "") String noteUpdateStatus,

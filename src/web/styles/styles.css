@@ -30,6 +30,10 @@ body
     border-top: none;
     
 }
+#sendToLabel, #subjectLabel {
+width: 70px;
+    float:left;
+}
 
 .indent 
 {

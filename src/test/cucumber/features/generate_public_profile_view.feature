@@ -11,6 +11,9 @@ Feature: Generate public profile view
         And Gender should be displayed
         And Background should be displayed
         And Disciplinary should be displayed
+        And To should be displayed
+        And Subject should be displayed
+        And Send Profile should be displayed
         And Comments should be displayed
         And Caste should not be displayed
         And Subcaste should not be displayed
