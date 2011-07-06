@@ -3,14 +3,14 @@ Feature: Add student record
 
      Scenario: Go to Register a Student page
      Given I am on the View Students page
-     When I "Add New Student" in the sidebar
+     When I navigate to the Add New Student page
      Then the Register a student page is displayed
 
      Scenario: Add new student details
      Given I am on the Add New Student page
-     When I enter "SK2010082011" as "studentId"
-     And I enter "Yael" as "name"
-     And I enter "06-03-1982" as "dateOfBirth"
+     When I enter SK2010082011 as the studentId
+     And I enter Yael as the name
+     And I enter 06-03-1982 as the dateOfBirth
      And I select "Female" as "gender"
      And I "Register" the form
      Then the Edit Student Record: Yael page is displayed
@@ -30,17 +30,17 @@ Feature: Add student record
 
    Scenario: Display error message when New student with existing ID is entered for registration
     Given I am on the Add New Student page
-    When I enter "SK2010082022" as "studentId"
-     And I enter "Yael" as "name"
-     And I enter "06-03-1982" as "dateOfBirth"
+    When I enter SK2010082022 as the studentId
+     And I enter Yael as the name
+     And I enter 06-03-1982 as the dateOfBirth
      And I select "Female" as "gender"
      And I "Register" the form
      Then the Edit Student Record: Yael page is displayed
 
      When I "Add New Student" in the sidebar
-     And I enter "SK2010082022" as "studentId"
-     And I enter "Jack" as "name"
-     And I enter "12-12-1290" as "dateOfBirth"
+     And I enter SK2010082022 as the studentId
+     And I enter Jack as the name
+     And I enter 12-12-1290 as the dateOfBirth
      And I select "Male" as "gender"
      And I "Register" the form
      Then the message "Student with the same ID already exists." is displayed
