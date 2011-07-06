@@ -2,11 +2,11 @@
 Feature: Add New Event
     Scenario: Create an event with mandatory fields
         Given I am on the Create an Event page
-        When I enter Dancing as the title
-        And I enter 13-04-2011 as the date
-        And I enter Event description as the description
-        And I enter 64262 as the attendees
-        And I save the event
+        When I enter Dancing as title
+        And I enter 13-04-2011 as date
+        And I enter Event description as description
+        And I enter 64262 as attendees
+        And I select Save
         Then Event: Dancing should be displayed
         And Dancing should be displayed
         And 13-04-2011 should be displayed
@@ -16,16 +16,16 @@ Feature: Add New Event
 
     Scenario: Create event with all fields
         Given I am on the Create an Event page
-        When I enter MMA as the title
-        And I enter 13-4-2011 as the date
-        And I enter Event description... as the description
-        And I enter the start time as 01:30 pm
-        And I enter the end time as 03:30 pm
-        And I enter Colloseum as the venue
-        And I enter John as the coordinator
-        And I enter BYOB as the notes
-        And I enter 64262 as the attendees
-        And I save the event
+        When I enter MMA as title
+        And I enter 13-4-2011 as date
+        And I enter Event description... as description
+        And I enter the start time as "01:30" pm
+        And I enter the end time as "03:30" pm
+        And I enter Colloseum as venue
+        And I enter John as coordinator
+        And I enter BYOB as notes
+        And I enter 64262 as attendees
+        And I select Save
         Then Event: MMA should be displayed
         And MMA should be displayed
         And 13-04-2011 should be displayed
@@ -40,14 +40,14 @@ Feature: Add New Event
 
     Scenario: Clear create new event form contents
         Given I am on the Create an Event page
-        When I enter MMA as the title
-        And I enter 13-4-2011 as the date
-        And I enter Event description... as the description
-        And I enter the start time as 01:30 pm
-        And I enter the end time as 03:30 pm
-        And I enter Colloseum as the venue
-        And I enter BYOB as the notes
-        And I enter 64262 as the attendees
+        When I enter MMA as title
+        And I enter 13-4-2011 as date
+        And I enter Event description... as description
+        And I enter the start time as "01:30" pm
+        And I enter the end time as "03:30" pm
+        And I enter Colloseum as venue
+        And I enter BYOB as notes
+        And I enter 64262 as attendees
         And I clear all the fields
         Then title is blank
         And date is blank
@@ -64,39 +64,49 @@ Feature: Add New Event
         When I save the event
         Then the message "Please fill in all required fields." is displayed
 
-        When I enter It's freaking awesome as the description
-        And I enter 64262 as the attendees
-        And I enter 22-08-2011 as the date
-        And I save the event
+        When I enter It's freaking awesome as description
+        And I enter 64262 as attendees
+        And I enter 22-08-2011 as date
+        And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as the title
-        And I enter 64262 as the attendees
-        And I enter 22-08-2011 as the date
-        And I save the event
+        And I enter Rachel's party as title
+        And I enter 64262 as attendees
+        And I enter 22-08-2011 as date
+        And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as the title
-        And I enter It's freaking awesome as the description
-        And I enter 22-08-2011 as the date
-        And I save the event
+        And I enter Rachel's party as title
+        And I enter It's freaking awesome as description
+        And I enter 22-08-2011 as date
+        And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as the title
-        And I enter It's freaking awesome as the description
-        And I enter 64262 as the attendees
-        And I save the event
+        And I enter Rachel's party as title
+        And I enter It's freaking awesome as description
+        And I enter 64262 as attendees
+        And I select Save
         Then the message "Please fill in all required fields." is displayed
 
 
     Scenario: Fields with invalid input should give error message
         Given I am on the Create an Event page
-        When I enter Rachel's party as the title
-        And I enter It's freaking awesome as the description
-        And I enter 64262 as the attendees
-        And I enter may 26 2011 as the date
-        And I save the event
+        When I enter Rachel's party as title
+        And I enter It's freaking awesome as description
+        And I enter 64262 as attendees
+        And I enter may 26 2011 as date
+        And I select Save
         Then the message "Invalid date" is displayed
+
+        When I enter Rachel's party as title
+        And I enter It's freaking awesome as description
+        And I enter 64262 as attendees
+        And I enter roberto as date
+        And I select Save
+        Then the message "Invalid date" is displayed
+
+
+

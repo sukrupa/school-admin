@@ -9,8 +9,8 @@ Feature: Add, Edit and Delete Big Needs
 
   Scenario: Add item to Big Need list
     Given I am on the Big Needs page
-    When I enter "Refrigerator" as "Item"
-    And I enter "20000" as "Cost"
+    When I enter Refrigerator as Item
+    And I enter 20000 as Cost
     And I "Add" the form
     #TODO: Ben/Nishi 2011-07-04 WIP
     #Then Refrigerator added should be displayed

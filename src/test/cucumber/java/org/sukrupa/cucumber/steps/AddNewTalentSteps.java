@@ -8,11 +8,6 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class AddNewTalentSteps {
 
-    @When("^I enter talent description as ([^\"]*)$")
-    public void enterTalent(String talentName) {
-        browser().byId("description").setValue(talentName);
-    }
-
     @When("^I add the talent$")
     public void iAddTheTalent() {
         browser().submit("Add Talent").click();

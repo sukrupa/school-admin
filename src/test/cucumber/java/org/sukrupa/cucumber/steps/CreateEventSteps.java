@@ -4,13 +4,13 @@ import cuke4duke.annotation.I18n.EN.*;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class CreateEventSteps extends BasicWebSteps {
-    @When("^I enter the start time as ([^\"]*) pm$")
+    @When("^I enter the start time as \"([^\"]*)\" pm$")
     public void enterStartTime(String eventStartTime) {
         browser().byId("startTime").setValue(eventStartTime);
         browser().radio("startTimePm").click();
     }
 
-    @When("^I enter the end time as ([^\"]*) pm$")
+    @When("^I enter the end time as \"([^\"]*)\" pm$")
     public void enterEndTime(String eventEndTime ) {
         browser().byId("endTime").setValue(eventEndTime);
         browser().radio("endTimePm").click();

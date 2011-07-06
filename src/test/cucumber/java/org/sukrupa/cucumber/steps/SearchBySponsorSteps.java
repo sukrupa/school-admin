@@ -10,7 +10,7 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 public class SearchBySponsorSteps extends BasicWebSteps {
 
 
-    @When("^I enter sponsor name \"([^\"]*)\"$")
+    @When("^I enter sponsor name ([^\"]*)$")
     public void enterSponsorName(String value) {
         browser().textbox("sponsorName").setValue(value);
     }

@@ -82,9 +82,9 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
-    @When("^I enter \"([^\"]*)\" as Notes$")
+    @When("^I enter \"([^\"]*)\" as the note$")
     public void enterIntoTheTextArea(String text){
-        enterAsThe(text, "new-note");
+        enterIntoTheTextBox(text, "new-note");
     }
 
     @When("^I \"([^\"]*)\" to the form$")

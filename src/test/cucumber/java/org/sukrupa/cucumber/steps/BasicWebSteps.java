@@ -104,12 +104,12 @@ public class BasicWebSteps {
         browser().link(text).click();
     }
 
-    @When("^I enter ([^\"]*) as the ([^\"]*)")
-    public void enterIntoTheTextBox(String text, String textBoxName) {
-        if (browser().label(textBoxName).exists(true)) {
-            textBoxName = browser().label(textBoxName).fetch("htmlFor");
+    @When("^I enter ([^\"]*) as ([^\"]*)")
+    public void enterIntoTheTextBox(String text, String elementId) {
+        if (browser().label(elementId).exists(true)) {
+            elementId = browser().label(elementId).fetch("htmlFor");
         }
-        browser().textbox(textBoxName).setValue(text);
+        browser().byId(elementId).setValue(text);
     }
 
     @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
