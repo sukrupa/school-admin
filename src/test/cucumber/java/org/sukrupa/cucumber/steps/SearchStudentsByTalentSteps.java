@@ -9,9 +9,19 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class SearchStudentsByTalentSteps extends BasicWebSteps {
 
-    @When("^I select Add$")
+    @When("^I Add the talent$")
     public void selectAddButton(){
         browser().button("addTalent").click();
+    }
+
+    @When("^I Remove the talent$")
+    public void selectRemoveButton(){
+        browser().button("removeTalent").click();
+    }
+
+    @When("^I Clear the chosen list of talents$")
+    public void selectClearButton(){
+        browser().button("clearTalents").click();
     }
 
     @When("^I select \"([^\"]*)\" from list of talents$")
