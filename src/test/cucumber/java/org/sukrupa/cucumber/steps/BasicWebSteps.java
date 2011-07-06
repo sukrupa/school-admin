@@ -104,7 +104,7 @@ public class BasicWebSteps {
         browser().link(text).click();
     }
 
-    @When("^I enter ([^\"]*) as ([^\"]*)")
+    @When("^I enter ([^\"']*) as ([^\"]*)")
     public void enterIntoTheTextBox(String text, String elementId) {
         if (browser().label(elementId).exists(true)) {
             elementId = browser().label(elementId).fetch("htmlFor");

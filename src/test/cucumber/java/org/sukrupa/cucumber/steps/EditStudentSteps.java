@@ -24,32 +24,32 @@ public class EditStudentSteps {
         browser().link(studentName).click();
     }
 
-    @When("^I enter ([^\"]*) name as ([^\"]*)$")
+    @When("^I enter ([^\"]*)'s name as ([^\"]*)$")
     public void fillInTheNamefieldWith(String name, String fieldContent){
         browser().textbox(name+".name").setValue(fieldContent);
     }
 
-    @When("^I enter ([^\"]*) education as ([^\"]*)$")
+    @When("^I enter ([^\"]*)'s education as ([^\"]*)$")
     public void fillInTheEducationfieldWith(String name, String fieldContent){
         browser().textbox(name+".education").setValue(fieldContent);
     }
 
-    @When("^I enter ([^\"]*) salary as ([^\"]*)$")
+    @When("^I enter ([^\"]*)'s salary as ([^\"]*)$")
     public void fillInTheSalaryfieldWith(String name, String fieldContent){
         browser().textbox(name+".salary").setValue(fieldContent);
     }
 
-    @When("^I enter ([^\"]*) contact as ([^\"]*)$")
+    @When("^I enter ([^\"]*)'s contact as ([^\"]*)$")
     public void fillInTheContactfieldWith(String name, String fieldContent){
         browser().textbox(name+".contact").setValue(fieldContent);
     }
 
-    @When("^I select ([^\"]*) occupation as ([^\"]*)$")
+    @When("^I select ([^\"]*)'s occupation as ([^\"]*)$")
     public void selectTheOccupationAs(String name, String fieldContent){
         browser().select(name+".occupation").choose(fieldContent);
     }
 
-    @When("^I select ([^\"]*) maritalStatus as ([^\"]*)$")
+    @When("^I select ([^\"]*)'s maritalStatus as ([^\"]*)$")
     public void selectTheMaritalStatusAs(String name, String fieldContent){
         browser().select(name+".maritalStatus").choose(fieldContent);
     }

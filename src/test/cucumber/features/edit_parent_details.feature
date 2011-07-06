@@ -2,22 +2,22 @@
 Feature: Edit parent details
     Scenario Outline: Select student to edit parent details
         When I edit student record of Bhavani
-        And I enter father name as <FatherName>
-        And I enter mother name as <MotherName>
-        And I enter guardian name as <GuardianName>
-        And I enter father education as <FatherEducation>
-        And I enter mother education as <MotherEducation>
-        And I enter guardian education as <GuardianEducation>
-        And I enter father contact as <FatherContact>
-        And I enter mother contact as <MotherContact>
-        And I enter guardian contact as <GuradianContact>
-        And I enter father salary as <FatherSalary>
-        And I enter mother salary as <MotherSalary>
-        And I enter guardian salary as <GuardianSalary>
-        And I select father occupation as <FatherOccupation>
-        And I select mother occupation as <MotherOccupation>
-        And I select father maritalStatus as <FatherMaritalStatus>
-        And I select mother maritalStatus as <MotherMaritalStatus>
+        And I enter father's name as <FatherName>
+        And I enter mother's name as <MotherName>
+        And I enter guardian's name as <GuardianName>
+        And I enter father's education as <FatherEducation>
+        And I enter mother's education as <MotherEducation>
+        And I enter guardian's education as <GuardianEducation>
+        And I enter father's contact as <FatherContact>
+        And I enter mother's contact as <MotherContact>
+        And I enter guardian's contact as <GuradianContact>
+        And I enter father's salary as <FatherSalary>
+        And I enter mother's salary as <MotherSalary>
+        And I enter guardian's salary as <GuardianSalary>
+        And I select father's occupation as <FatherOccupation>
+        And I select mother's occupation as <MotherOccupation>
+        And I select father's maritalStatus as <FatherMaritalStatus>
+        And I select mother's maritalStatus as <MotherMaritalStatus>
         And I save the changes
         Then the message "Student record updated successfully" should be displayed
     Examples:
