@@ -59,10 +59,21 @@ public class AdminController {
         return "admin/sendnewsletterPage";
     }
 
-    @RequestMapping(value = "sendemail", method = GET)
+
+    @RequestMapping("/endofsponsorshipform")
+    public String sendEndOfSponsorship() {
+        return "admin/endofsponsorshipform";
+    }
+
+    @RequestMapping(value = "sendemail", method = POST)
     public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) {
         emailService.sendEmail(to, subject);
 
+    }
+
+    @RequestMapping(value = "/endofsponsorshipmailsentPage")
+    public String endOfSponsorshipMailSent() {
+        return "/admin/endofsponsorshipmailsentPage";
     }
 }
 

@@ -58,6 +58,19 @@ public class AdminControllerTest {
     }
 
     @Test
+    public void shouldDisplayEndOfSponsorshipForm(){
+
+        String view = adminController.sendEndOfSponsorship();
+        assertThat(view,is("admin/endofsponsorshipform"));
+    }
+
+    @Test
+    public void shouldDisplayEndOfSponsorshipEmailSentPage(){
+        String view = adminController.endOfSponsorshipMailSent();
+        assertThat(view,is("redirect:/admin/endofsponsorshipmailsentPage"));
+    }
+
+    @Test
     public void shouldSendEmail() {
 
         String toAddress = "anita@thoughtworks.com";

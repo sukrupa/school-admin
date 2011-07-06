@@ -7,6 +7,8 @@
                 <td >Student Name</td>
                 <td >Sponsor Name</td>
                 <td >Sponsor's Email</td>
+                <td >Send End of Sponsorship Email </td>
+
                
             </tr>
             </thead>
@@ -15,8 +17,8 @@
             <tr >
                 <td >$it.name$</td>
                 <td>$it.sponsor$</td>
-                <td >$it.sponsor_email$
-                </td>
+                <td >$it.sponsor_email$</td>
+                <td ><a href="/admin/endofsponsorshipform"> Send mail </td>
 
             </tr>
             }$

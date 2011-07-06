@@ -1,0 +1,1 @@
+$layout(body=admin/endofsponsorshipmailsentPageBody(), title="Thank you. Mail sent.", stylesheets="admin")$
