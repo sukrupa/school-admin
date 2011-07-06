@@ -42,6 +42,7 @@ public class TalentRepository {
         return genericHashSetFrom(criteria.list());
     }
 
+     @SuppressWarnings("unchecked")
     public List<Talent> findAllTalents(){
         return query("from Talent order by description").list();
     }

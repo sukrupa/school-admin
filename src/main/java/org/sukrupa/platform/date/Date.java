@@ -7,6 +7,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.DateTimeComparator;
 import org.sukrupa.event.Time;
 
+import java.io.LineNumberInputStream;
 import java.io.Serializable;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
@@ -18,6 +19,7 @@ public class Date implements Serializable {
     private static final String DATE_FORMAT = "dd-MM-YYYY";
     private static final String TIME_FORMAT = "hh:mm";
     private static final String DATE_TIME_FORMAT = "dd-MM-YYYY hh:mm a";
+    private static final long serialVersionUID = 1;
 
     private DateTime jodaTime;
 

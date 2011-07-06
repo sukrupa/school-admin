@@ -14,6 +14,8 @@ import static java.lang.String.format;
 public class FrontController extends DispatcherServlet  {
 
     private static final Logger log = Logger.getLogger(FrontController.class);
+    private static final long serialVersionUID = 1;
+
 
     private ConfigurableWebApplicationContext context;
 

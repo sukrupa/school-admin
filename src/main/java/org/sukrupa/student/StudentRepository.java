@@ -40,6 +40,7 @@ public class StudentRepository {
         return student;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Student> findAll() {
         return query("from Student").list();
     }
@@ -48,6 +49,7 @@ public class StudentRepository {
         return (Student) query("from Student where studentId = ?").setParameter(0, StringUtils.upperCase(studentId)).uniqueResult();
     }
 
+    @SuppressWarnings("unchecked")
     public Set<Student> findByStudentIds(String... studentIds) {
         return newHashSet(query("from Student where studentId in (:ids)").setParameterList("ids", studentIds).list());
     }
@@ -60,6 +62,7 @@ public class StudentRepository {
         return sessionFactory.getCurrentSession();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Student> findBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(searchParam);
         getPageCriteria.setFirstResult(firstIndex);
@@ -82,6 +85,7 @@ public class StudentRepository {
         return sponsoredStudentList.size();
     }
 
+   @SuppressWarnings("unchecked")
     public List<Student> findSponsoredStudentsCount() {
         return query("from Student where SPONSOR != '' ").list();
     }

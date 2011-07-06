@@ -13,6 +13,8 @@ import java.sql.SQLException;
 public class PersistentDate implements UserType, Serializable {
 
     private PersistentDateTime delegate = new PersistentDateTime();
+    private static final long serialVersionUID = 1;
+
 
     @Override
     public Object assemble(Serializable cached, Object owner) throws HibernateException {

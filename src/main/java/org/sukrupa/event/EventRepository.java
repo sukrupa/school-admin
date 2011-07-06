@@ -28,6 +28,7 @@ public class EventRepository {
         return event;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Event> list() {
         return session().createCriteria(Event.class).addOrder(Order.desc("endDate")).list();
     }

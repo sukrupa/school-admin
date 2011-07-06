@@ -71,7 +71,10 @@
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
-               classpathref="classpath.compilation" debug="true"/>
+               classpathref="classpath.compilation" debug="true">
+         <compilerarg value="-Xlint:all"/>
+         <compilerarg value="-Werror"/>
+       </javac>
     </target>
 
     <target name="compile:test:shared">

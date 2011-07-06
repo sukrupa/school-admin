@@ -36,6 +36,7 @@ public class BigNeedRepository {
         return session().createQuery(hibernateQueryLanguage);
     }
 
+    @SuppressWarnings("unchecked")
     public List<BigNeed> getList() {
          return (List<BigNeed>) query("from BigNeed").list();
     }
