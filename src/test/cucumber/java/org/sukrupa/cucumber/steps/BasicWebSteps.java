@@ -24,7 +24,7 @@ public class BasicWebSteps {
     }
 
     // Don't use this step, we're getting rid of it --Ben & Pooja
-    @When("^I select (Login|Edit|Send)$")
+    @When("^I select (Send)$")
     public void click(String buttonText) {
         browser().submit(buttonText).click();
     }
@@ -84,7 +84,7 @@ public class BasicWebSteps {
         browser().textbox(field).setValue(fieldContent);
     }
 
-    @Then("^student \"([^\"]*)\" is displayed$")
+    @Then("^student ([^\"]*) is displayed$")
     public void studentIsDisplayed(String text) {
         Browser browser = browser();
         assertTrue(browser.containsText(browser.div(TOP_LEVEL_DIV), text));

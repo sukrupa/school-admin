@@ -31,4 +31,9 @@ public class AuthenticationSteps extends Login{
     public void logout(){
         browser().link("Logout").click();
     }
+
+    @When("^I Login")
+    public void login(){
+        browser().submit("Login").click();
+    }
 }

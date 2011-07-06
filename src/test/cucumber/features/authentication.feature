@@ -4,7 +4,7 @@ Feature: Authentication Log In
     Given I am on Sukrupa Page
     When I enter the username "admin"
     And I enter the password "password"
-    And I select Login
+    And I Login
     Then List of Students is displayed
     And Logout is displayed
 
@@ -13,14 +13,14 @@ Feature: Authentication Log In
     Given I am on Sukrupa Page
     When I enter the username "admin"
     And I enter the password "password123"
-    And I select Login
+    And I Login
     Then the message "Invalid username and password" is displayed
 
   Scenario: Invalid username
     Given I am on Sukrupa Page
     When I enter the username "username123"
     And I enter the password "password"
-    And I select Login
+    And I Login
     Then the message "Invalid username and password" is displayed
 
   @Login
