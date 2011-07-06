@@ -23,8 +23,7 @@ public class BasicWebSteps {
         browser().byId(objectID).setValue(objectInput);
     }
 
-    // Don't use this step, we're getting rid of it --Ben & Pooja
-    @When("^I select (Send)$")
+    @When("^I select ([^\" ]*)$")
     public void click(String buttonText) {
         browser().submit(buttonText).click();
     }
@@ -34,7 +33,7 @@ public class BasicWebSteps {
         browser().byId(ObjectID).choose(choice);
     }
 
-    @Then("^([^\"]*) should contain ([^\"]*)$")
+    @Then("^([^\" ]*) should contain ([^\"]*)$")
     public void shouldContain(String ObjectID, String objectValueToMatch) {
         String objectValue = browser().byId(ObjectID).getValue();
         assertThat(objectValue, containsString(objectValueToMatch));

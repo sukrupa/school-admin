@@ -24,16 +24,10 @@ public class SearchStudentsByTalentSteps extends BasicWebSteps {
         browser().button("clearTalents").click();
     }
 
-    @When("^I select \"([^\"]*)\" from list of talents$")
+    @When("^I select ([^\"]*) from list of talents$")
     public void selectedListOfTalents(String talent){
         browser().byId("availableTalents").choose(talent);
 
-    }
-
-    @Then("^Chosen list of talents should contain \"([^\"]*)\"$")
-    public void shouldBeInChosenListOfTalents(String talent){
-         String objectValue = browser().byId("chosenTalents").getValue();
-        assertThat(objectValue, containsString(talent));
     }
 
     @Then("^Chosen list of talents should not contain \"([^\"]*)\"$")
