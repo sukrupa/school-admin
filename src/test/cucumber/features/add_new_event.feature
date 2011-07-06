@@ -1,6 +1,6 @@
 @Login
 Feature: Add New Event
-    Scenario:  Create an event with mandatory fields
+    Scenario: Create an event with mandatory fields
         Given I am on the Create an Event page
         When I enter Dancing as the title
         And I enter 13-04-2011 as the date
@@ -100,13 +100,3 @@ Feature: Add New Event
         And I enter may 26 2011 as the date
         And I save the event
         Then the message "Invalid date" is displayed
-
-        When I enter Rachel's party as the title
-        And I enter It's freaking awesome as the description
-        And I enter 64262 as the attendees
-        And I enter roberto as the date
-        And I save the event
-        Then the message "Invalid date" is displayed
-
-
-
