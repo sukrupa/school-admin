@@ -3,9 +3,9 @@ Feature: search students add talent button
 
     Scenario: Add acting to student search criteria
         Given I am on the Search Students page
-      #  When I Add the talent
-      #  Then Chosen list of talents should contain ""
-      #  And Chosen list of talents should not contain "Acting"
+        When I Add the talent
+        Then Chosen list of talents should now contain ""
+        And Chosen list of talents should not contain Acting
 
         When I select Acting from list of talents
         And I Add the talent
@@ -29,7 +29,7 @@ Feature: search students add talent button
         Then Chosen list of talents should now contain Acting
 
         When I Remove the talent
-        Then Chosen list of talents should not contain "Acting"
+        Then Chosen list of talents should not contain Acting
 
 
 
@@ -43,5 +43,5 @@ Feature: search students add talent button
         And Chosen list of talents should now contain Dancing
 
         When I Clear the chosen list of talents
-        Then Chosen list of talents should not contain "Acting"
-        And Chosen list of talents should not contain "Dancing"
+        Then Chosen list of talents should not contain Acting
+        And Chosen list of talents should not contain Dancing

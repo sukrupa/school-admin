@@ -30,7 +30,7 @@ public class SearchStudentsByTalentSteps extends BasicWebSteps {
 
     }
 
-    @Then("^Chosen list of talents should not contain \"([^\"]*)\"$")
+    @Then("^Chosen list of talents should not contain ([^\"]*)$")
     public void shouldNotBeInChosenListOfTalents(String talent){
          String objectValue = browser().byId("chosenTalents").getValue();
         assertThat(objectValue, not(containsString(talent)));
