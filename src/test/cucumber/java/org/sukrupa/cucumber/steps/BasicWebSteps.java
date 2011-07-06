@@ -23,11 +23,6 @@ public class BasicWebSteps {
         browser().byId(objectID).setValue(objectInput);
     }
 
-    @When("^I select ([^\" ]*)$")
-    public void click(String buttonText) {
-        browser().submit(buttonText).click();
-    }
-
     @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice, String ObjectID) {
         browser().byId(ObjectID).choose(choice);
@@ -145,6 +140,7 @@ public class BasicWebSteps {
     private void navigateTo(String pageName) {
         browser().link(pageName).click();
     }
+
 
     @After
     public void closeBrowser() {
