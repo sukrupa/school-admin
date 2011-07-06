@@ -19,7 +19,7 @@ public class EditStudentSteps {
         browser().submit("Edit").click();
     }
 
-    @When("^I select the student record of \"([^\"]*)\"$")
+    @When("^I select the student record of ([^\"]*)$")
     public void viewStudent(String studentName){
         browser().link(studentName).click();
     }
@@ -44,12 +44,12 @@ public class EditStudentSteps {
         browser().textbox(name+".contact").setValue(fieldContent);
     }
 
-    @When("^I select ([^\"]*) occupation as \"([^\"]*)\"$")
+    @When("^I select ([^\"]*) occupation as ([^\"]*)$")
     public void selectTheOccupationAs(String name, String fieldContent){
         browser().select(name+".occupation").choose(fieldContent);
     }
 
-    @When("^I select ([^\"]*) maritalStatus as \"([^\"]*)\"$")
+    @When("^I select ([^\"]*) maritalStatus as ([^\"]*)$")
     public void selectTheMaritalStatusAs(String name, String fieldContent){
         browser().select(name+".maritalStatus").choose(fieldContent);
     }

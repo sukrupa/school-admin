@@ -16,10 +16,10 @@ Feature: Edit parent details
        And I enter father salary as <FatherSalary>
        And I enter mother salary as <MotherSalary>
        And I enter guardian salary as <GuardianSalary>
-       And I select father occupation as "<FatherOccupation>"
-       And I select mother occupation as "<MotherOccupation>"
-       And I select father maritalStatus as "<FatherMaritalStatus>"
-       And I select mother maritalStatus as "<MotherMaritalStatus>"
+       And I select father occupation as <FatherOccupation>
+       And I select mother occupation as <MotherOccupation>
+       And I select father maritalStatus as <FatherMaritalStatus>
+       And I select mother maritalStatus as <MotherMaritalStatus>
        And I save the changes
        Then the message "Student record updated successfully" should be displayed
 
@@ -29,7 +29,7 @@ Feature: Edit parent details
         |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
 
 Scenario Outline: Verify that the parent details are updated
-        When I select the student record of "Bhavani"
+        When I select the student record of Bhavani
         Then <FatherName> should be displayed
         And <MotherName> should be displayed
         And <GuardianName> should be displayed

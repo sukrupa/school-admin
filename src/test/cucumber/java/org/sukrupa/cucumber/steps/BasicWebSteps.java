@@ -141,6 +141,10 @@ public class BasicWebSteps {
         browser().link(pageName).click();
     }
 
+    @Then("^the message \"([^\"]*)\" should be displayed$")
+    public void displayMessage(String message) {
+           assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), message));
+    }
 
     @After
     public void closeBrowser() {
