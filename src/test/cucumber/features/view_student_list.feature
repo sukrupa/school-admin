@@ -6,7 +6,7 @@ Feature: View student list
      When I "View Students" in the sidebar
      Then <studentName> should be displayed
 
-      Examples:
+     Examples:
         |studentName|
         |Anok       |
         |Abhishek   |

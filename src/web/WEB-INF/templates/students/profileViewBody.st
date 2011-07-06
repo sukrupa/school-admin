@@ -33,12 +33,12 @@
             </div>
 
             <div class="entry" id="sendTo">
-                <div id="sendToLabel"><b> To </b></div>
+                <div id="sendToLabel"><b> To: </b></div>
                 <div id="sendToInput"><input type="text" id="sendTo" name="SendTo"  /></div>
             </div>
 
             <div class="entry" id="subject">
-                <div id="subjectLabel"><b> Subject </b></div>
+                <div id="subjectLabel"><b> Subject: </b></div>
                 <div id="subjectInput"><input type="text" id="subject" name="Subject"  /></div>
             </div>
 
@@ -47,7 +47,7 @@
             <textarea name="comments" id="comments" cols="40" rows="10"> </textarea>
             </div>
 
-            <div class = "sendProfile">
+            <div id="sendProfileButton" class = "sendProfile">
                   <a href = "/students/thankYouView" align="right"><input type="submit" value="Send Profile"/></a>
               </div>
 

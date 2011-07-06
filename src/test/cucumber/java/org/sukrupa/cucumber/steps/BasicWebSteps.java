@@ -56,6 +56,11 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
+    @Then("^the button ([^\"]*) must be displayed$")
+    public void buttonShouldBeDisplayed(String text) {
+        assertTrue(browser().submit(text).exists());
+    }
+
     @Then("^([^\"]*) should be displayed$")
     public void shouldBeDisplayed(String text) {
         ElementStub pageDiv = browser().div(TOP_LEVEL_DIV);
