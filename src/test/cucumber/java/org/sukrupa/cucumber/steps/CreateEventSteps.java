@@ -20,4 +20,9 @@ public class CreateEventSteps extends BasicWebSteps {
     public void clearFormFields(){
         browser().byId("clear").click();
     }
+
+    @When("^I save the event")
+    public void saveEvent(){
+        browser().byId("save").click();
+    }
 }

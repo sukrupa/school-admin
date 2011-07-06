@@ -6,7 +6,7 @@ Feature: Add New Event
         And I enter 13-04-2011 as the date
         And I enter Event description as the description
         And I enter 64262 as the attendees
-        And I select Save
+        And I save the event
         Then Event: Dancing should be displayed
         And Dancing should be displayed
         And 13-04-2011 should be displayed
@@ -25,7 +25,7 @@ Feature: Add New Event
         And I enter John as the coordinator
         And I enter BYOB as the notes
         And I enter 64262 as the attendees
-        And I select Save
+        And I save the event
         Then Event: MMA should be displayed
         And MMA should be displayed
         And 13-04-2011 should be displayed
@@ -61,34 +61,34 @@ Feature: Add New Event
 
     Scenario: Create event without mandatory fields
         Given I am on the Create an Event page
-        When I select Save
+        When I save the event
         Then the message "Please fill in all required fields." is displayed
 
         When I enter It's freaking awesome as the description
         And I enter 64262 as the attendees
         And I enter 22-08-2011 as the date
-        And I select Save
+        And I save the event
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
         And I enter Rachel's party as the title
         And I enter 64262 as the attendees
         And I enter 22-08-2011 as the date
-        And I select Save
+        And I save the event
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
         And I enter Rachel's party as the title
         And I enter It's freaking awesome as the description
         And I enter 22-08-2011 as the date
-        And I select Save
+        And I save the event
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
         And I enter Rachel's party as the title
         And I enter It's freaking awesome as the description
         And I enter 64262 as the attendees
-        And I select Save
+        And I save the event
         Then the message "Please fill in all required fields." is displayed
 
 
@@ -98,14 +98,14 @@ Feature: Add New Event
         And I enter It's freaking awesome as the description
         And I enter 64262 as the attendees
         And I enter may 26 2011 as the date
-        And I select Save
+        And I save the event
         Then the message "Invalid date" is displayed
 
         When I enter Rachel's party as the title
         And I enter It's freaking awesome as the description
         And I enter 64262 as the attendees
         And I enter roberto as the date
-        And I select Save
+        And I save the event
         Then the message "Invalid date" is displayed
 
 
