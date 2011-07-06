@@ -1,37 +1,47 @@
 @Login
-Feature: Search students by talent
+Feature: search students add talent button
 
-  Scenario: No Talents Selected
-    Given I am on the Search Students page
-    When I click "Search" submit button
+    Scenario: Add acting to student search criteria
+        Given I am on the Search Students page
+      #  When I click "addTalent"
+      #  Then Chosen list of talents should contain ""
+      #  And Chosen list of talents should not contain "Acting"
 
-    # These students have mutually exclusive talents
-    Then Anok should be displayed
-    And Abhishek should be displayed
+        When I select "Acting" from list of talents
+        And I click "addTalent"
+        Then Chosen list of talents should contain "Acting"
 
-    # This student has no talents
-    And Haripriya should be displayed
+    Scenario: Add acting and dancing to student search criteria
+        Given I am on the Search Students page
+        When I select "Acting" from list of talents
+        And I click "addTalent"
+        And I select "Dancing" from list of talents
+        And I click "addTalent"
+        Then Chosen list of talents should now contain "Acting"
+        And Chosen list of talents should now contain "Dancing"
 
-  Scenario: One Talent Selected
-    Given I am on the Search Students page
-    When I select the talent "Sports"
-    When I click "Search" submit button
 
-    Then Armugam should be displayed
-    And "Anok" should not be displayed
 
-  Scenario: More than One Talent Selected
-    Given I am on the Search Students page
-    When I select the talent "Sports"
-    And I select the talent "Acting"
-    And I select the talent "Arts & Crafts"
-    And I select the talent "Mimicry"
-    And I select the talent "Story Telling"
-    And I click "Search" submit button
+    Scenario: Remove acting from selected talents of student
+        Given I am on the Search Students page
+        When I select "Acting" from list of talents
+        And I click "addTalent" button
+        Then Chosen list of talents should contain "Acting"
 
-    Then Chandana should be displayed
-    And Abhishek should be displayed
-    And Armugam should be displayed
-    And Chandru should be displayed
-    And "Bhavani" should not be displayed
-    And "Haripriya" should not be displayed
+        When I select "removeTalent" button
+        Then Chosen list of talents should not contain "Acting"
+
+
+
+    Scenario: Clear acting and dancing from selected talents for student
+        Given I am on the Search Students page
+        When I select "Acting" from list of talents
+        And I click "addTalent" button
+        And I select "Dancing" from list of talents
+        And I click "addTalent" button
+        Then Chosen list of talents should now contain "Acting"
+        And Chosen list of talents should now contain "Dancing"
+
+        When I select "clearTalents" button
+        Then Chosen list of talents should not contain "Acting"
+        And Chosen list of talents should not contain "Dancing"
