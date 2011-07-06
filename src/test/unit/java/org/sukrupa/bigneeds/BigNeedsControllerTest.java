@@ -94,5 +94,16 @@ public class BigNeedsControllerTest {
         verify(bigNeedRepository).delete(bigNeed);
     }
 
+    @Test
+    public void shouldSaveAnEditedBigNeed(){
+        BigNeed bigNeed = mock(BigNeed.class);
+        when(bigNeedRepository.getBigNeed(123)).thenReturn(bigNeed);
+        when(bigNeed.getItemName()).thenReturn("Banana");
 
+        String view = controller.saveEdit(123, "Forks" , "9001" , model);
+
+        assertThat(view, is("redirect:/bigneeds"));
+        assertThat(model, hasEntry("message", "Saved changes to Forks"));
+        //verify(bigNeedRepository).save(bigNeed);
+    }
 }

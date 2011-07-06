@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
@@ -55,13 +54,23 @@ public class BigNeedsController {
         return "redirect:/bigneeds";
     }
 
-    @RequestMapping(value = "{id}/saveeditedneed", method = POST)
+    @RequestMapping(value = "/saveeditedneed", method = POST)
     @Transactional
-    public String edit(@PathVariable long id, @RequestParam String itemName, @RequestParam String cost, HashMap<String, Object> model) {
-//        model.put("message", "Edited Successfully");
-//        BigNeed bigNeed = bigNeedRepository.getBigNeed(id); //
-        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
+    public String saveEdit(@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
+        try{
+        BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
+        bigNeed.setItemName(itemName);
+        bigNeed.setCost(Integer.parseInt(itemCost));
+
+        model.put("message", "Edited Successfully");
+        bigNeedRepository.put(bigNeed);
+
+
+        } catch (Exception e) {
+               
+
+        }
+
         return "redirect:/bigneeds";
-//        return "bigNeeds/list";; 
     }
 }
