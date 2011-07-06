@@ -19,8 +19,8 @@ Feature: Edit an Event
         And I enter Event description as the description
         And I enter 64262 as the attendees
         And I select Save
-        Then Event: Dancing should be displayed
-        And Dancing should be displayed
+        #Then Event: Dancing should be displayed
+        Then Dancing should be displayed
         And 13-04-2011 should be displayed
         And Wednesday should be displayed
         And Event description should be displayed
