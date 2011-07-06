@@ -64,29 +64,29 @@ Feature: Add New Event
         When I save the event
         Then the message "Please fill in all required fields." is displayed
 
-        When I enter It's freaking awesome as description
+        When I enter It is freaking awesome as description
         And I enter 64262 as attendees
         And I enter 22-08-2011 as date
         And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as title
+        And I enter Rachel party as title
         And I enter 64262 as attendees
         And I enter 22-08-2011 as date
         And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as title
-        And I enter It's freaking awesome as description
+        And I enter Rachel party as title
+        And I enter It is freaking awesome as description
         And I enter 22-08-2011 as date
         And I select Save
         Then the message "Please fill in all required fields." is displayed
 
         When I clear all the fields
-        And I enter Rachel's party as title
-        And I enter It's freaking awesome as description
+        And I enter Rachel party as title
+        And I enter It is freaking awesome as description
         And I enter 64262 as attendees
         And I select Save
         Then the message "Please fill in all required fields." is displayed
@@ -94,15 +94,15 @@ Feature: Add New Event
 
     Scenario: Fields with invalid input should give error message
         Given I am on the Create an Event page
-        When I enter Rachel's party as title
-        And I enter It's freaking awesome as description
+        When I enter Rachel party as title
+        And I enter It is freaking awesome as description
         And I enter 64262 as attendees
         And I enter may 26 2011 as date
         And I select Save
         Then the message "Invalid date" is displayed
 
-        When I enter Rachel's party as title
-        And I enter It's freaking awesome as description
+        When I enter Rachel party as title
+        And I enter It is freaking awesome as description
         And I enter 64262 as attendees
         And I enter roberto as date
         And I select Save
