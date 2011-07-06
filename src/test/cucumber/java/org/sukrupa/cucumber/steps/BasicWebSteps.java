@@ -23,7 +23,8 @@ public class BasicWebSteps {
         browser().byId(objectID).setValue(objectInput);
     }
 
-    @When("^I select ([^\"]*)$")
+    // Don't use this step, we're getting rid of it --Ben & Pooja
+    @When("^I select (Save|Login|Edit|Send)$")
     public void click(String buttonText) {
         browser().submit(buttonText).click();
     }
