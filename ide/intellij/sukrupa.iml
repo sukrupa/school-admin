@@ -20,7 +20,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/unit/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/integration/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/shared/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../src/test/functional/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/cucumber/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools/cobertura-1.9.4.1" />
     </content>
