@@ -35,6 +35,13 @@ public class BigNeedSteps extends Login {
         deleteButton.click();
     }
 
+    @When("^I edit the \"([^\"]+)\"")
+    public void editItem(String itemName){
+        ElementStub editButton = browser().submit("Edit").in(browser().cell(itemName).parentNode());
+        assertTrue(editButton.exists(true));
+        editButton.click();
+    }
+
     private boolean itemWithCostExists(String name, String cost) {
         ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));

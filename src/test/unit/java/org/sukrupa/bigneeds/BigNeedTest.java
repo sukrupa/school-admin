@@ -21,6 +21,4 @@ public class BigNeedTest {
         assertThat(computerBigNeed.getItemName(),is("Computer"));
         assertThat(computerBigNeed.getCost(), is(120000));
     }
-
-
 }

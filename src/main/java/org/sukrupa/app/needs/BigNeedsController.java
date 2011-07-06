@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
@@ -23,7 +24,8 @@ public class BigNeedsController {
     private BigNeedRepository bigNeedRepository;
 
     @RequiredByFramework
-    public BigNeedsController() {}
+    public BigNeedsController() {
+    }
 
     @Autowired
     public BigNeedsController(BigNeedRepository bigNeedRepository) {
@@ -47,9 +49,19 @@ public class BigNeedsController {
     @RequestMapping(value = "{id}/delete", method = POST)
     @Transactional
     public String delete(@PathVariable long id, HashMap<String, Object> model) {
-        BigNeed bigNeed= bigNeedRepository.getBigNeed(id);
+        BigNeed bigNeed = bigNeedRepository.getBigNeed(id);
         this.bigNeedRepository.delete(bigNeed);
         model.put("message", bigNeed.getItemName() + " was deleted");
         return "redirect:/bigneeds";
+    }
+
+    @RequestMapping(value = "{id}/saveeditedneed", method = POST)
+    @Transactional
+    public String edit(@PathVariable long id, @RequestParam String itemName, @RequestParam String cost, HashMap<String, Object> model) {
+//        model.put("message", "Edited Successfully");
+//        BigNeed bigNeed = bigNeedRepository.getBigNeed(id); //
+        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
+        return "redirect:/bigneeds";
+//        return "bigNeeds/list";; 
     }
 }

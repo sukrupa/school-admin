@@ -48,4 +48,8 @@ public class BigNeedRepository {
     public void delete(BigNeed bigNeed) {
         session().delete(bigNeed);
     }
+
+    public void edit(BigNeed bigNeed) {
+        session().contains(bigNeed);
+    }
 }
