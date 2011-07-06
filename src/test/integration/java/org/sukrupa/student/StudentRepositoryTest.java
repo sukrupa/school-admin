@@ -153,6 +153,20 @@ public class StudentRepositoryTest {
             .sponsored("SomeSponsor")
             .build();
 
+    private Student kishore = new StudentBuilder()
+            .studentId("636360").name("Kishore")
+            .studentClass("Preschool").dateOfBirth(new LocalDate(1989, 11, 4))
+            .gender("Male")
+            .sponsored("Hephzibah")
+            .build();
+
+    private Student aravind = new StudentBuilder()
+            .studentId("636361").name("Aravind")
+            .studentClass("10th grade").dateOfBirth(new LocalDate(1989, 11, 1))
+            .gender("Male")
+            .sponsored("Abhinaya")
+            .build();
+
 
     private final StudentSearchParameter all = new StudentSearchParameterBuilder().build();
 
@@ -241,6 +255,34 @@ public class StudentRepositoryTest {
         List<Student> students = getPageCriteria.list();
         assertThat(students.size(), is(2));
         assertThat(students, CollectionMatchers.hasOnly(pat, renaud));
+    }
+
+    @Test
+    public void shouldReturnTheTotalNumberOfStudentsAsSix(){
+    hibernateSession.save(pat, sahil, renaud,mark , kishore, aravind);
+        int studentCount = studentRepository.getTotalStudentsCount();
+        assertThat(studentCount, is(6));
+    }
+
+    @Test
+    public void shouldReturnTheTotalNumberOfStudentsAsFour(){
+    hibernateSession.save( renaud,mark , kishore, aravind);
+        int studentCount = studentRepository.getTotalStudentsCount();
+        assertThat(studentCount, is(4));
+    }
+
+    @Test
+    public void shouldReturnTheTotalNumberOfStudentsSponsoredAsTwo(){
+    hibernateSession.save( renaud, kishore, aravind);
+        int studentCount = studentRepository.getSponsoredStudentsCount();
+        assertThat(studentCount, is(2));
+    }
+
+    @Test
+    public void shouldReturnTheTotalNumberOfStudentsSponsoredAsThree(){
+    hibernateSession.save( pat, renaud, mark, kishore, aravind);
+        int studentCount = studentRepository.getSponsoredStudentsCount();
+        assertThat(studentCount, is(3));
     }
 
     @Test

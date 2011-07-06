@@ -71,4 +71,18 @@ public class StudentRepository {
         Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
         return Integer.parseInt(countCriteria.uniqueResult().toString());
     }
+
+    public int getTotalStudentsCount() {
+        List<Student> studentList = findAll();
+        return studentList.size();
+    }
+
+    public int getSponsoredStudentsCount() {
+        List<Student> sponsoredStudentList = findSponsoredStudentsCount();
+        return sponsoredStudentList.size();
+    }
+
+    public List<Student> findSponsoredStudentsCount() {
+        return query("from Student where SPONSOR != '' ").list();
+    }
 }
