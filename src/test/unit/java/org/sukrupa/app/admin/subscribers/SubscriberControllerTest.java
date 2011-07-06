@@ -1,6 +1,9 @@
 package org.sukrupa.app.admin.subscribers;
 
 
+import org.apache.commons.lang.ObjectUtils;
+import org.hamcrest.CoreMatchers;
+import org.hsqldb.types.NullType;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.app.admin.SubscriberController;
@@ -12,16 +15,11 @@ import java.util.HashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 7/5/11
- * Time: 4:25 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class SubscriberControllerTest {
 
 
+    private HashMap<String, Object> model = new HashMap<String, Object>();
 
     @Mock
     private SubscriberRepository subscriberRepository;
@@ -31,7 +29,6 @@ public class SubscriberControllerTest {
 
     @Test
     public void ShouldDisplaySubscribersPage(){
-        System.out.println("ahsdga"+controller.listsubscribers());
-        assertThat(controller.listsubscribers(),is("admin/subscribers/viewSubscribers"));
+        assertThat(controller.listsubscribers(model), is("admin/subscribers/viewsubscribers"));
     }
 }

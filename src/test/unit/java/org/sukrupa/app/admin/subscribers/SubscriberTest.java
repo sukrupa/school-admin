@@ -6,13 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 7/5/11
- * Time: 4:42 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class SubscriberTest {
 
     @Test

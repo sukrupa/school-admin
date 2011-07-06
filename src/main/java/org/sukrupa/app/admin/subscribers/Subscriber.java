@@ -5,13 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Thoughtworks
- * Date: 7/5/11
- * Time: 4:14 PM
- * To change this template use File | Settings | File Templates.
- */
+
 
 @Entity
 public class Subscriber {
@@ -19,15 +13,15 @@ public class Subscriber {
     @GeneratedValue
     private long id;
 
-    @Column(name = "SUBSCRIBER_NAME")
+    @Column(name = "SUBSCRIBERNAME")
     private String subscriberName;
 
-    @Column(name = "Email")
+    @Column(name = "EMAIL")
     private String subscriberEmail;
 
 
-    public Subscriber(String subscribeName, String subscriberEmail){
-        this.subscriberName=subscribeName;
+    public Subscriber(String subscriberName, String subscriberEmail){
+        this.subscriberName=subscriberName;
         this.subscriberEmail=subscriberEmail;
     }
 
