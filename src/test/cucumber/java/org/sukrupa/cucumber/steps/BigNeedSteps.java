@@ -4,6 +4,8 @@ import cuke4duke.annotation.I18n.EN.*;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.context.Login;
 
+import java.security.PublicKey;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +18,11 @@ public class BigNeedSteps extends Login {
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed with priority \"([^\"]+)\"")
     public void itemWithCostShouldBeDisplayed(String name, String cost, String priority) {
         assertTrue(itemWithCostExists(name, cost, priority));
+    }
+
+    @Then("^a \"([^\"]+)\" should be displayed as pre-populated \"([^\"]+)\"")
+     public void shouldDisplayPrepopulatedPriority(String priority, String field) {
+        assertTrue(browser().byId(field).getText().contains(priority));
     }
 
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" with priority \"([^\"]+)\" should not be displayed")

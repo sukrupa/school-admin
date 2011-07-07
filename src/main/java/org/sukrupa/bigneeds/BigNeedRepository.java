@@ -38,7 +38,7 @@ public class BigNeedRepository {
 
     @SuppressWarnings("unchecked")
     public List<BigNeed> getList() {
-         return (List<BigNeed>) query("from BigNeed").list();
+         return (List<BigNeed>) query("from BigNeed order by priority").list();
     }
 
     public BigNeed getBigNeed(long id) {
