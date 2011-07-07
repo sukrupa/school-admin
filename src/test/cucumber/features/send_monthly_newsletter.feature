@@ -13,5 +13,5 @@ Feature: Send Monthly Newsletter
     When I enter mchamber@thoughtworks.com as to
     And I enter Monthly Newsletter as subject
     And I send the mail
-    # Working on this step next: #536 Anita and Matt
+    # Working on this step next: #536 Anita and Sri
     #Then Thank You should be displayed
