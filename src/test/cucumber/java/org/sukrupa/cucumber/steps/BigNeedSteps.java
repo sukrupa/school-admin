@@ -13,14 +13,14 @@ public class BigNeedSteps extends Login {
     private static final String TOP_LEVEL_DIV = "page";
 
 
-    @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed")
-    public void itemWithCostShouldBeDisplayed(String name, String cost) {
-        assertTrue(itemWithCostExists(name, cost));
+    @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed with priority \"([^\"]+)\"")
+    public void itemWithCostShouldBeDisplayed(String name, String cost, String priority) {
+        assertTrue(itemWithCostExists(name, cost, priority));
     }
 
-    @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should not be displayed")
-    public void itemWithCostShouldNotBeDisplayed(String name, String cost) {
-        assertFalse(itemWithCostExists(name, cost));
+    @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" with priority \"([^\"]+)\" should not be displayed")
+    public void itemWithCostShouldNotBeDisplayed(String name, String cost, String priority) {
+        assertFalse(itemWithCostExists(name, cost,priority));
     }
 
     @Then("^a \"([^\"]+)\" should not be displayed")
@@ -42,11 +42,11 @@ public class BigNeedSteps extends Login {
         editButton.click();
     }
 
-    private boolean itemWithCostExists(String name, String cost) {
+    private boolean itemWithCostExists(String name, String cost,String priority) {
         ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
-      //  ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
-        ElementStub rowContainingBothNameAndCost = browser().cell(cost).in(browser().cell(name).parentNode());
-        return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && rowContainingBothNameAndCost.exists(true);
+        ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
+        ElementStub rowContainingAllNameAndCostAndPriority = browser().cell(cost).in(browser().cell(name).in(browser().cell(priority).parentNode()));
+        return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && priorityCellWithCorrectCost.exists(true);// && rowContainingAllNameAndCostAndPriority.exists(true);
     }
 }

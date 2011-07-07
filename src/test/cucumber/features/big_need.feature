@@ -4,8 +4,8 @@ Feature: Add, Edit and Delete Big Needs
   Scenario: Big Needs List is Displayed
     Given I am on the Big Needs page
     Then Big Needs should be displayed
-    And a "Power Generator" costing "50000" should be displayed
-    And a "50000" costing "Power Generator" should not be displayed
+    And a "Power Generator" costing "50000" should be displayed with priority "1"
+    And a "50000" costing "Power Generator" with priority "1" should not be displayed
 
   Scenario: Add item to Big Need list
     Given I am on the Big Needs page
@@ -37,4 +37,5 @@ Feature: Add, Edit and Delete Big Needs
   Scenario: View the priority of the items
     Given I am on the Big Needs page
     Then Priority should be displayed
+    
 
