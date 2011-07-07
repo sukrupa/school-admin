@@ -13,6 +13,8 @@ import org.sukrupa.platform.db.HibernateSession;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -37,6 +39,29 @@ public class BigNeedRepositoryTest {
         assertThat(retrievedBigNeed.getItemName(), is(powerGeneratorBigNeed.getItemName()));
         assertThat(retrievedBigNeed.getCost(), is(powerGeneratorBigNeed.getCost()));
         //assertThat(retrievedBigNeed.getPriority(),is(powerGeneratorBigNeed.getPriority()));
+    }
+
+    @Test
+    public void validatingcheckForPrioritization(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+        bigNeedRepository.put(powerGeneratorBigNeed);
+        bigNeedRepository.put(airConditionerBigNeed);
+        BigNeed banana = new BigNeed("Banana", 25000,1);
+        assertThat(bigNeedRepository.checkForPrioritization(banana),is(true));
+
+    }
+
+     @Test
+    public void shouldInsertNewItemInTheProperPosition(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+         BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
+        bigNeedRepository.put(powerGeneratorBigNeed);
+        bigNeedRepository.put(airConditionerBigNeed);
+        BigNeed banana = new BigNeed("Banana", 25000,2);
+        assertThat(bigNeedRepository.checkForPrioritization(banana),is(true));
+
     }
 
     @Test

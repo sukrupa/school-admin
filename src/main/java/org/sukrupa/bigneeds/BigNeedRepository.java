@@ -1,8 +1,10 @@
 package org.sukrupa.bigneeds;
 
+import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +21,19 @@ public class BigNeedRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    
+    public boolean checkForPrioritization(BigNeed bigNeed){
+       return getList().size() > bigNeed.getPriority() ? true : false;
+    }
+
     public void put(BigNeed bigNeed) {
-        
-        session().saveOrUpdate(bigNeed);
+        /*List<BigNeed> bigNeedList = getList();
+        List<BigNeed> unModifiedBigNeedList;
+        if(checkForPrioritization(bigNeed)){
+                bigNeedList.subList(0,bigNeed.getPriority()-1);
+        }
+        else{*/
+            session().saveOrUpdate(bigNeed);
+        //}
     }
 
     public BigNeed findByName(String itemName) {
