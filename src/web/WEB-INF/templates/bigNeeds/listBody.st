@@ -58,7 +58,7 @@
                     <td class="edit">
                         <input type="button" class="save-row-button" value="Save"/>
                     </td>
-                    <td></td>
+                    <td>$it.priority$</td>
                     <td class="display">$it.itemName$</td>
                     <td class="display">$it.cost$</td>
                     <td class="display">

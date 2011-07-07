@@ -39,9 +39,9 @@ public class BigNeedsController {
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam String itemName, @RequestParam String cost, Map<String, Object> model) {
+    public String create(@RequestParam String priority,@RequestParam String itemName, @RequestParam String cost, Map<String, Object> model) {
         model.put("message", "Added Successfully");
-        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost)));
+        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost), Integer.parseInt(priority)));
         return "redirect:/bigneeds";
     }
 

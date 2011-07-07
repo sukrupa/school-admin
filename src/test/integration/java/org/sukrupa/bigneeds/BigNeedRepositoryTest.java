@@ -31,17 +31,18 @@ public class BigNeedRepositoryTest {
 
     @Test
     public void shouldSaveABigNeed() {
-        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000);
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
         bigNeedRepository.put(powerGeneratorBigNeed);
         BigNeed retrievedBigNeed = bigNeedRepository.findByName("Power Generator");
         assertThat(retrievedBigNeed.getItemName(), is(powerGeneratorBigNeed.getItemName()));
         assertThat(retrievedBigNeed.getCost(), is(powerGeneratorBigNeed.getCost()));
+        assertThat(retrievedBigNeed.getPriority(),is(powerGeneratorBigNeed.getPriority()));
     }
 
     @Test
     public void shouldRetrieveBigNeedList() {
-        BigNeed computerBigNeed = new BigNeed("Computer", 120000);
-        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000);
+        BigNeed computerBigNeed = new BigNeed("Computer", 120000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,4);
         bigNeedRepository.put(computerBigNeed);
         bigNeedRepository.put(airConditionerBigNeed);
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
@@ -50,7 +51,7 @@ public class BigNeedRepositoryTest {
 
     @Test
     public void shouldDeleteBigNeed() {
-        BigNeed banana = new BigNeed("Banana", 25000);
+        BigNeed banana = new BigNeed("Banana", 25000,3);
         bigNeedRepository.put(banana);
         bigNeedRepository.delete(banana);
         assertThat(bigNeedRepository.getList(), not(hasItem(banana)));
@@ -58,7 +59,7 @@ public class BigNeedRepositoryTest {
 
     @Test
     public void shouldGetBigNeedById() {
-        BigNeed example = new BigNeed("example", 10000);
+        BigNeed example = new BigNeed("example", 10000,2);
         bigNeedRepository.put(example);
         long id = example.getId();
         assertThat(bigNeedRepository.getBigNeed(id), is(example));

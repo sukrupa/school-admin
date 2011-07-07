@@ -21,17 +21,21 @@ public class BigNeed {
     @Column(name = "COST")
     private int cost;
 
-    public BigNeed(String itemName, int cost) {
+    @Column(name = "PRIORITY")
+    private int priority;
+
+    public BigNeed(String itemName, int cost,int priority) {
         this.itemName = itemName;
         this.cost = cost;
+        this.priority=priority;
     }
 
     @RequiredByFramework
     public BigNeed() {
     }
 
-    public BigNeed(int id, String itemName, int cost) {
-        this(itemName, cost);
+    public BigNeed(int id, String itemName, int cost, int priority) {
+        this(itemName, cost, priority);
         this.id = id;
     }
 
@@ -46,6 +50,11 @@ public class BigNeed {
     public long getId() {
         return id;
     }
+
+    public int getPriority(){
+        return priority;
+    }
+
 
     public boolean equals(BigNeed object){
         return itemName.equals(object.getItemName()) && (cost == object.getCost());
@@ -63,4 +72,11 @@ public class BigNeed {
         System.out.println(cost);
         this.cost = cost;
     }
+
+
+    public void setPriority(int priority){
+        this.priority=priority;
+    }
+
+
 }

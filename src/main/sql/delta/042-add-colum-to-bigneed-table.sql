@@ -1,0 +1,1 @@
+ALTER TABLE BigNeed ADD column priority int;
