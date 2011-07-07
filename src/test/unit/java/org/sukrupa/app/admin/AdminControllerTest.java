@@ -59,15 +59,25 @@ public class AdminControllerTest {
 
     @Test
     public void shouldDisplayEndOfSponsorshipForm(){
-
-        String view = adminController.sendEndOfSponsorship();
+        String view = adminController.showEndOfSponsorshipForm();
         assertThat(view,is("admin/endofsponsorshipform"));
     }
 
     @Test
-    public void shouldDisplayEndOfSponsorshipEmailSentPage(){
-        String view = adminController.endOfSponsorshipMailSent();
+    public void shouldShowEndOfSponsorshipConfirmPage(){
+        String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage("", "", null);
         assertThat(view,is("/admin/endofsponsorshipmailsentPage"));
+    }
+
+    @Test
+    public void shouldSentEndOfSponsorshipEmail()
+    {
+        String toAddress="aravindp@thoughtworks.com";
+        String subject="end of sponsor";
+        String comments="Thanks for Sponsorship";
+        String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage(toAddress, subject, comments);
+        verify(emailService).sendEmail(toAddress, subject, comments);
+
     }
 
     @Test
@@ -77,6 +87,6 @@ public class AdminControllerTest {
         String subject = "NewsLetter";
         adminController.sendNewsletterEmail(toAddress, subject);
 
-        verify(emailService).sendEmail(toAddress, subject);
+        verify(emailService).sendEmail(toAddress, subject, null);
     }
 }

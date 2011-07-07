@@ -1,6 +1,8 @@
 package org.sukrupa.app.services;
 
+import com.sun.istack.internal.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.config.AppConfiguration;
 
@@ -21,10 +23,8 @@ public class EmailService {
         this.appConfiguration = appConfiguration;
     }
 
-    public void sendEmail(String toAddress, String subject) {
-//        InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
-//        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject);
-        
+    public void sendEmail(String toAddress, String subject, @Nullable String messageBody) {
+        appConfiguration.properties();
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
