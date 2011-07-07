@@ -134,6 +134,7 @@ public class StudentBuilder {
         return this;
     }
 
+    @SuppressWarnings("unchecked")
     public StudentBuilder notes(Note... notes) {
         this.notes = new HashSet(asList(notes));
         return this;
