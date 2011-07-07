@@ -29,7 +29,7 @@ public class EmailService {
     }
 
     public void sendEmail(String toAddress, String subject, String messageBody) {
-
+             appConfiguration.properties();
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
