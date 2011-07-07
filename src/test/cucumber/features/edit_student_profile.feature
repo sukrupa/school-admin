@@ -8,14 +8,14 @@
     And I save the changes
     Then Student record updated successfully should be displayed
     And the Student Record: Bhavani page is displayed
-    And "Peter Murray" is displayed under Sponsor
+    And Peter Murray is displayed under Sponsor
 
     When I navigate to the View Students page
     And I select the student record of Bhavani
-    Then "A+" is displayed under Academic Performance
-    And "Excellent" is displayed under Disciplinary
-    And "Existing Student" is displayed under Student Status
-    And "Peter Murray" is displayed under Sponsor
+    Then A+ is displayed under Academic Performance
+    And Excellent is displayed under Disciplinary
+    And Existing Student is displayed under Student Status
+    And Peter Murray is displayed under Sponsor
     
     Scenario:Adding a note to student profile
     Given I am on the View Students page
@@ -32,7 +32,7 @@
     And I save the changes
     Then Student record updated successfully should be displayed
     And the Student Record: Bhavani page is displayed
-    And "Existing Student" is displayed under Student Status
+    And Existing Student is displayed under Student Status
 
     Scenario:Verify edit of family status success
     Given I am on the View Students page
@@ -41,4 +41,4 @@
     And I save the changes
     Then Student record updated successfully should be displayed
     And the Student Record: Bhavani page is displayed
-    And "Single" is displayed under Family Status
+    And Single is displayed under Family Status

@@ -26,28 +26,28 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
     }
 
 
-    @Then("^\"([^\"]*)\" is displayed under Sponsor$")
+    @Then("^([^\"]*) is displayed under Sponsor$")
     public  void  isDisplayedUnderSponsor(String text){
          isDisplayedUnderDivId(text, "sponsor");
     }
 
 
-    @Then("^\"([^\"]*)\" is displayed under Academic Performance$")
+    @Then("^([^\"]*) is displayed under Academic Performance$")
     public  void  isDisplayedUnderAcademicPerformance(String text){
         isDisplayedUnderDivId(text, "student-performance");
     }
 
-    @Then("^\"([^\"]*)\" is displayed under Disciplinary$")
+    @Then("^([^\"]*) is displayed under Disciplinary$")
     public  void  isDisplayedUnderDisciplinary(String text){
         isDisplayedUnderDivId(text, "student-disciplinary");
     }
 
-    @Then("^\"([^\"]*)\" is displayed under Student Status$")
+    @Then("^([^\"]*) is displayed under Student Status$")
     public  void  isDisplayedUnderStudentStatus(String text){
         isDisplayedUnderSecondaryInfoInStudentRecordPage(text);
     }
 
-    @Then("^\"([^\"]*)\" is displayed under Talents$")
+    @Then("^([^\"]*) is displayed under Talents$")
     public  void  isDisplayedUnderTalents(String text){
         isDisplayedUnderDivId(text, "talents");
     }
@@ -67,7 +67,7 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
-     @Then("^\"([^\"]*)\" is displayed under Background$")
+     @Then("^([^\"]*) is displayed under Background$")
     public  void  isDisplayedUnderBackground(String text){
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
@@ -102,7 +102,7 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
        choseFrom(text,"familystatus");
     }
 
-     @Then("^\"([^\"]*)\" is displayed under Family Status$")
+     @Then("^([^\"]*) is displayed under Family Status$")
     public  void  isDisplayedUnderFamilyStatus(String text){
         isDisplayedUnderDivId(text,"family-status");
     }
