@@ -1,1 +1,1 @@
-$layout(scripts=["editNeed", "fadeout"], body=bigNeeds/listBody(), title="Big Needs", stylesheets=["needs"])$
+$layout(scripts=["editNeed"], body=bigNeeds/listBody(), title="Big Needs", stylesheets=["needs"])$

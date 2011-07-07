@@ -44,5 +44,4 @@
         </table>
         <div id="msg">$message$ $bigneed.itemName$</div>
     </div>
-    $successMessage(condition=bigNeedAddedSuccesfully, message={$bigNeedName$ added successfully.})$
 </div>

@@ -44,8 +44,6 @@ public class BigNeedsController {
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
         //TODO fix
         model.put("message", "Added Successfully");
-//        model.put("bigNeedName", itemName);
-//        model.put("bigNeedAddedSuccesfully", true);
         bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
         return "/bigneeds/list";
     }
