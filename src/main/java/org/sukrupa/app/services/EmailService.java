@@ -21,8 +21,10 @@ public class EmailService {
         this.appConfiguration = appConfiguration;
     }
 
-    public void sendEmail(String toAddress, String subject) {
- 
+    public void sendEmail(String toAddress, String subject) throws MessagingException {
+//        InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
+//        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject);
+        
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
@@ -30,7 +32,7 @@ public class EmailService {
         return internetAddress;
     }
 
-    public MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(String subject, InternetAddress recipient) throws MessagingException {
+    protected MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(InternetAddress recipient, String subject) throws MessagingException {
 
         Session session = Session.getInstance(appConfiguration.properties());
 
@@ -38,6 +40,5 @@ public class EmailService {
         mimeMessage.setSubject(subject);
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
         return mimeMessage;
-
     }
 }

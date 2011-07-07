@@ -36,7 +36,7 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldSendEmailEventually() {
+    public void shouldSendEmailEventually() throws MessagingException {
         emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");
         // Anita, Sri, will come back and finish this off once we figured out how to test it
     }
@@ -65,7 +65,7 @@ public class EmailServiceTest {
         when(appConfiguration.properties()).thenReturn(new Properties());
 
         InternetAddress expectedRecipient = new InternetAddress("anitam@thoughtworks.com");
-        MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsTo(excpectedSubject, expectedRecipient);
+        MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsTo(expectedRecipient, excpectedSubject);
 
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
         assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)expectedRecipient));
