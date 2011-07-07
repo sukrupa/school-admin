@@ -34,7 +34,7 @@ public class BigNeedsController {
     @RequestMapping
     public String list(Map<String, Object> model) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
-        int priority=bigNeedList.get(bigNeedList.size()-1).getPriority()+1;
+        int priority=bigNeedList.size()==0? 1 :bigNeedList.get(bigNeedList.size()-1).getPriority()+1;
         model.put("priority",""+priority);
         model.put("bigNeedList", bigNeedList);
         return "bigNeeds/list";
