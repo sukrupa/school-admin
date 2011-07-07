@@ -3,16 +3,14 @@
 
     Scenario: Add/Edit sponsor, and verify other student details are unchanged
     Given I am on the View Students page
-    When I select the student record of Bhavani
-    And I "Edit" the form
+    When I edit student record of Bhavani
     And I enter Peter Murray as Sponsor
     And I save the changes
     Then Student record updated successfully should be displayed
-
     And the Student Record: Bhavani page is displayed
     And "Peter Murray" is displayed under Sponsor
 
-    When I "View Students" in the sidebar
+    When I navigate to the View Students page
     And I select the student record of Bhavani
     Then "A+" is displayed under Academic Performance
     And "Excellent" is displayed under Disciplinary
@@ -21,8 +19,7 @@
     
     Scenario:Adding a note to student profile
     Given I am on the View Students page
-    When I select the student record of Bhavani
-    And I "Edit" the form
+    When I edit student record of Bhavani
     And I enter "This is a note" as the note
     And I "Add a Note" to the form
     Then Note Added Successfully should be displayed
@@ -30,8 +27,7 @@
 
     Scenario: Edit student's status successfully
     Given I am on the View Students page
-    When I select the student record of Bhavani
-    And I "Edit" the form
+    When I edit student record of Bhavani
     And I select "Existing Student" as the Student Status
     And I save the changes
     Then Student record updated successfully should be displayed
@@ -40,8 +36,7 @@
 
     Scenario:Verify edit of family status success
     Given I am on the View Students page
-    When I select the student record of Bhavani
-    And I "Edit" the form
+    When I edit student record of Bhavani
     And I select "Single" as the Family Status
     And I save the changes
     Then Student record updated successfully should be displayed
