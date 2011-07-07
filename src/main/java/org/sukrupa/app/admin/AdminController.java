@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -59,14 +62,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendemail", method = POST)
-    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) {
+    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) throws MessagingException {
         emailService.sendEmail(to, subject, "");
 
     }
 
     @RequestMapping(value = "/endofsponsorshipmailsentPage")
     public String sendEndOfSponsorShipEmailAndShowConfirmPage(@RequestParam String toAddress,
-                                                              @RequestParam String subject, @RequestParam String comments){
+                                                              @RequestParam String subject, @RequestParam String comments) throws MessagingException {
         emailService.sendEmail(toAddress, subject, "");
         return "/admin/endofsponsorshipmailsentPage";
     }

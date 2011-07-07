@@ -4,6 +4,7 @@ package org.sukrupa.app.services;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.sukrupa.platform.config.AppConfiguration;
 
 import javax.mail.Address;
@@ -27,7 +28,7 @@ public class EmailServiceTest {
 
     private EmailService emailService;
     @Mock
-    AppConfiguration appConfiguration;
+    private  AppConfiguration appConfiguration;
 
 
     @Before
@@ -37,9 +38,15 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldSendEmail() {
-        emailService.sendEmail("", "", "");
-        verify(appConfiguration).properties();
+    public void shouldSendEmail() throws MessagingException {
+        String toAddress = "aravindp@thoughtworks.com";
+        String subject="Hai";
+        String comments="Thanks";
+        when(appConfiguration.properties()).thenReturn(new Properties());
+
+        emailService.sendEmail(toAddress, subject, comments);
+
+        //verify(appConfiguration).properties();
     }
 
     @Test

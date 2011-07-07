@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -64,14 +65,13 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void shouldShowEndOfSponsorshipConfirmPage(){
+    public void shouldShowEndOfSponsorshipConfirmPage() throws MessagingException {
         String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage("", "","");
         assertThat(view,is("/admin/endofsponsorshipmailsentPage"));
     }
 
     @Test
-    public void shouldSentEndOfSponsorshipEmail()
-    {
+    public void shouldSentEndOfSponsorshipEmail() throws MessagingException {
         String toAddress="aravindp@thoughtworks.com";
         String subject="end of sponsor";
         String comments="Thanks for Sponsorship";
@@ -81,7 +81,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void shouldSendEmail() {
+    public void shouldSendEmail() throws MessagingException {
 
         String toAddress = "anita@thoughtworks.com";
         String subject = "NewsLetter";
