@@ -21,7 +21,7 @@
     Given I am on the View Students page
     When I edit student record of Bhavani
     And I enter "This is a note" as the note
-    And I "Add a Note" to the form
+    And I Add a Note to the student profile
     Then Note Added Successfully should be displayed
     And "This is a note" should be displayed in the list of notes
 

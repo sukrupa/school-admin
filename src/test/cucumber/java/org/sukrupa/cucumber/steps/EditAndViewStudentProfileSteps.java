@@ -72,7 +72,7 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
-     @Then("^\"([^\"]*)\" is displayed under Events$")
+     @Then("^([^\"]*) is displayed under Events$")
     public  void  isDisplayedUnderEvents(String text){
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
@@ -82,7 +82,7 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
         enterIntoTheTextBox(text, "new-note");
     }
 
-    @When("^I \"([^\"]*)\" to the form$")
+    @When("^I ([^\"]*) to the student profile$")
     public  void submitToTheForm(String submitButtonName){
         submitForm(submitButtonName);
     }
@@ -113,7 +113,7 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
 //        assertTrue(browser().image(imageId).exists());
 //    }
 
-    @Then("^an image for \"([^\"]*)\" with student ID \"([^\"]*)\" is displayed")
+    @Then("^an image for ([^\"]*) with student ID ([^\"]*) is displayed")
    public void checkIfImageIsDisplayed(String personName, String personId){
        assertTrue(browser().image(personId).exists());
         assertTrue(browser().containsText(browser().div("basicInfo"),personName));

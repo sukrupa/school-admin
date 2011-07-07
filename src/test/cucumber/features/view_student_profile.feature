@@ -17,16 +17,16 @@ Feature: View student records
      And Female is displayed under Gender
      And 20-03-1997 is displayed under Date Of Birth
      And Born in India is displayed under Background
-     And "Spice Girls, Sports Day, Annual Day" is displayed under Events
+     And Spice Girls, Sports Day, Annual Day is displayed under Events
 
     Scenario: View student's photo on the profile
     Given I am on the View Students page
     When I select the student record of Bhavani
-    Then an image for "Bhavani" with student ID "SK20090080" is displayed
+    Then an image for Bhavani with student ID SK20090080 is displayed
 
     When I navigate to the View Students page
     When I select the student record of Anok
-    Then an image for "Anok" with student ID "64262" is displayed
+    Then an image for Anok with student ID 64262 is displayed
 
 
 
