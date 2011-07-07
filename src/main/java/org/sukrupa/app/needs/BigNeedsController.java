@@ -57,7 +57,7 @@ public class BigNeedsController {
     @RequestMapping(value = "/saveeditedneed", method = POST)
     @Transactional
     public String saveEdit(@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
-        try{
+        try {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         bigNeed.setItemName(itemName);
         bigNeed.setCost(Integer.parseInt(itemCost));
