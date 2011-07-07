@@ -60,14 +60,14 @@ public class AdminController {
 
     @RequestMapping(value = "sendemail", method = POST)
     public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) {
-        emailService.sendEmail(to, subject, null);
+        emailService.sendEmail(to, subject, "");
 
     }
 
     @RequestMapping(value = "/endofsponsorshipmailsentPage")
     public String sendEndOfSponsorShipEmailAndShowConfirmPage(@RequestParam String toAddress,
                                                               @RequestParam String subject, @RequestParam String comments){
-        emailService.sendEmail(toAddress, subject, comments);
+        emailService.sendEmail(toAddress, subject, "");
         return "/admin/endofsponsorshipmailsentPage";
     }
 

@@ -37,7 +37,7 @@ public class EmailServiceTest {
 
     @Test
     public void shouldSendEmail() {
-        emailService.sendEmail("", "", null);
+        emailService.sendEmail("", "", "");
         verify(appConfiguration).properties();
     }
 
