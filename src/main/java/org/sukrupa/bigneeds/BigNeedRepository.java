@@ -24,7 +24,7 @@ public class BigNeedRepository {
        return getList().size() > bigNeed.getPriority() ? true : false;
     }
 
-    public void put(BigNeed bigNeed) {
+    public void addOrEditBigNeed(BigNeed bigNeed) {
         /*List<BigNeed> bigNeedList = getList();
         List<BigNeed> unModifiedBigNeedList;
         if(checkForPrioritization(bigNeed)){

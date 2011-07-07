@@ -3,7 +3,6 @@ package org.sukrupa.app.needs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.bigneeds.BigNeed;
@@ -42,9 +41,7 @@ public class BigNeedsController {
 
     @RequestMapping(value = "create", method = POST)
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
-        //TODO fix
-        model.put("message", "Added Successfully");
-        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
+        bigNeedRepository.addOrEditBigNeed(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
         return "/bigneeds/list";
     }
 
@@ -53,8 +50,6 @@ public class BigNeedsController {
     public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         this.bigNeedRepository.delete(bigNeed);
-        //TODO fix
-        //model.put("message", bigNeed.getItemName() + " was deleted");
         return "/bigneeds/list";
     }
 
@@ -62,13 +57,13 @@ public class BigNeedsController {
     @Transactional
     public String saveEdit(@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
-        BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
-        bigNeed.setItemName(itemName);
-        bigNeed.setCost(Integer.parseInt(itemCost));
-        model.put("message", "Saved changes to " + itemName);
-        bigNeedRepository.put(bigNeed);
-        } catch (Exception e) { }
-
+            BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
+            bigNeed.setItemName(itemName);
+            bigNeed.setCost(Integer.parseInt(itemCost));
+            bigNeedRepository.addOrEditBigNeed(bigNeed);
+        } catch (Exception e) {
+            return "Error: " + e.toString();
+        }
         return "/bigneeds/list";
     }
 }
