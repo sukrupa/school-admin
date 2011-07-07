@@ -32,25 +32,26 @@
             <h3> Send Profile To Sponsors </h3>
             </div>
 
-            <div class="entry" id="sendTo">
-                <div id="sendToLabel"><b> To: </b></div>
-                <div id="sendToInput"><input type="text" id="sendTo" name="SendTo"  /></div>
+            <div class="createEntry">
+                <div class="label"> To: </div>
+                <input type="text" id="sendTo" name="SendTo"  />
             </div>
 
-            <div class="entry" id="subject">
-                <div id="subjectLabel"><b> Subject: </b></div>
-                <div id="subjectInput"><input type="text" id="subject" name="Subject"  /></div>
+            <div class="createEntry">
+                <div class="label"> Subject: </div>
+                <input type="text" id="subject" name="Subject"  />
             </div>
 
-            <h4> Comments </h4>
-            <div id="comments">
-            <textarea name="comments" id="comments" cols="40" rows="10"> </textarea>
+            <div class="createEntry">
+                <div class="label"> Comments </div>
+                <textarea name="comments" id="comments" cols="40" rows="10"> </textarea>
             </div>
+
 
             <div id="sendProfileButton" class = "sendProfile">
-                  <a href = "/students/thankYouView" align="right"><input type="submit" value="Send Profile"/></a>
+                  <a href = "/students/thankYouView"><input type="submit" name="sendProfile" id="sendProfile" value="Send Profile"/></a>
               </div>
-
+            
         </div>
         <div id="secondaryInfo">
 

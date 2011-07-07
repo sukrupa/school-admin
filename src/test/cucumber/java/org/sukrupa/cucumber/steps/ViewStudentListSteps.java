@@ -5,8 +5,4 @@ import cuke4duke.annotation.I18n.EN.Then;
 
 public class ViewStudentListSteps extends EditAndViewStudentProfileSteps {
 
-//    @Then("^\"([^\"]*)\" is displayed in the list of students$")
-//    public  void  isDisplayedInListOfStudents(String text){
-//        isDisplayedUnderDivId(text,"studentListPages");
-//    }
 }
