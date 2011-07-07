@@ -150,6 +150,4 @@ public class BasicWebSteps {
     public void closeBrowser() {
         SahiFacade.closeBrowser();
     }
-
-
 }

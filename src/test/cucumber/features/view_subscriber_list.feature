@@ -6,9 +6,9 @@ Feature: View subscriber list
       #When I view "View Subscribers"
       #Then <subscriberName> and <subscriberEmail> should be displayed
 
-            Examples:
-        |subscriberName| subscriberEmail       |
-        |subscriber1   | subscriber1@email.com |
-        |subscriber2   | subscriber2@email.com |
+      #      Examples:
+      #  |subscriberName| subscriberEmail       |
+      #  |subscriber1   | subscriber1@email.com |
+      #  |subscriber2   | subscriber2@email.com |
 
 
