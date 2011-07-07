@@ -1,8 +1,6 @@
 package org.sukrupa.app.services;
 
 
-import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
-import com.sun.xml.internal.ws.wsdl.writer.document.soap.BodyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
