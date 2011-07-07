@@ -14,7 +14,7 @@
                 <form name="createBigNeedsForm" method="post" action="/bigneeds/create">
                     <td><input type="text" id="itemName" name="itemName"/></td>
                     <td><input type="text" id="cost" name="cost"/></td>
-                    <td><input type="text" id="comment" name="itemName"/></td>
+                    <td><input type="text" id="comment" name="comment"/></td>
                     <td><input type="submit" name="add" value="Add"/></td>
                 </form>
             </tr>

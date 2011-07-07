@@ -21,7 +21,7 @@ public class SmallNeed {
     @Column(name = "COST")
     private long cost;
 
-    @Column(name = "COMMENTS")
+    @Column(name = "COMMENT")
     private String comments;
 
 
