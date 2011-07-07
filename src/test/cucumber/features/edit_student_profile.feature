@@ -28,7 +28,7 @@
     Scenario: Edit student's status successfully
     Given I am on the View Students page
     When I edit student record of Bhavani
-    And I select "Existing Student" as the Student Status
+    And I select Existing Student for Student Status
     And I save the changes
     Then Student record updated successfully should be displayed
     And the Student Record: Bhavani page is displayed
@@ -37,7 +37,7 @@
     Scenario:Verify edit of family status success
     Given I am on the View Students page
     When I edit student record of Bhavani
-    And I select "Single" as the Family Status
+    And I select Single for Family Status
     And I save the changes
     Then Student record updated successfully should be displayed
     And the Student Record: Bhavani page is displayed

@@ -52,17 +52,17 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
         isDisplayedUnderDivId(text, "talents");
     }
 
-      @Then("^\"([^\"]*)\" is displayed under Name$")
+      @Then("^([^\"]*) is displayed under Name$")
     public  void  isDisplayedUnderName(String text){
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
-     @Then("^\"([^\"]*)\" is displayed under Gender$")
+     @Then("^([^\"]*) is displayed under Gender$")
     public  void  isDisplayedUnderGender(String text){
         isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
 
-     @Then("^\"([^\"]*)\" is displayed under Date Of Birth$")
+     @Then("^([^\"]*) is displayed under Date Of Birth$")
     public  void  isDisplayedUnderDOB(String text){
           isDisplayedUnderBasicInfoInStudentRecordPage(text);
     }
@@ -92,12 +92,13 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
        shouldBeDisplayed(text);
     }
 
-    @When("^I select \"([^\"]*)\" as the Student Status")
+
+    @When("^I select ([^\"]*) for Student Status")
     public  void  selectStudentStatus(String text){
        choseFrom(text,"status");
     }
 
-    @When("^I select \"([^\"]*)\" as the Family Status")
+    @When("^I select ([^\"]*) for Family Status")
     public  void  selectFamilyStatus(String text){
        choseFrom(text,"familystatus");
     }
