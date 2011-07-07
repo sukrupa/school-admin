@@ -67,7 +67,7 @@ public class AdminControllerTest {
     @Test
     public void shouldDisplayEndOfSponsorshipEmailSentPage(){
         String view = adminController.endOfSponsorshipMailSent();
-        assertThat(view,is("redirect:/admin/endofsponsorshipmailsentPage"));
+        assertThat(view,is("/admin/endofsponsorshipmailsentPage"));
     }
 
     @Test
