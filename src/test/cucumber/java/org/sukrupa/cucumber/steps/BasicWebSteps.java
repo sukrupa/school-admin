@@ -112,7 +112,7 @@ public class BasicWebSteps {
         browser().byId(elementId).setValue(text);
     }
 
-    @When("^I select \"([^\"]*)\" as \"([^\"]*)\"")
+    @When("^I select ([^\"]*) as ([^\"]*)")
     public void selectFromDropDown(String value, String dropDownName) {
         browser().select(dropDownName).choose(value);
     }
