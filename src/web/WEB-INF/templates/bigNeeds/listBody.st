@@ -1,5 +1,5 @@
 <div>
-    <div class="page">
+    <div class="page" id="pageDiv">
         <table border="0">
             <thead class="header">
             <tr>
