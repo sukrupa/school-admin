@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.ListIterator;
 
 @Repository
 public class BigNeedRepository {
@@ -25,14 +26,32 @@ public class BigNeedRepository {
     }
 
     public void addOrEditBigNeed(BigNeed bigNeed) {
-        /*List<BigNeed> bigNeedList = getList();
-        List<BigNeed> unModifiedBigNeedList;
+       List<BigNeed> unModifiedBigNeedList;
+        BigNeed tempBigNeed;
         if(checkForPrioritization(bigNeed)){
-                bigNeedList.subList(0,bigNeed.getPriority()-1);
-        }
-        else{*/
+                unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
+                ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
+                adjustThePriorities(bigNeedListIterator);
             session().saveOrUpdate(bigNeed);
-        //}
+        }
+        else{
+            session().saveOrUpdate(bigNeed);
+        }
+    }
+
+    public void adjustThePriorities(ListIterator<BigNeed> bigNeedListIterator) {
+        BigNeed tempBigNeed;
+        while (bigNeedListIterator.hasNext()){
+            tempBigNeed = bigNeedListIterator.next();
+         //   System.out.println("*********"+tempBigNeed.getItemName()+"*****"+tempBigNeed.getPriority());
+            tempBigNeed.setPriority(tempBigNeed.getPriority()+1);
+         //   System.out.println("New prio*****"+tempBigNeed.getPriority());
+            session().saveOrUpdate(tempBigNeed);
+        }
+    }
+
+    private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int index){
+         return bigNeedList.subList(index-1,bigNeedList.size());
     }
 
     public BigNeed findByName(String itemName) {

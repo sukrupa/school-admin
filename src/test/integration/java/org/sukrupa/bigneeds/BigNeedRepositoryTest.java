@@ -1,5 +1,6 @@
 package org.sukrupa.bigneeds;
 
+
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +13,8 @@ import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.HibernateSession;
 
 import java.util.List;
+import java.util.ListIterator;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -53,17 +53,49 @@ public class BigNeedRepositoryTest {
     }
 
     //todo fix me!
-//     @Test
-//    public void shouldInsertNewItemInTheProperPosition(){
-//        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
-//        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
-//         BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
-//        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
-//        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
-//        BigNeed banana = new BigNeed("Banana", 25000,2);
-//        assertThat(bigNeedRepository.checkForPrioritization(banana),is(true));
-//
-//    }
+     @Test
+    public void shouldReturnTheCorrectPositionForInsertingTheNewRecord(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+        BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
+        bigNeedRepository.put(powerGeneratorBigNeed);
+        bigNeedRepository.put(airConditionerBigNeed);
+        bigNeedRepository.put(bigLargeBedBigNeed);
+        BigNeed banana = new BigNeed("Banana", 25000,2);
+        List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
+        assertThat(unModifiedBigNeedList.size(),is(2));
+        assertThat(unModifiedBigNeedList.get(0).getItemName(), is(airConditionerBigNeed.getItemName()));
+        assertThat(unModifiedBigNeedList.get(1).getCost(), is(bigLargeBedBigNeed.getCost()));
+        assertThat(unModifiedBigNeedList.get(0).getCost(), not(is(powerGeneratorBigNeed.getCost())));
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionAndModifyPriority(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+        BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
+        BigNeed tempBigNeed, retrievedBigNeed;
+        bigNeedRepository.put(powerGeneratorBigNeed);
+        bigNeedRepository.put(airConditionerBigNeed);
+        bigNeedRepository.put(bigLargeBedBigNeed);
+        BigNeed banana = new BigNeed("Banana", 25000,2);
+        List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
+        bigNeedRepository.put(banana);
+//        ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
+//            while (bigNeedListIterator.hasNext()){
+//            tempBigNeed = bigNeedListIterator.next();
+//            tempBigNeed.setPriority(tempBigNeed.getPriority()+1);
+//            bigNeedRepository.put(tempBigNeed);
+//        }
+//        bigNeedRepository.adjustThePriorities(bigNeedListIterator);
+        retrievedBigNeed = bigNeedRepository.findByName("Big Large Bed");
+        assertThat(retrievedBigNeed.getPriority(),is(4));
+
+    }
+
+    private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int priority){
+         return bigNeedList.subList(priority-1,bigNeedList.size());
+    }
 
     @Test
     public void shouldRetrieveBigNeedList() {
