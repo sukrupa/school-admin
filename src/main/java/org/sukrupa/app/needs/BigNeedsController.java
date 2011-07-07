@@ -41,38 +41,36 @@ public class BigNeedsController {
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam String priority,@RequestParam String itemName, @RequestParam String cost, Map<String, Object> model) {
+    public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
+        //TODO fix
         model.put("message", "Added Successfully");
-        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(cost), Integer.parseInt(priority)));
-        return "redirect:/bigneeds";
+//        model.put("bigNeedName", itemName);
+//        model.put("bigNeedAddedSuccesfully", true);
+        bigNeedRepository.put(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
+        return "/bigneeds/list";
     }
 
-    @RequestMapping(value = "{id}/delete", method = POST)
+    @RequestMapping(value = "delete", method = POST)
     @Transactional
-    public String delete(@PathVariable long id, HashMap<String, Object> model) {
-        BigNeed bigNeed = bigNeedRepository.getBigNeed(id);
+    public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
+        BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         this.bigNeedRepository.delete(bigNeed);
-        model.put("message", bigNeed.getItemName() + " was deleted");
-        return "redirect:/bigneeds";
+        //TODO fix
+        //model.put("message", bigNeed.getItemName() + " was deleted");
+        return "/bigneeds/list";
     }
 
-    @RequestMapping(value = "/saveeditedneed", method = POST)
+    @RequestMapping(value = "saveeditedneed", method = POST)
     @Transactional
     public String saveEdit(@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         bigNeed.setItemName(itemName);
         bigNeed.setCost(Integer.parseInt(itemCost));
-
-        model.put("message", "Edited Successfully");
+        model.put("message", "Saved changes to " + itemName);
         bigNeedRepository.put(bigNeed);
+        } catch (Exception e) { }
 
-
-        } catch (Exception e) {
-               
-
-        }
-
-        return "redirect:/bigneeds";
+        return "/bigneeds/list";
     }
 }

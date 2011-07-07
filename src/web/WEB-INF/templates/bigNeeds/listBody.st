@@ -1,20 +1,8 @@
-<style>
-    .edit {
-        display: none;
-    }
-    .editable .edit {
-        display: table-cell;
-    }
-    .editable .display {
-        display: none;
-    }
-</style>
 <div>
     <div class="page">
         <table border="0">
             <thead class="header">
             <tr>
-                <td><label for="priority">Priority</label></td>
                 <td><label for="itemName">Item</label></td>
                 <td><label for="cost">Cost</label></td>
                 <td>Actions</td>
@@ -22,60 +10,33 @@
             </thead>
             <tbody>
             <tr>
-             $priority:{
-                <form name="createBigNeed" method="post" action="/bigneeds/create">
-                    <td><input type="text" id="priority" name="priority" value="$it$"/></td>
-                    <td><input type="text" id="itemName" name="itemName" /></td>
-                    <td><input type="text" id="cost" name="cost" /></td>
-                    <td><input type="submit" name="add" value="Add" /></td>
-                </form>
-              }$
+                <td><input class="item-name" id="itemName" name="itemName"/></td>
+                <td><input class="item-cost" id="cost" name="cost"/></td>
+                <td>
+                    <input type="button" class="add-bigneed-button" value="Add"/>
+                </td>
             </tr>
             $bigNeedList:{
-
-                    <!--
-                <form id="editBigNeedsForm" name="editBigNeedsForm" method="post" action="/bigneeds/$it.id$/edit">
-
-                    <td class="edit"><textbox value="$it.itemName$" id="$it.id$.itemName" name="$it.id$.itemName"/></td>
-                    <td class="edit"><textbox value="$it.cost$" id="$it.id$.cost" name="$it.id$.cost" /></td>
-
-                    <td class="edit">
-                        <input type="button" onclick="saveEditedNeed($it.id$, $it.id$.itemName.value, $it.id$.cost.value)" id="saveNeedButton" value="Save"/>
-                    </td>
-                    <td class="display">$it.itemName$</td>
-                    <td class="display">$it.cost$</td>
-                    <td class="display">
-                        <input type="button" id="editNeedButton" name="edit" value="Edit"/>
-                    </td>
-                    <td>
-                        <input type="button" onclick="deleteNeed($it.id$)" id="deleteNeedButton" value="Delete"/>
-                    </td>
-                </form>
--->
-                <form name="editBigNeedsForm" method="post" action="">
-                    <td class="hidden"><input class="item-id" value="$it.id$" /></td>
-                    <td class="edit"><input class="item-name" value="$it.itemName$" id="itemName3" name="itemName3"/></td>
-                    <td class="edit"><input class="item-cost" value="$it.cost$" id="cost$it.id$" name="cost2" /> </td>
-                    <td class="edit">
-                        <input type="button" class="save-row-button" value="Save"/>
-                    </td>
-                    <td>$it.priority$</td>
-                    <td class="display">$it.itemName$</td>
-                    <td class="display">$it.cost$</td>
-                    <td class="display">
-                        <input type="button" id="editNeedButton" name="edit" value="Edit"/>
-                    </td>
-                    <td>
-                        <input type="button" onclick="deleteNeed($it.id$)" id="deleteNeedButton" value="Delete"/>
-                    </td>
-
-                </form>
-   
+            <tr>
+                <td class="hidden"><input class="item-id" value="$it.id$" /></td>
+                <td class="edit"><input class="item-name" value="$it.itemName$" id="itemName3" name="itemName3"/></td>
+                <td class="edit"><input class="item-cost" value="$it.cost$" id="cost$it.id$" name="cost2" /> </td>
+                <td class="edit">
+                    <input type="button" class="save-row-button" value="Save"/>
+                </td>
+                <td class="display">$it.itemName$</td>
+                <td class="display">$it.cost$</td>
+                <td class="display">
+                    <input type="button" class="edit-bigneed-button" name="edit" value="Edit"/>
+                </td>
+                <td>
+                    <input type="button" class="delete-bigneed-button" id="deleteNeedButton" value="Delete"/>
+                </td>
             </tr>
             }$
             </tbody>
         </table>
         <div id="msg">$message$ $bigneed.itemName$</div>
     </div>
-
+    $successMessage(condition=bigNeedAddedSuccesfully, message={$bigNeedName$ added successfully.})$
 </div>

@@ -53,6 +53,7 @@ public class BigNeedRepositoryTest {
     public void shouldDeleteBigNeed() {
         BigNeed banana = new BigNeed("Banana", 25000,3);
         bigNeedRepository.put(banana);
+        assertThat(bigNeedRepository.getList(), hasItem(banana));
         bigNeedRepository.delete(banana);
         assertThat(bigNeedRepository.getList(), not(hasItem(banana)));
     }

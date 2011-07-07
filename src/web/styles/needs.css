@@ -1,0 +1,9 @@
+.edit {
+    display: none;
+}
+.editable .edit {
+    display: table-cell;
+}
+.editable .display {
+    display: none;
+}
