@@ -1,4 +1,4 @@
-package org.sukrupa.smallNeeds;
+package org.sukrupa.smallneeds;
 
 
 import org.junit.Test;

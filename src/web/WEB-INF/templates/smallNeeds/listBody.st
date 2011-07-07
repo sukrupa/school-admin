@@ -5,6 +5,7 @@
             <tr>
                 <td><label for="itemName">Item</label></td>
                 <td><label for="cost">Cost</label></td>
+                <td><label for="comment">Comment</label></td>
                 <td>Actions</td>
             </tr>
             </thead>
@@ -13,6 +14,7 @@
                 <form name="createBigNeedsForm" method="post" action="/bigneeds/create">
                     <td><input type="text" id="itemName" name="itemName"/></td>
                     <td><input type="text" id="cost" name="cost"/></td>
+                    <td><input type="text" id="comment" name="itemName"/></td>
                     <td><input type="submit" name="add" value="Add"/></td>
                 </form>
             </tr>
