@@ -1,19 +1,26 @@
 package org.sukrupa.app.services;
 
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.config.AppConfiguration;
 
-
+import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class EmailServiceTest {
@@ -30,18 +37,37 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldSendEmail() {
+    public void shouldSendEmailEventually() {
         emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");
-        verify(appConfiguration).properties();
+        // Anita, Sri, will come back and finish this off once we figured out how to test it
     }
 
     @Test
     public void shouldConvertStringToInternetAddress() throws AddressException {
         String testEmailAddress = "sabhinay@thoughtworks.com";
+        InternetAddress expectedInternetAddress = new InternetAddress(testEmailAddress);
 
         InternetAddress actualInternetAddress = emailService.convertStringToInternetAddress(testEmailAddress);
-        InternetAddress expectedInternetAddress = new InternetAddress(testEmailAddress);
-        
+
         assertThat(actualInternetAddress, is(expectedInternetAddress));
+    }
+
+    @Test(expected = AddressException.class)
+    public void shouldThrowAnAddressExceptionForInvalidEmailAddress() throws AddressException {
+        String invalidEmailAddress = "notvalid@";
+
+        emailService.convertStringToInternetAddress(invalidEmailAddress);
+
+    }
+
+    @Test
+    public void shouldCreateMimeMessage() throws MessagingException {
+        String excpectedSubject = "A subject";
+        when(appConfiguration.properties()).thenReturn(new Properties());
+
+        MimeMessage mimeMessage = emailService.createMimeMessageWithSubject(excpectedSubject);
+
+        Assert.assertThat(mimeMessage.getSubject(), is(excpectedSubject));
+        verify(appConfiguration).properties();
     }
 }
