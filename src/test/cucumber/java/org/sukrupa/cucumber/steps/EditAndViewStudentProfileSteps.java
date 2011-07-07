@@ -20,11 +20,6 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps{
         isDisplayedUnderDivId(text, "secondaryInfo");
     }
 
-    @When("^I choose \"([^\"]*)\" from student list$")
-    public void chooseNameFromStudentList(String name){
-        clickLink(name);
-    }
-
     @When("^I enter \"([^\"]*)\" as the Sponsor$")
     public void enterIntoTheSponsorTextBox(String text){
         fillInTheTextfieldWith("sponsored",text);
