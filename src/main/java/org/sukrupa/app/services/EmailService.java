@@ -1,16 +1,21 @@
 package org.sukrupa.app.services;
 
 
+import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
+import com.sun.xml.internal.ws.wsdl.writer.document.soap.BodyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.config.AppConfiguration;
 
+import javax.mail.BodyPart;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.*;
+import javax.swing.text.PlainDocument;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Component
 public class EmailService {
@@ -24,7 +29,7 @@ public class EmailService {
     }
 
     public void sendEmail(String toAddress, String subject, String messageBody) {
-        appConfiguration.properties();
+
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
@@ -39,6 +44,17 @@ public class EmailService {
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
+        return mimeMessage;
+    }
+
+    public MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(InternetAddress recipient,
+                                                                    String subject, String comments) throws MessagingException {
+        Session session = Session.getInstance(appConfiguration.properties());
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.setSubject(subject);
+        mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
+        mimeMessage.setText(comments);
         return mimeMessage;
     }
 }

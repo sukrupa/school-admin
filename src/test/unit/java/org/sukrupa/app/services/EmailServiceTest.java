@@ -12,6 +12,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -70,5 +71,20 @@ public class EmailServiceTest {
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
         assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)expectedRecipient));
         verify(appConfiguration).properties();
+    }
+
+    @Test
+    public void shouldCreateMessageWithCommentsAndRecipientAsTo() throws  MessagingException ,IOException{
+        String subject="Hai";
+        String comments="Thanks";
+        InternetAddress recipient =new InternetAddress("aravindp@thoughtworks.com");
+        when(appConfiguration.properties()).thenReturn(new Properties());
+
+        MimeMessage message =emailService.createMimeMessageWithSubjectAndRecipientAsTo(recipient,subject,comments);
+
+        assertThat(message.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)recipient));
+        assertThat(message.getSubject(), is(subject));
+        assertThat((String)message.getContent(),is(comments));
+
     }
 }
