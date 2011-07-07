@@ -80,7 +80,8 @@
     <ul>
         <li>
             <p class="indent">
-                <a id="bigNeeds" href="/bigneeds">Big Needs</a>
+                <a id="bigNeeds" href="/bigneeds">Big Needs</a><br>
+                <a id="smallNeeds" href="/smallneeds">Small Needs</a>
             </p>
         </li>
     </ul>
