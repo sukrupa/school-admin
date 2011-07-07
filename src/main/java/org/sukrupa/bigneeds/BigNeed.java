@@ -63,6 +63,4 @@ public class BigNeed {
         System.out.println(cost);
         this.cost = cost;
     }
-
-
 }

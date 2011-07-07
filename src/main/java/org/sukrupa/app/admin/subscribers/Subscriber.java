@@ -4,7 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import org.hibernate.*;
+import org.sukrupa.platform.RequiredByFramework;
 
 
 @Entity
@@ -19,10 +20,18 @@ public class Subscriber {
     @Column(name = "EMAIL")
     private String subscriberEmail;
 
+    @RequiredByFramework
+    public Subscriber(){
+    }
 
     public Subscriber(String subscriberName, String subscriberEmail){
         this.subscriberName=subscriberName;
         this.subscriberEmail=subscriberEmail;
+    }
+
+    public Subscriber(int id, String subscriberName, String subscriberEmail){
+        this(subscriberName, subscriberEmail);
+        this.id = id;
     }
 
     public String getSubscriberName(){
@@ -31,5 +40,13 @@ public class Subscriber {
 
     public String getSubscriberEmail(){
         return this.subscriberEmail;
+    }
+
+    public long getSubscriberId() {
+        return id;
+    }
+
+    public int hashCode(){
+        return subscriberName.hashCode();
     }
 }

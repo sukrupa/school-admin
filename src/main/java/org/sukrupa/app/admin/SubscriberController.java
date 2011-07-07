@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.sukrupa.app.admin.subscribers.Subscriber;
-import org.sukrupa.app.admin.subscribers.SubscriberRepository;
+//import org.sukrupa.app.admin.subscribers.SubscriberRepository;
 //import sun.jvm.hotspot.debugger.macosx.MacOSXDebuggerLocal;
 
 import java.util.List;
@@ -19,17 +19,17 @@ import java.util.Map;
 public class SubscriberController {
 
 
-    private SubscriberRepository subscriberRepository;
-    @Autowired
-    public SubscriberController(SubscriberRepository subscriberRepository) {
-              this.subscriberRepository=subscriberRepository;
-    }
+    //private SubscriberRepository subscriberRepository;
+    //@Autowired
+    //public SubscriberController(SubscriberRepository subscriberRepository) {
+    //          this.subscriberRepository=subscriberRepository;
+    //}
 
 
-    @RequestMapping(value = "viewsubscribers", method = RequestMethod.GET)
+    @RequestMapping
     public String listsubscribers(Map<String, Object> model) {
-        List<Subscriber> viewSubscribers = subscriberRepository.getList();
-        model.put("viewsubscribers",viewSubscribers);
+//        List<Subscriber> viewSubscribers = subscriberRepository.findAllSubscribers();
+//        model.put("viewsubscribers",viewSubscribers);
         return "admin/subscribers/viewsubscribers";
 
     }

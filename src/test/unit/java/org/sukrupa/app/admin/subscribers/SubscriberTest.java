@@ -2,6 +2,7 @@ package org.sukrupa.app.admin.subscribers;
 
 import org.hamcrest.core.Is;
 import org.junit.Test;
+import org.sukrupa.app.admin.subscribers.Subscriber;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
