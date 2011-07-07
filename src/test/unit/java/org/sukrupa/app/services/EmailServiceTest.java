@@ -36,7 +36,7 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldSendEmailEventually() throws MessagingException {
+    public void shouldSendEmailEventually() {
         emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");
         // Anita, Sri, will come back and finish this off once we figured out how to test it
     }

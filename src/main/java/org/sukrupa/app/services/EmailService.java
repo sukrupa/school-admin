@@ -21,7 +21,7 @@ public class EmailService {
         this.appConfiguration = appConfiguration;
     }
 
-    public void sendEmail(String toAddress, String subject) throws MessagingException {
+    public void sendEmail(String toAddress, String subject) {
 //        InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
 //        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject);
         
