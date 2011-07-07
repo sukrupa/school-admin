@@ -18,11 +18,6 @@ public class BasicWebSteps {
 
     protected static final String TOP_LEVEL_DIV = "page";
 
-//    @When("^I enter ([^\"]*) as the ([^\"]*)$")
-//    public void enterAsThe(String objectInput, String objectID) {
-//        browser().byId(objectID).setValue(objectInput);
-//    }
-
     @When("^I select \"([^\"]*)\" from \"([^\"]*)\"$")
     public void choseFrom(String choice, String ObjectID) {
         browser().byId(ObjectID).choose(choice);
