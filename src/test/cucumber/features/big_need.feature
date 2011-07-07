@@ -32,4 +32,9 @@ Feature: Add, Edit and Delete Big Needs
 #    Then a "Power Generator" costing "40000" should be displayed
 
 
-    
+
+
+  Scenario: View the priority of the items
+    Given I am on the Big Needs page
+    Then Priority should be displayed
+

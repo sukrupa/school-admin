@@ -45,6 +45,7 @@ public class BigNeedSteps extends Login {
     private boolean itemWithCostExists(String name, String cost) {
         ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
+      //  ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
         ElementStub rowContainingBothNameAndCost = browser().cell(cost).in(browser().cell(name).parentNode());
         return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && rowContainingBothNameAndCost.exists(true);
     }
