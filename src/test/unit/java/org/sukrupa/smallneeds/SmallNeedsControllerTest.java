@@ -2,7 +2,8 @@ package org.sukrupa.smallneeds;
 
 
 import com.sun.org.apache.xml.internal.security.Init;
-import cuke4duke.annotation.Before;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
