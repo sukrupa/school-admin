@@ -10,8 +10,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import java.util.Properties;
-
 @Component
 public class EmailService {
 
@@ -32,12 +30,13 @@ public class EmailService {
         return internetAddress;
     }
 
-    public MimeMessage createMimeMessageWithSubject(String subject) throws MessagingException {
+    public MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(String subject, InternetAddress recipient) throws MessagingException {
+
         Session session = Session.getInstance(appConfiguration.properties());
 
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
-
+        mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
         return mimeMessage;
 
     }

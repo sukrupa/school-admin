@@ -1,14 +1,13 @@
 package org.sukrupa.app.services;
 
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.platform.config.AppConfiguration;
 
+import javax.mail.Address;
 import javax.mail.MessagingException;
-import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -61,13 +60,15 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldCreateMimeMessage() throws MessagingException {
+    public void shouldCreateMimeMessageAndRecipientAsTo() throws MessagingException {
         String excpectedSubject = "A subject";
         when(appConfiguration.properties()).thenReturn(new Properties());
 
-        MimeMessage mimeMessage = emailService.createMimeMessageWithSubject(excpectedSubject);
+        InternetAddress expectedRecipient = new InternetAddress("anitam@thoughtworks.com");
+        MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsTo(excpectedSubject, expectedRecipient);
 
-        Assert.assertThat(mimeMessage.getSubject(), is(excpectedSubject));
+        assertThat(mimeMessage.getSubject(), is(excpectedSubject));
+        assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)expectedRecipient));
         verify(appConfiguration).properties();
     }
 }
