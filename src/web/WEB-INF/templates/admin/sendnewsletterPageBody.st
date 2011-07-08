@@ -1,4 +1,4 @@
-<form id="sendnewsletter" name="sendnewsletter" action="/sendemail" method="GET" >
+<form id="sendnewsletter" name="sendnewsletter" action="/admin/sendnewsletteremail" method="GET" >
     <div>To:</div>
     <input type="text" id="to" name="to" />
     <div>Subject:</div>

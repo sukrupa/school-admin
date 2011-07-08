@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
@@ -55,16 +56,14 @@ public class AdminController {
         return "admin/sendnewsletterPage";
     }
 
+    @RequestMapping(value = "/sendnewsletteremail", method = GET)
+    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) throws MessagingException {
+        emailService.sendEmail(to, subject,"");
+    }
 
     @RequestMapping("/endofsponsorshipform")
     public String showEndOfSponsorshipForm() {
         return "admin/endofsponsorshipform";
-    }
-
-    @RequestMapping(value = "sendemail", method = POST)
-    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) throws MessagingException {
-        emailService.sendEmail(to, subject, "");
-
     }
 
     @RequestMapping(value = "/endofsponsorshipmailsentPage")

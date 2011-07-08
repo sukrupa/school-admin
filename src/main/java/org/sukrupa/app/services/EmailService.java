@@ -12,6 +12,15 @@ import javax.swing.text.PlainDocument;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
+import javax.mail.PasswordAuthentication;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import javax.transaction.Transaction;
+import java.net.*;
+import java.net.Authenticator;
+import java.util.Properties;
 
 @Component
 public class EmailService {
@@ -25,20 +34,21 @@ public class EmailService {
         this.appConfiguration = appConfiguration;
     }
 
+
     public void sendEmail(String toAddress, String subject, String messageBody) throws MessagingException {
-        InternetAddress recipient =new InternetAddress(toAddress);
-        Properties properties = appConfiguration.properties();
 
-        MimeMessage mimeMessage = createMimeMessageWithSubjectAndRecipientAsTo(recipient, subject, messageBody);
-        properties.put("mail.smtp.starttls.enable","true");
-        String host=properties.getProperty("mail.smtp.host");
-        String userName=properties.getProperty("mail.smtp.user");
-        String passWord=properties.getProperty("mail.smtp.password");
+        InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
+        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject);
+        MimeMessage mimeMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject, messageBody);
+        Properties applicationProperties = appConfiguration.properties();
 
-//        Transport transport = session.getTransport("smtp");
-//        transport.connect(host, userName, passWord);
-//        transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-//        transport.close();
+        applicationProperties.put("mail.smtp.auth", "true");
+        applicationProperties.put("mail.smtp.starttls.enable", "true");
+
+        Transport transport = Session.getDefaultInstance(applicationProperties).getTransport("smtp");
+        transport.connect(applicationProperties.getProperty("mail.smtp.host"),Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")),applicationProperties.getProperty("mail.smtp.user"),applicationProperties.getProperty("mail.smtp.password"));
+        transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+        transport.close();
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
@@ -48,10 +58,13 @@ public class EmailService {
 
     protected MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(InternetAddress recipient, String subject) throws MessagingException {
 
-        Session session = Session.getInstance(appConfiguration.properties());
-
+        Properties applicationProperties = appConfiguration.properties();
+        Session session = Session.getDefaultInstance(applicationProperties,null);
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
+
+        //Sri and Abhi : Change/Modify Content based on needs.
+        mimeMessage.setContent("Monthly Newsletter","text/html");
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
         return mimeMessage;
     }
