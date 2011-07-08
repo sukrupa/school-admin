@@ -39,12 +39,15 @@ public class EmailServiceTest {
 
     @Test
     public void shouldSendEmail() throws MessagingException {
-//        String toAddress = "aravindp@thoughtworks.com";
-//        String subject="Hai";
-//        String comments="Thanks";
-//        when(appConfiguration.properties()).thenReturn(new Properties());
-//        assertThat(emailService.sendEmail(toAddress,subject,comments), is(true));
-//        Aravind to work on tests.
+        String toAddress = "aravindp@thoughtworks.com";
+        String subject="Hai";
+        String comments="Thanks";
+
+        when(appConfiguration.properties()).thenReturn(new AppConfiguration().properties());
+
+        boolean result = emailService.sendEmail(toAddress, subject, comments);
+
+        assertThat(result, is(true));
     }
 
     @Test
@@ -80,7 +83,7 @@ public class EmailServiceTest {
         MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsTo(expectedRecipient, excpectedSubject);
 
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
-        assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)expectedRecipient));
+        assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address) expectedRecipient));
     }
 
     @Test
