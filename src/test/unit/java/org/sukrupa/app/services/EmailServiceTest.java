@@ -43,10 +43,12 @@ public class EmailServiceTest {
 //        String subject="Hai";
 //        String comments="Thanks";
 //        when(appConfiguration.properties()).thenReturn(new Properties());
-//
-//        emailService.sendEmail(toAddress, subject, comments);
+//        assertThat(emailService.sendEmail(toAddress,subject,comments), is(true));
+//        Aravind to work on tests.
+
     }
         //verify(appConfiguration).properties();
+
     @Test
         public void shouldSendEmailEventually() throws MessagingException {
         //emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");

@@ -35,11 +35,10 @@ public class EmailService {
     }
 
 
-    public void sendEmail(String toAddress, String subject, String messageBody) throws MessagingException {
-
+    public boolean sendEmail(String toAddress, String subject, String messageBody) throws MessagingException {
+        try{
         InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
-        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject);
-        MimeMessage mimeMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject, messageBody);
+        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject, messageBody);
         Properties applicationProperties = appConfiguration.properties();
 
         applicationProperties.put("mail.smtp.auth", "true");
@@ -48,7 +47,13 @@ public class EmailService {
         Transport transport = Session.getDefaultInstance(applicationProperties).getTransport("smtp");
         transport.connect(applicationProperties.getProperty("mail.smtp.host"),Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")),applicationProperties.getProperty("mail.smtp.user"),applicationProperties.getProperty("mail.smtp.password"));
         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+
         transport.close();
+            return true;
+        }
+        catch (MessagingException e){
+            return false;
+        }
     }
 
     protected InternetAddress convertStringToInternetAddress(String emailAddress) throws AddressException {
