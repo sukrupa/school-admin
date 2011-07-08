@@ -63,7 +63,7 @@ public class BasicWebSteps {
         assertTrue(browser().containsText(pageDiv, text));
     }
 
-    @Then("^\"([^\"]*)\" should not be displayed$")
+    @Then("^([^\"]*) should not be displayed$")
     public void shouldNotBeDisplayed(String text) {
         assertFalse(browser().containsText(browser().div(TOP_LEVEL_DIV), text));
     }

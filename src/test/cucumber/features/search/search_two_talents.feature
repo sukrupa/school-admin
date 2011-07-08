@@ -12,4 +12,4 @@ Feature: Search Student with Two Talents
     And Abhishek should be displayed
     And Armugam should be displayed
     And Chandru should be displayed
-    And "Anok" should not be displayed
+    And Anok should not be displayed

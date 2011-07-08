@@ -29,7 +29,7 @@ Feature: Search students by sponsor
     Then Abhishek should be displayed
     And Anok should be displayed
     And Armugam should be displayed
-    And "Bhavani" should not be displayed
+    And Bhavani should not be displayed
 
   Scenario: Search for null entry where sponsors exist
     Given I am on the Search Students by Sponsor page

@@ -9,4 +9,4 @@ Feature: Search students by age
     Then Peter should be displayed
     And Anok should be displayed
     And Haripriya should be displayed
-    And "Abhishek" should not be displayed
+    And Abhishek should not be displayed

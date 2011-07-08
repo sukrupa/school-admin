@@ -18,7 +18,7 @@ Feature: Search students by talent
     When I click "Search" submit button
 
     Then Armugam should be displayed
-    And "Anok" should not be displayed
+    And Anok should not be displayed
 
   Scenario: More than One Talent Selected
     Given I am on the Search Students page
@@ -33,5 +33,5 @@ Feature: Search students by talent
     And Abhishek should be displayed
     And Armugam should be displayed
     And Chandru should be displayed
-    And "Bhavani" should not be displayed
-    And "Haripriya" should not be displayed
+    And Bhavani should not be displayed
+    And Haripriya should not be displayed

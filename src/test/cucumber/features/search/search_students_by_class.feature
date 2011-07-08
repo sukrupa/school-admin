@@ -7,6 +7,6 @@ Feature: Search students by class
     And I click "Search" submit button
 
     Then Peter should be displayed
-    And "Anok" should not be displayed
-    And "Haripriya" should not be displayed
-    And "Abhishek" should not be displayed
+    And Anok should not be displayed
+    And Haripriya should not be displayed
+    And Abhishek should not be displayed
