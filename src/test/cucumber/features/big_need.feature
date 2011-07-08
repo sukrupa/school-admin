@@ -8,6 +8,7 @@ Feature: Add, Edit and Delete Big Needs
     And a "50000" costing "Power Generator" with priority "1" should not be displayed
     And a "6" should be displayed as pre-populated "priority"
 
+
   Scenario: Add item to Big Need list
     Given I am on the Big Needs page
     When I enter Refrigerator as Item
