@@ -81,13 +81,7 @@ public class BigNeedRepositoryTest {
         BigNeed banana = new BigNeed("Banana", 25000,2);
         List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
         bigNeedRepository.addOrEditBigNeed(banana);
-//        ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
-//            while (bigNeedListIterator.hasNext()){
-//            tempBigNeed = bigNeedListIterator.next();
-//            tempBigNeed.setPriority(tempBigNeed.getPriority()+1);
-//            bigNeedRepository.put(tempBigNeed);
-//        }
-//        bigNeedRepository.adjustThePriorities(bigNeedListIterator);
+
         retrievedBigNeed = bigNeedRepository.findByName("Big Large Bed");
         assertThat(retrievedBigNeed.getPriority(),is(4));
 
@@ -96,6 +90,26 @@ public class BigNeedRepositoryTest {
     private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int priority){
          return bigNeedList.subList(priority-1,bigNeedList.size());
     }
+
+     @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdated(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+        BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
+        BigNeed tempBigNeed, retrievedBigNeed;
+        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
+        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
+        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
+
+       bigNeedRepository.editBigNeed(bigLargeBedBigNeed,2);
+        List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
+        retrievedBigNeed = bigNeedRepository.findByName("Air Conditioner");
+        assertThat(retrievedBigNeed.getPriority(),is(3));
+         retrievedBigNeed = bigNeedRepository.findByName("Big Large Bed");
+        assertThat(retrievedBigNeed.getPriority(),is(2));
+
+    }
+
 
     @Test
     public void shouldRetrieveBigNeedList() {

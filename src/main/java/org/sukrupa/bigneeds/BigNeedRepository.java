@@ -29,10 +29,13 @@ public class BigNeedRepository {
        List<BigNeed> unModifiedBigNeedList;
         BigNeed tempBigNeed;
         if(checkForPrioritization(bigNeed)){
-                unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
+                 session().saveOrUpdate(bigNeed);
+
+                 unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
                 ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
                 adjustThePriorities(bigNeedListIterator);
-            session().saveOrUpdate(bigNeed);
+
+
         }
         else{
             session().saveOrUpdate(bigNeed);
@@ -48,8 +51,13 @@ public class BigNeedRepository {
          //   System.out.println("New prio*****"+tempBigNeed.getPriority());
             session().saveOrUpdate(tempBigNeed);
         }
+        System.out.println();
     }
 
+    public void editBigNeed(BigNeed bigNeed,int priority) {
+
+         System.out.println(bigNeed.getPriority() + bigNeed.getItemName());
+    }
     private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int index){
          return bigNeedList.subList(index-1,bigNeedList.size());
     }
