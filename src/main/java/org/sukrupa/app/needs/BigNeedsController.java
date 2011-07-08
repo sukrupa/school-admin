@@ -36,21 +36,13 @@ public class BigNeedsController {
         int priority=bigNeedList.size()==0? 1 :bigNeedList.get(bigNeedList.size()-1).getPriority()+1;
         model.put("priority",priority);
         model.put("bigNeedList", bigNeedList);
-        return "bigNeeds/list";
+        return "bigneeds/bigneedslist";
     }
 
     @RequestMapping(value = "create", method = POST)
-    @Transactional
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
         bigNeedRepository.addOrEditBigNeed(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
-        //TODO fix
-
-        List<BigNeed> bigNeedList = bigNeedRepository.getList();
-        //model.put("message", "Added Successfully");
-//        model.put("bigNeedName", itemName);
-//        model.put("bigNeedAddedSuccesfully", true);
-        model.put("bigNeedList", bigNeedList);
-        return "/bigneeds/list";
+        return "/bigneeds/bigneedslist";
     }
 
     @RequestMapping(value = "delete", method = POST)
@@ -58,14 +50,13 @@ public class BigNeedsController {
     public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         this.bigNeedRepository.delete(bigNeed);
-        return "/bigneeds/list";
+        return "/bigneeds/bigneedslist";
     }
 
     @RequestMapping(value = "saveeditedneed", method = POST)
     @Transactional
     public String saveEdit(@RequestParam String priority,@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
-
             BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Integer.parseInt(itemCost));
@@ -74,7 +65,6 @@ public class BigNeedsController {
         } catch (Exception e) {
             return "Error: " + e.toString();
         }
-
-        return "/bigneeds/list";
+        return "/bigneeds/bigneedslist";
     }
 }

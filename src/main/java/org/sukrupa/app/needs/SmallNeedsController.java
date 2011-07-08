@@ -36,6 +36,6 @@ public class SmallNeedsController {
 
      model.put("message","Added Successfully");
 
-        return "/bigneeds/list";
+        return "/smallNeeds/list";
     }
 }

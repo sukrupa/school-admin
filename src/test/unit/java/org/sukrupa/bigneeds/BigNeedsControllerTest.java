@@ -37,7 +37,7 @@ public class BigNeedsControllerTest {
 
     @Test
     public void shouldDisplayBigNeedsPage() {
-        assertThat(controller.list(model), is("bigNeeds/list"));
+        assertThat(controller.list(model), is("bigneeds/bigneedslist"));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class BigNeedsControllerTest {
         List<BigNeed> bigNeedList = mock(List.class);
         when(bigNeedRepository.getList()).thenReturn(bigNeedList);
         String view = controller.list(model);
-        Assert.assertThat(view, is("bigNeeds/list"));
+        Assert.assertThat(view, is("bigneeds/bigneedslist"));
         assertThat(model, hasEntry("bigNeedList", bigNeedList));
     }
 
