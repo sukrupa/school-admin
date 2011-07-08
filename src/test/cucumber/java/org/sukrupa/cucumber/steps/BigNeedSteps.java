@@ -2,6 +2,7 @@ package org.sukrupa.cucumber.steps;
 
 import cuke4duke.annotation.I18n.EN.*;
 import net.sf.sahi.client.ElementStub;
+import org.springframework.beans.factory.annotation.Value;
 import org.sukrupa.cucumber.context.Login;
 
 import java.security.PublicKey;
@@ -44,7 +45,7 @@ public class BigNeedSteps extends Login {
 
     @When("^I edit the \"([^\"]+)\"")
     public void editItem(String itemName){
-        ElementStub editButton = browser().submit("Edit").in(browser().cell(itemName).parentNode());
+        ElementStub editButton = browser().button("Edit").in(browser().cell(itemName).parentNode());
         assertTrue(editButton.exists(true));
         editButton.click();
     }
@@ -54,11 +55,30 @@ public class BigNeedSteps extends Login {
         browser().button("Add").click();
     }
 
+    @When("^I save edited need")
+    public void saveEditedNeed(){
+        browser().button("Save").click();
+    }
+
+    @When("^I update item name \"([^\"]+)\" with \"([^\"]+)\"")
+    public void updateItemName(String itemName, String newItemName){
+        ElementStub getItem = browser().byXPath("//input[@value='" + itemName + "']");
+        getItem.setValue(newItemName);
+       // getItem.near(browser().cell("Cost")).setValue(cost);
+    }
+
+    @When("^I update cost of \"([^\"]+)\" from \"([^\"]+)\" to \"([^\"]+)\"")
+    public void updateItemCost(String itemName, String cost){
+        ElementStub getItem = browser().byXPath("//input[@value='" + itemName + "']").near(browser().cell("Cost"));
+        getItem.setValue(cost);
+       // getItem.near(browser().cell("Cost")).setValue(cost);
+    }
+
     private boolean itemWithCostExists(String name, String cost,String priority) {
         ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
         ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
         ElementStub rowContainingAllNameAndCostAndPriority = browser().cell(cost).in(browser().cell(name).in(browser().cell(priority).parentNode()));
-        return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && priorityCellWithCorrectCost.exists(true);// && rowContainingAllNameAndCostAndPriority.exists(true);
+        return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && priorityCellWithCorrectCost.exists(true); //&& rowContainingAllNameAndCostAndPriority.exists(true);
     }
 }
