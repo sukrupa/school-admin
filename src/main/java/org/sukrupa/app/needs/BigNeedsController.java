@@ -36,13 +36,13 @@ public class BigNeedsController {
         int priority=bigNeedList.size()==0? 1 :bigNeedList.get(bigNeedList.size()-1).getPriority()+1;
         model.put("priority",priority);
         model.put("bigNeedList", bigNeedList);
-        return "bigneeds/bigneedslist";
+        return "bigNeeds/bigNeedsList";
     }
 
     @RequestMapping(value = "create", method = POST)
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
         bigNeedRepository.addOrEditBigNeed(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
-        return "/bigneeds/bigneedslist";
+        return "/bigNeeds/bigNeedsList";
     }
 
     @RequestMapping(value = "delete", method = POST)
@@ -50,7 +50,7 @@ public class BigNeedsController {
     public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         this.bigNeedRepository.delete(bigNeed);
-        return "/bigneeds/bigneedslist";
+        return "/bigNeeds/bigNeedsList";
     }
 
     @RequestMapping(value = "saveeditedneed", method = POST)
@@ -65,6 +65,6 @@ public class BigNeedsController {
         } catch (Exception e) {
             return "Error: " + e.toString();
         }
-        return "/bigneeds/bigneedslist";
+        return "/bigNeeds/bigNeedsList";
     }
 }
