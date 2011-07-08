@@ -37,7 +37,7 @@ public class BigNeedSteps extends Login {
 
     @When("^I delete the \"([^\"]+)\"")
     public void deleteItem(String itemName){
-        ElementStub deleteButton = browser().submit("Delete").in(browser().cell(itemName).parentNode());
+        ElementStub deleteButton = browser().button("Delete").in(browser().cell(itemName).parentNode());
         assertTrue(deleteButton.exists(true));
         deleteButton.click();
     }
