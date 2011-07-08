@@ -2,8 +2,7 @@
 Feature: View student list
 
      Scenario Outline: View List of Students in Sukrupa
-     Given I am on the View Students page
-     When I "View Students" in the sidebar
+     When I navigate to the View Students page
      Then <studentName> should be displayed
 
      Examples:

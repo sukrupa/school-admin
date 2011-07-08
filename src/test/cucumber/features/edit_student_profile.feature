@@ -5,7 +5,7 @@
     When I edit student record of Bhavani
     And I enter Peter Murray as Sponsor
     And I save the changes
-    Then Student record updated successfully should be displayed
+    Then the messgae "Student record updated successfully" is displayed
     And the Student Record: Bhavani page is displayed
     And Peter Murray is displayed under Sponsor
 
@@ -17,7 +17,6 @@
     And Peter Murray is displayed under Sponsor
     
     Scenario:Adding a note to student profile
-    Given I am on the View Students page
     When I edit student record of Bhavani
     And I enter "This is a note" as the note
     And I Add a Note to the student profile
@@ -25,19 +24,17 @@
     And "This is a note" should be displayed in the list of notes
 
     Scenario: Edit student's status successfully
-    Given I am on the View Students page
     When I edit student record of Bhavani
     And I select Existing Student for Student Status
     And I save the changes
-    Then Student record updated successfully should be displayed
+    Then the messgae "Student record updated successfully" is displayed
     And the Student Record: Bhavani page is displayed
     And Existing Student is displayed under Student Status
 
     Scenario:Verify edit of family status success
-    Given I am on the View Students page
     When I edit student record of Bhavani
     And I select Single for Family Status
     And I save the changes
-    Then Student record updated successfully should be displayed
+    Then the messgae "Student record updated successfully" is displayed
     And the Student Record: Bhavani page is displayed
     And Single is displayed under Family Status
