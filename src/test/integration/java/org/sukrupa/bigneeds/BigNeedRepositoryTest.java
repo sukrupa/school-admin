@@ -58,9 +58,9 @@ public class BigNeedRepositoryTest {
         BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
         BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
         BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
-        bigNeedRepository.put(powerGeneratorBigNeed);
-        bigNeedRepository.put(airConditionerBigNeed);
-        bigNeedRepository.put(bigLargeBedBigNeed);
+        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
+        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
+        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
         BigNeed banana = new BigNeed("Banana", 25000,2);
         List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
         assertThat(unModifiedBigNeedList.size(),is(2));
@@ -75,12 +75,12 @@ public class BigNeedRepositoryTest {
         BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
         BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
         BigNeed tempBigNeed, retrievedBigNeed;
-        bigNeedRepository.put(powerGeneratorBigNeed);
-        bigNeedRepository.put(airConditionerBigNeed);
-        bigNeedRepository.put(bigLargeBedBigNeed);
+        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
+        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
+        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
         BigNeed banana = new BigNeed("Banana", 25000,2);
         List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
-        bigNeedRepository.put(banana);
+        bigNeedRepository.addOrEditBigNeed(banana);
 //        ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
 //            while (bigNeedListIterator.hasNext()){
 //            tempBigNeed = bigNeedListIterator.next();
