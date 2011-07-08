@@ -45,9 +45,7 @@ public class EmailServiceTest {
 //        when(appConfiguration.properties()).thenReturn(new Properties());
 //        assertThat(emailService.sendEmail(toAddress,subject,comments), is(true));
 //        Aravind to work on tests.
-
     }
-        //verify(appConfiguration).properties();
 
     @Test
         public void shouldSendEmailEventually() throws MessagingException {

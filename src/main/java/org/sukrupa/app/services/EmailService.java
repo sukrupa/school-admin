@@ -1,6 +1,7 @@
 package org.sukrupa.app.services;
 
 
+import com.sun.mail.smtp.SMTPSaslAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,6 @@ public class EmailService {
 
     @Autowired
     public EmailService(AppConfiguration appConfiguration) {
-
         this.appConfiguration = appConfiguration;
     }
 
@@ -62,9 +62,9 @@ public class EmailService {
     }
 
     protected MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(InternetAddress recipient, String subject) throws MessagingException {
-
         Properties applicationProperties = appConfiguration.properties();
-        Session session = Session.getDefaultInstance(applicationProperties,null);
+        session = Session.getDefaultInstance(appConfiguration.properties());
+
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
 

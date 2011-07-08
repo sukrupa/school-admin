@@ -76,7 +76,7 @@ public class AdminControllerTest {
         String subject="end of sponsor";
         String comments="Thanks for Sponsorship";
         String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage(toAddress, subject, comments);
-        verify(emailService).sendEmail(toAddress, subject, "");
+        verify(emailService).sendEmail(toAddress, subject, comments);
 
     }
 

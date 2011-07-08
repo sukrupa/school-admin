@@ -67,9 +67,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/endofsponsorshipmailsentPage")
-    public String sendEndOfSponsorShipEmailAndShowConfirmPage(@RequestParam String toAddress,
+    public String sendEndOfSponsorShipEmailAndShowConfirmPage(@RequestParam("to") String toAddress,
                                                               @RequestParam String subject, @RequestParam String comments) throws MessagingException {
-        emailService.sendEmail(toAddress, subject, "");
+        emailService.sendEmail(toAddress, subject, comments);
         return "/admin/endofsponsorshipmailsentPage";
     }
 
