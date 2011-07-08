@@ -81,7 +81,6 @@ public class EmailServiceTest {
 
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
         assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address)expectedRecipient));
-        verify(appConfiguration).properties();
     }
 
     @Test
