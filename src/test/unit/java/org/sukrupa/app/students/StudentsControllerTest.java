@@ -1,13 +1,11 @@
 package org.sukrupa.app.students;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +33,13 @@ public class StudentsControllerTest {
     @Mock
     private StudentService service;
 
-    private StudentsController controller;
+    @Mock
+    private StudentProfile studentProfile;
+
+    @Mock
+    private EmailService emailService;
+
+    private StudentsController studentController;
 
     private HashMap<String, Object> studentModel = new HashMap<String, Object>();
     private Student pat = new StudentBuilder().name("sahil").studentClass("Nursery").build();
@@ -46,30 +50,30 @@ public class StudentsControllerTest {
     public void setUp() throws Exception {
         initMocks(this);
         studentValidator = new FakeStudentValidator();
-        controller = new StudentsController(service, studentValidator);
+        studentController = new StudentsController(service, studentValidator, emailService);
     }
 
     @Test
     public void shouldPopulateModelWithAStudent() {
         when(service.load("123")).thenReturn(pat);
-        controller.view("123", false, studentModel);
+        studentController.view("123", false, studentModel);
         assertThat((Student) studentModel.get("student"), is(pat));
     }
 
     @Test
     public void shouldPickStudentViewForDisplayingSingleStudent() {
         when(service.load("123")).thenReturn(pat);
-        assertThat(controller.view("123", false, studentModel), is("students/view"));
+        assertThat(studentController.view("123", false, studentModel), is("students/view"));
     }
 
     @Test
-    public void shouldDisplayingErrorWhenAskedForInvalidStudentID() {
-        assertThat(controller.view("0987ihuyi", false, studentModel), is("students/viewFailed"));
+    public void shouldDisplayErrorWhenAskedForInvalidStudentID() {
+        assertThat(studentController.view("0987ihuyi", false, studentModel), is("students/viewFailed"));
     }
 
     @Test
     public void shouldDirectToNewStudentForm() {
-        assertThat(controller.newStudent(studentModel), is("students/create"));
+        assertThat(studentController.newStudent(studentModel), is("students/create"));
     }
 
     @Test
@@ -85,7 +89,7 @@ public class StudentsControllerTest {
         when(service.getPage(searchParam, 23, "TestQueryString")).thenReturn(students);
         when(students.getStudents()).thenReturn(asList(student));
 
-        String view = controller.listForStudentsBySponsor(23, searchParam, studentModel, request);
+        String view = studentController.listForStudentsBySponsor(23, searchParam, studentModel, request);
 
         assertThat(view, is("students/listsponsorsearch"));
         assertThat(studentModel.get("page"), is((Object) students));
@@ -101,7 +105,7 @@ public class StudentsControllerTest {
         when(service.getPage(any(StudentSearchParameter.class), anyInt(), anyString())).thenReturn(students);
         when(students.getStudents()).thenReturn(new ArrayList<Student>());
 
-        String view = controller.listForStudentsBySponsor(23, searchParam, studentModel, request);
+        String view = studentController.listForStudentsBySponsor(23, searchParam, studentModel, request);
 
         assertThat(view, is("students/listsponsorempty"));
         assertThat(studentModel, hasKey("searchCriteria"));
@@ -112,7 +116,7 @@ public class StudentsControllerTest {
         Student student = mock(Student.class);
         when(service.load("123")).thenReturn(student);
 
-        assertThat(controller.publicStudentProfile("123", studentModel), is("students/profileView"));
+        assertThat(studentController.publicStudentProfile("123", studentModel), is("students/profileView"));
         assertThat(studentModel, hasEntry("student", student));
     }
 
@@ -124,7 +128,7 @@ public class StudentsControllerTest {
         Student studentThatGetsCreated = new Student("SK111", "", "01-01-2001", "Male");
         when(service.create(any(StudentForm.class))).thenReturn(studentThatGetsCreated);
 
-        String result = controller.create(studentToCreate, null);
+        String result = studentController.create(studentToCreate, null);
 
         assertThat(result, is("redirect:/students/SK111/edit"));
     }
@@ -135,7 +139,7 @@ public class StudentsControllerTest {
         Map<String, Object> model = new HashMap<String, Object>();
         StudentForm userDidNotEnterName = mock(StudentForm.class);
 
-        controller.create(userDidNotEnterName, model);
+        studentController.create(userDidNotEnterName, model);
 
         assertNotNull(model.get("nameError"));
     }
@@ -146,7 +150,7 @@ public class StudentsControllerTest {
         Map<String, Object> model = new HashMap<String, Object>();
         StudentForm userWithoutGender = mock(StudentForm.class);
 
-        controller.create(userWithoutGender, model);
+        studentController.create(userWithoutGender, model);
         assertNotNull(model.get("genderError"));
     }
 
@@ -157,7 +161,7 @@ public class StudentsControllerTest {
         when(service.load("id")).thenReturn(student);
         when(student.getStatus()).thenReturn(StudentStatus.EXISTING_STUDENT);
 
-        controller.view("id", false, model);
+        studentController.view("id", false, model);
 
         assertThat((String) model.get("statusType"), is("existing"));
     }
@@ -169,7 +173,7 @@ public class StudentsControllerTest {
         when(service.load("id")).thenReturn(student);
         when(student.getStatus()).thenReturn(StudentStatus.DROPOUT);
 
-        controller.view("id", false, model);
+        studentController.view("id", false, model);
 
         assertThat((String) model.get("statusType"), is("dropout"));
     }
@@ -181,7 +185,7 @@ public class StudentsControllerTest {
         when(service.load("id")).thenReturn(student);
         when(student.getStatus()).thenReturn(StudentStatus.ALUMNI);
 
-        controller.view("id", false, model);
+        studentController.view("id", false, model);
 
         assertThat((String) model.get("statusType"), is("alumni"));
     }
@@ -193,10 +197,36 @@ public class StudentsControllerTest {
         when(service.load("id")).thenReturn(student);
         when(student.getStatus()).thenReturn(null);
 
-        controller.view("id", false, model);
+        studentController.view("id", false, model);
 
         assertThat((String) model.get("statusType"), is("default"));
     }
+
+   @Test
+   public void shouldDisplayThankyouPageWhenEmailHasBeenSent(){
+       Map<String, Object> model = new HashMap<String, Object>();
+       String htmlString = "<html><body>A Html Message</body></html>";
+       String email = "me@mydomain.com";
+       String subject = "Testing Send Profile View";
+       when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
+       when(emailService.sendEmail(htmlString, email, subject)).thenReturn(true);
+       String redirectPath = studentController.sendProfileView(studentProfile, email, subject, model);
+       assertThat(model.get("errorMessage").toString(), is(""));
+       assertThat(redirectPath, is("/student/thankyou"));
+   }
+
+    @Test
+    public void shouldDisplayAnErrorMessageWhenEmailSendingFailed(){
+       Map<String, Object> model = new HashMap<String, Object>();
+       String htmlString = "<html><body>A Html Message</body></html>";
+       String email = "me@mydomain.com";
+       String subject = "Testing Send Profile View";
+       when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
+       when(emailService.sendEmail(htmlString, email, subject)).thenReturn(false);
+       studentController.sendProfileView(studentProfile, email, subject, model);
+       assertThat(model.get("errorMessage").toString(), is("Error sending email!"));
+    }
+
 
     private class FakeStudentValidator extends StudentValidator {
         private List<String> errorFields;

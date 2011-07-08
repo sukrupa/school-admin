@@ -21,7 +21,6 @@ public class EmailService {
     private AppConfiguration appConfiguration;
     private Session session;
 
-
     @Autowired
     public EmailService(AppConfiguration appConfiguration) {
         this.appConfiguration = appConfiguration;
@@ -56,10 +55,11 @@ public class EmailService {
         return attachment;
     }
 
-    public boolean sendEmail(String toAddress, String subject, String messageBody) throws MessagingException {
+
+    public boolean sendEmail(String toAddress, String subject, String messageBody) {
         try{
         InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
-        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject, "");
+        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsTo(toRecipientAddress, subject, messageBody);
         Properties applicationProperties = appConfiguration.properties();
 
         applicationProperties.put("mail.smtp.auth", "true");
@@ -71,6 +71,7 @@ public class EmailService {
 //        transport.send(emailMessage);
 
         transport.close();
+
             return true;
         }
         catch (MessagingException e){
@@ -85,9 +86,7 @@ public class EmailService {
 
     protected MimeMessage createMimeMessageWithSubjectAndRecipientAsToAndAttachment(InternetAddress recipient, String subject, String comments, String attachment) throws MessagingException {
 
-        //Properties applicationProperties = appConfiguration.properties();
         session = Session.getDefaultInstance(appConfiguration.properties());
-
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
@@ -116,7 +115,7 @@ public class EmailService {
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setSubject(subject);
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
-        mimeMessage.setText(comments);
+        mimeMessage.setContent(comments, "text/html");
         return mimeMessage;
     }
 }

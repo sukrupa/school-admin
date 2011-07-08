@@ -1,5 +1,6 @@
 package org.sukrupa.app.students;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.commons.lang.ObjectUtils;
 import org.hibernate.type.YesNoType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +30,12 @@ public class StudentsController {
 
     private StudentService studentService;
     private StudentValidator studentValidator;
-
+    private EmailService emailService;
     @Autowired
-    public StudentsController(StudentService studentService, StudentValidator studentValidator) {
+    public StudentsController(StudentService studentService, StudentValidator studentValidator, EmailService emailService) {
         this.studentService = studentService;
         this.studentValidator = studentValidator;
+        this.emailService = emailService;
     }
 
     @RequestMapping
@@ -210,7 +213,16 @@ public class StudentsController {
         for (FieldError error : errors.getFieldErrors()) {
             model.put(format("%sError", error.getField()), error.getDefaultMessage());
         }
-
     }
 
+    public String sendProfileView(StudentProfile studentProfile, String recipientEmailId, String subject, Map<String, Object> model) {
+        String message = studentProfile.composeHtmlMessage();
+        boolean emailSent = emailService.sendEmail(message, recipientEmailId, subject);
+        if(emailSent){
+            model.put("errorMessage", "");
+            return "/student/thankyou";
+        }
+        model.put("errorMessage", "Error sending email!");
+        return "/student/error";
+    }
 }
