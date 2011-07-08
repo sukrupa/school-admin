@@ -39,4 +39,18 @@ public class CollectionMatchers {
             }
         };
     }
+
+    public static <T> Matcher<Map<String, ?>> hasEntry(final String key) {
+        return new TypeSafeMatcher<Map<String, ?>>() {
+            @Override
+            protected boolean matchesSafely(Map<String, ?> map) {
+                return map.containsKey(key);
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("has entry with key [" + key + "]");
+            }
+        };
+    }
 }

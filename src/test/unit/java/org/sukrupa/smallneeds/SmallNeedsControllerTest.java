@@ -1,26 +1,26 @@
 package org.sukrupa.smallneeds;
 
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.springframework.mock.web.MockHttpSession;
 import org.sukrupa.app.needs.SmallNeedsController;
-import org.sukrupa.bigneeds.BigNeed;
 import org.sukrupa.smallNeeds.SmallNeed;
 import org.sukrupa.smallNeeds.SmallNeedRepository;
 
-import java.util.Arrays;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasEntry;
 
@@ -42,10 +42,11 @@ public class SmallNeedsControllerTest {
 
     @Test
     public void shouldDisplaySmallNeedsPage() {
+        HttpSession session = mock(HttpSession.class);
         List<SmallNeed> smallNeedList = asList(mock(SmallNeed.class), mock(SmallNeed.class));
         when(smallNeedRepository.getList()).thenReturn(smallNeedList);
 
-        String view = controller.list(model);
+        String view = controller.list(model, session);
 
         assertThat(view, is("smallNeeds/smallNeedsList"));
         assertThat(model, hasEntry("smallNeedList", smallNeedList));
@@ -53,13 +54,35 @@ public class SmallNeedsControllerTest {
     }
 
     @Test
+    public void shouldDisplaySuccessMessageWhenAvailable() {
+        HttpSession session = new MockHttpSession();
+        session.setAttribute("message", "some message");
+
+        String view = controller.list(model, session);
+
+        assertThat(model, hasEntry("shouldDisplayMessage", true));
+        assertThat(model, hasEntry("message", "some message"));
+        assertThat(session.getAttribute("message"), is(nullValue()));
+    }
+
+    @Test
+    public void shouldNotDisplaySuccessMessageWhenUnavailable() {
+        HttpSession session = new MockHttpSession();
+
+        String view = controller.list(model, session);
+
+        assertThat(model, hasEntry("shouldDisplayMessage", false));
+    }
+
+    @Test
     public void shouldAddSmallNeed() {
         ArgumentCaptor<SmallNeed> smallNeedCaptor = ArgumentCaptor.forClass(SmallNeed.class);
+        HttpSession session = new MockHttpSession();
 
-        String view = controller.create(1, "SchoolUniform", 5000L, "For Aarthi", model);
+        String view = controller.create(1, "SchoolUniform", 5000L, "For Aarthi", session);
 
         assertThat(view, is("redirect:/smallneeds"));
-        assertThat((String) model.get("message"), is("Added Successfully"));
+        assertThat(session.getAttribute("message"), is((Object) "Added SchoolUniform"));
         verify(smallNeedRepository).put(smallNeedCaptor.capture());
         assertThat(smallNeedCaptor.getValue().getItemName(), is("SchoolUniform"));
         assertThat(smallNeedCaptor.getValue().getCost(), is(5000L));

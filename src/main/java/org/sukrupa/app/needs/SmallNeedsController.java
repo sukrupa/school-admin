@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.smallNeeds.SmallNeed;
 import org.sukrupa.smallNeeds.SmallNeedRepository;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,17 +25,23 @@ public class SmallNeedsController {
     }
 
     @RequestMapping
-    public String list(HashMap<String, Object> model) {
+    public String list(HashMap<String, Object> model, HttpSession session) {
         List<SmallNeed> smallNeedList = smallNeedRepository.getList();
         model.put("smallNeedList", smallNeedList);
         model.put("priority", smallNeedList.size() + 1);
+        model.put("message", session.getAttribute("message"));
+        if(session.getAttribute("message") != null)
+        model.put("shouldDisplayMessage", true);
+        else
+        model.put("shouldDisplayMessage", false);
+        session.removeAttribute("message");
         return "smallNeeds/smallNeedsList";
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam int priority, @RequestParam String itemName, @RequestParam long cost, @RequestParam String comment, HashMap<String, Object> model) {
+    public String create(@RequestParam int priority, @RequestParam String itemName, @RequestParam long cost, @RequestParam String comment, HttpSession session) {
         smallNeedRepository.put(new SmallNeed(itemName, cost, comment, priority));
-        model.put("message", "Added Successfully");
+        session.setAttribute("message", "Added " + itemName);
         return "redirect:/smallneeds";
     }
 }

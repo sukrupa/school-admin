@@ -1,3 +1,4 @@
+$successMessage(condition=shouldDisplayMessage, message=message)$
 <div>
     <div class="page">
         <table border="0">
