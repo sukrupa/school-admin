@@ -12,8 +12,8 @@
             </thead>
             <tbody>
             <tr>
-                <form name="createBigNeedsForm" method="post" action="/bigneeds/create">
-                    <td><input type="text" id="priority" name="priority" class="item-priority"/></td>
+                <form name="createSmallNeedsForm" method="post" action="/smallneeds/create">
+                    <td><input type="text" id="priority" name="priority" class="item-priority" value="$priority$"/></td>
                     <td><input type="text" id="itemName" name="itemName"/></td>
                     <td><input type="text" id="cost" name="cost"/></td>
                     <td><input type="text" id="comment" name="comment"/></td>

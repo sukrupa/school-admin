@@ -1,5 +1,5 @@
 @Login
-Feature: Add, Edit and Delete Big Needs
+Feature: Add, Edit and Delete Small Needs
 
     Scenario: Small Needs List is Displayed
         Given I am on the View Students page
@@ -17,4 +17,12 @@ Feature: Add, Edit and Delete Big Needs
         And I "Add" the form
         # Ben/Hephzibah 2011-07-08 Work in Progress
         #Then Shoes added should be displayed
-        #Then a "Shoes" costing "200" should be displayed
+        Then a "Shoes" costing "200" should be displayed with priority "3"
+
+    #Scenario: Edit item in the Small Need list
+    #   Given I am on the Small Needs page
+    #   When I edit the "School Uniform"
+    #   When I enter "Geometry Box" as Item
+    #   And I enter "400" as Cost
+    #   Then School Uniform edited should be displayed
+    #   Then a "Geometry Box" costing "400" should be displayed

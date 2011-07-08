@@ -33,8 +33,8 @@ public class BigNeedsController {
     @RequestMapping
     public String list(Map<String, Object> model) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
-        int priority=bigNeedList.size()==0? 1 :bigNeedList.get(bigNeedList.size()-1).getPriority()+1;
-        model.put("priority",priority);
+        int priority = bigNeedList.size() == 0 ? 1 : bigNeedList.get(bigNeedList.size() - 1).getPriority() + 1;
+        model.put("priority", priority);
         model.put("bigNeedList", bigNeedList);
         return "bigNeeds/bigNeedsList";
     }
@@ -55,7 +55,7 @@ public class BigNeedsController {
 
     @RequestMapping(value = "saveeditedneed", method = POST)
     @Transactional
-    public String saveEdit(@RequestParam String priority,@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
+    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
             BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
             bigNeed.setItemName(itemName);

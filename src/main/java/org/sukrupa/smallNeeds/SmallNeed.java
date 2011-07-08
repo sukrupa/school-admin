@@ -1,7 +1,6 @@
 package org.sukrupa.smallNeeds;
 
 
-
 import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.Column;
@@ -13,7 +12,7 @@ import javax.persistence.Id;
 public class SmallNeed {
     @Id
     @GeneratedValue
-    private int ID;
+    private int id;
 
     @Column(name = "ITEM_NAME")
     private String itemName;
@@ -33,14 +32,14 @@ public class SmallNeed {
     }
 
     public SmallNeed(String itemName, long cost, String comments, int priority) {
-        this.itemName=itemName;
-        this.cost=cost;
-        this.comments=comments;
-        this.priority=priority;
+        this.itemName = itemName;
+        this.cost = cost;
+        this.comments = comments;
+        this.priority = priority;
     }
 
     public String getItemName() {
-             return itemName;
+        return itemName;
     }
 
     public long getCost() {
@@ -52,6 +51,10 @@ public class SmallNeed {
     }
 
     public int getPriority() {
-      return priority;
+        return priority;
+    }
+
+    public int getId() {
+        return id;
     }
 }

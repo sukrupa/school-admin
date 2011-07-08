@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.sukrupa.smallNeeds.SmallNeed;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SmallNeedTest {
@@ -17,6 +18,7 @@ public class SmallNeedTest {
         assertThat(schoolUniformSmallNeed.getCost(), (Matcher<? super Long>) is(5000L));
         assertThat(schoolUniformSmallNeed.getComment(), is("For Aarthi"));
         assertThat(schoolUniformSmallNeed.getPriority(), is(1));
+        assertThat(schoolUniformSmallNeed.getId(), is(0));
     }
 
 }
