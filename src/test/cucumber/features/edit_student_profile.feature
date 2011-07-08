@@ -2,7 +2,6 @@
     Feature: Edit student profile
 
     Scenario: Add/Edit sponsor, and verify other student details are unchanged
-    Given I am on the View Students page
     When I edit student record of Bhavani
     And I enter Peter Murray as Sponsor
     And I save the changes
@@ -22,7 +21,7 @@
     When I edit student record of Bhavani
     And I enter "This is a note" as the note
     And I Add a Note to the student profile
-    Then Note Added Successfully should be displayed
+    Then the message "Note Added Successfully" is displayed
     And "This is a note" should be displayed in the list of notes
 
     Scenario: Edit student's status successfully
