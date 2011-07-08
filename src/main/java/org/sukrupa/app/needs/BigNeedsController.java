@@ -65,6 +65,7 @@ public class BigNeedsController {
     @Transactional
     public String saveEdit(@RequestParam String priority,@RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
+<<<<<<< HEAD
             BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Integer.parseInt(itemCost));
@@ -73,6 +74,18 @@ public class BigNeedsController {
         } catch (Exception e) {
             return "Error: " + e.toString();
         }
+=======
+        BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
+        bigNeed.setItemName(itemName);
+        bigNeed.setCost(Integer.parseInt(itemCost));
+        bigNeed.setPriority(Integer.parseInt(priority));
+        model.put("message", "Saved changes to " + itemName);
+        bigNeedRepository.put(bigNeed);
+        List<BigNeed> bigNeedList = bigNeedRepository.getList();
+        model.put("bigNeedList", bigNeedList);
+        } catch (Exception e) { }
+
+>>>>>>> Sree & Pooja: (#534) Prioritizing Pipeline, adjusted priorities for newly added item
         return "/bigneeds/list";
     }
 }
