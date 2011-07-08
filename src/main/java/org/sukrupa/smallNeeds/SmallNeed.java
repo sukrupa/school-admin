@@ -24,15 +24,19 @@ public class SmallNeed {
     @Column(name = "COMMENT")
     private String comments;
 
+    @Column(name = "PRIORITY")
+    private int priority;
+
 
     @RequiredByFramework
     public SmallNeed() {
     }
 
-    public SmallNeed(String itemName, long cost, String comments) {
+    public SmallNeed(String itemName, long cost, String comments, int priority) {
         this.itemName=itemName;
         this.cost=cost;
         this.comments=comments;
+        this.priority=priority;
     }
 
     public String getItemName() {
@@ -45,5 +49,9 @@ public class SmallNeed {
 
     public String getComment() {
         return comments;
+    }
+
+    public int getPriority() {
+      return priority;
     }
 }

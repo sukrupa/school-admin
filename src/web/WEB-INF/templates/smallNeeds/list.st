@@ -1,1 +1,1 @@
-$layout(body=smallNeeds/listBody(), title="Small Needs")$
+$layout(body=smallNeeds/listBody(), title="Small Needs", stylesheets=["needs"])$

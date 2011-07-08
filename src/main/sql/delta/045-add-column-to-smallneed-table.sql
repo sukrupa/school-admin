@@ -1,0 +1,1 @@
+ALTER TABLE SmallNeed ADD column priority int

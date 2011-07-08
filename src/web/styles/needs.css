@@ -7,3 +7,7 @@
 .editable .display {
     display: none;
 }
+
+input.item-priority {
+    width: 3em;
+}
