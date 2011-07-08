@@ -1,1 +1,1 @@
-Thank you. Mail sent. <a href="/admin/monthlyreports?sponsored=Yes">Back to monthly reports</a>
+Thank you. Mail sent.<br/> <a href="/admin/monthlyreports?sponsored=Yes">Back to monthly reports</a>
