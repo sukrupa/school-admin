@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -215,9 +216,9 @@ public class StudentsController {
         }
     }
 
-    public String sendProfileView(StudentProfile studentProfile, String recipientEmailId, String subject, Map<String, Object> model) {
+    public String sendProfileView(StudentProfile studentProfile, String recipientEmailId, String subject, Map<String, Object> model) throws MessagingException {
         String message = studentProfile.composeHtmlMessage();
-        boolean emailSent = emailService.sendEmail(message, recipientEmailId, subject);
+        boolean emailSent = emailService.sendEmail(recipientEmailId, subject, message);
         if(emailSent){
             model.put("errorMessage", "");
             return "/student/thankyou";

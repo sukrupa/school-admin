@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -203,26 +204,26 @@ public class StudentsControllerTest {
     }
 
    @Test
-   public void shouldDisplayThankyouPageWhenEmailHasBeenSent(){
+   public void shouldDisplayThankyouPageWhenEmailHasBeenSent() throws MessagingException {
        Map<String, Object> model = new HashMap<String, Object>();
        String htmlString = "<html><body>A Html Message</body></html>";
        String email = "me@mydomain.com";
        String subject = "Testing Send Profile View";
        when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
-       when(emailService.sendEmail(htmlString, email, subject)).thenReturn(true);
+       when(emailService.sendEmail( email, subject, htmlString)).thenReturn(true);
        String redirectPath = studentController.sendProfileView(studentProfile, email, subject, model);
        assertThat(model.get("errorMessage").toString(), is(""));
        assertThat(redirectPath, is("/student/thankyou"));
    }
 
     @Test
-    public void shouldDisplayAnErrorMessageWhenEmailSendingFailed(){
+    public void shouldDisplayAnErrorMessageWhenEmailSendingFailed() throws MessagingException {
        Map<String, Object> model = new HashMap<String, Object>();
        String htmlString = "<html><body>A Html Message</body></html>";
        String email = "me@mydomain.com";
        String subject = "Testing Send Profile View";
        when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
-       when(emailService.sendEmail(htmlString, email, subject)).thenReturn(false);
+       when(emailService.sendEmail(email, subject, htmlString)).thenReturn(false);
        studentController.sendProfileView(studentProfile, email, subject, model);
        assertThat(model.get("errorMessage").toString(), is("Error sending email!"));
     }
