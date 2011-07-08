@@ -51,6 +51,11 @@ public class BasicWebSteps {
         browser().submit(buttonText).click();
     }
 
+    @When("^I submit a search$")
+    public void submitSearch() {
+        browser().submit("Search").click();
+    }
+
     @Then("^the button ([^\"]*) must be displayed$")
     public void buttonShouldBeDisplayed(String text) {
         assertTrue(browser().submit(text).exists());

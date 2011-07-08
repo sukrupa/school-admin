@@ -12,7 +12,7 @@ Feature: Search Student Records
     And I select caste as "<caste>"
     And I select community location as "<community_location>"
     And I select family status as "<family_status>"
-    And I click "Search" submit button
+    And I submit a search
 
     Then <name> should be displayed
 

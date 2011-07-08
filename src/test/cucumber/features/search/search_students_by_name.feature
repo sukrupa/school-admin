@@ -5,7 +5,7 @@ Feature: Search students by name
   Scenario: Search for student by entering Partial String
   Given I am on the Search Students page
     When I enter name  "An"
-    And I click "Search" submit button
+    And I submit a search
 
     Then Anok should be displayed
     And Chandru should not be displayed
@@ -14,7 +14,7 @@ Feature: Search students by name
   Scenario: Search for students by entering the full name
   Given I am on the Search Students page
     When I enter name "Anok"
-    And I click "Search" submit button
+    And I submit a search
 
     Then Anok should be displayed
     And Haripriya should not be displayed

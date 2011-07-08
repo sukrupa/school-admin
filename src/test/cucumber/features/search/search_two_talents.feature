@@ -6,7 +6,7 @@ Feature: Search Student with Two Talents
     Given I am on the Search Students page
     When I select the talent "Sports"
     And I select the talent "Acting"
-    And I click "Search" submit button
+    And I submit a search
 
     Then Chandana should be displayed
     And Abhishek should be displayed

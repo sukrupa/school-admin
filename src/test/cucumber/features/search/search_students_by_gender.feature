@@ -4,7 +4,7 @@ Feature: Search students by class
   Scenario: Search for male students
       Given I am on the Search Students page
       When I select gender as "Male"
-      And I click "Search" submit button
+      And I submit a search
 
       Then Peter should be displayed
       And Anok should be displayed
