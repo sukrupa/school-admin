@@ -49,6 +49,11 @@ public class BigNeedSteps extends Login {
         editButton.click();
     }
 
+    @When("^I add the need")
+    public void addNeed(){
+        browser().button("Add").click();
+    }
+
     private boolean itemWithCostExists(String name, String cost,String priority) {
         ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
         ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
