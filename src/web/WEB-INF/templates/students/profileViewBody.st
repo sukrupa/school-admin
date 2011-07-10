@@ -2,7 +2,7 @@
     $successMessage(condition=studentUpdatedSuccesfully, message="Student record updated successfully.")$
     <div id="studentInfo">
         <div id="basicInfo">
-            <form name="profileView" id="profileView" action="." method="POST">
+            <form name="profileView" id="profileView" action="/students/sendprofileview" method="post">
 
                 <div class="entry">
                     <div class="label">Name</div>
@@ -31,22 +31,22 @@
                 </div>
 
                 <div class="entry" id="noteToSendEmail">
-                    <h3> Send Profile To Sponsors </h3>
+                    <h3> Send Profile To Sponsors</h3>
                 </div>
 
                 <div class="createEntry">
                     <div class="label">To:</div>
-                    <input type="text" id="sendTo" name="SendTo"/>
+                    <input type="text" id="sendTo" name="sendTo"/>
                 </div>
 
                 <div class="createEntry">
                     <div class="label">Subject:</div>
-                    <input type="text" id="subject" name="Subject"/>
+                    <input type="text" id="subject" name="subject"/>
                 </div>
 
                 <div class="createEntry">
                     <div class="label">Comments</div>
-                    <textarea name="comments" id="comments" cols="40" rows="10"> </textarea>
+                    <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
                 </div>
 
                 <div id="sendProfileButton" class="sendProfile">

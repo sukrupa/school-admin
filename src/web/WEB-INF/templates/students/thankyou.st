@@ -1,0 +1,1 @@
+$layout(body=students/thankyouBody(), title="Sending Success")$

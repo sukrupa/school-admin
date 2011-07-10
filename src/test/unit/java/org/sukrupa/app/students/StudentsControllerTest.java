@@ -210,10 +210,10 @@ public class StudentsControllerTest {
        String email = "me@mydomain.com";
        String subject = "Testing Send Profile View";
        when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
-       when(emailService.sendEmail( email, subject, htmlString)).thenReturn(true);
-       String redirectPath = studentController.sendProfileView(studentProfile, email, subject, model);
+       when(emailService.sendEmail( anyString(), anyString(), anyString())).thenReturn(true);
+       String redirectPath = studentController.sendProfileView(email, subject, studentProfile,  model);
        assertThat(model.get("errorMessage").toString(), is(""));
-       assertThat(redirectPath, is("/student/thankyou"));
+       assertThat(redirectPath, is("/students/thankyou"));
    }
 
     @Test
@@ -223,8 +223,8 @@ public class StudentsControllerTest {
        String email = "me@mydomain.com";
        String subject = "Testing Send Profile View";
        when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
-       when(emailService.sendEmail(email, subject, htmlString)).thenReturn(false);
-       studentController.sendProfileView(studentProfile, email, subject, model);
+       when(emailService.sendEmail(anyString(), anyString(), anyString())).thenReturn(false);
+       studentController.sendProfileView(email, subject, studentProfile, model);
        assertThat(model.get("errorMessage").toString(), is("Error sending email!"));
     }
 

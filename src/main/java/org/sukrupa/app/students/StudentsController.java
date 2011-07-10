@@ -1,6 +1,7 @@
 package org.sukrupa.app.students;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import javassist.bytecode.annotation.BooleanMemberValue;
 import org.apache.commons.lang.ObjectUtils;
 import org.hibernate.type.YesNoType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,10 +78,6 @@ public class StudentsController {
     @RequestMapping("search")
     public void search(Map<String, Object> model) {
         model.put("formhelper", studentService.getStudentReferenceData());
-    }
-
-    @RequestMapping("searchbysponsor")
-    public void searchStudentsBySponsor() {
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
@@ -206,6 +203,18 @@ public class StudentsController {
         return "students/profileView";
     }
 
+    @RequestMapping(value = "sendprofileview", method= POST)
+    public String sendProfileView(@RequestParam String subject,@RequestParam String sendTo, @ModelAttribute("profileView") StudentProfile studentProfile,  Map<String, Object> model) {
+        String message = studentProfile.composeHtmlMessage();
+        boolean emailSent = emailService.sendEmail(sendTo, subject, message);
+        if(emailSent){
+            model.put("errorMessage", "");
+            return "/students/thankyou";
+        }
+        model.put("errorMessage", "Error sending email!");
+        return "/students/error";
+    }
+
     private boolean mandatoryFieldsExist(Errors errors) {
         return errors.getErrorCount() == 0;
     }
@@ -214,16 +223,5 @@ public class StudentsController {
         for (FieldError error : errors.getFieldErrors()) {
             model.put(format("%sError", error.getField()), error.getDefaultMessage());
         }
-    }
-
-    public String sendProfileView(StudentProfile studentProfile, String recipientEmailId, String subject, Map<String, Object> model) throws MessagingException {
-        String message = studentProfile.composeHtmlMessage();
-        boolean emailSent = emailService.sendEmail(recipientEmailId, subject, message);
-        if(emailSent){
-            model.put("errorMessage", "");
-            return "/student/thankyou";
-        }
-        model.put("errorMessage", "Error sending email!");
-        return "/student/error";
-    }
+}
 }
