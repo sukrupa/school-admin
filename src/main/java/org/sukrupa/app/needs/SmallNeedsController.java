@@ -53,9 +53,11 @@ public class SmallNeedsController {
 
     @RequestMapping(value = "delete", method = POST)
     @Transactional
-    public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
+    public String delete(@RequestParam long itemId, HashMap<String, Object> model, HttpSession session) {
         SmallNeed smallNeed = smallNeedRepository.getSmallNeed(itemId);
         this.smallNeedRepository.delete(smallNeed);
+        this.smallNeedRepository.getSmallNeed(itemId);
+        session.setAttribute("message", "Deleted " + smallNeed.getItemName());
         return "smallNeeds/smallNeedsList";
     }
 }

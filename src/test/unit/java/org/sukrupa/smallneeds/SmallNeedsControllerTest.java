@@ -92,9 +92,11 @@ public class SmallNeedsControllerTest {
 
     @Test
     public void shouldDeleteSmallNeed(){
+
         SmallNeed smallNeed=mock(SmallNeed.class);
+        HttpSession session=new MockHttpSession();
         when(smallNeedRepository.getSmallNeed(123)).thenReturn(smallNeed);
-        String view=controller.delete(123, model);
+        String view=controller.delete(123, model,session);
         verify(smallNeedRepository).delete(smallNeed);
 
     }

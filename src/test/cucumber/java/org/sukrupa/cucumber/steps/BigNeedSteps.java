@@ -1,14 +1,12 @@
 package org.sukrupa.cucumber.steps;
 
-import cuke4duke.annotation.I18n.EN.*;
+import cuke4duke.annotation.I18n.EN.Then;
+import cuke4duke.annotation.I18n.EN.When;
+import cuke4duke.annotation.Pending;
 import net.sf.sahi.client.ElementStub;
-import org.springframework.beans.factory.annotation.Value;
 import org.sukrupa.cucumber.context.Login;
 
-import java.security.PublicKey;
-
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
@@ -34,6 +32,14 @@ public class BigNeedSteps extends Login {
     @Then("^\"([^\"]+)\" should not be displayed")
     public void itemShouldNotBeDisplayed(String name) {
         assertFalse(browser().cell(name).under(browser().cell("Name")).exists(true));
+    }
+
+    @When("^I delete the \"([^\"]*)\" with priority \"([^\"]*)\"$")
+    public void deleteGivenItemWithGivenPriority(String itemName, String priority) {
+
+        ElementStub rowContainingNameAndCostAndPriority = browser().cell(itemName).in(browser().cell(priority).parentNode());
+        ElementStub deleteButton = browser().button("Delete").in(rowContainingNameAndCostAndPriority.parentNode());
+        deleteButton.click();
     }
 
     @When("^I delete the \"([^\"]+)\"")
