@@ -61,7 +61,7 @@ public class BigNeedsController {
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Integer.parseInt(itemCost));
             bigNeed.setPriority(Integer.parseInt(priority));
-            bigNeedRepository.addOrEditBigNeed(bigNeed);
+            bigNeedRepository.editBigNeed(bigNeed);
         } catch (Exception e) {
             return "Error: " + e.toString();
         }

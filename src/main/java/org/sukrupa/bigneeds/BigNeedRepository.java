@@ -58,25 +58,33 @@ public class BigNeedRepository {
 
     public void editBigNeed(BigNeed bigNeed) {
 
-             List<BigNeed> bigNeedList=getList();
+         List<BigNeed> bigNeedList=getList();
+         int endpriority=0;
+         int startPriority=bigNeed.getPriority();
 
-             for(BigNeed need : bigNeedList)
-             {
-                 if(need.getId() == bigNeed.getId())
-                 {
-                     need.setPriority(bigNeed.getPriority());
-                     need.setItemName(bigNeed.getItemName());
-                     need.setCost(bigNeed.getCost());
-                 }
-                 else
-                     if(need.getPriority() >= bigNeed.getPriority())
-                 {
-                     int priority = need.getPriority()+1;
-                     need.setPriority(priority);
-                 }
-             }
+         for(BigNeed need1 : bigNeedList){
+            if(need1.getId() == bigNeed.getId())
+            {
+                  endpriority=need1.getPriority();
+                  break;
+            }
+         }
 
-            session().flush();
+         List<BigNeed> listOfNeedsToModifyPriority= new ArrayList<BigNeed>();
+        for(int i = startPriority-1; i <= endpriority-2; i++)
+        {
+            listOfNeedsToModifyPriority.add(bigNeedList.get(i));
+        }
+
+         for(BigNeed need2: listOfNeedsToModifyPriority){
+            int priority = need2.getPriority()+1;
+            need2.setPriority(priority);
+         }
+         BigNeed needtoUpdate = bigNeedList.get(endpriority - 1);
+         needtoUpdate.setPriority(bigNeed.getPriority());
+         needtoUpdate.setItemName(bigNeed.getItemName());
+         needtoUpdate.setCost(bigNeed.getCost());
+         session().flush();
 
     }
     private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int index){

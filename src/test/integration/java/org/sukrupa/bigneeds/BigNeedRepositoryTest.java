@@ -80,24 +80,27 @@ public class BigNeedRepositoryTest {
     }
 
 
-//     @Test
-//    public void shouldInsertRecordInProperPositionWhenItemsAreUpdated(){
-//        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
-//        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
-//        BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
-//        BigNeed tempBigNeed, retrievedBigNeed;
-//        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
-//        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
-//        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
-//        bigLargeBedBigNeed.setPriority(2);
-//        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
-//        List<BigNeed> unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(bigNeedRepository.getList(),2);
-//        retrievedBigNeed = bigNeedRepository.findByName("Air Conditioner");
-//        assertThat(retrievedBigNeed.getPriority(),is(3));
-//         retrievedBigNeed = bigNeedRepository.findByName("Big Large Bed");
-//       assertThat(retrievedBigNeed.getPriority(),is(2));
-//
-//    }
+     @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdated(){
+        BigNeed powerGeneratorBigNeed = new BigNeed("Power Generator", 50000,1);
+        BigNeed airConditionerBigNeed = new BigNeed("Air Conditioner", 20000,2);
+        BigNeed bigLargeBedBigNeed = new BigNeed("Big Large Bed", 20000,3);
+
+
+        bigNeedRepository.addOrEditBigNeed(powerGeneratorBigNeed);
+        bigNeedRepository.addOrEditBigNeed(airConditionerBigNeed);
+        bigNeedRepository.addOrEditBigNeed(bigLargeBedBigNeed);
+
+          sessionFactory.getCurrentSession().evict(airConditionerBigNeed);
+         sessionFactory.getCurrentSession().evict(powerGeneratorBigNeed);
+         sessionFactory.getCurrentSession().evict(bigLargeBedBigNeed);
+
+         bigLargeBedBigNeed.setPriority(1);
+
+        bigNeedRepository.editBigNeed(bigLargeBedBigNeed);
+         assertThat(bigNeedRepository.findByName(bigLargeBedBigNeed.getItemName()).getPriority(),is(1));
+         assertThat(bigNeedRepository.findByName(powerGeneratorBigNeed.getItemName()).getPriority(),is(2));
+    }
 
 @Test
  public void previousItemPriorityIsUpdatedAfterEditingWithExistingPriority()
