@@ -7,6 +7,7 @@
                     <div class="label">Name</div>
                     <div class="value">$student.name$</div>
                     <input type="hidden" name="studentName" id="studentName" value="$student.name$"/>
+                    <input type="hidden" name="studentId" id="studentId" value="$student.studentId$" />
                 </div>
 
                 <div class="entry">
@@ -34,17 +35,19 @@
                 </div>
 
                 <div class="createEntry">
-                    <div class="label">To:</div>
+                    <div class="label">To:<span class="mandatory">*</span></div>
                     <input type="text" id="sendTo" name="sendTo"/>
+                    <span class="errorMessage">$toEmpty$</span>
                 </div>
 
                 <div class="createEntry">
-                    <div class="label">Subject:</div>
+                    <div class="label">Subject:<span class="mandatory">*</span></div>
                     <input type="text" id="subject" name="subject"/>
+                    <span class="errorMessage">$subjectEmpty$</span>
                 </div>
 
                 <div class="createEntry">
-                    <div class="label">Comments</div><br></br>
+                    <div class="label">Comments:</div><br></br>
                     <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
                 </div>
 
@@ -60,7 +63,7 @@
                 <div class="value existing $statusType$">$student.status$</div>
             </div>
 
-            <img alt="$student.studentName$" src="/students/$student.imageLink$/image" class="studentImage"
+            <img alt="$student.name$" src="/students/$student.imageLink$/image" class="studentImage"
                  id="$student.imageLink$"/>
 
         </div>

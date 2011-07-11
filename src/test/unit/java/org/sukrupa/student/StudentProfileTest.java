@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringContains.containsString;
 public class StudentProfileTest {
     @Test
     public void shouldCreateAHTMLMessageFromStudentDetails(){
-        StudentProfile studentProfile = new StudentProfile("A Name", "10-1-1990", "Male", "Some Background", "A Disciplinary", "Comments");
+        StudentProfile studentProfile = new StudentProfile("A Name", "10-1-1990", "Male", "Some Background", "A Disciplinary", "Comments", "234524");
         String message = studentProfile.composeHtmlMessage();
         assertThat(message, containsString("<html>"));
         assertThat(message, containsString("<body>"));
@@ -21,7 +21,7 @@ public class StudentProfileTest {
 
     @Test
     public void shouldContainStudentDetailsWithinHtmlTableTags(){
-        StudentProfile studentProfile = new StudentProfile("Bhavani", "22-04-2004", "Female", "Born in India", "Excellent", "Bhavani is a very smart kid!");
+        StudentProfile studentProfile = new StudentProfile("Bhavani", "22-04-2004", "Female", "Born in India", "Excellent", "Bhavani is a very smart kid!","23462");
         String message = studentProfile.composeHtmlMessage();
         assertThat(message, containsString("<html>"));
         assertThat(message, containsString("<body>"));

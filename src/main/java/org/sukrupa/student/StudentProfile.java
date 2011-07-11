@@ -10,9 +10,10 @@ public class StudentProfile {
     private String studentBackground;
     private String studentDisciplinary;
     private String comments;
+    private String studentId;
 
 
-    public StudentProfile(String studentName, String dateOfBirth, String gender, String studentBackground, String studentDisciplinary, String comments) {
+    public StudentProfile(String studentName, String dateOfBirth, String gender, String studentBackground, String studentDisciplinary, String comments, String studentId) {
 
         this.studentName = studentName;
         this.dateOfBirth = dateOfBirth;
@@ -20,6 +21,7 @@ public class StudentProfile {
         this.studentBackground = studentBackground;
         this.studentDisciplinary = studentDisciplinary;
         this.comments = comments;
+        this.studentId = studentId;
     }
 
     @RequiredByFramework
@@ -79,13 +81,15 @@ public class StudentProfile {
         StringBuilder htmlMessage = new StringBuilder();
         htmlMessage.append("<html>");
         htmlMessage.append("<body>");
+        htmlMessage.append("<p style=\"width:250px\">" + comments + "</p>");
         htmlMessage.append("<table border=\"0\">");
-        createTableRow(htmlMessage, "Name", studentName);
-        createTableRow(htmlMessage, "Date Of Birth", dateOfBirth);
-        createTableRow(htmlMessage, "Gender", gender);
-        createTableRow(htmlMessage, "Background", studentBackground);
-        createTableRow(htmlMessage, "Disciplinary", studentDisciplinary);
-        htmlMessage.append("<tr><td colspan=\"2\">" + comments + "</td></tr>");
+        htmlMessage.append("<tr><td colspan=\"2\">" + "<img src=\"http://localhost:8080/getstudentimage/"+studentId+"/image\">" + "</td></tr>");
+        createTableRow(htmlMessage, "<b>Name:</b>", studentName);
+        createTableRow(htmlMessage, "<b>Date Of Birth:</b>", dateOfBirth);
+        createTableRow(htmlMessage, "<b>Gender:</b>", gender);
+        createTableRow(htmlMessage, "<b>Background:</b>", studentBackground);
+        createTableRow(htmlMessage, "<b>Disciplinary:</b>", studentDisciplinary);
+
         htmlMessage.append("</table>");
         htmlMessage.append("</body>");
         htmlMessage.append("</html>");
@@ -96,5 +100,13 @@ public class StudentProfile {
         htmlMessage.append("<tr><td>" + attributeName + "</td><td>");
         htmlMessage.append(value);
         htmlMessage.append("</td></tr>");
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

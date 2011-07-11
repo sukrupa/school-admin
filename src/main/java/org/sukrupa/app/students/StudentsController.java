@@ -206,7 +206,8 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "sendprofileview", method= POST)
-    public String sendProfileView(@RequestParam String subject,@RequestParam String sendTo, @ModelAttribute("profileView") StudentProfile studentProfile,  Map<String, Object> model) {
+    public String sendProfileView(@RequestParam String subject,@RequestParam String sendTo, @ModelAttribute("profileView")
+                                                                StudentProfile studentProfile,  Map<String, Object> model) {
         String message = studentProfile.composeHtmlMessage();
         boolean emailSent = emailService.sendEmail(sendTo, subject, message);
         if(emailSent){
