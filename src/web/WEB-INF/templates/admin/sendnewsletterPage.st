@@ -1,1 +1,1 @@
-$layout(scripts=["sendNewsletter"],body=admin/sendnewsletterPageBody(), title="Send Newsletter", stylesheets="admin")$
+$layout(scripts=["sendNewsletter","removeAttachment"],body=admin/sendnewsletterPageBody(), title="Send Newsletter", stylesheets="admin")$

@@ -1,0 +1,1 @@
+$layout( title="Mail Sent. Thank you", stylesheets="admin")$
