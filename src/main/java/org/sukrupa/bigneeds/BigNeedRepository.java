@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -51,14 +52,32 @@ public class BigNeedRepository {
          //   System.out.println("*********"+tempBigNeed.getItemName()+"*****"+tempBigNeed.getPriority());
             tempBigNeed.setPriority(tempBigNeed.getPriority()+1);
          //   System.out.println("New prio*****"+tempBigNeed.getPriority());
-            session().saveOrUpdate(tempBigNeed);
+            session().update(tempBigNeed);
         }
-        System.out.println();
     }
 
-    public void editBigNeed(BigNeed bigNeed,int priority) {
+    public void editBigNeed(BigNeed bigNeed) {
 
-         System.out.println(bigNeed.getPriority() + bigNeed.getItemName());
+             List<BigNeed> bigNeedList=getList();
+
+             for(BigNeed need : bigNeedList)
+             {
+                 if(need.getId() == bigNeed.getId())
+                 {
+                     need.setPriority(bigNeed.getPriority());
+                     need.setItemName(bigNeed.getItemName());
+                     need.setCost(bigNeed.getCost());
+                 }
+                 else
+                     if(need.getPriority() >= bigNeed.getPriority())
+                 {
+                     int priority = need.getPriority()+1;
+                     need.setPriority(priority);
+                 }
+             }
+
+            session().flush();
+
     }
     private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int index){
          return bigNeedList.subList(index-1,bigNeedList.size());
@@ -87,9 +106,5 @@ public class BigNeedRepository {
 
     public void delete(BigNeed bigNeed) {
         session().delete(bigNeed);
-    }
-
-    public void edit(BigNeed bigNeed) {
-        session().contains(bigNeed);
     }
 }
