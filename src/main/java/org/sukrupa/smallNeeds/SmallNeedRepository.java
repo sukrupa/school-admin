@@ -40,4 +40,14 @@ public class SmallNeedRepository {
     public List<SmallNeed> getList() {
         return (List<SmallNeed>) query("from SmallNeed order by priority").list();
     }
+
+    public SmallNeed getSmallNeed(long id) {
+        return (SmallNeed) query("from SmallNeed where ID = ?").setParameter(0, id).uniqueResult();
+    }
+
+    public void delete(Object smallNeed) {
+        session().delete(smallNeed);
+    }
+
+
 }

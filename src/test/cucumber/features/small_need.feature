@@ -15,9 +15,13 @@ Feature: Add, Edit and Delete Small Needs
         And I enter 200 as Cost
         And I enter For Anok as Comment
         And I "Add" the form
-        # Ben/Hephzibah 2011-07-08 Work in Progress
-        #Then Shoes added should be displayed
+        Then the message "Added Shoes" is displayed
         Then a "Shoes" costing "200" should be displayed with priority "3"
+
+    Scenario: Delete item from the Small Need list
+        Given I am on the Small Needs page
+        When I delete the "Books"
+        Then "Books" should not be displayed
 
     #Scenario: Edit item in the Small Need list
     #   Given I am on the Small Needs page

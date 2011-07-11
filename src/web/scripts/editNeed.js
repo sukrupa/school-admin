@@ -2,13 +2,24 @@ $(function() {
     $(".edit-bigneed-button").click(makeRowEditable)
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
-    $(".delete-bigneed-button").click(deleteNeed);
+    $(".delete-bigneed-button").click(deleteBigNeed);
+    $(".delete-smallneed-button").click(deleteSmallNeed);
+
 });
 
-function deleteNeed(itemID){
+function deleteBigNeed(itemID){
     var itemId = $(this).parents('tr').find('.item-id').val();
     var params = {itemId:itemId};
     var url = "/bigneeds/delete";
+    jQuery.post(url, params, function(data){
+        refreshPage();
+    });
+}
+
+function deleteSmallNeed(){
+    var itemId = $(this).parents('tr').find('.item-id').val();
+    var params = {itemId:itemId};
+    var url = "/smallneeds/delete";
     jQuery.post(url, params, function(data){
         refreshPage();
     });

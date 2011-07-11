@@ -39,7 +39,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                     <input type="button" class="edit-bigneed-button" name="edit" value="Edit"/>
                 </td>
                 <td>
-                    <input type="button" class="delete-bigneed-button" id="deleteNeedButton" value="Delete"/>
+                    <input type="button" class="delete-smallneed-button" id="deleteNeedButton" value="Delete"/>
                 </td>
             </tr>
             }$

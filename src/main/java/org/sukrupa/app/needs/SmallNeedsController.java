@@ -2,8 +2,10 @@ package org.sukrupa.app.needs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.smallNeeds.SmallNeed;
 import org.sukrupa.smallNeeds.SmallNeedRepository;
 
@@ -17,7 +19,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/smallneeds")
 public class SmallNeedsController {
 
-    private final SmallNeedRepository smallNeedRepository;
+    private SmallNeedRepository smallNeedRepository;
+
+    @RequiredByFramework
+    public SmallNeedsController(){
+    }
 
     @Autowired
     public SmallNeedsController(SmallNeedRepository smallNeedRepository) {
@@ -43,5 +49,13 @@ public class SmallNeedsController {
         smallNeedRepository.put(new SmallNeed(itemName, cost, comment, priority));
         session.setAttribute("message", "Added " + itemName);
         return "redirect:/smallneeds";
+    }
+
+    @RequestMapping(value = "delete", method = POST)
+    @Transactional
+    public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
+        SmallNeed smallNeed = smallNeedRepository.getSmallNeed(itemId);
+        this.smallNeedRepository.delete(smallNeed);
+        return "smallNeeds/smallNeedsList";
     }
 }

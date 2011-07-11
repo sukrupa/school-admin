@@ -31,7 +31,7 @@ public class BigNeedSteps extends Login {
         assertFalse(itemWithCostExists(name, cost,priority));
     }
 
-    @Then("^a \"([^\"]+)\" should not be displayed")
+    @Then("^\"([^\"]+)\" should not be displayed")
     public void itemShouldNotBeDisplayed(String name) {
         assertFalse(browser().cell(name).under(browser().cell("Name")).exists(true));
     }

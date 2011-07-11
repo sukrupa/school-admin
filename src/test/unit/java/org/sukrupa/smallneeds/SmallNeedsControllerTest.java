@@ -89,4 +89,13 @@ public class SmallNeedsControllerTest {
         assertThat(smallNeedCaptor.getValue().getComment(), is("For Aarthi"));
         assertThat(smallNeedCaptor.getValue().getPriority(), is(1));
     }
+
+    @Test
+    public void shouldDeleteSmallNeed(){
+        SmallNeed smallNeed=mock(SmallNeed.class);
+        when(smallNeedRepository.getSmallNeed(123)).thenReturn(smallNeed);
+        String view=controller.delete(123, model);
+        verify(smallNeedRepository).delete(smallNeed);
+
+    }
 }

@@ -1,1 +1,1 @@
-$layout(body=smallNeeds/smallNeedsListBody(), title="Small Needs", scripts=["fadeout"], stylesheets=["needs"])$
+$layout(body=smallNeeds/smallNeedsListBody(), title="Small Needs", scripts=["fadeout","editNeed"], stylesheets=["needs"])$
