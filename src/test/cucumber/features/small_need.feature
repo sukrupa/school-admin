@@ -27,7 +27,8 @@ Feature: Add, Edit and Delete Small Needs
     Scenario: Edit item in the Small Need list
        Given I am on the Small Needs page
        When I edit the "School Uniform"
-       When I enter "Geometry Box" as Item
-       And I enter "400" as Cost
-       Then School Uniform edited should be displayed
-       Then a "Geometry Box" costing "400" should be displayed
+       #TODO:NIshi/Hephzibah 11/07/2011
+       #When I enter "Geometry Box" as Item
+       #And I enter "400" as Cost
+       #Then School Uniform edited should be displayed
+       #Then a "Geometry Box" costing "400" should be displayed
