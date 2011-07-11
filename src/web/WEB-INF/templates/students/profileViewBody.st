@@ -1,5 +1,4 @@
 <div id="student">
-    $successMessage(condition=studentUpdatedSuccesfully, message="Student record updated successfully.")$
     <div id="studentInfo">
         <div id="basicInfo">
             <form name="profileView" id="profileView" action="/students/sendprofileview" method="post">
@@ -45,7 +44,7 @@
                 </div>
 
                 <div class="createEntry">
-                    <div class="label">Comments</div>
+                    <div class="label">Comments</div><br></br>
                     <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
                 </div>
 

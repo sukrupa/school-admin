@@ -13,7 +13,7 @@ public class SendProfileViewSteps extends BasicWebSteps {
         pageIsDisplayed("Profile View");
     }
 
-    @When("^I enter the email \"([^\"]*)\" as To$")
+    @When("^I enter the email to \"([^\"]*)\"$")
     public void enterSendToEmailId(String emailId){
        enterIntoTheTextBox(emailId, "sendTo");
     }
