@@ -22,24 +22,26 @@ public class BigNeedRepository {
     }
 
     public boolean checkForPrioritization(BigNeed bigNeed){
-       return getList().size() > bigNeed.getPriority() ? true : false;
+       return getList().size() >= bigNeed.getPriority() ? true : false;
     }
 
-    public void addOrEditBigNeed(BigNeed bigNeed) {
+    public void  addOrEditBigNeed(BigNeed bigNeed) {
        List<BigNeed> unModifiedBigNeedList;
-        BigNeed tempBigNeed;
-        if(checkForPrioritization(bigNeed)){
-                 session().saveOrUpdate(bigNeed);
 
-                 unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
+        if(checkForPrioritization(bigNeed)){
+                // session().saveOrUpdate(bigNeed);
+
+                unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
                 ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
                 adjustThePriorities(bigNeedListIterator);
+
 
 
         }
         else{
             session().saveOrUpdate(bigNeed);
         }
+        session().saveOrUpdate(bigNeed);
     }
 
     public void adjustThePriorities(ListIterator<BigNeed> bigNeedListIterator) {
