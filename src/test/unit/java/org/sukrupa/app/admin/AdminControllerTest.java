@@ -88,6 +88,6 @@ public class AdminControllerTest {
 
         adminController.sendNewsletterEmail(toAddress, subject,"/Users/srivathr/Desktop/Test.txt","");
 
-        verify(emailService).sendEmail(toAddress, subject, "");
+        verify(emailService).sendNewsLetter(toAddress, subject, "","/Users/srivathr/Desktop/Test.txt");
     }
 }
