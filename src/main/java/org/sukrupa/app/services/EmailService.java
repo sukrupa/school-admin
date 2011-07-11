@@ -1,19 +1,20 @@
 package org.sukrupa.app.services;
 
 
-import com.sun.mail.smtp.SMTPSaslAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.sukrupa.platform.config.AppConfiguration;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.*;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 @Component
 public class EmailService {
@@ -26,9 +27,8 @@ public class EmailService {
         this.appConfiguration = appConfiguration;
     }
 
-     public boolean sendNewsLetter(String toAddress, String subject, String comments, String attachment) throws MessagingException {
-        try{
-        InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
+     public boolean sendNewsLetter(String toAddress, String subject, String comments, String attachment) throws MessagingException, IOException {
+                InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
         attachment = extractAttachmentFileAddress(attachment);
 
         MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsToAndAttachment(toRecipientAddress, subject, comments, attachment);
@@ -43,11 +43,9 @@ public class EmailService {
 
         transport.close();
             return true;
-        }
-        catch (MessagingException e){
-            return false;
-        }
-    }
+
+
+     }
 
     protected String extractAttachmentFileAddress(String attachment) {
         attachment=attachment.substring(attachment.indexOf('\\'));
@@ -68,7 +66,6 @@ public class EmailService {
         Transport transport = Session.getDefaultInstance(applicationProperties).getTransport("smtp");
         transport.connect(applicationProperties.getProperty("mail.smtp.host"),Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")),applicationProperties.getProperty("mail.smtp.user"),applicationProperties.getProperty("mail.smtp.password"));
         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
-//        transport.send(emailMessage);
 
         transport.close();
 
@@ -84,7 +81,7 @@ public class EmailService {
         return internetAddress;
     }
 
-    protected MimeMessage createMimeMessageWithSubjectAndRecipientAsToAndAttachment(InternetAddress recipient, String subject, String comments, String attachment) throws MessagingException {
+    protected MimeMessage createMimeMessageWithSubjectAndRecipientAsToAndAttachment(InternetAddress recipient, String subject, String comments, String attachment) throws MessagingException, IOException {
 
         session = Session.getDefaultInstance(appConfiguration.properties());
         MimeMessage mimeMessage = new MimeMessage(session);

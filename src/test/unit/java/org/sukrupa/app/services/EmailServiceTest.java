@@ -12,7 +12,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.xml.soap.Text;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -85,7 +84,7 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldCreateMimeMessageAndRecipientAsTo() throws MessagingException {
+    public void shouldCreateMimeMessageAndRecipientAsTo() throws MessagingException, IOException {
         String excpectedSubject = "A subject";
         when(appConfiguration.properties()).thenReturn(new Properties());
 

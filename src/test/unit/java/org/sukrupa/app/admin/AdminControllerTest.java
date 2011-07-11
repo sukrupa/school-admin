@@ -3,11 +3,13 @@ package org.sukrupa.app.admin;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.web.multipart.MultipartFile;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class AdminControllerTest {
     private StudentService studentService;
     @Mock
     private EmailService emailService;
+    @Mock
+    private MultipartFile mockAttachment;
 
     private AdminController adminController;
 
@@ -81,13 +85,14 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void shouldSendEmail() throws MessagingException {
+    public void shouldSendEmail() throws MessagingException, IOException {
 
         String toAddress = "anita@thoughtworks.com";
         String subject = "NewsLetter";
+        
+        when(mockAttachment.getOriginalFilename()).thenReturn("Test.txt");
+        adminController.sendNewsletterEmail(toAddress, subject,"",mockAttachment);
 
-        adminController.sendNewsletterEmail(toAddress, subject,"/Users/srivathr/Desktop/Test.txt","");
-
-        verify(emailService).sendNewsLetter(toAddress, subject, "","/Users/srivathr/Desktop/Test.txt");
+        verify(emailService).sendNewsLetter(toAddress, subject, "", "C:\\Users\\srivathr\\Desktop\\Test.txt");
     }
 }
