@@ -9,13 +9,10 @@ import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @Controller
@@ -57,8 +54,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/sendnewsletteremail", method = GET)
-    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject) throws MessagingException {
-        emailService.sendEmail(to, subject,"");
+    public void sendNewsletterEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String fakebox, @RequestParam String comments) throws MessagingException {
+        emailService.sendNewsLetter(to, subject,comments,fakebox);
+
     }
 
     @RequestMapping("/endofsponsorshipform")

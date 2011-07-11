@@ -1,10 +1,10 @@
 package org.sukrupa.app.services;
 
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.sukrupa.platform.config.AppConfiguration;
 
 import javax.mail.Address;
@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.soap.Text;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -51,6 +52,15 @@ public class EmailServiceTest {
     }
 
     @Test
+    public void shouldExtractAttachmentFileAddress(){
+        String actualFilePath = "C:\\Users\\srivathr\\Desktop\\Text.txt";
+        emailService = new EmailService(appConfiguration);
+        String extractedAttachmentFileAddress = emailService.extractAttachmentFileAddress(actualFilePath);
+        Assert.assertThat(extractedAttachmentFileAddress, is("/Users/srivathr/Desktop/Text.txt"));
+
+    }
+
+    @Test
         public void shouldSendEmailEventually() throws MessagingException {
         //emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");
         // Anita, Sri, will come back and finish this off once we figured out how to test it
@@ -80,7 +90,7 @@ public class EmailServiceTest {
         when(appConfiguration.properties()).thenReturn(new Properties());
 
         InternetAddress expectedRecipient = new InternetAddress("anitam@thoughtworks.com");
-        MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsTo(expectedRecipient, excpectedSubject);
+        MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsToAndAttachment(expectedRecipient, excpectedSubject, "", "");
 
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
         assertThat(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)[0], is((Address) expectedRecipient));

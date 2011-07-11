@@ -85,7 +85,8 @@ public class AdminControllerTest {
 
         String toAddress = "anita@thoughtworks.com";
         String subject = "NewsLetter";
-        adminController.sendNewsletterEmail(toAddress, subject);
+
+        adminController.sendNewsletterEmail(toAddress, subject,"/Users/srivathr/Desktop/Test.txt","");
 
         verify(emailService).sendEmail(toAddress, subject, "");
     }
