@@ -666,4 +666,8 @@ img.studentImage{
     display: none;
 }
 
+.dualSelectBoxButtons {
+    width: 90px;
+}
+
 

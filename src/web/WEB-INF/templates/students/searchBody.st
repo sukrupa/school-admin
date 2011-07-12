@@ -26,13 +26,13 @@
                         </td>
                         <td>
                             <div>
-                                <input type="button" style="width:90" id='addTalent' name="addTalent" value="Add >">
+                                <input type="button" class="dualSelectBoxButtons" id='addTalent' name="addTalent" value="Add >">
                             </div>
                             <div>
-                                <input type="button" style="width:90" id='removeTalent' name="removeTalent" value="Remove <">
+                                <input type="button" class="dualSelectBoxButtons" id='removeTalent' name="removeTalent" value="Remove <">
                             </div>
                             <div>
-                                <input type="button" style="width:90" id='clearTalents' name="clearTalents" value="Clear <<">
+                                <input type="button" class="dualSelectBoxButtons" id='clearTalents' name="clearTalents" value="Clear <<">
                             </div>
                         </td>
                         <td>

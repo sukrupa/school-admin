@@ -88,13 +88,13 @@
                 </td>
                 <td>
                     <div>
-                        <input type="button" style="width:90" id='addStudents' name="addStudents" value="Add >">
+                        <input type="button" class="dualSelectBoxButtons" id='addStudents' name="addStudents" value="Add >">
                     </div>
                     <div>
-                        <input type="button" style="width:90" id='removeStudents' name="removeStudents" value="Remove <">
+                        <input type="button" class="dualSelectBoxButtons" id='removeStudents' name="removeStudents" value="Remove <">
                     </div>
                     <div>
-                        <input type="button" style="width:90" id='clearStudents' name="clearStudents" value="Clear <<">
+                        <input type="button" class="dualSelectBoxButtons" id='clearStudents' name="clearStudents" value="Clear <<">
                     </div>
                 </td>
                 <td>
