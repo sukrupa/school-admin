@@ -59,11 +59,13 @@ public class AdminController {
 
     @RequestMapping(value = "/sendnewsletteremail", method = POST)
     public String sendNewsletterEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String comments, @RequestParam ("attach")MultipartFile file) throws MessagingException, IOException {
+
         String fileAttachmentFilePath = System.getProperty("user.dir")+file.getOriginalFilename();
         if(file.getOriginalFilename()== ""){
             emailService.sendEmail(to,subject,comments);
             return  "admin/thankyou";
         }
+
         File webserverSideCopyOfClientSideFileAttachment = new File(fileAttachmentFilePath);
         file.transferTo(webserverSideCopyOfClientSideFileAttachment);
         emailService.sendNewsLetter(to, subject,comments,fileAttachmentFilePath);

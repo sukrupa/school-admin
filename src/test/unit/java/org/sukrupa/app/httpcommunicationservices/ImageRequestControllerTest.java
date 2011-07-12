@@ -1,5 +1,4 @@
 package org.sukrupa.app.httpcommunicationservices;
-
 import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.app.services.FileHandler;
