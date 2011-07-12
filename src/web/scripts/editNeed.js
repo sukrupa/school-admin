@@ -1,21 +1,13 @@
 $(function() {
-    $(".edit-bigneed-button").click(makeRowEditable)
+    $(".edit-bigneed-button").click(makeRowEditable);
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
-    $(".delete-bigneed-button").click(deleteBigNeed);
+    $(".delete-bigneed-button").click(deleteNeed);
     $(".delete-smallneed-button").click(deleteSmallNeed);
 
 });
 
-function deleteBigNeed(itemID){
-    var itemId = $(this).parents('tr').find('.item-id').val();
-    var params = {itemId:itemId};
-    var url = "/bigneeds/delete";
-    jQuery.post(url, params, function(data){
-        refreshPage();
-    });
-}
-
+//Needs Refactoring
 function deleteSmallNeed(){
     var itemId = $(this).parents('tr').find('.item-id').val();
     var params = {itemId:itemId};
@@ -25,33 +17,6 @@ function deleteSmallNeed(){
     });
 }
 
-function saveRow(){
-    var itemId = $(this).parents('tr').find('.item-id').val();
-    var itemName = $(this).parents('tr').find('.item-name').val();
-    var itemCost = $(this).parents('tr').find('.item-cost').val();
-    var priority = $(this).parents('tr').find('.item-priority').val();
-    var params = {itemName: itemName, itemCost: itemCost, itemId:itemId, priority: priority};
-    var url = "/bigneeds/saveeditedneed";
-    jQuery.post(url, params, function(data){
-        refreshPage();
-    });
-}
-
-function addBigNeed(){
-    var priority = $(this).parents('tr').find('.item-priority').val();
-    var itemName = $(this).parents('tr').find('.item-name').val();
-    var itemCost = $(this).parents('tr').find('.item-cost').val();
-    var params ={itemName: itemName, itemCost: itemCost, priority: priority};
-    var url = "/bigneeds/create";
-    jQuery.post(url,params, function(data){
-        refreshPage();
-    });
-}
-
-function makeRowEditable(){
-    $(this).parents("tr").addClass("editable");
-}
-
 function refreshPage() {
     try {
         location.reload();
@@ -59,4 +24,31 @@ function refreshPage() {
         alert("Page Refresh Failed")
     }
 }
+//End of "Needs Refactoring"
+
+function deleteNeed(itemID) {
+    submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
+}
+
+function saveRow() {
+    submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/saveeditedneed");
+}
+
+function addBigNeed() {
+    submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/create");
+}
+
+function submitForm(form, $, actionUrl) {
+    form.itemName.value = $.parents('tr').find('.item-name').val();
+    form.itemCost.value = $.parents('tr').find('.item-cost').val();
+    form.priority.value = $.parents('tr').find('.item-priority').val();
+    form.itemId.value = $.parents('tr').find('.item-id').val();
+    form.action = actionUrl;
+    form.submit();
+}
+
+function makeRowEditable() {
+    $(this).parents("tr").addClass("editable");
+}
+
 

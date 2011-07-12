@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 import org.sukrupa.bigneeds.BigNeed;
 import org.sukrupa.bigneeds.BigNeedRepository;
 import org.sukrupa.platform.RequiredByFramework;
@@ -42,7 +43,7 @@ public class BigNeedsController {
     @RequestMapping(value = "create", method = POST)
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
         bigNeedRepository.addOrEditBigNeed(new BigNeed(itemName, Integer.parseInt(itemCost), Integer.parseInt(priority)));
-        return "/bigNeeds/bigNeedsList";
+        return list(model);
     }
 
     @RequestMapping(value = "delete", method = POST)
@@ -50,7 +51,7 @@ public class BigNeedsController {
     public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
         BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
         this.bigNeedRepository.delete(bigNeed);
-        return "/bigNeeds/bigNeedsList";
+        return list(model);
     }
 
     @RequestMapping(value = "saveeditedneed", method = POST)
@@ -65,6 +66,6 @@ public class BigNeedsController {
         } catch (Exception e) {
             return "Error: " + e.toString();
         }
-        return "/bigNeeds/bigNeedsList";
+        return list(model);
     }
 }
