@@ -23,17 +23,21 @@ public class BigNeed {
     @Column(name = "PRIORITY")
     private int priority;
 
-    public BigNeed(String itemName, double cost,int priority) {
-        this.itemName = itemName;
-        this.cost = cost;
-        this.priority=priority;
-    }
-
     @RequiredByFramework
     public BigNeed() {
     }
 
-    public BigNeed(int id, String itemName, int cost, int priority) {
+    public BigNeed(String itemName, double cost) {
+        this.itemName = itemName;
+        this.cost = cost;
+    }
+
+    public BigNeed(String itemName, double cost,int priority) {
+        this(itemName, cost);
+        this.priority=priority;
+    }
+
+    public BigNeed(int id, String itemName, double cost, int priority) {
         this(itemName, cost, priority);
         this.id = id;
     }

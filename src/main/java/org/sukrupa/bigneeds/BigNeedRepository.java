@@ -6,7 +6,6 @@ import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -20,73 +19,35 @@ public class BigNeedRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public boolean checkForPrioritization(BigNeed bigNeed){
-       return getList().size() >= bigNeed.getPriority() ? true : false;
+    public void addBigNeed(BigNeed bigNeed, int newPriority) {
+        bigNeed.setPriority(getList().size()+1);
+        editBigNeed(bigNeed, newPriority);
     }
 
-    public void  addOrEditBigNeed(BigNeed bigNeed) {
-       List<BigNeed> unModifiedBigNeedList;
+    public void editBigNeed(BigNeed updatedBigNeed, int newPriority) {
+        List<BigNeed> bigNeeds = getList();
+        bigNeeds.remove(updatedBigNeed);
+        saveList(adjustPriorities(bigNeeds, updatedBigNeed, newPriority));
+    }
 
-        if(checkForPrioritization(bigNeed)){
-                // session().saveOrUpdate(bigNeed);
-
-                unModifiedBigNeedList=returnUnmodifiedListOfBigNeeds(getList(),bigNeed.getPriority());
-                ListIterator<BigNeed> bigNeedListIterator = unModifiedBigNeedList.listIterator();
-                adjustThePriorities(bigNeedListIterator);
-
-
-
-        }
-        else{
+    private void saveList(List<BigNeed> bigNeeds) {
+        for (BigNeed bigNeed : bigNeeds) {
             session().saveOrUpdate(bigNeed);
         }
-        session().saveOrUpdate(bigNeed);
     }
 
-    public void adjustThePriorities(ListIterator<BigNeed> bigNeedListIterator) {
-        BigNeed tempBigNeed;
-        while (bigNeedListIterator.hasNext()){
-            tempBigNeed = bigNeedListIterator.next();
-         //   System.out.println("*********"+tempBigNeed.getItemName()+"*****"+tempBigNeed.getPriority());
-            tempBigNeed.setPriority(tempBigNeed.getPriority()+1);
-         //   System.out.println("New prio*****"+tempBigNeed.getPriority());
-            session().update(tempBigNeed);
-        }
-    }
-
-    public void editBigNeed(BigNeed bigNeed) {
-
-         List<BigNeed> bigNeedList=getList();
-         int endpriority=0;
-         int startPriority=bigNeed.getPriority();
-
-         for(BigNeed need1 : bigNeedList){
-            if(need1.getId() == bigNeed.getId())
-            {
-                  endpriority=need1.getPriority();
-                  break;
+    private List<BigNeed> adjustPriorities(List<BigNeed> bigNeeds, BigNeed updatedBigNeed, int newPriority) {
+        int i = 0;
+        for (; i < bigNeeds.size(); i++) {
+            if (bigNeeds.get(i).getPriority() == newPriority) {
+                break;
             }
-         }
-
-         List<BigNeed> listOfNeedsToModifyPriority= new ArrayList<BigNeed>();
-        for(int i = startPriority-1; i <= endpriority-2; i++)
-        {
-            listOfNeedsToModifyPriority.add(bigNeedList.get(i));
         }
-
-         for(BigNeed need2: listOfNeedsToModifyPriority){
-            int priority = need2.getPriority()+1;
-            need2.setPriority(priority);
-         }
-         BigNeed needtoUpdate = bigNeedList.get(endpriority - 1);
-         needtoUpdate.setPriority(bigNeed.getPriority());
-         needtoUpdate.setItemName(bigNeed.getItemName());
-         needtoUpdate.setCost(bigNeed.getCost());
-         session().flush();
-
-    }
-    private List<BigNeed> returnUnmodifiedListOfBigNeeds(List<BigNeed> bigNeedList, int index){
-         return bigNeedList.subList(index-1,bigNeedList.size());
+        bigNeeds.add(updatedBigNeed.getPriority() >= newPriority ? i : i + 1, updatedBigNeed);
+        for (i = 0; i < bigNeeds.size(); i++) {
+            bigNeeds.get(i).setPriority(i + 1);
+        }
+        return bigNeeds;
     }
 
     public BigNeed findByName(String itemName) {
@@ -103,11 +64,11 @@ public class BigNeedRepository {
 
     @SuppressWarnings("unchecked")
     public List<BigNeed> getList() {
-         return (List<BigNeed>) query("from BigNeed order by priority").list();
+        return (List<BigNeed>) query("from BigNeed order by priority").list();
     }
 
     public BigNeed getBigNeed(long id) {
-        return (BigNeed) session().get(BigNeed.class,id);
+        return (BigNeed) session().get(BigNeed.class, id);
     }
 
     public void delete(BigNeed bigNeed) {

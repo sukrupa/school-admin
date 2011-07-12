@@ -41,7 +41,7 @@ public class BigNeedsController {
 
     @RequestMapping(value = "create", method = POST)
     public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
-        bigNeedRepository.addOrEditBigNeed(new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority)));
+        bigNeedRepository.addBigNeed(new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority)),Integer.parseInt(priority));
         model.clear();
         return "redirect:/bigneeds";
     }
@@ -62,8 +62,7 @@ public class BigNeedsController {
             BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Double.parseDouble(itemCost));
-            bigNeed.setPriority(Integer.parseInt(priority));
-            bigNeedRepository.editBigNeed(bigNeed);
+            bigNeedRepository.editBigNeed(bigNeed,Integer.parseInt(priority));
         } catch (Exception e) {
             return "Error: " + e.toString();
         }

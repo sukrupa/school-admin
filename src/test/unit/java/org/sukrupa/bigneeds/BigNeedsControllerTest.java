@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.sukrupa.app.needs.BigNeedsController;
 
@@ -12,10 +13,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasEntry;
 
@@ -52,14 +50,19 @@ public class BigNeedsControllerTest {
     @Test
     public void shouldCreateABigNeed() {
         ArgumentCaptor<BigNeed> bigNeedCaptor = ArgumentCaptor.forClass(BigNeed.class);
-        String view = controller.create("1","sample", "60000", model);
-        verify(bigNeedRepository).addOrEditBigNeed(bigNeedCaptor.capture());
+        String view = controller.create("1", "sample", "60000", model);
+        verify(bigNeedRepository).addBigNeed(bigNeedCaptor.capture(), eq(1));
         assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
+<<<<<<< HEAD
         assertThat(bigNeedCaptor.getValue().getCost(), is((double)60000));
+=======
+        assertThat(bigNeedCaptor.getValue().getCost(), is(60000));
+        Assert.assertThat(view, is("/bigNeeds/bigNeedsList"));
+>>>>>>> Deepak & Pooja(#534) Prioritization for updating items in big needs
     }
 
     @Test
-    public void shouldDeleteABigNeed(){
+    public void shouldDeleteABigNeed() {
         BigNeed bigNeed = mock(BigNeed.class);
         when(bigNeedRepository.getBigNeed(123)).thenReturn(bigNeed);
         when(bigNeed.getItemName()).thenReturn("Banana");
@@ -67,18 +70,17 @@ public class BigNeedsControllerTest {
         verify(bigNeedRepository).delete(bigNeed);
     }
 
-    
 
     @Test
-    public void shouldSaveAnEditedBigNeed(){
+    public void shouldSaveAnEditedBigNeed() {
         BigNeed bigNeed = mock(BigNeed.class);
         when(bigNeedRepository.getBigNeed(123)).thenReturn(bigNeed);
         when(bigNeed.getItemName()).thenReturn("Banana");
 
-        String view = controller.saveEdit("1",123, "Forks" , "9001" , model);
+        String view = controller.saveEdit("1", 123, "Forks", "9001", model);
         //controller.saveEdit(123, "Forks" , "9001" , model);
         //assertThat(view, is("redirect:/bigneeds"));
-      //  assertThat(model, hasEntry("message", "Saved changes to Forks"));
+        //  assertThat(model, hasEntry("message", "Saved changes to Forks"));
         //verify(bigNeedRepository).save(bigNeed);
     }
 }
