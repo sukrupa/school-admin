@@ -18,15 +18,7 @@
                 <td >$it.name$</td>
                 <td>$it.sponsor$</td>
                 <td >$it.sponsor_email$</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <td ><a href="/admin/endofsponsorshipform?sponsor_email=$it.sponsor_email$"> Send mail </a></td>git
-=======
                 <td ><a href="/admin/endofsponsorshipform?sponsor_email=$it.sponsor_email$"> Send mail </a></td>
->>>>>>> nishi and shikhar added some junit tests
-=======
-                <td ><a href="/admin/endofsponsorshipform?sponsor_email=$it.sponsor_email$"> Send mail </td>
->>>>>>> nishi and shikhar added some junit tests
             </tr>
             }$
             </tbody>
