@@ -1,6 +1,5 @@
 package org.sukrupa.bigneeds;
 
-import org.eclipse.jdt.core.dom.ThisExpression;
 import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.Column;
@@ -19,12 +18,12 @@ public class BigNeed {
     private String itemName;
 
     @Column(name = "COST")
-    private int cost;
+    private double cost;
 
     @Column(name = "PRIORITY")
     private int priority;
 
-    public BigNeed(String itemName, int cost,int priority) {
+    public BigNeed(String itemName, double cost,int priority) {
         this.itemName = itemName;
         this.cost = cost;
         this.priority=priority;
@@ -43,7 +42,7 @@ public class BigNeed {
         return itemName;
     }
 
-    public Integer getCost() {
+    public double getCost() {
         return cost;
     }
 
@@ -68,7 +67,7 @@ public class BigNeed {
         this.itemName = itemName;
     }
 
-    public void setCost(int cost){
+    public void setCost(double cost){
         System.out.println(cost);
         this.cost = cost;
     }

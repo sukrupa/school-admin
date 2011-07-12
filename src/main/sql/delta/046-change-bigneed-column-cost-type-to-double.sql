@@ -1,0 +1,2 @@
+
+ALTER TABLE BigNeed ALTER COLUMN COST double;

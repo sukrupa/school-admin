@@ -29,7 +29,7 @@ function refreshPage() {
 
 
 function deleteNeed(itemID) {
-    if(confirm("Are you sure ?"))
+    if(confirm("Are you sure you want to "+$(this)[0].value +"?"))
         submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
 }
 
@@ -53,9 +53,11 @@ function submitForm(form, $, actionUrl) {
 }
 
 function isNumber(string){
-    var number = parseInt(string);
-    return (!isNaN(number));
+    //var number = parseFloat(string);
+    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.[0-9]+)?$/.test(string);
 }
+
+
 function validateNeedsForm(form) {
 
     if(!isNumber(form.priority.value)){
@@ -70,6 +72,7 @@ function validateNeedsForm(form) {
         $('#error')[0].innerHTML = "Please enter a valid Cost !!!";
         return false;
     }
+    form.itemCost.value = parseFloat(form.itemCost.value).toFixed(2);
     return true;
 }
 

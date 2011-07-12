@@ -55,7 +55,7 @@ public class BigNeedsControllerTest {
         String view = controller.create("1","sample", "60000", model);
         verify(bigNeedRepository).addOrEditBigNeed(bigNeedCaptor.capture());
         assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
-        assertThat(bigNeedCaptor.getValue().getCost(), is(60000));
+        assertThat(bigNeedCaptor.getValue().getCost(), is((double)60000));
     }
 
     @Test
