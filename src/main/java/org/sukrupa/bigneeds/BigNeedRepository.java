@@ -27,6 +27,7 @@ public class BigNeedRepository {
     public void editBigNeed(BigNeed updatedBigNeed, int newPriority) {
         List<BigNeed> bigNeeds = getList();
         bigNeeds.remove(updatedBigNeed);
+        newPriority=Math.min(bigNeeds.size()+1,newPriority);
         saveList(adjustPriorities(bigNeeds, updatedBigNeed, newPriority));
     }
 
@@ -73,5 +74,17 @@ public class BigNeedRepository {
 
     public void delete(BigNeed bigNeed) {
         session().delete(bigNeed);
+        List<BigNeed> bigNeeds=adjustingPrioritiesForDelete();
+        saveList(bigNeeds);
+
+    }
+
+    private List<BigNeed> adjustingPrioritiesForDelete() {
+        List<BigNeed>bigNeeds=getList();
+        int i;
+         for (i = 0; i < bigNeeds.size(); i++) {
+            bigNeeds.get(i).setPriority(i + 1);
+         }
+        return bigNeeds;
     }
 }

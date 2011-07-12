@@ -1,6 +1,8 @@
 package org.sukrupa.bigneeds;
 
 
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
@@ -84,6 +87,36 @@ public class BigNeedRepositoryTest {
     }
 
     @Test
+    public void shouldInsertPriorityCorrectlyIfGreaterThanPrePopulatedPriority(){
+        BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
+        sessionFactory.getCurrentSession().save(powerGenerator);
+
+        BigNeed airConditioner = new BigNeed("Air Conditioner", 20000);
+        bigNeedRepository.addBigNeed(airConditioner,3);
+
+        assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(1));
+        assertThat(bigNeedRepository.findByName(airConditioner.getItemName()).getPriority(), is(2));
+
+    }
+
+     @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToGreaterThanMaximumSize() {
+        BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
+        BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2);
+        BigNeed largeBed = new BigNeed("Big Large Bed", 20000, 3);
+
+        sessionFactory.getCurrentSession().save(powerGenerator);
+        sessionFactory.getCurrentSession().save(airConditioner);
+        sessionFactory.getCurrentSession().save(largeBed);
+
+        bigNeedRepository.editBigNeed(powerGenerator, 5);
+
+        assertThat(bigNeedRepository.findByName(airConditioner.getItemName()).getPriority(), is(1));
+         assertThat(bigNeedRepository.findByName(largeBed.getItemName()).getPriority(), is(2));
+         assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(3));
+    }
+
+    @Test
     public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToLowerPriority() {
         BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
         BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2);
@@ -127,6 +160,23 @@ public class BigNeedRepositoryTest {
         sessionFactory.getCurrentSession().save(airConditionerBigNeed);
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
         assertThat(bigNeedList.isEmpty(), is(false));
+    }
+
+     @Test
+    public void shouldDeleteRecordAndAdjustThePriorites() {
+        BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
+        BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2);
+        BigNeed largeBed = new BigNeed("Big Large Bed", 20000, 3);
+
+        sessionFactory.getCurrentSession().save(powerGenerator);
+        sessionFactory.getCurrentSession().save(airConditioner);
+        sessionFactory.getCurrentSession().save(largeBed);
+
+        bigNeedRepository.delete(airConditioner);
+
+        assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(1));
+        assertThat(bigNeedRepository.findByName(largeBed.getItemName()).getPriority(), is(2));
+        assertNull(bigNeedRepository.findByName(airConditioner.getItemName()));
     }
 
     @Test

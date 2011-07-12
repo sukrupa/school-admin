@@ -53,12 +53,10 @@ public class BigNeedsControllerTest {
         String view = controller.create("1", "sample", "60000", model);
         verify(bigNeedRepository).addBigNeed(bigNeedCaptor.capture(), eq(1));
         assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
-<<<<<<< HEAD
+
         assertThat(bigNeedCaptor.getValue().getCost(), is((double)60000));
-=======
-        assertThat(bigNeedCaptor.getValue().getCost(), is(60000));
-        Assert.assertThat(view, is("/bigNeeds/bigNeedsList"));
->>>>>>> Deepak & Pooja(#534) Prioritization for updating items in big needs
+
+
     }
 
     @Test
