@@ -1,1 +1,1 @@
-$layout(body=admin/endofsponsorshipformbody(), title="Send Approaching End of Sponsorship", stylesheets="admin")$
+$layout(scripts=["sendNewsletter"], body=admin/endofsponsorshipformbody(), title="Send Approaching End of Sponsorship", stylesheets="admin")$

@@ -81,6 +81,7 @@ public class StudentProfile {
         StringBuilder htmlMessage = new StringBuilder();
         htmlMessage.append("<html>");
         htmlMessage.append("<body>");
+        comments = comments.replaceAll("\r","<br><br/>");
         htmlMessage.append("<p style=\"width:250px\">" + comments + "</p>");
         htmlMessage.append("<table border=\"0\">");
         htmlMessage.append("<tr><td colspan=\"2\">" + "<img src=\"http://localhost:8080/getstudentimage/"+studentId+"/image\">" + "</td></tr>");
@@ -89,7 +90,6 @@ public class StudentProfile {
         createTableRow(htmlMessage, "<b>Gender:</b>", gender);
         createTableRow(htmlMessage, "<b>Background:</b>", studentBackground);
         createTableRow(htmlMessage, "<b>Disciplinary:</b>", studentDisciplinary);
-
         htmlMessage.append("</table>");
         htmlMessage.append("</body>");
         htmlMessage.append("</html>");

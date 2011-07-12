@@ -1,5 +1,6 @@
 @Login
 Feature: Send Profile View to Sponsor
+
     Scenario: Send Profile View with Mandatory field
         Given I am on the Profile View page for Bhavani
         When I enter the email to "sukrupa.test@gmail.com"

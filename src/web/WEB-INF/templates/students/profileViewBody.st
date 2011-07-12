@@ -1,7 +1,7 @@
 <div id="student">
     <div id="studentInfo">
         <div id="basicInfo">
-            <form name="profileView" id="profileView" action="/students/sendprofileview" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
+            <form name="profileView" id="profileView" action="/students/sendprofileview" onsubmit="return validateForm()" method="post">
 
                 <div class="entry">
                     <div class="label">Name</div>
@@ -63,7 +63,7 @@
                 <div class="value existing $statusType$">$student.status$</div>
             </div>
 
-            <img alt="$student.name$" src="/students/$student.imageLink$/image" class="studentImage"
+            <img alt="$student.name$" src="/getstudentimage/$student.imageLink$/image" class="studentImage"
                  id="$student.imageLink$"/>
 
         </div>

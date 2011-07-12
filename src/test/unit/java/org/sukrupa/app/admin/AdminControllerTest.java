@@ -92,7 +92,6 @@ public class AdminControllerTest {
         
         when(mockAttachment.getOriginalFilename()).thenReturn("Test.txt");
         adminController.sendNewsletterEmail(toAddress, subject,"",mockAttachment);
-
         verify(emailService).sendNewsLetter(toAddress, subject, "", System.getProperty("user.dir")+"Test.txt");
     }
 }
