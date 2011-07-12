@@ -23,7 +23,9 @@ public class SubscriberController {
     }
 
     @RequestMapping("subscribers")
-       public String shouldDisplaySubscribers(Map<String,Subscriber> model){
+       public String shouldDisplaySubscribers(Map<String,Object> model){
+        List<Subscriber> subscriberList = subscriberRepository.getList();
+        model.put("subscriberList", subscriberList);
             return "admin/subscribers/viewsubscribers";
         }
 

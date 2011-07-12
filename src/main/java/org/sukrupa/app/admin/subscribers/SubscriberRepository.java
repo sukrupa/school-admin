@@ -28,12 +28,10 @@ public class SubscriberRepository {
         return session().createQuery(hibernateQueryLanguage);
     }
 
-    public List findAllSubscribers(){
-
-        //System.out.println("here's the list:" + query("from Subscriber").list() );
-        return  session().createQuery("from Subscriber").list();
+    @SuppressWarnings("unchecked")
+    public List<Subscriber> getList() {
+         return (List<Subscriber>) query("from Subscriber").list();
     }
-
 
     public void put(Subscriber subscriber){
         session().save(subscriber);

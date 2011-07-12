@@ -10,14 +10,15 @@ import org.sukrupa.platform.RequiredByFramework;
 
 @Entity
 public class Subscriber {
+
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Column(name = "SUBSCRIBERNAME")
     private String subscriberName;
 
-    @Column(name = "EMAIL")
+    @Column(name = "SUBSCRIBEREMAIL")
     private String subscriberEmail;
 
     @RequiredByFramework
@@ -43,7 +44,7 @@ public class Subscriber {
     }
 
     public long getSubscriberId() {
-        return id;
+        return this.id;
     }
 
     public int hashCode(){
