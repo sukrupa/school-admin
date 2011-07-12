@@ -42,6 +42,9 @@ public class SubscriberRepositoryTest {
 
      }
 
+    //shouldDeleteSubscriber
+    //shouldGetSubscriberByID
+    //shouldGetListOfSubscribers
     
 
 
