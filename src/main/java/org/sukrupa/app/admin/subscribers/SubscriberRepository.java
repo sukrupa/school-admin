@@ -28,12 +28,13 @@ public class SubscriberRepository {
         return session().createQuery(hibernateQueryLanguage);
     }
 
+
     @SuppressWarnings("unchecked")
     public List<Subscriber> getList() {
          return (List<Subscriber>) query("from Subscriber").list();
     }
 
-    public void put(Subscriber subscriber){
+    public void addSubscriber(Subscriber subscriber){
         session().save(subscriber);
     }
 
