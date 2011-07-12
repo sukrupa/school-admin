@@ -14,6 +14,11 @@ public class SearchStudentsByTalentSteps extends BasicWebSteps {
         browser().button("addTalent").click();
     }
 
+     @When("^I Add the new talent$")
+    public void selectAddNewTalentButton(){
+        browser().submit("addNewTalent").click();
+    }
+
     @When("^I Remove the talent$")
     public void selectRemoveButton(){
         browser().button("removeTalent").click();

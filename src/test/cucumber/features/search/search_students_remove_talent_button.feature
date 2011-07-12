@@ -4,9 +4,9 @@ Feature: search students Remove talent button
     Scenario: Remove acting from selected talents of student
         Given I am on the Search Students page
         When I select "Acting" from "availableTalents"
-        And I click "addTalent" button
-        Then "chosenTalents" should contain "Acting"
+        And I Add the talent
+         Then Chosen list of talents should now contain Acting
 
         When I click "removeTalent" button
-        Then "chosenTalents" should not contain "Acting"
+         Then Chosen list of talents should not contain Acting
 

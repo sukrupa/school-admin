@@ -4,11 +4,11 @@ Feature: search students clear talent button
     Scenario: Clear acting and dancing from selected talents for student
         Given I am on the Search Students page
         When I select "Acting" from "availableTalents"
-        And I click "addTalent" button
-        When I select "Dancing" from "availableTalents"
-        And I click "addTalent" button
-        Then "chosenTalents" should now contain "Acting"
-        Then "chosenTalents" should now contain "Dancing"
+        And I Add the talent
+        And I select "Dancing" from "availableTalents"
+        And I Add the talent
+        Then Chosen list of talents should now contain Acting
+        And Chosen list of talents should now contain Dancing
         When I click "clearTalents" button
-        Then "chosenTalents" should not contain "Acting"
-        Then "chosenTalents" should not contain "Dancing"
+        Then Chosen list of talents should not contain Acting
+        And Chosen list of talents should not contain Dancing
