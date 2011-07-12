@@ -27,9 +27,6 @@ Feature: Add, Edit and Delete Big Needs
     When I edit the "Computer"
     And I update item name "Computer" with "Tractor"
     And I save edited need
-   #TODO Aleks/Vini
-   #And I edit the "Tractor"
-   #And I update item "Tractor" with cost "1234"
     Then a "Tractor" costing "120000" should be displayed with priority "2"
 
 

@@ -29,7 +29,8 @@ function refreshPage() {
 
 
 function deleteNeed(itemID) {
-    submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
+    if(confirm("Are you sure you want to delete ?"))
+        submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
 }
 
 function saveRow() {
@@ -43,21 +44,33 @@ function addBigNeed() {
 
 function submitForm(form, $, actionUrl) {
     form.itemName.value = $.parents('tr').find('.item-name').val();
-    form.itemCost.value = $.parents('tr').find('.item-cost').val();
+    form.itemCost.value = round($.parents('tr').find('.item-cost').val());
     form.priority.value = $.parents('tr').find('.item-priority').val();
     form.itemId.value = $.parents('tr').find('.item-id').val();
-    if(!validateNumber(form.itemCost.value)) return;
+    if(!validateNeedsForm(form)) return;
     form.action = actionUrl;
     form.submit();
 }
 
-function validateNumber(string){
+function isNumber(string){
     var number = parseInt(string);
-    if(isNaN(number)){
-    $('#costError')[0].innerHTML = "Please enter a valid Cost !!!";
-    return false;
-   }
-   return true;
+    return (!isNaN(number));
+}
+function validateNeedsForm(form) {
+
+    if(!isNumber(form.priority.value)){
+        $('#error')[0].innerHTML = "Please enter a valid priority  !!!";
+        return false;
+    }
+    if(form.itemName.value == ""){
+        $('#error')[0].innerHTML = "Please enter an Item Name  !!!";
+        return false;
+    }
+    if(!isNumber(form.itemCost.value)){
+        $('#error')[0].innerHTML = "Please enter a valid Cost !!!";
+        return false;
+    }
+    return true;
 }
 
 function makeRowEditable() {

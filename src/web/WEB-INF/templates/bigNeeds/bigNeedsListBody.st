@@ -6,7 +6,7 @@
             <input type="hidden" name="itemCost" />
             <input type="hidden" name="itemId" />
         </form>
-              <span class="errorMessage" id="costError"></span>
+              <span class="errorMessage" id="error"></span>
         <table border="0">
             <thead class="header">
             <tr>
