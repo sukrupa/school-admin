@@ -36,5 +36,20 @@ public class SearchStudentsByTalentSteps extends BasicWebSteps {
         assertThat(objectValue, not(containsString(talent)));
     }
 
+     @Then("^Chosen list of talents should now contain ([^\"]*)$")
+    public void shouldBeInChosenListOfTalents(String talent){
+         String objectValue = browser().byId("chosenTalents").getText();
+        assertThat(objectValue, containsString(talent));
+    }
+
+     @Then("^Chosen list of talents should now be empty$")
+    public void shouldBeNothingInChosenListOfTalents(){
+         String emptyString="";
+         String objectValue = browser().byId("chosenTalents").getText();
+        assertThat(objectValue, containsString(emptyString));
+    }
+
+
+
 
 }

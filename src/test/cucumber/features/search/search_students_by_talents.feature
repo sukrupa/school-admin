@@ -4,7 +4,7 @@ Feature: search students add talent button
     Scenario: Add acting to student search criteria
         Given I am on the Search Students page
         When I Add the talent
-        Then Chosen list of talents should now contain ""
+        Then Chosen list of talents should now be empty
         And Chosen list of talents should not contain Acting
 
         When I select Acting from list of talents
