@@ -29,7 +29,7 @@ function refreshPage() {
 
 
 function deleteNeed(itemID) {
-    if(confirm("Are you sure you want to delete ?"))
+    if(confirm("Are you sure ?"))
         submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
 }
 
@@ -44,7 +44,7 @@ function addBigNeed() {
 
 function submitForm(form, $, actionUrl) {
     form.itemName.value = $.parents('tr').find('.item-name').val();
-    form.itemCost.value = round($.parents('tr').find('.item-cost').val());
+    form.itemCost.value = $.parents('tr').find('.item-cost').val();
     form.priority.value = $.parents('tr').find('.item-priority').val();
     form.itemId.value = $.parents('tr').find('.item-id').val();
     if(!validateNeedsForm(form)) return;
