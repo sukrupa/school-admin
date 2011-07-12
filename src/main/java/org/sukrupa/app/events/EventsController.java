@@ -1,5 +1,6 @@
 package org.sukrupa.app.events;
 
+import org.hsqldb.lib.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -11,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventForm;
 import org.sukrupa.event.EventService;
+import org.sukrupa.student.StudentNameComparator;
 import org.sukrupa.student.StudentRepository;
 import org.sukrupa.student.Student;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -47,12 +46,14 @@ public class EventsController {
         return "events/view";
     }
 
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/{eventId}/edit", method = GET)
     public String edit(@PathVariable int eventId, Map<String, Object> model) {
         List<Student> studentList = studentRepository.getList();
-
+        Collections.sort(studentList, new StudentNameComparator());
         try {
             List<Student> attendeesList = new ArrayList<Student>(service.getEvent(eventId).getAttendees());
+            Collections.sort(attendeesList, new StudentNameComparator());
             for (Student student: attendeesList){
                 studentList.remove(student);
             }
@@ -100,6 +101,7 @@ public class EventsController {
         }
     }
 
+    @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEventForm") EventForm eventForm, Map<String, Object> model) {
 
