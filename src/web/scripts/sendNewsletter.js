@@ -12,6 +12,11 @@ function validateForm() {
         alert("Not a valid e-mail address");
         return false;
     }
+    var y = document.forms[0].subject.value;
+    if (y == ""){
+        alert("Please Enter a subject");
+        return false;
+    }
 }
 
 
