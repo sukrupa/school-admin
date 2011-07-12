@@ -1,7 +1,7 @@
 <div id="student">
     <div id="studentInfo">
         <div id="basicInfo">
-            <form name="profileView" id="profileView" action="/students/sendprofileview" method="post">
+            <form name="profileView" id="profileView" action="/students/sendprofileview" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
 
                 <div class="entry">
                     <div class="label">Name</div>
@@ -36,14 +36,14 @@
 
                 <div class="createEntry">
                     <div class="label">To:<span class="mandatory">*</span></div>
-                    <input type="text" id="sendTo" name="sendTo"/>
-                    <span class="errorMessage">$toEmpty$</span>
+                    <input type="text" id="to" name="to"/>
+
                 </div>
 
                 <div class="createEntry">
                     <div class="label">Subject:<span class="mandatory">*</span></div>
                     <input type="text" id="subject" name="subject"/>
-                    <span class="errorMessage">$subjectEmpty$</span>
+
                 </div>
 
                 <div class="createEntry">

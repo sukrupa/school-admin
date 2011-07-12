@@ -15,7 +15,7 @@ public class SendProfileViewSteps extends BasicWebSteps {
 
     @When("^I enter the email to \"([^\"]*)\"$")
     public void enterSendToEmailId(String emailId){
-       enterIntoTheTextBox(emailId, "sendTo");
+       enterIntoTheTextBox(emailId, "to");
     }
 
     @When("^I Send Profile to sponsor$")

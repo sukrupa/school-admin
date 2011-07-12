@@ -1,7 +1,5 @@
 package org.sukrupa.app.students;
 
-import org.apache.commons.lang.ObjectUtils;
-import org.hibernate.type.YesNoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -206,10 +203,10 @@ public class StudentsController {
     }
 
     @RequestMapping(value = "sendprofileview", method= POST)
-    public String sendProfileView(@RequestParam String subject,@RequestParam String sendTo, @ModelAttribute("profileView")
+    public String sendProfileView(@RequestParam String subject,@RequestParam String to, @ModelAttribute("profileView")
                                                                 StudentProfile studentProfile,  Map<String, Object> model) {
         String message = studentProfile.composeHtmlMessage();
-        boolean emailSent = emailService.sendEmail(sendTo, subject, message);
+        boolean emailSent = emailService.sendEmail(to, subject, message);
         if(emailSent){
             model.put("errorMessage", "");
             return "/students/thankyou";

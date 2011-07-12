@@ -1,7 +1,5 @@
 function copylink() {
-
     (document.forms[0].fakebox.value) = document.sendnewsletter.attach.value;
-
 }
 
 function validateForm() {
