@@ -4,8 +4,8 @@ Feature: Add, Edit and Delete Big Needs
   Scenario: Big Needs List is Displayed
     Given I am on the Big Needs page
     Then Big Needs should be displayed
-    And a "Power Generator" costing "50000" should be displayed with priority "1"
-    And a "50000" costing "Power Generator" with priority "1" should not be displayed
+    And a "Power Generator" costing "50000.0" should be displayed with priority "1"
+    And a "50000.0" costing "Power Generator" with priority "1" should not be displayed
     And a "6" should be displayed as pre-populated "priority"
 
 
@@ -15,7 +15,7 @@ Feature: Add, Edit and Delete Big Needs
     And I enter 20000 as Cost
     And I add the need
     Then Refrigerator should be displayed
-    Then a "Water Purifier" costing "25000" should be displayed with priority "4"
+    Then a "Water Purifier" costing "25000.0" should be displayed with priority "4"
 
   Scenario: Delete item from the Big Need list
     Given I am on the Big Needs page

@@ -8,7 +8,7 @@ import static org.sukrupa.cucumber.SahiFacade.browser;
 
 public class AddNewTalentSteps {
 
-    @When("^I add the talent$")
+    @When("^I add a talent$")
     public void iAddTheTalent() {
         browser().submit("Add Talent").click();
     }

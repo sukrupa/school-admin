@@ -5,8 +5,8 @@ Feature: Authentication Log In
     When I enter the username "admin"
     And I enter the password "password"
     And I Login
-    Then List of Students is displayed
-    And Logout is displayed
+    Then List of Students should be displayed
+    And Logout should be displayed
 
 
   Scenario: Invalid password
