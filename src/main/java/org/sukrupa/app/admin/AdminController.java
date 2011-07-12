@@ -59,8 +59,7 @@ public class AdminController {
 
     @RequestMapping(value = "/sendnewsletteremail", method = POST)
     public String sendNewsletterEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String comments, @RequestParam ("attach")MultipartFile file) throws MessagingException, IOException {
-        String fileAttachmentFilePath = "C:\\Users\\srivathr\\Desktop\\"+file.getOriginalFilename();
-        System.out.println(fileAttachmentFilePath);
+        String fileAttachmentFilePath = System.getProperty("user.dir")+file.getOriginalFilename();
         File webserverSideCopyOfClientSideFileAttachment = new File(fileAttachmentFilePath);
         file.transferTo(webserverSideCopyOfClientSideFileAttachment);
         emailService.sendNewsLetter(to, subject,comments,fileAttachmentFilePath);
