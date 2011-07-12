@@ -17,7 +17,7 @@
                 <table border="0">
                     <tr>
                         <td>
-                            <select multiple size="6" style="width:150px"  id="availableTalents">
+                            <select multiple="multiple" size="6" style="width:150px"  id="availableTalents">
                                 $formhelper.
                                 talentDescriptions:{
                                 <option value="$it$">$it$</option>
@@ -26,18 +26,18 @@
                         </td>
                         <td>
                             <div>
-                                <input type="button" class="dualSelectBoxButtons" id='addTalent' name="addTalent" value="Add >">
+                                <input type="button" class="dualSelectBoxButtons" id='addTalent' name="addTalent" value="Add >" />
                             </div>
                             <div>
-                                <input type="button" class="dualSelectBoxButtons" id='removeTalent' name="removeTalent" value="Remove <">
+                                <input type="button" class="dualSelectBoxButtons" id='removeTalent' name="removeTalent" value="Remove <" />
                             </div>
                             <div>
-                                <input type="button" class="dualSelectBoxButtons" id='clearTalents' name="clearTalents" value="Clear <<">
+                                <input type="button" class="dualSelectBoxButtons" id='clearTalents' name="clearTalents" value="Clear <<" />
                             </div>
                         </td>
                         <td>
-                            <select multiple size="6" style="width:150px" id="chosenTalents">
-                                <option value="*" disabled=disabled>Any</option>
+                            <select multiple="multiple" size="6" style="width:150px" id="chosenTalents">
+                                <option value="*" disabled="disabled">Any</option>
                             </select>
                         </td>
                     </tr>
@@ -189,14 +189,14 @@
                         <option value="$it$">$it$</option>
                    }$
                 </select>
-                 <span>Sponsor: </span> <input type="text" id="sponsorName" name="sponsorName" disabled />
+                 <span>Sponsor: </span> <input type="text" id="sponsorName" name="sponsorName" disabled="disabled" />
             </td>
         </tr>
 
 
         <tr>
             <td><input type="submit" value="Search"/></td>
-            <td></td>
+            <td> <br /> </td>
         </tr>
     </table>
 </form>
