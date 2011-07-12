@@ -6,7 +6,7 @@
     And I enter Peter Murray as Sponsor
     And I save the changes
     Then the message "Student record updated successfully" is displayed
-    And the Student Record: Bhavani page is displayed
+    And the "Student Record: Bhavani" page is displayed
     And Peter Murray is displayed under Sponsor
 
     When I navigate to the View Students page
@@ -28,7 +28,7 @@
     And I select Existing Student for Student Status
     And I save the changes
     Then the message "Student record updated successfully" is displayed
-    And the Student Record: Bhavani page is displayed
+    And the "Student Record: Bhavani" page is displayed
     And Existing Student is displayed under Student Status
 
     Scenario:Verify edit of family status success
@@ -36,5 +36,5 @@
     And I select Single for Family Status
     And I save the changes
     Then the message "Student record updated successfully" is displayed
-    And the Student Record: Bhavani page is displayed
+    And the "Student Record: Bhavani" page is displayed
     And Single is displayed under Family Status

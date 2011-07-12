@@ -5,7 +5,7 @@ Feature: Generate public profile view
     Given I am on the View Students page
     When I select the student record of Bhavani
     When I click "Generate Profile View" link
-    Then the Profile View page is displayed
+    Then the "Profile View" page is displayed
     And Name should be displayed
     And Date of Birth should be displayed
     And Gender should be displayed
