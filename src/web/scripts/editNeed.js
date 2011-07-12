@@ -1,10 +1,11 @@
+var editing = false;
+
 $(function() {
     $(".edit-bigneed-button").click(makeRowEditable);
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
     $(".delete-bigneed-button").click(deleteNeed);
     $(".delete-smallneed-button").click(deleteSmallNeed);
-
 });
 
 //Needs Refactoring
@@ -26,11 +27,13 @@ function refreshPage() {
 }
 //End of "Needs Refactoring"
 
+
 function deleteNeed(itemID) {
     submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
 }
 
 function saveRow() {
+    editing = false;
     submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/saveeditedneed");
 }
 
@@ -43,12 +46,30 @@ function submitForm(form, $, actionUrl) {
     form.itemCost.value = $.parents('tr').find('.item-cost').val();
     form.priority.value = $.parents('tr').find('.item-priority').val();
     form.itemId.value = $.parents('tr').find('.item-id').val();
+    if(!validateNumber(form.itemCost.value)) return;
     form.action = actionUrl;
     form.submit();
 }
 
-function makeRowEditable() {
-    $(this).parents("tr").addClass("editable");
+function validateNumber(string){
+    var number = parseInt(string);
+    if(isNaN(number)){
+    $('#costError')[0].innerHTML = "Please enter a valid Cost !!!";
+    return false;
+   }
+   return true;
 }
+
+function makeRowEditable() {
+    if(!editing){
+        editing = true;
+        $(this).parents("tr").find('.delete-bigneed-button')[0].value = "Cancel";
+        $(this).parents("tr").find('.delete-bigneed-button').click(refreshPage);
+        $(this).parents("tr").addClass("editable");
+    } else{
+        alert("Please save the current row, before editing !!!");
+    }
+}
+
 
 

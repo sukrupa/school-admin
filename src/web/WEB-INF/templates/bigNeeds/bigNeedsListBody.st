@@ -6,6 +6,7 @@
             <input type="hidden" name="itemCost" />
             <input type="hidden" name="itemId" />
         </form>
+              <span class="errorMessage" id="costError"></span>
         <table border="0">
             <thead class="header">
             <tr>
@@ -20,10 +21,12 @@
             <tr>
                 <td><input class="item-priority" id="priority" value="$it$"/></td>
                 <td><input class="item-name" id="itemName"/></td>
-                <td><input class="item-cost" id="cost"/></td>
+                <td><input class="item-cost" id="cost"/>
+                </td>
                 <td>
                     <input type="button" class="add-bigneed-button" value="Add"/>
                 </td>
+
             </tr>
             }$
             $bigNeedList:{
