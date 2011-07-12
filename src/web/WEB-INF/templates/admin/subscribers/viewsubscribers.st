@@ -1,1 +1,1 @@
-$layout(body=admin/subscribers/subscribersbody(), title="Subscribers")$
+$layout(body=admin/subscribers/subscribersbody(), title="List of Subscribers", stylesheets="admin")$

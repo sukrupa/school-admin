@@ -61,7 +61,7 @@ public class BasicWebSteps {
         assertTrue(browser().submit(text).exists());
     }
 
-    @Then("^([^\"]*) should be displayed$")
+    @Then("\"([^\"]*)\" should be displayed$")
     public void shouldBeDisplayed(String text) {
         ElementStub pageDiv = browser().div(TOP_LEVEL_DIV);
         assertTrue(pageDiv.exists());

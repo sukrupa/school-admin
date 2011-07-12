@@ -9,7 +9,7 @@
                     <td>Name</td>
                     <td>Email</td>
                     </tr>
-            </thead>
+           </thead>
              $subscribers:{
                 <tr>
                     <td>$it.ID$</td>

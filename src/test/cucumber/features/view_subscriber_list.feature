@@ -2,8 +2,9 @@
 Feature: View subscriber list
 
     Scenario: View the list of existing subscribers on school.sukrupa.org
-      #Given I am on the Tools page
-      #When I view "View Subscribers"
+      When I go to "Tools" in the sidebar
+      Then I should be able to "View Subscribers"
+      Then "List of Subscribers" should be displayed
       #Then <subscriberName> and <subscriberEmail> should be displayed
 
       #      Examples:
