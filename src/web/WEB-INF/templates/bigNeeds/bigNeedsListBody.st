@@ -17,10 +17,10 @@
             </thead>
             <tbody>
             $priority:{
-            <tr id="testing">
-                <td><input class="item-priority" value="$it$"/></td>
-                <td><input class="item-name"/></td>
-                <td><input class="item-cost"/></td>
+            <tr>
+                <td><input class="item-priority" id="priority" value="$it$"/></td>
+                <td><input class="item-name" id="itemName"/></td>
+                <td><input class="item-cost" id="cost"/></td>
                 <td>
                     <input type="button" class="add-bigneed-button" value="Add"/>
                 </td>
