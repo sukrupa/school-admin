@@ -51,8 +51,9 @@ public class EventsController {
     public String edit(@PathVariable int eventId, Map<String, Object> model) {
         List<Student> studentList = studentRepository.getList();
         Collections.sort(studentList, new StudentNameComparator());
+        Event event = service.getEvent(eventId);
         try {
-            List<Student> attendeesList = new ArrayList<Student>(service.getEvent(eventId).getAttendees());
+            List<Student> attendeesList = new ArrayList<Student>(event.getAttendees());
             Collections.sort(attendeesList, new StudentNameComparator());
             for (Student student: attendeesList){
                 studentList.remove(student);
@@ -62,7 +63,7 @@ public class EventsController {
             // there are attendees
         }
         model.put("studentList", studentList);
-        model.put("event",service.getEvent(eventId));
+        model.put("event",event);
         return "events/edit";
     }
 
