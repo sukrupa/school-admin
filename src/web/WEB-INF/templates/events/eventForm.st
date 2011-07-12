@@ -57,12 +57,6 @@
             <div class="label">Coordinator</div>
             <input type="text" name="coordinator" id="coordinator" value="$event.coordinator$" class="createValue" />
         </div>
-
-        <div class="createEntry">
-            <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
-
-        </div>
     </div>
 
     <div class="eventInfoRight">
@@ -77,5 +71,41 @@
         </div>
     </div>
 
+    <div class="eventInfoBottom">
+        <div class="createEntry">
+            <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
+            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
+        </div>
+
+        <table border="0">
+            <tr>
+                <td>
+                    <select multiple size="6" style="width:150px"  id="availableStudents">
+                        $studentList:{
+                        <option value="$it$">$it.name$ ($it.studentId$)</option>
+                        }$
+                    </select>
+                </td>
+                <td>
+                    <div>
+                        <input type="button" style="width:90" id='addStudents' name="addStudents" value="Add >">
+                    </div>
+                    <div>
+                        <input type="button" style="width:90" id='removeStudents' name="removeStudents" value="Remove <">
+                    </div>
+                    <div>
+                        <input type="button" style="width:90" id='clearStudents' name="clearStudents" value="Clear <<">
+                    </div>
+                </td>
+                <td>
+                    <select multiple size="6" style="width:150px" id="chosenStudents">
+                        $attendeesList:{
+                            <option value="$it$">$it.name$ ($it.studentId$)</option>
+                        }$
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </div>

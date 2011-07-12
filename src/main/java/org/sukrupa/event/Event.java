@@ -143,7 +143,7 @@ public class Event {
     public String getAttendeesIdsForDisplay() {
         List<String> attendeeIds = new ArrayList<String>();
         for (Student attendee : attendees) {
-            attendeeIds.add(attendee.getStudentId());
+            attendeeIds.add(attendee.getName());
         }
 
         return StringUtils.join(attendeeIds, ", ");

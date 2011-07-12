@@ -15,39 +15,33 @@
             </td>
             <td>
                 <table border="0">
-
                     <tr>
-                    <td>
-                        <select multiple size="6" style="width:150px"  id="availableTalents">
-                            $formhelper.
-                            talentDescriptions:{
-                            <option value="$it$">$it$</option>
-                            }$
-                        </select>
-                    </td>
-                    <td>
-                        <div>
-                            <input type="button" style="width:90" id='addTalent' name="addTalent" value="Add >">
-                        </div>
-                        <div>
-                            <input type="button" style="width:90" id='removeTalent' name="removeTalent" value="Remove <">
-                        </div>
-                        <div>
-                            <input type="button" style="width:90" id='clearTalents' name="clearTalents" value="Clear <<">
-                        </div>
-
-                    </td>
-                    <td>
-
-
-
-                        <select multiple size="6" style="width:150px" id="chosenTalents">
-                            <option value="*" disabled=disabled>Any</option>
-                        </select>
-
-                    </td>
-                </tr>
-            </table>
+                        <td>
+                            <select multiple size="6" style="width:150px"  id="availableTalents">
+                                $formhelper.
+                                talentDescriptions:{
+                                <option value="$it$">$it$</option>
+                                }$
+                            </select>
+                        </td>
+                        <td>
+                            <div>
+                                <input type="button" style="width:90" id='addTalent' name="addTalent" value="Add >">
+                            </div>
+                            <div>
+                                <input type="button" style="width:90" id='removeTalent' name="removeTalent" value="Remove <">
+                            </div>
+                            <div>
+                                <input type="button" style="width:90" id='clearTalents' name="clearTalents" value="Clear <<">
+                            </div>
+                        </td>
+                        <td>
+                            <select multiple size="6" style="width:150px" id="chosenTalents">
+                                <option value="*" disabled=disabled>Any</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
 

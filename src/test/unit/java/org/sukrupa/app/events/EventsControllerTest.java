@@ -19,6 +19,7 @@ import org.sukrupa.event.*;
 import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentBuilder;
+import org.sukrupa.student.StudentRepository;
 
 import java.security.PrivateKey;
 import java.util.*;
@@ -42,6 +43,8 @@ public class EventsControllerTest {
 
     @Mock
     private EventService service;
+    @Mock
+    private StudentRepository studentRepository;
     @Mock
     private EventForm eventForm;
     @Mock
@@ -75,7 +78,7 @@ public class EventsControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        controller = new EventsController(service);
+        controller = new EventsController(service, studentRepository);
     }
 
     @Test
@@ -101,14 +104,14 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayCreateANewEventPage() {
-        String actual = controller.create();
+        String actual = controller.create(objectModel);
 
-        assertThat("Display the Create Event Page",actual, is("events/create"));
+        assertThat("Display the Create Event Page", actual, is("events/create"));
     }
 
     @Test
     public void shouldDisplayEditANewEventPage() {
-        String edit = controller.edit(eventForm.getId(), model);
+        String edit = controller.edit(eventForm.getId(), objectModel);
 
         assertThat("Display the edit Event Page",edit, is("events/edit"));
     }
@@ -128,11 +131,13 @@ public class EventsControllerTest {
     public void shouldDisplayTheEditEventPageForTheGivenEventId() {
         when(service.getEvent(4)).thenReturn(eventOne);
 
-        String edit = controller.edit(4, model);
+        String edit = controller.edit(4, objectModel);
 
         assertThat("Display the Edit Event Page for the Given Id",edit, is("events/edit"));
         verify(service).getEvent(4);
-        assertThat("Model contains the given event",model.get("event").getDate().year(), is(2011));
+        assertThat("Model contains the given event",
+                ((Event) objectModel.get("event")).getDate().year(),
+                is(2011));
     }
 
     @Test

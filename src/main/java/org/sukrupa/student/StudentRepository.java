@@ -70,6 +70,11 @@ public class StudentRepository {
         return getPageCriteria.list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Student> getList() {
+        return (List<Student>) query("from Student where Status = '0' order by name").list(); // 0 is exsiting student
+    }
+
     int getCountBasedOn(StudentSearchParameter searchParam) {
         Criteria countCriteria = studentsSearchCriteriaGenerator.createCountCriteriaBasedOn(searchParam);
         return Integer.parseInt(countCriteria.uniqueResult().toString());

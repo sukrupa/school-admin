@@ -263,7 +263,6 @@ text-decoration: none;
 
 .talentsLabel, .label, .label-header,  .attendeeLabel
 {
-
     font-weight: bold;
 }
 
@@ -498,7 +497,11 @@ li
     float:left;
 	position:relative;
     width: 40%;
-    height: 250px;
+}
+
+.eventInfoBottom{
+    width: 100%;
+    clear: both;
 }
 
 .eventButtons{

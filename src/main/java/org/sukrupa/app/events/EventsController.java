@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.sukrupa.event.Event;
 import org.sukrupa.event.EventForm;
 import org.sukrupa.event.EventService;
+import org.sukrupa.student.StudentRepository;
+import org.sukrupa.student.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,10 +27,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/events")
 public class EventsController {
     private final EventService service;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public EventsController(EventService service) {
+    public EventsController(EventService service, StudentRepository studentRepository) {
         this.service = service;
+        this.studentRepository = studentRepository;
     }
     @RequestMapping()
     public String list(Map<String, List<Event>> model)
@@ -43,13 +48,27 @@ public class EventsController {
     }
 
     @RequestMapping(value = "/{eventId}/edit", method = GET)
-    public String edit(@PathVariable int eventId, Map<String, Event> model) {
+    public String edit(@PathVariable int eventId, Map<String, Object> model) {
+        List<Student> studentList = studentRepository.getList();
+
+        try {
+            List<Student> attendeesList = new ArrayList<Student>(service.getEvent(eventId).getAttendees());
+            for (Student student: attendeesList){
+                studentList.remove(student);
+            }
+            model.put("attendeesList", attendeesList);
+        } catch (NullPointerException e) {
+            // there are attendees
+        }
+        model.put("studentList", studentList);
         model.put("event",service.getEvent(eventId));
         return "events/edit";
     }
 
 	@RequestMapping(value = "create", method = GET)
-	public String create() {
+	public String create(Map<String, Object> model) {
+        List<Student> studentList = studentRepository.getList();
+        model.put("studentList", studentList);
 		return "events/create";
 	}
 
