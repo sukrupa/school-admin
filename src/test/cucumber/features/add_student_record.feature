@@ -4,7 +4,7 @@
      Scenario: Verify that the student registration page is displayed
      Given I am on the View Students page
      When I navigate to the Add New Student page
-     Then the Register a student page is displayed
+     Then the "Register a student" page is displayed
 
      Scenario: Add new student details
      Given I am on the Add New Student page
@@ -13,12 +13,12 @@
      And I enter 06-03-1982 as dateOfBirth
      And I select Female as gender
      And I register the student
-     Then the Edit Student Record: Yael page is displayed
+     Then the "Edit Student Record: Yael" page is displayed
 
      Scenario: Return from register a student page without adding a new student
      Given I am on the Add New Student page
      When I cancel the student registration
-     Then the List of Students page is displayed
+     Then the "List of Students" page is displayed
 
      Scenario: Display error messages when fields are incomplete
      Given I am on the Add New Student page
@@ -35,7 +35,7 @@
      And I enter 06-03-1982 as dateOfBirth
      And I select Female as gender
      And I register the student
-     Then the Edit Student Record: Yael page is displayed
+     Then the "Edit Student Record: Yael" page is displayed
 
      Given I am on the Add New Student page
      And I enter SK2010082022 as studentId

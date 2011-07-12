@@ -99,7 +99,7 @@ public class BasicWebSteps {
         assertTrue(browser().select(field).getText().contains(text));
     }
 
-    @Then("^the ([^\"]*) page is displayed")
+    @Then("^the \"([^\"]*)\" page is displayed")
     public void pageIsDisplayed(String pageName) {
         assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), pageName));
     }
