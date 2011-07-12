@@ -21,10 +21,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/integration/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/shared/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/cucumber/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../src/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../src/main" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/../../lib" />
-      <excludeFolder url="file://$MODULE_DIR$/../../tools" />
       <excludeFolder url="file://$MODULE_DIR$/../../tools/cobertura-1.9.4.1" />
     </content>
     <orderEntry type="inheritedJdk" />
