@@ -17,6 +17,11 @@ function validateForm() {
         alert("Please Enter a subject");
         return false;
     }
+    var z=document.forms[0].attach.value;
+    if(z==""){
+        alert("You are trying to send Monthly Newsletter without an Attachment!!");
+        return true;
+    }
 }
 
 
