@@ -54,7 +54,7 @@ function submitForm(form, $, actionUrl) {
 
 function isNumber(string){
     //var number = parseFloat(string);
-    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.[0-9]+)?$/.test(string);
+    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
 }
 
 
