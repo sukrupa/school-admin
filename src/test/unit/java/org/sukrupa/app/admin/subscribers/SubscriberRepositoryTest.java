@@ -1,6 +1,7 @@
 package org.sukrupa.app.admin.subscribers;
 
 
+
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.hibernate.SessionFactory;
@@ -52,4 +53,5 @@ public class SubscriberRepositoryTest {
          assertThat(retrievedSubscriber.getSubscriberEmail(),is(subscriber.getSubscriberEmail()));
 
      }
+
 }

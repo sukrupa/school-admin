@@ -31,7 +31,7 @@ public class SubscriberRepository {
 
     @SuppressWarnings("unchecked")
     public List<Subscriber> getList() {
-         return (List<Subscriber>) query("from Subscriber").list();
+         return (List<Subscriber>) query("from Subscriber order by SUBSCRIBERNAME").list();
     }
 
     public void addSubscriber(Subscriber subscriber){

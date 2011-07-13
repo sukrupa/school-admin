@@ -7,7 +7,7 @@
             <a href="/admin/talents/new">Add New Talent</a>
         </li>
         <li>
-            <a href="/admin/subscribers">View Subscribers</a>
+            <a href="/admin/subscribers">View Current Subscribers</a>
         </li>
     </ul>
 </div>
