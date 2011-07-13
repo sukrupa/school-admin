@@ -156,8 +156,10 @@ public class WebServer {
         ConstraintMapping students = mapConstraintTo(constraint, "/students/*");
         ConstraintMapping admin = mapConstraintTo(constraint, "/admin/*");
         ConstraintMapping healthCheck = mapConstraintTo(constraint, "/healthCheck");
+        ConstraintMapping bigNeeds = mapConstraintTo(constraint, "/bigneeds/*");
+        ConstraintMapping smallNeeds = mapConstraintTo(constraint, "/smallneeds/*");
 
-        securityHandler.setConstraintMappings(asList(events, students, admin, healthCheck));
+        securityHandler.setConstraintMappings(asList(events, students, admin, healthCheck, bigNeeds, smallNeeds));
 
         servletHandler.setSecurityHandler(securityHandler);
     }
