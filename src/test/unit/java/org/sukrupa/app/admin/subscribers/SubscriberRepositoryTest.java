@@ -1,39 +1,50 @@
 package org.sukrupa.app.admin.subscribers;
 
 
-import org.junit.Before;
+import org.hibernate.Query;
+import org.hibernate.classic.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-import org.sukrupa.platform.config.SpringContextLoaderForTesting;
-import org.sukrupa.platform.db.HibernateSession;
+import org.mockito.Matchers;
+import org.mockito.Mock;
+
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = SpringContextLoaderForTesting.class)
-@Transactional
 public class SubscriberRepositoryTest {
 
-    @Autowired
+    @Mock
     private SessionFactory sessionFactory;
+    @Mock
+    private Session session;
+    @Mock
+    private Query firstQuery;
+    @Mock
+    private Query secondQuery;
 
     private SubscriberRepository subscriberRepository;
 
     @Before
     public void setUp() throws Exception {
+        initMocks(this);
         subscriberRepository = new SubscriberRepository(sessionFactory);
     }
 
-     @Test
+
+
+    @Test
      public void shouldSaveASubscriber(){
-         Subscriber subscriber =new Subscriber("Carlos","Carlos@gmail.com");
-         subscriberRepository.addSubscriber(subscriber);
+        Subscriber subscriber = new Subscriber("Carlos","Carlos@gmail.com");
+
+        when(sessionFactory.getCurrentSession()).thenReturn(session);
+        when(session.createQuery("from Subscriber where SUBSCRIBERNAME = ?")).thenReturn(firstQuery);
+        when(firstQuery.setParameter(0, (Object)"Carlos")).thenReturn(secondQuery);
+        when(secondQuery.uniqueResult()).thenReturn(subscriber);
 
         Subscriber retrievedSubscriber = subscriberRepository.findByName("Carlos");
 
@@ -41,11 +52,4 @@ public class SubscriberRepositoryTest {
          assertThat(retrievedSubscriber.getSubscriberEmail(),is(subscriber.getSubscriberEmail()));
 
      }
-
-    //shouldDeleteSubscriber
-    //shouldGetSubscriberByID
-    //shouldGetListOfSubscribers
-
-
-
 }

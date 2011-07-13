@@ -4,24 +4,28 @@ package org.sukrupa.app.services;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Any;
+import org.sukrupa.app.SMTPTransportFactory;
 import org.sukrupa.platform.config.AppConfiguration;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
+import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.Message;
 import javax.mail.internet.MimeMessage;
 
 import java.io.IOException;
 import java.util.Properties;
 
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class EmailServiceTest {
@@ -29,12 +33,18 @@ public class EmailServiceTest {
     private EmailService emailService;
     @Mock
     private  AppConfiguration appConfiguration;
+    @Mock
+    private Transport transport;
+    @Mock
+    private SMTPTransportFactory transportFactory;
+    @Mock
+    private Properties properties;
 
 
     @Before
     public void setUp() {
         initMocks(this);
-        emailService = new EmailService(appConfiguration);
+        emailService = new EmailService(appConfiguration, transportFactory);
     }
 
     @Test
@@ -43,26 +53,48 @@ public class EmailServiceTest {
         String subject="Hai";
         String comments="Thanks";
 
-        when(appConfiguration.properties()).thenReturn(new AppConfiguration().properties());
+        when(appConfiguration.properties()).thenReturn(properties);
+        when(transportFactory.getNewSMTPTransport(properties)).thenReturn(transport);
+        when(properties.getProperty("mail.smtp.host")).thenReturn("host");
+        when(properties.getProperty("mail.smtp.port")).thenReturn("1234");
+        when(properties.getProperty("mail.smtp.user")).thenReturn("user");
+        when(properties.getProperty("mail.smtp.password")).thenReturn("pw");
+
 
         boolean result = emailService.sendEmail(toAddress, subject, comments);
 
         assertThat(result, is(true));
+
+        verify(transport).sendMessage(Matchers.<Message>any(), Matchers.<Address[]>any());
+        verify(transport).connect(anyString(),anyInt(),anyString(),anyString());
+        verify(transport).close();
+    }
+
+    @Test
+    public void shouldReturnFalseWhenSendingEmailHasAnError() throws MessagingException {
+        String toAddress = "aravindp@thoughtworks.com";
+        String subject="Hai";
+        String comments="Thanks";
+
+        when(appConfiguration.properties()).thenReturn(properties);
+        when(transportFactory.getNewSMTPTransport(properties)).thenReturn(transport);
+        when(properties.getProperty("mail.smtp.host")).thenReturn("host");
+        when(properties.getProperty("mail.smtp.port")).thenReturn("1234");
+        when(properties.getProperty("mail.smtp.user")).thenReturn("user");
+        when(properties.getProperty("mail.smtp.password")).thenReturn("pw");
+        doThrow(new MessagingException()).when(transport).connect(anyString(),anyInt(),anyString(),anyString());
+
+        boolean result = emailService.sendEmail(toAddress, subject, comments);
+
+        assertThat(result, is(false));
     }
 
     @Test
     public void shouldExtractAttachmentFileAddress(){
         String actualFilePath = "C:\\Users\\srivathr\\Desktop\\Text.txt";
-        emailService = new EmailService(appConfiguration);
         String extractedAttachmentFileAddress = emailService.extractAttachmentFileAddress(actualFilePath);
         Assert.assertThat(extractedAttachmentFileAddress, is("/Users/srivathr/Desktop/Text.txt"));
 
-    }
-
-    @Test
-        public void shouldSendEmailEventually() throws MessagingException {
-        //emailService.sendEmail("sabhinay@thoughtworks.com", "Testing Email service");
-        // Anita, Sri, will come back and finish this off once we figured out how to test it
     }
 
     @Test
@@ -80,7 +112,6 @@ public class EmailServiceTest {
         String invalidEmailAddress = "notvalid@";
 
         emailService.convertStringToInternetAddress(invalidEmailAddress);
-
     }
 
     @Test
