@@ -1,8 +1,0 @@
-Tags:
-Preconditions:Navigate To HomePage,Log In,	Log out afterwards
-Viewing Admin Menu:
-#Given that I am on the home page
-#Then I should see the "Admin" menu on the sidebar
-#When I click the "Tools" link in the Admin menu
-#Then I get directed to the "Admin Tools" page
-#And I see a link for "Annual Class Update"

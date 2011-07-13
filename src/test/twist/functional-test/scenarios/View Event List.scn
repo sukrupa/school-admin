@@ -1,9 +1,0 @@
-Tags:in-progress
-Preconditions:Navigate to dashboard,Log In,	Log out afterwards
-Metadata:ScenarioType=Auto
-Event List:
-#Follow the "View Events" link
-#Check that event "1" is titled "Sports Day" 
-#Check that event is on "25/03/2011"
-#Click on "Sports Day"
-#Verify that you are on "Sports Day" record 
