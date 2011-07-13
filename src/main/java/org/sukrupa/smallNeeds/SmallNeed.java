@@ -57,4 +57,20 @@ public class SmallNeed {
     public int getId() {
         return id;
     }
+
+    public void setItemName(String itemName) {
+        this.itemName=itemName;
+    }
+
+    public void setCost(double cost) {
+        this.cost=cost;
+    }
+
+    public void setPriority(int priority) {
+        this.priority=priority;
+    }
+
+    public void setComment(String comment) {
+        this.comments=comment;
+    }
 }

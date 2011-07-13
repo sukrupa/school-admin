@@ -61,4 +61,28 @@ public class SmallNeedRepositoryTest {
         assertThat(retrieveSmallNeed.getComment(), is(schoolUniformSmallNeed.getComment()));
     }
 
+    @Test
+    public void shouldDeleteSmallNeeds(){
+        SmallNeed schoolUniformSmallNeed = new SmallNeed("School Uniform", 5000L, "For Aarthi",1);
+        smallNeedRepository.put(schoolUniformSmallNeed);
+        List<SmallNeed> smallNeedList = smallNeedRepository.getList();
+        assertThat(smallNeedList.size(),is(1));
+        smallNeedRepository.delete(smallNeedRepository.getSmallNeed(smallNeedRepository.findByName("School Uniform").getId()));
+        smallNeedList=smallNeedRepository.getList();
+        assertThat(smallNeedList.size(),is(0));
+    }
+
+    @Test
+    public void shouldEditSmallNeeds(){
+        SmallNeed schoolUniformSmallNeed = new SmallNeed("School Uniform", 5000L, "For Aarthi",1);
+        smallNeedRepository.put(schoolUniformSmallNeed);
+        schoolUniformSmallNeed.setItemName("Air Cooler");
+        smallNeedRepository.put(schoolUniformSmallNeed);
+        List<SmallNeed> smallNeedList = smallNeedRepository.getList();
+        assertThat(smallNeedList.size(),is(1));
+        assertThat(smallNeedList.get(0).getItemName(),is("Air Cooler"));
+
+
+    }
+
 }

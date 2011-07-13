@@ -2,6 +2,7 @@ package org.sukrupa.smallneeds;
 
 
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -89,15 +90,33 @@ public class SmallNeedsControllerTest {
         assertThat(smallNeedCaptor.getValue().getComment(), is("For Aarthi"));
         assertThat(smallNeedCaptor.getValue().getPriority(), is(1));
     }*/
-
+    @Test
+    public void shouldCreateSmallNeed(){
+        ArgumentCaptor<SmallNeed> smallNeedCaptor = ArgumentCaptor.forClass(SmallNeed.class);
+        HttpSession session = new MockHttpSession();
+        String view = controller.create(1,"Water Heater","1000","Waterheater",session,model);
+        verify(smallNeedRepository).put(smallNeedCaptor.capture());
+        assertThat(smallNeedCaptor.getValue().getItemName(), is("Water Heater"));
+    }
     @Test
     public void shouldDeleteSmallNeed(){
 
         SmallNeed smallNeed=mock(SmallNeed.class);
         HttpSession session=new MockHttpSession();
         when(smallNeedRepository.getSmallNeed(123)).thenReturn(smallNeed);
-        String view=controller.delete(123, model,session);
+        controller.delete(123, model,session);
         verify(smallNeedRepository).delete(smallNeed);
+
+    }
+
+    @Test
+    public void shouldEditSmallNeed(){
+
+        SmallNeed smallNeed=mock(SmallNeed.class);
+        HttpSession session=new MockHttpSession();
+        when(smallNeedRepository.getSmallNeed(111)).thenReturn(smallNeed);
+        String view=controller.saveEdit("1",111,"Cooler","10000", "Cooler is essential ", model,session);
+        verify(smallNeedRepository).put(smallNeed);
 
     }
 }

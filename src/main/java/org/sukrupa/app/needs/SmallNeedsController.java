@@ -58,4 +58,20 @@ public class SmallNeedsController {
         session.setAttribute("message", "Deleted " + smallNeed.getItemName());
         return list(model,session);
     }
+
+    @RequestMapping(value = "saveeditedneed", method = POST)
+    @Transactional
+    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost,@RequestParam String comment, HashMap<String, Object> model, HttpSession session) {
+        try {
+            SmallNeed smallNeed = smallNeedRepository.getSmallNeed(itemId);
+            smallNeed.setItemName(itemName);
+            smallNeed.setCost(Double.parseDouble(itemCost));
+            smallNeed.setPriority(Integer.parseInt(priority));
+            smallNeed.setComment(comment);
+            smallNeedRepository.put(smallNeed);
+        } catch (Exception e) {
+            return "Error: " + e.toString();
+        }
+        return list(model,session);
+    }
 }
