@@ -91,12 +91,8 @@ public class EmailServiceTest {
 
     @Test
     public void shouldExtractAttachmentFileAddress(){
-<<<<<<< HEAD
-        String actualFilePath = "C:\\Users\\srivathr\\Desktop\\Text.txt";
-=======
         String actualFilePath = "C:\\Users\\myuser\\Desktop\\Text.txt";
-        emailService = new EmailService(appConfiguration);
->>>>>>> Abhi/Kishore: Story 536 Added cucumber feature for file attach. remove. Pre populated bcc with mailing list
+        emailService = new EmailService(appConfiguration, transportFactory);
         String extractedAttachmentFileAddress = emailService.extractAttachmentFileAddress(actualFilePath);
         Assert.assertThat(extractedAttachmentFileAddress, is("/Users/myuser/Desktop/Text.txt"));
 

@@ -10,5 +10,5 @@ Feature: View subscriber list
 
       Examples:
       |SubscriberName  |SubscriberEmail    |
-      |Roberto         |robocop@aljksaj.com|
+      |Abhinaya        |sukrupa.test@gmail.com|
 
