@@ -1,0 +1,1 @@
+Thank you!! The newletter has been successfully sent!!

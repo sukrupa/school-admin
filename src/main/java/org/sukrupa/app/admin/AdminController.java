@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.sukrupa.app.admin.subscribers.Subscriber;
+import org.sukrupa.app.admin.subscribers.SubscriberRepository;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
@@ -13,6 +15,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -24,11 +27,13 @@ public class AdminController {
 
     private StudentService studentService;
     private EmailService emailService;
+    private SubscriberRepository subscriberRepository;
 
     @Autowired
-    public AdminController(StudentService studentService, EmailService emailService) {
+    public AdminController(StudentService studentService, EmailService emailService, SubscriberRepository subscriberRepository) {
         this.studentService = studentService;
         this.emailService = emailService;
+        this.subscriberRepository = subscriberRepository;
     }
 
 
@@ -52,7 +57,8 @@ public class AdminController {
     }
 
     @RequestMapping("/sendnewsletter")
-    public String sendNewsletter() {
+    public String sendNewsletter(Map<String, Object> model) {
+        model.put("bccList", getMailListAsString());
         return "admin/sendnewsletterPage";
     }
 
@@ -82,5 +88,14 @@ public class AdminController {
                                                               @RequestParam String subject, @RequestParam String message) throws MessagingException {
         emailService.sendEmail(toAddress, subject, message);
         return "/admin/endofsponsorshipmailsentPage";
+    }
+
+    public String getMailListAsString() {
+        List<Subscriber> subscriberList = subscriberRepository.getList();
+        String mailList = "";
+        for(Subscriber subscriber: subscriberList){
+            mailList += subscriber.getSubscriberEmail()+";";
+        }
+        return mailList;
     }
 }

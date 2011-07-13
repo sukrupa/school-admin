@@ -11,11 +11,8 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-<<<<<<< HEAD
-=======
 import javax.sound.midi.MidiMessage;
 import java.io.File;
->>>>>>> Abhi/Kishore: SendMail with bcc
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -36,10 +33,9 @@ public class EmailService {
 
      public boolean sendNewsLetter(String toAddress, String bcc, String subject, String comments, String attachment) throws MessagingException, IOException {
         InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
-         System.out.println(attachment);
          attachment = extractAttachmentFileAddress(attachment);
          File tempFile = new File(attachment);
-         System.out.println(tempFile.exists());
+
           Message emailMessage;
          if(bcc.equals("")){
            emailMessage = createMimeMessageWithSubjectAndRecipientAsToAndAttachment(toRecipientAddress,subject,comments,attachment);
@@ -97,12 +93,10 @@ public class EmailService {
     }
     protected Address[] convertStringToAddressArray(String bcc) throws AddressException {
         String[] individualEmailAddressArray=bcc.split(";");
-        System.out.println(individualEmailAddressArray.length);
         Address[] addresses = new Address[individualEmailAddressArray.length];
         for(int i=0; i< individualEmailAddressArray.length;i++){
             InternetAddress internetAddress = new InternetAddress(individualEmailAddressArray[i]);
             addresses[i]=internetAddress;
-            System.out.println(addresses[i].toString());
         }
         return addresses;
     }

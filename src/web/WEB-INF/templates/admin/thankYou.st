@@ -1,1 +1,1 @@
-$layout( title="Mail Sent. Thank you", stylesheets="admin")$
+$layout( title="Send Monthly Newsletter", body=admin/thankYouBody(),stylesheets="admin")$

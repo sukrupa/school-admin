@@ -3,7 +3,7 @@
     <div>To:</div>
     <input type="text" id="to" name="to" />
     <div>Bcc:</div>
-    <input type="text" id="bcc" name="bcc"/>
+    <input type="text" id="bcc" name="bcc" value="$bccList$"/>
     <div>Subject:</div>
     <input type="text" id="subject" name="subject" />
     <div>Comments:</div>

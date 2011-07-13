@@ -49,7 +49,7 @@ public class EmailServiceTest {
 
     @Test
     public void shouldSendEmail() throws MessagingException {
-        String toAddress = "aravindp@thoughtworks.com";
+        String toAddress = "sukrupa.test@gmail.com";
         String subject="Hai";
         String comments="Thanks";
 
@@ -91,15 +91,20 @@ public class EmailServiceTest {
 
     @Test
     public void shouldExtractAttachmentFileAddress(){
+<<<<<<< HEAD
         String actualFilePath = "C:\\Users\\srivathr\\Desktop\\Text.txt";
+=======
+        String actualFilePath = "C:\\Users\\myuser\\Desktop\\Text.txt";
+        emailService = new EmailService(appConfiguration);
+>>>>>>> Abhi/Kishore: Story 536 Added cucumber feature for file attach. remove. Pre populated bcc with mailing list
         String extractedAttachmentFileAddress = emailService.extractAttachmentFileAddress(actualFilePath);
-        Assert.assertThat(extractedAttachmentFileAddress, is("/Users/srivathr/Desktop/Text.txt"));
+        Assert.assertThat(extractedAttachmentFileAddress, is("/Users/myuser/Desktop/Text.txt"));
 
     }
 
     @Test
     public void shouldConvertStringToInternetAddress() throws AddressException {
-        String testEmailAddress = "sabhinay@thoughtworks.com";
+        String testEmailAddress = "sukrupa.test@gmail.com";
         InternetAddress expectedInternetAddress = new InternetAddress(testEmailAddress);
 
         InternetAddress actualInternetAddress = emailService.convertStringToInternetAddress(testEmailAddress);
@@ -119,7 +124,7 @@ public class EmailServiceTest {
         String excpectedSubject = "A subject";
         when(appConfiguration.properties()).thenReturn(new Properties());
 
-        InternetAddress expectedRecipient = new InternetAddress("anitam@thoughtworks.com");
+        InternetAddress expectedRecipient = new InternetAddress("sukrupa.test@gmail.com");
         MimeMessage mimeMessage = emailService.createMimeMessageWithSubjectAndRecipientAsToAndAttachment(expectedRecipient, excpectedSubject, "", "");
 
         assertThat(mimeMessage.getSubject(), is(excpectedSubject));
@@ -130,7 +135,7 @@ public class EmailServiceTest {
     public void shouldCreateMessageWithCommentsAndRecipientAsTo() throws  MessagingException ,IOException{
         String subject="Hai";
         String comments="Thanks";
-        InternetAddress recipient =new InternetAddress("aravindp@thoughtworks.com");
+        InternetAddress recipient =new InternetAddress("sukrupa.test@gmail.com");
         when(appConfiguration.properties()).thenReturn(new Properties());
 
         MimeMessage message =emailService.createMimeMessageWithSubjectAndRecipientAsTo(recipient,subject,comments);

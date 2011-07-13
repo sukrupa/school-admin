@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.web.multipart.MultipartFile;
+import org.sukrupa.app.admin.subscribers.Subscriber;
+import org.sukrupa.app.admin.subscribers.SubscriberRepository;
 import org.sukrupa.app.services.EmailService;
 import org.sukrupa.student.*;
 
@@ -11,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.beans.beancontext.BeanContextChild;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +33,8 @@ public class AdminControllerTest {
     private EmailService emailService;
     @Mock
     private MultipartFile mockAttachment;
+    @Mock
+    private SubscriberRepository subscriberRepository;
 
     private AdminController adminController;
 
@@ -39,7 +44,7 @@ public class AdminControllerTest {
     public void setUp() throws Exception {
         initMocks(this);
 
-        adminController = new AdminController(studentService, emailService);
+        adminController = new AdminController(studentService, emailService, subscriberRepository);
     }
 
     @Test
@@ -86,13 +91,24 @@ public class AdminControllerTest {
     }
 
     @Test
+    public void shouldConvertSubscribersMailListTOAString(){
+        ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
+        subscribers.add(new Subscriber("Abhinaya", "abhijan90@gmail.com"));
+        subscribers.add(new Subscriber("Kishore", "abyu.kishore@aol.in"));
+        when(subscriberRepository.getList()).thenReturn(subscribers);
+        List<Subscriber> subscriberList = subscriberRepository.getList();
+        String mailList = adminController.getMailListAsString();
+        assertThat(mailList, is("abhijan90@gmail.com;abyu.kishore@aol.in;"));
+    }
+
+    @Test
     public void shouldSendEmail() throws MessagingException, IOException {
 
-        String toAddress = "anita@thoughtworks.com";
+        String toAddress = "sukrupa.test@gmail.com";
         String subject = "NewsLetter";
-        String bcc="vishnukool@gmail.com";
+        String bcc="sukrupa.test@gmail.com";
         when(mockAttachment.getOriginalFilename()).thenReturn("Test.txt");
         adminController.sendNewsletterEmail(toAddress,bcc,subject,"",mockAttachment);
-        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir")+"Test.txt");
+        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir")+"\\Test.txt");
     }
 }
