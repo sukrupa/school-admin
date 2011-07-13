@@ -18,7 +18,7 @@ public class SmallNeed {
     private String itemName;
 
     @Column(name = "COST")
-    private long cost;
+    private double cost;
 
     @Column(name = "COMMENT")
     private String comments;
@@ -31,7 +31,7 @@ public class SmallNeed {
     public SmallNeed() {
     }
 
-    public SmallNeed(String itemName, long cost, String comments, int priority) {
+    public SmallNeed(String itemName, double cost, String comments, int priority) {
         this.itemName = itemName;
         this.cost = cost;
         this.comments = comments;
@@ -42,7 +42,7 @@ public class SmallNeed {
         return itemName;
     }
 
-    public long getCost() {
+    public double getCost() {
         return cost;
     }
 

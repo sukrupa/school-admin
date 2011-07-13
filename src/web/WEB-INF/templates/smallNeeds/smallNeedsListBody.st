@@ -1,6 +1,14 @@
 $successMessage(condition=shouldDisplayMessage, message=message)$
 <div>
     <div class="page">
+        <form id="smallNeedsForm" method="post">
+            <input type="hidden" name="itemName" />
+            <input type="hidden" name="priority" />
+            <input type="hidden" name="itemCost" />
+            <input type="hidden" name="itemId" />
+            <input type="hidden" name="comment"/>
+        </form>
+            <span class="errorMessage" id="error"></span>
         <table border="0">
             <thead class="header">
             <tr>
@@ -12,15 +20,17 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
             </tr>
             </thead>
             <tbody>
+            $priority:{
             <tr>
-                <form name="createSmallNeedsForm" method="post" action="/smallneeds/create">
-                    <td><input type="text" id="priority" name="priority" class="item-priority" value="$priority$"/></td>
-                    <td><input type="text" id="itemName" name="itemName"/></td>
-                    <td><input type="text" id="cost" name="cost"/></td>
-                    <td><input type="text" id="comment" name="comment"/></td>
-                    <td><input type="submit" name="add" value="Add"/></td>
-                </form>
+                <td><input class="item-priority" id="priority" value="$it$"/></td>
+                <td><input class="item-name" id="itemName"/></td>
+                <td><input class="item-cost" id="cost"/></td>
+                <td><input class="item-comment" id="comment"></td>
+                <td>
+                    <input type="button" class="add-smallneed-button" value="Add"/>
+                </td>
             </tr>
+            }$
             $smallNeedList:{
             <tr>
                 <td class="hidden"><input class="item-id" value="$it.id$"/></td>
@@ -36,7 +46,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                 <td class="display">$it.cost$</td>
                 <td class="display">$it.comment$</td>
                 <td class="display">
-                    <input type="button" class="edit-bigneed-button" name="edit" value="Edit"/>
+                    <input type="button" class="edit-smallneed-button" name="edit" value="Edit"/>
                 </td>
                 <td>
                     <input type="button" class="delete-smallneed-button" id="deleteNeedButton" value="Delete"/>

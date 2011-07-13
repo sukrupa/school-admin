@@ -12,6 +12,7 @@ import org.sukrupa.smallNeeds.SmallNeedRepository;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -36,19 +37,16 @@ public class SmallNeedsController {
         model.put("smallNeedList", smallNeedList);
         model.put("priority", smallNeedList.size() + 1);
         model.put("message", session.getAttribute("message"));
-        if(session.getAttribute("message") != null)
-        model.put("shouldDisplayMessage", true);
-        else
-        model.put("shouldDisplayMessage", false);
+        model.put("shouldDisplayMessage",session.getAttribute("message") != null);
         session.removeAttribute("message");
         return "smallNeeds/smallNeedsList";
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam int priority, @RequestParam String itemName, @RequestParam long cost, @RequestParam String comment, HttpSession session) {
-        smallNeedRepository.put(new SmallNeed(itemName, cost, comment, priority));
+    public String create(@RequestParam int priority, @RequestParam String itemName, @RequestParam String itemCost, @RequestParam String comment, HttpSession session,HashMap<String, Object> model) {
+        smallNeedRepository.put(new SmallNeed(itemName, Double.parseDouble(itemCost), comment, priority));
         session.setAttribute("message", "Added " + itemName);
-        return "redirect:/smallneeds";
+        return list(model,session);
     }
 
     @RequestMapping(value = "delete", method = POST)
@@ -58,6 +56,6 @@ public class SmallNeedsController {
         this.smallNeedRepository.delete(smallNeed);
         this.smallNeedRepository.getSmallNeed(itemId);
         session.setAttribute("message", "Deleted " + smallNeed.getItemName());
-        return "smallNeeds/smallNeedsList";
+        return list(model,session);
     }
 }

@@ -5,19 +5,18 @@ $(function() {
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
     $(".delete-bigneed-button").click(deleteNeed);
-    $(".delete-smallneed-button").click(deleteSmallNeed);
 });
 
 //Needs Refactoring
-function deleteSmallNeed(){
-    var itemId = $(this).parents('tr').find('.item-id').val();
-    var params = {itemId:itemId};
-    var url = "/smallneeds/delete";
-    jQuery.post(url, params, function(data){
-        refreshPage();
-    });
-}
-
+//function deleteSmallNeed(){
+//    var itemId = $(this).parents('tr').find('.item-id').val();
+//    var params = {itemId:itemId};
+//    var url = "/smallneeds/delete";
+//    jQuery.post(url, params, function(data){
+//        refreshPage();
+//    });
+//}
+//
 function refreshPage() {
     try {
         location.reload();
