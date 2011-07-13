@@ -12,7 +12,6 @@ import org.sukrupa.student.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
@@ -58,19 +57,18 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/sendnewsletteremail", method = POST)
-    public String sendNewsletterEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String comments, @RequestParam ("attach")MultipartFile file) throws MessagingException, IOException {
-
-        String fileAttachmentFilePath = System.getProperty("user.dir")+file.getOriginalFilename();
+    public String sendNewsletterEmail(@RequestParam String to,@RequestParam String bcc, @RequestParam String subject, @RequestParam String comments, @RequestParam ("attach")MultipartFile file) throws MessagingException, IOException {
+        String fileAttachmentFilePath = System.getProperty("user.dir")+"\\"+file.getOriginalFilename();
         if(file.getOriginalFilename()== ""){
-            emailService.sendEmail(to,subject,comments);
+            emailService.sendNewsLetterEmailWithoutAttachment(to,bcc,subject,comments);
             return  "admin/thankyou";
         }
 
         File webserverSideCopyOfClientSideFileAttachment = new File(fileAttachmentFilePath);
         file.transferTo(webserverSideCopyOfClientSideFileAttachment);
-        emailService.sendNewsLetter(to, subject,comments,fileAttachmentFilePath);
+        emailService.sendNewsLetter(to, bcc, subject,comments,fileAttachmentFilePath);
         webserverSideCopyOfClientSideFileAttachment.delete();
-         return "admin/thankyou";
+        return "admin/thankyou";
 
     }
 
@@ -85,7 +83,4 @@ public class AdminController {
         emailService.sendEmail(toAddress, subject, message);
         return "/admin/endofsponsorshipmailsentPage";
     }
-
-
-
 }

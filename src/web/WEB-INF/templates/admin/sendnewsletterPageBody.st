@@ -2,6 +2,8 @@
 <form id="sendnewsletter" name="sendnewsletter" action="/admin/sendnewsletteremail" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" >
     <div>To:</div>
     <input type="text" id="to" name="to" />
+    <div>Bcc:</div>
+    <input type="text" id="bcc" name="bcc"/>
     <div>Subject:</div>
     <input type="text" id="subject" name="subject" />
     <div>Comments:</div>
@@ -10,6 +12,6 @@
     <div><input type ="text" id="fakebox" name="fakebox" />
     <input type="button" value="Remove" onclick="javascript:remove();"/></div>
     <div><input type="submit" id="send" name="send" value="Send"/></div>
-    
+
 
 </form>

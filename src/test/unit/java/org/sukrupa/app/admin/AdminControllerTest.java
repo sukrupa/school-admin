@@ -9,6 +9,7 @@ import org.sukrupa.student.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.beans.beancontext.BeanContextChild;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +77,11 @@ public class AdminControllerTest {
 
     @Test
     public void shouldSentEndOfSponsorshipEmail() throws MessagingException {
-        String toAddress="aravindp@thoughtworks.com";
+        String toAddress="sukrupa.test@gmail.com";
         String subject="end of sponsor";
         String comments="Thanks for Sponsorship";
         String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage(toAddress, subject, comments);
-        verify(emailService).sendEmail(toAddress, subject, comments);
+       verify(emailService).sendEmail(toAddress, subject, comments);
 
     }
 
@@ -89,9 +90,9 @@ public class AdminControllerTest {
 
         String toAddress = "anita@thoughtworks.com";
         String subject = "NewsLetter";
-        
+        String bcc="vishnukool@gmail.com";
         when(mockAttachment.getOriginalFilename()).thenReturn("Test.txt");
-        adminController.sendNewsletterEmail(toAddress, subject,"",mockAttachment);
-        verify(emailService).sendNewsLetter(toAddress, subject, "", System.getProperty("user.dir")+"Test.txt");
+        adminController.sendNewsletterEmail(toAddress,bcc,subject,"",mockAttachment);
+        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir")+"Test.txt");
     }
 }

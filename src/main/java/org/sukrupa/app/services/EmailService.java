@@ -9,12 +9,15 @@ import org.sukrupa.platform.config.AppConfiguration;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.*;
+<<<<<<< HEAD
+=======
+import javax.sound.midi.MidiMessage;
+import java.io.File;
+>>>>>>> Abhi/Kishore: SendMail with bcc
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 @Component
@@ -31,25 +34,34 @@ public class EmailService {
         this.transportFactory = transportFactory;
     }
 
-    public boolean sendNewsLetter(String toAddress, String subject, String comments, String attachment) throws MessagingException, IOException {
+     public boolean sendNewsLetter(String toAddress, String bcc, String subject, String comments, String attachment) throws MessagingException, IOException {
         InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
-        attachment = extractAttachmentFileAddress(attachment);
-
-        MimeMessage emailMessage = createMimeMessageWithSubjectAndRecipientAsToAndAttachment(toRecipientAddress, subject, comments, attachment);
+         System.out.println(attachment);
+         attachment = extractAttachmentFileAddress(attachment);
+         File tempFile = new File(attachment);
+         System.out.println(tempFile.exists());
+          Message emailMessage;
+         if(bcc.equals("")){
+           emailMessage = createMimeMessageWithSubjectAndRecipientAsToAndAttachment(toRecipientAddress,subject,comments,attachment);
+         }
+         else {
+        Address[] bccRecipients= convertStringToAddressArray(bcc);
+         emailMessage = createMimeMessageWithSubjectAndRecipientAsToBccAndAttachment(toRecipientAddress,bccRecipients,subject,comments,attachment);
+         }
 
         Properties applicationProperties = appConfiguration.properties();
         applicationProperties.put("mail.smtp.auth", "true");
         applicationProperties.put("mail.smtp.starttls.enable", "true");
 
         Transport transport = Session.getDefaultInstance(applicationProperties).getTransport("smtp");
-        transport.connect(applicationProperties.getProperty("mail.smtp.host"), Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")), applicationProperties.getProperty("mail.smtp.user"), applicationProperties.getProperty("mail.smtp.password"));
-        transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+
+        transport.connect(applicationProperties.getProperty("mail.smtp.host"),Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")),applicationProperties.getProperty("mail.smtp.user"),applicationProperties.getProperty("mail.smtp.password"));
+
+         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
 
         transport.close();
-        return true;
-
-
-    }
+            return true;
+     }
 
     protected String extractAttachmentFileAddress(String attachment) {
         attachment = attachment.substring(attachment.indexOf('\\'));
@@ -83,6 +95,17 @@ public class EmailService {
         InternetAddress internetAddress = new InternetAddress(emailAddress);
         return internetAddress;
     }
+    protected Address[] convertStringToAddressArray(String bcc) throws AddressException {
+        String[] individualEmailAddressArray=bcc.split(";");
+        System.out.println(individualEmailAddressArray.length);
+        Address[] addresses = new Address[individualEmailAddressArray.length];
+        for(int i=0; i< individualEmailAddressArray.length;i++){
+            InternetAddress internetAddress = new InternetAddress(individualEmailAddressArray[i]);
+            addresses[i]=internetAddress;
+            System.out.println(addresses[i].toString());
+        }
+        return addresses;
+    }
 
     protected MimeMessage createMimeMessageWithSubjectAndRecipientAsToAndAttachment(InternetAddress recipient, String subject, String comments, String attachment) throws MessagingException, IOException {
 
@@ -107,6 +130,31 @@ public class EmailService {
 
         return mimeMessage;
     }
+     protected MimeMessage createMimeMessageWithSubjectAndRecipientAsToBccAndAttachment(InternetAddress recipient,Address[] bcc, String subject, String comments, String attachment) throws MessagingException, IOException {
+
+        session = Session.getDefaultInstance(appConfiguration.properties());
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.setSubject(subject);
+        mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
+        mimeMessage.setRecipients(MimeMessage.RecipientType.BCC,bcc);
+
+        MimeBodyPart messageBody = new MimeBodyPart();
+        messageBody.setText(comments);
+
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBody);
+
+        MimeBodyPart messageAttachment = new MimeBodyPart();
+        FileDataSource fileSource = new FileDataSource(attachment);
+
+        messageAttachment.setDataHandler(new DataHandler(fileSource));
+        messageAttachment.setFileName(attachment);
+        multipart.addBodyPart(messageAttachment);
+        mimeMessage.setContent(multipart);
+
+        return mimeMessage;
+    }
+
 
     public MimeMessage createMimeMessageWithSubjectAndRecipientAsTo(InternetAddress recipient,
                                                                     String subject, String comments) throws MessagingException {
@@ -117,5 +165,41 @@ public class EmailService {
         mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
         mimeMessage.setContent(comments, "text/html");
         return mimeMessage;
+    }
+
+public MimeMessage createMimeMessageWithBccSubjectAndRecipientAsTo(InternetAddress recipient,
+                                                                    Address[] bcc,String subject, String comments) throws MessagingException {
+        session = Session.getInstance(appConfiguration.properties());
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.setSubject(subject);
+        mimeMessage.setRecipient(MimeMessage.RecipientType.TO, recipient);
+        mimeMessage.setRecipients(MimeMessage.RecipientType.BCC,bcc);
+        mimeMessage.setContent(comments, "text/html");
+        return mimeMessage;
+    }
+
+
+    public boolean sendNewsLetterEmailWithoutAttachment(String to, String bcc, String subject, String comments) {
+        try{
+        InternetAddress toRecipientAddress = convertStringToInternetAddress(to);
+        Address[] bccRecipients= convertStringToAddressArray(bcc);
+        MimeMessage emailMessage = createMimeMessageWithBccSubjectAndRecipientAsTo(toRecipientAddress,bccRecipients,subject,comments);
+        Properties applicationProperties = appConfiguration.properties();
+
+        applicationProperties.put("mail.smtp.auth", "true");
+        applicationProperties.put("mail.smtp.starttls.enable", "true");
+
+        Transport transport = Session.getDefaultInstance(applicationProperties).getTransport("smtp");
+        transport.connect(applicationProperties.getProperty("mail.smtp.host"),Integer.parseInt(applicationProperties.getProperty("mail.smtp.port")),applicationProperties.getProperty("mail.smtp.user"),applicationProperties.getProperty("mail.smtp.password"));
+        transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+
+        transport.close();
+
+            return true;
+        }
+        catch (MessagingException e){
+            return false;
+        }
     }
 }
