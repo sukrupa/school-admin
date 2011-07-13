@@ -4,6 +4,7 @@ package org.sukrupa.bigneeds;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,7 @@ public class BigNeedRepositoryTest {
 
     @Test
     public void shouldSaveTheFirstBigNeedObject() {
-        BigNeed powerGenerator = new BigNeed("Power Generator", 150000);
+        BigNeed powerGenerator = new BigNeed("Power Generator", 150000,1);
         bigNeedRepository.addBigNeed(powerGenerator, 1);
 
         BigNeed retrievedBigNeed = bigNeedRepository.findByName("Power Generator");
@@ -117,6 +118,26 @@ public class BigNeedRepositoryTest {
     }
 
     @Test
+    public void shouldHaveTheSamePriorityIfPriorityHasNotChanged(){
+        BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
+        BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2);
+        BigNeed largeBed = new BigNeed("Big Large Bed", 20000, 3);
+
+        sessionFactory.getCurrentSession().save(powerGenerator);
+        sessionFactory.getCurrentSession().save(airConditioner);
+        sessionFactory.getCurrentSession().save(largeBed);
+
+        airConditioner.setItemName("Projector");
+
+        bigNeedRepository.editBigNeed(airConditioner,2);
+
+         assertThat(bigNeedRepository.findByName(airConditioner.getItemName()).getPriority(), is(2));
+         assertThat(bigNeedRepository.findByName(largeBed.getItemName()).getPriority(), is(3));
+         assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(1));
+
+    }
+
+    @Test
     public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToLowerPriority() {
         BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1);
         BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2);
@@ -127,11 +148,12 @@ public class BigNeedRepositoryTest {
         sessionFactory.getCurrentSession().save(airConditioner);
         sessionFactory.getCurrentSession().save(largeBed);
 
-        bigNeedRepository.editBigNeed(powerGenerator, 2);
+        bigNeedRepository.editBigNeed(airConditioner, 2);
 
-        assertThat(bigNeedRepository.findByName(airConditioner.getItemName()).getPriority(), is(1));
-        assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(2));
+        assertThat(bigNeedRepository.findByName(airConditioner.getItemName()).getPriority(), is(2));
+        assertThat(bigNeedRepository.findByName(powerGenerator.getItemName()).getPriority(), is(1));
         assertThat(bigNeedRepository.findByName(largeBed.getItemName()).getPriority(), is(3));
+       
     }
 
     @Test

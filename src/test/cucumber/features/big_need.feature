@@ -30,8 +30,8 @@ Feature: Add, Edit and Delete Big Needs
     Then a "Tractor" costing "120000.0" should be displayed with priority "2"
 
 
-#  Scenario: View the priority of the items
-#    Given I am on the Big Needs page
-#    Then Priority should be displayed
+  Scenario: View the priority of the items
+    Given I am on the Big Needs page
+    Then Priority should be displayed
     
 

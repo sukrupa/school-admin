@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.ListIterator;
 
 @Repository
 public class BigNeedRepository {
@@ -26,9 +25,13 @@ public class BigNeedRepository {
 
     public void editBigNeed(BigNeed updatedBigNeed, int newPriority) {
         List<BigNeed> bigNeeds = getList();
-        bigNeeds.remove(updatedBigNeed);
-        newPriority=Math.min(bigNeeds.size()+1,newPriority);
-        saveList(adjustPriorities(bigNeeds, updatedBigNeed, newPriority));
+        if(updatedBigNeed.getPriority()!=newPriority){
+            bigNeeds.remove(updatedBigNeed);
+            newPriority=Math.min(bigNeeds.size()+1,newPriority);
+            saveList(adjustPriorities(bigNeeds, updatedBigNeed, newPriority));
+        } else {
+            session().saveOrUpdate(updatedBigNeed);
+        }
     }
 
     private void saveList(List<BigNeed> bigNeeds) {
@@ -37,18 +40,41 @@ public class BigNeedRepository {
         }
     }
 
-    private List<BigNeed> adjustPriorities(List<BigNeed> bigNeeds, BigNeed updatedBigNeed, int newPriority) {
+    private List<BigNeed> adjustPriorities(List<BigNeed> bigNeeds, BigNeed newOrEditedBigNeed, int newPriority) {
+        int samePriorityItemIndex = findTheItemThatCurrentlyHasTheSamePriorityAsTheNewItem(bigNeeds, newPriority);
+        int indexAtWhichToAddTheNewItem = findPriorityIndexForTheNewItem(newOrEditedBigNeed, newPriority, samePriorityItemIndex);
+
+        bigNeeds.add(indexAtWhichToAddTheNewItem, newOrEditedBigNeed);
+
+        updatePrioritiesOfAllItems(bigNeeds);
+        return bigNeeds;
+    }
+
+    private void updatePrioritiesOfAllItems(List<BigNeed> bigNeeds) {
+        int samePriorityItemIndex;
+        for (samePriorityItemIndex = 0; samePriorityItemIndex < bigNeeds.size(); samePriorityItemIndex++) {
+            bigNeeds.get(samePriorityItemIndex).setPriority(samePriorityItemIndex + 1);
+        }
+    }
+
+    private int findPriorityIndexForTheNewItem(BigNeed updatedBigNeed, int newPriority, int samePriorityItemIndex) {
+        int indexAtWhichToAddItem;
+        if(updatedBigNeed.getPriority() >= newPriority){
+            indexAtWhichToAddItem = samePriorityItemIndex;
+        } else {
+            indexAtWhichToAddItem = samePriorityItemIndex + 1;
+        }
+        return indexAtWhichToAddItem;
+    }
+
+    private int findTheItemThatCurrentlyHasTheSamePriorityAsTheNewItem(List<BigNeed> bigNeeds, int newPriority) {
         int i = 0;
         for (; i < bigNeeds.size(); i++) {
             if (bigNeeds.get(i).getPriority() == newPriority) {
                 break;
             }
         }
-        bigNeeds.add(updatedBigNeed.getPriority() >= newPriority ? i : i + 1, updatedBigNeed);
-        for (i = 0; i < bigNeeds.size(); i++) {
-            bigNeeds.get(i).setPriority(i + 1);
-        }
-        return bigNeeds;
+        return i;
     }
 
     public BigNeed findByName(String itemName) {
