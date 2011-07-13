@@ -1,5 +1,6 @@
 package org.sukrupa.student;
 
+import org.joda.time.LocalDate;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.sukrupa.app.services.StudentImageRepository;
 import org.sukrupa.platform.RequiredByFramework;
@@ -25,6 +26,8 @@ public class StudentForm {
     private Set<String> talents;
     private String status;
     private String sponsored;
+    private String sponsorEmail;
+    private LocalDate sponsorStartDate;
     private String disciplinary;
     private String performance;
     private String background;
@@ -33,7 +36,7 @@ public class StudentForm {
     private final List<String> validImageTypes = asList("image/jpg","image/jpeg","image/png","image/gif","image/pjpeg");
 
 
-    public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload) {
+    public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload, String sponsored, String sponsorEmail, LocalDate sponsorStartDate) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -53,6 +56,9 @@ public class StudentForm {
         this.performance = performance;
         this.background = background;
         this.familyStatus = familyStatus;
+        this.sponsored = sponsored;
+        this.sponsorEmail = sponsorEmail;
+        this.sponsorStartDate = sponsorStartDate;
     }
 
     @RequiredByFramework
@@ -191,8 +197,10 @@ public class StudentForm {
         this.familyStatus = familyStatus;
     }
 
-    public void setSponsored(String sponsored) {
+    public void setSponsored(String sponsored, String sponsorEmail, LocalDate sponsorStartDate) {
         this.sponsored = sponsored;
+        this.sponsorEmail = sponsorEmail;
+        this.sponsorStartDate = sponsorStartDate;
     }
 
     public String getPerformance() {

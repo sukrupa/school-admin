@@ -25,7 +25,9 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String disciplinary;
     private String performance;
     private String background;
-    private boolean sponsored;
+    private String sponsored;
+    private String sponsorEmail;
+    private LocalDate sponsorStartDate;
     private String familyStatus;
     private CommonsMultipartFile imageToUpload;
 
@@ -122,7 +124,7 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentForm build() {
         return new StudentForm(studentId, name, dateOfBirth, gender, studentClass, religion, caste, subCaste, area, father, mother, guardian,
-                talents, status.toString(), disciplinary, performance, background, familyStatus, imageToUpload);
+                talents, status.toString(), disciplinary, performance, background, familyStatus, imageToUpload, sponsored, sponsorEmail, sponsorStartDate);
     }
 
 
@@ -131,7 +133,7 @@ public class StudentCreateOrUpdateParameterBuilder {
         return this;
     }
 
-    public StudentCreateOrUpdateParameterBuilder sponsored(boolean sponsored) {
+    public StudentCreateOrUpdateParameterBuilder sponsored(String sponsored) {
         this.sponsored = sponsored;
         return this;
     }

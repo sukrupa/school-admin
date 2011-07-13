@@ -90,33 +90,34 @@
 
                 <div class="updateEntry">
                     <div class="label-header">Background</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "soft"
+                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "soft"
                             onKeyDown = "limitText(this.form.background,500);">$student.profile.background$</textarea>
                 </div>
 
                 <div class="updateEntry">
                     <div class="label-header">Academic Performance</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "soft"
+                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "soft"
                             onKeyDown = "limitText(this.form.performance,500);">$student.performance$</textarea>
                 </div>
 
 
                 <div class="updateEntry">
                     <div class="label-header">Disciplinary</div>
-                    <textarea autocomplete="off" cols="54" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "soft"
+                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "soft"
                             onKeyDown = "limitText(this.form.disciplinary,500);">$student.disciplinary$</textarea>
                 </div>
 
             </div>
 
-            <div class="editStatus">
                 <div class="statusLabel">Student Status<span class="mandatory">*</span></div>
+                <div class="statusLabel">
                 <select name="status" id="status" class="updateStatusValue">
                     $formhelper.statusesDropDownList:{
                         <option $if (it.selected)$ selected="selected"$endif$>$it.value$</option>
                         }$
                 </select>
-            </div>
+                </div>
+
 
             <div class="studentImage">
 
@@ -125,10 +126,18 @@
                 <span class="errorMessage">$imageToUploadError$</span>
             </div>
 
-             <div class="editStatus">
+             <div class="updateSponsorDetails">
                 <div class="sponsoredLabel"><label id="Sponsor" for="sponsored">Sponsor</label></div>
-                <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsor$" size="15" ></input></div>
+                <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsor$" ></input></div>
+            </div>
+            <div class="updateSponsorDetails">
+            <div class="sponsoredLabel"><label id="Sponsor-Email" for="sponsored">Sponsor Email</label></div>
+                <div class="sponsorValue"><input type="text" name="sponsor-email" id="sponsor-email" value="$student.sponsor_email$" ></input></div>
+            </div>
 
+            <div class="updateSponsorDetails">
+                 <div class="sponsoredLabel"><label id="Sponsor-Start-Date" for="sponsored">Sponsor Start Date <br/> (dd-mm-yyyy)</label></div>
+                 <div class="sponsorValue"><input type="text" name="sponsor-start-date" id="sponsor-start-date" value="$student.sponsorStartDateForDisplay$" ></input></div>
             </div>
 
             <div class="talentsList">
