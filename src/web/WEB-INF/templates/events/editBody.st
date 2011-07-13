@@ -1,6 +1,6 @@
 <div id="event">
 
-	<form id="editEvent" name="editEvent" action="/events/$event.id$" method="post">
+	<form id="editEvent" name="editEvent" action="/events/update/$event.id$" method="post">
         <input type="hidden" name="id" id="id" value="$event.id$" class="createValue"></input>
 		$events/eventForm()$
 

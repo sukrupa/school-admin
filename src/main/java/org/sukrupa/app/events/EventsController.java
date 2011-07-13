@@ -33,48 +33,36 @@ public class EventsController {
         this.service = service;
         this.studentRepository = studentRepository;
     }
+
     @RequestMapping()
-    public String list(Map<String, List<Event>> model)
-    {
+    public String getListOfEvents(Map<String, List<Event>> model){
         model.put("events", service.list());
         return "events/list";
     }
 
     @RequestMapping(value = "/{eventId}")
-    public String view(@PathVariable int eventId, Map<String, Event> model) {
+    public String getAnEventView(@PathVariable int eventId, Map<String, Event> model) {
         model.put("event", service.getEvent(eventId));
         return "events/view";
     }
 
-    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/{eventId}/edit", method = GET)
-    public String edit(@PathVariable int eventId, Map<String, Object> model) {
-        List<Student> studentList = studentRepository.getList();
-        Collections.sort(studentList, new StudentNameComparator());
+    public String getEditEventPage(@PathVariable int eventId, Map<String, Object> model) {
         Event event = service.getEvent(eventId);
-        try {
-            List<Student> attendeesList = new ArrayList<Student>(event.getAttendees());
-            Collections.sort(attendeesList, new StudentNameComparator());
-            for (Student student: attendeesList){
-                studentList.remove(student);
-            }
-            model.put("attendeesList", attendeesList);
-        } catch (NullPointerException e) {
-            // there are attendees
-        }
-        model.put("studentList", studentList);
-        model.put("event",event);
+        model.put("attendeesList", getListOfAttendingStudents(event));
+        model.put("studentList", getListOfAvailableStudents(event));
+        model.put("event", event);
         return "events/edit";
     }
 
 	@RequestMapping(value = "create", method = GET)
 	public String create(Map<String, Object> model) {
-        List<Student> studentList = studentRepository.getList();
-        model.put("studentList", studentList);
+//        List<Student> studentList = studentRepository.getList();
+        model.put("studentList", getListOfAvailableStudents());
 		return "events/create";
 	}
 
-    @RequestMapping(value = "{eventId}", method = POST)
+    @RequestMapping(value = "/update/{eventId}", method = POST)
     public String update(@PathVariable String eventId,
             @ModelAttribute("editEvent") EventForm eventForm,
             Map<String, Object> model)
@@ -147,5 +135,37 @@ public class EventsController {
         public String toString() {
             return value;
         }
+    }
+
+    // all students less attending students
+    @SuppressWarnings("unchecked")
+    private List<Student> getListOfAvailableStudents(Event event){
+        List<Student> studentList = studentRepository.getList();
+        List<Student> attendeesList = getListOfAttendingStudents(event);
+        for (Student student: attendeesList){
+            studentList.remove(student);
+        }
+        Collections.sort(studentList, new StudentNameComparator());
+        return studentList;
+    }
+
+    // all students
+    @SuppressWarnings("unchecked")
+    private List<Student> getListOfAvailableStudents(){
+        List<Student> studentList = studentRepository.getList();
+        Collections.sort(studentList, new StudentNameComparator());
+        return studentList;
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Student> getListOfAttendingStudents(Event event){
+        List<Student> attendeesList = new ArrayList<Student>();
+        try{
+            attendeesList = new ArrayList<Student>(event.getAttendees());
+            Collections.sort(attendeesList, new StudentNameComparator());
+        } catch (NullPointerException e) {
+            // there are no attendess
+        }
+        return attendeesList;
     }
 }

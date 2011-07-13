@@ -83,7 +83,7 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayEventsPage() {
-        String list = controller.list(eventModel);
+        String list = controller.getListOfEvents(eventModel);
 
         assertThat("Displays the Events page",list, is("events/list"));
     }
@@ -95,7 +95,7 @@ public class EventsControllerTest {
         ourEventList.add(eventTwo);
         when(service.list()).thenReturn(ourEventList);
 
-        controller.list(eventModel);
+        controller.getListOfEvents(eventModel);
         List<Event> eventList = eventModel.get("events");
 
         assertTrue("EventList contains eventOne",eventList.contains(eventOne));
@@ -111,7 +111,7 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayEditANewEventPage() {
-        String edit = controller.edit(eventForm.getId(), objectModel);
+        String edit = controller.getEditEventPage(eventForm.getId(), objectModel);
 
         assertThat("Display the edit Event Page",edit, is("events/edit"));
     }
@@ -120,7 +120,7 @@ public class EventsControllerTest {
     public void shouldDisplayGivenEventPage() {
         when(service.getEvent(4)).thenReturn(eventOne);
 
-        String view = controller.view(4, model);
+        String view = controller.getAnEventView(4, model);
 
         assertThat("Displays the Event Page for the given Event Id",view, is("events/view"));
         verify(service).getEvent(4);
@@ -131,7 +131,7 @@ public class EventsControllerTest {
     public void shouldDisplayTheEditEventPageForTheGivenEventId() {
         when(service.getEvent(4)).thenReturn(eventOne);
 
-        String edit = controller.edit(4, objectModel);
+        String edit = controller.getEditEventPage(4, objectModel);
 
         assertThat("Display the Edit Event Page for the Given Id",edit, is("events/edit"));
         verify(service).getEvent(4);

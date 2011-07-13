@@ -24,30 +24,29 @@ $(document).ready(function () {
     });
 
     $('#addStudents').click(function() {
-        $('#availableStudents option:selected').appendTo('#chosenStudents');
-        return false;
-    });
-
-    $('#removeStudents').click(function() {
-        $('#chosenStudents option:selected').appendTo('#availableStudents');
-        return false;
-    });
-
-    $('#clearStudents').click(function() {
-        $('#chosenStudents option').each( function(){
-            $(this).attr("selected", "selected")
-        })
-        $('#chosenStudents option:selected').appendTo('#availableStudents');
+        $('#availableStudents option:selected').appendTo('#attendingStudents');
         return true;
     });
 
-    addAttendees();
+    $('#removeStudents').click(function() {
+        $('#attendingStudents option:selected').appendTo('#availableStudents');
+        return true;
+    });
 
+    $('#clearStudents').click(function() {
+        $('#attendingStudents option').each( function(){
+            $(this).attr("selected", "selected")
+        })
+        $('#attendingStudents option:selected').appendTo('#availableStudents');
+        return true;
+    });
+
+    addAttendeesToForm();
 });
 
-function addAttendees(){
+function addAttendeesToForm(){
     $('#attendeesList option').each( function(){
-        $('#availableStudents option["*"]').appendTo('#chosenStudents');
+        $('#availableStudents option["*"]').appendTo('#attendingStudents');
     })
     return true;
 }

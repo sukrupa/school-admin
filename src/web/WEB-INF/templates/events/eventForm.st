@@ -82,7 +82,7 @@
                 <td>
                     <select multiple size="6" style="width:150px"  id="availableStudents">
                         $studentList:{
-                        <option value="$it$">$it.name$ ($it.studentId$)</option>
+                        <option value="$it.studentId$">$it.name$ ($it.studentId$)</option>
                         }$
                     </select>
                 </td>
@@ -98,9 +98,9 @@
                     </div>
                 </td>
                 <td>
-                    <select multiple size="6" style="width:150px" id="chosenStudents">
+                    <select multiple size="6" style="width:150px" id="attendingStudents">
                         $attendeesList:{
-                            <option value="$it$">$it.name$ ($it.studentId$)</option>
+                            <option value="$it.studentId$">$it.name$ ($it.studentId$)</option>
                         }$
                     </select>
                 </td>
