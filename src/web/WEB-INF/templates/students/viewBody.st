@@ -81,7 +81,7 @@
                 <div class="value $statusType$">$student.status$</div>
             </div>
 
-            <img src="/students/$student.imageLink$/image" class="studentImage" id="$student.imageLink$">
+            <img alt="Photo of Student" src="/students/$student.imageLink$/image" class="studentImage" id="$student.imageLink$"/>
 
              <div class="entry">
                  $if(sponsored)$

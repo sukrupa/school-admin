@@ -28,5 +28,11 @@ Feature: View student records
     When I select the student record of Anok
     Then an image for Anok with student ID 64262 is displayed
 
-
+    # Currently under development
+    #Scenario: View sponsor details on student profile
+    #Given I am on the View Students page
+    #When I select the student record of Anok
+    #Then Tim is displayed under Sponsor
+    #And Tim@gmail.com is displayed under Sponsor Email
+    #And 13-07-2011 is displayed under Sponsor Start Date
 
