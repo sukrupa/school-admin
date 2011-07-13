@@ -21,7 +21,7 @@ public class SearchStudentsSteps extends BasicWebSteps {
         }
     }
 
-    @When("^I enter name \"([^\"]*)\"$")
+    @When("^I enter name ([^\"]*)$")
     public void fillInTheTextBoxWith(String value) {
         browser().textbox("name").setValue(value);
     }
