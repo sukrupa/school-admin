@@ -16,11 +16,11 @@
 
 
 #basicInfo .entry .label {
-    width: 190px;
+    width: 170px;
 }
 
 #basicInfo .entry .value {
-    width: 250px;
+    width: 220px;
 }
 
 #secondaryInfo {
@@ -34,12 +34,12 @@
 
 #secondaryInfo .entry .label {
  
-    width: 130px;
+    width: 160px;
 }
 
 #secondaryInfo .entry .value {
 
-    width: 100px;
+    width: 140px;
     position: relative;
     right: 20px;
 }

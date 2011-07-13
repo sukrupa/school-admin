@@ -150,21 +150,21 @@ public class StudentRepositoryTest {
             .studentId("636363").name("Mark")
             .studentClass("1th grade").dateOfBirth(new LocalDate(1911, 11, 1))
             .gender("Male")
-            .sponsored("SomeSponsor")
+            .sponsored("SomeSponsor", "", new LocalDate(2011, 07, 13) )
             .build();
 
     private Student kishore = new StudentBuilder()
             .studentId("636360").name("Kishore")
             .studentClass("Preschool").dateOfBirth(new LocalDate(1989, 11, 4))
             .gender("Male")
-            .sponsored("Hephzibah")
+            .sponsored("Hephzibah", "", new LocalDate(2011, 07, 13))
             .build();
 
     private Student aravind = new StudentBuilder()
             .studentId("636361").name("Aravind")
             .studentClass("10th grade").dateOfBirth(new LocalDate(1989, 11, 1))
             .gender("Male")
-            .sponsored("Abhinaya")
+            .sponsored("Abhinaya", "", new LocalDate(2011, 07, 13))
             .build();
 
 

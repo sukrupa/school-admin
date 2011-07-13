@@ -54,44 +54,66 @@
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Background</div>$if(student.profile)$<div class="value inline-block" id="student-background" name="student-background">$student.profile.background$</div>$endif$
+                <div class="label inline-block">Background</div>
+                $if(student.profile)$
+                <div class="value inline-block" id="student-background" name="student-background">
+                    $student.profile.background$
+                </div>
+                $endif$
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Academic Performance</div><div class="value inline-block" id="student-performance" name="student-performance">$student.performance$</div>
+                <div class="label inline-block">Academic Performance</div>
+                <div class="value inline-block" id="student-performance" name="student-performance">
+                    $student.performance$
+                </div>
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Disciplinary</div><div class="value inline-block" id="student-disciplinary" name="student-disciplinary">$student.disciplinary$</div>
+                <div class="label inline-block">Disciplinary</div>
+                <div class="value inline-block" id="student-disciplinary" name="student-disciplinary">
+                    $student.disciplinary$
+                </div>
             </div>
 
             <div class="entry">
-                 <div class="label inline-block">Events</div><div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
+                <div class="label inline-block">Events</div>
+                <div class="value inline-block" id="student-event" name="student-event">$student.eventsForDisplay$</div>
             </div>
 
 
         </div>
         <div id="secondaryInfo">
-              <div class = "publicProfileView">
-                  <a href = "/students/$student.studentId$/profileView">Generate Profile View</a>
-              </div>
+            <div class="publicProfileView">
+                <a href="/students/$student.studentId$/profileView">Generate Profile View</a>
+            </div>
             <div class="entry">
 
                 <div class="label">Student Status</div>
                 <div class="value $statusType$">$student.status$</div>
             </div>
 
-            <img alt="Photo of Student" src="/students/$student.imageLink$/image" class="studentImage" id="$student.imageLink$"/>
+            <img alt="Photo of Student" src="/students/$student.imageLink$/image" class="studentImage"
+                 id="$student.imageLink$"/>
 
-             <div class="entry">
-                 $if(sponsored)$
-                <div class="label">Sponsor</div>
-                <div class="value" id="sponsor">$student.sponsor$</div>
-                 $else$
-                 <div class="label">Not Sponsored</div>
-                $endif$
+            <div class="entry">
+                $if(sponsored)$
+                <div class="entry">
+                    <div class="label">Sponsor</div>
+                    <div class="value" id="sponsor">$student.sponsor$</div>
+                    $else$
+                    <div class="label">Not Sponsored</div>
+                    $endif$
+                </div>
+            <div class="entry">
+                <div class="label">Sponsor Email</div>
+                <div class="value" id="sponsor-email">$student.sponsor_email$</div>
             </div>
-
+            <div class="entry">
+                <div class="label">Sponsor Start Date</div>
+                <div class="value" id="sponsor-start-date">$student.sponsorStartDateForDisplay$</div>
+            </div>
+            </div>
 
             <div id="talents">
                 <div class="talentsLabel">Talents</div>
@@ -107,6 +129,7 @@
 
         <div class="parentDetails">
             <h2>Parent Details</h2>
+
             <div id="fatherDetails">
                 <div class="labelHead">Father</div>
                 $students/caregiver(caregiver=student.father,label="father")$
@@ -120,7 +143,7 @@
                 <div class="labelHead">Guardian</div>
                 <div class="entry">
                     <div class="label">Name</div>
-                    <div class="value" id="guardianName" >$student.guardian.name$</div>
+                    <div class="value" id="guardianName">$student.guardian.name$</div>
                 </div>
                 <div class="entry">
                     <div class="label">Education</div>

@@ -94,10 +94,13 @@ public class Student {
 
     @Column(name = "SPONSOR")
     private String sponsor;
-    @Column(name="sponsor_email")
+    @Column(name = "sponsor_email")
     private String sponsor_email;
-    @Enumerated (EnumType.ORDINAL)
-    @Column (name = "FAMILY_STATUS_ENUMS")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Column(name = "sponsor_start_date")
+    private LocalDate sponsor_start_date;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "FAMILY_STATUS_ENUMS")
     private StudentFamilyStatus familyStatus = null;
 
     @RequiredByFramework
@@ -108,7 +111,7 @@ public class Student {
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
                    StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events,
-                   StudentFamilyStatus familyStatus, String sponsor, String sponsor_email) {
+                   StudentFamilyStatus familyStatus, String sponsor, String sponsor_email, LocalDate sponsor_start_date) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -134,7 +137,8 @@ public class Student {
 
         this.status = status;
         this.sponsor = sponsor;
-        this.sponsor_email=sponsor_email;
+        this.sponsor_email = sponsor_email;
+        this.sponsor_start_date = sponsor_start_date;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -207,8 +211,12 @@ public class Student {
         return sponsor;
     }
 
-    public String getSponsor_email(){
+    public String getSponsor_email() {
         return sponsor_email;
+    }
+
+    public LocalDate getSponsor_start_date() {
+        return sponsor_start_date;
     }
 
     public String getStudentClass() {
@@ -320,6 +328,10 @@ public class Student {
 
     public String getDateOfBirthForDisplay() {
         return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
+    }
+
+    public String getSponsorStartDateForDisplay() {
+        return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsor_start_date);
     }
 
     public void updateStudent(StudentForm studentUpdateParameters, Set<Talent> newTalents) {

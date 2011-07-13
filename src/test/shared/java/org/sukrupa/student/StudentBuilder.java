@@ -31,6 +31,7 @@ public class StudentBuilder {
     private StudentFamilyStatus familyStatus = null;
     private String sponsored;
     private String sponsor_email;
+    private LocalDate sponsor_start_date = new LocalDate();
     private String disciplinary;
     private String performance;
     private Profile profile = new Profile();
@@ -157,7 +158,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored,sponsor_email);
+       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored,sponsor_email,sponsor_start_date);
 
     }
 
@@ -166,8 +167,10 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder sponsored (String sponsored) {
+    public StudentBuilder sponsored (String sponsored, String sponsorEmail, LocalDate sponsorDate) {
         this.sponsored = sponsored;
+        this.sponsor_email = sponsorEmail;
+        this.sponsor_start_date = sponsorDate;
         return this;
     }
 
