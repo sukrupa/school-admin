@@ -42,6 +42,12 @@ public class SubscriberRepository {
         return (Subscriber) query("from Subscriber where SUBSCRIBERNAME = ?").setParameter(0, subscriberName).uniqueResult();
     }
 
+     public Subscriber findById(int id){
+        return (Subscriber) query("from Subscriber where id = ?").setParameter(0, id).uniqueResult();
+    }
 
 
+    public void deleteSubscriber(Subscriber subscriber) {
+        session().delete(subscriber);
+    }
 }

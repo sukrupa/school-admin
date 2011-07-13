@@ -43,7 +43,7 @@ public class Subscriber {
         return this.subscriberEmail;
     }
 
-    public long getId() {
+    public int getId() {
         return this.id;
     }
 
