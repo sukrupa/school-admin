@@ -69,29 +69,29 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void shouldDisplayEndOfSponsorshipForm(){
+    public void shouldDisplayEndOfSponsorshipForm() {
         String view = adminController.showEndOfSponsorshipForm();
-        assertThat(view,is("admin/endofsponsorshipform"));
+        assertThat(view, is("admin/endofsponsorshipform"));
     }
 
     @Test
     public void shouldShowEndOfSponsorshipConfirmPage() throws MessagingException {
-        String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage("", "","");
-        assertThat(view,is("/admin/endofsponsorshipmailsentPage"));
+        String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage("", "", "");
+        assertThat(view, is("/admin/endofsponsorshipmailsentPage"));
     }
 
     @Test
     public void shouldSentEndOfSponsorshipEmail() throws MessagingException {
-        String toAddress="sukrupa.test@gmail.com";
-        String subject="end of sponsor";
-        String comments="Thanks for Sponsorship";
+        String toAddress = "sukrupa.test@gmail.com";
+        String subject = "end of sponsor";
+        String comments = "Thanks for Sponsorship";
         String view = adminController.sendEndOfSponsorShipEmailAndShowConfirmPage(toAddress, subject, comments);
-       verify(emailService).sendEmail(toAddress, subject, comments);
+        verify(emailService).sendEmail(toAddress, subject, comments);
 
     }
 
     @Test
-    public void shouldConvertSubscribersMailListTOAString(){
+    public void shouldConvertSubscribersMailListTOAString() {
         ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
         subscribers.add(new Subscriber("Abhinaya", "abhijan90@gmail.com"));
         subscribers.add(new Subscriber("Kishore", "abyu.kishore@aol.in"));
@@ -102,13 +102,28 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void shouldSendEmail() throws MessagingException, IOException {
-
+    public void shouldSendEmailWithAttachment() throws MessagingException, IOException {
         String toAddress = "sukrupa.test@gmail.com";
         String subject = "NewsLetter";
-        String bcc="sukrupa.test@gmail.com";
+        String bcc = "sukrupa.test@gmail.com";
         when(mockAttachment.getOriginalFilename()).thenReturn("Test.txt");
-        adminController.sendNewsletterEmail(toAddress,bcc,subject,"",mockAttachment);
-        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir")+"\\Test.txt");
+
+        String view = adminController.sendNewsletterEmail(toAddress, bcc, subject, "", mockAttachment);
+
+        assertThat(view, is("admin/thankYou"));
+        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir") + "\\Test.txt");
+    }
+
+    @Test
+    public void shouldSendEmailWithoutAttachment() throws MessagingException, IOException {
+        String toAddress = "sukrupa.test@gmail.com";
+        String subject = "NewsLetter";
+        String bcc = "sukrupa.test@gmail.com";
+        when(mockAttachment.getOriginalFilename()).thenReturn("");
+
+        String view = adminController.sendNewsletterEmail(toAddress, bcc, subject, "", mockAttachment);
+
+        assertThat(view, is("admin/thankYou"));
+        verify(emailService).sendNewsLetterEmailWithoutAttachment(toAddress, bcc, subject, "");
     }
 }

@@ -211,9 +211,11 @@ public class StudentsControllerTest {
        String subject = "Testing Send Profile View";
        when(studentProfile.composeHtmlMessage()).thenReturn(htmlString);
        when(emailService.sendEmail( anyString(), anyString(), anyString())).thenReturn(true);
+
        String redirectPath = studentController.sendProfileView(email, subject, studentProfile,  model);
+
        assertThat(model.get("errorMessage").toString(), is(""));
-       assertThat(redirectPath, is("/students/thankyou"));
+       assertThat(redirectPath, is("/students/thankYou"));
    }
 
     @Test

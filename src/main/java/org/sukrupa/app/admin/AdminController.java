@@ -38,14 +38,14 @@ public class AdminController {
 
 
     @RequestMapping()
-    public String list(){
+    public String list() {
         return "admin/adminPage";
     }
 
     @RequestMapping("/monthlyreports")
     public String monthlyReports(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNumber,
-                                           @ModelAttribute("searchParam") StudentSearchParameter searchParam,
-                                           Map<String, Object> model, HttpServletRequest request){
+                                 @ModelAttribute("searchParam") StudentSearchParameter searchParam,
+                                 Map<String, Object> model, HttpServletRequest request) {
 
         model.put("searchCriteria", searchParam.getValidCriteria());
 
@@ -63,19 +63,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/sendnewsletteremail", method = POST)
-    public String sendNewsletterEmail(@RequestParam String to,@RequestParam String bcc, @RequestParam String subject, @RequestParam String comments, @RequestParam ("attach")MultipartFile file) throws MessagingException, IOException {
-        String fileAttachmentFilePath = System.getProperty("user.dir")+"\\"+file.getOriginalFilename();
-        if(file.getOriginalFilename()== ""){
-            emailService.sendNewsLetterEmailWithoutAttachment(to,bcc,subject,comments);
-            return  "admin/thankyou";
+    public String sendNewsletterEmail(@RequestParam String to, @RequestParam String bcc, @RequestParam String subject, @RequestParam String comments, @RequestParam("attach") MultipartFile file) throws MessagingException, IOException {
+        String fileAttachmentFilePath = System.getProperty("user.dir") + "\\" + file.getOriginalFilename();
+        if (file.getOriginalFilename() == "") {
+            emailService.sendNewsLetterEmailWithoutAttachment(to, bcc, subject, comments);
+        } else {
+            File webserverSideCopyOfClientSideFileAttachment = new File(fileAttachmentFilePath);
+            file.transferTo(webserverSideCopyOfClientSideFileAttachment);
+            emailService.sendNewsLetter(to, bcc, subject, comments, fileAttachmentFilePath);
+            webserverSideCopyOfClientSideFileAttachment.delete();
         }
-
-        File webserverSideCopyOfClientSideFileAttachment = new File(fileAttachmentFilePath);
-        file.transferTo(webserverSideCopyOfClientSideFileAttachment);
-        emailService.sendNewsLetter(to, bcc, subject,comments,fileAttachmentFilePath);
-        webserverSideCopyOfClientSideFileAttachment.delete();
-        return "admin/thankyou";
-
+        return "admin/thankYou";
     }
 
     @RequestMapping("/endofsponsorshipform")
@@ -93,8 +91,8 @@ public class AdminController {
     public String getMailListAsString() {
         List<Subscriber> subscriberList = subscriberRepository.getList();
         String mailList = "";
-        for(Subscriber subscriber: subscriberList){
-            mailList += subscriber.getSubscriberEmail()+";";
+        for (Subscriber subscriber : subscriberList) {
+            mailList += subscriber.getSubscriberEmail() + ";";
         }
         return mailList;
     }
