@@ -27,16 +27,16 @@ public class StudentForm {
     private String status;
     private String sponsored;
     private String sponsorEmail;
-    private LocalDate sponsorStartDate;
+    private String sponsorStartDate;
     private String disciplinary;
     private String performance;
     private String background;
     private CommonsMultipartFile imageToUpload;
     private String familyStatus;
-    private final List<String> validImageTypes = asList("image/jpg","image/jpeg","image/png","image/gif","image/pjpeg");
+    private final List<String> validImageTypes = asList("image/jpg", "image/jpeg", "image/png", "image/gif", "image/pjpeg");
 
 
-    public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload, String sponsored, String sponsorEmail, LocalDate sponsorStartDate) {
+    public StudentForm(String studentId, String name, String dateOfBirth, String gender, String studentClass, String religion, String caste, String subCaste, String communityLocation, Caregiver father, Caregiver mother, Caregiver guardian, Set<String> talents, String status, String disciplinary, String performance, String background, String familyStatus, CommonsMultipartFile imageToUpload, String sponsored, String sponsorEmail, String sponsorStartDate) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -197,27 +197,34 @@ public class StudentForm {
         this.familyStatus = familyStatus;
     }
 
-    public void setSponsored(String sponsored, String sponsorEmail, LocalDate sponsorStartDate) {
+    public void setSponsored(String sponsored) {
         this.sponsored = sponsored;
+    }
+
+    public void setSponsorEmail(String sponsorEmail) {
         this.sponsorEmail = sponsorEmail;
+    }
+
+    public void setSponsorStartDate(String sponsorStartDate) {
         this.sponsorStartDate = sponsorStartDate;
     }
 
     public String getPerformance() {
-    return performance;
-}
+        return performance;
+    }
 
     public String getDisciplinary() {
-    return disciplinary;
-}
+        return disciplinary;
+    }
 
     public String getBackground() {
-    return this.background;
-}
+        return this.background;
+    }
 
     public String getSponsored() {
-    return sponsored;
-}
+        return sponsored;
+    }
+
     public String getfamilyStatus() {
         return familyStatus;
     }
@@ -238,12 +245,20 @@ public class StudentForm {
         studentImageRepository.save(getImage(), studentId);
     }
 
-    public boolean isImageValid(){
-        for(String imageType : validImageTypes){
-            if(imageToUpload.getContentType().equalsIgnoreCase(imageType)){
+    public boolean isImageValid() {
+        for (String imageType : validImageTypes) {
+            if (imageToUpload.getContentType().equalsIgnoreCase(imageType)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public String getSponsorEmail() {
+        return sponsorEmail;
+    }
+
+    public String getSponsorStartDate() {
+        return sponsorStartDate;
     }
 }

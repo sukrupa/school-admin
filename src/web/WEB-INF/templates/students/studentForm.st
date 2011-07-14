@@ -4,7 +4,7 @@
           action="/students/$student.studentId$"
           enctype="multipart/form-data"
           method="post">
-            <script type = "text/javascript" src="../../../scripts/studentUpdate.js"></script>
+            <script type = "text/javascript" src="/scripts/studentUpdate.js"></script>
 
         <div id="studentInfo">
             <div id="basicInfo">
@@ -132,12 +132,12 @@
             </div>
             <div class="updateSponsorDetails">
             <div class="sponsoredLabel"><label id="Sponsor-Email" for="sponsored">Sponsor Email</label></div>
-                <div class="sponsorValue"><input type="text" name="sponsor-email" id="sponsor-email" value="$student.sponsor_email$" ></input></div>
+                <div class="sponsorValue"><input type="text" name="sponsorEmail" id="sponsor-email" value="$student.sponsor_email$" ></input></div>
             </div>
 
             <div class="updateSponsorDetails">
                  <div class="sponsoredLabel"><label id="Sponsor-Start-Date" for="sponsored">Sponsor Start Date <br/> (dd-mm-yyyy)</label></div>
-                 <div class="sponsorValue"><input type="text" name="sponsor-start-date" id="sponsor-start-date" value="$student.sponsorStartDateForDisplay$" ></input></div>
+                 <div class="sponsorValue"><input type="text" name="sponsorStartDate" id="sponsor-start-date" value="$student.sponsorStartDateForDisplay$" ></input></div>
             </div>
 
             <div class="talentsList">

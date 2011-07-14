@@ -27,7 +27,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String background;
     private String sponsored;
     private String sponsorEmail;
-    private LocalDate sponsorStartDate;
+    private String sponsorStartDate;
     private String familyStatus;
     private CommonsMultipartFile imageToUpload;
 

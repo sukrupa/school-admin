@@ -357,6 +357,8 @@ public class Student {
         this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsor = studentUpdateParameters.getSponsored();
+        this.sponsor_email = studentUpdateParameters.getSponsorEmail();
+        this.sponsor_start_date = convertDate(studentUpdateParameters.getSponsorStartDate());
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
         if (studentUpdateParameters.getFather() != null) {

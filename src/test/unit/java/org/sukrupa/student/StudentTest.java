@@ -163,7 +163,9 @@ public class StudentTest {
         studentForm.setDateOfBirth("01-02-2005");
         studentForm.setStatus("Existing Student");
         studentForm.setFamilyStatus("Single");
-        studentForm.setSponsored("Peter Murray", "", new LocalDate(2011,7,13));
+        studentForm.setSponsored("Peter Murray");
+        studentForm.setSponsorEmail("peter@gmail.com");
+        studentForm.setSponsorStartDate("2011-7-13");
 
         student.updateStudent(studentForm, Collections.EMPTY_SET);
 
