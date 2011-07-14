@@ -216,7 +216,10 @@ public class Student {
     }
 
     public LocalDate getSponsor_start_date() {
-        return sponsor_start_date;
+        if(sponsor_start_date != null){
+            return sponsor_start_date;
+        }
+        return new LocalDate();
     }
 
     public String getStudentClass() {
@@ -331,7 +334,9 @@ public class Student {
     }
 
     public String getSponsorStartDateForDisplay() {
-        return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsor_start_date);
+        if(sponsor_start_date != null)
+            return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsor_start_date);
+        return "";
     }
 
     public void updateStudent(StudentForm studentUpdateParameters, Set<Talent> newTalents) {
