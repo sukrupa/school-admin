@@ -10,4 +10,4 @@ Feature: Search students by age
     And Anok should be displayed
     And Haripriya should be displayed
     And Abhishek should not be displayed
-    Then Exit
+    And Exit

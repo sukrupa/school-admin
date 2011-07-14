@@ -9,4 +9,4 @@ Feature: Search students by class
       Then Peter should be displayed
       And Anok should be displayed
       And Haripriya should not be displayed
-      Then Exit
+      And Exit

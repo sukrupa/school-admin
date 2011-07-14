@@ -10,4 +10,4 @@ Feature: Search students by class
     And Anok should not be displayed
     And Haripriya should not be displayed
     And Abhishek should not be displayed
-    Then Exit
+    And Exit

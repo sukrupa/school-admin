@@ -20,5 +20,3 @@ Feature: Add, Edit and Delete Big Needs
     Given I am on the Big Needs page
     Then Priority should be displayed
     And Exit
-    
-

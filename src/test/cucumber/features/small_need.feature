@@ -16,7 +16,7 @@ Feature: Add, Edit and Delete Small Needs
         And I enter 1000 as Cost
         And I enter For Anok as Comment
         And I add the need
-        Then "Added Shoes" should be displayed
+        Then Added Shoes should be displayed
         Then a "Shoes" costing "1000.0" should be displayed with priority "3"
 
     Scenario: Delete item from the Small Need list
@@ -33,10 +33,4 @@ Feature: Add, Edit and Delete Small Needs
   #     When I enter "Geometry Box" as Item
   #     And I enter "400" as Cost
   #     Then a "Geometry Box" costing "400" should be displayed with priority "1"
-
-       #TODO:NIshi/Hephzibah 11/07/2011
-       #When I enter "Geometry Box" as Item
-       #And I enter "400" as Cost
-       #Then School Uniform edited should be displayed
-       #Then a "Geometry Box" costing "400" should be displayed
 
