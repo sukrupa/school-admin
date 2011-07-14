@@ -1,6 +1,7 @@
-@Login
+
 Feature: search students add talent button
 
+@Login
     Scenario: Add acting to student search criteria
         Given I am on the Search Students page
         When I Add the talent
@@ -45,3 +46,4 @@ Feature: search students add talent button
         When I Clear the chosen list of talents
         Then Chosen list of talents should not contain Acting
         And Chosen list of talents should not contain Dancing
+        And Exit

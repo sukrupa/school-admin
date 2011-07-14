@@ -1,5 +1,7 @@
-@Login
+
 Feature: Edit an Event
+
+@Login
     Scenario: Edit an event
         Given I am on the View Events page
         When I navigate to the Annual Day page
@@ -8,6 +10,7 @@ Feature: Edit an Event
         And date should contain 20-02-2011
         And description should contain This is a event description. It is a test.
         And notes should contain This is a note
+        And Exit
         #And attendees should contain 64262, 12345, 34545
 
    #Scenario: Editing an event by changing fields
@@ -25,3 +28,4 @@ Feature: Edit an Event
         #And Wednesday should be displayed
         #And Event description should be displayed
         #And Anok should be displayed
+

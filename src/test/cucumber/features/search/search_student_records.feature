@@ -1,7 +1,7 @@
-@Login
+
 Feature: Search Student Records
 
-
+@Login
   Scenario Outline: Search student record by table
     Given I am on the Search Students page
     When I select the talent "<talent>"
@@ -15,6 +15,7 @@ Feature: Search Student Records
     And I submit a search
 
     Then <name> should be displayed
+    Then Exit
 
     Examples:
      | talent             | ageFrom | ageTo | class | gender  | religion  | caste  | community_location | family_status | name     |
@@ -25,3 +26,4 @@ Feature: Search Student Records
      | Singing            |         |       | Any   | Any     | Any       | Any    | Bhuvaneshwari Slum | Any           | Chandru  |
      |                    | 5       | 8     | Any   | Any     | Any       | Shetty | Any                | Any           | Chandana |
      | Musical Instrument |         |       | Any   | Any     | Any       | Any    | Any                | Any           | Bhavani  |
+

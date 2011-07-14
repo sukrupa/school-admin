@@ -1,6 +1,7 @@
-@Login
+
 Feature: Send End of Sponsorship
 
+@Login
   Scenario: I can see the end of sponsorship page
     Given I am on the Monthly Reports page
     When I navigate to the Send mail page
@@ -23,4 +24,5 @@ Feature: Send End of Sponsorship
     Then subject should contain Sukrupa sponsorship is expiring soon
     And message should contain Thanks for sponsoring.
     And to should contain Tim@gmail.com
+    And Exit
 

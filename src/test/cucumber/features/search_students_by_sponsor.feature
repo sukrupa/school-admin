@@ -1,6 +1,7 @@
-   @Login
+
 Feature: Search students by sponsor
 
+   @Login
   Scenario: Search for Sponsor by full name
     Given I am on the Search Students by Sponsor page
     When I enter sponsor name Tim
@@ -43,6 +44,7 @@ Feature: Search students by sponsor
     Given I am on the Search Students by Sponsor page
     When I enter sponsor name Jlo
     And I submit a search
+    And Exit
     #Then the message "No Sponsors found" should be displayed
 
 

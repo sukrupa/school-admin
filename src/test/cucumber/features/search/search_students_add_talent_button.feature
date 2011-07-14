@@ -1,6 +1,7 @@
-@Login
+
 Feature: search students add talent button
 
+@Login
     Scenario: Add acting to student search criteria
         Given I am on the Search Students page
         When I Add the talent
@@ -20,6 +21,7 @@ Feature: search students add talent button
         When I Add the talent
         Then Chosen list of talents should now contain Acting
         Then Chosen list of talents should now contain Dancing
+        Then Exit
 
 
 #        When i chose another talent acting form talentpool

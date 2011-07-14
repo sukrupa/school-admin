@@ -1,6 +1,7 @@
-@Login
+
 Feature: Search Student with Two Talents
 
+@Login
   Scenario: Two Talents Selected
 
     Given I am on the Search Students page
@@ -13,3 +14,4 @@ Feature: Search Student with Two Talents
     And Armugam should be displayed
     And Chandru should be displayed
     And Anok should not be displayed
+    And Exit

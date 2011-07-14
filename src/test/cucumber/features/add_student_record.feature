@@ -1,6 +1,7 @@
-    @Login
+
     Feature: Add student record
 
+    @Login
      Scenario: Verify that the student registration page is displayed
      Given I am on the View Students page
      When I navigate to the Add New Student page
@@ -44,3 +45,4 @@
      And I select Male as gender
      And I register the student
      Then the message "Student with the same ID already exists." is displayed
+     And Exit

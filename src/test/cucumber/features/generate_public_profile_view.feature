@@ -1,6 +1,7 @@
-@Login
+
 Feature: Generate public profile view
 
+@Login
     Scenario: select 'Generate profile view' link
     Given I am on the View Students page
     When I select the student record of Bhavani
@@ -17,6 +18,6 @@ Feature: Generate public profile view
     And the button Send Profile must be displayed
     And Caste should not be displayed
     And Subcaste should not be displayed
-
+    And Exit
 
   

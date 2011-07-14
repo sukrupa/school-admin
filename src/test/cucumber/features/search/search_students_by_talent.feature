@@ -1,6 +1,7 @@
-@Login
+
 Feature: Search students by talent
 
+@Login
   Scenario: No Talents Selected
     Given I am on the Search Students page
     When I submit a search
@@ -35,3 +36,4 @@ Feature: Search students by talent
     And Chandru should be displayed
     And Bhavani should not be displayed
     And Haripriya should not be displayed
+    And Exit

@@ -1,6 +1,7 @@
-@Login
+
 Feature: Send Monthly Newsletter
 
+@Login
   Scenario: Navigate to Send Newsletter Page
     Given I am on the Send Newsletter page
     Then Send Newsletter should be displayed
@@ -20,6 +21,7 @@ Feature: Send Monthly Newsletter
   Scenario: Bcc field is pre-populated With Mailing List
     Given I am on the Send Newsletter page
     Then a "sukrupa.test@gmail.com;oracle.cstrike@yahoo.com;" should be displayed as pre-populated "bcc"
+    Then Exit
 
 #These tests only work on windows
   #Scenario: Send Newsletter With Attachment

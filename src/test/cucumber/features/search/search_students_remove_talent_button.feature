@@ -1,6 +1,7 @@
-@Login
+
 Feature: search students Remove talent button
 
+@Login
     Scenario: Remove acting from selected talents of student
         Given I am on the Search Students page
         When I select "Acting" from "availableTalents"
@@ -9,4 +10,5 @@ Feature: search students Remove talent button
 
         When I click "removeTalent" button
          Then Chosen list of talents should not contain Acting
+         And Exit
 

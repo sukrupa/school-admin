@@ -1,5 +1,7 @@
 @Login
 Feature: Edit parent details
+
+
     Scenario Outline: Select student to edit parent details
         When I edit student record of Bhavani
         And I enter father's name as <FatherName>
@@ -20,6 +22,7 @@ Feature: Edit parent details
         And I select mother's maritalStatus as <MotherMaritalStatus>
         And I save the changes
         Then the message "Student record updated successfully" should be displayed
+        And Logout
     Examples:
         |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
         |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
@@ -42,6 +45,8 @@ Feature: Edit parent details
         And <MotherOccupation> should be displayed
         And <FatherMaritalStatus> should be displayed
         And <MotherMaritalStatus> should be displayed
+        And Exit
+
     Examples:
         |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
         |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |

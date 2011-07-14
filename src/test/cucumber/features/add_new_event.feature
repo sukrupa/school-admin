@@ -1,5 +1,6 @@
-@Login
+
 Feature: Add New Event
+@Login
     Scenario: Create an event with mandatory fields
         Given I am on the Create an Event page
         When I enter Dancing as title
@@ -107,3 +108,4 @@ Feature: Add New Event
         And I enter roberto as date
         And I save the changes
         Then the message "Invalid date" is displayed
+        And Exit

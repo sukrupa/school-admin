@@ -1,6 +1,6 @@
-    @Login
-    Feature: Edit student profile
+Feature: Edit student profile
 
+    @Login
     Scenario: Add/Edit sponsor, and verify other student details are unchanged
     When I edit student record of Bhavani
     And I enter Peter Murray as Sponsor
@@ -17,6 +17,7 @@
     And Peter Murray is displayed under Sponsor
     
     Scenario:Adding a note to student profile
+    Given I am on Sukrupa Page
     When I edit student record of Bhavani
     And I enter "This is a note" as the note
     And I Add a Note to the student profile
@@ -24,17 +25,20 @@
     And "This is a note" should be displayed in the list of notes
 
     Scenario: Edit student's status successfully
+    Given I am on Sukrupa Page
     When I edit student record of Bhavani
     And I select Existing Student for Student Status
     And I save the changes
-    Then the message "Student record updated successfully" is displayed
+    Then theI Edit message "Student record updated successfully" is displayed
     And the "Student Record: Bhavani" page is displayed
     And Existing Student is displayed under Student Status
 
     Scenario:Verify edit of family status success
+    Given I am on Sukrupa Page
     When I edit student record of Bhavani
     And I select Single for Family Status
     And I save the changes
     Then the message "Student record updated successfully" is displayed
     And the "Student Record: Bhavani" page is displayed
     And Single is displayed under Family Status
+    And Exit

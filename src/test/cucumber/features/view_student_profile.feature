@@ -1,6 +1,7 @@
-@Login
+
 Feature: View student records
 
+@Login
      Scenario: View a student profile
      Given I am on the View Students page
      When I select the student record of Bhavani
@@ -34,4 +35,6 @@ Feature: View student records
     Then Tim is displayed under Sponsor
     And Tim@gmail.com is displayed under Sponsor Email
     And 13-07-2011 is displayed under Sponsor Start Date
+    And Exit
+
 

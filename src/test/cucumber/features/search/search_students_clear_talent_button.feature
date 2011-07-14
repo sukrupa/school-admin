@@ -1,6 +1,7 @@
-@Login
+
 Feature: search students clear talent button
 
+@Login
     Scenario: Clear acting and dancing from selected talents for student
         Given I am on the Search Students page
         When I select "Acting" from "availableTalents"
@@ -12,3 +13,4 @@ Feature: search students clear talent button
         When I click "clearTalents" button
         Then Chosen list of talents should not contain Acting
         And Chosen list of talents should not contain Dancing
+        And Exit
