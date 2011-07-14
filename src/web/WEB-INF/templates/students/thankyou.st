@@ -1,1 +1,1 @@
-$layout(body=students/thankYouBody(), title="Sending Success")$
+$layout(body=students/thankyouBody(), title="Sending Success")$
