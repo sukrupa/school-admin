@@ -49,7 +49,7 @@ task :deploy do
 end
 
 task :stop_remote_server do
-  run "cd #{deploy_path} && sh stop-server.sh"
+  run "cd #{deploy_path} && ./stop-server.sh"
 end
 
 task :copy_deploy_artifact do
