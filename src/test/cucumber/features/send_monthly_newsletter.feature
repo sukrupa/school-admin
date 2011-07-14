@@ -21,17 +21,18 @@ Feature: Send Monthly Newsletter
     Given I am on the Send Newsletter page
     Then a "sukrupa.test@gmail.com;oracle.cstrike@yahoo.com;" should be displayed as pre-populated "bcc"
 
-  Scenario: Send Newsletter With Attachment
-    Given I am on the Send Newsletter page
-    When I enter sukrupa.test@gmail.com as to
-    And I enter Monthly Newsletter as subject
-    And I attach a file
-    And I send the mail
-    Then Thank you should be displayed
+#These tests only work on windows
+  #Scenario: Send Newsletter With Attachment
+   # Given I am on the Send Newsletter page
+    #When I enter sukrupa.test@gmail.com as to
+    #And I enter Monthly Newsletter as subject
+    #And I attach a file
+    #And I send the mail
+    #Then Thank you should be displayed
 
-  Scenario: Remove the attached file
-    Given I am on the Send Newsletter page
-    When I enter sukrupa.test@gmail.com as to
-    And I attach a file
-    When I click "Remove" button
-    Then the file entry is cleared
+  #Scenario: Remove the attached file
+    #Given I am on the Send Newsletter page
+    #When I enter sukrupa.test@gmail.com as to
+    #And I attach a file
+    #When I click "Remove" button
+    #Then the file entry is cleared
