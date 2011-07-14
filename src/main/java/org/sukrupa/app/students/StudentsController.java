@@ -209,7 +209,7 @@ public class StudentsController {
         boolean emailSent = emailService.sendEmail(to, subject, message);
         if(emailSent){
             model.put("errorMessage", "");
-            return "/students/thankYou";
+            return "/students/thankyou";
         }
         model.put("errorMessage", "Error sending email!");
         return "/students/error";

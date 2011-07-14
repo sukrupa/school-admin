@@ -22,7 +22,7 @@ public class SendMonthlyNewsletterSteps {
         File tempFile = new File("testFile.txt");
         if (!tempFile.exists())
             tempFile.createNewFile();
-        browser().setFile(browser().byId("attach"), tempFile.getAbsolutePath());
+        browser().setFile(browser().byId("attach"), tempFile.getCanonicalPath());
     }
 
     @After

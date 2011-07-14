@@ -215,7 +215,7 @@ public class StudentsControllerTest {
        String redirectPath = studentController.sendProfileView(email, subject, studentProfile,  model);
 
        assertThat(model.get("errorMessage").toString(), is(""));
-       assertThat(redirectPath, is("/students/thankYou"));
+       assertThat(redirectPath, is("/students/thankyou"));
    }
 
     @Test
