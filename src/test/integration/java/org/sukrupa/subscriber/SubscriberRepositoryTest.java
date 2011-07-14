@@ -32,40 +32,6 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @Transactional
 public class SubscriberRepositoryTest {
 
-//    @Mock
-//    private SessionFactory sessionFactory;
-//    @Mock
-//    private Session session;
-//    @Mock
-//    private Query firstQuery;
-//    @Mock
-//    private Query secondQuery;
-//
-//    private SubscriberRepository subscriberRepository;
-//
-//    @Before
-//    public void setUp() throws Exception {
-//        initMocks(this);
-//        subscriberRepository = new SubscriberRepository(sessionFactory);
-//    }
-//
-//
-//
-//    @Test
-//     public void shouldSaveASubscriber(){
-//        Subscriber subscriber = new Subscriber("Carlos","Carlos@gmail.com");
-//
-//        when(sessionFactory.getCurrentSession()).thenReturn(session);
-//        when(session.createQuery("from Subscriber where SUBSCRIBERNAME = ?")).thenReturn(firstQuery);
-//        when(firstQuery.setParameter(0, (Object)"Carlos")).thenReturn(secondQuery);
-//        when(secondQuery.uniqueResult()).thenReturn(subscriber);
-//
-//        Subscriber retrievedSubscriber = subscriberRepository.findByName("Carlos");
-//
-//         assertThat(retrievedSubscriber.getSubscriberName(), is(subscriber.getSubscriberName()) );
-//         assertThat(retrievedSubscriber.getSubscriberEmail(),is(subscriber.getSubscriberEmail()));
-//
-//     }
     public final Subscriber carlos = new Subscriber("carlos","carlos@gmail.com");
     public final Subscriber dude = new Subscriber("dude","dude@gmail.com");
 
