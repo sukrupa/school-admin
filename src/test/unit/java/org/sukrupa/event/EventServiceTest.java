@@ -111,9 +111,11 @@ public class EventServiceTest {
                                                     .build();
 
         when(eventRepository.load(1)).thenReturn(sportsEvent);
-        when(service.update(updateParameter)).thenReturn(newEvent);
+        @SuppressWarnings("unchecked")
+        List<Student> newAttendeesList = new ArrayList<Student>(newAttendees);
+        when(service.update(updateParameter, newAttendeesList)).thenReturn(newEvent);
 
-        Event updatedEvent = service.update(updateParameter);
+        Event updatedEvent = service.update(updateParameter, newAttendeesList);
         assertEquals(newEvent, updatedEvent);
 
     }

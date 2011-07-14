@@ -77,35 +77,34 @@
             <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
         </div>
 
-        <table border="0">
-            <tr>
-                <td>
-                    <select multiple size="6" style="width:150px"  id="availableStudents">
-                        $studentList:{
+        <div class="createEntry">
+            <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
+            <div style="float:left;">
+                <select multiple="multiple" size="6" style="width:150px"  id="availableStudents">
+                    $studentList:{
+                    <option value="$it.studentId$">$it.name$ ($it.studentId$)</option>
+                    }$
+                </select>
+            </div>
+            <div style="float:left;">
+                <div>
+                    <input type="button" class="dualSelectBoxButtons" id='addStudents' name="addStudents" value="Add >" />
+                </div>
+                <div>
+                    <input type="button" class="dualSelectBoxButtons" id='removeStudents' name="removeStudents" value="Remove <" />
+                </div>
+                <div>
+                    <input type="button" class="dualSelectBoxButtons" id='clearStudents' name="clearStudents" value="Clear <<" />
+                </div>
+            </div>
+            <div style="float:left;">
+                <select multiple="multiple" size="6" style="width:150px" id="attendingStudents" name="attendingStudents">
+                    $attendeesList:{
                         <option value="$it.studentId$">$it.name$ ($it.studentId$)</option>
-                        }$
-                    </select>
-                </td>
-                <td>
-                    <div>
-                        <input type="button" class="dualSelectBoxButtons" id='addStudents' name="addStudents" value="Add >">
-                    </div>
-                    <div>
-                        <input type="button" class="dualSelectBoxButtons" id='removeStudents' name="removeStudents" value="Remove <">
-                    </div>
-                    <div>
-                        <input type="button" class="dualSelectBoxButtons" id='clearStudents' name="clearStudents" value="Clear <<">
-                    </div>
-                </td>
-                <td>
-                    <select multiple size="6" style="width:150px" id="attendingStudents">
-                        $attendeesList:{
-                            <option value="$it.studentId$">$it.name$ ($it.studentId$)</option>
-                        }$
-                    </select>
-                </td>
-            </tr>
-        </table>
+                    }$
+                </select>
+            </div>
+        </div>
     </div>
 
 </div>

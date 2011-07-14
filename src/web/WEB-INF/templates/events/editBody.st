@@ -5,7 +5,7 @@
 		$events/eventForm()$
 
 		<div class="eventButtons">
-			<input type="submit" id="save" value="Save"/>
+			<input type="button" id="save" value="Save"/>
 			<input type="button" id="cancel" value="Cancel" />
 		</div>
 	</form>

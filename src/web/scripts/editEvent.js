@@ -28,6 +28,14 @@ $(document).ready(function () {
         return true;
     });
 
+    $('#save').click(function() {
+        $('#attendingStudents option').each( function(){
+            $(this).attr("selected", "selected")
+        })
+        $('#editEvent').submit();
+        return true;
+    });
+
     $('#removeStudents').click(function() {
         $('#attendingStudents option:selected').appendTo('#availableStudents');
         return true;

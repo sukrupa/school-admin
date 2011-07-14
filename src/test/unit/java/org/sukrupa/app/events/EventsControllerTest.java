@@ -104,7 +104,7 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayCreateANewEventPage() {
-        String actual = controller.create(objectModel);
+        String actual = controller.createNewEventPage(objectModel);
 
         assertThat("Display the Create Event Page", actual, is("events/create"));
     }
@@ -145,7 +145,7 @@ public class EventsControllerTest {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
         when(eventForm.isInvalid(errors)).thenReturn(true);
 
-        String update = controller.update("4", eventForm, objectModel);
+        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
 
         assertThat("Display the Edit Event Page",update, is("events/edit"));
     }
@@ -159,17 +159,17 @@ public class EventsControllerTest {
         when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
-        String update = controller.update("4", eventForm, objectModel);
+        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
 
         assertThat("Display the Edit Event Page",update, is("events/edit"));
     }
 
     @Test
     public void shouldDisplayEventPageAfterSuccesfullyUpdating() {
-        String update = controller.update("4", eventForm, objectModel);
+        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
 
         assertThat("Display the Event Page",update,is("redirect:/events/4"));
-        verify(service).update(eventForm);
+        verify(service).update(eventForm, new ArrayList<Student>());
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.sukrupa.platform.RequiredByFramework;
 import org.sukrupa.student.Student;
 import org.sukrupa.student.StudentRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -56,14 +57,13 @@ public class EventService {
 		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
 	}
 
-    public Event update(EventForm eventParam) {
+    public Event update(EventForm eventParam, List<Student> attendingStudents) {
         Event event = eventRepository.load(eventParam.getId());
-
-        String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});
-
-        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
+        //TODO Mike - Clean Up this
+//        String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});
+//        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
+        event.updateFrom(eventParam,  new HashSet<Student>(attendingStudents));
         return eventRepository.update(event);
-
     }
 	
 }
