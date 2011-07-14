@@ -11,7 +11,3 @@ Feature: View Event
         And This is a event description. It is a test. should be displayed
         And Exit
         #And Anok, Chandru, Haripriya should be displayed
-
-
-
-
