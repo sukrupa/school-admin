@@ -29,6 +29,25 @@ public enum StudentClass {
         return StudentClass.valueOf(nextClass);
     }
 
+    public StudentClass previous(){
+        if(displayName=="Day Care") return (StudentClass.DAY_CARE);
+        if(displayName=="Nursery") return (StudentClass.DAY_CARE);
+        if(displayName=="LKG") return (StudentClass.NURSERY);
+        if(displayName=="UKG") return (StudentClass.LKG);
+        if(displayName=="1 Std") return (StudentClass.UKG);
+        if(displayName=="2 Std") return (StudentClass.ONE_STD);
+        if(displayName=="3 Std") return (StudentClass.TWO_STD);
+        if(displayName=="4 Std") return (StudentClass.THREE_STD);
+        if(displayName=="5 Std") return (StudentClass.FOUR_STD);
+        if(displayName=="6 Std") return (StudentClass.FIVE_STD);
+        if(displayName=="7 Std") return (StudentClass.SIX_STD);
+        if(displayName=="8 Std") return (StudentClass.SEVEN_STD);
+        if(displayName=="9 Std") return (StudentClass.EIGHT_STD);
+        if(displayName=="10 Std") return (StudentClass.NINE_STD);
+        return StudentClass.NINE_STD;
+
+    }
+
     public String displayName() {
         return displayName;
     }

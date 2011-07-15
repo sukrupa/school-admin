@@ -29,6 +29,25 @@ public class StudentClassTest {
     }
 
     @Test
+    public void shouldDemoteStudent(){
+
+        assertEquals(StudentClass.DAY_CARE, StudentClass.DAY_CARE.previous());
+        assertEquals(StudentClass.DAY_CARE, StudentClass.NURSERY.previous());
+        assertEquals(StudentClass.NURSERY, StudentClass.LKG.previous());
+        assertEquals(StudentClass.LKG, StudentClass.UKG.previous());
+        assertEquals(StudentClass.UKG, StudentClass.ONE_STD.previous());
+        assertEquals(StudentClass.ONE_STD, StudentClass.TWO_STD.previous());
+        assertEquals(StudentClass.TWO_STD, StudentClass.THREE_STD.previous());
+        assertEquals(StudentClass.THREE_STD, StudentClass.FOUR_STD.previous());
+        assertEquals(StudentClass.FOUR_STD, StudentClass.FIVE_STD.previous());
+        assertEquals(StudentClass.FIVE_STD, StudentClass.SIX_STD.previous());
+        assertEquals(StudentClass.SIX_STD, StudentClass.SEVEN_STD.previous());
+        assertEquals(StudentClass.SEVEN_STD, StudentClass.EIGHT_STD.previous());
+        assertEquals(StudentClass.EIGHT_STD, StudentClass.NINE_STD.previous());
+        assertEquals(StudentClass.NINE_STD, StudentClass.TEN_STD.previous());
+    }
+
+    @Test
     public void shouldCreateAStudentClassFromDisplayName() {
         assertEquals(StudentClass.DAY_CARE, StudentClass.fromDisplayName("Day Care"));
         assertEquals(StudentClass.NURSERY, StudentClass.fromDisplayName("Nursery"));

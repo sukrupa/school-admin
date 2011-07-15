@@ -5,6 +5,9 @@
         <p>Students in Class 10 will be moved to the status Alumni. Records with status Alumni and Dropouts will not be affected</p>
         $else$
             <p> Class has already been updated this year</p>
+            <form action="/admin/annualupdate/undoupdate" method="GET">
+                <input type="submit" value="Undo Class Update" />
+            </form>
         $endif$
     </div>
     <div class='lastUpdate'>

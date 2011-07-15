@@ -47,4 +47,10 @@ public class AnnualUpdateController {
         model.put("classUpdateCount", annualClassUpdateService.getClassUpdateCount());
         return "admin/annualupdate/annualUpdateSuccess";
     }
+
+    @RequestMapping(value = "undoupdate", method = GET)
+    public String undoAnnualUpdate(){
+        annualClassUpdateService.undoPromoteStudentsToNextClass();
+        return "admin/annualupdate/undoupdate";
+    }
 }

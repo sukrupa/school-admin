@@ -7,7 +7,7 @@ Feature: Search students by age
     And I submit a search
 
     Then Peter should be displayed
-    And Anok should be displayed
+    Then Anok should be displayed
     And Haripriya should be displayed
     And Abhishek should not be displayed
     And Exit

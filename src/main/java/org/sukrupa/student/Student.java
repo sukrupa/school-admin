@@ -402,6 +402,19 @@ public class Student {
         }
     }
 
+     public void demote() {
+        if (this.status != StudentStatus.DROPOUT && this.status != StudentStatus.ALUMNI) {
+            StudentClass classBeforeDemotion = StudentClass.fromDisplayName(this.studentClass);
+            if (classBeforeDemotion != null) {
+                StudentClass classAfterDemotion = classBeforeDemotion.previous();
+                this.studentClass = classAfterDemotion.displayName();
+                }
+        }
+         if (this.status == StudentStatus.ALUMNI) {
+            this.status = StudentStatus.EXISTING_STUDENT;
+         }
+
+    }
 
     private static class EmptyStudent extends Student {
         @Override

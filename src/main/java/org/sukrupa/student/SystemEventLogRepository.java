@@ -32,4 +32,5 @@ public class SystemEventLogRepository {
         session().saveOrUpdate(systemEventLog);
         session().flush();
     }
+
 }

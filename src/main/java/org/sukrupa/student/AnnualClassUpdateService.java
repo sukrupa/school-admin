@@ -81,4 +81,24 @@ public class AnnualClassUpdateService {
         return classUpdateCount;
     }
 
-}
+    public void undoPromoteStudentsToNextClass() {
+
+        SystemEventLog annualClassUpdateEventLog = systemEventLogRepository.find(ANNUAL_CLASS_UPDATE);
+        if (hasBeenUpdatedThisYear(annualClassUpdateEventLog)) {
+            List<Student> students = studentRepository.findAll();
+            for (Student student : students) {
+                if (student.getStatus() != StudentStatus.DROPOUT) {
+                    student.demote();
+                }
+                 studentRepository.put(student);
+            }
+
+            LocalDate myDate = new LocalDate("1989-08-21");
+
+                systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(myDate));
+            }
+
+        }
+
+
+   }
