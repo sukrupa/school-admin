@@ -79,22 +79,25 @@ public class StudentService {
 
         List<Student> students = studentRepository.findBySearchParameter(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
-        int totalNumberOfResults = studentRepository.getCountBasedOn(searchParam);
-        int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
+        int totalNumberOfPages = calculateNumberOfPages(searchParam);
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
     }
-
 
     public StudentListPage getPageForSponsorSearch(StudentSearchParameter searchParam, int pageNumber, String queryString) {
          int firstIndex = (pageNumber - 1) * NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE;
 
         List<Student> students = studentRepository.findSponsorsBySearchParameter(searchParam, firstIndex, NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE);
 
-        int totalNumberOfResults = studentRepository.getCountBasedOn(searchParam);
-        int totalNumberOfPages = (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
+        int totalNumberOfPages = calculateNumberOfPages(searchParam);
 
         return new StudentListPage(students, pageNumber, totalNumberOfPages, queryString);
+    }
+
+
+    private int calculateNumberOfPages(StudentSearchParameter searchParam) {
+        int totalNumberOfResults = studentRepository.getCountBasedOn(searchParam);
+        return (totalNumberOfResults - 1) / NUMBER_OF_STUDENTS_TO_LIST_PER_PAGE + 1;
     }
 
     public StudentReferenceData getStudentReferenceData() {
