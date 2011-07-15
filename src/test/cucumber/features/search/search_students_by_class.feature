@@ -10,3 +10,4 @@ Feature: Search students by class
     And Haripriya should not be displayed
     And Abhishek should not be displayed
     And Exit
+
