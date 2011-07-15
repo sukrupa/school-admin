@@ -109,7 +109,7 @@ public class StudentServiceTest {
                 .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.EXISTING_STUDENT).build();
         Student philNew = new StudentBuilder().studentId("12345")
                 .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
-                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.EXISTING_STUDENT).build();
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.EXISTING_STUDENT).sponsored("Tim").sponsorEmail("tim@gmail.com").sponsorDate(new LocalDate(2011, 07, 07)).build();
 
         when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
         when(studentRepository.update(philNew)).thenReturn(philNew);
@@ -125,7 +125,10 @@ public class StudentServiceTest {
                 .studentClass("2 Std")
                 .dateOfBirth("03-02-2000")
                 .familyStatus("")
-                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.EXISTING_STUDENT).build();
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT)).status(StudentStatus.EXISTING_STUDENT)
+                .sponsored("Tim")
+                .sponsorEmail("tim@gmail.com")
+                .sponsorStartDate("07-07-2011").build();
         Student updatedStudent = service.update(updateParameters);
         assertThat(updatedStudent, Matchers.is(philNew));
     }
@@ -162,7 +165,38 @@ public class StudentServiceTest {
         verify(studentImageRepository, never()).save(null, "12345");
     }
 
+    @Test
+    public void shouldUpdateStudentWithSponsor() {
+        Student philOld = new StudentBuilder().studentId("12345")
+                .name("Phil").studentClass("1 Std").gender("Male").religion("Hindu").area("Bhuvaneshwari Slum")
+                .caste("SC").subCaste("AD").talents(Sets.newHashSet(cooking, sport)).dateOfBirth(new LocalDate(2000, 05, 03)).status(StudentStatus.EXISTING_STUDENT).build();
+        Student philNew = new StudentBuilder().studentId("12345")
+                .name("Philippa").studentClass("2 Std").gender("Female").religion("Catholic").area("Chamundi Nagar")
+                .caste("ST").subCaste("AK").talents(Sets.newHashSet(music, sport)).dateOfBirth(new LocalDate(2000, 02, 03)).status(StudentStatus.ALUMNI).sponsored("Tim").sponsorEmail("tim@gmail.com").sponsorDate(new LocalDate(2011, 07, 07)).build();
+        when(studentRepository.findByStudentId(philOld.getStudentId())).thenReturn(philOld);
+        when(studentRepository.update(philNew)).thenReturn(philNew);
+        when(talentRepository.findTalents(Sets.newHashSet(MUSIC, SPORT))).thenReturn(Sets.newHashSet(music, sport));
 
+        StudentForm updateParameters = new StudentCreateOrUpdateParameterBuilder().studentId(philOld.getStudentId())
+                .area("Chamundi Nagar")
+                .caste("ST")
+                .subCaste("AK")
+                .religion("Catholic")
+                .name("Philippa")
+                .gender("Female")
+                .studentClass("2 Std")
+                .dateOfBirth("03-02-2000")
+                .familyStatus("")
+                .talents(Sets.<String>newHashSet(MUSIC, SPORT))
+                .status(StudentStatus.ALUMNI)
+                .sponsored("Tim")
+                .sponsorEmail("tim@gmail.com")
+                .sponsorStartDate("07-07-2011").build();
+
+        Student updatedStudent = service.update(updateParameters);
+
+        assertThat(updatedStudent, Matchers.is(philNew));
+    }
 
     @Test
     public void shouldUpdateStudentStatus() {
@@ -188,7 +222,9 @@ public class StudentServiceTest {
                 .familyStatus("")
                 .talents(Sets.<String>newHashSet(MUSIC, SPORT))
                 .status(StudentStatus.ALUMNI).build();
+
         Student updatedStudent = service.update(updateParameters);
+
         assertThat(updatedStudent, Matchers.is(philNew));
     }
 

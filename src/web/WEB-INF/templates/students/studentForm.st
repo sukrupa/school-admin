@@ -131,13 +131,13 @@
                 <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsor$" ></input></div>
             </div>
             <div class="updateSponsorDetails">
-            <div class="sponsoredLabel"><label id="Sponsor-Email" for="sponsored">Sponsor Email</label></div>
-                <div class="sponsorValue"><input type="text" name="sponsorEmail" id="sponsor-email" value="$student.sponsor_email$" ></input></div>
+            <div class="sponsoredLabel"><label id="Sponsor Email" for="sponsored">Sponsor Email</label></div>
+                <div class="sponsorValue"><input type="text" name="sponsorEmail" id="SponsorEmail" value="$student.sponsorEmail$" ></input></div>
             </div>
 
             <div class="updateSponsorDetails">
-                 <div class="sponsoredLabel"><label id="Sponsor-Start-Date" for="sponsored">Sponsor Start Date <br/> (dd-mm-yyyy)</label></div>
-                 <div class="sponsorValue"><input type="text" name="sponsorStartDate" id="sponsor-start-date" value="$student.sponsorStartDateForDisplay$" ></input></div>
+                 <div class="sponsoredLabel"><label id="Sponsor Start Date" for="sponsored">Sponsor Start Date</label><br/> (dd-mm-yyy)</div>
+                 <div class="sponsorValue"><input type="text" name="sponsorStartDate" id="SponsorStartDate" value="$student.sponsorStartDateForDisplay$" ></input></div>
             </div>
 
             <div class="talentsList">

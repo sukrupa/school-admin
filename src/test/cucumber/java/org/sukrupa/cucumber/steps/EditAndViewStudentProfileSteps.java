@@ -21,9 +21,9 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps {
         isDisplayedUnderDivId(text, "secondaryInfo");
     }
 
-    @When("^I enter \"([^\"]*)\" as the Sponsor$")
+    @When("^I enter ([^\"]*) as the Sponsor$")
     public void enterIntoTheSponsorTextBox(String text) {
-        fillInTheTextfieldWith("sponsored", text);
+        fillInTheTextfieldWith("sponsor", text);
     }
 
 
@@ -109,11 +109,6 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps {
         isDisplayedUnderDivId(text, "family-status");
     }
 
-//    @Then("^image \"([^\"]*)\" is displayed")
-//    public void checkIfImageIsDisplayed(String imageId){
-//        assertTrue(browser().image(imageId).exists());
-//    }
-
     @Then("^an image for ([^\"]*) with student ID ([^\"]*) is displayed")
     public void checkIfImageIsDisplayed(String personName, String personId) {
         assertTrue(browser().image(personId).exists());
@@ -123,12 +118,12 @@ public class EditAndViewStudentProfileSteps extends BasicWebSteps {
 
     @Then("^([^\"]*) is displayed under Sponsor Email$")
     public void isDisplayedUnderSponsorEmail(String text) {
-        isDisplayedUnderDivId(text, "sponsor-email");
+        isDisplayedUnderDivId(text, "sponsorEmail");
     }
 
     @Then("^([^\"]*) is displayed under Sponsor Start Date$")
     public void isDisplayedUnderSponsorStartDate(String text) {
-        isDisplayedUnderDivId(text, "sponsor-start-date");
+        isDisplayedUnderDivId(text, "sponsorStartDate");
     }
 
 

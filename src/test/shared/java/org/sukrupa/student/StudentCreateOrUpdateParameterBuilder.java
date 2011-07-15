@@ -7,6 +7,9 @@ import org.sukrupa.platform.date.Date;
 
 import java.util.Set;
 
+/*
+* This class is meant to help us create StudentForm Instance for testing
+*/
 public class StudentCreateOrUpdateParameterBuilder {
     private String studentId;
     private String name;
@@ -27,7 +30,7 @@ public class StudentCreateOrUpdateParameterBuilder {
     private String background;
     private String sponsored;
     private String sponsorEmail;
-    private String sponsorStartDate;
+    private String sponsorStartDate = DateTimeFormat.forPattern("dd-MM-YYYY").print(new LocalDate());
     private String familyStatus;
     private CommonsMultipartFile imageToUpload;
 
@@ -135,6 +138,15 @@ public class StudentCreateOrUpdateParameterBuilder {
 
     public StudentCreateOrUpdateParameterBuilder sponsored(String sponsored) {
         this.sponsored = sponsored;
+        return this;
+    }
+    public StudentCreateOrUpdateParameterBuilder sponsorEmail(String sponsorEmail) {
+        this.sponsorEmail = sponsorEmail;
+        return this;
+    }
+
+    public StudentCreateOrUpdateParameterBuilder sponsorStartDate(String sponsorStartDate) {
+        this.sponsorStartDate = sponsorStartDate;
         return this;
     }
 

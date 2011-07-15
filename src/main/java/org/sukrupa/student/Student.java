@@ -211,15 +211,12 @@ public class Student {
         return sponsor;
     }
 
-    public String getSponsor_email() {
+    public String getSponsorEmail() {
         return sponsor_email;
     }
 
-    public LocalDate getSponsor_start_date() {
-        if(sponsor_start_date != null){
-            return sponsor_start_date;
-        }
-        return new LocalDate();
+    public LocalDate getSponsorStartDate() {
+        return sponsor_start_date;
     }
 
     public String getStudentClass() {
@@ -496,6 +493,21 @@ public class Student {
         @Override
         public int getAge() {
             return 0;
+        }
+
+        @Override
+        public String getSponsor(){
+            return "";
+        }
+
+        @Override
+        public String getSponsorEmail(){
+            return "";
+        }
+
+        @Override
+        public LocalDate getSponsorStartDate(){
+            return new LocalDate();
         }
 
 

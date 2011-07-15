@@ -1,4 +1,3 @@
-
 package org.sukrupa.student;
 
 import org.joda.time.LocalDate;
@@ -96,12 +95,12 @@ public class StudentBuilder {
         return this;
     }
 
-     public StudentBuilder disciplinary(String disciplinary) {
+    public StudentBuilder disciplinary(String disciplinary) {
         this.disciplinary = disciplinary;
         return this;
     }
 
-     public StudentBuilder performance(String performance) {
+    public StudentBuilder performance(String performance) {
         this.performance = performance;
         return this;
     }
@@ -158,7 +157,7 @@ public class StudentBuilder {
 
     public Student build() {
 
-       return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored,sponsor_email,sponsor_start_date);
+        return new Student(studentId, name, religion, caste, subCaste, area, gender, studentClass, talents, father, mother, guardian, dateOfBirth, notes, this.status, disciplinary, performance, profile, events, familyStatus, sponsored, sponsor_email, sponsor_start_date);
 
     }
 
@@ -167,9 +166,17 @@ public class StudentBuilder {
         return this;
     }
 
-    public StudentBuilder sponsored (String sponsored, String sponsorEmail, LocalDate sponsorDate) {
+    public StudentBuilder sponsored(String sponsored) {
         this.sponsored = sponsored;
+        return this;
+    }
+
+    public StudentBuilder sponsorEmail(String sponsorEmail) {
         this.sponsor_email = sponsorEmail;
+        return this;
+    }
+
+    public StudentBuilder sponsorDate(LocalDate sponsorDate) {
         this.sponsor_start_date = sponsorDate;
         return this;
     }

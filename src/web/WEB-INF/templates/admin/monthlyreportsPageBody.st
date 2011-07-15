@@ -17,8 +17,8 @@
             <tr >
                 <td >$it.name$</td>
                 <td>$it.sponsor$</td>
-                <td >$it.sponsor_email$</td>
-                <td ><a href="/admin/endofsponsorshipform?sponsor_email=$it.sponsor_email$"> Send mail </a></td>
+                <td >$it.sponsorEmail$</td>
+                <td ><a href="/admin/endofsponsorshipform?sponsor_email=$it.sponsorEmail$"> Send mail </a></td>
             </tr>
             }$
             </tbody>

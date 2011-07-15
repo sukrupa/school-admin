@@ -103,7 +103,7 @@
                     <div class="value" id="sponsor">$student.sponsor$</div>
                     <div class="entry">
                         <div class="label">Sponsor Email</div>
-                        <div class="value" id="sponsor-email">$student.sponsor_email$</div>
+                        <div class="value" id="sponsor-email">$student.sponsorEmail$</div>
                     </div>
                     <div class="entry">
                         <div class="label">Sponsor Start Date</div>

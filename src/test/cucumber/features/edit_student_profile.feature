@@ -4,8 +4,8 @@ Feature: Edit student profile
     Scenario: Add/Edit sponsor, and verify other student details are unchanged
     When I edit student record of Bhavani
     And I enter Peter Murray as Sponsor
-    And I enter Tim@gmail.com as Sponsor Email
-    And I enter 13-07-2011 as Sponsor Start Date
+    And I enter Tim@gmail.com as SponsorEmail
+    And I enter 13-07-2011 as SponsorStartDate
     And I save the changes
     Then the message "Student record updated successfully" is displayed
     And the "Student Record: Bhavani" page is displayed
