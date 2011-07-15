@@ -101,15 +101,16 @@
                 <div class="entry">
                     <div class="label">Sponsor</div>
                     <div class="value" id="sponsor">$student.sponsor$</div>
-                    <div class="entry">
-                        <div class="label">Sponsor Email</div>
-                        <div class="value" id="sponsor-email">$student.sponsorEmail$</div>
-                    </div>
-                    <div class="entry">
-                        <div class="label">Sponsor Start Date</div>
-                        <div class="value" id="sponsor-start-date">$student.sponsorStartDateForDisplay$</div>
-                    </div>
                 </div>
+                <div class="entry">
+                        <div class="label">Sponsor Email</div>
+                        <div class="value" id="sponsorEmail">$student.sponsorEmail$</div>
+                </div>
+                <div class="entry">
+                        <div class="label">Sponsor Start Date</div>
+                        <div class="value" id="sponsorStartDate">$student.sponsorStartDateForDisplay$</div>
+                </div>
+
                 $else$
                 <div class="entry">
                     <div class="label">Not Sponsored</div>

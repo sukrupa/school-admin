@@ -33,7 +33,7 @@ Feature: Edit student profile
     When I edit student record of Bhavani
     And I select Existing Student for Student Status
     And I save the changes
-    Then theI Edit message "Student record updated successfully" is displayed
+    Then the message "Student record updated successfully" is displayed
     And the "Student Record: Bhavani" page is displayed
     And Existing Student is displayed under Student Status
 
