@@ -68,11 +68,13 @@ public class StudentRepository {
         return managePaging(getPageCriteria, firstIndex, maxResults);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Student> findSponsorsBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createSponsorSearchOrderedCriteriaFrom(searchParam);
         return managePaging(getPageCriteria, firstIndex, maxResults);
     }
 
+    @SuppressWarnings("unchecked")
     private List<Student> managePaging(Criteria getPageCriteria, int firstIndex, int maxResults) {
         getPageCriteria.setFirstResult(firstIndex);
         getPageCriteria.setMaxResults(maxResults);

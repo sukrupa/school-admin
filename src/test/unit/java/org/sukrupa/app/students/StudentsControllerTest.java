@@ -87,7 +87,7 @@ public class StudentsControllerTest {
 
         when(searchParam.getValidCriteria()).thenReturn(validCriteria);
         when(request.getQueryString()).thenReturn("TestQueryString");
-        when(service.getPage(searchParam, 23, "TestQueryString")).thenReturn(students);
+        when(service.getPageForSponsorSearch(searchParam, 23, "TestQueryString")).thenReturn(students);
         when(students.getStudents()).thenReturn(asList(student));
 
         String view = studentController.listForStudentsBySponsor(23, searchParam, studentModel, request);
@@ -103,7 +103,7 @@ public class StudentsControllerTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         StudentListPage students = mock(StudentListPage.class);
 
-        when(service.getPage(any(StudentSearchParameter.class), anyInt(), anyString())).thenReturn(students);
+        when(service.getPageForSponsorSearch(any(StudentSearchParameter.class), anyInt(), anyString())).thenReturn(students);
         when(students.getStudents()).thenReturn(new ArrayList<Student>());
 
         String view = studentController.listForStudentsBySponsor(23, searchParam, studentModel, request);
