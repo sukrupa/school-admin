@@ -5,20 +5,20 @@ INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS" , "STUDENT_PROFILE")
 VALUES (2 , 'Haripriya', 'Hindu', 'ST', '', 'Buvaneshwari Slum','34545', 'Female', '1997-03-20', '9 Std',2)
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS", "IMAGE_LINK","STUDENT_PROFILE", "FAMILY_STATUS_ENUMS", "SPONSOR","SPONSOR_EMAIL", "SPONSOR_START_DATE")
-VALUES (3 , 'Anok', 'Hindu', 'SC', 'AK', 'Subramnya Nagar','64262','Male', '1997-02-08', '6 Std', '3',3, 1, 'Tim','Tim@gmail.com', '2011-07-13')
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS", "IMAGE_LINK","STUDENT_PROFILE", "FAMILY_STATUS_ENUMS", "SPONSOR","SPONSOR_EMAIL")
+VALUES (3 , 'Anok', 'Hindu', 'SC', 'AK', 'Subramnya Nagar','64262','Male', '1997-02-08', '6 Std', '3',3, 1, 'Tim','Tim@gmail.com')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE", "SPONSOR","SPONSOR_EMAIL", "SPONSOR_START_DATE")
-VALUES (4 , 'Abhishek', 'Hindu', 'SC', 'AK', 'Chamundi Nagar','16346', 'Male', '2001-11-19', '4 Std',4, 'Tim','Tim@gmail.com', '2011-08-26')
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE", "SPONSOR","SPONSOR_EMAIL")
+VALUES (4 , 'Abhishek', 'Hindu', 'SC', 'AK', 'Chamundi Nagar','16346', 'Male', '2001-11-19', '4 Std',4, 'Tim','Tim@gmail.com')
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE","FAMILY_STATUS_ENUMS")
 VALUES (5 , 'Chandana', 'Christian', 'Shetty', '', 'Guddadahalli','83415', 'Female', '2004-05-15', '1 Std',5, 0)
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE", "SPONSOR", "SPONSOR_EMAIL", "SPONSOR_START_DATE")
-VALUES (6 , 'Armugam', 'Hindu', 'SC', '', 'Cholanaykanahalli','23462', 'Male', '2003-06-19', 'UKG',6, 'Jim','Jim@gmail.com', '2011-09-11')
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STUDENT_PROFILE", "SPONSOR")
+VALUES (6 , 'Armugam', 'Hindu', 'SC', '', 'Cholanaykanahalli','23462', 'Male', '2003-06-19', 'UKG',6, 'Jim')
 INSERT INTO "PUBLIC"."STUDENT"
-( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS", "STUDENT_DISCIPLINARY", "STUDENT_PERFORMANCE","STUDENT_PROFILE", "SPONSOR", "SPONSOR_EMAIL", "SPONSOR_START_DATE")
-VALUES (7 , 'Bhavani', 'Hindu', 'SC', '', 'Bhuvaneshwari Slum','SK20090080', 'Female', '2004-02-22', 'UKG', 'Excellent', 'A+',7, 'Stan','Stan@gmail.com', '2011-04-19')
+( "ID", "NAME", "RELIGION", "CASTE", "SUB_CASTE", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS", "STUDENT_DISCIPLINARY", "STUDENT_PERFORMANCE","STUDENT_PROFILE", "SPONSOR")
+VALUES (7 , 'Bhavani', 'Hindu', 'SC', '', 'Bhuvaneshwari Slum','SK20090080', 'Female', '2004-02-22', 'UKG', 'Excellent', 'A+',7, 'Stan')
 INSERT INTO "PUBLIC"."STUDENT"
 ( "ID", "NAME", "COMMUNITY_LOCATION" ,"STUDENT_ID", "GENDER", "DATE_OF_BIRTH", "STUDENT_CLASS","STATUS")
 VALUES (8 , 'Balaji', 'Diamond District','12345678', 'Male', '2001-02-22', '10 Std', 2)
@@ -109,22 +109,22 @@ VALUES (3,7);
 INSERT INTO "PUBLIC"."EVENT"
 ("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","START_DATE","END_DATE")
 VALUES
-(1,'Annual Day', 'Bangalore 2','Rebecca Sliter','This is a event description. It is a test.','This is a note','2011-01-20 00:23:00','2011-02-20 00:00:00');
+(1,'Annual Day', 'Bangalore 2','Rebecca Sliter','This is a event description. It is a test.','This is a note','2011-02-20 00:05:00','2011-02-20 01:10:00') ;
 
 INSERT INTO "PUBLIC"."EVENT"
 ("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","START_DATE","END_DATE")
 VALUES
-(2,'Sports Day', 'Bangalore agra','Suhas Vishwanath','This is a event description. It is a test.','This is a note','2011-01-20 00:00:23','2011-03-25 00:00:00');
+(2,'Sports Day', 'Bangalore agra','Suhas Vishwanath','This is a event description. It is a test.','This is a note','2011-03-25 11:00:00','2011-03-25 13:00:00');
 
 INSERT INTO "PUBLIC"."EVENT"
 ("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","START_DATE","END_DATE")
 VALUES
-(3,'Independence Day', 'Bangalore agra','Shefali','This is a event description. It is a test.','This is a note','2011-02-20 00:00:00','2011-03-27 00:00:00');
+(3,'Independence Day', 'Bangalore agra','Shefali','This is a event description. It is a test.','This is a note','2011-02-27 01:00:00','2011-02-28 00:59:59');
 
 INSERT INTO "PUBLIC"."EVENT"
 ("ID","TITLE", "VENUE","COORDINATOR","DESCRIPTION","NOTES","START_DATE","END_DATE")
 VALUES
-(4,'Spice Girls', 'P-81 Diamond District','Joel Tellez','This is a event description. It is a test.','This is a note','2011-02-20 00:00:00','2011-04-05 00:00:00');
+(4,'Spice Girls', 'P-81 Diamond District','Joel Tellez','This is a event description. It is a test.','This is a note','2011-04-25 10:00:00','2011-04-25 13:00:00');
 
 INSERT INTO EVENT_ATTENDEES ("EVENT_ID","STUDENT_ID") VALUES (1,1);
 INSERT INTO EVENT_ATTENDEES ("EVENT_ID","STUDENT_ID") VALUES (1,2);
