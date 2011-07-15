@@ -17,8 +17,9 @@ function validateForm() {
     }
     var z=document.forms[0].attach.value;
     if(z==""){
-        alert("You are trying to send Monthly Newsletter without an Attachment!!");
-        return true;
+        var answer=confirm("Do you wish to send Newsletter without an attachment?");
+        return answer;
+
     }
 }
 
