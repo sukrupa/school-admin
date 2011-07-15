@@ -88,11 +88,11 @@ public class Event {
     }
 
     public Date getDate() {
-        return endDate;
+        return startDate;
     }
 
     public String getDay() {
-        return endDate.getDay();
+        return startDate.getDay();
     }
 
     public String getEndTime() {
