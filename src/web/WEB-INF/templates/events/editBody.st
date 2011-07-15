@@ -14,7 +14,7 @@
 	<div id="createEventErrors">
 		<div id="errorMessages">
 			$if (invalidAttendees)$
-			Invalid student IDs: $invalidAttendees; separator=", "$
+			Error: $invalidAttendees$
 			$endif$
 		</div>
 	</div>

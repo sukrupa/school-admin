@@ -151,20 +151,6 @@ public class EventsControllerTest {
     }
 
     @Test
-    public void shouldDisplayEditPagewhenUpdatingEventWithInvalidAttendees() {
-        HashSet<String> idList = new HashSet<String>();
-        idList.add("111");
-        idList.add("123");
-        Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
-        when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
-        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-
-        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
-
-        assertThat("Display the Edit Event Page",update, is("events/edit"));
-    }
-
-    @Test
     public void shouldDisplayEventPageAfterSuccesfullyUpdating() {
         String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
 

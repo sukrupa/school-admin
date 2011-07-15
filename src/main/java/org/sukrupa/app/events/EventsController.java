@@ -23,6 +23,8 @@ import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+
+@SuppressWarnings("unchecked")
 @Controller
 @RequestMapping("/events")
 public class EventsController {
@@ -96,7 +98,7 @@ public class EventsController {
 //            return "events/edit";
 
 //        } else {
-            service.update(eventForm, attendingStudentsList);
+         service.update(eventForm, attendingStudentsList);
             return format("redirect:/events/%s", eventId);
 //        }
     }
