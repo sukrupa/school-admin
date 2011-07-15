@@ -1,5 +1,7 @@
-@Login
+
 Feature: Annual Class Update
+
+@Login
 
     Scenario: Annual Class Update
     Given I am on the Tools page
@@ -34,7 +36,6 @@ Feature: Annual Class Update
     Given I am on the View Students page
     When I navigate to Anok profile
     Then 7 Std should be displayed
-
-
+    And Exit
     
 

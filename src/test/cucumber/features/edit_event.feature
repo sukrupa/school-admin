@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 
 Feature: Edit an Event
 
 @Login
-=======
-@Login
-Feature: Edit an Events
->>>>>>> Undoing some changes made to fix cucumber
+
     Scenario: Edit an event
         Given I am on the View Events page
         When I navigate to the Annual Day page
