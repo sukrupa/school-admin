@@ -94,11 +94,11 @@ public class Student {
 
     @Column(name = "SPONSOR")
     private String sponsor;
-    @Column(name = "sponsor_email")
-    private String sponsor_email;
+    @Column(name = "SPONSOR_EMAIL")
+    private String sponsorEmail;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @Column(name = "sponsor_start_date")
-    private LocalDate sponsor_start_date;
+    @Column(name = "SPONSOR_START_DATE")
+    private LocalDate sponsorStartDate;
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "FAMILY_STATUS_ENUMS")
     private StudentFamilyStatus familyStatus = null;
@@ -111,7 +111,7 @@ public class Student {
                    String communityLocation, String gender, String studentClass, Set<Talent> talents,
                    Caregiver father, Caregiver mother, Caregiver guardian, LocalDate dateOfBirth, Set<Note> notes,
                    StudentStatus status, String disciplinary, String performance, Profile profile, Set<Event> events,
-                   StudentFamilyStatus familyStatus, String sponsor, String sponsor_email, LocalDate sponsor_start_date) {
+                   StudentFamilyStatus familyStatus, String sponsor, String sponsorEmail, LocalDate sponsorStartDate) {
 
         this.studentId = setStudentId(studentId);
         this.name = name;
@@ -137,8 +137,8 @@ public class Student {
 
         this.status = status;
         this.sponsor = sponsor;
-        this.sponsor_email = sponsor_email;
-        this.sponsor_start_date = sponsor_start_date;
+        this.sponsorEmail = sponsorEmail;
+        this.sponsorStartDate = sponsorStartDate;
         this.disciplinary = disciplinary;
         this.performance = performance;
         this.profile = profile;
@@ -212,11 +212,11 @@ public class Student {
     }
 
     public String getSponsorEmail() {
-        return sponsor_email;
+        return sponsorEmail;
     }
 
     public LocalDate getSponsorStartDate() {
-        return sponsor_start_date;
+        return sponsorStartDate;
     }
 
     public String getStudentClass() {
@@ -331,8 +331,8 @@ public class Student {
     }
 
     public String getSponsorStartDateForDisplay() {
-        if(sponsor_start_date != null)
-            return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsor_start_date);
+        if(sponsorStartDate != null)
+            return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsorStartDate);
         return "";
     }
 
@@ -354,8 +354,8 @@ public class Student {
         this.dateOfBirth = convertDate(studentUpdateParameters.getDateOfBirth());
         this.status = StudentStatus.fromString(studentUpdateParameters.getStatus());
         this.sponsor = studentUpdateParameters.getSponsored();
-        this.sponsor_email = studentUpdateParameters.getSponsorEmail();
-        this.sponsor_start_date = convertDate(studentUpdateParameters.getSponsorStartDate());
+        this.sponsorEmail = studentUpdateParameters.getSponsorEmail();
+        this.sponsorStartDate = convertDate(studentUpdateParameters.getSponsorStartDate());
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
         if (studentUpdateParameters.getFather() != null) {
