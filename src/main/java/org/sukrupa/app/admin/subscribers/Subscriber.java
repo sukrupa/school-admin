@@ -47,6 +47,11 @@ public class Subscriber {
         return this.id;
     }
 
+    public boolean equals(Object subscriber){
+        Subscriber mySubscriber = (Subscriber) subscriber;
+        return this.subscriberName.equals(mySubscriber.getSubscriberName()) && this.subscriberEmail.equals(mySubscriber.getSubscriberEmail());
+    }
+
     public int hashCode(){
         return subscriberName.hashCode();
     }

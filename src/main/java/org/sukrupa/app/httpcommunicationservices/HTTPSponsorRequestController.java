@@ -12,12 +12,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @RequestMapping("/getsponsorshipinfo")
-public class HTTPRequestController {
+public class HTTPSponsorRequestController {
 
     private StudentRepository studentRepository;
 
     @Autowired
-    public HTTPRequestController(StudentRepository studentRepository) {
+    public HTTPSponsorRequestController(StudentRepository studentRepository) {
 
         this.studentRepository = studentRepository;
     }
