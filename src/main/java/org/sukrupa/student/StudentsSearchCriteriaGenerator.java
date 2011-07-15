@@ -3,10 +3,12 @@ package org.sukrupa.student;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
+import org.hibernate.hql.classic.GroupByParser;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +34,19 @@ public class StudentsSearchCriteriaGenerator {
     private static final String GUARDIAN = "guardian";
     private static final String FAMILY_STATUS = "familyStatus";
     private static final String SPONSOR = "sponsor";
-    private static final String SPONSOR_EMAIL="sponsor_email";
+    private static final String SPONSOR_EMAIL = "sponsor_email";
+
     @Autowired
     public StudentsSearchCriteriaGenerator(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     public Criteria createOrderedCriteriaFrom(StudentSearchParameter searchParam) {
-        return addOrderCriteria(generateSearchCriteria(searchParam));
+        return addOrderCriteria(generateSearchCriteria(searchParam), NAME);
+    }
+
+    public Criteria createSponsorSearchOrderedCriteriaFrom(StudentSearchParameter searchParam) {
+        return addOrderCriteria(generateSearchCriteria(searchParam), SPONSOR);
     }
 
     public Criteria createCountCriteriaBasedOn(StudentSearchParameter searchParam) {
@@ -66,23 +73,21 @@ public class StudentsSearchCriteriaGenerator {
     }
 
     private void addSponsoredSearchCriteria(Criteria criteria, String sponsored, String sponsorName) {
-        if (!sponsored.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
-            if(sponsored.equals("Yes")){
-                if(sponsorName.equals("")){
-                    criteria.add(Restrictions.and(Restrictions.isNotNull(SPONSOR),Restrictions.ne(SPONSOR,sponsorName)));
+        if (!sponsored.equals(StudentSearchParameter.WILDCARD_CHARACTER)) {
+            if (sponsored.equals("Yes")) {
+                if (sponsorName.equals("")) {
+                    criteria.add(Restrictions.and(Restrictions.isNotNull(SPONSOR), Restrictions.ne(SPONSOR, sponsorName)));
+                } else {
+                    criteria.add(Restrictions.like(SPONSOR, "%" + sponsorName + "%").ignoreCase());
                 }
-                else {
-                    criteria.add(Restrictions.like(SPONSOR,"%" + sponsorName + "%").ignoreCase());
-                }
-            }
-            else {
-                criteria.add(Restrictions.or(Restrictions.isNull(SPONSOR),Restrictions.eq(SPONSOR,"")));
+            } else {
+                criteria.add(Restrictions.or(Restrictions.isNull(SPONSOR), Restrictions.eq(SPONSOR, "")));
             }
         }
     }
 
     private void addStudentFamilyStatusSearchCriteria(Criteria criteria, String studentFamilyStatus) {
-        if (!studentFamilyStatus.equals(StudentSearchParameter.WILDCARD_CHARACTER)){
+        if (!studentFamilyStatus.equals(StudentSearchParameter.WILDCARD_CHARACTER)) {
             if (studentFamilyStatus.isEmpty()) {
                 criteria.add(Restrictions.isNull(FAMILY_STATUS));
             } else {
@@ -115,11 +120,11 @@ public class StudentsSearchCriteriaGenerator {
 
     private void addCaregiversOccupationSearchCriteria(Criteria criteria, String caregiversOccupation) {
         if (!caregiversOccupation.equals("*")) {
-            criteria.createAlias("father","fa");
-            criteria.createAlias("mother","ma");
-            criteria.createAlias("guardian","ga");
+            criteria.createAlias("father", "fa");
+            criteria.createAlias("mother", "ma");
+            criteria.createAlias("guardian", "ga");
 
-            SimpleExpression fatherRestrictions = Restrictions.eq("fa.occupation",caregiversOccupation);
+            SimpleExpression fatherRestrictions = Restrictions.eq("fa.occupation", caregiversOccupation);
             SimpleExpression fatherNotDeceased = Restrictions.ne("fa.maritalStatus", "Deceased");
             LogicalExpression fatherIsAlive = Restrictions.and(fatherRestrictions, fatherNotDeceased);
 
@@ -129,7 +134,7 @@ public class StudentsSearchCriteriaGenerator {
 
             SimpleExpression guardianRestrictions = Restrictions.eq("ga.occupation", caregiversOccupation);
 
-            criteria.add( Restrictions.or( Restrictions.or( fatherIsAlive , motherIsAlive ), guardianRestrictions));
+            criteria.add(Restrictions.or(Restrictions.or(fatherIsAlive, motherIsAlive), guardianRestrictions));
         }
     }
 
@@ -141,8 +146,8 @@ public class StudentsSearchCriteriaGenerator {
         return new LocalDate().minusYears(age);
     }
 
-    private Criteria addOrderCriteria(Criteria criteria) {
-        return criteria.addOrder(Order.asc(NAME).ignoreCase());
+    private Criteria addOrderCriteria(Criteria criteria, String orderByField) {
+        return criteria.addOrder(Order.asc(orderByField).ignoreCase());
     }
 
     private Conjunction createConjunction(String name, String studentClass, String gender, String caste, String communityLocation, String religion) {
@@ -199,4 +204,5 @@ public class StudentsSearchCriteriaGenerator {
             }
         }
     }
+
 }

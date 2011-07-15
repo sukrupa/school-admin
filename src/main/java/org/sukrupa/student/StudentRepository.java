@@ -65,6 +65,15 @@ public class StudentRepository {
     @SuppressWarnings("unchecked")
     public List<Student> findBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
         Criteria getPageCriteria = studentsSearchCriteriaGenerator.createOrderedCriteriaFrom(searchParam);
+        return managePaging(getPageCriteria, firstIndex, maxResults);
+    }
+
+    public List<Student> findSponsorsBySearchParameter(StudentSearchParameter searchParam, int firstIndex, int maxResults) {
+        Criteria getPageCriteria = studentsSearchCriteriaGenerator.createSponsorSearchOrderedCriteriaFrom(searchParam);
+        return managePaging(getPageCriteria, firstIndex, maxResults);
+    }
+
+    private List<Student> managePaging(Criteria getPageCriteria, int firstIndex, int maxResults) {
         getPageCriteria.setFirstResult(firstIndex);
         getPageCriteria.setMaxResults(maxResults);
         return getPageCriteria.list();
@@ -94,4 +103,6 @@ public class StudentRepository {
     public List<Student> findSponsoredStudentsCount() {
         return query("from Student where SPONSOR != '' ").list();
     }
+
+
 }

@@ -62,7 +62,7 @@ public class StudentsController {
                                            Map<String, Object> model, HttpServletRequest request) {
         model.put("searchCriteria", searchParam.getValidCriteria());
 
-        StudentListPage students = studentService.getPage(searchParam, pageNumber, request.getQueryString());
+        StudentListPage students = studentService.getPageForSponsorSearch(searchParam, pageNumber, request.getQueryString());
         if (students.getStudents().isEmpty()) {
             return "students/listsponsorempty";
         }
@@ -75,8 +75,9 @@ public class StudentsController {
         model.put("formhelper", studentService.getStudentReferenceData());
     }
 
-     @RequestMapping("searchbysponsor")
+    @RequestMapping("searchbysponsor")
     public void searchStudentsBySponsor() {
+        // needed for rendering the search Student by Sponsor page
     }
 
     @RequestMapping(value = "{id}/edit", method = GET)
