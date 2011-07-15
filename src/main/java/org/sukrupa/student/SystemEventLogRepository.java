@@ -33,4 +33,8 @@ public class SystemEventLogRepository {
         session().flush();
     }
 
+    public void clear(SystemEventLog systemEventLog){
+        session().delete(systemEventLog);
+        session().flush();
+    }
 }

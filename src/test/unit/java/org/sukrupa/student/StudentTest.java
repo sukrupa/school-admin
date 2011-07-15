@@ -108,6 +108,17 @@ public class StudentTest {
     }
 
     @Test
+    public void shouldDemoteStudent() {
+        assertEquals("2 Std", demoteStudent("3 Std").getStudentClass());
+        assertEquals("3 Std", demoteStudent("4 Std").getStudentClass());
+        assertEquals("4 Std", demoteStudent("5 Std").getStudentClass());
+        assertEquals("9 Std", demoteStudent("10 Std").getStudentClass());
+        assertEquals("LKG",demoteStudent("UKG").getStudentClass());
+        assertEquals("UKG",demoteStudent("1 Std").getStudentClass());
+        assertEquals("Nursery", demoteStudent("LKG").getStudentClass());
+    }
+
+    @Test
     public void shouldPromoteAStudentOutOfTheSchool() {
         Student tenthStandardStudent = new StudentBuilder().studentClass("10 Std").build();
 
@@ -219,6 +230,12 @@ public class StudentTest {
     private Student promoteStudent(String studentClass) {
         Student student = new StudentBuilder().studentClass(studentClass).build();
         student.promote();
+        return student;
+    }
+
+    private Student demoteStudent(String studentClass) {
+        Student student = new StudentBuilder().studentClass(studentClass).build();
+        student.demote();
         return student;
     }
 

@@ -93,9 +93,7 @@ public class AnnualClassUpdateService {
                  studentRepository.put(student);
             }
 
-            LocalDate myDate = new LocalDate("1989-08-21");
-
-                systemEventLogRepository.put(annualClassUpdateEventLog.newEntry(myDate));
+                systemEventLogRepository.clear(systemEventLogRepository.find(ANNUAL_CLASS_UPDATE));
             }
 
         }
