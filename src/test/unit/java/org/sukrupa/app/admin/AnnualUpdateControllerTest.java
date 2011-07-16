@@ -30,12 +30,12 @@ public class AnnualUpdateControllerTest {
         verify(annaulClassUpdateService).promoteStudentsToNextClass();
     }
 
-//    @Test
-//    public void shouldUndoPromoteAllStudents(){
-//
-//        controller.undoAnnualUpdate();
-//        verify(annaulClassUpdateService).undoPromoteStudentsToNextClass();
-//
-//    }
+    @Test
+    public void shouldUndoPromoteAllStudents(){
+
+        controller.undoAnnualUpdate();
+        verify(annaulClassUpdateService).undoPromoteStudentsToNextClass();
+
+    }
 
 }
