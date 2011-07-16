@@ -12,15 +12,15 @@ import java.io.FileNotFoundException;
 
 @Controller
 @RequestMapping("/getstudentimage")
-public class ImageRequestController {
+public class StudentsImageController {
     private StudentImageRepository studentImageRepository;
-    private StudentImageController studentImageController;
+    private org.sukrupa.app.students.image.StudentImageController studentImageController;
 
     @Autowired
-    public ImageRequestController(StudentImageRepository studentImageRepository) {
+    public StudentsImageController(StudentImageRepository studentImageRepository) {
 
         this.studentImageRepository = studentImageRepository;
-        studentImageController = new StudentImageController(studentImageRepository);
+        studentImageController = new org.sukrupa.app.students.image.StudentImageController(studentImageRepository);
     }
 
     @RequestMapping(value = "{id}/image")
