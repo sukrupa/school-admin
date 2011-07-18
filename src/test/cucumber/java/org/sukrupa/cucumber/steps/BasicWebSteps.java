@@ -83,6 +83,11 @@ public class BasicWebSteps {
         browser().textbox(field).setValue(fieldContent);
     }
 
+    @When("^I write ([^\"]*) as ([^\"]*)$")
+    public void fillInTheTextWith(String field, String fieldContent) {
+        browser().textbox(field).setValue(fieldContent);
+    }
+
     @Then("^student ([^\"]*) is displayed$")
     public void studentIsDisplayed(String text) {
         Browser browser = browser();
