@@ -361,8 +361,12 @@ public class Student {
         this.sponsorEmail = studentUpdateParameters.getSponsorEmail();
         this.sponsorStartDate = convertDate(studentUpdateParameters.getSponsorStartDate());
 
+
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
+        if(sponsor.equals("")){
+            this.sponsor = null;
+        }
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);

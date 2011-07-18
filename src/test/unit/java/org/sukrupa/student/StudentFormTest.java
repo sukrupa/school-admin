@@ -23,6 +23,4 @@ public class StudentFormTest {
         verify(studentImageRepository).save(new Image(image), "12345");
     }
 
-
-
 }
