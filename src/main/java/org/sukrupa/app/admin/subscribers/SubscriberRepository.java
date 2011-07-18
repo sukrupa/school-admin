@@ -35,6 +35,7 @@ public class SubscriberRepository {
     }
 
     public void addSubscriber(Subscriber subscriber){
+        if (duplicateNameAndEmailExists(subscriber)) return;
         session().save(subscriber);
     }
 
@@ -46,8 +47,23 @@ public class SubscriberRepository {
         return (Subscriber) query("from Subscriber where id = ?").setParameter(0, id).uniqueResult();
     }
 
+    public Subscriber findByNameAndEmail(String subscriberName, String subscriberEmail){
+          Query query = session().createQuery("from Subscriber where SUBSCRIBERNAME = :subcriberName and SUBSCRIBEREMAIL = :subcriberEmail");
+         query.setParameter("subcriberName", subscriberName);
+         query.setParameter("subcriberEmail", subscriberEmail);
+         return (Subscriber) query.uniqueResult();
+    }
 
     public void deleteSubscriber(Subscriber subscriber) {
         session().delete(subscriber);
     }
+
+    public boolean duplicateNameAndEmailExists(Subscriber subscriber){
+        Subscriber retrievedSubscriber=findByNameAndEmail(subscriber.getSubscriberName(),subscriber.getSubscriberEmail());
+        if(retrievedSubscriber == null) return false;
+        else return true;
+
+    }
+
+
 }
