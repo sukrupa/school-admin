@@ -63,7 +63,7 @@ function validateFields() {
     }
     if($("#sponsored").val() != "" || $("#SponsorEmail").val() != "" || $("#SponsorStartDate").val() != ""){
         if (!($("#sponsored").val() != "" && $("#SponsorEmail").val() != "" && $("#SponsorStartDate").val() != "")){
-            errorMessage += "Please enter all three sponsor fields - sponsor name, sponsor email and sponsor start date. <br/>";
+            errorMessage += "Please enter all three sponsor fields. <br/>";
             valid = false;
         }
         if(!new DateValidator().validate(sponsorDateStr, dummyTimeStr, new Date())) {

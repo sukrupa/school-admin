@@ -56,7 +56,7 @@ Feature: Edit student profile
     When I edit student record of Chandru
     And I enter Tim as Sponsor
     And I save the changes
-    Then the message "Please enter all three sponsor fields - sponsor name, sponsor email and sponsor start date." is displayed
+    Then the message "Please enter all three sponsor fields." is displayed
     And the message "Please enter a valid sponsor start date." is displayed
     And the message "Please enter a valid sponsor email address." is displayed
     And Exit
