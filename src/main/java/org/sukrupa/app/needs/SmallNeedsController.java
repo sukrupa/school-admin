@@ -42,36 +42,40 @@ public class SmallNeedsController {
         return "smallNeeds/smallNeedsList";
     }
 
+
     @RequestMapping(value = "create", method = POST)
+    @Transactional
     public String create(@RequestParam int priority, @RequestParam String itemName, @RequestParam String itemCost, @RequestParam String comment, HttpSession session,HashMap<String, Object> model) {
-        smallNeedRepository.put(new SmallNeed(itemName, Double.parseDouble(itemCost), comment, priority));
+        smallNeedRepository.addNeed((new SmallNeed(itemName, Double.parseDouble(itemCost), comment, priority)), priority);
         session.setAttribute("message", "Added " + itemName);
-        return list(model,session);
+        model.clear();
+        return "redirect:/smallneeds";
     }
 
     @RequestMapping(value = "delete", method = POST)
     @Transactional
     public String delete(@RequestParam long itemId, HashMap<String, Object> model, HttpSession session) {
-        SmallNeed smallNeed = smallNeedRepository.getSmallNeed(itemId);
+        SmallNeed smallNeed = smallNeedRepository.getNeedById(itemId);
         this.smallNeedRepository.delete(smallNeed);
-        this.smallNeedRepository.getSmallNeed(itemId);
+        this.smallNeedRepository.getNeedById(itemId);
         session.setAttribute("message", "Deleted " + smallNeed.getItemName());
-        return list(model,session);
+        model.clear();
+        return "redirect:/smallneeds";
     }
 
     @RequestMapping(value = "saveeditedneed", method = POST)
     @Transactional
-    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost,@RequestParam String comment, HashMap<String, Object> model, HttpSession session) {
+    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost,@RequestParam String comment, HashMap<String, Object> model) {
         try {
-            SmallNeed smallNeed = smallNeedRepository.getSmallNeed(itemId);
+            SmallNeed smallNeed = smallNeedRepository.getNeedById(itemId);
             smallNeed.setItemName(itemName);
             smallNeed.setCost(Double.parseDouble(itemCost));
-            smallNeed.setPriority(Integer.parseInt(priority));
             smallNeed.setComment(comment);
-            smallNeedRepository.put(smallNeed);
+            smallNeedRepository.editNeed(smallNeed, Integer.parseInt(priority));
         } catch (Exception e) {
             return "Error: " + e.toString();
         }
-        return list(model,session);
+        model.clear();
+        return "redirect:/smallneeds";
     }
 }

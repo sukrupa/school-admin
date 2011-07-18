@@ -157,13 +157,8 @@ public class BasicWebSteps {
            assertTrue(browser().containsText(browser().div(TOP_LEVEL_DIV), message));
     }
 
-    @Then("Exit")
+    @After
     public void closeBrowser() {
         SahiFacade.closeBrowser();
     }
-    @Then("Logout")
-    public void logout() {
-        browser().link("Logout").click();
-    }
-
 }

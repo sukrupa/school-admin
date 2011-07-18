@@ -9,6 +9,7 @@ import org.sukrupa.bigneeds.BigNeed;
 import org.sukrupa.bigneeds.BigNeedRepository;
 import org.sukrupa.platform.RequiredByFramework;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,26 +32,32 @@ public class BigNeedsController {
     }
 
     @RequestMapping
-    public String list(Map<String, Object> model) {
+    public String list(Map<String, Object> model, HttpSession session) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
         int priority = bigNeedList.size() == 0 ? 1 : bigNeedList.get(bigNeedList.size() - 1).getPriority() + 1;
+        model.put("message", session.getAttribute("message"));
+        model.put("shouldDisplayMessage",session.getAttribute("message") != null);
         model.put("priority", priority);
         model.put("bigNeedList", bigNeedList);
+        session.removeAttribute("message");
         return "bigNeeds/bigNeedsList";
     }
 
     @RequestMapping(value = "create", method = POST)
-    public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost, Map<String, Object> model) {
-        bigNeedRepository.addBigNeed(new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority)),Integer.parseInt(priority));
+    @Transactional
+    public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost,HttpSession session, Map<String, Object> model) {
+        bigNeedRepository.addNeed(new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority)),Integer.parseInt(priority));
+        session.setAttribute("message", "Added " + itemName);
         model.clear();
         return "redirect:/bigneeds";
     }
 
     @RequestMapping(value = "delete", method = POST)
     @Transactional
-    public String delete(@RequestParam long itemId, HashMap<String, Object> model) {
-        BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
+    public String delete(@RequestParam long itemId, HashMap<String, Object> model, HttpSession session) {
+        BigNeed bigNeed = bigNeedRepository.getNeedById(itemId);
         this.bigNeedRepository.delete(bigNeed);
+        session.setAttribute("message", "Deleted " + bigNeed.getItemName());
         model.clear();
         return "redirect:/bigneeds";
     }
@@ -59,10 +66,10 @@ public class BigNeedsController {
     @Transactional
     public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
         try {
-            BigNeed bigNeed = bigNeedRepository.getBigNeed(itemId);
+            BigNeed bigNeed = bigNeedRepository.getNeedById(itemId);
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Double.parseDouble(itemCost));
-            bigNeedRepository.editBigNeed(bigNeed,Integer.parseInt(priority));
+            bigNeedRepository.editNeed(bigNeed,Integer.parseInt(priority));
         } catch (Exception e) {
             return "Error: " + e.toString();
         }

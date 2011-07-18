@@ -75,27 +75,13 @@ public class SmallNeedsControllerTest {
         assertThat(model, hasEntry("shouldDisplayMessage", false));
     }
 
-   /* @Test
-    public void shouldAddSmallNeed() {
-        ArgumentCaptor<SmallNeed> smallNeedCaptor = ArgumentCaptor.forClass(SmallNeed.class);
-        HttpSession session = new MockHttpSession();
 
-        String view = controller.create(1, "SchoolUniform", 5000L, "For Aarthi", session);
-
-        assertThat(view, is("redirect:/smallneeds"));
-        assertThat(session.getAttribute("message"), is((Object) "Added SchoolUniform"));
-        verify(smallNeedRepository).put(smallNeedCaptor.capture());
-        assertThat(smallNeedCaptor.getValue().getItemName(), is("SchoolUniform"));
-        assertThat(smallNeedCaptor.getValue().getCost(), is(5000L));
-        assertThat(smallNeedCaptor.getValue().getComment(), is("For Aarthi"));
-        assertThat(smallNeedCaptor.getValue().getPriority(), is(1));
-    }*/
     @Test
     public void shouldCreateSmallNeed(){
         ArgumentCaptor<SmallNeed> smallNeedCaptor = ArgumentCaptor.forClass(SmallNeed.class);
         HttpSession session = new MockHttpSession();
         String view = controller.create(1,"Water Heater","1000","Waterheater",session,model);
-        verify(smallNeedRepository).put(smallNeedCaptor.capture());
+        verify(smallNeedRepository).addNeed((smallNeedCaptor.capture()), 1);
         assertThat(smallNeedCaptor.getValue().getItemName(), is("Water Heater"));
     }
     @Test
@@ -103,7 +89,7 @@ public class SmallNeedsControllerTest {
 
         SmallNeed smallNeed=mock(SmallNeed.class);
         HttpSession session=new MockHttpSession();
-        when(smallNeedRepository.getSmallNeed(123)).thenReturn(smallNeed);
+        when(smallNeedRepository.getNeedById(123)).thenReturn(smallNeed);
         controller.delete(123, model,session);
         verify(smallNeedRepository).delete(smallNeed);
 
@@ -114,9 +100,9 @@ public class SmallNeedsControllerTest {
 
         SmallNeed smallNeed=mock(SmallNeed.class);
         HttpSession session=new MockHttpSession();
-        when(smallNeedRepository.getSmallNeed(111)).thenReturn(smallNeed);
-        String view=controller.saveEdit("1",111,"Cooler","10000", "Cooler is essential ", model,session);
-        verify(smallNeedRepository).put(smallNeed);
+        when(smallNeedRepository.getNeedById(111)).thenReturn(smallNeed);
+        String view=controller.saveEdit("1",111,"Cooler","10000", "Cooler is essential ", model);
+        verify(smallNeedRepository).addNeed(smallNeed, 1);
 
     }
 }

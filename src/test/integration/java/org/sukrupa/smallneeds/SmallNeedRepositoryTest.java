@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.sukrupa.needs.Need;
+import org.sukrupa.needs.NeedRepository;
+import org.sukrupa.needs.NeedRepositoryTestBase;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 import org.sukrupa.platform.db.HibernateSession;
 import org.sukrupa.smallNeeds.SmallNeed;
@@ -25,7 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 @Transactional
-public class SmallNeedRepositoryTest {
+public class SmallNeedRepositoryTest extends NeedRepositoryTestBase{
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -38,13 +41,80 @@ public class SmallNeedRepositoryTest {
     public void setUp() {
         smallNeedRepository = new SmallNeedRepository(sessionFactory);
     }
+
+    @Test
+    public void shouldSaveTheFirstSmallNeed() {
+        assertSavingFirstNeed();
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionAndModifyPriority() {
+        assertInsertNeed();
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToHigherPriority() {
+        assertUpdateToHigherPriority();
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToHighestPriority() {
+        assertUpdateToHighestPriority();
+    }
+
+      @Test
+    public void shouldInsertPriorityCorrectlyIfGreaterThanPrePopulatedPriority() {
+        assertInsertWithGreaterThanExistingPriority();
+    }
+
+    @Test
+    public void shouldUpdatePriorityCorrectlyIfGreaterThanPrePopulatedPriority() {
+        assertUpdateWithGreaterThanExistingPriority();
+    }
+
+    @Test
+    public void shouldHaveTheSamePriorityIfPriorityHasNotChanged() {
+        assertHasTheSamePriorityIfPriorityHasNotChanged();
+
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToLowerPriority() {
+        assertUpdateToLowerPriority();
+    }
+
+    @Test
+    public void shouldInsertRecordInProperPositionWhenItemsAreUpdatedToLowestPriority() {
+        assertUpdateToLowestPriority();
+    }
+
+    @Test
+    public void shouldRetrieveBigNeedList() {
+        assertRetrieveNeedList();
+    }
+
+    @Test
+    public void shouldDeleteRecordAndAdjustThePriorites() {
+        assertDeleteAdjustsPriorities();
+    }
+
+    @Test
+    public void shouldDeleteBigNeed() {
+        assertDelete();
+    }
+
+    @Test
+    public void shouldGetBigNeedById() {
+        assertGetNeedById();
+    }
+
     
     @Test
     public void shouldRetrieveListOfSmallNeeds() {
         SmallNeed item1 = new SmallNeed("Item 1", 100, "A comment",1);
         SmallNeed item2 = new SmallNeed("Item 2", 200, "Another comment",2);
-        smallNeedRepository.put(item1);
-        smallNeedRepository.put(item2);
+        smallNeedRepository.addNeed(item1, 1);
+        smallNeedRepository.addNeed(item2, 2);
 
         List<SmallNeed> smallNeeds = smallNeedRepository.getList();
         assertThat(smallNeeds, hasItem(item1));
@@ -54,7 +124,7 @@ public class SmallNeedRepositoryTest {
     @Test
     public void shouldSaveSmallNeeds() {
         SmallNeed schoolUniformSmallNeed = new SmallNeed("School Uniform", 5000L, "For Aarthi",1);
-        smallNeedRepository.put(schoolUniformSmallNeed);
+        smallNeedRepository.addNeed(schoolUniformSmallNeed, 1);
         SmallNeed retrieveSmallNeed = smallNeedRepository.findByName("School Uniform");
         assertThat(retrieveSmallNeed.getItemName(), is(schoolUniformSmallNeed.getItemName()));
         assertThat(retrieveSmallNeed.getCost(), is(schoolUniformSmallNeed.getCost()));
@@ -64,10 +134,10 @@ public class SmallNeedRepositoryTest {
     @Test
     public void shouldDeleteSmallNeeds(){
         SmallNeed schoolUniformSmallNeed = new SmallNeed("School Uniform", 5000L, "For Aarthi",1);
-        smallNeedRepository.put(schoolUniformSmallNeed);
+        smallNeedRepository.addNeed(schoolUniformSmallNeed, 1);
         List<SmallNeed> smallNeedList = smallNeedRepository.getList();
         assertThat(smallNeedList.size(),is(1));
-        smallNeedRepository.delete(smallNeedRepository.getSmallNeed(smallNeedRepository.findByName("School Uniform").getId()));
+        smallNeedRepository.delete(smallNeedRepository.getNeedById(smallNeedRepository.findByName("School Uniform").getId()));
         smallNeedList=smallNeedRepository.getList();
         assertThat(smallNeedList.size(),is(0));
     }
@@ -75,14 +145,25 @@ public class SmallNeedRepositoryTest {
     @Test
     public void shouldEditSmallNeeds(){
         SmallNeed schoolUniformSmallNeed = new SmallNeed("School Uniform", 5000L, "For Aarthi",1);
-        smallNeedRepository.put(schoolUniformSmallNeed);
+        smallNeedRepository.addNeed(schoolUniformSmallNeed, 1);
         schoolUniformSmallNeed.setItemName("Air Cooler");
-        smallNeedRepository.put(schoolUniformSmallNeed);
+        smallNeedRepository.addNeed(schoolUniformSmallNeed, 1);
         List<SmallNeed> smallNeedList = smallNeedRepository.getList();
         assertThat(smallNeedList.size(),is(1));
         assertThat(smallNeedList.get(0).getItemName(),is("Air Cooler"));
 
 
     }
+
+    @Override
+    protected NeedRepository repository() {
+        return smallNeedRepository;
+    }
+
+    @Override
+    protected Need createNeed(String itemName, int cost, int priority) {
+        return new SmallNeed(itemName, cost, "comment", priority);
+    }
+
 
 }

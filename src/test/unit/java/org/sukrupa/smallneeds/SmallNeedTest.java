@@ -15,10 +15,9 @@ public class SmallNeedTest {
     public void shouldCreateSchoolUniformSmallNeed(){
         SmallNeed schoolUniformSmallNeed=new SmallNeed("School Uniform",5000L,"For Aarthi",1);
         assertThat(schoolUniformSmallNeed.getItemName(), is("School Uniform"));
-        //assertThat(schoolUniformSmallNeed.getCost(), (Matcher<? super Long>) is(5000L));
         assertThat(schoolUniformSmallNeed.getComment(), is("For Aarthi"));
         assertThat(schoolUniformSmallNeed.getPriority(), is(1));
-        assertThat(schoolUniformSmallNeed.getId(), is(0));
+        assertThat(schoolUniformSmallNeed.getId(), is(0L));
     }
 
 }

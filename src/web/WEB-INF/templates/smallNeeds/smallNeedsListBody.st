@@ -1,7 +1,7 @@
 $successMessage(condition=shouldDisplayMessage, message=message)$
 <div>
-    <div class="page">
-        <form id="smallNeedsForm" method="post">
+    <div class="page" id="pageDiv">
+        <form id="smallNeedsForm" method="post" action = "/smallneeds/create">
             <input type="hidden" name="itemName" />
             <input type="hidden" name="priority" />
             <input type="hidden" name="itemCost" />
@@ -25,7 +25,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                 <td><input class="item-priority" id="priority" value="$it$"/></td>
                 <td><input class="item-name" id="itemName"/></td>
                 <td><input class="item-cost" id="cost"/></td>
-                <td><input class="item-comment" id="comment"></td>
+                <td><input class="item-comment" id="comment"/></td>
                 <td>
                     <input type="button" class="add-smallneed-button" value="Add"/>
                 </td>

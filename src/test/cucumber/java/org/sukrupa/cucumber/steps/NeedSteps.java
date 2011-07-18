@@ -10,7 +10,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
 
-public class BigNeedSteps extends Login {
+public class NeedSteps extends Login {
     private static final String TOP_LEVEL_DIV = "page";
 
 
@@ -56,6 +56,7 @@ public class BigNeedSteps extends Login {
         editButton.click();
     }
 
+
     @When("^I add the need")
     public void addNeed(){
         browser().button("Add").click();
@@ -64,12 +65,17 @@ public class BigNeedSteps extends Login {
     @When("^I save edited need")
     public void saveEditedNeed(){
         browser().button("Save").click();
+
     }
 
     @When("^I update item name \"([^\"]+)\" with \"([^\"]+)\"")
     public void updateItemName(String itemName, String newItemName){
         ElementStub getItem = browser().byXPath("//input[@value='" + itemName + "']");
         getItem.setValue(newItemName);
+        ElementStub saveButton = browser().button("Save").in(browser().cell("Computer").parentNode());
+        assertTrue(saveButton.exists(true));
+        saveButton.click();
+        //browser().button("Save").click();
        // getItem.near(browser().cell("Cost")).setValue(cost);
     }
 
@@ -81,10 +87,10 @@ public class BigNeedSteps extends Login {
     }
 
     private boolean itemWithCostExists(String name, String cost,String priority) {
-        ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
-        ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
-        ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
-        ElementStub rowContainingAllNameAndCostAndPriority = browser().cell(cost).in(browser().cell(name).in(browser().cell(priority).parentNode()));
-        return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && priorityCellWithCorrectCost.exists(true); //&& rowContainingAllNameAndCostAndPriority.exists(true);
+            ElementStub nameCellWithCorrectName = browser().cell(name).under(browser().cell("Item"));
+            ElementStub costCellWithCorrectCost = browser().cell(cost).under(browser().cell("Cost"));
+            ElementStub priorityCellWithCorrectCost = browser().cell(priority).under(browser().cell("Priority"));
+            ElementStub rowContainingAllNameAndCostAndPriority = browser().cell(cost).in(browser().cell(name).in(browser().cell(priority).parentNode()));
+            return nameCellWithCorrectName.exists(true) && costCellWithCorrectCost.exists(true) && priorityCellWithCorrectCost.exists(true); //&& rowContainingAllNameAndCostAndPriority.exists(true);
+        }
     }
-}

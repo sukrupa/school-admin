@@ -1,5 +1,6 @@
 package org.sukrupa.bigneeds;
 
+import org.sukrupa.needs.Need;
 import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.Column;
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class BigNeed {
+public class BigNeed extends Need {
 
     @Id
     @GeneratedValue
@@ -37,23 +38,22 @@ public class BigNeed {
         this.priority=priority;
     }
 
-    public BigNeed(int id, String itemName, double cost, int priority) {
-        this(itemName, cost, priority);
-        this.id = id;
-    }
-
+    @Override
     public String getItemName() {
         return itemName;
     }
 
+    @Override
     public double getCost() {
         return cost;
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public int getPriority(){
         return priority;
     }
@@ -67,19 +67,18 @@ public class BigNeed {
         return itemName.hashCode();
     }
 
+    @Override
     public void setItemName(String itemName){
         this.itemName = itemName;
     }
 
+    @Override
     public void setCost(double cost){
-        System.out.println(cost);
         this.cost = cost;
     }
 
-
+    @Override
     public void setPriority(int priority){
         this.priority=priority;
     }
-
-
 }

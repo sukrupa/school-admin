@@ -1,3 +1,4 @@
+$successMessage(condition=shouldDisplayMessage, message=message)$
 <div>
     <div class="page" id="pageDiv">
         <form id="bigNeedsForm" method="post" action="/bigneeds/create">
@@ -10,7 +11,7 @@
         <table border="0">
             <thead class="header">
             <tr>
-                <td>Priority</td>
+                <td><label for="itemName">Priority</label></td>
                 <td><label for="itemName">Item</label></td>
                 <td><label for="cost">Cost</label></td>
                 <td>Actions</td>
@@ -51,6 +52,5 @@
             }$
             </tbody>
         </table>
-        <div id="msg">$message$ $bigneed.itemName$</div>
     </div>
 </div>

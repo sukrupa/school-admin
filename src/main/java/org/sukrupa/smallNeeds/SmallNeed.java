@@ -1,6 +1,7 @@
 package org.sukrupa.smallNeeds;
 
 
+import org.sukrupa.needs.Need;
 import org.sukrupa.platform.RequiredByFramework;
 
 import javax.persistence.Column;
@@ -9,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class SmallNeed {
+public class SmallNeed extends Need{
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name = "ITEM_NAME")
     private String itemName;
@@ -54,7 +55,7 @@ public class SmallNeed {
         return priority;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
