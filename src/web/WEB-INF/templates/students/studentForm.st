@@ -90,20 +90,20 @@
 
                 <div class="updateEntry">
                     <div class="label-header">Background</div>
-                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "soft"
+                    <textarea autocomplete="off" cols="45" rows="3" class="noHorizontalResize" name="background" id="edit-background" wrap = "soft"
                             onKeyDown = "limitText(this.form.background,500);">$student.profile.background$</textarea>
                 </div>
 
                 <div class="updateEntry">
                     <div class="label-header">Academic Performance</div>
-                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "soft"
+                    <textarea autocomplete="off" cols="45" rows="3" class="noHorizontalResize" name="performance" id="edit-performance" wrap = "soft"
                             onKeyDown = "limitText(this.form.performance,500);">$student.performance$</textarea>
                 </div>
 
 
                 <div class="updateEntry">
                     <div class="label-header">Disciplinary</div>
-                    <textarea autocomplete="off" cols="50" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "soft"
+                    <textarea autocomplete="off" cols="45" rows="3" class="noHorizontalResize" name="disciplinary" id="edit-disciplinary" wrap= "soft"
                             onKeyDown = "limitText(this.form.disciplinary,500);">$student.disciplinary$</textarea>
                 </div>
 
@@ -126,7 +126,11 @@
                 <span class="errorMessage">$imageToUploadError$</span>
             </div>
 
-             <div class="updateSponsorDetails">
+            <div class ="updateSponsorDetails">
+            <div class ="sponsoredMessage">If adding a sponsor, enter all 3 following details</div>
+            </div>
+
+            <div class="updateSponsorDetails">
                 <div class="sponsoredLabel"><label id="Sponsor" for="sponsored">Sponsor</label></div>
                 <div class="sponsorValue"><input type="text" name="sponsored" id="sponsored" value="$student.sponsor$" ></input></div>
             </div>
@@ -136,9 +140,10 @@
             </div>
 
             <div class="updateSponsorDetails">
-                 <div class="sponsoredLabel"><label id="Sponsor Start Date" for="sponsored">Sponsor Start Date</label><br/> (dd-mm-yyyy)</div>
+                 <div class="sponsoredLabel"><label id="Sponsor Start Date" for="sponsored">Start Date</label><br/> (dd-mm-yyyy)</div>
                  <div class="sponsorValue"><input type="text" name="sponsorStartDate" id="SponsorStartDate" value="$student.sponsorStartDateForDisplay$" ></input></div>
             </div>
+            
 
             <div class="talentsList">
                 <div class="talentsLabel">Talents</div>

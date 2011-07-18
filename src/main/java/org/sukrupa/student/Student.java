@@ -364,9 +364,10 @@ public class Student {
 
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
 
-        if(sponsor.equals("")){
+        if(sponsor == null || sponsor.equals("")){
             this.sponsor = null;
         }
+
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);
