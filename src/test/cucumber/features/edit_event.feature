@@ -11,3 +11,7 @@ Feature: Edit an Event
         And date should contain 20-02-2011
         And description should contain This is a event description. It is a test.
         And notes should contain This is a note
+        And attendees should contain Anok
+        And attendees should contain Haripriya
+        And attendees should contain Chandru
+        And Exit
