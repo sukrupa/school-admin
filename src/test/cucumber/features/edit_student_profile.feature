@@ -45,6 +45,18 @@ Feature: Edit student profile
     Then the message "Student record updated successfully" is displayed
     And the "Student Record: Bhavani" page is displayed
     And Single is displayed under Family Status
+
+    Scenario: New acceptance criteria message
+    Given I am on Sukrupa Page
+    When I edit student record of Chandru
+    Then the message "If adding a sponsor, enter all 3 following details" is displayed
+
+    Scenario: Adding a sponsor without all required data
+    Given I am on Sukrupa Page
+    When I edit student record of Chandru
+    And I enter Tim as Sponsor
+    And I save the changes
+    Then the message "Please enter all three sponsor fields - sponsor name, sponsor email and sponsor start date." is displayed
+    And the message "Please enter a valid sponsor start date." is displayed
+    And the message "Please enter a valid sponsor email address." is displayed
     And Exit
-
-
