@@ -4,49 +4,41 @@ Feature: Edit parent details
 
     Scenario Outline: Select student to edit parent details
         When I edit student record of Bhavani
-        And I enter father's name as <FatherName>
-        And I enter mother's name as <MotherName>
-        And I enter guardian's name as <GuardianName>
-        And I enter father's education as <FatherEducation>
-        And I enter mother's education as <MotherEducation>
-        And I enter guardian's education as <GuardianEducation>
-        And I enter father's contact as <FatherContact>
-        And I enter mother's contact as <MotherContact>
-        And I enter guardian's contact as <GuradianContact>
-        And I enter father's salary as <FatherSalary>
-        And I enter mother's salary as <MotherSalary>
-        And I enter guardian's salary as <GuardianSalary>
-        And I select father's occupation as <FatherOccupation>
-        And I select mother's occupation as <MotherOccupation>
-        And I select father's maritalStatus as <FatherMaritalStatus>
-        And I select mother's maritalStatus as <MotherMaritalStatus>
+        And I enter father's name as Peter Murray
+        And I enter mother's name as My Mother
+        And I enter guardian's name as My Guardian
+        And I enter father's education as Not Much
+        And I enter mother's education as Mother Education
+        And I enter guardian's education as Guardian Education
+        And I enter father's contact as 123456
+        And I enter mother's contact as 1234567
+        And I enter guardian's contact as 12345678
+        And I enter father's salary as 5000
+        And I enter mother's salary as 6000
+        And I enter guardian's salary as 7000
+        And I select father's occupation as Coolie
+        And I select mother's occupation as House Keeper
+        And I select father's maritalStatus as Single
+        And I select mother's maritalStatus as Married
         And I save the changes
         Then the message "Student record updated successfully" should be displayed
-        #And Logout
-    Examples:
-        |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
-        |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
 
     Scenario Outline: Verify that the parent details are updated
         When I select the student record of Bhavani
-        Then <FatherName> should be displayed
-        And <MotherName> should be displayed
-        And <GuardianName> should be displayed
-        And <FatherEducation> should be displayed
-        And <MotherEducation> should be displayed
-        And <GuardianEducation> should be displayed
-        And <FatherContact> should be displayed
-        And <MotherContact> should be displayed
-        And <GuradianContact> should be displayed
-        And <FatherSalary> should be displayed
-        And <MotherSalary> should be displayed
-        And <GuardianSalary> should be displayed
-        And <FatherOccupation> should be displayed
-        And <MotherOccupation> should be displayed
-        And <FatherMaritalStatus> should be displayed
-        And <MotherMaritalStatus> should be displayed
+        Then Peter Murray should be displayed
+        And My Mother should be displayed
+        And My Guardian should be displayed
+        And Not Much should be displayed
+        And Mother Education should be displayed
+        And Guardian Education should be displayed
+        And 123456 should be displayed
+        And 1234567 should be displayed
+        And 12345678 should be displayed
+        And 5000 should be displayed
+        And 6000 should be displayed
+        And 7000 should be displayed
+        And Coolie should be displayed
+        And House Keeper should be displayed
+        And Single should be displayed
+        And Married should be displayed
         And Exit
-
-    Examples:
-        |FatherName  |MotherName|FatherEducation|MotherEducation |GuardianName|GuardianEducation |FatherContact|MotherContact|GuradianContact|FatherSalary|MotherSalary|GuardianSalary|FatherOccupation|MotherOccupation|FatherMaritalStatus|MotherMaritalStatus|
-        |Peter Murray|My Mother |Not Much       |Mother Education|My Guardian |Guardian Education|123456       |1234567      |12345678       |5000        |6000        |7000          |Coolie          |House Keeper    |Single             |Married            |
