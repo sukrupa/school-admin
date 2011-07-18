@@ -17,7 +17,7 @@ Feature: search students add talent button
         Then Chosen list of talents should now contain Acting
         And Chosen list of talents should now contain Dancing
 
-./    Scenario: Remove acting from selected talents of student
+    Scenario: Remove acting from selected talents of student
         Given I am on the Search Students page
         When I select Acting from list of talents
         And I Add the talent
