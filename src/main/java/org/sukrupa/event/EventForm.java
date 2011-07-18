@@ -6,7 +6,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.sukrupa.platform.date.Date;
+import org.sukrupa.student.Student;
+import org.sukrupa.student.StudentRepository;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
@@ -21,7 +25,7 @@ public class EventForm implements Validator {
     private String coordinator;
     private String description;
     private String notes;
-    private String attendees;
+    private List<String> attendees;
 
     private String endTime;
     private String endTimeAmPm;
@@ -32,7 +36,10 @@ public class EventForm implements Validator {
     public EventForm() {
     }
 
-    public EventForm(int id, String title, String date, String endTime, String venue, String coordinator, String description, String notes, String attendees, String startTime) {
+    public EventForm(int id,                String title,       String date,
+                     String endTime,        String venue,       String coordinator,
+                     String description,    String notes,       List<String> attendingStudents,
+                     String startTime) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -41,7 +48,7 @@ public class EventForm implements Validator {
         this.coordinator = coordinator;
         this.description = description;
         this.notes = notes;
-        this.attendees = attendees;
+        this.attendees = attendingStudents;
         this.startTime = startTime;
     }
 
@@ -123,21 +130,24 @@ public class EventForm implements Validator {
         this.notes = notes;
     }
 
-    public String getAttendees() {
+    public List<String> getAttendees() {
         return attendees;
     }
 
     public String getAttendeesIdsForDisplay() {
-        return getAttendees();
+        return getAttendees().toString();
     }
 
     public Set<String> getStudentIdsOfAttendees() {
-        attendees = attendees.replace(" ", "").replace("\n", "").replace("\r", "");
-        return Sets.newHashSet(Splitter.on(",").omitEmptyStrings().trimResults().split(attendees));
+        Set<String> attendingStudentsID= new HashSet<String>();
+        for(String attendingStudent:attendees){
+            attendingStudentsID.add(attendingStudent);
+        }
+        return attendingStudentsID;
     }
 
-    public void setAttendees(String attendees) {
-        this.attendees = attendees;
+    public void setAttendingStudents(List<String> attendingStudents) {
+        this.attendees = attendingStudents;
     }
 
     public void setEndTimeAmPm(String amPm) {

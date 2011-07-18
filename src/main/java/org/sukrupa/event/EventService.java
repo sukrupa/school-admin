@@ -47,6 +47,7 @@ public class EventService {
         return eventRepository.list();
     }
 
+    @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	public Set<String> validateStudentIdsOfAttendees(Set<String> studentIdsOfAttendees) {
 		Set<Student> students = studentRepository.findByStudentIds(studentIdsOfAttendees.toArray(new String[]{}));
 		Set<String> loadedStudentsIds = Sets.newHashSet();
@@ -57,12 +58,18 @@ public class EventService {
 		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
 	}
 
-    public Event update(EventForm eventParam, List<Student> attendingStudents) {
+    @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
+    public Event update(EventForm eventParam) {
         Event event = eventRepository.load(eventParam.getId());
-        //TODO Mike - Clean Up this
-//        String[] arrayOfAttendees = eventParam.getStudentIdsOfAttendees().toArray(new String[]{});
-//        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
-        event.updateFrom(eventParam,  new HashSet<Student>(attendingStudents));
+
+        //TODO MIKE ROBERTO .toarray gives null pointer
+//        System.out.println("hello world");
+//        List<String> testnull = eventParam.getAttendees();
+//        System.out.println("zxcv = " + testnull);
+//        int temp = testnull.size();
+//        System.out.println("zxcv = " + temp);
+        String[] arrayOfAttendees = eventParam.getAttendees().toArray(new String[]{});
+        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
         return eventRepository.update(event);
     }
 	

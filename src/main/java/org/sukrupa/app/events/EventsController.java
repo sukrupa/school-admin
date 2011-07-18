@@ -3,6 +3,7 @@ package org.sukrupa.app.events;
 import org.hsqldb.lib.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -22,7 +23,6 @@ import java.util.*;
 import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 
 @SuppressWarnings("unchecked")
 @Controller
@@ -68,17 +68,19 @@ public class EventsController {
     @RequestMapping(value = "/update/{eventId}", method = POST)
     public String updateAnEvent(@PathVariable String eventId,
             @ModelAttribute("editEvent") EventForm eventForm,
-            Map<String, Object> model,
-            @RequestParam("attendingStudents") java.util.Collection<String> attendingStudents){
+            Map<String, Object> model){
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 
-        @SuppressWarnings("unchecked")
+        //todo removed
+        System.out.println("UpdateAnEvent Called");
+
+        List<String> attendingStudents = eventForm.getAttendees();
         List<Student> attendingStudentsList = new ArrayList<Student>();
         for (String attendingStudent : attendingStudents){
             attendingStudentsList.add(studentRepository.findByStudentId(attendingStudent));
         }
         Collections.sort(attendingStudentsList, new StudentNameComparator());
-//TODO Mike - Find Uncheck Exception in this file
+
         if (eventForm.isInvalid(errors)){
             model.put("errors", errors);
             model.put("event", eventForm);
@@ -87,25 +89,17 @@ public class EventsController {
             addErrorToFields(model, errors);
             return "events/edit";
         }
-        //TODO Mike Robert, ValidaTE THAT THERE ARE ATTENDING STUDENts
-//        Set<String> studentIdsOfAttendees =   eventForm.getStudentIdsOfAttendees();
-//        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-//        if (!invalidAttendees.isEmpty()) {
-//            model.put("event", eventForm);
-//            model.put("invalidAttendees",invalidAttendees);
-//            model.put("attendeesList", attendingStudentsList);
-//            model.put("studentList", getListOfAvailableStudents(attendingStudentsList));
-//            return "events/edit";
 
-//        } else {
-         service.update(eventForm, attendingStudentsList);
-            return format("redirect:/events/%s", eventId);
-//        }
+        service.update(eventForm);
+        return format("redirect:/events/%s", eventId);
     }
 
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEventForm") EventForm eventForm, Map<String, Object> model) {
+
+        //todo removed
+        System.out.println("Save Called");
 
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 

@@ -5,16 +5,11 @@ import org.sukrupa.platform.date.Date;
 import org.sukrupa.student.Student;
 import static com.google.common.collect.Sets.newHashSet;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * User: pmurray
- * Date: 4/04/11
- * Time: 4:14 PM
- * To change this template use File | Settings | File Templates.
- */
 public class EventUpdateParameterBuilder {
     private int id;
     private String title;
@@ -86,12 +81,14 @@ public class EventUpdateParameterBuilder {
           return new EventForm(id, title, date.toString(), time, venue, coordinator, description, notes, attendeesIds(), startTime);
       }
 
-    private String attendeesIds() {
-        Set<String> attendeesIds = new HashSet<String>();
+    private List<String> attendeesIds() {
+        List<String> attendeesIds = new ArrayList<String>();
         for (Student student:attendees) {
             attendeesIds.add(student.getStudentId());
         }
-        return Joiner.on(", ").join(attendeesIds);
+        return attendeesIds;
+
+
     }
 
     private String attendeeString() {

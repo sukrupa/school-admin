@@ -31,6 +31,7 @@ import java.util.Map;
 
 import static java.text.MessageFormat.format;
 import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
@@ -62,7 +63,6 @@ public class EventsControllerTest {
             .dateOfBirth(new LocalDate(1989, 9, 12))
             .studentId("231")
             .build();
-
     private Event eventOne = new EventBuilder().title("Spice Girls")
             .attendees(attendee1, attendee2)
             .date(new Date(1, 12, 2011))
@@ -70,10 +70,9 @@ public class EventsControllerTest {
             .build();
     private Event eventTwo = new EventBuilder().title("Aravind's Event")
             .attendees(attendee1)
-            .date(new Date(4, 07, 2011))
+            .date(new Date(4, 7, 2011))
             .description("Testing Aravind's event")
             .build();
-
 
     @Before
     public void setUp() throws Exception {
@@ -84,8 +83,9 @@ public class EventsControllerTest {
     @Test
     public void shouldDisplayEventsPage() {
         String list = controller.getListOfEvents(eventModel);
-
+        verify(service).list();
         assertThat("Displays the Events page",list, is("events/list"));
+
     }
 
     @Test
@@ -94,10 +94,8 @@ public class EventsControllerTest {
         ourEventList.add(eventOne);
         ourEventList.add(eventTwo);
         when(service.list()).thenReturn(ourEventList);
-
         controller.getListOfEvents(eventModel);
         List<Event> eventList = eventModel.get("events");
-
         assertTrue("EventList contains eventOne",eventList.contains(eventOne));
         assertTrue("EventList contains eventTwo",eventList.contains(eventTwo));
     }
@@ -105,23 +103,19 @@ public class EventsControllerTest {
     @Test
     public void shouldDisplayCreateANewEventPage() {
         String actual = controller.createNewEventPage(objectModel);
-
         assertThat("Display the Create Event Page", actual, is("events/create"));
     }
 
     @Test
     public void shouldDisplayEditANewEventPage() {
         String edit = controller.getEditEventPage(eventForm.getId(), objectModel);
-
-        assertThat("Display the edit Event Page",edit, is("events/edit"));
+        assertThat("Display the edit Event Page", edit, is("events/edit"));
     }
 
     @Test
     public void shouldDisplayGivenEventPage() {
         when(service.getEvent(4)).thenReturn(eventOne);
-
         String view = controller.getAnEventView(4, model);
-
         assertThat("Displays the Event Page for the given Event Id",view, is("events/view"));
         verify(service).getEvent(4);
         assertThat("Model contains the given event",model.get("event").getTitle(), is("Spice Girls"));
@@ -130,32 +124,27 @@ public class EventsControllerTest {
     @Test
     public void shouldDisplayTheEditEventPageForTheGivenEventId() {
         when(service.getEvent(4)).thenReturn(eventOne);
-
         String edit = controller.getEditEventPage(4, objectModel);
-
         assertThat("Display the Edit Event Page for the Given Id",edit, is("events/edit"));
         verify(service).getEvent(4);
-        assertThat("Model contains the given event",
-                ((Event) objectModel.get("event")).getDate().year(),
-                is(2011));
+        assertThat("Model contains the given event",((Event) objectModel.get("event")), is(eventOne));
     }
 
+    //TODO Mike, Reberto - Refeactor from here down
     @Test
     public void shouldDisplayTheEditPageWhenUpdatingInvalidEvent() {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
         when(eventForm.isInvalid(errors)).thenReturn(true);
-
-        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
-
+        String update = controller.updateAnEvent("4", eventForm, objectModel);
+        verify(eventForm).isInvalid(errors);
         assertThat("Display the Edit Event Page",update, is("events/edit"));
     }
 
     @Test
     public void shouldDisplayEventPageAfterSuccesfullyUpdating() {
-        String update = controller.updateAnEvent("4", eventForm, objectModel, new ArrayList<String>());
-
+        String update = controller.updateAnEvent("4", eventForm, objectModel);
         assertThat("Display the Event Page",update,is("redirect:/events/4"));
-        verify(service).update(eventForm, new ArrayList<Student>());
+        verify(service).update(eventForm);
     }
 
     @Test
@@ -175,6 +164,7 @@ public class EventsControllerTest {
         idList.add("123");
         Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
         when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
+        // TODO Mike Fix warrning  that never used
         Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
 
         String save = controller.save(eventForm, objectModel);
@@ -182,6 +172,7 @@ public class EventsControllerTest {
         assertThat("Displays the Save Event Page",save, is("events/create"));
     }
 
+    @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
     @Test
     public void shouldDisplayEventsPageAfterSuccesfullySaving() {
         Errors errors= mock(Errors.class);

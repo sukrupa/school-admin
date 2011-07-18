@@ -30,6 +30,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import static org.sukrupa.platform.hamcrest.SchoolAdminMatchers.containsAttendees;
 import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasOnly;
 
+
 public class EventServiceTest {
 
     private final Student pat = new StudentBuilder().studentId("1").build();
@@ -85,8 +86,8 @@ public class EventServiceTest {
 
     @Test
     public void shouldUpdateEvent() {
-
-        Set<Student> newAttendees = newHashSet();
+        @SuppressWarnings("unchecked")
+        Set<Student> newAttendees = new HashSet();
         newAttendees.add(pat);
         newAttendees.add(jim);
 
@@ -111,11 +112,8 @@ public class EventServiceTest {
                                                     .build();
 
         when(eventRepository.load(1)).thenReturn(sportsEvent);
-        @SuppressWarnings("unchecked")
-        List<Student> newAttendeesList = new ArrayList<Student>(newAttendees);
-        when(service.update(updateParameter, newAttendeesList)).thenReturn(newEvent);
-
-        Event updatedEvent = service.update(updateParameter, newAttendeesList);
+        when(service.update(updateParameter)).thenReturn(newEvent);
+        Event updatedEvent = service.update(updateParameter);
         assertEquals(newEvent, updatedEvent);
 
     }

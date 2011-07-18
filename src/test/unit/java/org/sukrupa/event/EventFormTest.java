@@ -4,6 +4,10 @@ import org.junit.Test;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,14 +18,22 @@ public class EventFormTest {
     @Test
     public void shouldReturnStudentIdsOfAttendees() {
         EventForm eventForm = new EventForm();
-        eventForm.setAttendees("1,2,3");
+        List<String> attendees= new ArrayList<String>();
+        attendees.add("1");
+        attendees.add("2");
+        attendees.add("3");
+        eventForm.setAttendingStudents(attendees);
         assertThat(eventForm.getStudentIdsOfAttendees(), hasOnly("1", "2", "3"));
     }
 
     @Test
     public void shouldReturnStudentIdOfAttendeesWithoutEnter() {
         EventForm eventForm = new EventForm();
-        eventForm.setAttendees("34545, 83415, 64262\r\n");
+        List<String> attendees= new ArrayList<String>();
+        attendees.add("34545");
+        attendees.add("83415");
+        attendees.add("64262");
+        eventForm.setAttendingStudents(attendees);
         assertThat(eventForm.getStudentIdsOfAttendees(), hasOnly("34545", "83415", "64262"));
     }
 
