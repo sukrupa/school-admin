@@ -23,7 +23,6 @@ profiles/
 reports/
 certs/
 src/test/twist/functional-test/reports/
-src/test/twist/functional-test/src/twist.properties
 
 src/test/resources/sahi.properties
 

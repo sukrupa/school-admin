@@ -12,7 +12,6 @@
 
     <target name="clean">
         <delete dir="${target.dir}"/>
-        <delete dir="${module.dir}/src/test/twist/functional-test/sahi/userdata/browser/ff"/>
     </target>
 
     <target name="init">
@@ -21,10 +20,7 @@
         <mkdir dir="${target.test.unit.dir}"/>
         <mkdir dir="${target.test.integration.dir}"/>
         <mkdir dir="${target.test.cucumber.java.dir}"/>
-        <mkdir dir="${target.test.twist.fixtures.dir}"/>
-        <mkdir dir="${target.test.twist.sukrupa-code.dir}"/>
         <mkdir dir="${target.reports.dir}"/>
-        <mkdir dir="${target.reports.twist.dir}"/>
         <mkdir dir="${target.reports.cucumber.dir}"/>
         <mkdir dir="${target.main.dir}"/>
         <antcall target="config:sahi"/>
@@ -92,26 +88,7 @@
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-    <target name="compile:test:twist">
-        <compile srcdir="${src.test.twist.src.dir}" destdir="${target.test.twist.fixtures.dir}"
-                 classpathref="classpath.compilation.test.twist"/>
-
-        <copy file="src/test/twist/functional-test/src/twist.template.properties"
-              toFile="src/test/twist/functional-test/src/twist.properties" overwrite="true">
-            <filterset begintoken="@" endtoken="@">
-                <filter token="BROWSER_EXECUTABLE" value="${browser.executable}"/>
-                <filter token="FUNCTIONAL_TEST_DIRECTORY" value="${src.test.twist.fixtures.dir}"/>
-            </filterset>
-        </copy>
-        <copy todir="${target.test.twist.fixtures.dir}">
-            <fileset dir="${src.test.twist.src.dir}">
-                <exclude name="**/*.java"/>
-            </fileset>
-            <fileset dir="${src.test.twist.conf.dir}"/>
-        </copy>
-    </target>
-
-    <target name="compile:test:cucumber">
+     <target name="compile:test:cucumber">
         <compile srcdir="${src.test.cucumber.java.dir}" destdir="${target.test.cucumber.java.dir}"
                  classpathref="classpath.compilation.test.cucumber"/>
     </target>
@@ -140,28 +117,6 @@
 
     <target name="test:integration">
         <test type="integration"/>
-    </target>
-
-
-    <target name="test:twist"
-            depends="compile:test:twist"
-            description="Run only the functional (twist) tests - you need to have built the project first">
-
-
-        <run-against-server startServerTarget="sukrupa-server:start-for-twist"
-                            stopServerTarget="sukrupa-server:stop-for-twist"
-                            checkServerUpTarget="sukrupa-server:check-is-running">
-            <execute>
-                <ant antfile="${ops.build.dir}/twist.xml"
-                     dir="${src.test.twist.fixtures.dir}"
-                     target="execute-twist"
-                     inheritall="true"
-                     inheritrefs="true"/>
-            </execute>
-        </run-against-server>
-
-        <available file="${target.test.twist.failed.file}" property="twist.scenarios.failed"/>
-        <fail if="twist.scenarios.failed" message="Some twist tests failed"/>
     </target>
 
     <target name="test:cucumber"
