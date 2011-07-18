@@ -71,9 +71,6 @@ public class EventsController {
             Map<String, Object> model){
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 
-        //todo removed
-        System.out.println("UpdateAnEvent Called");
-
         List<String> attendingStudents = eventForm.getAttendees();
         List<Student> attendingStudentsList = new ArrayList<Student>();
         for (String attendingStudent : attendingStudents){
@@ -97,9 +94,6 @@ public class EventsController {
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	@RequestMapping(value = "save", method = POST)
 	public String save(@ModelAttribute(value = "createEventForm") EventForm eventForm, Map<String, Object> model) {
-
-        //todo removed
-        System.out.println("Save Called");
 
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 

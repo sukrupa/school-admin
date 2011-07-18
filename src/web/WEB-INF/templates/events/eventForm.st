@@ -17,9 +17,9 @@
             <input type="text" name="startTime" id="startTime" value="$event.startTime$" class="createValue" />
 
       <div class="label amPm">
-                <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" $if (!event.startTimePm)$ checked $endif$ />
+                <input type="radio" id="startTimeAm" class="amPm" name="startTimeAmPm" value="am" $if (!event.startTimePm)$ checked="checked" $endif$" />
           <label for="startTimeAm">a.m.</label>
-                <input type="radio" id="startTimePm" class="amPm" name="startTimeAmPm" value="pm" $if (event.startTimePm)$ checked $endif$  />
+                <input type="radio" id="startTimePm" class="amPm" name="startTimeAmPm" value="pm" $if (event.startTimePm)$ checked="checked" $endif$  />
           <label for="startTimePm">p.m.</label>
             </div>
         </div>
@@ -78,7 +78,7 @@
         </div>
 
         <div class="createEntry">
-            <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
+            <div class="attendeeLabel">Attendees</div>
             <div style="float:left;">
                 <select multiple="multiple" size="6" style="width:150px"  id="availableStudents">
                     $studentList:{
