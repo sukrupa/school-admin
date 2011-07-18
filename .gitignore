@@ -22,7 +22,6 @@ Cache/
 profiles/
 reports/
 certs/
-src/test/twist/functional-test/reports/
 
 src/test/resources/sahi.properties
 
