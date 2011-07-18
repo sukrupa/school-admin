@@ -28,7 +28,4 @@ public class SubscriberController {
         model.put("subscriberList", subscriberList);
             return "admin/subscribers/viewsubscribers";
         }
-
-
-
 }
