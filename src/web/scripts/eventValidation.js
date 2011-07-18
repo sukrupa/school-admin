@@ -10,7 +10,7 @@ function validateFields() {
 
     var valid = dateStr !== "" && timeValid && dateValid;
 
-    if (!validateMandatoryFields($('#title').val(), $('#description').val(), dateStr, $('#attendees').val())) {
+    if (!validateMandatoryFields($('#title').val(), $('#description').val(), dateStr)) {
         valid = false;
     }
 
@@ -25,8 +25,8 @@ function addErrorMessage(message) {
     $('#errorMessages').html($('#errorMessages').html() + message);
 }
 
-function validateMandatoryFields(title, description, date, attendees) {
-	if ($.trim(title) === "" || $.trim(description) === "" || date === "" || $.trim(attendees) === "") {
+function validateMandatoryFields(title, description, date) {
+	if ($.trim(title) === "" || $.trim(description) === "" || date === "") {
 		addErrorMessage("Please fill in all required fields.");
         return false;
 	}
