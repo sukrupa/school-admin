@@ -13,7 +13,6 @@ $(document).ready(function () {
         $('#new-note').val('');
     });
 
-
     $('#addNoteForm').submit(function () {
         var charLimit = 1000;
         var currentCharNumber = $('#new-note').val().length;
@@ -29,17 +28,18 @@ $(document).ready(function () {
 
         return true;
     });
-
-
-
 });
-
 
 function validateFields() {
     var dateStr = $('#dateOfBirth').val();
+    var sponsorDateStr = $('#SponsorStartDate').val();
     var dummyTimeStr = "01:01";
     var valid = true;
     var errorMessage = "";
+    var email = $('#SponsorEmail').val();
+    var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+
 
     if (dateStr === "") {
         errorMessage += "Please insert a date<br />";
@@ -48,6 +48,7 @@ function validateFields() {
         errorMessage += "Please insert a valid date of birth.<br/>";
         valid = false;
     }
+
     if ($('#name').val() === "") {
         errorMessage += "Please insert a valid name.";
         valid = false;
@@ -60,6 +61,21 @@ function validateFields() {
         errorMessage += "Please select a status.";
         valid = false;
     }
+    if($("#sponsored").val() != "" || $("#SponsorEmail").val() != "" || $("#SponsorStartDate").val() != ""){
+        if (!($("#sponsored").val() != "" && $("#SponsorEmail").val() != "" && $("#SponsorStartDate").val() != "")){
+            errorMessage += "Please enter all three sponsor fields - sponsor name, sponsor email and sponsor start date. <br/>";
+            valid = false;
+        }
+        if(!new DateValidator().validate(sponsorDateStr, dummyTimeStr, new Date())) {
+            errorMessage += "Please enter a valid sponsor start date.<br/>";
+            valid = false;
+        }
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+            errorMessage += "Please enter a valid sponsor email address.<br/>";
+            valid = false;
+        }
+    }
+
     $('#errorMessages').html(errorMessage);
 
     return valid;

@@ -136,7 +136,7 @@
             </div>
 
             <div class="updateSponsorDetails">
-                 <div class="sponsoredLabel"><label id="Sponsor Start Date" for="sponsored">Sponsor Start Date</label><br/> (dd-mm-yyy)</div>
+                 <div class="sponsoredLabel"><label id="Sponsor Start Date" for="sponsored">Sponsor Start Date</label><br/> (dd-mm-yyyy)</div>
                  <div class="sponsorValue"><input type="text" name="sponsorStartDate" id="SponsorStartDate" value="$student.sponsorStartDateForDisplay$" ></input></div>
             </div>
 

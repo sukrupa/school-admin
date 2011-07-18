@@ -1,6 +1,7 @@
 package org.sukrupa.student;
 
 import com.google.common.collect.Sets;
+import net.sf.cglib.core.Local;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -19,7 +20,7 @@ import java.util.*;
 @Entity
 public class Student {
 
-    public static final String DATE_OF_BIRTH_FORMAT = "dd-MM-YYYY";
+    public static final String DATE_FORMAT = "dd-MM-YYYY";
 
     @Id
     @GeneratedValue
@@ -156,8 +157,11 @@ public class Student {
         return StringUtils.upperCase(studentId);
     }
 
-    private LocalDate convertDate(String dateOfBirth) {
-        return new LocalDate(DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).parseDateTime(dateOfBirth));
+    private LocalDate convertDate(String dateToConvert) {
+        if (dateToConvert.equals("")){
+            return null;
+        }
+        return new LocalDate(DateTimeFormat.forPattern(DATE_FORMAT).parseDateTime(dateToConvert));
     }
 
     public String getName() {
@@ -327,12 +331,12 @@ public class Student {
     }
 
     public String getDateOfBirthForDisplay() {
-        return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(dateOfBirth);
+        return DateTimeFormat.forPattern(DATE_FORMAT).print(dateOfBirth);
     }
 
     public String getSponsorStartDateForDisplay() {
-        if(sponsorStartDate != null)
-            return DateTimeFormat.forPattern(DATE_OF_BIRTH_FORMAT).print(sponsorStartDate);
+        if (sponsorStartDate != null)
+            return DateTimeFormat.forPattern(DATE_FORMAT).print(sponsorStartDate);
         return "";
     }
 
@@ -356,7 +360,9 @@ public class Student {
         this.sponsor = studentUpdateParameters.getSponsored();
         this.sponsorEmail = studentUpdateParameters.getSponsorEmail();
         this.sponsorStartDate = convertDate(studentUpdateParameters.getSponsorStartDate());
+
         this.familyStatus = StudentFamilyStatus.fromString(studentUpdateParameters.getfamilyStatus());
+
 
         if (studentUpdateParameters.getFather() != null) {
             this.father = setAll(studentUpdateParameters.getFather(), this.father);
@@ -509,17 +515,17 @@ public class Student {
         }
 
         @Override
-        public String getSponsor(){
+        public String getSponsor() {
             return "";
         }
 
         @Override
-        public String getSponsorEmail(){
+        public String getSponsorEmail() {
             return "";
         }
 
         @Override
-        public LocalDate getSponsorStartDate(){
+        public LocalDate getSponsorStartDate() {
             return new LocalDate();
         }
 
