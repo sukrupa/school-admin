@@ -1,5 +1,7 @@
 package org.sukrupa.bigneeds;
 
+import net.sf.json.JSONObject;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sreerajan
@@ -16,6 +18,8 @@ public class BigNeedDonationController {
 
 
     public String getHighPriorityItemName() {
-        return bigNeedRepository.getBigNeed(1).getItemName();
+        JSONObject jsonBigNeedDonationInfo=new JSONObject();
+        jsonBigNeedDonationInfo.accumulate("highPriorityBigNeedItem",bigNeedRepository.getBigNeed(1).getItemName());
+        return jsonBigNeedDonationInfo.toString();
     }
 }
