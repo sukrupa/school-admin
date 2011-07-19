@@ -32,7 +32,7 @@ public class BasicWebSteps {
     @Then("^([^\"]*) is blank")
     public void shouldbeBlank(String ObjectID) {
         String objectValue = browser().byId(ObjectID).getValue();
-//        assertThat(objectValue, is(""));
+        assertThat(objectValue, is(""));
     }
 
     @Then("^\"([^\"]*)\" should not contain \"([^\"]*)\"$")
