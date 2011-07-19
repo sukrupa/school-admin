@@ -26,8 +26,7 @@ Feature: Add, Edit and Delete Big Needs
     Given I am on the Big Needs page
     When I edit the "Computer"
     And I update item name "Computer" with "Tractor"
-    #And I save edited need
-    And I save the row with "Tractor" as the item name
+    And I save edited need
     Then a "Tractor" costing "120000.0" should be displayed with priority "2"
 
   Scenario: View the priority of the items

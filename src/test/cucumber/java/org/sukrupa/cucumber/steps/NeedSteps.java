@@ -72,11 +72,10 @@ public class NeedSteps extends Login {
     public void updateItemName(String itemName, String newItemName){
         ElementStub getItem = browser().byXPath("//input[@value='" + itemName + "']");
         getItem.setValue(newItemName);
-        ElementStub saveButton = browser().button("Save").in(browser().cell("Computer").parentNode());
+        ElementStub saveButton = browser().button("Save").in(browser().cell(itemName).parentNode());
         assertTrue(saveButton.exists(true));
         saveButton.click();
-        //browser().button("Save").click();
-       // getItem.near(browser().cell("Cost")).setValue(cost);
+
     }
 
     @When("^I update cost of \"([^\"]+)\" from \"([^\"]+)\" to \"([^\"]+)\"")
