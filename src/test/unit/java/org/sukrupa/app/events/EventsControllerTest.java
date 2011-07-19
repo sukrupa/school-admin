@@ -54,6 +54,9 @@ public class EventsControllerTest {
     private Map<String, List<Event>> eventModel = new HashMap<String, List<Event>>();
     private Map<String, Event> model = new HashMap<String, Event>();
     private Map<String, Object> objectModel = new HashMap<String, Object>();
+    private List<String> listOfStudentIds = new ArrayList<String>();
+    //TODO Remove duplicate "new BeanPropertyBindingResult(eventForm, "EventForm");"
+    private Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
     private EventsController controller;
     private Student attendee1 = new StudentBuilder().name("TC")
             .dateOfBirth(new LocalDate(1987, 12, 12))
@@ -77,6 +80,8 @@ public class EventsControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
+        listOfStudentIds.add("123");
+        listOfStudentIds.add("231");
         controller = new EventsController(service, studentRepository);
     }
 
@@ -115,10 +120,10 @@ public class EventsControllerTest {
     @Test
     public void shouldDisplayGivenEventPage() {
         when(service.getEvent(4)).thenReturn(eventOne);
-        String view = controller.getAnEventView(4, model);
+        String view = controller.getAnEventView(4, objectModel);
         assertThat("Displays the Event Page for the given Event Id",view, is("events/view"));
         verify(service).getEvent(4);
-        assertThat("Model contains the given event",model.get("event").getTitle(), is("Spice Girls"));
+        assertThat("Model contains the given event", ((Event) objectModel.get("event")).getTitle(), is("Spice Girls"));
     }
 
     @Test
@@ -130,14 +135,45 @@ public class EventsControllerTest {
         assertThat("Model contains the given event",((Event) objectModel.get("event")), is(eventOne));
     }
 
-    //TODO Mike, Reberto - Refeactor from here down
+    @Test
+    public void shouldDisplayErrorsAssociatedWithAnInvalidEventSubmission() {
+//        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+//
+//        when(eventForm.isInvalid(errors)).thenReturn(true);
+//        String update = controller.updateAnEvent("4", eventForm, objectModel);
+//        verify(eventForm).isInvalid(errors);
+//        assertThat("Display the Edit Event Page",update, is("events/edit"));
+        fail();
+    }
+
     @Test
     public void shouldDisplayTheEditPageWhenUpdatingInvalidEvent() {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+
         when(eventForm.isInvalid(errors)).thenReturn(true);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).isInvalid(errors);
         assertThat("Display the Edit Event Page",update, is("events/edit"));
+    }
+
+    @Test
+    public void shouldDisplayTheEventPageWhenUpdatingEventWithAttendees() {
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+        when(eventForm.isInvalid(errors)).thenReturn(false);
+        when(eventForm.getAttendees()).thenReturn(listOfStudentIds);
+        String update = controller.updateAnEvent("4", eventForm, objectModel);
+        verify(eventForm).getAttendees();
+        assertThat("Display the Edit Event Page",update, is("redirect:/events/4"));
+    }
+
+    @Test
+    public void shouldDisplayTheEventPageWhenUpdatingEventWithoutAttendees() {
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+        when(eventForm.isInvalid(errors)).thenReturn(false);
+        when(eventForm.getAttendees()).thenReturn(null);
+        String update = controller.updateAnEvent("4", eventForm, objectModel);
+        verify(eventForm).getAttendees();
+        assertThat("Display the Edit Event Page",update, is("redirect:/events/4"));
     }
 
     @Test
@@ -151,25 +187,8 @@ public class EventsControllerTest {
     public void shouldDisplayCreatePageWhenThereIsErrorInSaving() {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
         when(eventForm.isInvalid(errors)).thenReturn(true);
-
-        String save = controller.save(eventForm, objectModel);
-
+        String save = controller.saveANewEvent(eventForm, objectModel);
         assertThat("display Create Event Page", save, is("events/create"));
-    }
-
-    @Test
-    public void shouldDisplayCreatePageWhenSavingEventWithInvalidAttendees() {
-        HashSet<String> idList = new HashSet<String>();
-        idList.add("111");
-        idList.add("123");
-        Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
-        when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(idList);
-        // TODO Mike Fix warrning  that never used
-        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-
-        String save = controller.save(eventForm, objectModel);
-
-        assertThat("Displays the Save Event Page",save, is("events/create"));
     }
 
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
@@ -177,20 +196,10 @@ public class EventsControllerTest {
     public void shouldDisplayEventsPageAfterSuccesfullySaving() {
         Errors errors= mock(Errors.class);
         when(eventForm.isInvalid(errors)).thenReturn(false);
-        when(eventForm.createEvent()).thenReturn(event);
         when(event.getId()).thenReturn(4);
-        Set<String> studentIdsOfAttendees = new HashSet<String>();
-        studentIdsOfAttendees.add("123");
-        studentIdsOfAttendees.add("231");
-        when(eventForm.getStudentIdsOfAttendees()).thenReturn(studentIdsOfAttendees);
-        Set<String> invalidAttendees = new HashSet<String>();
-        invalidAttendees.clear();
-        when(service.validateStudentIdsOfAttendees(studentIdsOfAttendees)).thenReturn(invalidAttendees);
-
-        String save = controller.save(eventForm, objectModel);
-
+        when(service.save(eventForm)).thenReturn(event);
+        String save = controller.saveANewEvent(eventForm, objectModel);
         assertThat("Display Event Page after Successful Save",save, is("redirect:/events/4"));
-        verify(eventForm).createEvent();
-        verify(service).save(event, studentIdsOfAttendees.toArray(new String[]{}));
+        verify(service).save(eventForm);
     }
 }

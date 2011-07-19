@@ -45,8 +45,10 @@ public class EventsController {
 
     //TODO Fix display of attendes
     @RequestMapping(value = "/{eventId}")
-    public String getAnEventView(@PathVariable int eventId, Map<String, Event> model) {
-        model.put("event", service.getEvent(eventId));
+    public String getAnEventView(@PathVariable int eventId, Map<String, Object> model) {
+        Event event = service.getEvent(eventId);
+        model.put("event", event);
+        model.put("attendeesList", getListOfAttendingStudents(event));
         return "events/view";
     }
 
@@ -68,15 +70,19 @@ public class EventsController {
     @RequestMapping(value = "/update/{eventId}", method = POST)
     public String updateAnEvent(@PathVariable String eventId,
             @ModelAttribute("editEvent") EventForm eventForm,
-            Map<String, Object> model){
+            Map<String, Object> model) {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 
         List<String> attendingStudents = eventForm.getAttendees();
         List<Student> attendingStudentsList = new ArrayList<Student>();
-        for (String attendingStudent : attendingStudents){
-            attendingStudentsList.add(studentRepository.findByStudentId(attendingStudent));
+        try{
+            for (String attendingStudent : attendingStudents){
+                attendingStudentsList.add(studentRepository.findByStudentId(attendingStudent));
+            }
+            Collections.sort(attendingStudentsList, new StudentNameComparator());
+        } catch (NullPointerException e){
+            //lol, there r no attendees yet
         }
-        Collections.sort(attendingStudentsList, new StudentNameComparator());
 
         if (eventForm.isInvalid(errors)){
             model.put("errors", errors);
@@ -92,51 +98,27 @@ public class EventsController {
     }
 
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
-	@RequestMapping(value = "save", method = POST)
-	public String save(@ModelAttribute(value = "createEventForm") EventForm eventForm, Map<String, Object> model) {
-
+    @RequestMapping(value = "save", method = POST)
+    public String saveANewEvent(@ModelAttribute(value = "createEventForm") EventForm eventForm,
+                       Map<String, Object> model) {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
 
-        if (eventForm.isInvalid(errors)){
+        if (eventForm.isInvalid(errors)) {
             model.put("errors", errors);
             model.put("event", eventForm);
-            addErrorToFields(model,errors);
+            addErrorToFields(model, errors);
             return "events/create";
         }
-
-        Event event = eventForm.createEvent();
-
-        Set<String> studentIdsOfAttendees = eventForm.getStudentIdsOfAttendees();
-        Set<String> invalidAttendees = service.validateStudentIdsOfAttendees(studentIdsOfAttendees);
-
-		if (!invalidAttendees.isEmpty()) {
-			model.put("invalidAttendees",invalidAttendees);
-			model.put("event", eventForm);
-			return "events/create";
-		} else {
-			service.save(event, studentIdsOfAttendees.toArray(new String[]{}));
-			return format("redirect:/events/%s", event.getId());
-		}
-	}
+        Event event = service.save(eventForm);
+        return format("redirect:/events/%s", event.getId());
+    }
 
     private void addErrorToFields(Map<String, Object> model, Errors errors) {
           for (FieldError error : errors.getFieldErrors()) {
-              model.put(format("%sError", error.getField()), new UnencodedString(error.getDefaultMessage()));
+              model.put(format("%sError", error.getField()), error.getDefaultMessage());
           }
 
       }
-
-    private class UnencodedString {
-        private String value;
-
-        public UnencodedString(String value) {
-            this.value = value;
-        }
-
-        public String toString() {
-            return value;
-        }
-    }
 
     // all students less attending students
     @SuppressWarnings("unchecked")
@@ -152,12 +134,15 @@ public class EventsController {
 
     // all students less list of students passed it.
     @SuppressWarnings("unchecked")
-    private List<Student> getListOfAvailableStudents(List<Student> attendeesList){
+    private List<Student> getListOfAvailableStudents(List<Student> attendeesList) {
         List<Student> studentList = studentRepository.getList();
-        for (Student student: attendeesList){
-            studentList.remove(student);
+        try {
+            for (Student student : attendeesList) {
+                studentList.remove(student);
+            }
+            Collections.sort(studentList, new StudentNameComparator());
+        } catch (NullPointerException e) {
         }
-        Collections.sort(studentList, new StudentNameComparator());
         return studentList;
     }
 

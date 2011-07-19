@@ -34,9 +34,21 @@ public class EventService {
     }
 
     @Transactional
-    public void save(Event event, String... studentIdsOfAttendees) {
-        event.addAttendees(studentRepository.findByStudentIds(studentIdsOfAttendees));
-        eventRepository.save(event);
+    public Event save(EventForm eventForm) {
+        Event event = eventForm.createEvent();
+        try {
+            String[] attendeesIDs = eventForm.getStudentIdsOfAttendees().toArray(new String[]{});
+            if (attendeesIDs.length < 1){
+                throw new Exception();
+            }
+            event.addAttendees(studentRepository.findByStudentIds(attendeesIDs));
+//            invesegat diff
+//            String[] arrayOfAttendees = eventParam.getAttendees().toArray(new String[]{});
+//            setOfAttendees = studentRepository.findByStudentIds(arrayOfAttendees);
+        } catch (Exception e) {
+            // there aint no attendees
+        }
+        return eventRepository.save(event);
     }
 
     public Event getEvent(int eventId) {
@@ -48,29 +60,16 @@ public class EventService {
     }
 
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
-	public Set<String> validateStudentIdsOfAttendees(Set<String> studentIdsOfAttendees) {
-		Set<Student> students = studentRepository.findByStudentIds(studentIdsOfAttendees.toArray(new String[]{}));
-		Set<String> loadedStudentsIds = Sets.newHashSet();
-
-		for (Student student : students) {
-			loadedStudentsIds.add(student.getStudentId());
-		}
-		return Sets.difference(studentIdsOfAttendees, loadedStudentsIds);
-	}
-
-    @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
     public Event update(EventForm eventParam) {
         Event event = eventRepository.load(eventParam.getId());
-
-        //TODO MIKE ROBERTO .toarray gives null pointer
-//        System.out.println("hello world");
-//        List<String> testnull = eventParam.getAttendees();
-//        System.out.println("zxcv = " + testnull);
-//        int temp = testnull.size();
-//        System.out.println("zxcv = " + temp);
-        String[] arrayOfAttendees = eventParam.getAttendees().toArray(new String[]{});
-        event.updateFrom(eventParam, studentRepository.findByStudentIds(arrayOfAttendees));
+        Set<Student> setOfAttendees = new HashSet<Student>();
+        try{
+            String[] arrayOfAttendees = eventParam.getAttendees().toArray(new String[]{});
+            setOfAttendees = studentRepository.findByStudentIds(arrayOfAttendees);
+        } catch (NullPointerException e){}
+        event.updateFrom(eventParam, setOfAttendees);
         return eventRepository.update(event);
+
     }
 	
 }

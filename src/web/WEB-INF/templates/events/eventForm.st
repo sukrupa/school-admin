@@ -70,13 +70,7 @@
             <textarea name="notes" id="notes" class="createValue" rows="5" cols="30">$event.notes$</textarea>
         </div>
     </div>
-
     <div class="eventInfoBottom">
-        <div class="createEntry">
-            <div class="attendeeLabel">Attendees<span class="mandatory">*</span></div>
-            <textarea name="attendees" id="attendees" class="createValue" rows="5" cols="38">$if (event.attendeesIdsForDisplay)$$trunc(event.attendeesIdsForDisplay):{it,}$$last(event.attendeesIdsForDisplay)$$endif$</textarea>
-        </div>
-
         <div class="createEntry">
             <div class="attendeeLabel">Attendees</div>
             <div style="float:left;">

@@ -140,9 +140,11 @@ public class EventForm implements Validator {
 
     public Set<String> getStudentIdsOfAttendees() {
         Set<String> attendingStudentsID= new HashSet<String>();
-        for(String attendingStudent:attendees){
-            attendingStudentsID.add(attendingStudent);
-        }
+        try{
+            for(String attendingStudent:attendees){
+                attendingStudentsID.add(attendingStudent);
+            }
+        } catch (NullPointerException e) {};
         return attendingStudentsID;
     }
 

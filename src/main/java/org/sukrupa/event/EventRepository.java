@@ -18,8 +18,9 @@ public class EventRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public void save(Event event) {
+    public Event save(Event event) {
         session().save(event);
+        return event;
     }
 
     public Event update(Event event) {

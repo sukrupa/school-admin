@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     $('#clear').click(function () {
-        resetFields();
+        location.href = './create';
     });
 
     $('#editEvent').submit(function () {
@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     $('#cancel').click(function() {
-        location.href = '.';
+        location.href = '../../events';
     });
 
     $('#addStudents').click(function() {
@@ -57,19 +57,4 @@ function addAttendeesToForm(){
         $('#availableStudents option["*"]').appendTo('#attendingStudents');
     })
     return true;
-}
-
-function resetFields() {
-    $('#title').val("");
-    $('#date').val("");
-    $('#startTime').val("");
-    $('#endTime').val("");
-    $('#startTimeAm:radio').attr('checked', true);
-    $('#endTimeAm:radio').attr('checked', true);
-    $('#venue').val("");
-    $('#description').val("");
-    $('#coordinator').val("");
-    $('#attendees').val("");
-    $('#notes').val("");
-    $('#errorMessages').text('');
 }

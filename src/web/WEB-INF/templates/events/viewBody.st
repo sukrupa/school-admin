@@ -60,7 +60,9 @@
     <div class="eventEntry">
         <div class="eventLabel">Attendees</div>
         <div class="attendees">
-            $event.attendeesForDisplay$
+            $attendeesList:{
+                   <span> $it.name$; </ span>
+            }$
         </div>
     </div>
         <div id="update">

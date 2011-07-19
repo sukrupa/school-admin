@@ -1,1 +1,1 @@
-You are logged out.
+<h2> You are logged out. </h2>

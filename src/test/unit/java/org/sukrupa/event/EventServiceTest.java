@@ -54,24 +54,24 @@ public class EventServiceTest {
 		service = new EventService(eventRepository, studentRepository);
 	}
 
-	@Test
-	public void shouldSaveEventWithStudents() {
-		when(studentRepository.findByStudentIds(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
-		service.save(event, pat.getStudentId(), jim.getStudentId());
-		verify(eventRepository).save(contains(pat, jim));
-	}
+//	@Test
+//	public void shouldSaveEventWithStudents() {
+//		when(studentRepository.findByStudentIds(pat.getStudentId(), jim.getStudentId())).thenReturn(newHashSet(pat, jim));
+//		service.save(event, pat.getStudentId(), jim.getStudentId());
+//		verify(eventRepository).save(contains(pat, jim));
+//	}
 
-	@Test
-	public void shouldReturnEmptyListForValidStudents() {
-		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
-		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId())).isEmpty(), is(true));
-	}
+//	@Test
+//	public void shouldReturnEmptyListForValidStudents() {
+//		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+//		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId())).isEmpty(), is(true));
+//	}
 
-	@Test
-	public void shouldReturnListOfInvalidStudentIds() {
-		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
-		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId(), "97543")), hasOnly("97543"));
-	}
+//	@Test
+//	public void shouldReturnListOfInvalidStudentIds() {
+//		when(studentRepository.findByStudentIds((String[]) anyVararg())).thenReturn(newHashSet(pat, jim));
+//		assertThat(service.validateStudentIdsOfAttendees(Sets.newHashSet(pat.getStudentId(), jim.getStudentId(), "97543")), hasOnly("97543"));
+//	}
 
 	private Event contains(Student... attendees) {
 		return argThat(containsAttendees(attendees));
