@@ -65,12 +65,12 @@ public class BigNeedDonationControllerTest {
     public void shouldReturnTheAmountDonatedtoBigNeedItemAs20000() throws JSONException{
         when(bigNeedRepository.getList()).thenReturn(bigNeeds);
         when(bigNeeds.get(0)).thenReturn(bigNeed);
-        when(bigNeed.getCost()).thenReturn(50000.0);
+        when(bigNeed.getDonatedAmount()).thenReturn(20000.0);
         JSONObject jsonBigNeedDonationInfo = new JSONObject();
-        jsonBigNeedDonationInfo.accumulate("bigNeedItemTotalCost",50000.0);
+        jsonBigNeedDonationInfo.accumulate("bigNeedItemAmountDonated",20000.0);
         BigNeedDonationController bigNeedDonationController = new BigNeedDonationController(bigNeedRepository);
-        String bigNeedItemTotalCost=bigNeedDonationController.getBigNeedItemTotalCost();
-        assertThat(bigNeedItemTotalCost,is(jsonBigNeedDonationInfo.toString()));
+        String bigNeedItemAmountDonated=bigNeedDonationController.getBigNeedItemAmountDonated();
+        assertThat(bigNeedItemAmountDonated,is(jsonBigNeedDonationInfo.toString()));
 
 
 

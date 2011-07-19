@@ -36,4 +36,14 @@ public class BigNeedDonationController {
        return jsonBigNeedDonationInfo.toString();
 
     }
+
+    @RequestMapping(value = "amountDonated", method = GET)
+    @ResponseBody
+    public String getBigNeedItemAmountDonated() {
+
+       JSONObject jsonBigNeedDonationInfo=new JSONObject();
+       jsonBigNeedDonationInfo.accumulate("bigNeedItemAmountDonated",bigNeedRepository.getList().get(0).getDonatedAmount());
+       return jsonBigNeedDonationInfo.toString();
+
+    }
 }
