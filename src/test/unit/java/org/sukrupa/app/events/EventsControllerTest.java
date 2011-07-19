@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.sukrupa.app.students.StudentsController;
 import org.sukrupa.app.events.EventsController;
 import org.sukrupa.event.*;
@@ -136,23 +137,21 @@ public class EventsControllerTest {
     }
 
     @Test
-    public void shouldDisplayErrorsAssociatedWithAnInvalidEventSubmission() {
-//        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
-//
-//        when(eventForm.isInvalid(errors)).thenReturn(true);
-//        String update = controller.updateAnEvent("4", eventForm, objectModel);
-//        verify(eventForm).isInvalid(errors);
-//        assertThat("Display the Edit Event Page",update, is("events/edit"));
-        fail();
-    }
-
-    @Test
     public void shouldDisplayTheEditPageWhenUpdatingInvalidEvent() {
         Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
-
         when(eventForm.isInvalid(errors)).thenReturn(true);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).isInvalid(errors);
+        assertThat("Display the Edit Event Page",update, is("events/edit"));
+    }
+
+    @Test
+    public void shouldDisplayTheEditPageWhenUpdatingInvalidEventWithAttendees() {
+        Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
+        when(eventForm.isInvalid(errors)).thenReturn(true);
+        when(eventForm.getAttendees()).thenReturn(listOfStudentIds);
+        String update = controller.updateAnEvent("4", eventForm, objectModel);
+        verify(eventForm).getAttendees();
         assertThat("Display the Edit Event Page",update, is("events/edit"));
     }
 

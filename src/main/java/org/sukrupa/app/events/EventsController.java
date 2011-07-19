@@ -117,7 +117,6 @@ public class EventsController {
           for (FieldError error : errors.getFieldErrors()) {
               model.put(format("%sError", error.getField()), error.getDefaultMessage());
           }
-
       }
 
     // all students less attending students
@@ -142,6 +141,7 @@ public class EventsController {
             }
             Collections.sort(studentList, new StudentNameComparator());
         } catch (NullPointerException e) {
+            // there are no attendees
         }
         return studentList;
     }
