@@ -1,6 +1,6 @@
-@Login
-Feature: Add, Edit and Delete Small Needs
 
+Feature: Add, Edit and Delete Small Needs
+    @Login
     Scenario: Small Needs List is Displayed
         Given I am on the View Students page
         When I navigate to the Small Needs page
@@ -35,5 +35,7 @@ Feature: Add, Edit and Delete Small Needs
     Scenario: View the priority of the items
         Given I am on the Small Needs page
         Then Priority should be displayed
+        And Exit
+
 
 

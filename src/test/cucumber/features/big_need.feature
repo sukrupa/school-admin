@@ -1,6 +1,6 @@
-@Login
-Feature: Add, Edit and Delete Big Needs
 
+Feature: Add, Edit and Delete Big Needs
+@Login
   Scenario: Big Needs List is Displayed
     Given I am on the Big Needs page
     Then Big Needs should be displayed
@@ -32,3 +32,4 @@ Feature: Add, Edit and Delete Big Needs
   Scenario: View the priority of the items
     Given I am on the Big Needs page
     Then Priority should be displayed
+    And Exit
