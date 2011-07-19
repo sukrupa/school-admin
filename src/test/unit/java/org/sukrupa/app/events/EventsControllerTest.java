@@ -56,7 +56,6 @@ public class EventsControllerTest {
     private Map<String, Event> model = new HashMap<String, Event>();
     private Map<String, Object> objectModel = new HashMap<String, Object>();
     private List<String> listOfStudentIds = new ArrayList<String>();
-    //TODO Remove duplicate "new BeanPropertyBindingResult(eventForm, "EventForm");"
     private Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
     private EventsController controller;
     private Student attendee1 = new StudentBuilder().name("TC")

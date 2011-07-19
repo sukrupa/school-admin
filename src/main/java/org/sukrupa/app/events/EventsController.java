@@ -43,7 +43,6 @@ public class EventsController {
         return "events/list";
     }
 
-    //TODO Fix display of attendes
     @RequestMapping(value = "/{eventId}")
     public String getAnEventView(@PathVariable int eventId, Map<String, Object> model) {
         Event event = service.getEvent(eventId);
