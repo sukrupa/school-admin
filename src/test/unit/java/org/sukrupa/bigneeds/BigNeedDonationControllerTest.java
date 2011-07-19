@@ -46,5 +46,35 @@ public class BigNeedDonationControllerTest {
 
     }
 
+    @Test
+    public void shouldReturnTheTotalCostForBigNeedItemAs50000() throws JSONException{
+        when(bigNeedRepository.getList()).thenReturn(bigNeeds);
+        when(bigNeeds.get(0)).thenReturn(bigNeed);
+        when(bigNeed.getCost()).thenReturn(50000.0);
+        JSONObject jsonBigNeedDonationInfo = new JSONObject();
+        jsonBigNeedDonationInfo.accumulate("bigNeedItemTotalCost",50000.0);
+        BigNeedDonationController bigNeedDonationController = new BigNeedDonationController(bigNeedRepository);
+        String bigNeedItemTotalCost=bigNeedDonationController.getBigNeedItemTotalCost();
+        assertThat(bigNeedItemTotalCost,is(jsonBigNeedDonationInfo.toString()));
+
+
+
+    }
+
+    @Test
+    public void shouldReturnTheAmountDonatedtoBigNeedItemAs20000() throws JSONException{
+        when(bigNeedRepository.getList()).thenReturn(bigNeeds);
+        when(bigNeeds.get(0)).thenReturn(bigNeed);
+        when(bigNeed.getCost()).thenReturn(50000.0);
+        JSONObject jsonBigNeedDonationInfo = new JSONObject();
+        jsonBigNeedDonationInfo.accumulate("bigNeedItemTotalCost",50000.0);
+        BigNeedDonationController bigNeedDonationController = new BigNeedDonationController(bigNeedRepository);
+        String bigNeedItemTotalCost=bigNeedDonationController.getBigNeedItemTotalCost();
+        assertThat(bigNeedItemTotalCost,is(jsonBigNeedDonationInfo.toString()));
+
+
+
+    }
+
 
 }

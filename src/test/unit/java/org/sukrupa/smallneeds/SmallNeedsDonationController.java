@@ -30,7 +30,7 @@ public class SmallNeedsDonationController {
         JSONObject jsonSmallNeedDonationInfo=new JSONObject();
         HashMap<String,Double> smallNeeds =new HashMap<String, Double>();
         List<SmallNeed> smallNeedList = smallNeedRepository.getList();
-        for(int i=0;i<2;i++) {
+        for(int i=0;i<smallNeedList.size();i++) {
             smallNeeds.put(smallNeedList.get(i).getItemName(), smallNeedList.get(i).getCost());
         }
 
