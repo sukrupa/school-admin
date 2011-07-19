@@ -2,7 +2,8 @@
 Feature: Edit parent details
 @Login
 
-    Scenario Outline: Select student to edit parent details
+    Scenario: Select student to edit parent details
+        Given I am on Sukrupa Page
         When I edit student record of Bhavani
         And I enter father's name as Peter Murray
         And I enter mother's name as My Mother
@@ -23,7 +24,8 @@ Feature: Edit parent details
         And I save the changes
         Then the message "Student record updated successfully" should be displayed
 
-    Scenario Outline: Verify that the parent details are updated
+    Scenario: Verify that the parent details are updated
+        Given I am on Sukrupa Page
         When I select the student record of Bhavani
         Then Peter Murray should be displayed
         And My Mother should be displayed

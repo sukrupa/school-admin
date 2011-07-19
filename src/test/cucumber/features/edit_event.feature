@@ -3,15 +3,15 @@ Feature: Edit an Event
 
 @Login
 
-    Scenario: Edit an event
+    Scenario: Edit an event and confirm the changes are saved
         Given I am on the View Events page
-        When I navigate to the Annual Day page
+        And I navigate to the Sports Day page
         And I Edit it
-        Then title should contain Annual Day
-        And date should contain 20-02-2011
-        And description should contain This is a event description. It is a test.
-        And notes should contain This is a note
-        And attendees should contain Anok
-        And attendees should contain Haripriya
-        And attendees should contain Chandru
+        When I enter 25-03-2011 as date
+        And I enter This is an edited note as notes
+        And I enter This event is awesome as description
+        And I Save it
+        Then 25-03-2011 should be displayed
+        And This is an edited note should be displayed
+        And This event is awesome should be displayed
         And Exit
