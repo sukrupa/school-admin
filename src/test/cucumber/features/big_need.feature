@@ -5,6 +5,7 @@ Feature: Add, Edit and Delete Big Needs
     Given I am on the Big Needs page
     Then Big Needs should be displayed
     And a "Power Generator" costing "50000.0" should be displayed with priority "1"
+    And the pre-populated donated amount should be 0.0
     And a "6" should be displayed as pre-populated "priority"
 
   Scenario: Add item to Big Need list

@@ -24,6 +24,12 @@ public class BigNeed extends Need {
     @Column(name = "PRIORITY")
     private int priority;
 
+    @Column(name = "AMOUNT_DONATED")
+    private double donatedAmount;
+
+    @Column(name = "FULFILLED")
+    private boolean fulfilled = false;
+
     @RequiredByFramework
     public BigNeed() {
     }
@@ -38,7 +44,16 @@ public class BigNeed extends Need {
         this.priority=priority;
     }
 
-    @Override
+    public BigNeed(int id, String itemName, double cost, int priority) {
+        this(itemName, cost, priority);
+        this.id = id;
+    }
+
+    public BigNeed(String itemName, double cost, int priority, double donatedAmount) {
+        this(itemName, cost, priority);
+        this.donatedAmount = donatedAmount;
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -80,5 +95,22 @@ public class BigNeed extends Need {
     @Override
     public void setPriority(int priority){
         this.priority=priority;
+    }
+
+
+    public double getDonatedAmount() {
+        return donatedAmount;
+    }
+
+    public void setDonatedAmount(double donatedAmount) {
+        this.donatedAmount = donatedAmount;
+    }
+
+    public boolean isFulfilled() {
+        return fulfilled;
+    }
+
+    public void setFulfilled(boolean fulfilled) {
+        this.fulfilled = fulfilled;
     }
 }

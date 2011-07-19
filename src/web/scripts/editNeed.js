@@ -1,4 +1,5 @@
 var editing = false;
+var itemFulfilled = false;
 
 $(function() {
     $(".edit-bigneed-button").click(makeRowEditable);
@@ -46,13 +47,13 @@ function submitForm(form, $, actionUrl) {
     form.itemCost.value = $.parents('tr').find('.item-cost').val();
     form.priority.value = $.parents('tr').find('.item-priority').val();
     form.itemId.value = $.parents('tr').find('.item-id').val();
+    form.donatedAmount.value = $.parents('tr').find('.item-donatedAmount').val();
     if(!validateNeedsForm(form)) return;
     form.action = actionUrl;
     form.submit();
 }
 
 function isNumber(string){
-    //var number = parseFloat(string);
     return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
 }
 
@@ -71,7 +72,16 @@ function validateNeedsForm(form) {
         $('#error')[0].innerHTML = "Please enter a valid Cost !!!";
         return false;
     }
+    if(!isNumber(form.donatedAmount.value)){
+        $('#error')[0].innerHTML = "Please enter a valid Donated Amount !!!";
+        return false;
+    }
+    if(form.donatedAmount.value > form.itemCost.value){
+        $('#error')[0].innerHTML = "Donated Amount cannot exceed Cost !!!";
+        return false;
+    }
     form.itemCost.value = parseFloat(form.itemCost.value).toFixed(2);
+    form.donatedAmount.value = parseFloat(form.donatedAmount.value).toFixed(2);
     return true;
 }
 
@@ -85,6 +95,8 @@ function makeRowEditable() {
         alert("Please save the current row, before editing !!!");
     }
 }
+
+
 
 
 

@@ -59,13 +59,10 @@ public class BigNeedsControllerTest {
     public void shouldCreateABigNeed() {
         HttpSession session = mock(HttpSession.class);
         ArgumentCaptor<BigNeed> bigNeedCaptor = ArgumentCaptor.forClass(BigNeed.class);
-        String view = controller.create("1", "sample", "60000",session, model);
+        String view = controller.create("1", "sample", "60000", "0.0",session, model);
         verify(bigNeedRepository).addNeed(bigNeedCaptor.capture(), eq(1));
         assertThat(bigNeedCaptor.getValue().getItemName(), is("sample"));
-
         assertThat(bigNeedCaptor.getValue().getCost(), is((double)60000));
-
-
     }
 
     @Test
@@ -87,13 +84,9 @@ public class BigNeedsControllerTest {
         BigNeed bigNeed = mock(BigNeed.class);
         when(bigNeedRepository.getNeedById(123)).thenReturn(bigNeed);
         when(bigNeed.getItemName()).thenReturn("Banana");
-
-
-        String view = controller.saveEdit("1", 123, "Forks", "9001", model);
+        String view = controller.saveEdit("1", 123, "Forks", "9001","0.0", model);
         //controller.saveEdit(123, "Forks" , "9001" , model);
-
-       assertThat(view, is("redirect:/bigneeds"));
-
+        assertThat(view, is("redirect:/bigneeds"));
         //assertThat(model, hasEntry("message", "Saved changes to Forks"));
         verify(bigNeedRepository).editNeed(bigNeed, 1);
     }

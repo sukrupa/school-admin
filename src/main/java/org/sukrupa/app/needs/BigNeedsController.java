@@ -45,8 +45,10 @@ public class BigNeedsController {
 
     @RequestMapping(value = "create", method = POST)
     @Transactional
-    public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost,HttpSession session, Map<String, Object> model) {
-        bigNeedRepository.addNeed(new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority)),Integer.parseInt(priority));
+    public String create(@RequestParam String priority, @RequestParam String itemName, @RequestParam String itemCost,@RequestParam String donatedAmount,HttpSession session, Map<String, Object> model) {
+        BigNeed bigNeed = new BigNeed(itemName, Double.parseDouble(itemCost), Integer.parseInt(priority), Double.parseDouble(donatedAmount));
+        bigNeed.setFulfilled(bigNeedRepository.isDonatedAmountFulfilled(bigNeed));
+        bigNeedRepository.addNeed(bigNeed,Integer.parseInt(priority));
         session.setAttribute("message", "Added " + itemName);
         model.clear();
         return "redirect:/bigneeds";
@@ -64,11 +66,13 @@ public class BigNeedsController {
 
     @RequestMapping(value = "saveeditedneed", method = POST)
     @Transactional
-    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost, HashMap<String, Object> model) {
+    public String saveEdit(@RequestParam String priority, @RequestParam long itemId, @RequestParam String itemName, @RequestParam String itemCost,@RequestParam String donatedAmount, HashMap<String, Object> model) {
         try {
             BigNeed bigNeed = bigNeedRepository.getNeedById(itemId);
             bigNeed.setItemName(itemName);
             bigNeed.setCost(Double.parseDouble(itemCost));
+            bigNeed.setDonatedAmount(Double.parseDouble(donatedAmount));
+            bigNeed.setFulfilled(bigNeedRepository.isDonatedAmountFulfilled(bigNeed));
             bigNeedRepository.editNeed(bigNeed,Integer.parseInt(priority));
         } catch (Exception e) {
             return "Error: " + e.toString();

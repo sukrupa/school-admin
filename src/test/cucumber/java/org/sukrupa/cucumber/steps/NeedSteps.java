@@ -6,6 +6,7 @@ import cuke4duke.annotation.Pending;
 import net.sf.sahi.client.ElementStub;
 import org.sukrupa.cucumber.context.Login;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.sukrupa.cucumber.SahiFacade.browser;
@@ -17,6 +18,19 @@ public class NeedSteps extends Login {
     @Then("^a \"([^\"]+)\" costing \"([^\"]+)\" should be displayed with priority \"([^\"]+)\"")
     public void itemWithCostShouldBeDisplayed(String name, String cost, String priority) {
         assertTrue(itemWithCostExists(name, cost, priority));
+    }
+
+    @Then("^the ([^\"]+) amount donated should be ([^\"]+)")
+    public void shouldDisplayAmountDonated(String name, String cost){
+        ElementStub cellWithCorrectName = browser().cell(name).under(browser().cell("Name"));
+        ElementStub row= cellWithCorrectName.parentNode();
+        String donatedAmount = row.fetch("Donated Amount");
+        assertEquals(donatedAmount, cost);
+    }
+
+    @Then("^the pre-populated donated amount should be 0.0")
+    public void prePopulatedDonatedAmountShouldBe0(){
+       assertTrue(browser().byId("donatedAmount").containsText("0.0"));
     }
 
     @Then("^a \"([^\"]+)\" should be displayed as pre-populated \"([^\"]+)\"")

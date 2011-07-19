@@ -11,6 +11,9 @@ import org.sukrupa.needs.NeedRepository;
 import org.sukrupa.needs.NeedRepositoryTestBase;
 import org.sukrupa.platform.config.SpringContextLoaderForTesting;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringContextLoaderForTesting.class)
 @Transactional
@@ -98,6 +101,18 @@ public class BigNeedRepositoryTest extends NeedRepositoryTestBase {
     @Test
     public void shouldGetBigNeedById() {
         assertGetNeedById();
+        BigNeed example = new BigNeed("example", 10000, 2);
+        sessionFactory.getCurrentSession().save(example);
+        long id = example.getId();
+        assertThat(bigNeedRepository.getNeedById(id), is(example));
+    }
+
+    @Test
+    public void shouldCheckIfDonatedAmountEqualsCost(){
+        BigNeed powerGenerator = new BigNeed("Power Generator", 50000, 1, 0.0);
+        BigNeed airConditioner = new BigNeed("Air Conditioner", 20000, 2, 20000);
+        assertThat(bigNeedRepository.isDonatedAmountFulfilled(powerGenerator), is(false));
+        assertThat(bigNeedRepository.isDonatedAmountFulfilled(airConditioner), is(true));
     }
 }
 

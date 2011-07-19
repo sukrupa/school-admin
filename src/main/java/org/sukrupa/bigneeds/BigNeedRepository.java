@@ -32,4 +32,11 @@ public class BigNeedRepository extends NeedRepository<BigNeed> {
     public List<BigNeed> getList() {
         return (List<BigNeed>) query("from BigNeed order by priority").list();
     }
+
+
+    public boolean isDonatedAmountFulfilled(BigNeed bigNeed) {
+        if(bigNeed.getDonatedAmount() >= bigNeed.getCost())
+            return true;
+        return false;
+    }
 }
