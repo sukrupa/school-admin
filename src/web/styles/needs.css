@@ -12,4 +12,6 @@ input.item-priority {
     width: 3em;
 }
 
-tr.fulfilled {background-color: #ccffcc;}
+tr.fulfilled {
+    background-color: #ccffcc;
+}

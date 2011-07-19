@@ -76,7 +76,7 @@ function validateNeedsForm(form) {
         $('#error')[0].innerHTML = "Please enter a valid Donated Amount !!!";
         return false;
     }
-    if(form.donatedAmount.value > form.itemCost.value){
+    if(parseFloat(form.donatedAmount.value) > parseFloat(form.itemCost.value)){
         $('#error')[0].innerHTML = "Donated Amount cannot exceed Cost !!!";
         return false;
     }
