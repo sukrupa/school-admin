@@ -1,8 +1,6 @@
 
 Feature: Edit an Event
-
 @Login
-
     Scenario: Edit an event and confirm the changes are saved
         Given I am on the View Events page
         And I navigate to the Sports Day page
@@ -14,4 +12,6 @@ Feature: Edit an Event
         Then 25-03-2011 should be displayed
         And This is an edited note should be displayed
         And This event is awesome should be displayed
-        And Exit
+
+    Scenario: close browser
+        Then Exit
