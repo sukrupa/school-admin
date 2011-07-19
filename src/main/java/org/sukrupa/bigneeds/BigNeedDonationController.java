@@ -1,25 +1,29 @@
 package org.sukrupa.bigneeds;
 
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Created by IntelliJ IDEA.
- * User: sreerajan
- * Date: 15/7/11
- * Time: 6:17 PM
- * To change this template use File | Settings | File Templates.
- */
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+@Controller
+@RequestMapping("/getHighPriorityBigNeedItem")
 public class BigNeedDonationController {
 
     BigNeedRepository bigNeedRepository;
+
+    @Autowired
     public BigNeedDonationController(BigNeedRepository bigNeedRepository){
         this.bigNeedRepository=bigNeedRepository;
     }
 
-
+    @RequestMapping(method = GET)
+    @ResponseBody
     public String getHighPriorityItemName() {
         JSONObject jsonBigNeedDonationInfo=new JSONObject();
-        jsonBigNeedDonationInfo.accumulate("highPriorityBigNeedItem",bigNeedRepository.getBigNeed(1).getItemName());
+        jsonBigNeedDonationInfo.accumulate("highPriorityBigNeedItem",bigNeedRepository.getList().get(0).getItemName());
         return jsonBigNeedDonationInfo.toString();
     }
 }

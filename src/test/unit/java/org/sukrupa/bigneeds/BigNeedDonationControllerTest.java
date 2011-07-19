@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.sukrupa.bigneeds.BigNeed;
 import org.sukrupa.bigneeds.BigNeedRepository;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -23,6 +25,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class BigNeedDonationControllerTest {
 
     @Mock private BigNeedRepository bigNeedRepository;
+    @Mock private List<BigNeed> bigNeeds;
     @Mock private BigNeed bigNeed;
 
     @Before
@@ -32,16 +35,14 @@ public class BigNeedDonationControllerTest {
 
     @Test
     public void shouldReturnTheHighPriorityBigNeedItemAsPowerGenerator() throws JSONException {
+        when(bigNeedRepository.getList()).thenReturn(bigNeeds);
+        when(bigNeeds.get(0)).thenReturn(bigNeed);
         when(bigNeed.getItemName()).thenReturn("Power Generator");
-        when(bigNeedRepository.getBigNeed(1)).thenReturn(bigNeed);
         JSONObject jsonBigNeedDonationInfo = new JSONObject();
         jsonBigNeedDonationInfo.accumulate("highPriorityBigNeedItem","Power Generator");
         BigNeedDonationController bigNeedDonationController = new BigNeedDonationController(bigNeedRepository);
         String highPriorityItemName=bigNeedDonationController.getHighPriorityItemName();
         assertThat(highPriorityItemName,is(jsonBigNeedDonationInfo.toString()));
-
-
-
 
     }
 
