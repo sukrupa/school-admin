@@ -89,7 +89,7 @@ public class SmallNeedRepositoryTest extends NeedRepositoryTestBase{
     }
 
     @Test
-    public void shouldRetrieveBigNeedList() {
+    public void shouldRetrieveSmallNeedList() {
         assertRetrieveNeedList();
     }
 
@@ -99,12 +99,12 @@ public class SmallNeedRepositoryTest extends NeedRepositoryTestBase{
     }
 
     @Test
-    public void shouldDeleteBigNeed() {
+    public void shouldDeleteSmallNeed() {
         assertDelete();
     }
 
     @Test
-    public void shouldGetBigNeedById() {
+    public void shouldGetSmallNeedById() {
         assertGetNeedById();
     }
 

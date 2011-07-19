@@ -14,6 +14,7 @@ import org.sukrupa.smallNeeds.SmallNeedRepository;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -78,16 +79,22 @@ public class BigNeedsControllerTest {
     }
 
 
+
+
+
     @Test
     public void shouldSaveAnEditedBigNeed() {
         BigNeed bigNeed = mock(BigNeed.class);
         when(bigNeedRepository.getNeedById(123)).thenReturn(bigNeed);
         when(bigNeed.getItemName()).thenReturn("Banana");
 
+
         String view = controller.saveEdit("1", 123, "Forks", "9001", model);
         //controller.saveEdit(123, "Forks" , "9001" , model);
-        //assertThat(view, is("redirect:/bigneeds"));
-        //  assertThat(model, hasEntry("message", "Saved changes to Forks"));
-        //verify(bigNeedRepository).save(bigNeed);
+
+       assertThat(view, is("redirect:/bigneeds"));
+
+        //assertThat(model, hasEntry("message", "Saved changes to Forks"));
+        verify(bigNeedRepository).editNeed(bigNeed, 1);
     }
 }

@@ -81,7 +81,7 @@ public class SmallNeedsControllerTest {
         ArgumentCaptor<SmallNeed> smallNeedCaptor = ArgumentCaptor.forClass(SmallNeed.class);
         HttpSession session = new MockHttpSession();
         String view = controller.create(1,"Water Heater","1000","Waterheater",session,model);
-        verify(smallNeedRepository).addNeed((smallNeedCaptor.capture()), 1);
+        verify(smallNeedRepository).addNeed((smallNeedCaptor.capture()),eq(1));
         assertThat(smallNeedCaptor.getValue().getItemName(), is("Water Heater"));
     }
     @Test
@@ -102,7 +102,8 @@ public class SmallNeedsControllerTest {
         HttpSession session=new MockHttpSession();
         when(smallNeedRepository.getNeedById(111)).thenReturn(smallNeed);
         String view=controller.saveEdit("1",111,"Cooler","10000", "Cooler is essential ", model);
-        verify(smallNeedRepository).addNeed(smallNeed, 1);
+
+       verify(smallNeedRepository).editNeed(smallNeed,  1);
 
     }
 }
