@@ -7,16 +7,16 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.sukrupa.smallNeeds.SmallNeed;
 import org.sukrupa.smallNeeds.SmallNeedRepository;
+import org.sukrupa.smallNeeds.SmallNeedsDonationController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+
 
 
 public class SmallNeedsDonationControllerTest {
@@ -43,15 +43,19 @@ public class SmallNeedsDonationControllerTest {
 
 
         JSONObject jsonSmallNeedDonationInfo = new JSONObject();
-        HashMap<String,Double> smallListLocal = new HashMap<String, Double>();
-        smallListLocal.put("Pencil",200.0);
-        smallListLocal.put("Uniform",250.0);
-        jsonSmallNeedDonationInfo.accumulate("smallNeedItems1", smallListLocal);
+        List<String> smallNeeds =new ArrayList<String>();
+        smallNeeds.add("Pencil");
+        smallNeeds.add("200.0");
+        smallNeeds.add("Uniform");
+        smallNeeds.add("250.0");
+        jsonSmallNeedDonationInfo.accumulate("smallNeedItems", smallNeeds);
 
 
         SmallNeedsDonationController smallNeedsDonationController = new SmallNeedsDonationController(smallNeedRepository);
         String smallListLocalOutput = jsonSmallNeedDonationInfo.toString();
         String smallList = smallNeedsDonationController.getSmallNeedList();
-        assertThat(smallList,is(smallListLocalOutput));
+        System.out.println(smallList);
+        assertThat(smallList, is(smallListLocalOutput));
     }
 }
+

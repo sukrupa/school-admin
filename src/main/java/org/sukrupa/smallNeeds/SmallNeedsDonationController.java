@@ -1,4 +1,4 @@
-package org.sukrupa.smallneeds;
+package org.sukrupa.smallNeeds;
 
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.sukrupa.smallNeeds.SmallNeed;
 import org.sukrupa.smallNeeds.SmallNeedRepository;
 
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,10 +29,11 @@ public class SmallNeedsDonationController {
     @ResponseBody
     public String getSmallNeedList(){
         JSONObject jsonSmallNeedDonationInfo=new JSONObject();
-        HashMap<String,Double> smallNeeds =new HashMap<String, Double>();
+        List<String> smallNeeds =new ArrayList<String>();
         List<SmallNeed> smallNeedList = smallNeedRepository.getList();
         for(int i=0;i<smallNeedList.size();i++) {
-            smallNeeds.put(smallNeedList.get(i).getItemName(), smallNeedList.get(i).getCost());
+            smallNeeds.add(smallNeedList.get(i).getItemName());
+            smallNeeds.add(smallNeedList.get(i).getCost()+"");
         }
 
         jsonSmallNeedDonationInfo.accumulate("smallNeedItems", smallNeeds);
