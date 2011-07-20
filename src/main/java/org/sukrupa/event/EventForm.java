@@ -144,7 +144,8 @@ public class EventForm implements Validator {
             for(String attendingStudent:attendees){
                 attendingStudentsID.add(attendingStudent);
             }
-        } catch (NullPointerException e) {};
+        } catch (NullPointerException e) {// there are no attendees
+        }
         return attendingStudentsID;
     }
 
@@ -212,7 +213,7 @@ public class EventForm implements Validator {
     public String invalidTimeErrorMessage(String fieldName) {
         String[] strings = StringUtils.splitByCharacterTypeCamelCase(fieldName);
         strings[1]= strings[1].toLowerCase();
-        return String.format("Please enter <strong>%s</strong> in the 00:00 format using the 12 hour clock.", StringUtils.join(strings, " "));
+        return String.format("Please enter %s in the 00:00 format using the 12 hour clock.", StringUtils.join(strings, " "));
     }
 
 }

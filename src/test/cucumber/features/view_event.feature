@@ -1,6 +1,7 @@
 
 Feature: View Event
 @Login
+#todo more comprehensive
     Scenario: View an event
         Given I am on the View Events page
         When I navigate to the Annual Day page
