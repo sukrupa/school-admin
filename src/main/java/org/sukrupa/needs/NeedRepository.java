@@ -56,7 +56,7 @@ public abstract class NeedRepository<N extends Need> {
         return needs;
     }
 
-    private List<N> updatePrioritiesOfAllItems(List<N> needs) {
+    public List<N> updatePrioritiesOfAllItems(List<N> needs) {
         int samePriorityItemIndex;
         for (samePriorityItemIndex = 0; samePriorityItemIndex < needs.size(); samePriorityItemIndex++) {
             needs.get(samePriorityItemIndex).setPriority(samePriorityItemIndex + 1);

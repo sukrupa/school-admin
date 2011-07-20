@@ -57,6 +57,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
             }$
             </tbody>
         </table>
+        <br><br>
         <table border="0" id="fulfilledItemsTable">
             <thead class="header">
             <tr>
@@ -75,7 +76,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                 <td class="display">$it.cost$</td>
                 <td class="display">$it.donatedAmount$</td>
                 <td>
-                    <input type="button" class="delete-bigneed-button" id="deleteFulfilledNeedButton" value="Delete"/>
+                    <input type="button" class="delete-fulfilled-bigneed-button" id="deleteFulfilledNeedButton" value="Delete"/>
                 </td>
             </tr>
             }$

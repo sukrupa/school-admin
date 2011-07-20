@@ -30,7 +30,8 @@ public class BigNeedRepository extends NeedRepository<BigNeed> {
 
     @SuppressWarnings("unchecked")
     public List<BigNeed> getList() {
-        return (List<BigNeed>) query("from BigNeed WHERE fulfilled=FALSE order by priority").list();
+        List<BigNeed> bigNeed = (List<BigNeed>) query("from BigNeed WHERE fulfilled=FALSE order by priority").list();
+        return updatePrioritiesOfAllItems(bigNeed);
     }
 
     @SuppressWarnings("unchecked")

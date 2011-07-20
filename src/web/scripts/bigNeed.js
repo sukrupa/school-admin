@@ -6,6 +6,7 @@ $(function() {
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
     $(".delete-bigneed-button").click(deleteNeed);
+    $(".delete-fulfilled-bigneed-button").click(deleteFulfilledNeed);
 });
 
 //Needs Refactoring
@@ -27,9 +28,25 @@ function refreshPage() {
 }
 //End of "Needs Refactoring"
 
+function deleteFulfilledNeed(itemID) {
+    if (confirm("Are you sure you want to " + $(this)[0].value + "?")) {
+       submitFulfilledForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
+    }
+
+}
+
+function submitFulfilledForm(form, $, actionUrl) {
+    form.itemName.value = $.parents('tr').find('.item-name').val();
+    form.itemCost.value = $.parents('tr').find('.item-cost').val();
+    form.priority.value = $.parents('tr').find('.item-priority').val();
+    form.itemId.value = $.parents('tr').find('.item-id').val();
+    form.donatedAmount.value = $.parents('tr').find('.item-donatedAmount').val();
+    form.action = actionUrl;
+    form.submit();
+}
 
 function deleteNeed(itemID) {
-    if(confirm("Are you sure you want to "+$(this)[0].value +"?"))
+    if (confirm("Are you sure you want to " + $(this)[0].value + "?"))
         submitForm($('#bigNeedsForm')[0], $(this), "/bigneeds/delete");
 }
 
@@ -48,40 +65,40 @@ function submitForm(form, $, actionUrl) {
     form.priority.value = $.parents('tr').find('.item-priority').val();
     form.itemId.value = $.parents('tr').find('.item-id').val();
     form.donatedAmount.value = $.parents('tr').find('.item-donatedAmount').val();
-    if(!validateNeedsForm(form)) return;
+    if (!validateNeedsForm(form)) return;
     form.action = actionUrl;
     form.submit();
 }
 
-function isNumber(string){
-    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
+function isNumber(string) {
+    return (!isNaN(parseFloat(string))) && /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
 }
 
 
-function isPriority(string){
+function isPriority(string) {
     //var number = parseFloat(string);
-    return (string != 0) &&  /^[0-9]+?$/.test(string);
+    return (string != 0) && /^[0-9]+?$/.test(string);
 }
 
 
 function validateNeedsForm(form) {
-    if(!isPriority(form.priority.value)){
+    if (!isPriority(form.priority.value)) {
         $('#error')[0].innerHTML = "Please enter a valid priority  !!!";
         return false;
     }
-    if(form.itemName.value == ""){
+    if (form.itemName.value == "") {
         $('#error')[0].innerHTML = "Please enter an Item Name  !!!";
         return false;
     }
-    if(!isNumber(form.itemCost.value)){
+    if (!isNumber(form.itemCost.value)) {
         $('#error')[0].innerHTML = "Please enter a valid Cost !!!";
         return false;
     }
-    if(!isNumber(form.donatedAmount.value)){
+    if (!isNumber(form.donatedAmount.value)) {
         $('#error')[0].innerHTML = "Please enter a valid Donated Amount !!!";
         return false;
     }
-    if(parseFloat(form.donatedAmount.value) > parseFloat(form.itemCost.value)){
+    if (parseFloat(form.donatedAmount.value) > parseFloat(form.itemCost.value)) {
         $('#error')[0].innerHTML = "Donated Amount cannot exceed Cost !!!";
         return false;
     }
@@ -91,12 +108,12 @@ function validateNeedsForm(form) {
 }
 
 function makeRowEditable() {
-    if(!editing){
+    if (!editing) {
         editing = true;
         $(this).parents("tr").find('.delete-bigneed-button')[0].value = "Cancel";
         $(this).parents("tr").find('.delete-bigneed-button').click(refreshPage);
         $(this).parents("tr").addClass("editable");
-    } else{
+    } else {
         alert("Please save the current row, before editing !!!");
     }
 }
