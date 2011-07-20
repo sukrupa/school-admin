@@ -23,12 +23,31 @@ function deleteSmallNeed(itemID) {
 
 function isNumber(string){
     //var number = parseFloat(string);
-    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.[0-9]+)?$/.test(string);
+    return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
 }
+
+
+function isPriority(string){
+    //var number = parseFloat(string);
+    return (string != 0) &&  /^[0-9]+?$/.test(string);
+}
+
+//function isPositiveInteger(val){
+//    if(val==null){return false;}
+//    if(val == 0){return false;}
+//    if (val.length==0){return false;}
+//    for (var i = 0; i < val.length; i++) {
+//        var ch = val.charAt(i);
+//        if (ch < "0" || ch > "9") {
+//            return false;
+//        }
+//    }
+//}
+
 
 function validateNeedsForm(form) {
 
-    if(!isNumber(form.priority.value)){
+    if(!isPriority(form.priority.value)){
         $('#error')[0].innerHTML = "Please enter a valid priority  !!!";
         return false;
     }
