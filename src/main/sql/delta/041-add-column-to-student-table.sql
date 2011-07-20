@@ -1,1 +1,1 @@
-ALTER TABLE student ADD column sponsor_email varchar(30);
+ALTER TABLE student ADD column sponsor_email varchar(255);
