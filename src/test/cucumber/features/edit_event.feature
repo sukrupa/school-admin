@@ -44,14 +44,24 @@ Feature: Edit an Event
         And Sports Day should be displayed
         And This event is awesome should be displayed
 
-#todo
     Scenario: Cancel button should redirect to list of events page
         Given I am on the View Events page
         And I navigate to the Spice Girls page
-#todo
+        And I Edit it
+        When I enter 25-03-2011 as date
+        And I cancel it
+        Then 25-04-2011 should be displayed
+        And List of Events should be displayed
+        And Spice Girls should be displayed
+
     Scenario: Should be able to add remove and clear attendees
         Given I am on the View Events page
         And I navigate to the Spice Girls page
+        And I Edit it
+        When I add Anok (64262) as an attendee
+        And I add Chandru (12345) as an attendee
+        And I clear all the students
+        Then attendingStudents is blank
 
     Scenario: close browser
         Then Exit

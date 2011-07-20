@@ -47,6 +47,11 @@ public class EventSteps extends BasicWebSteps {
         browser().byId("clear").click();
     }
 
+    @When("^I clear all the students")
+    public void clearFormStudents(){
+        browser().byId("clearStudents").click();
+    }
+
     @When("^I save the event")
     public void saveEvent(){
         browser().byId("save").click();
@@ -56,4 +61,10 @@ public class EventSteps extends BasicWebSteps {
     public void editEvent(){
         browser().submit("Edit").click();
     }
+
+    @When("^I cancel it")
+    public void cancelEvent(){
+        browser().button("Cancel").click();
+    }
+
 }
