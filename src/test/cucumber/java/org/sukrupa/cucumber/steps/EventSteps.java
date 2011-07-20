@@ -42,6 +42,12 @@ public class EventSteps extends BasicWebSteps {
         browser().byId("addStudents").click();
     }
 
+    @When("^I remove ([^\"]*) as an attendee$")
+    public void removeFromTheTextBox(String attendee) {
+        browser().select("attendingStudents").choose(attendee);
+        browser().byId("removeStudents").click();
+    }
+
     @When("^I clear all the fields")
     public void clearFormFields(){
         browser().byId("clear").click();

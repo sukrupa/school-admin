@@ -62,6 +62,11 @@ Feature: Edit an Event
         And I add Chandru (12345) as an attendee
         And I clear all the students
         Then attendingStudents is blank
+        When I add Anok (64262) as an attendee
+        And I add Chandru (12345) as an attendee
+        And I remove Anok (64262) as an attendee
+        And I remove Chandru (12345) as an attendee
+        Then attendingStudents is blank
 
     Scenario: close browser
         Then Exit
