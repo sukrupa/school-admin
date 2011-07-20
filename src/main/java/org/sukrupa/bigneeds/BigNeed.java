@@ -28,7 +28,7 @@ public class BigNeed extends Need {
     private double donatedAmount;
 
     @Column(name = "FULFILLED")
-    private boolean fulfilled = false;
+    private boolean fulfilled;
 
     @RequiredByFramework
     public BigNeed() {

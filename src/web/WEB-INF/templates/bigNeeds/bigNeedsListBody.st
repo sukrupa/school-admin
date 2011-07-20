@@ -12,7 +12,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
         <table border="0">
             <thead class="header">
             <tr>
-                <td><label for="itemName">Priority</label></td>
+                <td><label for="priority">Priority</label></td>
                 <td><label for="itemName">Item</label></td>
                 <td><label for="cost">Cost</label></td>
                 <td><label for="donatedAmount">Donated Amount</label></td>
