@@ -34,11 +34,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
             </tr>
             }$
             $bigNeedList:{
-            $if(it.fulfilled)$
-            <tr class="fulfilled">
-            $else$
             <tr>
-            $endif$
                 <td class="hidden"><input class="item-id" value="$it.id$" /></td>
                 <td class="edit"><input class="item-priority" value="$it.priority$" name="priority"/></td>
                 <td class="edit"><input class="item-name" value="$it.itemName$"/></td>
@@ -60,6 +56,29 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
             </tr>
             }$
             </tbody>
+        </table>
+        <table border="0" id="fulfilledItemsTable">
+            <thead class="header">
+            <tr>
+                <th>Fulfilled Items</th>
+            </tr>
+            <tr>
+                <td><label for="itemName">Item</label></td>
+                <td><label for="cost">Cost</label></td>
+                <td><label for="donatedAmount">Donated Amount</label></td>
+            </tr>
+            </thead>
+            $bigNeedFulfilledList:{
+            <tr class="fulfilled">
+                <td class="hidden"><input class="item-id" value="$it.id$" /></td>
+                <td class="display">$it.itemName$</td>
+                <td class="display">$it.cost$</td>
+                <td class="display">$it.donatedAmount$</td>
+                <td>
+                    <input type="button" class="delete-bigneed-button" id="deleteFulfilledNeedButton" value="Delete"/>
+                </td>
+            </tr>
+            }$
         </table>
     </div>
 </div>

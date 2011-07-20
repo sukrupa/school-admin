@@ -65,8 +65,8 @@ function isPriority(string){
 
 
 function validateNeedsForm(form) {
-
     if(!isPriority(form.priority.value)){
+    if(!isNumber(form.priority.value)){
         $('#error')[0].innerHTML = "Please enter a valid priority  !!!";
         return false;
     }

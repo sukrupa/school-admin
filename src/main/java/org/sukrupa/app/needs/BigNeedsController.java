@@ -34,11 +34,13 @@ public class BigNeedsController {
     @RequestMapping
     public String list(Map<String, Object> model, HttpSession session) {
         List<BigNeed> bigNeedList = bigNeedRepository.getList();
+        List<BigNeed> bigNeedFulfilledList = bigNeedRepository.getFulfilledList();
         int priority = bigNeedList.size() == 0 ? 1 : bigNeedList.get(bigNeedList.size() - 1).getPriority() + 1;
         model.put("message", session.getAttribute("message"));
         model.put("shouldDisplayMessage",session.getAttribute("message") != null);
         model.put("priority", priority);
         model.put("bigNeedList", bigNeedList);
+        model.put("bigNeedFulfilledList", bigNeedFulfilledList);
         session.removeAttribute("message");
         return "bigNeeds/bigNeedsList";
     }
