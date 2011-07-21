@@ -22,7 +22,6 @@ function deleteSmallNeed(itemID) {
 }
 
 function isNumber(string){
-    //var number = parseFloat(string);
     return (!isNaN(parseFloat(string))) &&  /^[0-9]+(\.([0-9]+)([E]([0-9]+))?)?$/.test(string);
 }
 
@@ -31,19 +30,6 @@ function isPriority(string){
     //var number = parseFloat(string);
     return (string != 0) &&  /^[0-9]+?$/.test(string);
 }
-
-//function isPositiveInteger(val){
-//    if(val==null){return false;}
-//    if(val == 0){return false;}
-//    if (val.length==0){return false;}
-//    for (var i = 0; i < val.length; i++) {
-//        var ch = val.charAt(i);
-//        if (ch < "0" || ch > "9") {
-//            return false;
-//        }
-//    }
-//}
-
 
 function validateNeedsForm(form) {
 
@@ -66,7 +52,6 @@ function validateNeedsForm(form) {
     return true;
 }
 
-
 function submitForm(form, $, actionUrl) {
     form.itemName.value = $.parents('tr').find('.item-name').val();
     form.itemCost.value = $.parents('tr').find('.item-cost').val();
@@ -78,7 +63,6 @@ function submitForm(form, $, actionUrl) {
     form.submit();
 }
 
-
 function refreshPage() {
     try {
         location.reload();
@@ -86,7 +70,6 @@ function refreshPage() {
         alert("Page Refresh Failed")
     }
 }
-
 
 function makeRowEditable() {
     if(!editing){

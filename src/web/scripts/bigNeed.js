@@ -9,16 +9,6 @@ $(function() {
     $(".delete-fulfilled-bigneed-button").click(deleteFulfilledNeed);
 });
 
-//Needs Refactoring
-//function deleteSmallNeed(){
-//    var itemId = $(this).parents('tr').find('.item-id').val();
-//    var params = {itemId:itemId};
-//    var url = "/smallneeds/delete";
-//    jQuery.post(url, params, function(data){
-//        refreshPage();
-//    });
-//}
-//
 function refreshPage() {
     try {
         location.reload();
@@ -26,7 +16,6 @@ function refreshPage() {
         alert("Page Refresh Failed")
     }
 }
-//End of "Needs Refactoring"
 
 function deleteFulfilledNeed(itemID) {
     if (confirm("Are you sure you want to " + $(this)[0].value + "?")) {
@@ -76,7 +65,6 @@ function isNumber(string) {
 
 
 function isPriority(string) {
-    //var number = parseFloat(string);
     return (string != 0) && /^[0-9]+?$/.test(string);
 }
 
