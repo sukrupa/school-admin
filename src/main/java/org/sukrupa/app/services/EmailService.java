@@ -34,6 +34,7 @@ public class EmailService {
      public boolean sendNewsLetter(String toAddress, String bcc, String subject, String comments, String attachment) throws MessagingException, IOException {
         InternetAddress toRecipientAddress = convertStringToInternetAddress(toAddress);
          attachment = extractAttachmentFileAddress(attachment);
+         System.out.println(attachment);
          File tempFile = new File(attachment);
 
           Message emailMessage;
@@ -60,9 +61,14 @@ public class EmailService {
      }
 
     protected String extractAttachmentFileAddress(String attachment) {
-        attachment = attachment.substring(attachment.indexOf('\\'));
-        attachment = attachment.replace('\\', '/');
-        return attachment;
+        if (System.getProperty("os.name").toLowerCase().contains("windows")){
+            attachment = attachment.substring(attachment.indexOf('\\'));
+            attachment = attachment.replace('\\', '/');
+            return attachment;
+        }
+        else{
+            return attachment;
+        }
     }
 
 

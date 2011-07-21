@@ -111,7 +111,12 @@ public class AdminControllerTest {
         String view = adminController.sendNewsletterEmail(toAddress, bcc, subject, "", mockAttachment);
 
         assertThat(view, is("admin/thankYou"));
-        verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir") + "\\Test.txt");
+        if(System.getProperty("os.name").toLowerCase().contains("windows")){
+            verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir") + "\\Test.txt");
+        }
+        else{
+            verify(emailService).sendNewsLetter(toAddress, bcc, subject, "", System.getProperty("user.dir") + "/Test.txt");
+        }
     }
 
     @Test

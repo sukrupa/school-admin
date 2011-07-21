@@ -94,7 +94,12 @@ public class EmailServiceTest {
         String actualFilePath = "C:\\Users\\myuser\\Desktop\\Text.txt";
         emailService = new EmailService(appConfiguration, transportFactory);
         String extractedAttachmentFileAddress = emailService.extractAttachmentFileAddress(actualFilePath);
-        Assert.assertThat(extractedAttachmentFileAddress, is("/Users/myuser/Desktop/Text.txt"));
+        if(System.getProperty("os.name").toLowerCase().contains("windows")){
+            Assert.assertThat(extractedAttachmentFileAddress, is("/Users/myuser/Desktop/Text.txt"));
+        }
+        else{
+            Assert.assertThat(extractedAttachmentFileAddress, is("C:\\Users\\myuser\\Desktop\\Text.txt"));
+        }
 
     }
 

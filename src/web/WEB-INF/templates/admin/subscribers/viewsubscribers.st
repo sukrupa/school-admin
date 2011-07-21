@@ -1,1 +1,1 @@
-$layout(body=admin/subscribers/subscribersbody(), title="List of Subscribers", stylesheets="admin")$
+$layout(scripts=["validateDelete"], body=admin/subscribers/subscribersbody(), title="List of Subscribers", stylesheets="admin")$

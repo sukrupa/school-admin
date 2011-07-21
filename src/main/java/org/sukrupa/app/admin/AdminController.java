@@ -64,7 +64,16 @@ public class AdminController {
 
     @RequestMapping(value = "/sendnewsletteremail", method = POST)
     public String sendNewsletterEmail(@RequestParam String to, @RequestParam String bcc, @RequestParam String subject, @RequestParam String comments, @RequestParam("attach") MultipartFile file) throws MessagingException, IOException {
-        String fileAttachmentFilePath = System.getProperty("user.dir") + "\\" + file.getOriginalFilename();
+        String findOS= System.getProperty("os.name").toLowerCase();
+        String fileAttachmentFilePath;
+        if (findOS.contains("mac") || findOS.contains("linux"))
+        {
+            fileAttachmentFilePath = System.getProperty("user.dir") + "/" + file.getOriginalFilename();
+        }
+        else{
+            fileAttachmentFilePath = System.getProperty("user.dir") + "\\" + file.getOriginalFilename();
+        }
+
         if (file.getOriginalFilename() == "") {
             emailService.sendNewsLetterEmailWithoutAttachment(to, bcc, subject, comments);
         } else {

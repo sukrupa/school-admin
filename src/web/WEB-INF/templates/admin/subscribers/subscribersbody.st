@@ -14,7 +14,7 @@
                 <tr>
                     <td>$it.subscriberName$</td>
                     <td>$it.subscriberEmail$</td>
-                    <td><a href = "deletesubscriber?subid=$it.id$">Delete</a></td>
+                    <td><a href = "deletesubscriber?subid=$it.id$" onclick="return validateDelete()">Delete</a></td>
                 </tr>
             }$
       </table>
