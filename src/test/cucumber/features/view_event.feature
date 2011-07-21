@@ -9,6 +9,6 @@ Feature: View Event
         And 20-02-2011 should be displayed
         And Sunday should be displayed
         And This is a event description. It is a test. should be displayed
-        And Anok; Chandru; Haripriya; should be displayed
+        And Anok, Chandru, Haripriya, should be displayed
         And Exit
 
