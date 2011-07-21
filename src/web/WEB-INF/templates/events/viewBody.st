@@ -61,7 +61,7 @@
         <div class="eventLabel">Attendees</div>
         <div class="attendees">
             $attendeesList:{
-                   <span> $it.name$; </ span>
+                   <span> $it.name$, </ span>
             }$
         </div>
     </div>
