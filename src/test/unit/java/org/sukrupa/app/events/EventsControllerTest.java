@@ -1,44 +1,24 @@
 package org.sukrupa.app.events;
 
-import org.apache.james.mime4j.io.LimitedInputStream;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
-import org.hibernate.mapping.Array;
-import org.joda.time.LocalDate;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.sukrupa.app.students.StudentsController;
-import org.sukrupa.app.events.EventsController;
-import org.sukrupa.event.*;
-import org.sukrupa.platform.date.Date;
-import org.sukrupa.student.Student;
-import org.sukrupa.student.StudentBuilder;
+import org.sukrupa.event.Event;
+import org.sukrupa.event.EventForm;
+import org.sukrupa.event.EventService;
 import org.sukrupa.student.StudentRepository;
 
-import java.security.PrivateKey;
-import java.util.*;
-import java.io.*;
-
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static java.text.MessageFormat.format;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class EventsControllerTest {
@@ -50,38 +30,21 @@ public class EventsControllerTest {
     @Mock
     private EventForm eventForm;
     @Mock
-    private Event event;
+    private Event event1;
+    @Mock
+    private Event event2;
 
     private Map<String, List<Event>> eventModel = new HashMap<String, List<Event>>();
     private Map<String, Event> model = new HashMap<String, Event>();
     private Map<String, Object> objectModel = new HashMap<String, Object>();
     private List<String> listOfStudentIds = new ArrayList<String>();
+
     private Errors errors = new BeanPropertyBindingResult(eventForm, "EventForm");
     private EventsController controller;
-    private Student attendee1 = new StudentBuilder().name("TC")
-            .dateOfBirth(new LocalDate(1987, 12, 12))
-            .studentId("123")
-            .build();
-    private Student attendee2 = new StudentBuilder().name("Hephzibah")
-            .dateOfBirth(new LocalDate(1989, 9, 12))
-            .studentId("231")
-            .build();
-    private Event eventOne = new EventBuilder().title("Spice Girls")
-            .attendees(attendee1, attendee2)
-            .date(new Date(1, 12, 2011))
-            .description("Wahoo Spice Girls")
-            .build();
-    private Event eventTwo = new EventBuilder().title("Aravind's Event")
-            .attendees(attendee1)
-            .date(new Date(4, 7, 2011))
-            .description("Testing Aravind's event")
-            .build();
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        listOfStudentIds.add("123");
-        listOfStudentIds.add("231");
         controller = new EventsController(service, studentRepository);
     }
 
@@ -89,20 +52,20 @@ public class EventsControllerTest {
     public void shouldDisplayEventsPage() {
         String list = controller.getListOfEvents(eventModel);
         verify(service).list();
-        assertThat("Displays the Events page",list, is("events/list"));
+        assertThat("Displays the Events page", list, is("events/list"));
 
     }
 
     @Test
     public void shouldAddEventsToListOfEvents() {
         List<Event> ourEventList = new ArrayList<Event>();
-        ourEventList.add(eventOne);
-        ourEventList.add(eventTwo);
+        ourEventList.add(event1);
+        ourEventList.add(event2);
         when(service.list()).thenReturn(ourEventList);
         controller.getListOfEvents(eventModel);
         List<Event> eventList = eventModel.get("events");
-        assertTrue("EventList contains eventOne",eventList.contains(eventOne));
-        assertTrue("EventList contains eventTwo",eventList.contains(eventTwo));
+        assertTrue("EventList contains eventOne", eventList.contains(event1));
+        assertTrue("EventList contains eventTwo", eventList.contains(event2));
     }
 
     @Test
@@ -119,20 +82,21 @@ public class EventsControllerTest {
 
     @Test
     public void shouldDisplayGivenEventPage() {
-        when(service.getEvent(4)).thenReturn(eventOne);
+        when(service.getEvent(4)).thenReturn(event1);
+        when(event1.getTitle()).thenReturn("Spice Girls");
         String view = controller.getAnEventView(4, objectModel);
-        assertThat("Displays the Event Page for the given Event Id",view, is("events/view"));
+        assertThat("Displays the Event Page for the given Event Id", view, is("events/view"));
         verify(service).getEvent(4);
         assertThat("Model contains the given event", ((Event) objectModel.get("event")).getTitle(), is("Spice Girls"));
     }
 
     @Test
     public void shouldDisplayTheEditEventPageForTheGivenEventId() {
-        when(service.getEvent(4)).thenReturn(eventOne);
+        when(service.getEvent(4)).thenReturn(event1);
         String edit = controller.getEditEventPage(4, objectModel);
-        assertThat("Display the Edit Event Page for the Given Id",edit, is("events/edit"));
+        assertThat("Display the Edit Event Page for the Given Id", edit, is("events/edit"));
         verify(service).getEvent(4);
-        assertThat("Model contains the given event",((Event) objectModel.get("event")), is(eventOne));
+        assertThat("Model contains the given event", ((Event) objectModel.get("event")), is(event1));
     }
 
     @Test
@@ -141,7 +105,7 @@ public class EventsControllerTest {
         when(eventForm.isInvalid(errors)).thenReturn(true);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).isInvalid(errors);
-        assertThat("Display the Edit Event Page",update, is("events/edit"));
+        assertThat("Display the Edit Event Page", update, is("events/edit"));
     }
 
     @Test
@@ -151,7 +115,7 @@ public class EventsControllerTest {
         when(eventForm.getAttendees()).thenReturn(listOfStudentIds);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).getAttendees();
-        assertThat("Display the Edit Event Page",update, is("events/edit"));
+        assertThat("Display the Edit Event Page", update, is("events/edit"));
     }
 
     @Test
@@ -161,7 +125,7 @@ public class EventsControllerTest {
         when(eventForm.getAttendees()).thenReturn(listOfStudentIds);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).getAttendees();
-        assertThat("Display the Edit Event Page",update, is("redirect:/events/4"));
+        assertThat("Display the Edit Event Page", update, is("redirect:/events/4"));
     }
 
     @Test
@@ -171,13 +135,13 @@ public class EventsControllerTest {
         when(eventForm.getAttendees()).thenReturn(null);
         String update = controller.updateAnEvent("4", eventForm, objectModel);
         verify(eventForm).getAttendees();
-        assertThat("Display the Edit Event Page",update, is("redirect:/events/4"));
+        assertThat("Display the Edit Event Page", update, is("redirect:/events/4"));
     }
 
     @Test
     public void shouldDisplayEventPageAfterSuccesfullyUpdating() {
         String update = controller.updateAnEvent("4", eventForm, objectModel);
-        assertThat("Display the Event Page",update,is("redirect:/events/4"));
+        assertThat("Display the Event Page", update, is("redirect:/events/4"));
         verify(service).update(eventForm);
     }
 
@@ -192,12 +156,12 @@ public class EventsControllerTest {
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
     @Test
     public void shouldDisplayEventsPageAfterSuccesfullySaving() {
-        Errors errors= mock(Errors.class);
+        Errors errors = mock(Errors.class);
         when(eventForm.isInvalid(errors)).thenReturn(false);
-        when(event.getId()).thenReturn(4);
-        when(service.save(eventForm)).thenReturn(event);
+        when(event1.getId()).thenReturn(4);
+        when(service.save(eventForm)).thenReturn(event1);
         String save = controller.saveANewEvent(eventForm, objectModel);
-        assertThat("Display Event Page after Successful Save",save, is("redirect:/events/4"));
+        assertThat("Display Event Page after Successful Save", save, is("redirect:/events/4"));
         verify(service).save(eventForm);
     }
 }

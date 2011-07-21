@@ -7,11 +7,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.sukrupa.app.admin.subscribers.Subscriber;
 import org.sukrupa.app.admin.subscribers.SubscriberRepository;
 import org.sukrupa.app.services.EmailService;
-import org.sukrupa.student.*;
+import org.sukrupa.student.Student;
+import org.sukrupa.student.StudentListPage;
+import org.sukrupa.student.StudentSearchParameter;
+import org.sukrupa.student.StudentService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import java.beans.beancontext.BeanContextChild;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +22,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class AdminControllerTest {
@@ -93,12 +93,18 @@ public class AdminControllerTest {
     @Test
     public void shouldConvertSubscribersMailListTOAString() {
         ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
-        subscribers.add(new Subscriber("Abhinaya", "abhijan90@gmail.com"));
-        subscribers.add(new Subscriber("Kishore", "abyu.kishore@aol.in"));
+        Subscriber kishore = mock(Subscriber.class);
+        Subscriber abhinaya = mock(Subscriber.class);
+        when(abhinaya.getSubscriberName()).thenReturn("Abhinaya");
+        when(abhinaya.getSubscriberEmail()).thenReturn("abhinaya@gmail.com");
+        when(kishore.getSubscriberName()).thenReturn("Kishore");
+        when(kishore.getSubscriberEmail()).thenReturn("kishore@gmail.com");
+        subscribers.add((abhinaya));
+        subscribers.add((kishore));
         when(subscriberRepository.getList()).thenReturn(subscribers);
         List<Subscriber> subscriberList = subscriberRepository.getList();
         String mailList = adminController.getMailListAsString();
-        assertThat(mailList, is("abhijan90@gmail.com;abyu.kishore@aol.in;"));
+        assertThat(mailList, is("abhinaya@gmail.com;kishore@gmail.com;"));
     }
 
     @Test
