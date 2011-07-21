@@ -28,8 +28,8 @@ function isNumber(string){
 
 
 function isPriority(string){
-    //var number = parseFloat(string);
-    return (string != 0) &&  /^[0-9]+?$/.test(string);
+    var numberOfDigits = string.length;
+    return (numberOfDigits<4)&& (string != 0) && /^[0-9]+?$/.test(string);
 }
 
 function validateNeedsForm(form) {
