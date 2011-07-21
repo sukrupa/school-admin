@@ -5,13 +5,14 @@ $(function() {
     $(".edit-bigneed-button").click(makeRowEditable);
     $(".save-row-button").click(saveRow);
     $(".add-bigneed-button").click(addBigNeed);
+    $(".cancel-row-edit").click(refreshPage);
     $(".delete-bigneed-button").click(deleteNeed);
     $(".delete-fulfilled-bigneed-button").click(deleteFulfilledNeed);
 });
 
 function refreshPage() {
     try {
-        location.reload();
+        location.href = "./bigneeds";
     } catch (Exception) {
         alert("Page Refresh Failed")
     }
@@ -98,8 +99,6 @@ function validateNeedsForm(form) {
 function makeRowEditable() {
     if (!editing) {
         editing = true;
-        $(this).parents("tr").find('.delete-bigneed-button')[0].value = "Cancel";
-        $(this).parents("tr").find('.delete-bigneed-button').click(refreshPage);
         $(this).parents("tr").addClass("editable");
     } else {
         alert("Please save the current row, before editing !!!");

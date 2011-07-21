@@ -3,6 +3,7 @@ var editing = false;
 $(function() {
     $(".edit-smallneed-button").click(makeRowEditable);
     $(".save-row-button").click(saveRow);
+    $(".cancel-row-edit").click(refreshPage);
     $(".add-smallneed-button").click(addSmallNeed);
     $(".delete-smallneed-button").click(deleteSmallNeed);
 });
@@ -65,7 +66,7 @@ function submitForm(form, $, actionUrl) {
 
 function refreshPage() {
     try {
-        location.reload();
+        location.href = "./smallneeds";
     } catch (Exception) {
         alert("Page Refresh Failed")
     }
@@ -74,8 +75,6 @@ function refreshPage() {
 function makeRowEditable() {
     if(!editing){
         editing = true;
-        $(this).parents("tr").find('.delete-smallneed-button')[0].value = "Cancel";
-        $(this).parents("tr").find('.delete-smallneed-button').click(refreshPage);
         $(this).parents("tr").addClass("editable");
     } else{
         alert("Please save the current row, before editing !!!");

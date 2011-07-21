@@ -41,6 +41,9 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                 <td class="edit">
                     <input type="button" class="save-row-button" value="Save"/>
                 </td>
+                <td class="edit">
+                    <input type="button" class="cancel-row-edit" value="Cancel"/>
+                </td>
                 <td class="display">$it.priority$</td>
                 <td class="display">$it.itemName$</td>
                 <td class="display">$it.cost$</td>
@@ -48,7 +51,7 @@ $successMessage(condition=shouldDisplayMessage, message=message)$
                 <td class="display">
                     <input type="button" class="edit-smallneed-button" name="edit" value="Edit"/>
                 </td>
-                <td>
+                <td class="display">
                     <input type="button" class="delete-smallneed-button" id="deleteNeedButton" value="Delete"/>
                 </td>
             </tr>
