@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.sukrupa.app.admin.subscribers.Subscriber;
 import org.sukrupa.app.admin.subscribers.SubscriberRepository;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @RequestMapping("/addsubscriberinfo")
@@ -24,7 +24,7 @@ public class HTTPSubscriberController {
         this.subscriberRepository = subscriberRepository;
     }
 
-    @RequestMapping(method = POST)
+    @RequestMapping(method = GET)
     @ResponseBody
     public String addSubscriberFromWebsite(@RequestParam String subscriberName, @RequestParam String subscriberEmail) {
         Subscriber subscriber = new Subscriber(subscriberName, subscriberEmail);

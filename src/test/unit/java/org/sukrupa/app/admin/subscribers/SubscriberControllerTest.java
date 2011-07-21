@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 
@@ -26,11 +28,19 @@ public class SubscriberControllerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        subscriberController=new SubscriberController(subscriberRepository);
+        subscriberController = new SubscriberController(subscriberRepository);
     }
 
-   @Test
-    public void ShouldDisplaySubscribersPage(){
-       assertThat(subscriberController.shouldDisplaySubscribers(subscriberModel),is("admin/subscribers/viewsubscribers"));
-   }
+    @Test
+    public void shouldDisplaySubscribersPage() {
+        assertThat(subscriberController.shouldDisplaySubscribers(subscriberModel), is("admin/subscribers/viewsubscribers"));
+    }
+
+    @Test
+    public void shouldDeleteASubscriber() {
+        Subscriber subcriberToBeDeleted = mock(Subscriber.class);
+        when(subscriberRepository.findById(anyInt())).thenReturn(subcriberToBeDeleted);
+        subscriberController.shouldDeleteSubscriber(subscriberModel, anyInt());
+        verify(subscriberRepository).deleteSubscriber(subcriberToBeDeleted);
+    }
 }

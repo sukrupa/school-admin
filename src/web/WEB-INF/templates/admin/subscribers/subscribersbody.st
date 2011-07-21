@@ -5,14 +5,16 @@
      <table border="0">
             <thead class="header">
                     <tr>
-                    <td>Name</td>
-                    <td>Email</td>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Action</td>
                     </tr>
            </thead>
              $subscriberList:{
                 <tr>
                     <td>$it.subscriberName$</td>
                     <td>$it.subscriberEmail$</td>
+                    <td><a href = "deletesubscriber?subid=$it.id$">Delete</a></td>
                 </tr>
             }$
       </table>
