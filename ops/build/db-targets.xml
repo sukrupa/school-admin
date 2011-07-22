@@ -53,7 +53,7 @@
 
     <target name="db:stop" description="Stops the database server (no data will be deleted).">
         <sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.password}"
-             failonconnectionerror="false">
+             failonconnectionerror="false" onerror="continue">
             SHUTDOWN;
         </sql>
     </target>
