@@ -26,6 +26,8 @@ task :production do
   set :user, "ubuntu"
   set :target_server, "ec2-122-248-198-134.ap-southeast-1.compute.amazonaws.com"
   set :deploy_path, "~/sukrupa/school-admin"
+  set :mail_smtp_user, "sukrupa.connect@sukrupa.org"
+  set :mail_smtp_password, "sukrupac0nn3ct"
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-prod.pem" }
 end
 
