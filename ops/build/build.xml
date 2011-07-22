@@ -23,7 +23,6 @@
         <mkdir dir="${target.reports.dir}"/>
         <mkdir dir="${target.reports.cucumber.dir}"/>
         <mkdir dir="${target.main.dir}"/>
-        <antcall target="config:sahi"/>
     </target>
 
     <target name="config:sahi">
@@ -36,34 +35,34 @@
         </copy>
     </target>
 
-    <target name="dev" depends="clean, init, compile:all, copy-resources"/>
+    <target name="dev" depends="clean, compile:all"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, img:recreate, test:unit, db:recreate, test:integration, test:cucumber"/>
+            depends="clean, compile:all, test:unit, db:recreate, test:integration, test:cucumber"/>
 
     <target name="all-without-functional" description="Does everything except run the functional tests"
-            depends="clean, init, compile:all, copy-resources, img:recreate, test:unit, db:recreate, test:integration"/>
+            depends="clean, compile:all, test:unit, db:recreate, test:integration"/>
 
     <target name="sanity" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, init, compile:all, copy-resources, img:recreate, test:unit, db:recreate, test:integration"/>
+            depends="clean, compile:all, test:unit, db:recreate, test:integration"/>
 
     <target name="ci"
             description="Runs the build as run on ci"
-            depends="clean, init, compile:all, copy-resources, test:unit, db:recreate, img:recreate, test:integration, deploy:save-build-number, package"/>
+            depends="clean, compile:all, test:unit, db:recreate, test:integration, deploy:save-build-number, package"/>
 
     <target name="unit-test"
             description="Clean, compile and only run unit tests"
-            depends="clean, init, compile:all, copy-resources, test:unit"/>
+            depends="clean, test:unit"/>
 
     <target name="install:local"
-            depends="clean, init, compile:all, copy-resources, package"
+            depends="clean, compile:all, package"
             description="Use this when you are working locally to just compile and package and install">
 
         <exec executable="./ops/local/local-package.sh"/>
     </target>
 
     <target name="compile:all"
-            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:cucumber"/>
+            depends="compile:main, compile:test:shared, compile:test:unit, compile:test:integration, compile:test:cucumber, copy-resources"/>
 
     <target name="compile:main" depends="init">
         <javac includeantruntime="false" srcdir="${src.main.dir}" destdir="${target.main.dir}"
@@ -73,22 +72,22 @@
        </javac>
     </target>
 
-    <target name="compile:test:shared">
+    <target name="compile:test:shared" depends="compile:main">
         <compile srcdir="${src.test.shared.dir}" destdir="${target.test.shared.dir}"
                  classpathref="classpath.compilation.test.shared"/>
     </target>
 
-    <target name="compile:test:unit">
+    <target name="compile:test:unit" depends="compile:test:shared">
         <compile srcdir="${src.test.unit.dir}" destdir="${target.test.unit.dir}"
                  classpathref="classpath.compilation.test.unit"/>
     </target>
 
-    <target name="compile:test:integration">
+    <target name="compile:test:integration" depends="compile:test:shared">
         <compile srcdir="${src.test.integration.dir}" destdir="${target.test.integration.dir}"
                  classpathref="classpath.compilation.test.integration"/>
     </target>
 
-     <target name="compile:test:cucumber">
+     <target name="compile:test:cucumber" depends="init">
         <compile srcdir="${src.test.cucumber.java.dir}" destdir="${target.test.cucumber.java.dir}"
                  classpathref="classpath.compilation.test.cucumber"/>
     </target>
@@ -99,7 +98,7 @@
         </copy>
     </target>
 
-    <target name="test:unit">
+    <target name="test:unit" depends="compile:test:unit, img:recreate">
         <test type="unit"/>
     </target>
 
@@ -115,12 +114,12 @@
         <fail if="js.test.failed" message="Javascript unit tests failed"/>
     </target>
 
-    <target name="test:integration">
+    <target name="test:integration" depends="compile:test:integration">
         <test type="integration"/>
     </target>
 
     <target name="test:cucumber"
-            depends="clean, init, compile:all"
+            depends="clean, compile:test:cucumber, config:sahi"
             description="Run Cucumber">
 
         <run-against-sahi-and-web-server startWebServerTarget="sukrupa-server:start-for-cucumber"
