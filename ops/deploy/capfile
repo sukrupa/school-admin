@@ -23,11 +23,10 @@ task :staging do
 end
 
 task :production do
+  set :environment, "production"
   set :user, "ubuntu"
   set :target_server, "ec2-122-248-198-134.ap-southeast-1.compute.amazonaws.com"
   set :deploy_path, "~/sukrupa/school-admin"
-  set :mail_smtp_user, "sukrupa.connect@sukrupa.org"
-  set :mail_smtp_password, "sukrupac0nn3ct"
   role :target_server, "#{target_server}", :ssh_options => { :keys => "/var/go/sukrupa-prod.pem" }
 end
 
@@ -65,7 +64,11 @@ task :unzip_deploy_artifact do
 end
 
 task :start_remote_server do
-  run "cd #{deploy_path} && sh start-server.sh"
+  if environment
+    run "cd #{deploy_path} && sh start-server.sh -Denvironment=#{environment}"
+  else
+    run "cd #{deploy_path} && sh start-server.sh"
+  end
 end
 
 task :update_or_recreate_database do
