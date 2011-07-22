@@ -99,11 +99,6 @@ public class BasicWebSteps {
         assertFalse(browser().containsText(browser().div("page"), text));
     }
 
-    @Then("^\"([^\"]*)\" should be displayed in \"([^\"]*)\"$")
-    public void shouldBeDisplayedInField(String text, String field) {
-        assertTrue(browser().select(field).getText().contains(text));
-    }
-
     //Note: quotes needed due to new line in page names
     @Then("^the \"([^\"]*)\" page is displayed")
     public void pageIsDisplayed(String pageName) {
@@ -121,6 +116,16 @@ public class BasicWebSteps {
             elementId = browser().label(elementId).fetch("htmlFor");
         }
         browser().byId(elementId).setValue(text);
+    }
+
+    @Then("^([^\"']*) should default to ([^\"]*)$")
+    public void fieldShouldDefaultToValue(String field, String value) {
+        ElementStub label = browser().label(field);
+        if (!label.exists(true)) {
+            throw new RuntimeException("Unable to find label for " + field);
+        }
+        String elementId = label.fetch("htmlFor");
+        assertThat(browser().byId(elementId).getValue(), is(value));
     }
 
     @When("^I select ([^\"']*) as ([^\"]*)")

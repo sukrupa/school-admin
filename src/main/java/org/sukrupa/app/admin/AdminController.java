@@ -1,6 +1,7 @@
 package org.sukrupa.app.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +58,8 @@ public class AdminController {
     }
 
     @RequestMapping("/sendnewsletter")
-    public String sendNewsletter(Map<String, Object> model) {
+    public String sendNewsletter(@Value("${mail.smtp.user}") String toEmailAddress, Map<String, Object> model) {
+        model.put("toEmailAddress", toEmailAddress);
         model.put("bccList", getMailListAsString());
         return "admin/sendnewsletterPage";
     }

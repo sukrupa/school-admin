@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.sukrupa.platform.hamcrest.CollectionMatchers.hasEntry;
 
 public class AdminControllerTest {
 
@@ -38,13 +39,28 @@ public class AdminControllerTest {
 
     private AdminController adminController;
 
-    private HashMap<String, Object> studentModel = new HashMap<String, Object>();
+    private HashMap<String, Object> model = new HashMap<String, Object>();
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
 
         adminController = new AdminController(studentService, emailService, subscriberRepository);
+    }
+
+    @Test
+    public void shouldDisplaySendNewsletterForm() {
+        Subscriber subscriber1 = mock(Subscriber.class);
+        Subscriber subscriber2 = mock(Subscriber.class);
+        when(subscriber1.getSubscriberEmail()).thenReturn("sub1@email");
+        when(subscriber2.getSubscriberEmail()).thenReturn("sub2@email");
+        when(subscriberRepository.getList()).thenReturn(asList(subscriber1, subscriber2));
+
+        String view = adminController.sendNewsletter("to@email", model);
+
+        assertThat(view, is("admin/sendnewsletterPage"));
+        assertThat(model, hasEntry("bccList", "sub1@email;sub2@email;"));
+        assertThat(model, hasEntry("toEmailAddress", "to@email"));
     }
 
     @Test
@@ -61,10 +77,10 @@ public class AdminControllerTest {
         when(studentService.getPage(searchParam, pageNumber, "TestQueryString")).thenReturn(students);
         when(students.getStudents()).thenReturn(asList(student));
 
-        String view = adminController.monthlyReports(pageNumber, searchParam, studentModel, request);
+        String view = adminController.monthlyReports(pageNumber, searchParam, model, request);
 
         assertThat(view, is("admin/monthlyreportsPage"));
-        assertThat(studentModel.get("page"), is((Object) students));
+        assertThat(model.get("page"), is((Object) students));
 
     }
 
