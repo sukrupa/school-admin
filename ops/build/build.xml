@@ -119,7 +119,7 @@
     </target>
 
     <target name="test:cucumber"
-            depends="clean, compile:test:cucumber, config:sahi"
+            depends="clean, compile:main, compile:test:cucumber, config:sahi"
             description="Run Cucumber">
 
         <run-against-sahi-and-web-server startWebServerTarget="sukrupa-server:start-for-cucumber"
