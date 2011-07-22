@@ -7,9 +7,17 @@ Feature: View subscriber list
       And List of Subscribers should be displayed
       And <SubscriberName> should be displayed
       And <SubscriberEmail> should be displayed
-      And Exit
+
 
       Examples:
       |SubscriberName  |SubscriberEmail    |
       |Abhinaya        |sukrupa.test@gmail.com|
+
+    Scenario: Delete a Subscriber from Subscriber List
+      When I go to "Tools" in the sidebar
+      Then I should be able to "View Current Subscribers"
+      When I delete "Abhinaya" with "sukrupa.test@gmail.com" as email from List of Subscribers
+      Then "Abhinaya" with email "sukrupa.test@gmail.com" should not be displayed
+      And Exit
+
 
