@@ -38,7 +38,7 @@
     <target name="dev" depends="clean, compile:all"/>
 
     <target name="all" description="Builds, updates the database, runs tests and packages the app."
-            depends="clean, compile:all, test:unit, db:recreate, test:integration, test:cucumber"/>
+            depends="clean, compile:all, test:unit, db:recreate, test:integration"/>
 
     <target name="all-without-functional" description="Does everything except run the functional tests"
             depends="clean, compile:all, test:unit, db:recreate, test:integration"/>

@@ -3,7 +3,7 @@
     <import file="classpaths.xml"/>
     <import file="macros.xml"/>
 
-    <taskdef name="if" classname="ise.antelope.tasks.IfTask"/>    
+    <taskdef name="if" classname="ise.antelope.tasks.IfTask"/>
 
     <target name="install-gems">
     	<taskdef name="gem" classname="cuke4duke.ant.GemTask" classpathref="classpath.compilation.test.cucumber"/>
@@ -45,6 +45,7 @@
     </target>
 
      <target name="report-cucumber-status" if="cucumber.features.failed">
+        <echo message="Cucumber tests failed, did you run ./build install-gems ?" />
         <propertyfile file="${target.test.cucumber.failed.file}">
             <entry key="cucumber.features.failed" value="${cucumber.features.failed}"/>
         </propertyfile>
