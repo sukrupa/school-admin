@@ -173,6 +173,7 @@
     </target>
 
     <target name="create.module.jar">
+        <delete file="${target.module.jar}" />
         <jar basedir="${target.main.dir}" jarfile="${target.module.jar}" excludes="jetty-realms.properties"/>
     </target>
 
