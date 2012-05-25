@@ -1,0 +1,1 @@
+class {'school_admin':}

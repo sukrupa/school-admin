@@ -1,0 +1,9 @@
+school_admin:
+  puppet_module_directory : puppet
+  puppet_manifest : school_admin.pp
+  service_configurator: PuppetServiceConfigurator
+  connectivity:
+    - protocol: tcp
+      ports: [ 8080 ]
+      allowed: [ WORLD ] # equivalent to '0.0.0.0/0'
+

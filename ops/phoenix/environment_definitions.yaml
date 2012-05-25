@@ -1,0 +1,13 @@
+school_admin:
+  nodes:
+    - ami_id: ami-4dad7424          # find these on alestic.com
+      size:   t1.micro              # ask Sam Newman
+      credentials_name: us-east-ssh # foreign key for credentials.yaml,
+      services: [ school_admin ]
+      security_groups: [ <YOUR SECURITY GROUP> ] # allows access to SSH over 22
+      region: < YOUR REGION > 
+      type: phoenix.providers.aws_provider.AWSNodeDefinition
+  node_provider:
+    class_name: AWSNodeProvider
+    public_api_key: <PUBLIC API KEY> 
+    private_api_key: <PRIVATE API KEY> 
